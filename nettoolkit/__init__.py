@@ -34,7 +34,7 @@ __all__ = ['JSet',
 	'DictMethods', 'Multi_Execution', 
 	]
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 
 from .jset import JSet
 from .addressing import (

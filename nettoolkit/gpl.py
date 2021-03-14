@@ -20,7 +20,7 @@ intBeginWith = compile(r'^\D+')
 # -----------------------------------------------------------------------------
 
 class Default():
-	"""Default docString"""
+	"""Default class representing class docString template"""
 	def __str__(self): return self.__doc__
 	def _repr(self):
 		fields = signature(self.__init__).parameters
@@ -30,8 +30,8 @@ class Default():
 
 
 class Container(ABC):
-	"""Support Containers callable objects
-	object should contain objVar property
+	"""Abstract base class providing template for standard dunder 
+	methods template.  Object should contain objVar property
 	"""
 	@abstractproperty
 	@property
@@ -90,6 +90,9 @@ class Numeric():
 #                           STRING OPERATIONS                                 #
 # -----------------------------------------------------------------------------
 class STR(Container):
+	"""Collection of static methods for string objects.
+	see more...	
+	"""
 
 	@staticmethod
 	def foundPos(s, sub, pos=0):
@@ -385,7 +388,9 @@ class STR(Container):
 
 	@staticmethod
 	def hostname(net_connect):
-		'''Hostname from connection'''
+		'''input paramiko netconnection, returns hostname from device.
+		-->str (Hostname from connection)
+		'''
 		try:
 			hns = net_connect.find_prompt()[:-1]
 			atPos = STR.foundPos(hns, "@")
@@ -396,7 +401,9 @@ class STR(Container):
 
 	@staticmethod
 	def hostname_from_cli(line, command):
-		'''hostname from command line'''
+		'''input standard text input line, for which command was entered.
+		-->str (hostname from command line)
+		'''
 		if not STR.found(line, command): return None
 		cmdPos = STR.foundPos(line, command)
 		hn = line[:cmdPos].strip()[:-1]
@@ -404,24 +411,41 @@ class STR(Container):
 
 	@staticmethod
 	def shrink_if(intName, length=2):
-		'''Interface Name shortening for standard 2 Characters '''
+		'''Interface Name shortening, input length will decide number of 
+		charactes to be included in shortened output
+		-->str (short name of interface)
+		'''
 		iBW = intBeginWith.match(intName)
 		return iBW.group()[:length]+intName[iBW.span()[1]:]
 
 	@staticmethod
 	def if_prefix(intName):
-		'''Interface beginning Name'''
+		'''Interface beginning Name
+		-->str (interface prefix)
+		'''
 		iBW = intBeginWith.match(intName)
 		return intName[iBW.start(): iBW.end()]
 
 	@staticmethod
 	def update_str(s, searchItem='', replaceItem=''):
-		'''Updates line for search item with replace item'''
+		'''Updates line for search item with replace item
+		(Find/Repalace)
+		-->str
+		'''
 		return s.replace(searchItem, replaceItem)
 
 	@staticmethod
-	def get_logfile_name(folder, hn, cmd='', ts='', separator="_@_"):
-		'''return log file name for the command on device with/wo provided time_stamp'''
+	def get_logfile_name(folder, hn, cmd='', ts='', separator="_@_", extn='.log'):
+		'''return log file name for the command on device with/wo provided 
+		time_stamp.
+		folder = path to where file should be saved
+		hn = file name starting with provided host-name
+		cmd = file name containing additional commands string
+		ts = file name containing additional time stamp
+		separator = hn-cmd-ts separator 
+		extn = extension of filename
+		--> str (filename along with full path)
+		'''
 		if ts: ts = separator + ts
 		if cmd:
 			cmd += ts
@@ -429,11 +453,12 @@ class STR(Container):
 			for x in replaceCandidates:
 				cmd = STR.update_str(cmd, x, "_")
 			cmd = separator + cmd
-		return folder+hn+cmd+'.log'
+		return folder+hn+cmd+extn
 
 	@staticmethod
 	def string_concate(s, s1, conj=''):
 		'''Concatenate strings s and s1 with conjuctor conj
+		--> str
 
 		:param s: string
 		:type s: str
@@ -444,11 +469,7 @@ class STR(Container):
 		:param conj: conjuctor
 		:type conj: string
 		'''
-		if s == '': 
-			s = s + s1
-		else:
-			s = s + conj + s1
-		return s
+		return s + s1 if s == '' else s + conj + s1
 
 	@staticmethod
 	def right(strg, n):
@@ -501,16 +522,20 @@ class STR(Container):
 
 	@staticmethod
 	def to_list(s):
-		'''Returns list for the provided string - s, split by lines '''
+		'''Returns list for the provided string - s, 
+		splits string by lines
+		--> list
+		'''
 		s = s.split("\n")
 		for i, x in enumerate(s):
 			s[i] = x + "\n"
 		return s
-		# return s.split("\n")
 
 	@staticmethod
 	def to_set(s):
-		'''return set of values for 'ipList' key from dictionary 
+		'''Return set of values for the provided string - s.
+		splits string by lines and comma
+		--> set
 		'''
 		if isinstance(s, str):
 			_s = []
@@ -522,6 +547,11 @@ class STR(Container):
 
 	@staticmethod
 	def header_indexes(line):
+		"""input header string line of a text table.
+		returns dictionary with key:value pair where 
+		keys are header string and value are string index (position) of string in line
+		--> OrderedDict
+		"""
 		exceptional_headers = {'Type', }
 		headers = OrderedDict()
 		prev_k = None
@@ -538,24 +568,42 @@ class STR(Container):
 
 	@staticmethod
 	def prepend_bgp_as(bgp_as, n):
+		"""'n' number of BGP AS Number prepending string.
+		--> str
+		"""
 		s = ''
 		for x in range(n): s += str(bgp_as) + " "
 		return s[:-1]
 
 	@staticmethod
-	def ending(line, c): return line.strip().endswith(c)
+	def ending(line, c): 
+		"""check if line ends with c or not
+		-->boolean
+		"""
+		return line.strip().endswith(c)
 
 	@staticmethod
-	def starting(line, c): return line.strip().startswith(c)
+	def starting(line, c): 
+		"""check if line starts with c or not
+		-->boolean
+		"""
+		return line.strip().startswith(c)
 
 
 # -----------------------------------------------------------------------------
 #                    FILE OPERATIONS/ CONVERSIONS                             #
 # -----------------------------------------------------------------------------
 class IO():
+	"""Collection of static methods for IO objects.
+	see more...	
+	"""
 
 	@staticmethod
 	def file_list_for_time_stamp(hn, ts, folder, splitter="_@_" ):
+		"""collection of files from given folder where hostname (hn) 
+		and timestamp (ts) found in the file name.
+		--> set
+		"""
 		files = set()
 		for file in os.listdir(folder):
 			if not splitter in file: continue
@@ -565,6 +613,9 @@ class IO():
 
 	@staticmethod
 	def devices_on_log_files(folder, splitter="_@_"):
+		"""collection of files from given folder where file extensions are .log
+		--> set
+		"""
 		devices = set()
 		for file in os.listdir(folder):
 			if not splitter in file: continue
@@ -575,6 +626,10 @@ class IO():
 
 	@staticmethod
 	def timestamps_for_device(devname, folder, splitter="_@_"):
+		"""collection of time stamps of files from given folder
+		for given hostnames.
+		--> set
+		"""
 		stamps = set()
 		for file in os.listdir(folder):
 			if not splitter in file: continue
@@ -654,14 +709,14 @@ class IO():
 		:param cr: carriage return to add at end of each string/line.(default True)
 		:type cr: bool
 		'''
-		if filename != '':
-			if isinstance(matter, str):
-				if cr and matter and matter[-1] != "\n": matter += "\n"
-				with open(filename, 'a') as f:
-					f.write(matter)
-			elif isinstance(matter, (list, tuple ,set)):
-				for i in matter:
-					IO.add_to_file(filename, i)
+		if not filename: return None
+		if isinstance(matter, str):
+			if cr and matter and matter[-1] != "\n": matter += "\n"
+			with open(filename, 'a') as f:
+				f.write(matter)
+		elif isinstance(matter, (list, tuple ,set)):
+			for i in matter:
+				IO.add_to_file(filename, i)
 
 	@staticmethod
 	def update(file, find_item, replace_item):
@@ -688,6 +743,10 @@ class IO():
 
 	@staticmethod
 	def jinja_verification(folder):
+		"""check all text files from provided folder for verification of 
+		self jinja strings descrepencies
+		--> str with outcome
+		"""
 		s = ''
 		for file in os.listdir(folder):
 			goahead = {'GOAHEAD FOR': 0, 'GOAHEAD END': 0,}
@@ -709,15 +768,25 @@ class IO():
 # -----------------------------------------------------------------------------
 
 class LST():
+	""" Collection of static methods for list objects.
+	see more...	
+	"""
 
 	@staticmethod
 	def remove_empty_members(lst):
+		"""house keeping of list
+		removes empty members from list
+		-->list
+		"""
 		empty_members = ('', None, 'N/A', 'nil')
 		tmp_lst = [m for m in lst if not m in empty_members]
 		return tmp_lst
 
 	@staticmethod
 	def convert_vlans_list_to_range_of_vlans_list(vlan_list):
+		"""converts list of individual vlans to a list of range of vlans
+		--> list
+		"""
 		vlan_list = sorted(vlan_list)
 		vlan_list.append(None)
 		range_list, previous_vlan = [], 0
@@ -739,10 +808,14 @@ class LST():
 
 	@staticmethod
 	def list_variants(input_list):
+		"""list of vlans in different format
+		list of vlans,
+		space separated string,
+		comma separated string,		
+		--> dict
+		"""
 		str_list = [str(_) 
 			for _ in LST.convert_vlans_list_to_range_of_vlans_list(input_list)]
-		# str_list = [str(_) 
-		# 	for _ in input_list]
 		ssv_list = " ".join(str_list)
 		csv_list = ",".join(str_list)
 		return {
@@ -753,6 +826,9 @@ class LST():
 
 	@staticmethod
 	def list_of_devices(list_of_files):
+		"""get hostnames (first index item) from list of files.
+		--> set
+		"""
 		devices = set()
 		for file in list_of_files:
 			if not file.strip(): continue
@@ -763,6 +839,9 @@ class LST():
 
 	@staticmethod
 	def split(lst, n):
+		"""yield provided list with group of n number of items
+		--> generator of list
+		"""
 		s = 0
 		lst = tuple(lst)
 		for _ in range(s, len(lst), n):
@@ -771,6 +850,10 @@ class LST():
 
 	@staticmethod
 	def list_to_octet(lst):
+		"""joins and return string with provided list with '.'
+		helpful in created ipv4 string with list of 4 numeric items
+		--> str
+		"""
 		l = ''
 		for x in lst: l = str(x) if l == '' else l +'.'+ str(x)
 		return l
@@ -781,6 +864,9 @@ class LST():
 # -----------------------------------------------------------------------------
 
 class DIC():
+	"""Collection of static methods for dictionary objects.
+	see more...	
+	"""
 
 	# INTERNAL : update dictionary d for provided keyvalue pairs
 	# param: d: dest dictionary
@@ -813,6 +899,10 @@ class DIC():
 
 	@staticmethod
 	def recursive_dic(dic, indention=0):
+		"""convert dictionary (dic) to string. 
+		recursive dictionary increases indention.
+		--> str
+		"""
 		s = ""
 		if isinstance(dic, dict):
 			for k, v in dic.items():
@@ -832,6 +922,9 @@ class DIC():
 # -----------------------------------------------------------------------------
 
 class DifferenceDict(dict):
+	"""Template class to get difference in two dictionary objects.
+	use dunder +/- for adds/removes.	
+	"""
 
 	missing = "- "
 	additive = "+ "
@@ -843,11 +936,19 @@ class DifferenceDict(dict):
 	def __add__(self, d): return self.get_change(d, self.additive)
 
 	def get_change(self, d, change):
+		"""compare current object/dict with provided new object/dict (ie: d) 
+		and return differences based on change required ("- "/"+ ")
+		"""
 		if isinstance(d, DifferenceDict):
 			return dict_differences(self.d, d.d, change)
 		elif isinstance(d, dict):
 			return dict_differences(self.d, d, change)
 
+# INTERNAL / RECURSIVE
+# returns differences for provided subnet/change
+# input subject can be of string/int/float/set/dictionary
+# input change is change type prefix
+# return value type depends on input subject type.
 def _get_differences(subject, change):
 	if isinstance(subject, (str, int, float)):
 		diff = change + str(subject)
@@ -870,6 +971,11 @@ def _get_differences(subject, change):
 
 
 def dict_differences(d1, d2, change):
+	"""returns differences for provided two dictionaries 
+	input d1, d2 type: string/int/float/set/dictionary
+	input change is change type prefix (ex: " -", " +")
+	return value type depends on input d1, d2 type.
+	"""
 	diff = {}
 	if d1 == d2: return None
 	if (not (isinstance(d1, (dict, set)) or isinstance(d2, (dict, set))) and
@@ -894,7 +1000,10 @@ def dict_differences(d1, d2, change):
 #                         Common Dictionary Methods                           #
 # -----------------------------------------------------------------------------
 class DictMethods():
-	"""PAPA FOR DICTIONARY REPR OBJECTS"""
+	"""PAPA DUNDER EXTENSIONS FOR DICTIONARY OBJECTS
+	[self.dic is abstract property which gets iterates over]
+	"""
+
 	def __iter__(self):
 		for k, v in self.dic.items():
 			yield (k, v)
@@ -924,6 +1033,10 @@ class DictMethods():
 			raise KeyError
 
 	def append(self, item, value):
+		"""appends value to self[item] dictionary.
+		create new list if no value found for item, appends to list if available.
+		--> None
+		"""
 		try:
 			if not self.dic.get(item):
 				self.dic[item] = []
@@ -939,6 +1052,9 @@ class DictMethods():
 # -----------------------------------------------------------------------------
 
 class LOG():
+	"""Collection of static methods for logging.
+	see more...	
+	"""
 
 	@staticmethod
 	def time_stamp():
@@ -952,6 +1068,9 @@ class LOG():
 # -----------------------------------------------------------------------------
 
 class DB():
+	"""Collection of static methods for Database.
+	see more...	
+	"""
 
 	@staticmethod
 	def read_excel(file, sheet='Sheet1', **kwargs):
@@ -1002,7 +1121,7 @@ class XL_WRITE():
 
 	def __repr__(self): return self.op_file
 
-	# write to Excel
+	# write to Excel/ INTERNAL
 	def __create_excel(self, hostname, index, **sht_df):
 		try:
 			n = 0
@@ -1070,44 +1189,30 @@ class XL_READ:
 
 	'''
 
-	# Object Initializer
 	def __init__(self, xl, shtName='Sheet1'):
 		self.df = pd.read_excel(xl, sheet_name=shtName)
 
-	# Object Represantation
 	def __repr__(self):
 		return 'Excel data reprezenting class as DataFrame Object - obj.df'
 
-	# Length of Object
-	def __len__(self):
-		return self.df.last_valid_index()+1
+	def __len__(self): return self.df.last_valid_index()+1
 
-	# Object Iterator
 	def __iter__(self):
-		for header, value in self.df.items():
-			yield (header, value)		
+		for header, value in self.df.items(): yield (header, value)		
 
-	# Get a specific Item/Record from Object
-	def __getitem__(self, key):
-		'''get an item from parameters'''
-		return self.df[key]
+	def __getitem__(self, key): return self.df[key]
 		
 
-	# Object Data Filter
 	def filter(self, df=None, **kwarg):
 		'''Filter Records
 		df    - external data frame ( default object dataframe )
 		kwarg - filters to be applied on df.
 		'''
-		if df is None:
-			tmpdf = self.df
-		else:
-			tmpdf = df
+		tmpdf = self.df if df is None else df
 		for k, v in kwarg.items():
 			try:
 				tmpdf = tmpdf[tmpdf[k]==v]
-			except:
-				pass
+			except: pass
 		return tmpdf
 
 	def column_values(self, column, **kwarg):
@@ -1125,9 +1230,15 @@ class XL_READ:
 # -----------------------------------------------------------------------------
 
 class IP():
+	"""Collection of static methods for Networking on (IP).
+	see more...	
+	"""
 
 	@staticmethod
 	def ping_average(ip):
+		"""return average ping responce for provided ip
+		-->int
+		"""
 		lst = popen(f"ping {ip}").read().split("\n")
 		for x in lst:
 			if "Average" in x:
@@ -1164,6 +1275,9 @@ class IP():
 # -----------------------------------------------------------------------------
 
 class Multi_Execution(Default):
+	"""Template methods for multi-threaded executions.
+	[self.items items are eligible threaded candidates]
+	"""
 
 	max_connections = 30
 
@@ -1173,25 +1287,35 @@ class Multi_Execution(Default):
 		self.items = items
 
 	def execute_steps(self, multi_thread=True):
+		"""steps defining executions """
 		self.start(multi_thread)
 
 	def start(self, multi_thread=True):
+		"""starting up executins either threaded/sequencial """
 		if not self.items: return None 
 		if multi_thread:
 			self.execute_mt()
 		else: 
 			self.execute_sequencial()
 
-	def end(self): pass
+	def end(self):
+		"""Closure process """		
+		pass
 
 	def get_devices(self):
+		"""get devices names from list of files"""
 		self.devices = LST.list_of_devices(self.files)
 
 	def execute_mt(self):
+		"""threaded execution in groups 
+		(self.max_connections defines max threaded processes) 
+		"""
 		for group, items in enumerate(LST.split(self.items, self.max_connections)):
 			self.execute_threads_max(items)
 
 	def execute_threads_max(self, item_list):
+		"""threaded execution of a group
+		"""
 		ts = []
 		for hn in item_list:
 			t = threading.Thread(target=self.execute, args=(hn,) )
@@ -1200,8 +1324,13 @@ class Multi_Execution(Default):
 		for t in ts: t.join()
 
 	def execute_sequencial(self):
+		"""sequencial execution of items
+		"""
 		for hn in self.items: self.execute(hn)
 
 	@abstractclassmethod
-	def execute(self, hn): pass
+	def execute(self, hn): 
+		"""abstract class method, to be executed for each item in self.items
+		"""
+		pass
 

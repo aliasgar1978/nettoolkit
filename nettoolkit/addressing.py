@@ -1,5 +1,6 @@
+from collections import OrderedDict
 
-from .gpl import STR, LST
+from .gpl import STR, LST, IO
 
 # from errors import incorrectinput
 incorrectinput = 'INCORRECT SUBNET OR SUBNET MASK DETECTED NULL RETURNED'
@@ -9,6 +10,10 @@ incorrectinput = 'INCORRECT SUBNET OR SUBNET MASK DETECTED NULL RETURNED'
 # ----------------------------------------------------------------------------
 
 def bin_mask(mask):
+	"""binary mask representation (ex: 255.255.255.0)
+	input mask = decimal mask
+	-->str
+	"""
 	mask = int(mask)
 	decmask = mask*str(1) + (32-mask)*str(0)
 	o1 = str(int(decmask[ 0: 8] , 2))
@@ -17,9 +22,24 @@ def bin_mask(mask):
 	o4 = str(int(decmask[24: 32], 2))
 	return o1+'.'+o2+'.'+o3+'.'+o4	
 def invalid_subnet(subnet): return f"Not a VALID Subnet {subnet}"
-def to_dec_mask(dotted_mask):  return bin2decmask(binsubnet(dotted_mask))
-def bin2dec(binnet): return int(binnet, 2)
-def bin2decmask(binmask): return binmask.count('1')
+def to_dec_mask(dotted_mask):  
+	"""Decimal mask representation
+	input mask = dotted mask
+	-->str
+	"""
+	return bin2decmask(binsubnet(dotted_mask))
+def bin2dec(binnet): 
+	"""Decimal network representation
+	input = dotted network
+	-->str
+	"""
+	return int(binnet, 2)
+def bin2decmask(binmask):
+	"""Decimal mask representation
+	input mask = binary mask in number
+	-->str
+	"""
+	return binmask.count('1')
 def binsubnet(subnet):
 	"""convert subnet to binary:0's and 1's """
 	try:
@@ -82,12 +102,15 @@ def isSplittedRoute(line):
 		0 : Yes splitted line [line1]
 		-1: Yes splitted line [line2]
 	"""
-	if found(line, ','):
+	if STR.found(line, ','):
 		return 1 if len(line.split()) > 5 else -1
 	else:
 		return 0
 
 def isSubset(pfx, supernet):
+	"""Check if provided prefix is part of provided supernet or not
+	--> Boolean
+	"""
 	if not isinstance(pfx, (str, IPv4)):
 		raise Exception("INPUTERROR")
 	if not isinstance(supernet, (str, IPv4)):
@@ -146,7 +169,7 @@ class Validation():
 			raise Exception(invalid_subnet(self.subnet))
 
 	def check_v4_input(self):
-		'''Property to validate provided v4 subnet
+		'''validation of v4 subnet
 		'''
 		# ~~~~~~~~~ Mask Check ~~~~~~~~~
 		try:
@@ -174,7 +197,7 @@ class Validation():
 			raise Exception(f"Unidentified Subnet: {self.subnet}")
 
 	def check_v6_input(self):
-		'''Property to validate provided v6 subnet
+		'''validation of v6 subnet
 		'''
 		try:
 			# ~~~~~~~~~ Mask Check ~~~~~~~~~
@@ -222,6 +245,8 @@ class Validation():
 # --------------------------------------------------------------------------------------------------
 
 class IP():
+	"""defines common properties and methods for IPV4 and IPV6 Objects
+	"""
 	def __init__(self, subnet):
 		self.subnet = subnet
 		self.mask = int(self.subnet.split("/")[1])
@@ -301,7 +326,8 @@ class IP():
 # ----------------------------------------------------------------------------
 
 class IPv6(IP):
-	'''Defines IPv6 object and its various operations'''
+	'''IPv6 object
+	'''
 
 	version = 6
 	bit_length = 128
@@ -447,8 +473,11 @@ class IPv6(IP):
 	# Public Methods 
 	# ------------------------------------------------------------------------
 
-	# Return a specific Hextate (hexTnum) from IPV6 address
-	def get_hext(self, hexTnum): return self._get_hext(hexTnum)
+	def get_hext(self, hexTnum): 
+		"""Return a specific Hextate (hexTnum) from IPV6 address
+		-->str
+		"""
+		return self._get_hext(hexTnum)
 	getHext = get_hext
 
 	def subnet_zero(self, withMask=True):
@@ -496,9 +525,7 @@ class IPv6(IP):
 # IPv4 Subnet (IPv4) class 
 # ----------------------------------------------------------------------------
 class IPv4(IP):
-	'''Defines IPv4 object and its various operations
-	::hashable object::
-
+	'''IPv4 object
 	'''
 
 	version = 4
@@ -673,9 +700,9 @@ class Routes(object):
 	inTable --> checks is provided prefix in routes / bool
 	outerPrefix --> outer prefix / str
 	'''
-	# object initializer
+
 	def __init__(self, hostname, route_list=None, route_file=None):
-		if route_file != None: route_list = text_to_List(route_file)
+		if route_file != None: route_list = IO.file_to_list(route_file)
 		self.__parse(route_list, hostname)
 
 	def __getitem__(self, key):
@@ -687,6 +714,9 @@ class Routes(object):
 
 	@property
 	def reversed_table(self):
+		"""reversed routes
+		--> generator
+		"""
 		for k, v in reversed(self.routes.items()):
 			yield (k, v)
 
@@ -765,9 +795,9 @@ class Routes(object):
 		)
 		op_items = OrderedDict()
 		for line in route_list:
-			if blank_line(line): continue
-			if hostname_line(line, hostname): continue
-			if find_any(line, headers): continue
+			if STR.is_blank_line(line): continue
+			if STR.is_hostname_line(line, hostname): continue
+			if STR.find_any(line, headers): continue
 			if isSplittedRoute(line) == 0:
 				spl = line.strip()
 				continue
@@ -775,14 +805,14 @@ class Routes(object):
 				line = spl + ' ' + line
 			spl = line.split(",")
 			if line.find('0.0.0.0 0.0.0.0') > -1:
-				op_items['0.0.0.0/0'] = replace_dual_and_split(spl[1])[-1].strip()
+				op_items['0.0.0.0/0'] = STR.replace_dual_and_split(spl[1])[-1].strip()
 				continue
-			route = replace_dual_and_split(spl[0])[1]
+			route = STR.replace_dual_and_split(spl[0])[1]
 			try:
-				routeMask = binsubnet(replace_dual_and_split(spl[0])[2]).count('1')
+				routeMask = binsubnet(STR.replace_dual_and_split(spl[0])[2]).count('1')
 			except:
 				print(spl)
-			routeDesc = replace_dual_and_split(spl[-1])[-1]
+			routeDesc = STR.replace_dual_and_split(spl[-1])[-1]
 			op_items[route + '/' + str(routeMask)] = routeDesc.strip()
 		self._op_items = op_items
 
@@ -794,7 +824,6 @@ class Routes(object):
 MAX_RECURSION_DEPTH = 100
 class Summary(IPv4):
 	'''Defines Summary of prefixes
-
 	'''
 
 	def __init__(self, *args):		
@@ -809,7 +838,10 @@ class Summary(IPv4):
 		self._validate_and_update_networks()
 
 	@property
-	def prefixes(self): 
+	def prefixes(self):
+		"""set of summary addresses
+		--> set
+		"""
 		for pfx in self.summaries:
 			if isinstance(pfx, str): pfx = IPv4(pfx)
 		return set(self.summaries)
@@ -822,6 +854,8 @@ class Summary(IPv4):
 
 	# kick
 	def calculate(self):
+		"""calculates summary for provided networks
+		"""
 		prev_network = None
 		for network in self.networks:
 			_sumy = self.summary(prev_network, network)
@@ -836,6 +870,8 @@ class Summary(IPv4):
 				continue
 
 	def summary(self, s1, s2):
+		"""--> summary of given network addresses s1 and s2
+		"""
 		if s2 is None: return s1
 		if s1 is None: return s2
 		if self._are_equal(s1, s2): return s1

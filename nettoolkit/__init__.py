@@ -4,12 +4,11 @@ JSet, IPv4, IPv6, addressing, Validation,
 Default, Container, Numeric, STR, IO, LST, DIC, LOG, DB, IP,
 DifferenceDict, DictMethods
 -------------------------------------------------------------------
- JSet         convert juniper standard config to set config
+ Juniper      various juniper config operations
  IPv4         IPV4 Object, and its operations
  IPv6         IPV4 Object, and its operations
  addressing   dynamic allocation of IPv4/IPv6 Objects
  Validation   Validate subnet
- IpHelperUpdate  DHCPv6 Helper update utility
  Default      default implementations of docstring
  Container    default identical dunder methods implementations
  Numeric      To be implemented later
@@ -26,20 +25,25 @@ DifferenceDict, DictMethods
 -------------------------------------------------------------------
 '''
 
-__all__ = ['JSet', 
+__all__ = [
+	# .juniper
+	'Juniper',
+	# .addressing
 	'IPv4', 'IPv6', 'addressing', 'Validation', 'get_summaries', 'isSubset',
 	'binsubnet', 'bin2dec', 'bin2decmask', 'to_dec_mask', 'bin_mask',
+	# .gpl
 	'Default', 'Container', 'Numeric', 'DifferenceDict', 
 	'STR', 'IO', 'LST', 'DIC', 'LOG', 'DB', 'IP', 'XL_READ', 'XL_WRITE', 
 	'DictMethods', 'Multi_Execution', 
 	]
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 
-from .jset import JSet
+from .juniper import Juniper
+
 from .addressing import (
 	IPv4, IPv6, addressing, Validation, get_summaries, isSubset,
-	binsubnet, bin2dec, bin2decmask, to_dec_mask, bin_mask
+	binsubnet, bin2dec, bin2decmask, to_dec_mask, bin_mask,
 	)
 
 from .gpl import (Default, Container, Numeric, 
@@ -47,3 +51,4 @@ from .gpl import (Default, Container, Numeric,
 	STR, IO, LST, LOG, DB, IP, XL_READ, XL_WRITE, 
 	Multi_Execution,
 	)
+

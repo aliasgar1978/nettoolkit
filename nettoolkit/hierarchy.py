@@ -4,6 +4,7 @@
 from collections import OrderedDict
 
 from .hierarchy_rules import *
+from .gpl import STR, IO
 
 # Enable only if Max Recursion depth reach.
 # import sys
@@ -506,53 +507,52 @@ class Convert():
 		self.add_to_str(s)
 
 
+class Hierarchy():
+	def __init__(self, input_file, output_file):
+		self.input_file = input_file
+		self.output_file = output_file
 
+	def convert(self):
+		section = self._gen_section_dict( IO.file_to_str(self.input_file) )
+		self._conv_dict_to_hierarchy(section)
+
+	def _gen_section_dict(self, input_file_lst):
+	    return Section(li_li_words(input_file_lst), 
+	    						ordered=False)
+
+	def _conv_dict_to_hierarchy(self, section):
+		self.output = str(Convert(section.dic, -1, is_tailed=False))
+
+
+
+# ------------------------------------------------------------------------------
 if __name__ == '__main__':
-    # set a b low cx c
-    # set a b low dx d
-    # set a b low ex e
+	pass
+# ------------------------------------------------------------------------------
+	# TEST BED
+    # # set a b low cx c
+    # # set a b low dx d
+    # # set a b low ex e
 
-    l = """set policy-options policy-statement rm_prefix_to_ldp term seq_20 from protocol static
-    """
+    # l = """set policy-options policy-statement rm_prefix_to_ldp term seq_20 from protocol static
+    # """
 
-    #----------------------------------------------------
-    # Main Sequences #
-    #----------------------------------------------------
-    # read set commands file
-    with open('g9z-vpb-hpcf1_Jset.cfg', 'r') as f:
-        pass
-        l = f.read()
+    # '''
+    # Exceptions to be done
 
-    # Generate Sections Dictionary
-    s = Section(li_li_words(l), ordered=False)
-    # print(s.dic)
+    # 3. - NTP servers should not come in brackets.
+    # server {
+    #     1.8.1.122;
+    #     1.8.4.122;
+    # }
+    # -->         server 1.8.1.122;
+    #             server 1.8.4.122;
 
-    # Convert Dictionary to Hierarchical config
-    op = Convert(s.dic, -1, is_tailed=False)
-
-    # write to output file
-    with open('normal.txt', 'w') as f:
-        f.write(str(op))
-
-    # print(str(op)[:-5])
-    #----------------------------------------------------
-
-    '''
-    Exceptions to be done
-
-    3. - NTP servers should not come in brackets.
-    server {
-        135.89.176.122;
-        135.89.45.122;
-    }
-    -->         server 135.89.176.122;
-                server 135.89.45.122;
-
-    4.
-    term seqxxx , from / then   --> based on entry expand or in single line
+    # 4.
+    # term seqxxx , from / then   --> based on entry expand or in single line
 
 
-    5.
+    # 5.
 
 
-    '''
+    # '''

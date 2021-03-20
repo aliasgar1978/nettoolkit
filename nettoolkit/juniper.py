@@ -11,11 +11,6 @@ class Juniper():
 		self.input_file = input_file
 		self.output_file = output_file
 
-	def remove_remarks(self):
-		self.input_file_lst = IO.file_to_list(self.input_file)
-		output_file_lst = self._get_clean_output_file_lst()
-		IO.to_file(self.output_file, output_file_lst)
-
 	def _get_clean_output_file_lst(self):
 		output_file_lst = []
 		for line in self.input_file_lst:
@@ -23,15 +18,26 @@ class Juniper():
 			output_file_lst.append(line.rstrip("\n"))
 		return output_file_lst
 
-	def convert_to_set(self):
+	def remove_remarks(self, to_file=True):
+		self.input_file_lst = IO.file_to_list(self.input_file)
+		output_file_lst = self._get_clean_output_file_lst()
+		if to_file and self.output_file:
+			IO.to_file(self.output_file, output_file_lst)
+		return output_file_lst
+
+	def convert_to_set(self, to_file=True):
 		J = JSet(self.input_file)
 		J.to_set
-		IO.to_file(self.output_file, J.output)
+		if to_file and self.output_file:
+			IO.to_file(self.output_file, J.output)
+		return J.output
 
-	def convert_to_hierarchy(self):
+	def convert_to_hierarchy(self, to_file=True):
 		H = Hierarchy(self.input_file, self.output_file)
 		H.convert()
-		IO.to_file(self.output_file, H.output)
+		if to_file and self.output_file:
+			IO.to_file(self.output_file, H.output)
+		return H.output
 
 
 # ------------------------------------------------------------------------------

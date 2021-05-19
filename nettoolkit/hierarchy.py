@@ -347,11 +347,11 @@ class Convert():
 			dic_key (str): string key to be pass on to selector logic
 			dic_value (dic): dictionary for the key to be pass on to selector logic
 		"""
-		
+
 
 		# if self.test : print(dic_key)
 		# if self.is_straight: print(dic_key)
-		if dic_key == "community" : self.test = True
+		if dic_key == "community": self.test = True
 		if False: pass
 
 		elif (len(dic_value) == 1 

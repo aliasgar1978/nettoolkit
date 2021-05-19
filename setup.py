@@ -11,7 +11,7 @@ setuptools.setup(
     description="Tool Set for Networking Geeks",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/alias1978/nettoolkit",
+    url="https://github.com/aliasgar1978/nettoolkit",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

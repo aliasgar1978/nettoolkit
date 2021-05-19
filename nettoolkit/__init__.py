@@ -34,10 +34,10 @@ __all__ = [
 	# .gpl
 	'Default', 'Container', 'Numeric', 'DifferenceDict', 
 	'STR', 'IO', 'LST', 'DIC', 'LOG', 'DB', 'IP', 'XL_READ', 'XL_WRITE', 
-	'DictMethods', 'Multi_Execution', 
+	'DictMethods', 'Multi_Execution',
 	]
 
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 
 from .juniper import Juniper
 

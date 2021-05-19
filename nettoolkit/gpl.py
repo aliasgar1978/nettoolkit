@@ -43,7 +43,13 @@ class Container(ABC):
 	def __setitem__(self, i, v): self.objVar[i] = v
 	def __delitem__(self, i): del(self.objVar[i])
 	def __contains__(self, i): return i in self.objVar
-	def __reversed__(self): return reversed(self.objVar)
+	def __reversed__(self): 
+		if isinstance(self.objVar, dict):
+			for k in reversed(tuple(self.objVar.keys())):
+				yield (k,self[k])
+		else:
+			return reversed(self.objVar)
+		
 	def __missing__(self, i): raise Exception(f'key {i} unavailable') # only for dict subclass
 	def __iter__(self):
 		if isinstance(self.objVar, (list, tuple, set, str)):
@@ -597,6 +603,16 @@ class IO():
 	"""Collection of static methods for IO objects.
 	see more...	
 	"""
+
+	@staticmethod
+	def copy_text_file(file):
+		"""copy file.txt to file-copy.txt
+		--> None
+		"""
+		dst = file[:-4] + "-copy.txt"
+		with open(file, 'r') as sf:
+			with open(dst, 'w') as dt:
+				dt.write(sf.read())
 
 	@staticmethod
 	def file_list_for_time_stamp(hn, ts, folder, splitter="_@_" ):

@@ -347,11 +347,12 @@ class Convert():
 			dic_key (str): string key to be pass on to selector logic
 			dic_value (dic): dictionary for the key to be pass on to selector logic
 		"""
-		
+		v = {'cl_from_a_only': {'members': {'2002:61': {}}}, 'cl_prefix_class_access': {'members': {'2002:12': {}}}, 'cl_prefix_class_infra': {'members': {'2002:11': {}}}, 'cl_prefix_class_user': {'members': {'2002:14': {}}}, 'cl_reso_id': {'members': {'163:12786': {}}}, 'cl_rt_blue': {'members': {'target:8:100': {}}}, 'cl_vpn_id_blue': {'members': {'2002:100': {}}}, 'cl_vpn_zone_blue': {'members': {'2002:8': {}}}}
+
 
 		# if self.test : print(dic_key)
 		# if self.is_straight: print(dic_key)
-		if dic_key == "community" : self.test = True
+		if dic_key == "community" and dic_value == v: self.test = True
 		if False: pass
 
 		elif (len(dic_value) == 1 

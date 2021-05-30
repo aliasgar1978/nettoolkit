@@ -28,6 +28,8 @@ DifferenceDict, DictMethods
 __all__ = [
 	# .juniper
 	'Juniper',
+	# Jset
+	'JSet',
 	# .addressing
 	'IPv4', 'IPv6', 'addressing', 'Validation', 'get_summaries', 'isSubset',
 	'binsubnet', 'bin2dec', 'bin2decmask', 'to_dec_mask', 'bin_mask',
@@ -37,9 +39,10 @@ __all__ = [
 	'DictMethods', 'Multi_Execution',
 	]
 
-__version__ = "0.0.6"
+__version__ = "0.0.7"
 
 from .juniper import Juniper
+from .jset import JSet
 
 from .addressing import (
 	IPv4, IPv6, addressing, Validation, get_summaries, isSubset,

@@ -39,7 +39,7 @@ __all__ = [
 	'DictMethods', 'Multi_Execution',
 	]
 
-__version__ = "0.0.7"
+__version__ = "0.0.8"
 
 from .juniper import Juniper
 from .jset import JSet

@@ -931,26 +931,3 @@ if __name__ == '__main__':
 	pass
 # END
 # ----------------------------------------------------------------------------
-
-	# # EXAMPLE on SUMMARIZATION
-
-	# s1 = IPv4("10.10.0.0/24")
-	# s2 = IPv4("10.10.1.0/24")
-	# s3 = IPv4("10.10.2.0/24")
-	# s4 = IPv4("10.10.3.0/24")
-
-	# # Method1 -- provide > 2 subnets as below using below func.
-	# # Return list of sorted individual/summary networks if non-summarizable
-	# print (get_summaries(s1 , s3, s2))
-
-	# # Method2 -- two subnets can be summarized directly using + operator if can be summarized
-	# # raise error if non-summarizable 
-	# print (s2 + s1)
-
-	# # Method2 -- two subnets can be summarized using summary method as below.
-	# # Return None if non-summarizable
-	# s = Summary()
-	# print (s.summary(s1, s2))
-
-
-# ----------------------------------------------------------------------------

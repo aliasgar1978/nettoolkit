@@ -528,30 +528,3 @@ class Hierarchy():
 if __name__ == '__main__':
 	pass
 # ------------------------------------------------------------------------------
-	# TEST BED
-    # # set a b low cx c
-    # # set a b low dx d
-    # # set a b low ex e
-
-    # l = """set policy-options policy-statement rm_prefix_to_ldp term seq_20 from protocol static
-    # """
-
-    # '''
-    # Exceptions to be done
-
-    # 3. - NTP servers should not come in brackets.
-    # server {
-    #     1.8.1.122;
-    #     1.8.4.122;
-    # }
-    # -->         server 1.8.1.122;
-    #             server 1.8.4.122;
-
-    # 4.
-    # term seqxxx , from / then   --> based on entry expand or in single line
-
-
-    # 5.
-
-
-    # '''

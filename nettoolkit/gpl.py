@@ -558,7 +558,7 @@ class STR(Container):
 		keys are header string and value are string index (position) of string in line
 		--> OrderedDict
 		"""
-		exceptional_headers = {'Type', }
+		exceptional_headers = {}#'Type', }
 		headers = OrderedDict()
 		prev_k = None
 		for k in STR.replace_dual_and_split(line.rstrip()):

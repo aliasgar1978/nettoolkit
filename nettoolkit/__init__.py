@@ -37,6 +37,8 @@ __all__ = [
 	'Default', 'Container', 'Numeric', 'DifferenceDict', 
 	'STR', 'IO', 'LST', 'DIC', 'LOG', 'DB', 'IP', 'XL_READ', 'XL_WRITE', 
 	'DictMethods', 'Multi_Execution',
+	# .convertdict
+	'ConvDict',
 	]
 
 __version__ = "0.0.8"
@@ -55,3 +57,4 @@ from .gpl import (Default, Container, Numeric,
 	Multi_Execution,
 	)
 
+from .convertdict import ConvDict

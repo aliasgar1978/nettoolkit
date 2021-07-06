@@ -7,7 +7,7 @@
 import pandas as pd
 
 # ----------------------------------------------------------------------------
-INDEX_KEY_PARENTS = {'instances', 'ifphysicals', 'ifvlans', 'ifloopbacks', } 
+INDEX_KEY_PARENTS = {'instances', 'ifphysicals', 'ifvlans', 'ifloopbacks', 'ifaggregates' } 
 
 # ----------------------------------------------------------------------------
 def varsheet(dic):
@@ -102,8 +102,10 @@ def update_nested_key(dic, keys, vitem):
 class ConvDict():
 	"""convert dictionary to and fro between nested and serialzed format"""
 
-	def __init__(self, dic):
+	def __init__(self, dic=None):
 		self.dic = dic
+		self.set_var_table_keys()
+		self.set_index_keys_parents()
 
 	def set_var_table_keys(self, var='var', table='table'):
 		"""standup variable of tab name, static variables:var , tabular data:table"""
@@ -136,9 +138,9 @@ class ConvDict():
 		return to pandas dataframe object
 		"""
 		if sheetname == self.var:
-			return pd.DataFrame(self.convert_var_dic())
+			return pd.DataFrame(self.convert_var_dic()).fillna()
 		if sheetname == self.table:
-			return pd.DataFrame(self.convert_table_dic())
+			return pd.DataFrame(self.convert_table_dic()).fillna()
 
 	def expand_to_dict(self, df_var, df_table):
 		"""expand the provided dataframes of var/table to nested dictionary and return it"""
@@ -146,7 +148,9 @@ class ConvDict():
 		opdv = self.expand_dfdic_to_dict(self.var, d_var)
 		d_table = df_table.to_dict()
 		opdt = self.expand_dfdic_to_dict(self.table, d_table)
-		return {self.var: opdv, self.table: opdt}
+		opd = {self.var: opdv}
+		opd.update(opdt)
+		return opd
 
 	def expand_dfdic_to_dict(self, sheetname, dic):
 		"""expand the provided dictionary to nested dictionary and return it"""

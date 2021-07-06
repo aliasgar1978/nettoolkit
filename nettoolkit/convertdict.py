@@ -138,9 +138,9 @@ class ConvDict():
 		return to pandas dataframe object
 		"""
 		if sheetname == self.var:
-			return pd.DataFrame(self.convert_var_dic()).fillna()
+			return pd.DataFrame(self.convert_var_dic()).fillna("")
 		if sheetname == self.table:
-			return pd.DataFrame(self.convert_table_dic()).fillna()
+			return pd.DataFrame(self.convert_table_dic()).fillna("")
 
 	def expand_to_dict(self, df_var, df_table):
 		"""expand the provided dataframes of var/table to nested dictionary and return it"""

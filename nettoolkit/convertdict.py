@@ -165,7 +165,7 @@ if __name__ == '__main__':
 # ----------------------------------------------------------------------------
 	# from pprint import pprint
 	
-	# # d is an input nested dictionary
+	# # d is an input nested dictionary ( dictionary keys should not contain "_")
 	# CD = ConvDict(d)
 	# CD.set_var_table_keys(var='var', table='table')
 	# CD.set_index_keys_parents(('phyint', 'vlint', ))

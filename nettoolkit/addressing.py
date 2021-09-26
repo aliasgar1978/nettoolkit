@@ -33,6 +33,7 @@ def bin2dec(binnet):
 	input = dotted network
 	-->str
 	"""
+	if not binnet: return 0
 	return int(binnet, 2)
 def bin2decmask(binmask):
 	"""Decimal mask representation
@@ -164,6 +165,7 @@ class Validation():
 			if not self.validated: return None
 			self.ip_obj = object_map[self.version](self.subnet)
 			self.validated = self.ip_obj + 0 == self.ip_obj.NetworkIP(False)
+			# print(self.ip_obj + 0 , self.ip_obj.NetworkIP(False))
 			if not self.validated:  return None
 		else:
 			raise Exception(invalid_subnet(self.subnet))
@@ -293,6 +295,7 @@ class IP():
 			for x in self._subnetips(n.start, n.stop):
 				l.append(x)
 			return tuple(l)
+	def __contains__(self, pfx): isSubset(pfx, self)
 
 	# get n-number of subnets of given super-net
 	def _sub_subnets(self, n):
@@ -386,20 +389,26 @@ class IPv6(IP):
 
 	# Return a specific Hextate (hexTnum) from IPV6 address
 	def _get_hext(self, hexTnum, s=''):	
+		test = hexTnum == 1
 		if s == '':
 			s = self.subnet.split("/")[0]
 		try:
 			if s != '' and all([hexTnum>0, hexTnum<=8]):
 				sip = s.split("/")[0].split("::")
+				# if test: print(hexTnum, s)
 				lsip = sip[0].split(":")
 				if hexTnum <= len(lsip):
-					return lsip[hexTnum-1]
+					lsiphext = lsip[hexTnum-1]
+					if lsiphext: return lsip[hexTnum-1]
+					return '0'
 				else:
 					rsip = sip[1].split(":")
 					if rsip[0] == '': rsip = []
 					if 8-hexTnum < len(rsip):
+						# if test: print(">>", rsip[(9-hexTnum)*-1])
 						return rsip[(9-hexTnum)*-1]
 					else:
+						# if test: print(">>> 0", )
 						return '0'
 			else:
 				raise Exception(incorrectinput)
@@ -429,7 +438,7 @@ class IPv6(IP):
 				asilast.append(x)
 				x = x + (2**(16-(self.mask-((fixedOctets)*16))))
 
-			## check avlbl subnet and choose less then given one.			
+			## check avlbl subnet and choose less then given one.
 			for netx in asilast:		
 				avs.append(self._get_hextates(fixedOctets)  
 										+ str(hex(netx))[2:])
@@ -442,7 +451,9 @@ class IPv6(IP):
 
 			## Return subnet by padding zeros.
 			self.fixedOctets = fixedOctets
-			return last_subnet+self._pad(padIP, 7-fixedOctets)	
+			nt = last_subnet+self._pad(padIP, 7-fixedOctets)
+			if nt[0] == ":": nt = nt[1:]
+			return nt
 
 		else:									# host-only subnet
 			return self.network
@@ -931,3 +942,4 @@ if __name__ == '__main__':
 	pass
 # END
 # ----------------------------------------------------------------------------
+

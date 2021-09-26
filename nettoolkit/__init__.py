@@ -32,7 +32,7 @@ __all__ = [
 	'JSet',
 	# .addressing
 	'IPv4', 'IPv6', 'addressing', 'Validation', 'get_summaries', 'isSubset',
-	'binsubnet', 'bin2dec', 'bin2decmask', 'to_dec_mask', 'bin_mask',
+	'binsubnet', 'bin2dec', 'bin2decmask', 'to_dec_mask', 'bin_mask', 'Routes',
 	# .gpl
 	'Default', 'Container', 'Numeric', 'DifferenceDict', 
 	'STR', 'IO', 'LST', 'DIC', 'LOG', 'DB', 'IP', 'XL_READ', 'XL_WRITE', 
@@ -48,7 +48,7 @@ from .jset import JSet
 
 from .addressing import (
 	IPv4, IPv6, addressing, Validation, get_summaries, isSubset,
-	binsubnet, bin2dec, bin2decmask, to_dec_mask, bin_mask,
+	binsubnet, bin2dec, bin2decmask, to_dec_mask, bin_mask, Routes,
 	)
 
 from .gpl import (Default, Container, Numeric, 

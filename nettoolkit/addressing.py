@@ -9,6 +9,56 @@ incorrectinput = 'INCORRECT SUBNET OR SUBNET MASK DETECTED NULL RETURNED'
 # Module Functions
 # ----------------------------------------------------------------------------
 
+def expand(v6subnet):		
+	# try:
+	p = ''
+	sip = v6subnet.split("/")[0].split("::")
+	if len(sip) == 2:
+		# ~~~~~~ No padding, inserting zeros in middle ~~~~~~~
+		for x in range(1, 9):
+			p = STR.string_concate(p, get_hext(v6subnet, hexTnum=x), conj=':')
+		v6subnet = p
+	else :
+		# ~~~~~~~ pad leading zeros ~~~~~~~
+		lsip = sip[0].split(":")
+		for x in range(8-len(lsip), 0, -1):
+			p = STR.string_concate(p, '0', conj=":")
+		if p != '':
+			v6subnet = p + ':' + v6subnet
+	return v6subnet
+	# except:
+	# 	return False
+
+def get_hext(v6subnet, hexTnum, s=''):	
+	test = hexTnum == 1
+	if s == '':
+		s = v6subnet.split("/")[0]
+	try:
+		if s != '' and all([hexTnum>0, hexTnum<=8]):
+			sip = s.split("/")[0].split("::")
+			# if test: print(hexTnum, s)
+			lsip = sip[0].split(":")
+			if hexTnum <= len(lsip):
+				lsiphext = lsip[hexTnum-1]
+				if lsiphext: return lsip[hexTnum-1]
+				return '0'
+			else:
+				rsip = sip[1].split(":")
+				if rsip[0] == '': rsip = []
+				if 8-hexTnum < len(rsip):
+					# if test: print(">>", rsip[(9-hexTnum)*-1])
+					return rsip[(9-hexTnum)*-1]
+				else:
+					# if test: print(">>> 0", )
+					return '0'
+		else:
+			raise Exception(incorrectinput)
+			return None
+	except:
+		raise Exception(incorrectinput)
+		return None
+
+
 def bin_mask(mask):
 	"""binary mask representation (ex: 255.255.255.0)
 	input mask = decimal mask
@@ -164,8 +214,9 @@ class Validation():
 			self.validated = func_map[self.version]()
 			if not self.validated: return None
 			self.ip_obj = object_map[self.version](self.subnet)
-			self.validated = self.ip_obj + 0 == self.ip_obj.NetworkIP(False)
-			# print(self.ip_obj + 0 , self.ip_obj.NetworkIP(False))
+			self.validated = expand(self.ip_obj + 0) == expand(self.ip_obj.NetworkIP(False))
+
+
 			if not self.validated:  return None
 		else:
 			raise Exception(invalid_subnet(self.subnet))
@@ -349,26 +400,32 @@ class IPv6(IP):
 	# ------------------------------------------------------------------------
 
 	# update Subnet to actual length / expand zeros 
-	def _to_actualsize(self):		
-		try:
-			if not self.__actualv6subnet:
-				p = ''
-				sip = self.subnet.split("/")[0].split("::")
-				if len(sip) == 2:
-					# ~~~~~~ No padding, inserting zeros in middle ~~~~~~~
-					for x in range(1, 9):
-						p = STR.string_concate(p, self._get_hext(hexTnum=x), conj=':')
-					self.subnet = p
-				else :
-					# ~~~~~~~ pad leading zeros ~~~~~~~
-					lsip = sip[0].split(":")
-					for x in range(8-len(lsip), 0, -1):
-						p = STR.string_concate(p, '0', conj=":")
-					if p != '':
-						self.subnet = p + ':' + self.subnet
-				self.__actualv6subnet = True
-		except:
-			return False
+	def _to_actualsize(self):
+		self.subnet = expand(self.subnet)
+		# if not self.subnet: return False
+		return self.subnet
+
+	# update Subnet to actual length / expand zeros 
+	# def _to_actualsize(self):		
+	# 	try:
+	# 		if not self.__actualv6subnet:
+	# 			p = ''
+	# 			sip = self.subnet.split("/")[0].split("::")
+	# 			if len(sip) == 2:
+	# 				# ~~~~~~ No padding, inserting zeros in middle ~~~~~~~
+	# 				for x in range(1, 9):
+	# 					p = STR.string_concate(p, self._get_hext(hexTnum=x), conj=':')
+	# 				self.subnet = p
+	# 			else :
+	# 				# ~~~~~~~ pad leading zeros ~~~~~~~
+	# 				lsip = sip[0].split(":")
+	# 				for x in range(8-len(lsip), 0, -1):
+	# 					p = STR.string_concate(p, '0', conj=":")
+	# 				if p != '':
+	# 					self.subnet = p + ':' + self.subnet
+	# 			self.__actualv6subnet = True
+	# 	except:
+	# 		return False
 
 	# IP Portion of Input
 	def _network_ip(self):
@@ -388,34 +445,37 @@ class IPv6(IP):
 		return s
 
 	# Return a specific Hextate (hexTnum) from IPV6 address
-	def _get_hext(self, hexTnum, s=''):	
-		test = hexTnum == 1
-		if s == '':
-			s = self.subnet.split("/")[0]
-		try:
-			if s != '' and all([hexTnum>0, hexTnum<=8]):
-				sip = s.split("/")[0].split("::")
-				# if test: print(hexTnum, s)
-				lsip = sip[0].split(":")
-				if hexTnum <= len(lsip):
-					lsiphext = lsip[hexTnum-1]
-					if lsiphext: return lsip[hexTnum-1]
-					return '0'
-				else:
-					rsip = sip[1].split(":")
-					if rsip[0] == '': rsip = []
-					if 8-hexTnum < len(rsip):
-						# if test: print(">>", rsip[(9-hexTnum)*-1])
-						return rsip[(9-hexTnum)*-1]
-					else:
-						# if test: print(">>> 0", )
-						return '0'
-			else:
-				raise Exception(incorrectinput)
-				return None
-		except:
-			raise Exception(incorrectinput)
-			return None
+	def _get_hext(self, hexTnum, s=''):	return get_hext(self.subnet, hexTnum, s)
+
+	# Return a specific Hextate (hexTnum) from IPV6 address
+	# def _get_hext(self, hexTnum, s=''):	
+	# 	test = hexTnum == 1
+	# 	if s == '':
+	# 		s = self.subnet.split("/")[0]
+	# 	try:
+	# 		if s != '' and all([hexTnum>0, hexTnum<=8]):
+	# 			sip = s.split("/")[0].split("::")
+	# 			# if test: print(hexTnum, s)
+	# 			lsip = sip[0].split(":")
+	# 			if hexTnum <= len(lsip):
+	# 				lsiphext = lsip[hexTnum-1]
+	# 				if lsiphext: return lsip[hexTnum-1]
+	# 				return '0'
+	# 			else:
+	# 				rsip = sip[1].split(":")
+	# 				if rsip[0] == '': rsip = []
+	# 				if 8-hexTnum < len(rsip):
+	# 					# if test: print(">>", rsip[(9-hexTnum)*-1])
+	# 					return rsip[(9-hexTnum)*-1]
+	# 				else:
+	# 					# if test: print(">>> 0", )
+	# 					return '0'
+	# 		else:
+	# 			raise Exception(incorrectinput)
+	# 			return None
+	# 	except:
+	# 		raise Exception(incorrectinput)
+	# 		return None
 
 	# Return Number of Network Hextates (hxts) from IPV6 address
 	def _get_hextates(self, hxts=1, s=''):
@@ -465,7 +525,7 @@ class IPv6(IP):
 		if _ != '':
 			s = self.subnet
 		_7o = self._get_hextates(7, s)
-		_8o = int(self._get_hext(8, s)) + num
+		_8o = int(self._get_hext(8, s), 16) + num
 		return _7o + str(hex(_8o)[2:])
 
 	@property
@@ -942,4 +1002,14 @@ if __name__ == '__main__':
 	pass
 # END
 # ----------------------------------------------------------------------------
+
+	# ip = '2620:1f7:3d1a::2:8203:a/128'
+	# # try: 
+	# # print(addressing(ip))
+	# # except:pass
+	# a = addressing(ip)
+	# # try:
+	# print(a)
+	# # except:
+	# # 	pass
 

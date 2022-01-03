@@ -1,4 +1,3 @@
-
 # ----------------------------------------------------------------------------
 #
 # Dictionary converter for extremely nested dictionary to and fro to excel data tabular format
@@ -165,7 +164,7 @@ if __name__ == '__main__':
 # ----------------------------------------------------------------------------
 	# from pprint import pprint
 	
-	# # d is an input nested dictionary ( dictionary keys should not contain "_")
+	# # d is an input nested dictionary
 	# CD = ConvDict(d)
 	# CD.set_var_table_keys(var='var', table='table')
 	# CD.set_index_keys_parents(('phyint', 'vlint', ))

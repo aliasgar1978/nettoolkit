@@ -19,6 +19,15 @@ intBeginWith = compile(r'^\D+')
 #                              Common Classes                                 #
 # -----------------------------------------------------------------------------
 
+def nslookup(ip):
+	"""return discovered hostname for provided ip
+	-->int
+	"""
+	lst = popen(f"nslookup {ip}").read().split("\n")
+	for line in lst:
+		if line.startswith("Name"): return line.split()[-1]
+	return ""
+
 class Default():
 	"""Default class representing class docString template"""
 	def __str__(self): return self.__doc__

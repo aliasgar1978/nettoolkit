@@ -36,7 +36,7 @@ __all__ = [
 	# .gpl
 	'Default', 'Container', 'Numeric', 'DifferenceDict', 
 	'STR', 'IO', 'LST', 'DIC', 'LOG', 'DB', 'IP', 'XL_READ', 'XL_WRITE', 
-	'DictMethods', 'Multi_Execution',
+	'DictMethods', 'Multi_Execution', 'nslookup'
 	# .convertdict
 	'ConvDict',
 	]
@@ -54,7 +54,7 @@ from .addressing import (
 from .gpl import (Default, Container, Numeric, 
 	DifferenceDict, DictMethods, DIC,
 	STR, IO, LST, LOG, DB, IP, XL_READ, XL_WRITE, 
-	Multi_Execution,
+	Multi_Execution, nslookup
 	)
 
 from .convertdict import ConvDict

@@ -1,4 +1,3 @@
-
 # ------------------------------------------------------------------------------
 from .gpl import STR, IO
 from .hierarchy import Hierarchy 

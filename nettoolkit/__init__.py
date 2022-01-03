@@ -41,7 +41,7 @@ __all__ = [
 	'ConvDict',
 	]
 
-__version__ = "0.0.9"
+__version__ = "0.0.10"
 
 from .juniper import Juniper
 from .jset import JSet

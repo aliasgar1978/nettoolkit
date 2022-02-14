@@ -36,7 +36,7 @@ __all__ = [
 	# .gpl
 	'Default', 'Container', 'Numeric', 'DifferenceDict', 
 	'STR', 'IO', 'LST', 'DIC', 'LOG', 'DB', 'IP', 'XL_READ', 'XL_WRITE', 
-	'DictMethods', 'Multi_Execution', 'nslookup'
+	'DictMethods', 'Multi_Execution', 'nslookup',
 	# .convertdict
 	'ConvDict',
 	]

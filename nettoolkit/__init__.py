@@ -41,7 +41,7 @@ __all__ = [
 	'ConvDict',
 	]
 
-__version__ = "0.0.11"
+__version__ = "0.0.12"
 
 from .juniper import Juniper
 from .jset import JSet
@@ -54,7 +54,7 @@ from .addressing import (
 from .gpl import (Default, Container, Numeric, 
 	DifferenceDict, DictMethods, DIC,
 	STR, IO, LST, LOG, DB, IP, XL_READ, XL_WRITE, 
-	Multi_Execution, nslookup
+	Multi_Execution, nslookup,
 	)
 
 from .convertdict import ConvDict

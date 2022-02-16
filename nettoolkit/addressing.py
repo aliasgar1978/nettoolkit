@@ -1,3 +1,6 @@
+"""IPv4, IPv6 subnets, routes, summaries and its properties, definitions.
+"""
+
 from collections import OrderedDict
 
 from .gpl import STR, LST, IO
@@ -9,7 +12,15 @@ incorrectinput = 'INCORRECT SUBNET OR SUBNET MASK DETECTED NULL RETURNED'
 # Module Functions
 # ----------------------------------------------------------------------------
 
-def expand(v6subnet):		
+def expand(v6subnet):
+	"""Expand the V6 subnet to its full length.
+
+	Args:
+		v6subnet (str): zipped v6 subnet
+
+	Returns:
+		str: expanded v6 subnet
+	"""	
 	# try:
 	p = ''
 	sip = v6subnet.split("/")[0].split("::")
@@ -30,6 +41,18 @@ def expand(v6subnet):
 	# 	return False
 
 def get_hext(v6subnet, hexTnum, s=''):	
+	"""get the a hextate of v6 subnet.
+
+	Args:
+		v6subnet (str): v6 subnet string
+		hexTnum (int): hextate number
+
+	Raises:
+		Exception: Raise Exception if incorrect input
+
+	Returns:
+		str: hextate string
+	"""	
 	test = hexTnum == 1
 	if s == '':
 		s = v6subnet.split("/")[0]
@@ -60,10 +83,14 @@ def get_hext(v6subnet, hexTnum, s=''):
 
 
 def bin_mask(mask):
-	"""binary mask representation (ex: 255.255.255.0)
-	input mask = decimal mask
-	-->str
-	"""
+	"""mask representation in binary (ex: 255.255.255.0)
+
+	Args:
+		mask (int): mask in number 
+
+	Returns:
+		str: mask in 8 byte format
+	"""    	
 	mask = int(mask)
 	decmask = mask*str(1) + (32-mask)*str(0)
 	o1 = str(int(decmask[ 0: 8] , 2))
@@ -71,28 +98,60 @@ def bin_mask(mask):
 	o3 = str(int(decmask[16: 24], 2))
 	o4 = str(int(decmask[24: 32], 2))
 	return o1+'.'+o2+'.'+o3+'.'+o4	
-def invalid_subnet(subnet): return f"Not a VALID Subnet {subnet}"
-def to_dec_mask(dotted_mask):  
+
+
+def _invalid_subnet(subnet): 
+	"""invalid subnet str
+	"""	
+	return f"Not a VALID Subnet {subnet}"
+
+
+def to_dec_mask(dotted_mask):
 	"""Decimal mask representation
-	input mask = dotted mask
-	-->str
-	"""
+
+	Args:
+		dotted_mask (str): input mask = dotted mask
+
+	Returns:
+		int: mask
+	"""    	
 	return bin2decmask(binsubnet(dotted_mask))
+
+
 def bin2dec(binnet): 
-	"""Decimal network representation
-	input = dotted network
-	-->str
-	"""
+	"""Decimal network representation / integer value
+
+	Args:
+		binnet (str): input = dotted network
+
+	Returns:
+		int: decimal number of network
+	"""	
 	if not binnet: return 0
 	return int(binnet, 2)
+
+
 def bin2decmask(binmask):
-	"""Decimal mask representation
-	input mask = binary mask in number
-	-->str
-	"""
+	"""Decimal mask representation / integer value
+
+	Args:
+		binmask (str): input mask = binary mask in number
+
+	Returns:
+		int: mask
+	"""    	
 	return binmask.count('1')
+
+
 def binsubnet(subnet):
-	"""convert subnet to binary:0's and 1's """
+	"""convert subnet to binary:0s and 1s
+
+	Args:
+		subnet (str): subnet string (v4, v6)
+
+	Returns:
+		str: binary subnet representation ( 0s and 1s )
+	"""    	
 	try:
 		if STR.found(subnet, "."): version, split_by, bit_per_oct = 4, ".", 8
 		if STR.found(subnet, ":"): version, split_by, bit_per_oct = 6, ":", 16
@@ -112,27 +171,24 @@ def binsubnet(subnet):
 
 
 def addressing(subnet):
-	'''main function proiving ip-subnet object for various functions on it
-	--> ipsubnet object
+	"""proives ip-subnet object for various functions on it
 
-	:param: subnet: either ipv4 or ipv6 subnet with /mask
-	:param type: str
+	Args:
+		subnet (str): either ipv4 or ipv6 subnet with /mask
 
-	:param decmask: decimal mask notation only in case of IPv4 (optional)
-	:param type: str
-	'''
+	Returns:
+		IPv4, IPv6: IPv4 or IPv6 object
+	"""    	
 	v_obj = Validation(subnet)
 	if v_obj.validated: return v_obj.ip_obj
 
 
 def get_summaries(*net_list):
-	'''summarize the provided network prefixes
-	--> list of sorted summary netwoks
+	"""summarize the provided network prefixes, provide all networks as arguments.
 
-	:param: *net_list: network prefixes (variable arguments)
-	:param type: str/list/tuple/set
-
-	'''
+	Returns:
+		list: summaries
+	"""    	
 	if not isinstance(net_list, (list, tuple, set)): return None
 	s = Summary(*net_list)
 	s.calculate()
@@ -149,19 +205,32 @@ def get_summaries(*net_list):
 
 
 def isSplittedRoute(line):
-	"""	1: No single line,
-		0 : Yes splitted line [line1]
-		-1: Yes splitted line [line2]
-	"""
+	"""checks if ip route is splitted in multiple lines or not.
+
+	Args:
+		line (str): ip route line from configuration
+
+	Returns:
+		int: 1: No single line,  0 : Yes splitted line [line1],  -1: Yes splitted line [line2]
+	"""    	
 	if STR.found(line, ','):
 		return 1 if len(line.split()) > 5 else -1
 	else:
 		return 0
 
 def isSubset(pfx, supernet):
-	"""Check if provided prefix is part of provided supernet or not
-	--> Boolean
-	"""
+	"""Check if provided prefix is part of provided supernet or not.
+
+	Args:
+		pfx (str): subnet
+		supernet (str): supernet
+
+	Raises:
+		Exception: if an input error occur
+
+	Returns:
+		bool: True if subnet is part of supernet else False
+	"""    	
 	if not isinstance(pfx, (str, IPv4)):
 		raise Exception("INPUTERROR")
 	if not isinstance(supernet, (str, IPv4)):
@@ -180,18 +249,15 @@ def isSubset(pfx, supernet):
 # Validation Class - doing subnet validation and version detection
 # ----------------------------------------------------------------------------
 class Validation():
-	'''ip-subnet validation class
-	:param subnet: ipv4 or ipv6 subnet with "/" mask
-	:param type: str
-
-	'''
+	"""ip-subnet validation class, provide ipv4 or ipv6 subnet with "/" mask
+	"""    	
 
 	def __init__(self, subnet):
-		'''ip-subnet validation class
-		:param subnet: ipv4 or ipv6 subnet with "/" mask
-		:param type: str
+		"""Initialise the validation.
 
-		'''
+		Args:
+			subnet (str): ipv4 or ipv6 subnet with "/" mask
+		"""    		
 		self.mask = None
 		self.subnet = subnet
 		self.version = self._version()
@@ -200,6 +266,11 @@ class Validation():
 
 
 	def _version(self):
+		"""ip version number
+
+		Returns:
+			int: version number
+		"""    		
 		if STR.found(self.subnet, ":"):
 			return 6
 		elif STR.found(self.subnet, "."):
@@ -208,6 +279,14 @@ class Validation():
 			return 0
 
 	def _check_ip_object(self):
+		"""internal checking method
+
+		Raises:
+			Exception: _description_
+
+		Returns:
+			_type_: _description_
+		"""    		
 		object_map = {4: IPv4, 6: IPv6}
 		func_map = {4: self.check_v4_input, 6: self.check_v6_input}
 		if self.version in object_map:
@@ -216,10 +295,9 @@ class Validation():
 			self.ip_obj = object_map[self.version](self.subnet)
 			self.validated = expand(self.ip_obj + 0) == expand(self.ip_obj.NetworkIP(False))
 
-
 			if not self.validated:  return None
 		else:
-			raise Exception(invalid_subnet(self.subnet))
+			raise Exception(_invalid_subnet(self.subnet))
 
 	def check_v4_input(self):
 		'''validation of v4 subnet
@@ -388,12 +466,23 @@ class IPv6(IP):
 
 	# Object Initializer
 	def __init__(self, subnet=''):
+		"""initialize the IPv6 object for provided v6 subnet
+
+		Args:
+			subnet (str): ipv6 subnet with mask.
+		"""    		
 		super().__init__(subnet)
 		self._network_ip()
 		self.__actualv6subnet = False				# breaked subnet expanded
 		self._network_address_bool = False			# Subnet zero available/not
 
-	def len(self): return bin2dec(binsubnet(self.broadcast_address())) - bin2dec(binsubnet(self.subnet_zero())) + 1
+	def len(self): 
+		"""Subnet size
+
+		Returns:
+			int: count of ip in this subnet 
+		"""	
+		return bin2dec(binsubnet(self.broadcast_address())) - bin2dec(binsubnet(self.subnet_zero())) + 1
 
 	# ------------------------------------------------------------------------
 	# Private Methods
@@ -545,15 +634,28 @@ class IPv6(IP):
 	# ------------------------------------------------------------------------
 
 	def get_hext(self, hexTnum): 
-		"""Return a specific Hextate (hexTnum) from IPV6 address
-		-->str
-		"""
+		"""get a specific Hextate value from IPV6 address
+		same as: getHext
+
+		Args:
+			hexTnum (int): hextate number
+
+		Returns:
+			str: hextate value
+		"""		
 		return self._get_hext(hexTnum)
 	getHext = get_hext
 
 	def subnet_zero(self, withMask=True):
-		'''--> Network Address with/without mask for given subnet
-		'''
+		"""Network Address (subnet zero) with/without mask for given subnet
+		same as: NetworkIP
+
+		Args:
+			withMask (bool, optional): return with mask. Defaults to True.
+
+		Returns:
+			str: Network Address
+		"""    		
 		if withMask :
 			return self._network_address + "/" + str(self.mask)
 		else:
@@ -561,8 +663,15 @@ class IPv6(IP):
 	NetworkIP = subnet_zero
 
 	def broadcast_address(self, withMask=True):
-		'''--> Broadcast Address with/without mask for given subnet
-		'''
+		"""Broadcast Address with/without mask for given subnet
+		same as: BroadcastIP
+
+		Args:
+			withMask (bool, optional): return with mask. Defaults to True.
+
+		Returns:
+			str: Broadcast Address
+		"""
 		if withMask :
 			return self._broadcast_address + "/" + str(self.mask)
 		else:
@@ -570,26 +679,45 @@ class IPv6(IP):
 	BroadcastIP = broadcast_address
 
 	def n_thIP(self, n=0, withMask=False, _=''):
-		'''--> n-th IP with/without mask from given subnet
-		'''
+		"""n-th IP with/without mask from given subnet
+
+		Args:
+			n (int, optional): n-th ip. Defaults to 0.
+			withMask (bool, optional): return with mask. Defaults to False.
+
+		Returns:
+			str: nth IP Address string
+		"""
 		ip = self._add_ip_to_network_address(n, _)
 		mask = self.decimalMask
 		return ip+"/"+mask if withMask else ip
 
 	@property
 	def decimalMask(self):
-		'''--> decimal mask of given subnet'''
+		'''decimal mask of given subnet
+		same as: decmask
+		'''
 		return str(self.mask)
 	decmask = decimalMask
 
 	## - NA - for IPv6 ##
 	@property
-	def binmask(self): return None
+	def binmask(self): 
+		"""Not Implemented for IPv6 """		
+		return None
 	@property
-	def invmask(self): return None
-	def ipdecmask(self, n=0): return self.n_thIP(n, True)
-	def ipbinmask(self, n=0): return None
-	def ipinvmask(self, n=0): return None
+	def invmask(self): 
+		"""Not Implemented for IPv6 """		
+		return None
+	def ipdecmask(self, n=0): 
+		"""nth ip with decimal mask"""
+		return self.n_thIP(n, True)
+	def ipbinmask(self, n=0): 
+		"""Not Implemented for IPv6 """		
+		return None
+	def ipinvmask(self, n=0): 
+		"""Not Implemented for IPv6 """		
+		return None
 
 
 # ----------------------------------------------------------------------------
@@ -642,7 +770,15 @@ class IPv4(IP):
 	# ------------------------------------------------------------------------
 
 	def subnet_zero(self, withMask=True):
-		'''Network IP Address of subnet from provided IP/Subnet'''
+		"""Network IP Address (subnet zero) of subnet from provided IP/Subnet.
+		same as: NetworkIP
+
+		Args:
+			withMask (bool, optional): return with mask. Defaults to True.
+
+		Returns:
+			str: Network address
+		"""    		
 		try:
 			s = binsubnet(self.subnet)
 			bm = self._binmask
@@ -656,7 +792,15 @@ class IPv4(IP):
 	NetworkIP = subnet_zero
 
 	def broadcast_address(self, withMask=False):
-		'''Broadcast IP Address of subnet from provided IP/Subnet'''
+		"""Broadcast IP Address of subnet from provided IP/Subnet
+		same as: BroadcastIP
+
+		Args:
+			withMask (bool, optional): return with mask. Defaults to False.
+
+		Returns:
+			str: broadcast ip
+		"""    		
 		try:
 			s = binsubnet(self.subnet)
 			im = self._invmask
@@ -670,7 +814,18 @@ class IPv4(IP):
 	BroadcastIP = broadcast_address
 
 	def n_thIP(self, n=0, withMask=False, _='', summary_calc=False):
-		'''n-th IP Address of subnet from provided IP/Subnet'''
+		"""n-th IP Address of subnet from provided IP/Subnet
+
+		Args:
+			n (int, optional): number of ip. Defaults to 0.
+			withMask (bool, optional): return with mask. Defaults to False.
+
+		Raises:
+			Exception: for address out of range
+
+		Returns:
+			str: nth ip address
+		"""
 		s = binsubnet(self.subnet)
 		if _ == '':
 			bm = self._binmask
@@ -708,36 +863,51 @@ class IPv4(IP):
 		return LST.list_to_octet(self._octets_bin2dec(self._invmask))
 
 	def ipdecmask(self, n=0):
-		'''IP with Decimal Mask for provided IP/Subnet,
-		n ==>
-		n-th ip of subnet will appear in output if provided,
-		subnet0 ip will appear in output if not provided
-		default: n = 0, for Network IP
-		'''
+		"""IP with Decimal Mask for provided IP/Subnet,
+
+		Args:
+			n (int, optional): n-th ip of subnet will appear in output if provided. Defaults to 0.
+
+		Raises:
+			Exception: invalid input
+
+		Returns:
+			str: ipaddress/mask
+		"""    		
 		try:
 			return self[n] + "/" + str(self.mask)
 		except:
 			raise Exception(f'Invalid Input : detected')
 
 	def ipbinmask(self, n=0):
-		'''IP with Binary Mask for provided IP/Subnet,
-		n ==>
-		n-th ip of subnet will appear in output if provided,
-		same input subnet/ip will appear in output if not provided
-		set - n = 0, for Network IP
-		'''
+		"""IP with Binary Mask for provided IP/Subnet,
+
+		Args:
+			n (int, optional): n-th ip of subnet will appear in output if provided,. Defaults to 0.
+
+		Raises:
+			Exception: invalid input
+
+		Returns:
+			str: ip_address subnet_mask
+		"""    		
 		try:
 			return self[n] + " " + self.binmask
 		except:
 			raise Exception(f'Invalid Input : detected')
 
 	def ipinvmask(self, n=0):
-		'''IP with Inverse Mask for provided IP/Subnet,
-		n ==>
-		n-th ip of subnet will appear in output if provided,
-		same input subnet/ip will appear in output if not provided
-		set - n = 0, for Network IP
-		'''
+		"""IP with Inverse Mask for provided IP/Subnet,
+
+		Args:
+			n (int, optional): n-th ip of subnet will appear in output if provided. Defaults to 0.
+
+		Raises:
+			Exception: invalid input
+
+		Returns:
+			str: ip_address inverse_mask
+		"""    		
 		try:
 			return self[n] + " " + self.invmask
 		except:
@@ -749,30 +919,19 @@ class IPv4(IP):
 # Routes Class
 # ------------------------------------------------------------------------------
 class Routes(object):
-	''' Routing Table
-	--> Routes object with all routes in dictionary
+	"""Routes Object
+	"""    	
 
-	:param hostname: device hostname
-	:param type: str
-
-	:param route_list: output of cisco sh route command in list format
-	:param type: list
-
-	:param route_file: feed text file of sh route output directly instead
-	:param type: io/text file
-
-	Properties
-	----------
-	routes: dictionary of route: routename
-
-	See also
-	---------
-	get_prefix_desc: --> Prefix Description / str
-	inTable --> checks is provided prefix in routes / bool
-	outerPrefix --> outer prefix / str
-	'''
 
 	def __init__(self, hostname, route_list=None, route_file=None):
+		"""Initialize Route object
+		Either one input is require (route_list, route_file)
+
+		Args:
+			hostname (str): device hostname
+			route_list (list, optional): cisco sh route command in list format. Defaults to None.
+			route_file (str, optional): text file of sh route output. Defaults to None.
+		"""    		
 		if route_file != None: route_list = IO.file_to_list(route_file)
 		self.__parse(route_list, hostname)
 
@@ -786,23 +945,30 @@ class Routes(object):
 	@property
 	def reversed_table(self):
 		"""reversed routes
-		--> generator
+
+		Yields:
+			tuple: route, route_attributes
 		"""
 		for k, v in reversed(self.routes.items()):
 			yield (k, v)
 
 	@property
 	def routes(self):
-		"""--> routes with its name"""
+		"""routes with its name"""
 		return self._op_items
 
 	def get_prefix_desc(self, prefix):
-		'''Returns prefix description if available or returns for default route
-		--> str
+		"""prefix description if available or returns it for default route
 
-		:param prefix: ip prefix to search in output
-		:param type: str
-		'''
+		Args:
+			prefix (str): prefix to check
+
+		Raises:
+			Exception: input error
+
+		Returns:
+			str: prefix remark/description if any
+		"""    		
 		pfxlst = []
 		if isinstance(prefix, str):
 			x = self.__check_in_table(addressing(prefix))[1]
@@ -828,15 +994,25 @@ class Routes(object):
 			print("prefixesNotinSamesubnet: Error")
 
 	def inTable(self, prefix):
-		'''check if prefix is in routes table, return for Def.Route otherwise
-		--> bool
-		'''
+		"""check if prefix is in routes table, return for default-route otherwise
+
+		Args:
+			prefix (str): prefix to check
+
+		Returns:
+			bool: prefix in table or not
+		"""    		
 		return self.__check_in_table(prefix)[0]
 
 	def outerPrefix(self, prefix):
-		'''check and return parent subnet of prefix in routes table, Def.Route else
-		--> str
-		'''
+		"""check and return parent subnet of prefix in routes table, default-route otherwise
+
+		Args:
+			prefix (str): prefix to check
+
+		Returns:
+			str: matching prefix/supernet
+		"""    		
 		return self.__check_in_table(prefix)[1]
 
 	######################### LOCAL FUNCTIONS #########################
@@ -892,12 +1068,14 @@ class Routes(object):
 # Prefixes summarization class 
 # ----------------------------------------------------------------------------
 
-MAX_RECURSION_DEPTH = 100
+MAX_RECURSION_DEPTH = 100		# default recursion depth, increase if exceeding and need to go deep more.
 class Summary(IPv4):
-	'''Defines Summary of prefixes
+	'''Defines Summaries of prefixes
 	'''
 
 	def __init__(self, *args):		
+		"""initialize object with provided args=prefixes
+		"""		
 		self.networks = set()
 		for arg in args:
 			if isinstance(arg, str):
@@ -911,12 +1089,15 @@ class Summary(IPv4):
 	@property
 	def prefixes(self):
 		"""set of summary addresses
-		--> set
-		"""
+
+		Returns:
+			set: summaries
+		"""    		
 		for pfx in self.summaries:
 			if isinstance(pfx, str): pfx = IPv4(pfx)
 		return set(self.summaries)
 
+	# provided networks validation, remove non-validated networks.
 	def _validate_and_update_networks(self):
 		for network in self.networks:
 			if not Validation(str(network)).validated:
@@ -925,7 +1106,7 @@ class Summary(IPv4):
 
 	# kick
 	def calculate(self):
-		"""calculates summary for provided networks
+		"""calculate summaries for provided networks
 		"""
 		prev_network = None
 		for network in self.networks:
@@ -941,7 +1122,7 @@ class Summary(IPv4):
 				continue
 
 	def summary(self, s1, s2):
-		"""--> summary of given network addresses s1 and s2
+		"""summary of given two network addresses s1 and s2
 		"""
 		if s2 is None: return s1
 		if s1 is None: return s2
@@ -954,6 +1135,7 @@ class Summary(IPv4):
 		summary_ip = self.first.NetworkIP(False)+"/"+str(self.mask)
 		return summary_ip if Validation(summary_ip).validated else None
 
+	# Order the subnet sequencially.
 	def _sequnce_it(self, s1, s2):
 		if int(binsubnet(s1.NetworkIP()), 2 ) > int(binsubnet(s2.NetworkIP()), 2 ):
 			(first, second) = (s2, s1) 
@@ -961,6 +1143,7 @@ class Summary(IPv4):
 			(first, second) = (s1, s2)
 		self.first, self.second = first, second
 
+	# defining some local variables
 	def _local_vars(self):
 		# ---------- set local vars ------------------
 		self.first_len = len(self.first)
@@ -969,8 +1152,10 @@ class Summary(IPv4):
 		self.mask = 32 - len(bin(self.total-1)[2:])			# tantative summary mask
 		# --------------------------------------------
 
+	# are provided two prefixes equal or not, check boolean
 	def _are_equal(self, s1, s2): return s1.mask == s2.mask and s1.NetworkIP() == s2.NetworkIP()
 
+	# is s1 part of s2 ?
 	def _is_any_subset(self, s1, s2):
 		(big_subnet, small_subnet) = (s2, s1) if s1.mask > s2.mask else (s1, s2)
 		is_part = False
@@ -985,10 +1170,12 @@ class Summary(IPv4):
 				break
 		return big_subnet if is_part else None
 
+	# a condition
 	def _contigious(self):
 		# condition 1 - next ip of subnet 1 should be network ip of subnet 2 / Verfications
 		return self.first.n_thIP(self.first_len, summary_calc=True) == self.second.NetworkIP(False)
 
+	# a more condition
 	def _immidiate(self):
 		# condition 2 - length subnet 1 + lenght subnet 2 == bc ip of subnet 2
 		return self.first.n_thIP(self.total-1, summary_calc=True) == self.second.broadcast_address()

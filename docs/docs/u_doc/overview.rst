@@ -21,7 +21,14 @@ Some high-level list of tools are:
 	* various prefixes related tools.
 		* check if prefix is part of another prefix (supernet)
 		* summarize given prefixes.
+	* various opertaions on String, List, Dictionaries.
+		* Merge two dictionaries
+		* Get the differences between dictionaries.
+		* Repesent dictrionary in Multiline hi-erarchical order
+		* Split list in group of objects
+		* find multiple strings from a single string
+	... and many more
 
-Stay Tuned to get more in details.
+Keep reading to get more in details.
 
 

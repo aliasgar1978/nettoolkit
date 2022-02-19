@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.1. addressing &mdash; nettoolkit 0.0.12 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.2. hierarchy" href="__hierarchy.html" />
+    <link rel="prev" title="4. Technical documentation!" href="../_tech_doc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../_preface.html">1. Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_install.html">2. Insall Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_user_doc.html">3. User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../_tech_doc.html">4. API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.1. Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__hierarchy.html">4.2. To Hi-erachy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__jset.html">4.3. To J-Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__juniper.html">4.4. Juniper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__gpl.html">4.5. GPL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__convertdict.html">4.6. Convert Dictionary</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../_tech_doc.html"><span class="section-number">4. </span>Technical documentation!</a> &raquo;</li>
+      <li><span class="section-number">4.1. </span>addressing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/t_doc/__addressing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-nettoolkit.addressing">
+<span id="addressing"></span><h1><span class="section-number">4.1. </span>addressing<a class="headerlink" href="#module-nettoolkit.addressing" title="Permalink to this headline"></a></h1>
+<p>IPv4, IPv6 subnets, routes, summaries and its properties, definitions.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">IP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subnet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IP" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>defines common properties and methods for IPV4 and IPV6 Objects</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">IPv4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subnet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv4" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.addressing.IP" title="nettoolkit.addressing.IP"><code class="xref py py-class docutils literal notranslate"><span class="pre">nettoolkit.addressing.IP</span></code></a></p>
+<p>IPv4 object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.BroadcastIP">
+<span class="sig-name descname"><span class="pre">BroadcastIP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">withMask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv4.BroadcastIP" title="Permalink to this definition"></a></dt>
+<dd><p>Broadcast IP Address of subnet from provided IP/Subnet
+same as: BroadcastIP</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>withMask (bool, optional): return with mask. Defaults to False.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: broadcast ip</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.NetworkIP">
+<span class="sig-name descname"><span class="pre">NetworkIP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">withMask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv4.NetworkIP" title="Permalink to this definition"></a></dt>
+<dd><p>Network IP Address (subnet zero) of subnet from provided IP/Subnet.
+same as: NetworkIP</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>withMask (bool, optional): return with mask. Defaults to True.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Network address</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.binmask">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">binmask</span></span><a class="headerlink" href="#nettoolkit.addressing.IPv4.binmask" title="Permalink to this definition"></a></dt>
+<dd><p>Binary Mask from provided IP/Subnet</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.bit_length">
+<span class="sig-name descname"><span class="pre">bit_length</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">32</span></em><a class="headerlink" href="#nettoolkit.addressing.IPv4.bit_length" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.broadcast_address">
+<span class="sig-name descname"><span class="pre">broadcast_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">withMask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv4.broadcast_address" title="Permalink to this definition"></a></dt>
+<dd><p>Broadcast IP Address of subnet from provided IP/Subnet
+same as: BroadcastIP</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>withMask (bool, optional): return with mask. Defaults to False.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: broadcast ip</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.decimalMask">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decimalMask</span></span><a class="headerlink" href="#nettoolkit.addressing.IPv4.decimalMask" title="Permalink to this definition"></a></dt>
+<dd><p>Decimal Mask from provided IP/Subnet - Numeric/Integer</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.decmask">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decmask</span></span><a class="headerlink" href="#nettoolkit.addressing.IPv4.decmask" title="Permalink to this definition"></a></dt>
+<dd><p>Decimal Mask from provided IP/Subnet - Numeric/Integer</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.invmask">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invmask</span></span><a class="headerlink" href="#nettoolkit.addressing.IPv4.invmask" title="Permalink to this definition"></a></dt>
+<dd><p>Inverse Mask from provided IP/Subnet</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.ipbinmask">
+<span class="sig-name descname"><span class="pre">ipbinmask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv4.ipbinmask" title="Permalink to this definition"></a></dt>
+<dd><p>IP with Binary Mask for provided IP/Subnet,</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int, optional): n-th ip of subnet will appear in output if provided,. Defaults to 0.</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: invalid input</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: ip_address subnet_mask</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.ipdecmask">
+<span class="sig-name descname"><span class="pre">ipdecmask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv4.ipdecmask" title="Permalink to this definition"></a></dt>
+<dd><p>IP with Decimal Mask for provided IP/Subnet,</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int, optional): n-th ip of subnet will appear in output if provided. Defaults to 0.</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: invalid input</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: ipaddress/mask</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.ipinvmask">
+<span class="sig-name descname"><span class="pre">ipinvmask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv4.ipinvmask" title="Permalink to this definition"></a></dt>
+<dd><p>IP with Inverse Mask for provided IP/Subnet,</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int, optional): n-th ip of subnet will appear in output if provided. Defaults to 0.</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: invalid input</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: ip_address inverse_mask</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.n_thIP">
+<span class="sig-name descname"><span class="pre">n_thIP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">withMask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary_calc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv4.n_thIP" title="Permalink to this definition"></a></dt>
+<dd><p>n-th IP Address of subnet from provided IP/Subnet</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int, optional): number of ip. Defaults to 0.
+withMask (bool, optional): return with mask. Defaults to False.</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: for address out of range</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: nth ip address</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.subnet_zero">
+<span class="sig-name descname"><span class="pre">subnet_zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">withMask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv4.subnet_zero" title="Permalink to this definition"></a></dt>
+<dd><p>Network IP Address (subnet zero) of subnet from provided IP/Subnet.
+same as: NetworkIP</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>withMask (bool, optional): return with mask. Defaults to True.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Network address</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv4.version">
+<span class="sig-name descname"><span class="pre">version</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#nettoolkit.addressing.IPv4.version" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">IPv6</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subnet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.addressing.IP" title="nettoolkit.addressing.IP"><code class="xref py py-class docutils literal notranslate"><span class="pre">nettoolkit.addressing.IP</span></code></a></p>
+<p>IPv6 object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.BroadcastIP">
+<span class="sig-name descname"><span class="pre">BroadcastIP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">withMask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6.BroadcastIP" title="Permalink to this definition"></a></dt>
+<dd><p>Broadcast Address with/without mask for given subnet
+same as: BroadcastIP</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>withMask (bool, optional): return with mask. Defaults to True.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Broadcast Address</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.NetworkAddress">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NetworkAddress</span></span><a class="headerlink" href="#nettoolkit.addressing.IPv6.NetworkAddress" title="Permalink to this definition"></a></dt>
+<dd><p>–&gt;Returns only NETWORK ADDRESS for given subnet</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.NetworkIP">
+<span class="sig-name descname"><span class="pre">NetworkIP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">withMask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6.NetworkIP" title="Permalink to this definition"></a></dt>
+<dd><p>Network Address (subnet zero) with/without mask for given subnet
+same as: NetworkIP</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>withMask (bool, optional): return with mask. Defaults to True.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Network Address</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.binmask">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">binmask</span></span><a class="headerlink" href="#nettoolkit.addressing.IPv6.binmask" title="Permalink to this definition"></a></dt>
+<dd><p>Not Implemented for IPv6</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.bit_length">
+<span class="sig-name descname"><span class="pre">bit_length</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">128</span></em><a class="headerlink" href="#nettoolkit.addressing.IPv6.bit_length" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.broadcast_address">
+<span class="sig-name descname"><span class="pre">broadcast_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">withMask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6.broadcast_address" title="Permalink to this definition"></a></dt>
+<dd><p>Broadcast Address with/without mask for given subnet
+same as: BroadcastIP</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>withMask (bool, optional): return with mask. Defaults to True.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Broadcast Address</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.decimalMask">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decimalMask</span></span><a class="headerlink" href="#nettoolkit.addressing.IPv6.decimalMask" title="Permalink to this definition"></a></dt>
+<dd><p>decimal mask of given subnet
+same as: decmask</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.decmask">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decmask</span></span><a class="headerlink" href="#nettoolkit.addressing.IPv6.decmask" title="Permalink to this definition"></a></dt>
+<dd><p>decimal mask of given subnet
+same as: decmask</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.getHext">
+<span class="sig-name descname"><span class="pre">getHext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hexTnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6.getHext" title="Permalink to this definition"></a></dt>
+<dd><p>get a specific Hextate value from IPV6 address
+same as: getHext</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>hexTnum (int): hextate number</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: hextate value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.get_hext">
+<span class="sig-name descname"><span class="pre">get_hext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hexTnum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6.get_hext" title="Permalink to this definition"></a></dt>
+<dd><p>get a specific Hextate value from IPV6 address
+same as: getHext</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>hexTnum (int): hextate number</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: hextate value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.invmask">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">invmask</span></span><a class="headerlink" href="#nettoolkit.addressing.IPv6.invmask" title="Permalink to this definition"></a></dt>
+<dd><p>Not Implemented for IPv6</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.ipbinmask">
+<span class="sig-name descname"><span class="pre">ipbinmask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6.ipbinmask" title="Permalink to this definition"></a></dt>
+<dd><p>Not Implemented for IPv6</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.ipdecmask">
+<span class="sig-name descname"><span class="pre">ipdecmask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6.ipdecmask" title="Permalink to this definition"></a></dt>
+<dd><p>nth ip with decimal mask</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.ipinvmask">
+<span class="sig-name descname"><span class="pre">ipinvmask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6.ipinvmask" title="Permalink to this definition"></a></dt>
+<dd><p>Not Implemented for IPv6</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.len">
+<span class="sig-name descname"><span class="pre">len</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6.len" title="Permalink to this definition"></a></dt>
+<dd><p>Subnet size</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: count of ip in this subnet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.n_thIP">
+<span class="sig-name descname"><span class="pre">n_thIP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">withMask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6.n_thIP" title="Permalink to this definition"></a></dt>
+<dd><p>n-th IP with/without mask from given subnet</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>n (int, optional): n-th ip. Defaults to 0.
+withMask (bool, optional): return with mask. Defaults to False.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: nth IP Address string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.subnet_zero">
+<span class="sig-name descname"><span class="pre">subnet_zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">withMask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.IPv6.subnet_zero" title="Permalink to this definition"></a></dt>
+<dd><p>Network Address (subnet zero) with/without mask for given subnet
+same as: NetworkIP</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>withMask (bool, optional): return with mask. Defaults to True.</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: Network Address</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.addressing.IPv6.version">
+<span class="sig-name descname"><span class="pre">version</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#nettoolkit.addressing.IPv6.version" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Routes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">Routes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">route_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">route_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.Routes" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Routes Object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Routes.get_prefix_desc">
+<span class="sig-name descname"><span class="pre">get_prefix_desc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.Routes.get_prefix_desc" title="Permalink to this definition"></a></dt>
+<dd><p>prefix description if available or returns it for default route</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>prefix (str): prefix to check</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: input error</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: prefix remark/description if any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Routes.inTable">
+<span class="sig-name descname"><span class="pre">inTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.Routes.inTable" title="Permalink to this definition"></a></dt>
+<dd><p>check if prefix is in routes table, return for default-route otherwise</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>prefix (str): prefix to check</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: prefix in table or not</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Routes.outerPrefix">
+<span class="sig-name descname"><span class="pre">outerPrefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.Routes.outerPrefix" title="Permalink to this definition"></a></dt>
+<dd><p>check and return parent subnet of prefix in routes table, default-route otherwise</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>prefix (str): prefix to check</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: matching prefix/supernet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Routes.reversed_table">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reversed_table</span></span><a class="headerlink" href="#nettoolkit.addressing.Routes.reversed_table" title="Permalink to this definition"></a></dt>
+<dd><p>reversed routes</p>
+<dl class="simple">
+<dt>Yields:</dt><dd><p>tuple: route, route_attributes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Routes.routes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">routes</span></span><a class="headerlink" href="#nettoolkit.addressing.Routes.routes" title="Permalink to this definition"></a></dt>
+<dd><p>routes with its name</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Summary">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">Summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.Summary" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.addressing.IPv4" title="nettoolkit.addressing.IPv4"><code class="xref py py-class docutils literal notranslate"><span class="pre">nettoolkit.addressing.IPv4</span></code></a></p>
+<p>Defines Summaries of prefixes</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Summary.calculate">
+<span class="sig-name descname"><span class="pre">calculate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.Summary.calculate" title="Permalink to this definition"></a></dt>
+<dd><p>calculate summaries for provided networks</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Summary.prefixes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prefixes</span></span><a class="headerlink" href="#nettoolkit.addressing.Summary.prefixes" title="Permalink to this definition"></a></dt>
+<dd><p>set of summary addresses</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>set: summaries</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Summary.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.Summary.summary" title="Permalink to this definition"></a></dt>
+<dd><p>summary of given two network addresses s1 and s2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Validation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">Validation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subnet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.Validation" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>ip-subnet validation class, provide ipv4 or ipv6 subnet with “/” mask</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Validation.check_v4_input">
+<span class="sig-name descname"><span class="pre">check_v4_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.Validation.check_v4_input" title="Permalink to this definition"></a></dt>
+<dd><p>validation of v4 subnet</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.addressing.Validation.check_v6_input">
+<span class="sig-name descname"><span class="pre">check_v6_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.Validation.check_v6_input" title="Permalink to this definition"></a></dt>
+<dd><p>validation of v6 subnet</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.addressing">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">addressing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subnet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.addressing" title="Permalink to this definition"></a></dt>
+<dd><p>proives ip-subnet object for various functions on it</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>subnet (str): either ipv4 or ipv6 subnet with /mask</p>
+</dd>
+<dt>Returns:</dt><dd><p>IPv4, IPv6: IPv4 or IPv6 object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.bin2dec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">bin2dec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binnet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.bin2dec" title="Permalink to this definition"></a></dt>
+<dd><p>Decimal network representation / integer value</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>binnet (str): input = dotted network</p>
+</dd>
+<dt>Returns:</dt><dd><p>int: decimal number of network</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.bin2decmask">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">bin2decmask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binmask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.bin2decmask" title="Permalink to this definition"></a></dt>
+<dd><p>Decimal mask representation / integer value</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>binmask (str): input mask = binary mask in number</p>
+</dd>
+<dt>Returns:</dt><dd><p>int: mask</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.bin_mask">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">bin_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.bin_mask" title="Permalink to this definition"></a></dt>
+<dd><p>mask representation in binary (ex: 255.255.255.0)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mask (int): mask in number</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: mask in 8 byte format</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.binsubnet">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">binsubnet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subnet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.binsubnet" title="Permalink to this definition"></a></dt>
+<dd><p>convert subnet to binary:0s and 1s</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>subnet (str): subnet string (v4, v6)</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: binary subnet representation ( 0s and 1s )</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.expand">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">expand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v6subnet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.expand" title="Permalink to this definition"></a></dt>
+<dd><p>Expand the V6 subnet to its full length.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>v6subnet (str): zipped v6 subnet</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: expanded v6 subnet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.get_hext">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">get_hext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v6subnet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexTnum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.get_hext" title="Permalink to this definition"></a></dt>
+<dd><p>get the a hextate of v6 subnet.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>v6subnet (str): v6 subnet string
+hexTnum (int): hextate number</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: Raise Exception if incorrect input</p>
+</dd>
+<dt>Returns:</dt><dd><p>str: hextate string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.get_summaries">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">get_summaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">net_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.get_summaries" title="Permalink to this definition"></a></dt>
+<dd><p>summarize the provided network prefixes, provide all networks as arguments.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>list: summaries</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.isSplittedRoute">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">isSplittedRoute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.isSplittedRoute" title="Permalink to this definition"></a></dt>
+<dd><p>checks if ip route is splitted in multiple lines or not.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>line (str): ip route line from configuration</p>
+</dd>
+<dt>Returns:</dt><dd><p>int: 1: No single line,  0 : Yes splitted line [line1],  -1: Yes splitted line [line2]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.isSubset">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">isSubset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pfx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">supernet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.isSubset" title="Permalink to this definition"></a></dt>
+<dd><p>Check if provided prefix is part of provided supernet or not.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>pfx (str): subnet
+supernet (str): supernet</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: if an input error occur</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: True if subnet is part of supernet else False</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.to_dec_mask">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.</span></span><span class="sig-name descname"><span class="pre">to_dec_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dotted_mask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.addressing.to_dec_mask" title="Permalink to this definition"></a></dt>
+<dd><p>Decimal mask representation</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>dotted_mask (str): input mask = dotted mask</p>
+</dd>
+<dt>Returns:</dt><dd><p>int: mask</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../_tech_doc.html" class="btn btn-neutral float-left" title="4. Technical documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="__hierarchy.html" class="btn btn-neutral float-right" title="4.2. hierarchy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

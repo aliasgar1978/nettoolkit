@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.5. gpl &mdash; nettoolkit 0.0.12 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.6. convertdict" href="__convertdict.html" />
+    <link rel="prev" title="4.4. juniper" href="__juniper.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../_preface.html">1. Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_install.html">2. Insall Instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_user_doc.html">3. User Manual</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../_tech_doc.html">4. API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="__addressing.html">4.1. Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__hierarchy.html">4.2. To Hi-erachy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__jset.html">4.3. To J-Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__juniper.html">4.4. Juniper</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.5. GPL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="__convertdict.html">4.6. Convert Dictionary</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../_tech_doc.html"><span class="section-number">4. </span>Technical documentation!</a> &raquo;</li>
+      <li><span class="section-number">4.5. </span>gpl</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/t_doc/__gpl.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-nettoolkit.gpl">
+<span id="gpl"></span><h1><span class="section-number">4.5. </span>gpl<a class="headerlink" href="#module-nettoolkit.gpl" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Container">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">Container</span></span><a class="headerlink" href="#nettoolkit.gpl.Container" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstract base class providing template for standard dunder 
+methods template.  Object should contain objVar property</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Container.objVar">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">objVar</span></span><a class="headerlink" href="#nettoolkit.gpl.Container.objVar" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.DB">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">DB</span></span><a class="headerlink" href="#nettoolkit.gpl.DB" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Collection of static methods for Database.
+see more…</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.DB.read_excel">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_excel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sheet1'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.DB.read_excel" title="Permalink to this definition"></a></dt>
+<dd><p>reads a sheet from an excel 
+—&gt;returns dataframe of that sheet data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> – source excel database file</p></li>
+<li><p><strong>sheet</strong> – sheet name on source excel which is to be read.</p></li>
+<li><p><strong>kwargs</strong> (<em>mutli</em>) – pandas df arguments to read excel</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.DIC">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">DIC</span></span><a class="headerlink" href="#nettoolkit.gpl.DIC" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Collection of static methods for dictionary objects.
+see more…</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.DIC.merge_dict">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dy</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.DIC.merge_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Merges two dictionaries for identical keys 
+–&gt; dict
+:param dx, dy: Two dictionaries to be merged
+:type dx, dy: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.DIC.recursive_dic">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recursive_dic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indention</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.DIC.recursive_dic" title="Permalink to this definition"></a></dt>
+<dd><p>convert dictionary (dic) to string. 
+recursive dictionary increases indention.
+–&gt; str</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Default">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">Default</span></span><a class="headerlink" href="#nettoolkit.gpl.Default" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Default class representing class docString template</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.DictMethods">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">DictMethods</span></span><a class="headerlink" href="#nettoolkit.gpl.DictMethods" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>PAPA DUNDER EXTENSIONS FOR DICTIONARY OBJECTS
+[self.dic is abstract property which gets iterates over]</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.DictMethods.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.DictMethods.append" title="Permalink to this definition"></a></dt>
+<dd><p>appends value to self[item] dictionary.
+create new list if no value found for item, appends to list if available.
+–&gt; None</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.DifferenceDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">DifferenceDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.DifferenceDict" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>Template class to get difference in two dictionary objects.
+use dunder +/- for adds/removes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.gpl.DifferenceDict.additive">
+<span class="sig-name descname"><span class="pre">additive</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'+</span> <span class="pre">'</span></em><a class="headerlink" href="#nettoolkit.gpl.DifferenceDict.additive" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.DifferenceDict.get_change">
+<span class="sig-name descname"><span class="pre">get_change</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">change</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.DifferenceDict.get_change" title="Permalink to this definition"></a></dt>
+<dd><p>compare current object/dict with provided new object/dict (ie: d) 
+and return differences based on change required (“- “/”+ “)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.gpl.DifferenceDict.missing">
+<span class="sig-name descname"><span class="pre">missing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'-</span> <span class="pre">'</span></em><a class="headerlink" href="#nettoolkit.gpl.DifferenceDict.missing" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">IO</span></span><a class="headerlink" href="#nettoolkit.gpl.IO" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Collection of static methods for IO objects.
+see more…</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO.add_to_file">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IO.add_to_file" title="Permalink to this definition"></a></dt>
+<dd><p>Writes List/text to output filename.
+–&gt; None
+:param filename: Existing filename with path
+:type filename: str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matter</strong> (<em>str</em><em>, </em><em>tuple</em><em>, </em><em>list</em>) – matter to write to new created file.</p></li>
+<li><p><strong>cr</strong> (<em>bool</em>) – carriage return to add at end of each string/line.(default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO.copy_text_file">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">copy_text_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IO.copy_text_file" title="Permalink to this definition"></a></dt>
+<dd><p>copy file.txt to file-copy.txt
+–&gt; None</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO.csv_to_tuple">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">csv_to_tuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IO.csv_to_tuple" title="Permalink to this definition"></a></dt>
+<dd><p>Returns tuple from the provided comma separated text values 
+–&gt; tuple</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>csv</strong> (<em>str</em>) – comma separated value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO.devices_on_log_files">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">devices_on_log_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splitter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_&#64;_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IO.devices_on_log_files" title="Permalink to this definition"></a></dt>
+<dd><p>collection of files from given folder where file extensions are .log
+–&gt; set</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO.file_list_for_time_stamp">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file_list_for_time_stamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splitter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_&#64;_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IO.file_list_for_time_stamp" title="Permalink to this definition"></a></dt>
+<dd><p>collection of files from given folder where hostname (hn) 
+and timestamp (ts) found in the file name.
+–&gt; set</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO.file_to_list">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file_to_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IO.file_to_list" title="Permalink to this definition"></a></dt>
+<dd><p>Returns list for the provided file 
+–&gt; list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – text input file name/with path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO.file_to_str">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file_to_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IO.file_to_str" title="Permalink to this definition"></a></dt>
+<dd><p>Returns string output for the provided file 
+–&gt; str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – text input file name/with path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO.jinja_verification">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jinja_verification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IO.jinja_verification" title="Permalink to this definition"></a></dt>
+<dd><p>check all text files from provided folder for verification of 
+self jinja strings descrepencies
+–&gt; str with outcome</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO.timestamps_for_device">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestamps_for_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">devname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splitter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_&#64;_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IO.timestamps_for_device" title="Permalink to this definition"></a></dt>
+<dd><p>collection of time stamps of files from given folder
+for given hostnames.
+–&gt; set</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO.to_file">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IO.to_file" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a file with matter
+–&gt; None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – filename with path to be creaed.</p></li>
+<li><p><strong>matter</strong> (<em>str</em><em>, </em><em>list</em><em>, </em><em>tuple</em>) – matter to write to new created file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IO.update">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">find_item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_item</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IO.update" title="Permalink to this definition"></a></dt>
+<dd><p>Find and Replace on provided file and saves file
+—&gt; None
+:param file: on which find and replace to be apply
+:type str:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>find_item</strong> – Search item</p></li>
+<li><p><strong>replace_item</strong> – Repalce item for the matched find_item</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">IP</span></span><a class="headerlink" href="#nettoolkit.gpl.IP" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Collection of static methods for Networking on (IP).
+see more…</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IP.bin2dec">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bin2dec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binmask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IP.bin2dec" title="Permalink to this definition"></a></dt>
+<dd><p>convert binary mask to decimal mask
+—&gt; decimal mask
+:param binmask str: binary mask as string</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IP.inv2dec">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inv2dec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">invmask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IP.inv2dec" title="Permalink to this definition"></a></dt>
+<dd><p>convert inverse mask to decimal mask
+—&gt; decimal mask
+:param invmask str: inverse mask as string</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.IP.ping_average">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ping_average</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.IP.ping_average" title="Permalink to this definition"></a></dt>
+<dd><p>return average ping responce for provided ip
+–&gt;int</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.LOG">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">LOG</span></span><a class="headerlink" href="#nettoolkit.gpl.LOG" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Collection of static methods for logging.
+see more…</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.LOG.time_stamp">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">time_stamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.LOG.time_stamp" title="Permalink to this definition"></a></dt>
+<dd><p>current time stamp (for log purpose)
+–&gt; str</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.LST">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">LST</span></span><a class="headerlink" href="#nettoolkit.gpl.LST" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Collection of static methods for list objects.
+see more…</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.LST.convert_vlans_list_to_range_of_vlans_list">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convert_vlans_list_to_range_of_vlans_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vlan_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.LST.convert_vlans_list_to_range_of_vlans_list" title="Permalink to this definition"></a></dt>
+<dd><p>converts list of individual vlans to a list of range of vlans
+–&gt; list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.LST.list_of_devices">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">list_of_devices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.LST.list_of_devices" title="Permalink to this definition"></a></dt>
+<dd><p>get hostnames (first index item) from list of files.
+–&gt; set</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.LST.list_to_octet">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">list_to_octet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.LST.list_to_octet" title="Permalink to this definition"></a></dt>
+<dd><p>joins and return string with provided list with ‘.’
+helpful in created ipv4 string with list of 4 numeric items
+–&gt; str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.LST.list_variants">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">list_variants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.LST.list_variants" title="Permalink to this definition"></a></dt>
+<dd><p>list of vlans in different format
+list of vlans,
+space separated string,
+comma separated string,         
+–&gt; dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.LST.remove_empty_members">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove_empty_members</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.LST.remove_empty_members" title="Permalink to this definition"></a></dt>
+<dd><p>house keeping of list
+removes empty members from list
+–&gt;list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.LST.split">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.LST.split" title="Permalink to this definition"></a></dt>
+<dd><p>yield provided list with group of n number of items
+–&gt; generator of list</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Multi_Execution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">Multi_Execution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.Multi_Execution" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.gpl.Default" title="nettoolkit.gpl.Default"><code class="xref py py-class docutils literal notranslate"><span class="pre">nettoolkit.gpl.Default</span></code></a></p>
+<p>Template methods for multi-threaded executions.
+[self.items items are eligible threaded candidates]</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Multi_Execution.end">
+<span class="sig-name descname"><span class="pre">end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.Multi_Execution.end" title="Permalink to this definition"></a></dt>
+<dd><p>Closure process</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Multi_Execution.execute">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hn</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.Multi_Execution.execute" title="Permalink to this definition"></a></dt>
+<dd><p>abstract class method, to be executed for each item in self.items</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Multi_Execution.execute_mt">
+<span class="sig-name descname"><span class="pre">execute_mt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.Multi_Execution.execute_mt" title="Permalink to this definition"></a></dt>
+<dd><p>threaded execution in groups 
+(self.max_connections defines max threaded processes)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Multi_Execution.execute_sequencial">
+<span class="sig-name descname"><span class="pre">execute_sequencial</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.Multi_Execution.execute_sequencial" title="Permalink to this definition"></a></dt>
+<dd><p>sequencial execution of items</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Multi_Execution.execute_steps">
+<span class="sig-name descname"><span class="pre">execute_steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multi_thread</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.Multi_Execution.execute_steps" title="Permalink to this definition"></a></dt>
+<dd><p>steps defining executions</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Multi_Execution.execute_threads_max">
+<span class="sig-name descname"><span class="pre">execute_threads_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.Multi_Execution.execute_threads_max" title="Permalink to this definition"></a></dt>
+<dd><p>threaded execution of a group</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Multi_Execution.get_devices">
+<span class="sig-name descname"><span class="pre">get_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.Multi_Execution.get_devices" title="Permalink to this definition"></a></dt>
+<dd><p>get devices names from list of files</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Multi_Execution.max_connections">
+<span class="sig-name descname"><span class="pre">max_connections</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#nettoolkit.gpl.Multi_Execution.max_connections" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Multi_Execution.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multi_thread</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.Multi_Execution.start" title="Permalink to this definition"></a></dt>
+<dd><p>starting up executins either threaded/sequencial</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.Numeric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">Numeric</span></span><a class="headerlink" href="#nettoolkit.gpl.Numeric" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Support Numberic objects</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">STR</span></span><a class="headerlink" href="#nettoolkit.gpl.STR" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.gpl.Container" title="nettoolkit.gpl.Container"><code class="xref py py-class docutils literal notranslate"><span class="pre">nettoolkit.gpl.Container</span></code></a></p>
+<p>Collection of static methods for string objects.
+see more…</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.delete_trailing_remarks">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delete_trailing_remarks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.delete_trailing_remarks" title="Permalink to this definition"></a></dt>
+<dd><p>Deletes trailing remarks from Juniper config line/string
+–&gt;str
+:param s: number of characters from right
+:type s: str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.ending">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ending</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.ending" title="Permalink to this definition"></a></dt>
+<dd><p>check if line ends with c or not, same as native string.endswith()
+addition is it first strips the line and then checks
+–&gt;boolean</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.find_all">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beginwith</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.find_all" title="Permalink to this definition"></a></dt>
+<dd><p>search for multiple substrings ‘sub’ within string ‘s’ 
+usage: find_all(s, sub, [start=n, [count=c]])
+–&gt; (all matches) -&gt; bool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – main string</p></li>
+<li><p><strong>sub</strong> (<em>(</em><em>str</em><em>, </em><em>tuple</em><em>, </em><em>list</em><em>)</em>) – sub string ( to be search within main string )</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Optional: substring to be start search from index (def:0)</p></li>
+<li><p><strong>count</strong> (<em>int</em>) – Optional: count of character from start index (def:end)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.find_any">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find_any</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beginwith</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.find_any" title="Permalink to this definition"></a></dt>
+<dd><p>search for multiple substrings ‘sub’ within string ‘s’ 
+usage: find_any(s, sub, [start=n, [count=c]])
+–&gt; (any matches) -&gt; bool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – main string</p></li>
+<li><p><strong>sub</strong> (<em>(</em><em>str</em><em>, </em><em>tuple</em><em>, </em><em>list</em><em>)</em>) – sub string ( to be search within main string )</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Optional: substring to be start search from index (def:0)</p></li>
+<li><p><strong>count</strong> (<em>int</em>) – Optional: count of character from start index (def:end)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.find_multi">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beginwith</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.find_multi" title="Permalink to this definition"></a></dt>
+<dd><p>search for multiple substrings ‘sub’ within string ‘s’
+usage: find_multi(s, sub, [start=n, [count=c], index=True])
+–&gt; list of indexes/bool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – main string</p></li>
+<li><p><strong>sub</strong> (<em>(</em><em>str</em><em>, </em><em>tuple</em><em>, </em><em>list</em><em>)</em>) – sub string ( to be search within main string )</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – Optional: substring to be start search from index (def:0)</p></li>
+<li><p><strong>count</strong> (<em>int</em>) – Optional: count of character from start index (def:end)</p></li>
+<li><p><strong>index</strong> (<em>bool</em>) – Optional: return index or boolean values(def:True=Index)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.find_within">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">find_within</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.find_within" title="Permalink to this definition"></a></dt>
+<dd><p>finds characters between prefix and suffix substrings from string,
+–&gt; tuple: (str, int)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – main string to be search within</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – starting substring</p></li>
+<li><p><strong>suffix</strong> (<em>str</em>) – ending substring</p></li>
+<li><p><strong>pos</strong> (<em>int</em>) – position index, search to be start from</p></li>
+</ul>
+</dd>
+</dl>
+<p>index-0 is returned string
+index-1 is position of returned suffix position</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.finddualnreplacesingle">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">finddualnreplacesingle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.finddualnreplacesingle" title="Permalink to this definition"></a></dt>
+<dd><p>Finds subsequent characters in string and replace those with single.
+–&gt; str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – Source string</p></li>
+<li><p><strong>duo</strong> (<em>str</em>) – characters which requires reductions if susequent</p></li>
+<li><p><strong>strip</strong> (<em>int</em>) – values (-1=lstrip ,0=strip ,1=rstrip) - def:None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.found">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">found</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.found" title="Permalink to this definition"></a></dt>
+<dd><p>Search for substring in string and return Boolean result
+–&gt; bool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – main string to be search within</p></li>
+<li><p><strong>sub</strong> (<em>str</em>) – substring which is to be search in to main string</p></li>
+<li><p><strong>pos</strong> (<em>int</em>) – position index, search to be start from</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.foundPos">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">foundPos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.foundPos" title="Permalink to this definition"></a></dt>
+<dd><p>Search for substring in string and return index value result
+–&gt; int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – main string to be search within</p></li>
+<li><p><strong>sub</strong> (<em>str</em>) – substring which is to be search in to main string</p></li>
+<li><p><strong>pos</strong> (<em>int</em>) – position index, search to be start from</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.get_logfile_name">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_logfile_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_&#64;_'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.log'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.get_logfile_name" title="Permalink to this definition"></a></dt>
+<dd><p>return log file name for the command on device with/wo provided 
+time_stamp.
+folder = path to where file should be saved
+hn = file name starting with provided host-name
+cmd = file name containing additional commands string
+ts = file name containing additional time stamp
+separator = hn-cmd-ts separator 
+extn = extension of filename
+–&gt; str (filename along with full path)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.header_indexes">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">header_indexes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.header_indexes" title="Permalink to this definition"></a></dt>
+<dd><p>input header string line of a text table.
+returns dictionary with key:value pair where 
+keys are header string and value are string index (position) of string in line
+–&gt; OrderedDict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.hostname">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hostname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">net_connect</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.hostname" title="Permalink to this definition"></a></dt>
+<dd><p>input paramiko netconnection, returns hostname from device.
+–&gt;str (Hostname from connection)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.hostname_from_cli">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hostname_from_cli</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">command</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.hostname_from_cli" title="Permalink to this definition"></a></dt>
+<dd><p>input standard text input line, for which command was entered.
+–&gt;str (hostname from command line)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.if_prefix">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">if_prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">intName</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.if_prefix" title="Permalink to this definition"></a></dt>
+<dd><p>Interface beginning Name
+–&gt;str (interface prefix)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.indention">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">indention</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.indention" title="Permalink to this definition"></a></dt>
+<dd><p>get string indention value 
+–&gt; int</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.is_blank_line">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_blank_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.is_blank_line" title="Permalink to this definition"></a></dt>
+<dd><p>Is provided string/line a blank line
+—&gt; bool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.is_hostname_line">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_hostname_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.is_hostname_line" title="Permalink to this definition"></a></dt>
+<dd><p>string/line containing hostname of device
+–&gt;bool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – string</p></li>
+<li><p><strong>host</strong> (<em>str</em>) – hostname to be find in provided string</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.mid">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.mid" title="Permalink to this definition"></a></dt>
+<dd><p>N-number of characters from position in string; default n is till end
+–&gt;str
+:param strg: string
+:type strg: str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos</strong> (<em>int</em>) – position from where slice to begin</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – number of characters from slice(pos)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.prepend_bgp_as">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prepend_bgp_as</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bgp_as</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.prepend_bgp_as" title="Permalink to this definition"></a></dt>
+<dd><p>‘n’ number of BGP AS Number prepending string.
+–&gt; str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.replace_dual_and_split">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">replace_dual_and_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.replace_dual_and_split" title="Permalink to this definition"></a></dt>
+<dd><p>Finds subsequent characters in string and replace those with single,
+plus, splits the string using provided character (duo).
+–&gt; list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>str</em>) – Source string</p>
+</dd>
+</dl>
+<p>:param duo:characters which requires reductions if susequent
+:type duo: str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strip</strong> (<em>int</em>) – values (-1=lstrip ,0=strip ,1=rstrip) - def:None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.right">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">right</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.right" title="Permalink to this definition"></a></dt>
+<dd><p>N-number of characters from right side of string
+–&gt; str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>strg</strong> (<em>str</em>) – string</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – number of characters from right</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.shrink_if">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shrink_if</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">intName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.shrink_if" title="Permalink to this definition"></a></dt>
+<dd><p>Interface Name shortening, input length will decide number of 
+charactes to be included in shortened output
+–&gt;str (short name of interface)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.starting">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">starting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.starting" title="Permalink to this definition"></a></dt>
+<dd><p>check if line starts with c or not, same as native string.startswith()
+addition is it first strips the line and then checks
+–&gt;boolean</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.string_concate">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">string_concate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conj</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.string_concate" title="Permalink to this definition"></a></dt>
+<dd><p>Concatenate strings s and s1 with conjuctor conj
+–&gt; str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – string</p></li>
+<li><p><strong>s1</strong> (<em>string</em>) – adder string</p></li>
+<li><p><strong>conj</strong> (<em>string</em>) – conjuctor</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.string_within">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">string_within</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.string_within" title="Permalink to this definition"></a></dt>
+<dd><p>finds characters between prefix and suffix substrings from string,
+–&gt; str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – main string to be search within</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – starting substring</p></li>
+<li><p><strong>suffix</strong> (<em>str</em>) – ending substring</p></li>
+<li><p><strong>pos</strong> (<em>int</em>) – position index, search to be start from</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.suffix_index_within">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">suffix_index_within</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.suffix_index_within" title="Permalink to this definition"></a></dt>
+<dd><p>finds characters between prefix and suffix substrings from string,
+–&gt; int: index of suffix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – main string to be search within</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – starting substring</p></li>
+<li><p><strong>suffix</strong> (<em>str</em>) – ending substring</p></li>
+<li><p><strong>pos</strong> (<em>int</em>) – position index, search to be start from</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.to_list">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.to_list" title="Permalink to this definition"></a></dt>
+<dd><p>Returns list for the provided string - s, 
+splits string by lines
+–&gt; list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.to_set">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.to_set" title="Permalink to this definition"></a></dt>
+<dd><p>Return set of values for the provided string - s.
+splits string by lines and comma
+–&gt; set</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.update">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">searchItem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaceItem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.update" title="Permalink to this definition"></a></dt>
+<dd><p>Updates string for search item with replace item
+–&gt; str</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – main string</p></li>
+<li><p><strong>searchItem</strong> (<em>str</em>) – search string</p></li>
+<li><p><strong>replaceItem</strong> (<em>str</em>) – replace string</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.STR.update_str">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">searchItem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replaceItem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.STR.update_str" title="Permalink to this definition"></a></dt>
+<dd><p>Updates line for search item with replace item
+(Find/Repalace)
+–&gt;str</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.XL_READ">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">XL_READ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shtName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sheet1'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.XL_READ" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>EXCEL FILE READING,
+xl      - Excel file to be read
+shtName - SheetName to be read from given read</p>
+<p>df      - DataFrame object (iterable, lenth, etc. available )</p>
+<p>obj = XL_READ(‘data/cmd_list.xlsx’)                                     # get xl df Object</p>
+<p>### Length of records ###
+print(len(obj))</p>
+<p>### Go thru each record ###
+for header, value in obj:</p>
+<blockquote>
+<div><p>print(header, value)</p>
+</div></blockquote>
+<p>### Get a particular column ###
+print(obj[“command”])</p>
+<p>### FILTERING RECORDS ###
+# Option:1
+flt = {‘level’:1, ‘dev_type’:’cisco_ios’}    # get arguments in a dict
+x = obj.filter(<a href="#id1"><span class="problematic" id="id2">**</span></a>flt)                        # apply filter dict</p>
+<p># Option:2
+x = obj.filter(dev_type=’cisco_ios’, level=1)# apply filter manually</p>
+<p># Option:3 - pass external df for filter
+x = obj.filter(level=1)                   # created a new DataFrame-x
+x = obj.filter(df=x, dev_type=’cisco_ios’)# apply flt manually on new DF-x</p>
+<p># Option:4 Filter Column &amp; return specific columns only.
+flt = {‘level’:1, ‘dev_type’:’cisco_ios’} # get arguments in a dict
+col = [‘command’, ‘level’]
+x = obj.column_values(column=col, <a href="#id3"><span class="problematic" id="id4">**</span></a>flt)</p>
+<p># Check Output for above options
+print(x)             # filtered output all columns
+print(x[‘xl_col’])   # filtered output with specific col only</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.XL_READ.column_values">
+<span class="sig-name descname"><span class="pre">column_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.XL_READ.column_values" title="Permalink to this definition"></a></dt>
+<dd><p>selected column output, after filters applied
+column - a single column name or , list of column names
+kwarg  - filters to be applied</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.gpl.XL_READ.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.XL_READ.filter" title="Permalink to this definition"></a></dt>
+<dd><p>Filter Records
+df    - external data frame ( default object dataframe )
+kwarg - filters to be applied on df.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.gpl.XL_WRITE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">XL_WRITE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">sht_df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.XL_WRITE" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>EXEL FILE CREATE, 
+hostname  - excel file name
+<a href="#id5"><span class="problematic" id="id6">**</span></a>sht_df    - sht_name=dataframe</p>
+<blockquote>
+<div><p>df        - dataframe which data to be copied to Excel.
+sht_name  - Sheet Name of Excel where data to be copied</p>
+</div></blockquote>
+<p>Excel O/P file will go inside - ./output/ - path</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.gpl.dict_differences">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">dict_differences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">change</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.dict_differences" title="Permalink to this definition"></a></dt>
+<dd><p>returns differences for provided two dictionaries 
+input d1, d2 type: string/int/float/set/dictionary
+input change is change type prefix (ex: ” -“, ” +”)
+return value type depends on input d1, d2 type.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.gpl.nslookup">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.gpl.</span></span><span class="sig-name descname"><span class="pre">nslookup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nettoolkit.gpl.nslookup" title="Permalink to this definition"></a></dt>
+<dd><p>return discovered hostname for provided ip
+–&gt;int</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="__juniper.html" class="btn btn-neutral float-left" title="4.4. juniper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="__convertdict.html" class="btn btn-neutral float-right" title="4.6. convertdict" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

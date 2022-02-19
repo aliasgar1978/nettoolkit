@@ -335,7 +335,7 @@ class STR(Container):
 		:param strip: values (-1=lstrip ,0=strip ,1=rstrip) - def:None
 		:type strip: int
 		'''
-		return STR.finddualnreplacesingle(s, strip=0).split(duo)
+		return STR.finddualnreplacesingle(s, duo, strip=strip).split(duo)
 
 	@staticmethod
 	def finddualnreplacesingle(s, duo=' ', strip=None):
@@ -361,9 +361,11 @@ class STR(Container):
 			elif strip == 1:
 				return s.rstrip()
 			else:
-				print('invalid strip value detected', strip)
+				pass
+				# print('invalid strip value detected', strip)
 		else:
-			print('invalid strip value detected', strip)
+			pass
+			# print('invalid strip value detected', strip)
 		return s
 
 	@staticmethod
@@ -592,14 +594,16 @@ class STR(Container):
 
 	@staticmethod
 	def ending(line, c): 
-		"""check if line ends with c or not
+		"""check if line ends with c or not, same as native string.endswith()
+		addition is it first strips the line and then checks
 		-->boolean
 		"""
 		return line.strip().endswith(c)
 
 	@staticmethod
 	def starting(line, c): 
-		"""check if line starts with c or not
+		"""check if line starts with c or not, same as native string.startswith()
+		addition is it first strips the line and then checks
 		-->boolean
 		"""
 		return line.strip().startswith(c)
@@ -1189,7 +1193,7 @@ class XL_READ:
 		print(header, value)
 
 	### Get a particular column ###
-	print(obj['command'])
+	print(obj["command"])
 
 	### FILTERING RECORDS ###
 	# Option:1

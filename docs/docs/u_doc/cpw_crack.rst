@@ -3,10 +3,9 @@ Cisco type 7 passwords Encryption/Decryption
 ============================================
 
 Activities that can be done are:
-	* Encrypt plain-text password to Cisco type-7 encrypted string
-	* Decrypt Cisco type-7 password to plain-text
-	* Decrypt all type-7 passwords from a cisco configuration and (create a new file)
-	* Mask all type-7, type-9 passwords from cisco configuration. (create a new file)
+	* Encrypt/Decrypt plain-text password string v/s Cisco type-7 encrypted string 
+	* Decrypt all type-7 passwords in a cisco configuration and (create a new file)
+	* Mask all type-7, type-9 passwords in cisco configuration. (create a new file)
 
 
 Encrypt to type7:
@@ -78,4 +77,4 @@ Mask passwords from cisco configuration file:
 
 .. note::
 		
-	These features are available in the package >= 0.0.13
+	These features are available in the package >= 0.0.14

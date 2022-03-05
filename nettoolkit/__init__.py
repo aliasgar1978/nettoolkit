@@ -39,6 +39,9 @@ __all__ = [
 	'DictMethods', 'Multi_Execution', 'nslookup',
 	# .convertdict
 	'ConvDict',
+	# cpw_cracker
+	'encrypt_type7', 'decrypt_type7',
+
 	]
 
 __version__ = "0.0.12"
@@ -58,3 +61,4 @@ from .gpl import (Default, Container, Numeric,
 	)
 
 from .convertdict import ConvDict
+from .cpw_cracker import decrypt_type7, encrypt_type7

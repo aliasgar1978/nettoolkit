@@ -15,7 +15,7 @@ it will be used than after for each function.
 	>>> from nettoolkit import DIC
 
 
-There are many string methods available under ``DIC`` class in ``nettoolkit``.
+There are many dictionary methods available under ``DIC`` class in ``nettoolkit``.
 
 Such available functions are:
 

@@ -38,7 +38,7 @@ Create Summaries:
 	* list down all prefixes in an **iterator (list, tuple, set)** that needs to be summarized.
 	* execute the ``get_summaries()`` by providing those list of prefixes as arguments. **Kindly note on asterisk sign `*` in argument; if list is directly provided, instead of individual arguments**
 	* Function will evaluate all prefixes, generate and return **least possible sumamries** for those prefixes.
-	* Incorrect prefixe inputs will be excluded.
+	* Incorrect prefix inputs will be excluded.
 
 	.. code-block:: python
 		:emphasize-lines: 5

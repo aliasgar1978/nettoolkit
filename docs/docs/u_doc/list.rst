@@ -13,7 +13,7 @@ it will be used than after for each function.
 List functions:
 ------------------------
 
-There are many string methods available under ``LST`` class in ``nettoolkit``.
+There are many list methods available under ``LST`` class in ``nettoolkit``.
 
 Such available functions are:
 

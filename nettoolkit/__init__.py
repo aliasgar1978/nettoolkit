@@ -40,11 +40,11 @@ __all__ = [
 	# .convertdict
 	'ConvDict',
 	# cpw_cracker
-	'encrypt_type7', 'decrypt_type7',
+	'encrypt_type7', 'decrypt_type7', 'decrypt_file_passwords', 'mask_file_passwords',
 
 	]
 
-__version__ = "0.0.12"
+__version__ = "0.0.13"
 
 from .juniper import Juniper
 from .jset import JSet
@@ -61,4 +61,4 @@ from .gpl import (Default, Container, Numeric,
 	)
 
 from .convertdict import ConvDict
-from .cpw_cracker import decrypt_type7, encrypt_type7
+from .cpw_cracker import decrypt_type7, encrypt_type7, decrypt_file_passwords, mask_file_passwords

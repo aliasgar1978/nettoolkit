@@ -4,7 +4,6 @@ Cisco type-7 password breaker. open-source from web.
 
 import re
 import random
-import optparse
 
 xlat = [0x64, 0x73, 0x66, 0x64, 0x3b, 0x6b, 0x66, 0x6f, 0x41, 0x2c, 0x2e, 0x69, 0x79, 0x65, 0x77, 0x72, 0x6b, 0x6c, 0x64
 , 0x4a, 0x4b, 0x44, 0x48, 0x53, 0x55, 0x42, 0x73, 0x67, 0x76, 0x63, 0x61, 0x36, 0x39, 0x38, 0x33, 0x34, 0x6e, 0x63,
@@ -13,7 +12,7 @@ xlat = [0x64, 0x73, 0x66, 0x64, 0x3b, 0x6b, 0x66, 0x6f, 0x41, 0x2c, 0x2e, 0x69, 
 			
 def decrypt_type7(ep):
 	"""
-	Cisco type-7 password decryptor,
+	Cisco type-7 password decryptor
 	"""
 	dp = ''
 	regex = re.compile('(^[0-9A-Fa-f]{2})([0-9A-Fa-f]+)')
@@ -22,7 +21,6 @@ def decrypt_type7(ep):
 	for pos in range(0, len(e), 2):
 		magic = int(e[pos] + e[pos+1], 16)
 		if s <= 50:
-			# xlat length is 51
 			newchar = '%c' % (magic ^ xlat[s])
 			s += 1
 		if s == 51: s = 0
@@ -31,7 +29,7 @@ def decrypt_type7(ep):
 
 def encrypt_type7(pt):
 	"""
-	Cisco type-7 password encryptor,
+	Cisco type-7 password encryptor
 	"""
 	salt = random.randrange(0,15);
 	ep = "%02x" % salt
@@ -41,41 +39,50 @@ def encrypt_type7(pt):
 		if salt == 51: salt = 0
 	return ep
 
-def main():
-	"""function to use password encryption/decryption with arguments parsers"""
-	usage = "Usage: %prog [options]"
-	parser = optparse.OptionParser(usage=usage)
-	parser.add_option('-e', '--encrypt', action='store_true', dest='encrypt', default=False, help='Encrypt password')
-	parser.add_option('-d', '--decrypt', action='store_true', dest='decrypt',default=True, help='Decrypt password. This is the default')
-	parser.add_option('-p', '--password', action='store', dest="password", help='Password to encrypt / decrypt')
-	parser.add_option('-f', '--file', action='store', dest="file", help='Cisco config file, only for decryption')
-	options, args = parser.parse_args()
-	render_as = "files"
 
-	#fix issue 1, if encrypt is selected, that takes precedence
-	if (options.encrypt):
-		options.decrypt = False
-	if (options.password is not None):
-		if(options.decrypt):
-			print("Decrypted password: " + decrypt_type7(options.password))
-		elif(options.encrypt):
-			print("Encrypted password: " + encrypt_type7(options.password))
-	elif (options.file is not None):
-		if(options.decrypt):
-			try:
-				f = open(options.file)
-				regex = re.compile('(7 )([0-9A-Fa-f]+)($)')
-				for line in f:
-					result = regex.search(line)
-					if(result):
-						print("Decrypted password: " + decrypt_type7(result.group(2)))
-			except IOError:
-				print("Couldn't open file: " + options.file)
-		elif(options.encrypt):
-			parser.error("You can't encrypt a config file\nPlease run 'python ciscot7.py --help' for usage instructions.")
-	else:
-		parser.error("Password or config file is not specified!\nPlease run 'python ciscot7.py --help' for usage instructions.")
+def _update_pw_line(line, mask):
+	# updates line if password string found, encrypt or mask it and return updated line	
+	regex7 = re.compile('(7 )([0-9A-Fa-f]+)($)')
+	regex9 = re.compile('secret 9 ')
+	result7 = regex7.search(line)
+	result9 = regex9.search(line)
+	if mask:
+		if result7: line = line[:line.find(result7.group(0))] + "XXXXXXXX\n"
+		if result9: 
+			line = line[:line.find(result9.group(0))] + "secret 9 XXXXXXXX\n"
+	elif result7:
+		line = line[:line.find(result7.group(0))] + decrypt_type7(result7.group(2)) + "\n"
+	return line
+
+
+def _file_passwords_update(input_file, output_file, pw_masking):
+	with open(input_file, 'r') as f:
+		lst = f.readlines()
+	ulist = (_update_pw_line(line, pw_masking) for line in lst)
+	cfg = "".join(ulist)
+	with open(output_file, 'w') as f:
+		f.write(cfg)
+
+def decrypt_file_passwords(input_file, output_file):
+	"""Decrypts all type 7 passwords found in input file, and create a new updated output file
+	with plain text passwords
+
+	Args:
+		input_file (str): cisco configuration file name
+		output_file (str): output file name
+	"""
+	_file_passwords_update(input_file, output_file, False)
+
+def mask_file_passwords(input_file, output_file):
+	"""Masks all type 7 and type 9 passwords found in cisco configuration input file,
+	and creates a new updated output file with plain masked passwords
+
+	Args:
+		input_file (str): cisco configuration file name
+		output_file (str): output file name
+	"""
+	_file_passwords_update(input_file, output_file, True)
 
 
 if __name__ == '__main__':
-	main()
+	pass

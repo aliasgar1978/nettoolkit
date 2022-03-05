@@ -12,4 +12,6 @@ Technical documentation!
 	Juniper <t_doc/__juniper>
 	GPL <t_doc/__gpl>
 	Convert Dictionary <t_doc/__convertdict>
+	Cisco PWD7 Enc/Dec <t_doc/__cpw_cracker>
+
 

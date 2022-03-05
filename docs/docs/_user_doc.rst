@@ -22,5 +22,7 @@ User documentation!
    String Operations <u_doc/string>
    List Operations <u_doc/list>
    Dict Operations <u_doc/dict>
+
+   Cisco Type7 Password Enc/Dec <u_doc/cpw_crack>
    
 

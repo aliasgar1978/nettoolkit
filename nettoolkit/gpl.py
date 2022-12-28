@@ -814,7 +814,7 @@ class LST():
 	@staticmethod
 	def expand_vlan_list(vlan_list):
 		"""takes input vlan list, expands it's ranges if any within
-		--> new vlan list with all individal vlan numbers.
+		--> set of individual vlans.
 		"""
 		exp_vl_list = set()
 		for v in vlan_list:

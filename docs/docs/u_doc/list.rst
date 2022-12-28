@@ -18,6 +18,7 @@ There are many list methods available under ``LST`` class in ``nettoolkit``.
 Such available functions are:
 
 	* remove_empty_members()
+	* expand_vlan_list()
 	* convert_vlans_list_to_range_of_vlans_list()
 	* list_variants()
 	* list_of_devices()
@@ -36,10 +37,22 @@ remove_empty_members()
 		['this', 'is', 'a', 'test', 'list']
 
 
+expand_vlan_list()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	* Expands Vlan list from given ranges.  (if any within). And returns new set of vlans with all individal vlan numbers.
+
+	.. code-block:: python
+
+		>>> vlan_list = [ '10-14', 17, '25-30' ]
+		>>> LST.expand_vlan_list(vlan_list)
+		{10, 11, 12, 13, 14, 17, 25, 26, 27, 28, 29, 30}
+
+
 convert_vlans_list_to_range_of_vlans_list()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	* converts list of individual vlans to a list of range of vlans
+	* Compress list of vlans to a possible range of vlans. i.e. Reverse action of above.
 
 	.. code-block:: python
 

@@ -812,28 +812,57 @@ class LST():
 		return tmp_lst
 
 	@staticmethod
+	def expand_vlan_list(vlan_list):
+		"""takes input vlan list, expands it's ranges if any within
+		--> new vlan list with all individal vlan numbers.
+		"""
+		exp_vl_list = set()
+		for v in vlan_list:
+			if not v: continue
+			try:
+				vl = int(v)
+				exp_vl_list.add(vl)
+				continue
+			except:
+				s, e = v.split("-")
+				try:
+					s, e = int(s), int(e)
+					r = set(range(s, e+1))
+					exp_vl_list = exp_vl_list.union(r)
+				except:
+					raise Exception(f"Invalid vlan number.  Expected int got {type(s)}, {type(e)}")
+		return exp_vl_list
+
+	@staticmethod
 	def convert_vlans_list_to_range_of_vlans_list(vlan_list):
 		"""converts list of individual vlans to a list of range of vlans
 		--> list
 		"""
-		vlan_list = sorted(vlan_list)
-		vlan_list.append(None)
-		range_list, previous_vlan = [], 0
-		range_begin, range_end = None, None
-		for vlan in vlan_list:
-			if previous_vlan + 1 == vlan:
-				if not range_begin: range_begin = str(previous_vlan) + "-"
-			elif range_begin:
-				range_end = previous_vlan
-				rangeStr = range_begin + str(range_end)
-				range_begin = None
-				range_list.append(rangeStr)
-			elif previous_vlan:
-				range_list.append(previous_vlan)
+		vlans_dict, vlans_list = {}, []
+		vlan_list = sorted(LST.expand_vlan_list(vlan_list))
+		for i, vlan in enumerate(vlan_list):
+			test = vlan == 4022
+			if not vlan: continue
+			if i == 0:
+				prev = vlan
+				last_key = vlan
+				continue
+			if vlan == prev + 1: 
+				prev = vlan
+				continue
 			else:
-				pass
-			previous_vlan = vlan
-		return range_list
+				vlans_dict[last_key] = prev
+				prev = vlan
+				last_key = vlan
+		else:
+			vlans_dict[last_key] = prev
+		
+		for k, v in vlans_dict.items():
+			if k == v:
+				vlans_list.append(str(k))
+			else:
+				vlans_list.append(str(k) + "-" + str(v))    
+		return vlans_list
 
 	@staticmethod
 	def list_variants(input_list):
@@ -886,7 +915,6 @@ class LST():
 		l = ''
 		for x in lst: l = str(x) if l == '' else l +'.'+ str(x)
 		return l
-
 
 # -----------------------------------------------------------------------------
 #                          DICTIONARY MODIFICATIONS                           #

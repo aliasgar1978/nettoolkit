@@ -77,9 +77,10 @@ class JSet(Default, STR, Container):
 				else :													# Uncategorized Lines 
 					self.err = True
 					raise Exception(f"UndefinedTypeLine-{c}:{line}")
+				# print(line)
 		except :
 			self.err = True
-			raise Exception(f"ErrorParsingLine-{c}:{line}")
+			raise Exception(f"ErrorParsingConfig-{self.lst}:")
 
 	def read_input_list(self, input_list):
 		"""Reads input list as input list

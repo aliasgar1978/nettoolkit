@@ -14,6 +14,25 @@ import os
 import threading
 
 intBeginWith = compile(r'^\D+')
+# ------------------------------------------------------------------------------
+# Standard number of characters for identifing interface short-hand
+# ------------------------------------------------------------------------------
+CISCO_IFSH_IDENTIFIERS = {
+	"VLAN": {'Vlan':2,},
+	"TUNNEL": {'Tunnel':2,},
+	"LOOPBACK": {'Loopback':2,} ,
+	"AGGREGATED": {'Port-channel':2,},
+	"PHYSICAL": {'Ethernet': 2, 
+		'FastEthernet': 2,
+		'GigabitEthernet': 2, 
+		'TenGigabitEthernet': 3, 
+		'FortyGigabitEthernet':2, 
+		'TwentyFiveGigE':3, 
+		'TwoGigabitEthernet': 3,
+		'HundredGigE':2,
+		'AppGigabitEthernet': 2,
+		},
+}
 
 # -----------------------------------------------------------------------------
 #                              Common Classes                                 #
@@ -432,6 +451,8 @@ class STR(Container):
 		charactes to be included in shortened output
 		-->str (short name of interface)
 		'''
+		if not intName: return ""
+		if intName.lower().startswith("tw"): length=3
 		iBW = intBeginWith.match(intName)
 		return iBW.group()[:length]+intName[iBW.span()[1]:]
 

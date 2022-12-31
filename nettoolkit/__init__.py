@@ -44,7 +44,7 @@ __all__ = [
 
 	]
 
-__version__ = "0.0.15"
+__version__ = "0.0.16"
 
 from .juniper import Juniper
 from .jset import JSet

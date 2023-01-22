@@ -24,5 +24,6 @@ User documentation!
    Dict Operations <u_doc/dict>
 
    Cisco Type7 Password Enc/Dec <u_doc/cpw_crack>
+   Junuper $9 Password Enc/Dec <u_doc/jpw_crack>
    
 

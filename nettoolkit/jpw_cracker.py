@@ -1,11 +1,8 @@
 #!/usr/bin/python
 #############################################################################
-## this lovely script was painfully ported
-## by matt hite (mhite@hotmail.com)
-## added juniper_encrypt and the necessary functions
-## by Minsuk Song <msuk.song@gmail.com>, who also knows
-## .. Thx Mhite & Minsuk.
-## original: http://search.cpan.org/dist/Crypt-Juniper/lib/Crypt/Juniper.pm
+## Thx you Mhite & Minsuk for providing such wonderful script.
+## matt hite (mhite@hotmail.com)
+## Minsuk Song <msuk.song@gmail.com>
 #############################################################################
 ##
 from __future__ import print_function

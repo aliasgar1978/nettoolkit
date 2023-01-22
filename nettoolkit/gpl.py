@@ -17,21 +17,39 @@ intBeginWith = compile(r'^\D+')
 # ------------------------------------------------------------------------------
 # Standard number of characters for identifing interface short-hand
 # ------------------------------------------------------------------------------
+PHYSICAL_IFS = OrderedDict()
+PHYSICAL_IFS.update({
+		'Ethernet': 2, 
+		'FastEthernet': 2,
+		'GigabitEthernet': 2, 
+		'TenGigabitEthernet': 2, 
+		'FortyGigabitEthernet':2, 
+		'HundredGigEthernet':2,
+		'AppGigabitEthernet': 2,
+})
+PHYSICAL_IFS['TwoGigabitEthernet'] = 3     # Do not alter sequence of these two.
+PHYSICAL_IFS['TwentyFiveGigEthernet'] = 3  # ....
 CISCO_IFSH_IDENTIFIERS = {
 	"VLAN": {'Vlan':2,},
 	"TUNNEL": {'Tunnel':2,},
 	"LOOPBACK": {'Loopback':2,} ,
 	"AGGREGATED": {'Port-channel':2,},
-	"PHYSICAL": {'Ethernet': 2, 
-		'FastEthernet': 2,
-		'GigabitEthernet': 2, 
-		'TenGigabitEthernet': 3, 
-		'FortyGigabitEthernet':2, 
-		'TwentyFiveGigE':3, 
-		'TwoGigabitEthernet': 3,
-		'HundredGigE':2,
-		'AppGigabitEthernet': 2,
-		},
+	"PHYSICAL": PHYSICAL_IFS,
+}
+JUNIPER_IFS_IDENTIFIERS = {
+	"VLAN": ('irb', 'vlan', 'iw'),
+	"LOOPBACK": 'lo',
+	"RANGE": 'interface-range',
+	"TUNNEL": ('lt', 'gr', 'ip', 'mt', 'vt', 'vtep', 'xt' ),
+	"AGGREGATED": ('ae', 'as', 'fc'),
+	"PHYSICAL": ('fe', 'ge', 'xe', 'et', 'xle', 'fte', ),
+	"MANAGEMENT": ('mg', 'em', 'me', 'fxp', 'vme'),
+	"INTERNAL": ('sxe', 'bcm', 'cp', 'demux', 'dsc', 'es', 'gre', 'ipip', 'ixgbe', 'lc','lsi', 'mo',
+		'ms', 'pd', 'pimd', 'rlsq', 'rms', 'rsp', 'sp', 'tap', 'umd', 'vsp', 'vc4',  ),
+	"CIRCUIT": ('at', 'cau4', 'ce1', 'coc1', 'coc3', 'coc12', 'coc48', 'cstm1', 'cstm4', 'cstm16', 
+		'ct1', 'ct3', 'ds', 'e1', 'e3', 'ls', 'ml', 'oc3', 'pip', 'se', 'si',  'so', 'stm1', 'stm4', 'stm16',
+		't1', 't3',    ),
+	"MONITORING": ('dfc', ),
 }
 
 # -----------------------------------------------------------------------------
@@ -461,8 +479,40 @@ class STR(Container):
 		'''Interface beginning Name
 		-->str (interface prefix)
 		'''
+		if not intName: return ""
 		iBW = intBeginWith.match(intName)
 		return intName[iBW.start(): iBW.end()]
+
+	@staticmethod
+	def if_suffix(intName):
+		'''Interface ending ports
+		-->str (interface suffix)
+		'''
+		if not intName: return ""
+		try:
+			iBW = intBeginWith.match(intName)
+			return intName[iBW.end():]
+		except:
+			return ""
+
+	@staticmethod
+	def if_standardize(intName, expand=True):
+		'''standardize the interface for uneven length strings.
+		expand will give fulllength, otherwise it will shrink it to its standard size given
+		-->str (standardized interface)
+		'''
+		# print(intName)
+		if not intName: return intName
+		pfx = STR.if_prefix(standardize_if(intName))
+		sfx = STR.if_suffix(intName)
+		for _, inttype_length in CISCO_IFSH_IDENTIFIERS.items():
+			for int_type, length in inttype_length.items():
+				if int_type.lower().startswith(pfx.lower()):
+					if expand:
+						return f"{int_type}{sfx}"
+					else:
+						return f"{int_type[:length]}{sfx}"
+		return intName
 
 	@staticmethod
 	def update_str(s, searchItem='', replaceItem=''):
@@ -491,6 +541,8 @@ class STR(Container):
 			for x in replaceCandidates:
 				cmd = STR.update_str(cmd, x, "_")
 			cmd = separator + cmd
+		if folder[-1] not in ( "/", "\\"):
+			folder += "/" 
 		return folder+hn+cmd+extn
 
 	@staticmethod
@@ -628,6 +680,75 @@ class STR(Container):
 		-->boolean
 		"""
 		return line.strip().startswith(c)
+
+# -----------------------------------------------------------------------------
+
+def interface_type(ifname):
+	"""get the interface type from interface string
+
+	Args:
+		ifname (str): interface name/string
+
+	Raises:
+		ValueError: raise error if input missing
+
+	Returns:
+		tuple: tuple with interface type (e.g PHYSICAL, VLAN...) and sub interface type 
+		(e.g FastEthernet, .. ). None if not detected
+	"""    	
+	if not ifname: 
+		raise ValueError(f"Missing mandatory input ifname")
+	for int_type, int_types in  CISCO_IFSH_IDENTIFIERS.items():
+		for sub_int_type in int_types:
+			if sub_int_type.startswith(ifname):
+				return (int_type, sub_int_type)
+
+def standardize_if(ifname, expand=False):
+	"""standardized interface naming
+
+	Args:
+		ifname (str): variable length interface name
+		expand (bool, optional): expand will make it full length name. Defaults to False.
+
+	Raises:
+		ValueError: if missing with mandatory input
+		TypeError: if invalid value detected
+		KeyError: if invalid shorthand key detected		
+
+	Returns:
+		str: updated interface string
+	"""    	
+	if not ifname:
+		raise ValueError("Missing mandatory input ifname")
+	if not isinstance(expand, bool): 
+		raise TypeError(f"Invalid value detected for input expand, "
+		f"should be bool.")
+	if not isinstance(ifname, str): 
+		raise TypeError(f"Invalid value detected for input ifname, "
+		f"should be str.")
+	srcifname = ''
+	for i in ifname:
+		if not i.isdigit(): srcifname += i
+		else: break
+	if not srcifname: return None
+	try:
+		it = interface_type(srcifname)
+		if it: 
+			int_type, int_pfx = it[0], it[1]
+		else:
+			return ifname
+	except:
+		raise TypeError(f"unable to detect interface type for {srcifname}")
+	try:
+		shorthand_len = CISCO_IFSH_IDENTIFIERS[int_type][int_pfx]
+	except:
+		raise KeyError(f"Invalid shorthand Key detected {int_type}, {int_pfx}")
+	if expand:  return int_pfx+ifname[len(srcifname):]
+	return int_pfx[:shorthand_len]+ifname[len(srcifname):]
+
+# -----------------------------------------------------------------------------
+
+
 
 
 # -----------------------------------------------------------------------------
@@ -859,10 +980,9 @@ class LST():
 		"""converts list of individual vlans to a list of range of vlans
 		--> list
 		"""
-		vlans_dict, vlans_list = {}, []
+		vlans_dict, vlans_list, prev, last_key = {}, [], "", ""
 		vlan_list = sorted(LST.expand_vlan_list(vlan_list))
 		for i, vlan in enumerate(vlan_list):
-			test = vlan == 4022
 			if not vlan: continue
 			if i == 0:
 				prev = vlan
@@ -1357,7 +1477,7 @@ class Multi_Execution(Default):
 	[self.items items are eligible threaded candidates]
 	"""
 
-	max_connections = 30
+	max_connections = 100
 
 	def __str__(self): return self._repr()
 

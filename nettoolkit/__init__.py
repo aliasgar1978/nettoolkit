@@ -36,15 +36,25 @@ __all__ = [
 	# .gpl
 	'Default', 'Container', 'Numeric', 'DifferenceDict', 
 	'STR', 'IO', 'LST', 'DIC', 'LOG', 'DB', 'IP', 'XL_READ', 'XL_WRITE', 
-	'DictMethods', 'Multi_Execution', 'nslookup',
+	'DictMethods', 'Multi_Execution', 'nslookup', 'standardize_if',
 	# .convertdict
 	'ConvDict',
 	# cpw_cracker
 	'encrypt_type7', 'decrypt_type7', 'decrypt_file_passwords', 'mask_file_passwords',
+	# jpw_cracker
+	'juniper_decrypt', 'juniper_encrypt',
+
+	# common
+	"remove_domain", "read_file", "get_op", "blank_line", "get_device_manufacturar", "verifid_output", 
+	"get_string_part", "get_string_trailing", "standardize_mac", "mac_2digit_separated", "mac_4digit_separated", 
+	"flatten", "dataframe_generate",
+
+	#databse
+	"write_to_xl", "append_to_xl", "read_xl",
 
 	]
 
-__version__ = "0.0.16"
+__version__ = "0.0.17"
 
 from .juniper import Juniper
 from .jset import JSet
@@ -57,8 +67,18 @@ from .addressing import (
 from .gpl import (Default, Container, Numeric, 
 	DifferenceDict, DictMethods, DIC,
 	STR, IO, LST, LOG, DB, IP, XL_READ, XL_WRITE, 
-	Multi_Execution, nslookup,
+	Multi_Execution, nslookup, standardize_if,
 	)
 
 from .convertdict import ConvDict
 from .cpw_cracker import decrypt_type7, encrypt_type7, decrypt_file_passwords, mask_file_passwords
+from .jpw_cracker import juniper_decrypt, juniper_encrypt
+
+from .common import (
+	remove_domain, read_file, get_op, blank_line, get_device_manufacturar, verifid_output, 
+	get_string_part, get_string_trailing, standardize_mac, mac_2digit_separated, mac_4digit_separated, 
+	flatten, dataframe_generate
+	)
+
+
+from .database import write_to_xl, append_to_xl, read_xl

@@ -516,8 +516,8 @@ class Hierarchy():
 		self._conv_dict_to_hierarchy(section)
 
 	def _gen_section_dict(self, input_file_lst):
-	    return Section(li_li_words(input_file_lst), 
-	    						ordered=False)
+		return Section(li_li_words(input_file_lst), 
+					ordered=False)
 
 	def _conv_dict_to_hierarchy(self, section):
 		self.output = str(Convert(section.dic, -1, is_tailed=False))

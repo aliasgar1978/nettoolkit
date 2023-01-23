@@ -28,7 +28,7 @@ Decrypt Juniper $9 password:
 **Steps Involved:**
 
 	* Import the ``juniper_decrypt()`` function from ``nettoolkit``.
-	* Pass plain-text-password as string argument for the function
+	* Pass encrypted string as argument for the function
 
 	.. code-block:: python
 		:emphasize-lines: 2

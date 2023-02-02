@@ -12,6 +12,7 @@ from collections import OrderedDict
 from os import popen
 import os
 import threading
+from getpass import getpass
 
 intBeginWith = compile(r'^\D+')
 # ------------------------------------------------------------------------------
@@ -24,11 +25,11 @@ PHYSICAL_IFS.update({
 		'GigabitEthernet': 2, 
 		'TenGigabitEthernet': 2, 
 		'FortyGigabitEthernet':2, 
-		'HundredGigEthernet':2,
+		'HundredGigE':2,
 		'AppGigabitEthernet': 2,
 })
 PHYSICAL_IFS['TwoGigabitEthernet'] = 3     # Do not alter sequence of these two.
-PHYSICAL_IFS['TwentyFiveGigEthernet'] = 3  # ....
+PHYSICAL_IFS['TwentyFiveGigE'] = 3  # ....
 CISCO_IFSH_IDENTIFIERS = {
 	"VLAN": {'Vlan':2,},
 	"TUNNEL": {'Tunnel':2,},
@@ -64,6 +65,14 @@ def nslookup(ip):
 	for line in lst:
 		if line.startswith("Name"): return line.split()[-1]
 	return ""
+
+
+def get_username():
+	return input("Enter Username: ")
+def get_password():
+	return getpass("Enter Password: ")
+
+
 
 class Default():
 	"""Default class representing class docString template"""

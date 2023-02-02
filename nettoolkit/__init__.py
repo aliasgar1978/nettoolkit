@@ -36,7 +36,7 @@ __all__ = [
 	# .gpl
 	'Default', 'Container', 'Numeric', 'DifferenceDict', 
 	'STR', 'IO', 'LST', 'DIC', 'LOG', 'DB', 'IP', 'XL_READ', 'XL_WRITE', 
-	'DictMethods', 'Multi_Execution', 'nslookup', 'standardize_if',
+	'DictMethods', 'Multi_Execution', 'nslookup', 'standardize_if', 'get_username', 'get_password',
 	# .convertdict
 	'ConvDict',
 	# cpw_cracker
@@ -68,6 +68,7 @@ from .gpl import (Default, Container, Numeric,
 	DifferenceDict, DictMethods, DIC,
 	STR, IO, LST, LOG, DB, IP, XL_READ, XL_WRITE, 
 	Multi_Execution, nslookup, standardize_if,
+	get_username, get_password,
 	)
 
 from .convertdict import ConvDict

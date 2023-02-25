@@ -100,6 +100,11 @@ def bin_mask(mask):
 	return o1+'.'+o2+'.'+o3+'.'+o4	
 
 
+def invmask_to_mask(invmask):
+	m = binsubnet(invmask)
+	return 32 - m.count("1")
+
+
 def _invalid_subnet(subnet): 
 	"""invalid subnet str
 	"""	
@@ -1189,14 +1194,3 @@ if __name__ == '__main__':
 	pass
 # END
 # ----------------------------------------------------------------------------
-
-	# ip = '2620:1f7:3d1a::2:8203:a/128'
-	# # try: 
-	# # print(addressing(ip))
-	# # except:pass
-	# a = addressing(ip)
-	# # try:
-	# print(a)
-	# # except:
-	# # 	pass
-

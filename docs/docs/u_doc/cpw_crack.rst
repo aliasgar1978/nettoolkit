@@ -4,11 +4,14 @@ Cisco type 7 passwords Encryption/Decryption
 
 Activities that can be done are:
 	* Encrypt/Decrypt plain-text password string v/s Cisco type-7 encrypted string 
-	* Decrypt all type-7 passwords in a cisco configuration and (create a new file)
-	* Mask all type-7, type-9 passwords in cisco configuration. (create a new file)
+	* Decrypt all type-7 passwords from cisco configuration. (create a new file)
+	* Mask all type-7, type-9 passwords from cisco configuration. (create a new file)
 
 
-Encrypt to type7:
+-----
+
+
+Password encrypt
 ------------------
 
 **Steps Involved:**
@@ -24,7 +27,8 @@ Encrypt to type7:
 		'062506324f41584b5643'				## Encrypted password string.
 
 
-Decrypt cisco type7 password:
+
+Password decrypt
 -------------------------------
 
 **Steps Involved:**
@@ -40,8 +44,11 @@ Decrypt cisco type7 password:
 		'Cisco1234'			## Decrypted password string
 
 
-Decrypt cisco type7 passwords from configuration file:
----------------------------------------------------
+-----
+
+
+Decrypt type7 passwords from cisco configuration file
+------------------------------------------------------
 
 **Steps Involved:**
 
@@ -57,7 +64,8 @@ Decrypt cisco type7 passwords from configuration file:
 		>>> decrypt_file_passwords("input_file.log", "output_file.log")
 
 
-Mask passwords from cisco configuration file:
+
+Mask type7 passwords from cisco configuration file
 ---------------------------------------------------
 
 **Steps Involved:**
@@ -74,7 +82,10 @@ Mask passwords from cisco configuration file:
 		>>> mask_file_passwords("input_file.log", "output_file.log")
 
 
+-----
+
 
 .. note::
 		
 	These features are available in the package >= 0.0.14
+

@@ -3,10 +3,14 @@ Juniper $9 passwords Encryption/Decryption
 ============================================
 
 Activities that can be done are:
-	* Encrypt/Decrypt plain-text password string v/s Juniper $9 encrypted string 
+	* Encrypt/Decrypt plain-text password string v/s Juniper $9$ encrypted string 
+	* Decrypt all $9$ passwords from juniper configuration. (creates a new file)
+	* Mask all $9$ passwords from juniper configuration. (creates a new file)
+
+-----
 
 
-Encrypt to $9:
+Password encrypt
 ------------------
 
 **Steps Involved:**
@@ -22,7 +26,8 @@ Encrypt to $9:
 		'$9$DDk5FCA0Rhrmf0IEyW8-VwYaZDikPTzji'				## Encrypted password string.
 
 
-Decrypt Juniper $9 password:
+
+Password decrypt
 -------------------------------
 
 **Steps Involved:**
@@ -38,10 +43,11 @@ Decrypt Juniper $9 password:
 		'welcome1234'			## Decrypted password string
 
 
+-----
 
 
-Decrypt Juniper $9 passwords from configuration file:
----------------------------------------------------
+Decrypt all $9 passwords from Juniper configuration file
+---------------------------------------------------------
 
 **Steps Involved:**
 
@@ -57,8 +63,9 @@ Decrypt Juniper $9 passwords from configuration file:
 		>>> decrypt_doller9_file_passwords("input_file.log", "output_file.log")
 
 
-Mask passwords from Juniper configuration file:
----------------------------------------------------
+
+Mask all $9 passwords from juniper configuration file
+-----------------------------------------------------
 
 **Steps Involved:**
 
@@ -74,8 +81,10 @@ Mask passwords from Juniper configuration file:
 		>>> mask_doller9_file_passwords("input_file.log", "output_file.log")
 
 
+-----
 
 
 .. note::
 		
 	Refer Version Control log to see the version from where these features are made available.
+

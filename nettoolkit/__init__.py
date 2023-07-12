@@ -42,7 +42,7 @@ __all__ = [
 	# cpw_cracker
 	'encrypt_type7', 'decrypt_type7', 'decrypt_file_passwords', 'mask_file_passwords',
 	# jpw_cracker
-	'juniper_decrypt', 'juniper_encrypt',
+	'juniper_decrypt', 'juniper_encrypt', 'decrypt_doller9_file_passwords', 'mask_doller9_file_passwords',
 
 	# common
 	"remove_domain", "read_file", "get_op", "blank_line", "get_device_manufacturar", "verifid_output", 
@@ -54,7 +54,7 @@ __all__ = [
 
 	]
 
-__version__ = "0.0.21"
+__version__ = "0.0.22"
 
 from .juniper import Juniper
 from .jset import JSet
@@ -73,7 +73,7 @@ from .gpl import (Default, Container, Numeric,
 
 from .convertdict import ConvDict
 from .cpw_cracker import decrypt_type7, encrypt_type7, decrypt_file_passwords, mask_file_passwords
-from .jpw_cracker import juniper_decrypt, juniper_encrypt
+from .jpw_cracker import juniper_decrypt, juniper_encrypt, decrypt_doller9_file_passwords, mask_doller9_file_passwords
 
 from .common import (
 	remove_domain, read_file, get_op, blank_line, get_device_manufacturar, verifid_output, 

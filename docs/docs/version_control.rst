@@ -74,6 +74,9 @@ Version Control
    * - 0.0.21
      - Jun 29, 2023
      - corrected console display message for error writing database.
+   * - 0.0.22
+     - Jul 12, 2023
+     - Feature add: juniper configuration - file passwords decrypt, file passwords mask.
 
 
 

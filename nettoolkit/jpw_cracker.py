@@ -118,5 +118,51 @@ def juniper_encrypt(plaintext, salt = None):
     return crypt
 
 
+
+def _update_pw_line(line, pw_masking):
+    if line.rstrip().endswith("## SECRET-DATA"):
+        spl = line.split('"')
+        pw = spl[1]
+        #
+        if pw.startswith("$9$"):
+            if pw_masking:
+                spl[1] = f"{'X'*9}"
+            else:
+                spl[1] = juniper_decrypt(pw)
+        line = '"'.join(spl)
+    return line
+
+
+def _file_passwords_update(input_file, output_file, pw_masking):
+    with open(input_file, 'r') as f:
+        lst = f.readlines()
+    ulist = (_update_pw_line(line, pw_masking) for line in lst)
+    cfg = "".join(ulist)
+    with open(output_file, 'w') as f:
+        f.write(cfg)
+
+
+def decrypt_doller9_file_passwords(input_file, output_file):
+    """Decrypts all $9$ passwords found in input file, and create a new updated output file
+    with plain text passwords
+
+    Args:
+        input_file (str): juniper configuration file name
+        output_file (str): output file name
+    """
+    _file_passwords_update(input_file, output_file, False)
+
+
+def mask_doller9_file_passwords(input_file, output_file):
+    """Masks all $9$ passwords found in juniper configuration input file,
+    and creates a new updated output file with plain masked passwords
+
+    Args:
+        input_file (str): juniper configuration file name
+        output_file (str): output file name
+    """
+
+    _file_passwords_update(input_file, output_file, True)
+
 if __name__ == "__main__":
     pass

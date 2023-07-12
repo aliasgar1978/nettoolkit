@@ -40,7 +40,42 @@ Decrypt Juniper $9 password:
 
 
 
+Decrypt Juniper $9 passwords from configuration file:
+---------------------------------------------------
+
+**Steps Involved:**
+
+	* Import the ``decrypt_doller9_file_passwords`` function from ``nettoolkit``
+	* First argument for the function is juniper configuration file name
+	* Second argument for the function is new output file name
+	* Output file will have all $9$ passwords decrypted
+
+	.. code-block:: python
+		:emphasize-lines: 2
+
+		>>> from nettoolkit import decrypt_doller9_file_passwords
+		>>> decrypt_doller9_file_passwords("input_file.log", "output_file.log")
+
+
+Mask passwords from Juniper configuration file:
+---------------------------------------------------
+
+**Steps Involved:**
+
+	* Import the ``mask_doller9_file_passwords`` function from ``nettoolkit``
+	* First argument for the function is cisco configuration file name
+	* Second argument for the function is new output file name
+	* Output file will have all $9$ password masked
+
+	.. code-block:: python
+		:emphasize-lines: 2
+
+		>>> from nettoolkit import mask_doller9_file_passwords
+		>>> mask_doller9_file_passwords("input_file.log", "output_file.log")
+
+
+
 
 .. note::
 		
-	This feature is made available from the package >= 0.0.17
+	Refer Version Control log to see the version from where these features are made available.

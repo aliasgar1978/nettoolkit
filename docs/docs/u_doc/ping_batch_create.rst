@@ -16,11 +16,11 @@ CLI Way
 
 		>>> from nettoolkit import create_batch_file
 		>>> create_batch_file(prefixes, names, ip, op_folder)
-            # where,
-            # pfxs (list): list of prefixes
-            # names (list): list of prefix names
-            # ip (list): ip(s) for which batch file(s) to be created
-            # op_folder (str): output folder where batch file(s) should be created
+            .. # where,
+            .. # pfxs (list): list of prefixes
+            .. # names (list): list of prefix names
+            .. # ip (list): ip(s) for which batch file(s) to be created
+            .. # op_folder (str): output folder where batch file(s) should be created
 
 
 

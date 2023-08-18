@@ -26,4 +26,6 @@ User documentation!
    Cisco Type7 Password Enc/Dec <u_doc/cpw_crack>
    Junuper $9 Password Enc/Dec <u_doc/jpw_crack>
    
-
+   Ping-Batch file creation <u_doc/ping_batch_create>
+   IP Subnet Scanner <u_doc/subnet_scanner>
+   Compare IP Scan Results  <u_doc/compare_scan_result>

@@ -2,7 +2,7 @@
 batch file generation functions
 -------------------------------------------------------------------------------
 
-.. automodule:: batch.common
+.. automodule:: nettoolkit.batch
 	:members:
 	:undoc-members:
 	:show-inheritance:

@@ -52,6 +52,9 @@ __all__ = [
 	#databse
 	"write_to_xl", "append_to_xl", "read_xl",
 
+	#batch
+	"CreateBatch", "create_batch_file",
+
 	]
 
 __version__ = "0.0.23"
@@ -83,3 +86,6 @@ from .common import (
 
 
 from .database import write_to_xl, append_to_xl, read_xl
+
+from .batch import CreateBatch, create_batch_file
+

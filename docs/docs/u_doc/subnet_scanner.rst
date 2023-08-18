@@ -16,23 +16,22 @@ CLI Way
 
 		>>> from nettoolkit import get_first_ips, Ping
 		>>> iplist = get_first_ips(pfxs, till=5)
-
-
-		.. note::
-
-			inputs -
-			* pfxs (list): list of prefixes
-			* till (int, optional): how many ips to select. Defaults to 5.
-
-            returns -
-    		* list: crafted list with first (n) ip addresses from each subnet
-
-
-	.. code-block:: python
-
+		>>>
         >>> # Initiate Ping, and write out Excel
         >>> P = Ping(iplist)
         >>> P.op_to_xl(output_file)
+
+
+.. note::
+
+	inputs -
+
+	* pfxs (list): list of prefixes
+	* till (int, optional): how many ips to select. Defaults to 5.
+
+	returns -
+	
+	* list: crafted list with first (n) ip addresses from each subnet
 
 
 

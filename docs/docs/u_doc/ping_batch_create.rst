@@ -20,7 +20,7 @@ CLI Way
 
 	.. note::
         
-		inputs -
+		**inputs**
 
           * pfxs (list): list of prefixes
           * names (list): list of prefix names

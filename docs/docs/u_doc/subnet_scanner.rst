@@ -24,12 +24,12 @@ CLI Way
 
 .. note::
 
-	inputs -
+	**inputs**
 
 	* pfxs (list): list of prefixes
 	* till (int, optional): how many ips to select. Defaults to 5.
 
-	returns -
+	**returns**
 	
 	* list: crafted list with first (n) ip addresses from each subnet
 

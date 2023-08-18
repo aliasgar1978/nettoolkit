@@ -77,6 +77,12 @@ Version Control
    * - 0.0.22
      - Jul 12, 2023
      - Feature add: juniper configuration - file passwords decrypt, file passwords mask.
+   * - 0.0.23
+     - Aug 18, 2023
+     - Feature add:
+        * ping batch file creations 
+        * ip subnet scanner
+        * ping responce comparisions
 
 
 

@@ -8,19 +8,19 @@ CLI Way
 
 **Steps Involved:**
 
-	* Import necessary functions
-	* execute function by providing necessary input parameters
+    * Import necessary functions
+    * execute function by providing necessary input parameters
 
-	.. code-block:: python
-		:emphasize-lines: 2
+    .. code-block:: python
+        :emphasize-lines: 2
 
-		>>> from nettoolkit import create_batch_file
-		>>> create_batch_file(prefixes, names, ip, op_folder)
+        >>> from nettoolkit import create_batch_file
+        >>> create_batch_file(prefixes, names, ip, op_folder)
 
 
-	.. note::
+    .. note::
         
-		**inputs**
+        **inputs**
 
           * pfxs (list): list of prefixes
           * names (list): list of prefix names
@@ -34,25 +34,25 @@ GUI Way
 
 **Steps Involved:**
 
-	* Import necessary class
-	* call class
-	* Provide inputs on  tab,  click 'Go' to execute.
-	* delete class instance
+    * Import necessary class
+    * call class
+    * Provide inputs on  tab,  click 'Go' to execute.
+    * delete class instance
 
-	.. code-block:: python
-		:emphasize-lines: 2
+    .. code-block:: python
+        :emphasize-lines: 2
 
-		>>> from nettoolkit import CreateBatch
-		>>> CB = CreateBatch()
+        >>> from nettoolkit import CreateBatch
+        >>> CB = CreateBatch()
         ## A new GUI Popup window will open for user inputs. provide inputs  on tab and click 'Go' 
 
-		>>> del(CB)
+        >>> del(CB)
 
 
 -----
 
 
 .. note::
-		
-	The feature is made available from the package >= 0.0.23
+        
+    The feature is made available from the package >= 0.0.23
 

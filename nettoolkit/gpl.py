@@ -544,8 +544,9 @@ class STR(Container):
 		--> str (filename along with full path)
 		'''
 		if ts: ts = separator + ts
+		cmd += ts
 		if cmd:
-			cmd += ts
+			# cmd += ts
 			replaceCandidates = ('|',  '\\', '/', ':', '*', '?', '"', '<', '>')
 			for x in replaceCandidates:
 				cmd = STR.update_str(cmd, x, "_")

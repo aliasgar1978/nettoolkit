@@ -55,6 +55,9 @@ __all__ = [
 	#batch
 	"CreateBatch", "create_batch_file",
 
+	#subnetscan
+	"SubnetScan", "compare_ping_sweeps", "get_first_ips", "Ping",
+
 	]
 
 __version__ = "0.0.23"
@@ -89,3 +92,4 @@ from .database import write_to_xl, append_to_xl, read_xl
 
 from .batch import CreateBatch, create_batch_file
 
+from .subnetscan import SubnetScan, compare_ping_sweeps, get_first_ips, Ping

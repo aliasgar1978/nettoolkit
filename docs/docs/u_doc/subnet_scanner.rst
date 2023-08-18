@@ -12,19 +12,25 @@ CLI Way
 	* call function with two files as arguments
 
 	.. code-block:: python
-		:emphasize-lines: 4,12,13
+		:emphasize-lines: 2
 
 		>>> from nettoolkit import get_first_ips, Ping
-
-        # Generate IP List
 		>>> iplist = get_first_ips(pfxs, till=5)
-            # inputs -
-            # pfxs (list): list of prefixes
-            # till (int, optional): how many ips to select. Defaults to 5.
-            # returns -
-    		# list: crafted list with first (n) ip addresses from each subnet
 
-        # Initiate Ping, and write out Excel
+
+		.. note::
+
+			inputs -
+			* pfxs (list): list of prefixes
+			* till (int, optional): how many ips to select. Defaults to 5.
+
+            returns -
+    		* list: crafted list with first (n) ip addresses from each subnet
+
+
+	.. code-block:: python
+
+        >>> # Initiate Ping, and write out Excel
         >>> P = Ping(iplist)
         >>> P.op_to_xl(output_file)
 
@@ -44,9 +50,7 @@ GUI Way
 		:emphasize-lines: 2
 
 		>>> from nettoolkit import SubnetScan
-		>>> SS = SubnetScan()
-        ## A new GUI Popup window will open for user inputs. provide inputs on `Subnet Scan` tab and click 'Go' 
-
+		>>> SS = SubnetScan()         ## A new GUI Popup window will open for user inputs. provide inputs on `Subnet Scan` tab and click 'Go' 
 		>>> del(SS)
 
 

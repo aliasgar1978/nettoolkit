@@ -33,9 +33,7 @@ GUI Way
 		:emphasize-lines: 2
 
 		>>> from nettoolkit import SubnetScan
-		>>> SS = SubnetScan()
-        ## A new GUI Popup window will open for user inputs. provide inputs on `Compare Outputs` tab and click 'Go' 
-
+		>>> SS = SubnetScan()      ## A new GUI Popup window will open for user inputs. provide inputs on `Compare Outputs` tab and click 'Go' 
 		>>> del(SS)
 
 

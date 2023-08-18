@@ -12,7 +12,7 @@ from nettoolkit.formitems import *
 # -----------------------------------------------------------------------------
 
 class CreateBatch():
-	'''Inititates a UserForm asking user inputs.	'''
+	'''Create Batchfile GUI - Inititates a UserForm asking user inputs.	'''
 
 	header = 'batch file generator'
 	version = 'v1.0.0'
@@ -70,7 +70,7 @@ class CreateBatch():
 			sg.Popup(s)
 
 	def select_file_path(self):
-		"""input output files 
+		"""select output files 
 
 		Returns:
 			sg.Frame: Frame with input data components
@@ -87,7 +87,7 @@ class CreateBatch():
 
 
 	def select_prefixes(self):
-		"""selection of filters tab display
+		"""selection of tab display - prefixes
 
 		Returns:
 			sg.Frame: Frame with filter selection components
@@ -104,7 +104,7 @@ class CreateBatch():
 			])
 
 	def select_names(self):
-		"""selection of filters tab display
+		"""selection of tab display - prefixes names
 
 		Returns:
 			sg.Frame: Frame with filter selection components
@@ -121,7 +121,7 @@ class CreateBatch():
 			])
 
 	def select_ips(self):
-		"""selection of filters tab display
+		"""selection of tab display - ips
 
 		Returns:
 			sg.Frame: Frame with filter selection components
@@ -141,6 +141,17 @@ class CreateBatch():
 
 # ------------------------------------
 def create_batch_file(pfxs, names, ip, op_folder):
+	"""creates batch file(s)
+
+	Args:
+		pfxs (list): list of prefixes
+		names (list): list of prefix names
+		ip (list): ip(s) for which batch file(s) to be created
+		op_folder (str): output folder where batch file(s) should be created
+
+	Returns:
+		bool, None: Result of outcome
+	"""	
 	if not isinstance(ip, int):
 		try:
 			ip = int(ip)
@@ -180,6 +191,15 @@ def create_batch_file(pfxs, names, ip, op_folder):
 	return True
 
 def add_ips_to_lists(pfxs, n):
+	"""create list of ip addresses for given nth ip from given prefixes 
+
+	Args:
+		pfxs (list): list of subnets/prefixes
+		n (int): nth ip address
+
+	Returns:
+		list: crafted list of ip addresses
+	"""	
 	list_of_1_ips = []
 	for pfx in pfxs:
 		subnet = nt.addressing(pfx)
@@ -191,6 +211,15 @@ def add_ips_to_lists(pfxs, n):
 	return list_of_1_ips
 
 def create_batch_file_string(lst, names):
+	"""get the output batch file content
+
+	Args:
+		lst (list): list of prefixes
+		names (list): list of prefix names
+
+	Returns:
+		str: output batch file content
+	"""	
 	s = ''
 	for ip, name in zip(lst, names):
 		s += f'start "{name}" ping -t {ip}\n'
@@ -198,6 +227,12 @@ def create_batch_file_string(lst, names):
 
 
 def write_out_batch_file(op_batch_filename, s):
+	"""write the output batch file.
+
+	Args:
+		op_batch_filename (str): output file name
+		s (str): mutliline string to write to file
+	"""	
 	print(f'creating batch file {op_batch_filename}')
 	with open(op_batch_filename, 'w') as f:
 		f.write(s)

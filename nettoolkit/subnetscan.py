@@ -10,6 +10,15 @@ nslookup = nt.nslookup
 
 # -----------------------------------------------------------------------------
 def get_first_ips(pfxs, till=5):
+	"""selects first (n) ips for each subnets from given prefixes
+
+	Args:
+		pfxs (list): list of prefixes
+		till (int, optional): how many ips to select. Defaults to 5.
+
+	Returns:
+		list: crafted list with first (n) ip addresses from each subnet
+	"""	
 	new_iplist=[]
 	for pfx in pfxs:
 		subnet = nt.addressing(pfx)
@@ -22,8 +31,16 @@ def get_first_ips(pfxs, till=5):
 
 # -----------------------------------------------------------------------------
 class Ping(Multi_Execution):
+	"""Multi Ping class
+
+	Args:
+		hosts (str): list of ips to be pinged
+		concurrent_connections (int, optional): number of simultaneous pings. Defaults to 1000.
+	"""	
 
 	def __init__(self, hosts, concurrent_connections=1000):
+		"""instance initializer
+		"""		
 		self.items = hosts
 		self.max_connections = concurrent_connections
 		self.ping_results = {}
@@ -33,17 +50,36 @@ class Ping(Multi_Execution):
 		self.start()
 
 	def execute(self, ip):
+		"""executor
+
+		Args:
+			ip (str): ip address
+		"""		
 		self.ping_ms[ip] = ping(ip)
 		self.ping_results[ip] = True if self.ping_ms[ip]  else False
 		self.dns_result[ip] = nslookup(ip)
 
 	def op_to_xl(self, opfile):
+		"""write out result of pings to an output file
+
+		Args:
+			opfile (str): output excel file 
+		"""		
 		df = pd.DataFrame(self.result)
 		df.to_excel(opfile, index_label='ip')
 
 
 
 def compare_ping_sweeps(first, second):
+	"""comparision of two ping result excel files 
+
+	Args:
+		first (str): ping result excel file-1
+		second (str): ping result excel file-2
+
+	Returns:
+		None: Returns None, prints out result on console/screen
+	"""	
 	#
 	df1 = pd.read_excel(first, index_col='ip').fillna('')
 	df2 = pd.read_excel(second, index_col='ip').fillna('')
@@ -82,7 +118,7 @@ def compare_ping_sweeps(first, second):
 # -----------------------------------------------------------------------------
 
 class SubnetScan():
-	'''Inititates a UserForm asking user inputs.	'''
+	'''Subnet Scanner GUI - Inititates a UserForm asking user inputs.	'''
 
 	header = 'Subnet Scanner For First [n] ips of each subnet'
 	version = 'v1.0.0'
@@ -103,7 +139,6 @@ class SubnetScan():
 	def create_form(self):
 		"""initialize the form, and keep it open until some event happens.
 		"""    		
-		# self.tabs()
 		layout = [
 			banner(self.version), 
 			button_pallete(),
@@ -137,7 +172,7 @@ class SubnetScan():
 
 
 	def subnet_scanner(self):
-		"""selection of filters tab display
+		"""tab display - subnet scanner
 
 		Returns:
 			sg.Frame: Frame with filter selection components
@@ -160,7 +195,7 @@ class SubnetScan():
 
 
 	def compare_scanner_outputs(self):
-		"""Compares output of scanner and result
+		"""tab display - Compares output of scanner and result
 
 		Returns:
 			sg.Frame: Frame with filter selection components

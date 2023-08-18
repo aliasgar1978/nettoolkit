@@ -36,6 +36,9 @@ def under_line(length):
 def banner(version):
 	"""Banner / Texts with bold center aligned fonts
 
+	Args:
+		version (str): version of code
+
 	Returns:
 		list: list with banner text
 	"""    		
@@ -90,6 +93,14 @@ def button_pallete():
 	] ), ]
 
 def get_list(raw_items):
+	"""create list from given raw items splits by enter and comma
+
+	Args:
+		raw_items (str): multiline raw items
+
+	Returns:
+		list: list of items
+	"""	
 	ri_lst = raw_items.split("\n")
 	lst = []
 	for i, item in enumerate(ri_lst):

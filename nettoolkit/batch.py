@@ -5,6 +5,7 @@ provide prefixes and names of prefixes to it.
 import nettoolkit as nt
 import PySimpleGUI as sg
 from pprint import pprint
+from nettoolkit.formitems import *
 
 # -----------------------------------------------------------------------------
 # Class to initiate UserForm
@@ -25,69 +26,23 @@ class CreateBatch():
 			'ips':(),
 		}
 		self.op_folder = '.'
+		self.tabs_dic = {
+			'Prefixes': self.select_prefixes(),
+			'Prefix Names': self.select_names(),
+			'ip(s)': self.select_ips(),
+			'Output Folder': self.select_file_path(),
+
+		}
 		self.create_form()
 
-	def banner(self):
-		"""Banner / Texts with bold center aligned fonts
-
-		Returns:
-			list: list with banner text
-		"""    		
-		return [sg.Text(self.version, font='arialBold', justification='center', size=(768,1))] 
-
-	def tabs(self, **kwargs):
-		"""create tab groups for provided kwargs
-
-		Returns:
-			sg.TabGroup: Tab groups
-		"""    		
-		tabs = []
-		for k, v in kwargs.items():
-			tabs.append( sg.Tab(k, [[v]]) )
-		return sg.TabGroup( [tabs] )
-
-	def button_ok(self, text, **kwargs):  
-		"""Insert an OK button of regular size. provide additional formating as kwargs.
-
-		Args:
-			text (str): Text instead of OK to display (if need)
-
-		Returns:
-			sg.OK: OK button
-		"""		
-		return sg.OK(text, size=(10,1), **kwargs)	
-	def button_cancel(self, text, **kwargs):
-		"""Insert a Cancel button of regular size. provide additional formating as kwargs.
-
-		Args:
-			text (str): Text instead of Cancel to display (if need)
-
-		Returns:
-			sg.Cancel: Cancel button
-		"""    	  
-		return sg.Cancel(text, size=(10,1), **kwargs)
-
-	def button_pallete(self):
-		"""button pallete containing standard OK  and Cancel buttons 
-
-		Returns:
-			list: list with sg.Frame containing buttons
-		"""    		
-		return [sg.Frame(title='Button Pallete', 
-				title_color='blue', 
-				relief=sg.RELIEF_RIDGE, 
-				layout=[
-			[self.button_ok("Go", bind_return_key=True), self.button_cancel("Cancel"),],
-		] ), ]
 
 	def create_form(self):
 		"""initialize the form, and keep it open until some event happens.
 		"""    		
-		self.tabs()
 		layout = [
-			self.banner(), 
-			self.button_pallete(),
-			self.tabs_display(),
+			banner(self.version), 
+			button_pallete(),
+			tabs_display(**self.tabs_dic),
 		]
 		self.w = sg.Window(self.header, layout, size=(700,500))#, icon='data/sak.ico')
 		while True:
@@ -99,41 +54,20 @@ class CreateBatch():
 			if event == 'Go': 
 				# update self.dic
 				for k in self.dic:
-					self.dic[k] = self.get_list(i[k])
+					self.dic[k] = get_list(i[k])
 				self.op_folder = i['op_folder']
 				break
 		self.w.Close()
 		for ip in self.dic['ips']:
-			create_batch_file(self.dic['pfxs'], self.dic['names'], ip, self.op_folder)
-
-	@staticmethod
-	def get_list(raw_items):
-		ri_lst = raw_items.split("\n")
-		lst = []
-		for i, item in enumerate(ri_lst):
-			if item.strip().endswith(","):
-				ri_lst[i] = item[:-1]
-		for ri_item in ri_lst:
-			lst.extend(ri_item.split(","))
-		for i, item in enumerate(lst):
-			lst[i] = item.strip()		
-		return lst
-
-	def tabs_display(self):
-		"""define tabs display
-
-		Returns:
-			list: list of tabs
-		"""    		
-		tabs_dic = {
-			'prefixes': self.select_prefixes(),
-			'names': self.select_names(),
-			'ips': self.select_ips(),
-			'op_path': self.select_file_path(),
-
-		}
-		return [self.tabs(**tabs_dic),]
-
+			success = create_batch_file(self.dic['pfxs'], self.dic['names'], ip, self.op_folder)
+		if success:
+			s = 'batch file creation process complete. please verify'
+			print(s)
+			sg.Popup(s)
+		else:
+			s = 'batch file creation process encounter errors. please verify inputs'
+			print(s)
+			sg.Popup(s)
 
 	def select_file_path(self):
 		"""input output files 
@@ -141,16 +75,14 @@ class CreateBatch():
 		Returns:
 			sg.Frame: Frame with input data components
 		"""    		
-		return sg.Frame(title='Output Files Path', 
-						title_color='red', 
-						# size=(500, 4), 
-						key='op_path',						
-						relief=sg.RELIEF_SUNKEN, 
+		return sg.Frame(title=None, 
 						layout=[
-			[sg.Text('select folder where op files to be generated :', size=(20, 1), text_color="blue"), 
+			[sg.Text('output folder:', text_color="yellow"), 
 				sg.InputText('', key='op_folder'),  
 				sg.FolderBrowse(),
 			],
+			under_line(80),
+			[sg.Text("batch file(s) will be generated at provide output folder path")],
 			])
 
 
@@ -160,16 +92,15 @@ class CreateBatch():
 		Returns:
 			sg.Frame: Frame with filter selection components
 		"""    		
-		return sg.Frame(title='list of Prefixes', 
-						title_color='blue', 
-						# size=(500, 4), 
-						key='list_of_prefixes',						
-						relief=sg.RELIEF_SUNKEN, 
+		return sg.Frame(title=None, 
 						layout=[
-			[sg.Text("Provide Prefixes - line/comma separated")],
-			[sg.Multiline("", key='pfxs', autoscroll=True, size=(30,20), disabled=False) ],
+			[sg.Text("Provide Prefixes", text_color="yellow")],
+			[sg.Multiline("", key='pfxs', autoscroll=True, size=(30,10), disabled=False) ],
+			under_line(80),
+			[sg.Text("Entries can be line(Enter) or comma(,) separated")],
+			[sg.Text("Example: \n10.10.10.0/24\n10.10.30.0/24,10.10.50.0/25")],
+			under_line(80),
 			[sg.Text("Entries of Prefixes and Prefix Names should match exactly")],
-
 			])
 
 	def select_names(self):
@@ -178,16 +109,15 @@ class CreateBatch():
 		Returns:
 			sg.Frame: Frame with filter selection components
 		"""    		
-		return sg.Frame(title='list of Names', 
-						title_color='blue', 
-						# size=(500, 4), 
-						key='list_of_names',						
-						relief=sg.RELIEF_SUNKEN, 
+		return sg.Frame(title=None, 
 						layout=[
-			[sg.Text("Provide Prefix Names - line/comma separated")],
-			[sg.Multiline("", key='names', autoscroll=True, size=(40,20), disabled=False) ],
+			[sg.Text("Provide Prefix Names", text_color="yellow")],
+			[sg.Multiline("", key='names', autoscroll=True, size=(30,10), disabled=False) ],
+			under_line(80),
+			[sg.Text("Entries can be line(Enter) or comma(,) separated")],
+			[sg.Text("Example: \nVlan-1\nVlan-2,Loopback0")],
+			under_line(80),
 			[sg.Text("Entries of Prefixes and Prefix Names should match exactly")],
-
 			])
 
 	def select_ips(self):
@@ -196,15 +126,16 @@ class CreateBatch():
 		Returns:
 			sg.Frame: Frame with filter selection components
 		"""    		
-		return sg.Frame(title='list of IPs', 
-						title_color='blue', 
-						# size=(500, 4), 
-						key='list_of_ips',						
-						relief=sg.RELIEF_SUNKEN, 
+		return sg.Frame(title=None, 
 						layout=[
-			[sg.Text("Provide ips - line/comma separated")],
-			[sg.Multiline("", key='ips', autoscroll=True, size=(10,5), disabled=False) ]
-
+			[sg.Text("Provide ip(s)", text_color="yellow")],
+			[sg.Multiline("", key='ips', autoscroll=True, size=(10,5), disabled=False) ],
+			under_line(80),
+			[sg.Text("Entries can be line(Enter) or comma(,) separated")],
+			under_line(80),
+			[sg.Text("Example: \n1\n3,4,5")],
+			under_line(80),
+			[sg.Text("one batch file will generate for each ip")],
 			])
 
 
@@ -214,10 +145,15 @@ def create_batch_file(pfxs, names, ip, op_folder):
 		try:
 			ip = int(ip)
 		except:
-			s = f"wrong ip detected .{ip}, will be skipped"
+			s = f"incorrect ip detected .`{ip}`, will be skipped"
 			sg.Popup(s)
 			print(s)
 			return None
+	if not op_folder:
+		s = f'Mandatory argument output folder was missing.\ncould not proceed, check inputs\n'
+		sg.Popup(s)
+		print(s)
+		return None
 	op_batch_filename = f"{op_folder}/ping_test-ips-.{ip}.bat"  
 	#
 	if not isinstance(pfxs, (list, tuple)):
@@ -241,6 +177,7 @@ def create_batch_file(pfxs, names, ip, op_folder):
 	s = create_batch_file_string(list_of_ips, names)
 	write_out_batch_file(op_batch_filename, s)
 	# ------------------------------------
+	return True
 
 def add_ips_to_lists(pfxs, n):
 	list_of_1_ips = []
@@ -261,15 +198,17 @@ def create_batch_file_string(lst, names):
 
 
 def write_out_batch_file(op_batch_filename, s):
+	print(f'creating batch file {op_batch_filename}')
 	with open(op_batch_filename, 'w') as f:
 		f.write(s)
 
 # ------------------------------------
 
 if __name__ == '__main__':
+	pass
 	# ------------------------------------
 	# TEST
 	# ------------------------------------
-	u = CreateBatch()
-	del(u)
+	# u = CreateBatch()
+	# del(u)
 

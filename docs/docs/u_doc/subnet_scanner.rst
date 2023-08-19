@@ -18,7 +18,7 @@ CLI Way
         >>> iplist = get_first_ips(pfxs, till=5)
         >>>
         >>> # Initiate Ping, and write out Excel
-        >>> P = Ping(iplist)
+        >>> P = Ping(iplist, concurrent_connections=1000)
         >>> P.op_to_xl(output_file)
 
 
@@ -27,11 +27,10 @@ CLI Way
     **inputs**
 
     * pfxs (list): list of prefixes
-    * till (int, optional): how many ips to select. Defaults to 5.
-
-    **returns**
-    
-    * list: crafted list with first (n) ip addresses from each subnet
+    * till (int, optional): how many ips to select. Defaults to 5
+    * iplist (list): list of ips to be pinged (created using get_first_ips function)
+    * concurrent_connections (int): number of max sockets to open parallel for ping check. (default: 1000)
+    * output_file (str): path/name of excel file where ping responces to be stored.
 
 
 

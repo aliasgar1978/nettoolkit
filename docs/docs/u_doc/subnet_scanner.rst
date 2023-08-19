@@ -27,9 +27,9 @@ CLI Way
     **inputs**
 
     * pfxs (list): list of prefixes
-    * till (int, optional): how many ips to select. Defaults to 5
+    * till (int, optional): how many ips to select. (Default: 5)
     * iplist (list): list of ips to be pinged (created using get_first_ips function)
-    * concurrent_connections (int): number of max sockets to open parallel for ping check. (default: 1000)
+    * concurrent_connections (int, optional): number of max sockets to open parallel for ping check. (default: 1000)
     * output_file (str): path/name of excel file where ping responces to be stored.
 
 

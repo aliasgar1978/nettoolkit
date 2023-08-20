@@ -83,6 +83,9 @@ Version Control
         * ping batch file creations 
         * ip subnet scanner
         * ping responce comparisions
+   * - 0.0.24
+     - Aug 20, 2023
+     - individual GUI Forms clubbed together into a single class ``Nettoolkit``.
 
 
 

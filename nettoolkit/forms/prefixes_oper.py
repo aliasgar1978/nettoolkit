@@ -5,6 +5,15 @@ from nettoolkit.addressing import get_summaries, addressing, isSubset
 
 
 def prefixes_oper_summary_exec(obj, i):
+	"""executor function
+
+	Args:
+		obj (object): frame object 
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		if i['pfxs_summary_input'] != '':
 			obj.event_update_element(pfxs_summary_result={'value': "calculating..."})
@@ -15,6 +24,15 @@ def prefixes_oper_summary_exec(obj, i):
 		return None
 
 def prefixes_oper_issubset_exec(obj, i):
+	"""executor function
+
+	Args:
+		obj (object): frame object 
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		if i['pfxs_subnet'] != '' and i['pfxs_supernet'] != '':
 			obj.event_update_element(pfxs_issubset_result={'value': "checking..."})
@@ -28,6 +46,15 @@ def prefixes_oper_issubset_exec(obj, i):
 		return None
 
 def prefixes_oper_pieces_exec(obj, i):
+	"""executor function
+
+	Args:
+		obj (object): frame object 
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		if i['pfxs_subnet1'] != '' and i['pfxs_pieces'] != '':
 			obj.event_update_element(pfxs_pieces_result={'value': "checking..."})

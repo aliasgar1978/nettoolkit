@@ -7,6 +7,15 @@ from nettoolkit.common import get_md5
 
 
 def md5_calculator_exec(obj, i):
+	"""executor function
+
+	Args:
+		obj (object): frame object 
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		if i['file_md5_hash_check'] != '':
 			obj.event_update_element(file_md5_hash_value={'value': "calculating..."})

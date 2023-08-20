@@ -9,6 +9,14 @@ from nettoolkit.juniper import Juniper
 
 
 def juniper_oper_to_jset_exec(i):
+	"""executor function
+
+	Args:
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		if i['file_juniper'] != '' and i['op_folder_juniper'] != '':
 			p = Path(i['file_juniper'])
@@ -21,7 +29,15 @@ def juniper_oper_to_jset_exec(i):
 		return None
 
 def juniper_oper_remove_remarks_exec(i):
-	# try:
+	"""executor function
+
+	Args:
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
+	try:
 		if i['file_juniper'] != '' and i['op_folder_juniper'] != '':
 			p = Path(i['file_juniper'])
 			input_file = p.name
@@ -29,8 +45,8 @@ def juniper_oper_remove_remarks_exec(i):
 			J = Juniper(i['file_juniper'], output_file)    # define a Juniper Object
 			s = J.remove_remarks(to_file=True)      #  remove remarks from config
 			return True
-	# except:
-	# 	return None
+	except:
+		return None
 
 
 

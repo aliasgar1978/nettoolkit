@@ -8,6 +8,14 @@ from nettoolkit.subnetscan import get_first_ips, Ping
 
 
 def subnet_scanner_exec(i):
+	"""executor function
+
+	Args:
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		if i['op_folder'] != '' and i['pfxs'] != "":
 			file = 'ping_scan_result_'

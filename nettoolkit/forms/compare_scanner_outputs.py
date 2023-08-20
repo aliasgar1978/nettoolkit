@@ -6,6 +6,14 @@ from nettoolkit.subnetscan import compare_ping_sweeps
 
 
 def compare_scanner_outputs_exec(i):
+	"""executor function
+
+	Args:
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		if i['file1'] != '' and i['file2'] != '':
 			compare_ping_sweeps(i['file1'], i['file2'])

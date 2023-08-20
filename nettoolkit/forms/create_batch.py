@@ -5,6 +5,14 @@ from nettoolkit.forms.formitems import *
 from nettoolkit.batch import create_batch_file
 
 def create_batch_exec(i):
+	"""executor function
+
+	Args:
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		if (i['ips_create_batch'] != "" 
 			and i['pfxs_create_batch'] != "" 

@@ -8,6 +8,15 @@ from nettoolkit.jpw_cracker import juniper_decrypt, juniper_encrypt, decrypt_dol
 
 
 def pw_enc_cisco_exec(obj, i):
+	"""executor function
+
+	Args:
+		obj (object): frame object 
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		obj.event_update_element(pw_result_cisco={'value': ''})	
 		_pw = encrypt_type7(i['pw_cisco'])
@@ -17,6 +26,15 @@ def pw_enc_cisco_exec(obj, i):
 		return None
 
 def pw_dec_cisco_exec(obj, i):
+	"""executor function
+
+	Args:
+		obj (object): frame object 
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		obj.event_update_element(pw_result_cisco={'value': ''})	
 		_pw = decrypt_type7(i['pw_cisco'])
@@ -26,6 +44,15 @@ def pw_dec_cisco_exec(obj, i):
 		return None
 
 def pw_enc_juniper_exec(obj, i):
+	"""executor function
+
+	Args:
+		obj (object): frame object 
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		obj.event_update_element(pw_result_juniper={'value': ''})	
 		_pw = juniper_encrypt(i['pw_juniper'])
@@ -35,6 +62,15 @@ def pw_enc_juniper_exec(obj, i):
 		return None
 
 def pw_dec_juniper_exec(obj, i):
+	"""executor function
+
+	Args:
+		obj (object): frame object 
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
 	try:
 		obj.event_update_element(pw_result_juniper={'value': ''})	
 		_pw = juniper_decrypt(i['pw_juniper'])

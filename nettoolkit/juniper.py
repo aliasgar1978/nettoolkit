@@ -1,8 +1,8 @@
 
 # ------------------------------------------------------------------------------
-from .gpl import STR, IO
-from .hierarchy import Hierarchy 
-from .jset import JSet
+from nettoolkit.gpl import STR, IO
+from nettoolkit.hierarchy import Hierarchy 
+from nettoolkit.jset import JSet
 # ------------------------------------------------------------------------------
 
 class Juniper():
@@ -22,8 +22,9 @@ class Juniper():
 	def _get_clean_output_file_lst(self):
 		output_file_lst = []
 		for line in self.input_file_lst:
-			if line.lstrip()[0] == "#": continue
-			output_file_lst.append(line.rstrip("\n"))
+			if len(line.lstrip()) > 0:
+				if line.lstrip()[0] == "#": continue
+				output_file_lst.append(line.rstrip("\n"))
 		return output_file_lst
 
 	def remove_remarks(self, to_file=True):

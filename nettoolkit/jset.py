@@ -2,7 +2,7 @@
 # IMPORTS
 # -----------------------------------------------------------------------------
 
-from .gpl import Default, STR, Container
+from nettoolkit.gpl import Default, STR, Container
 
 # ---------------------------------------------------------------------------- #
 # J-Set

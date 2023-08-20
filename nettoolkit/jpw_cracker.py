@@ -1,4 +1,3 @@
-#!/usr/bin/python
 #############################################################################
 ## Thx you Mhite & Minsuk for providing such wonderful script.
 ## matt hite (mhite@hotmail.com)

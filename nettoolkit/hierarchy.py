@@ -3,8 +3,8 @@
 # -----------------------------------------------------------------------------
 from collections import OrderedDict
 
-from .hierarchy_rules import *
-from .gpl import STR, IO
+from nettoolkit.hierarchy_rules import *
+from nettoolkit.gpl import STR, IO
 
 # Enable only if Max Recursion depth reach.
 # import sys

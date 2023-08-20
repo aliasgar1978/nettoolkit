@@ -1,12 +1,14 @@
 
 # -----------------------------------------------------------------------------
-import nettoolkit as nt
-from nettoolkit import Multi_Execution
 import pandas as pd
 import PySimpleGUI as sg
-from nettoolkit.formitems import *
-ping = nt.IP.ping_average
-nslookup = nt.nslookup
+import nettoolkit as nt
+from nettoolkit.addressing import addressing
+from nettoolkit.gpl import Multi_Execution
+from nettoolkit.forms.formitems import *
+from nettoolkit.gpl import IP
+from nettoolkit.gpl import nslookup
+ping = IP.ping_average
 
 # -----------------------------------------------------------------------------
 def get_first_ips(pfxs, till=5):
@@ -21,7 +23,7 @@ def get_first_ips(pfxs, till=5):
 	"""	
 	new_iplist=[]
 	for pfx in pfxs:
-		subnet = nt.addressing(pfx)
+		subnet = addressing(pfx)
 		try:
 			hosts = subnet[1:till+1]
 		except:
@@ -102,11 +104,11 @@ def compare_ping_sweeps(first, second):
 		sg.Popup(s)
 	else:
 		if missing:
-			s = f'\n{"="*80}\nips which were pinging, but now not pinging\n{"="*80}\n{missing}\n{"="*80}\n'
+			s = f'\n{"="*80}\nips which were pinging in first file, but not pinging in second file\n{"="*80}\n{missing}\n{"="*80}\n'
 			print(s)
 			sg.Popup(s)
 		if added:
-			s = f'\n{"="*80}\nips which were not-pinging, but now it is pinging\n{"="*80}\n{added}\n{"="*80}\n'
+			s = f'\n{"="*80}\nips which were not-pinging in first file, but it is pinging in second file\n{"="*80}\n{added}\n{"="*80}\n'
 			print(s)
 			sg.Popup(s)
 
@@ -116,133 +118,16 @@ def compare_ping_sweeps(first, second):
 # -----------------------------------------------------------------------------
 # Class to initiate UserForm
 # -----------------------------------------------------------------------------
-
 class SubnetScan():
-	'''Subnet Scanner GUI - Inititates a UserForm asking user inputs.	'''
-
-	header = 'Subnet Scanner For First [n] ips of each subnet'
-	version = 'v1.0.0'
-
-	# Object Initializer
 	def __init__(self):
-		self.pfxs = []
-		self.op_file = '.'
-		self.till = 5
-		self.tabs_dic = {
-			'Subnet Scan': self.subnet_scanner(),
-			'Compare Outputs': self.compare_scanner_outputs(),
-
-		}
-		self.create_form()
-
-
-	def create_form(self):
-		"""initialize the form, and keep it open until some event happens.
-		"""    		
-		layout = [
-			banner(self.version), 
-			button_pallete(),
-			tabs_display(**self.tabs_dic),
-		]
-		self.w = sg.Window(self.header, layout, size=(700,600))#, icon='data/sak.ico')
-		while True:
-			event, (i) = self.w.Read()
-			# - Events Triggers - - - - - - - - - - - - - - - - - - - - - - - 
-			if event == 'Cancel': 
-				break
-			if event == 'Go': 
-
-				if i['op_folder'] != '' and i['pfxs'] != "":
-					file = 'ping_scan_result_'
-					self.op_file = f"{nt.STR.get_logfile_name(i['op_folder'], file, ts=nt.LOG.time_stamp())[:-4]}.xlsx"
-					self.pfxs = get_list(i['pfxs'])
-					self.till = i['till']
-					#
-					new_iplist = get_first_ips(self.pfxs, self.till)
-					P = Ping(new_iplist)
-					P.op_to_xl(self.op_file)
-
-				if i['file1'] != '' and i['file2'] != '':
-					self.file1 = i['file1']
-					self.file2 = i['file2']
-					compare_ping_sweeps(self.file1, self.file2)
-				break
-
-		self.w.Close()
-
-
-	def subnet_scanner(self):
-		"""tab display - subnet scanner
-
-		Returns:
-			sg.Frame: Frame with filter selection components
-		"""    		
-		return sg.Frame(title=None, 
-						relief=sg.RELIEF_SUNKEN, 
-						layout=[
-			[sg.Text('select output folder :',  text_color="yellow"), 
-				sg.InputText('', key='op_folder'),   sg.FolderBrowse(),
-			],
-			under_line(80),
-			[sg.Text("Prefixes - enter/comma separated", text_color="yellow")],
-			[sg.Multiline("", key='pfxs', autoscroll=True, size=(30,14), disabled=False) ],
-
-			under_line(80),
-			[sg.Text('[n]', text_color="yellow"), sg.InputCombo(list(range(1,256)), key='till', size=(20,1))],  
-			
-
-			])
-
-
-	def compare_scanner_outputs(self):
-		"""tab display - Compares output of scanner and result
-
-		Returns:
-			sg.Frame: Frame with filter selection components
-		"""    		
-		return sg.Frame(title=None, 
-						relief=sg.RELIEF_SUNKEN, 
-						layout=[
-
-			[sg.Text('Select first scanner file :', size=(20, 1), text_color="yellow"), 
-				sg.InputText(key='file1'),  
-				sg.FileBrowse()],
-			under_line(80),
-
-			[sg.Text('Select second scanner file :', size=(20, 1), text_color="yellow"), 
-				sg.InputText(key='file2'),  
-				sg.FileBrowse()],
-			under_line(80),
-
-			])
+		s = "Deprycated class, use `Nettoolkit` instead"
+		print(s)
+		sg.Popup(s)
 
 
 # -----------------------------------------------------------------------------
 # Execute
 # -----------------------------------------------------------------------------
-
 if __name__ == '__main__':
 	pass
-	##
-
-	## 1.
-	# pfxs = ['10.10.10.0/24', '10.10.20.0/24']
-	# output_file = 'path/filename'
-	# ##
-	# new_iplist = get_first_ips(pfxs, till)
-	# P = Ping(new_iplist)
-	# P.op_to_xl(output_file)
-	# ##
-
-
-	## 2.
-	# file1 = ''
-	# file2 = ''
-	# compare_ping_sweeps(first, second)
-
-	# u = SubnetScan()
-	# del(u)
-
-
-
-	# ----------------------------------------------------------------------
+# ----------------------------------------------------------------------

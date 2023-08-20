@@ -42,11 +42,10 @@ GUI Way
     .. code-block:: python
         :emphasize-lines: 2
 
-        >>> from nettoolkit import CreateBatch
-        >>> CB = CreateBatch()
-        ## A new GUI Popup window will open for user inputs. provide inputs  on tab and click 'Go' 
-
-        >>> del(CB)
+        >>> from nettoolkit import Nettoolkit
+        >>> NTK = Nettoolkit()
+        ## A new GUI Popup window will open for user inputs. provide inputs on tab `Create Batch` and click 'Create' 
+        >>> del(NTK)
 
 
 -----
@@ -54,5 +53,6 @@ GUI Way
 
 .. note::
         
-    The feature is made available from the package >= 0.0.23
+	The feature is made available from the package >= 0.0.23, 
+	And clubbed together in 0.0.24
 

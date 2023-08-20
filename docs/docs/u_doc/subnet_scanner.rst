@@ -47,9 +47,9 @@ GUI Way
     .. code-block:: python
         :emphasize-lines: 2
 
-        >>> from nettoolkit import SubnetScan
-        >>> SS = SubnetScan()         ## A new GUI Popup window will open for user inputs. provide inputs on `Subnet Scan` tab and click 'Go' 
-        >>> del(SS)
+        >>> from nettoolkit import Nettoolkit
+        >>> NTK = Nettoolkit()         ## A new GUI Popup window will open for user inputs. provide inputs on `Subnet Scan` tab and click 'Go' 
+        >>> del(NTK)
 
 
 -----
@@ -57,5 +57,6 @@ GUI Way
 
 .. note::
         
-    The feature is made available from the package >= 0.0.23
+	The feature is made available from the package >= 0.0.23, 
+	And clubbed together in 0.0.24
 

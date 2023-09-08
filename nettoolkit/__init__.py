@@ -56,14 +56,14 @@ __all__ = [
 	"CreateBatch", "create_batch_file",
 
 	#subnetscan
-	"SubnetScan", "compare_ping_sweeps", "get_first_ips", "Ping",
+	"SubnetScan", "compare_ping_sweeps", "Ping",
 
 	#gui
 	"Nettoolkit",
 
 	]
 
-__version__ = "0.0.24"
+__version__ = "0.0.25"
 
 from .juniper import Juniper
 from .jset import JSet
@@ -95,6 +95,6 @@ from .database import write_to_xl, append_to_xl, read_xl
 
 from .batch import CreateBatch, create_batch_file
 
-from .subnetscan import SubnetScan, compare_ping_sweeps, get_first_ips, Ping
+from .subnetscan import SubnetScan, compare_ping_sweeps, Ping
 
 from .gui import Nettoolkit

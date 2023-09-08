@@ -19,7 +19,7 @@ from nettoolkit.forms.create_batch import create_batch_exec, create_batch_frame
 class Nettoolkit():
 	'''Subnet Scanner GUI - Inititates a UserForm asking user inputs.	'''
 
-	header = 'Nettoolkit - v2.0.0'
+	header = 'Nettoolkit - v2.0.1'
 
 	# Object Initializer
 	def __init__(self):

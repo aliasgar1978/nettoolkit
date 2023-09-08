@@ -8,48 +8,57 @@ from nettoolkit.gpl import Multi_Execution
 from nettoolkit.forms.formitems import *
 from nettoolkit.gpl import IP
 from nettoolkit.gpl import nslookup
+from nettoolkit.database import write_to_xl, read_xl, get_merged_DataFrame_of_file
 ping = IP.ping_average
-
-# -----------------------------------------------------------------------------
-def get_first_ips(pfxs, till=5):
-	"""selects first (n) ips for each subnets from given prefixes
-
-	Args:
-		pfxs (list): list of prefixes
-		till (int, optional): how many ips to select. Defaults to 5.
-
-	Returns:
-		list: crafted list with first (n) ip addresses from each subnet
-	"""	
-	new_iplist=[]
-	for pfx in pfxs:
-		subnet = addressing(pfx)
-		try:
-			hosts = subnet[1:till+1]
-		except:
-			hosts =subnet[1:len(subnet)]
-		new_iplist.extend([host for host in hosts])
-	return new_iplist
 
 # -----------------------------------------------------------------------------
 class Ping(Multi_Execution):
 	"""Multi Ping class
 
 	Args:
-		hosts (str): list of ips to be pinged
+		pfxs (list): list of prefixes
+		till (int, optional): how many ips to select. Defaults to 5.
 		concurrent_connections (int, optional): number of simultaneous pings. Defaults to 1000.
+		create_tabs (bool, optional): want to create individual tab (True) for each subnet or clubbed (False)
 	"""	
 
-	def __init__(self, hosts, concurrent_connections=1000):
+	def __init__(self, pfxs, till, concurrent_connections=1000, create_tabs=False):
 		"""instance initializer
 		"""		
-		self.items = hosts
+		self.pfxs = pfxs
+		self.till = till
 		self.max_connections = concurrent_connections
+		self.create_tabs = create_tabs
+		self.items = self.get_first_ips()
 		self.ping_results = {}
 		self.ping_ms = {}
 		self.dns_result = {}
 		self.result = {'ping_ms': self.ping_ms, 'dns_result': self.dns_result, 'ping_results': self.ping_results} 
+		self.results_dict = {}
 		self.start()
+
+	def get_first_ips(self):
+		"""selects ips for each subnets from given prefixes
+
+		Args:
+
+		Returns:
+			list: crafted list with first (n)/ all ip addresses from each subnet
+		"""	
+		new_iplist=[]
+		self.pfx_dict={}
+		for pfx in self.pfxs:
+			subnet = addressing(pfx)
+			try:
+				if self.till:
+					hosts = subnet[1:int(self.till)+1]
+				else:
+					hosts =subnet[1:len(subnet)]
+			except:
+				hosts =subnet[1:len(subnet)]
+			self.pfx_dict[pfx] = [host for host in hosts]
+			new_iplist.extend(self.pfx_dict[pfx])
+		return new_iplist
 
 	def execute(self, ip):
 		"""executor
@@ -60,6 +69,23 @@ class Ping(Multi_Execution):
 		self.ping_ms[ip] = ping(ip)
 		self.ping_results[ip] = True if self.ping_ms[ip]  else False
 		self.dns_result[ip] = nslookup(ip)
+		self.add_results(ip, self.ping_results[ip], self.ping_ms[ip], self.dns_result[ip])
+
+	def add_results(self, ip, ping_R, ping_ms_R, dns_R):
+		"""add ping/dns results to results dictionary
+
+		Args:
+			ip (str): ip address
+			ping_R (bool): ping result True/False
+			ping_ms_R (int): milisecond if True
+			dns_R (str): dns result
+		"""		
+		for pfx, hosts in self.pfx_dict.items():
+			if not ip in hosts: continue
+			if not self.results_dict.get(pfx):
+				self.results_dict[pfx] = {}
+			self.results_dict[pfx][ip] = { 'ping_ms': ping_ms_R, 'dns_result': dns_R, 'ping_results': ping_R}
+			break
 
 	def op_to_xl(self, opfile):
 		"""write out result of pings to an output file
@@ -67,8 +93,14 @@ class Ping(Multi_Execution):
 		Args:
 			opfile (str): output excel file 
 		"""		
-		df = pd.DataFrame(self.result)
-		df.to_excel(opfile, index_label='ip')
+		if self.create_tabs:
+			d = {}
+			for pfx, ipresults in self.results_dict.items():
+				d[pfx.replace("/", "_")] = pd.DataFrame(ipresults).T
+			write_to_xl(opfile, d, index=True, overwrite=False, index_label='ip')
+		else:
+			df = pd.DataFrame(self.result)
+			df.to_excel(opfile, index_label='ip')
 
 
 
@@ -83,8 +115,10 @@ def compare_ping_sweeps(first, second):
 		None: Returns None, prints out result on console/screen
 	"""	
 	#
-	df1 = pd.read_excel(first, index_col='ip').fillna('')
-	df2 = pd.read_excel(second, index_col='ip').fillna('')
+	df1 = get_merged_DataFrame_of_file(first)
+	df2 = get_merged_DataFrame_of_file(second)
+	df1 = df1.set_index('ip')
+	df2 = df2.set_index('ip')
 	#
 	sdf1 = df1.sort_values(by=['ping_results', 'ip'])
 	sdf2 = df2.sort_values(by=['ping_results', 'ip'])
@@ -119,6 +153,8 @@ def compare_ping_sweeps(first, second):
 # Class to initiate UserForm
 # -----------------------------------------------------------------------------
 class SubnetScan():
+	"""Deprycated class, use `Nettoolkit` instead
+	"""	
 	def __init__(self):
 		s = "Deprycated class, use `Nettoolkit` instead"
 		print(s)

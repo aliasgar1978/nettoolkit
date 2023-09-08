@@ -4,7 +4,7 @@ import PySimpleGUI as sg
 
 from nettoolkit.gpl import STR, LOG
 from nettoolkit.forms.formitems import *
-from nettoolkit.subnetscan import get_first_ips, Ping
+from nettoolkit.subnetscan import Ping
 
 
 def subnet_scanner_exec(i):
@@ -26,8 +26,7 @@ def subnet_scanner_exec(i):
 			except:
 				concurrent_connections = 1000
 			#
-			new_iplist = get_first_ips(pfxs, i['till'])
-			P = Ping(new_iplist, concurrent_connections)
+			P = Ping(pfxs, i['till'], concurrent_connections, i['subnet_scanner_create_tabs'])
 			P.op_to_xl(op_file)
 			sg.Popup("Scan completed, \nFile write completed, \nVerify output")
 			return True
@@ -56,6 +55,9 @@ def subnet_scanner_frame():
 		# under_line(80),
 		[sg.Text('[n]', text_color="yellow"), sg.InputCombo(list(range(1,256)), key='till', size=(20,1)),  
 		sg.Text('Concurrent connections', text_color="yellow"), sg.InputText(1000, key='sockets', size=(20,1))],  
+		under_line(80),
+		[sg.Checkbox('create separate tab for each subnet', key='subnet_scanner_create_tabs', default=False, text_color='yellow')],
+
 		under_line(80),
 		[sg.Button("Start", change_submits=True, key='go_subnet_scanner')],
 

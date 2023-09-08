@@ -29,7 +29,24 @@ def read_xl(file):
 	xlrd.read_sheets()
 	return xlrd
 
-def append_to_xl(file, df_dict, overwrite=True):
+
+def get_merged_DataFrame_of_file(file):
+	"""returns merged DataFrame after clubbing all tabs of file
+
+	Args:
+		file (str): Excel file name
+
+	Returns:
+		pandas DataFrame: merged database
+	"""	
+	xlr = read_xl(file)
+	df = pd.DataFrame()
+	for k, v in xlr:
+		v = v.fillna("")
+		df = pd.concat([v,df])
+	return df
+
+def append_to_xl(file, df_dict, overwrite=True, index_label=""):
 	"""appends dictionary of dataframes to an Excel file
 	overwrite: will append data to existing file, else create a copy and 
 	adds data to it
@@ -38,6 +55,7 @@ def append_to_xl(file, df_dict, overwrite=True):
 		file (str): input excel filename
 		df_dict (dict): dictionary of key:DataFrame format
 		overwrite (bool, optional): overwrite or append. Defaults to True.
+		index_label (str, optional): index label for each tab
 	"""    	
 	try:
 		xlrd = read_xl(file)
@@ -49,9 +67,9 @@ def append_to_xl(file, df_dict, overwrite=True):
 		try:
 			os.remove(file)
 		except: pass
-	write_to_xl(file, prev_dict, overwrite=overwrite)
+	write_to_xl(file, prev_dict, overwrite=overwrite, index_label=index_label)
 
-def write_to_xl(file, df_dict, index=False, overwrite=False):
+def write_to_xl(file, df_dict, index=False, overwrite=False, index_label=""):
 	"""Create a new Excel file with provided dictionary of dataframes
 	overwrite: removes existing file, else create a copy if file exist.	
 
@@ -60,8 +78,9 @@ def write_to_xl(file, df_dict, index=False, overwrite=False):
 		df_dict (dict): dictionary of key:DataFrame format
 		index (bool, optional): keep index column. Defaults to False.
 		overwrite (bool, optional): overwrite or create a new file. Defaults to False.
+		index_label (str, optional): index label for each tab
 	"""
-	XL_WRITE(file, df_dict=df_dict, index=index, overwrite=overwrite)
+	XL_WRITE(file, df_dict=df_dict, index=index, overwrite=overwrite, index_label=index_label)
 # ------------------------------------------------------------------------------
 
 class XL_READ:
@@ -111,7 +130,7 @@ class XL_WRITE():
 	Returns:
 		self: XL_WRITE object
 	"""
-	def __init__(self, name, df_dict, index=False, overwrite=False):
+	def __init__(self, name, df_dict, index=False, overwrite=False, index_label=""):
 		"""initialize an object by providing name of excel and dictionary of dataframes 
 
 		Args:
@@ -120,26 +139,27 @@ class XL_WRITE():
 			index (bool, optional): write index column or not. Defaults to False.
 			overwrite (bool, optional): overwrite the file (if exist) or not. Defaults to False.
 		"""    		
-		self.write(name, df_dict, index, overwrite)
+		self.write(name, df_dict, index, index_label, overwrite)
 
-	def write(self, name, df_dict, index, overwrite):
+	def write(self, name, df_dict, index, index_label, overwrite):
 		"""method to start write to file.  by default it will run while initialize of object
 
 		Args:
 			name (str): file name with absolute path and extension
 			df_dict (dict): dictionary of dataframes
 			index (bool, optional): write index column or not. Defaults to False.
+			index_label (str, optional): index label
 			overwrite (bool, optional): overwrite the file (if exist) or not. Defaults to False.
 		"""    		
 		fileName = name if overwrite else self.get_valid_file_name(name)
 		with pd.ExcelWriter(fileName) as writer_file:
 			for sht_name, df in df_dict.items():
 				try:
-					df.to_excel(writer_file, sheet_name=sht_name, index=index)
+					df.to_excel(writer_file, sheet_name=sht_name, index=index, index_label=index_label)
 				except:
 					try:
 						print(f"writing data for {fileName} sheet {sht_name} ...failed!!!, length of sheet name = {len(sht_name)}")
-						df.to_excel(writer_file, sheet_name=sht_name[:31], index=index)
+						df.to_excel(writer_file, sheet_name=sht_name[:31], index=index, index_label=index_label)
 						print(f"instead data for {fileName} sheet {sht_name[:31]} - trunked ...done!")
 					except:
 						print(f"writing data for {fileName} sheet {sht_name[:31]} - trunked ...failed!!!")
@@ -182,5 +202,5 @@ class XL_WRITE():
 
 # ------------------------------------------------------------------------------
 
-__all__ = ['read_xl', 'append_to_xl', 'write_to_xl']
+__all__ = ['read_xl', 'get_merged_DataFrame_of_file', 'append_to_xl', 'write_to_xl']
 # ------------------------------------------------------------------------------

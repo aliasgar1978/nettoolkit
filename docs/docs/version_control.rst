@@ -86,6 +86,9 @@ Version Control
    * - 0.0.24
      - Aug 20, 2023
      - individual GUI Forms clubbed together into a single class ``Nettoolkit``.
+   * - 0.0.25
+     - Sep 8, 2023
+     - added multi-tab ip subnet scanner feature, defult full subnet scan feature.
 
 
 

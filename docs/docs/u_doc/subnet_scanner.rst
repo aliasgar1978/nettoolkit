@@ -8,17 +8,16 @@ CLI Way
 
 **Steps Involved:**
 
-    * Import necessary function, class
+    * Import necessary class
     * call function with two files as arguments
 
     .. code-block:: python
-        :emphasize-lines: 2
+        :emphasize-lines: 4
 
-        >>> from nettoolkit import get_first_ips, Ping
-        >>> iplist = get_first_ips(pfxs, till=5)
+        >>> from nettoolkit import Ping
         >>>
         >>> # Initiate Ping, and write out Excel
-        >>> P = Ping(iplist, concurrent_connections=1000)
+        >>> P = Ping(pfxs, till=5, concurrent_connections=1000, create_tabs=True)
         >>> P.op_to_xl(output_file)
 
 
@@ -28,8 +27,8 @@ CLI Way
 
     * pfxs (list): list of prefixes
     * till (int, optional): how many ips to select. (Default: 5)
-    * iplist (list): list of ips to be pinged (created using get_first_ips function)
     * concurrent_connections (int, optional): number of max sockets to open parallel for ping check. (default: 1000)
+    * create_tabs (bool, optional): whether to create individual tabs for each subnet or not (default: False)
     * output_file (str): path/name of excel file where ping responces to be stored.
 
 

@@ -35,6 +35,7 @@ class Ping(Multi_Execution):
 		self.dns_result = {}
 		self.result = {'ping_ms': self.ping_ms, 'dns_result': self.dns_result, 'ping_results': self.ping_results} 
 		self.results_dict = {}
+		self.counter = 1
 		self.start()
 
 	def get_first_ips(self):

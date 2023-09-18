@@ -27,7 +27,7 @@ DifferenceDict, DictMethods
 
 __all__ = [
 	# .juniper
-	'Juniper',
+	'Juniper', 'convert_to_set_from_captures',
 	# Jset
 	'JSet',
 	# .addressing
@@ -65,7 +65,7 @@ __all__ = [
 
 __version__ = "0.0.26"
 
-from .juniper import Juniper
+from .juniper import Juniper, convert_to_set_from_captures
 from .jset import JSet
 
 from .addressing import (
@@ -98,3 +98,7 @@ from .batch import CreateBatch, create_batch_file
 from .subnetscan import SubnetScan, compare_ping_sweeps, Ping
 
 from .gui import Nettoolkit
+
+
+def version():
+	return __version__

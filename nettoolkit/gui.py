@@ -1,10 +1,11 @@
 
 import PySimpleGUI as sg
 
+import nettoolkit as nt
 from nettoolkit.gpl import STR, LOG
 from nettoolkit.forms.formitems import *
 
-from nettoolkit.forms.subnet_scanner import subnet_scanner_exec, subnet_scanner_frame
+from nettoolkit.forms.subnet_scanner import subnet_scanner_exec, subnet_scanner_frame, count_ips
 from nettoolkit.forms.compare_scanner_outputs import compare_scanner_outputs_exec, compare_scanner_outputs_frame
 from nettoolkit.forms.md5_calculator import md5_calculator_exec, md5_calculator_frame
 from nettoolkit.forms.pw_enc_dec import pw_enc_cisco_exec, pw_dec_cisco_exec, pw_enc_juniper_exec, pw_dec_juniper_exec, pw_enc_decr_frame
@@ -65,7 +66,7 @@ class Nettoolkit():
 		"""initialize the form, and keep it open until some event happens.
 		"""    		
 		layout = [
-			banner(self.header), 
+			banner(self.header + '\tPackage version - ' + nt.version()), 
 			self.button_pallete(),
 			tabs_display(**self.tabs_dic),
 		]
@@ -86,6 +87,9 @@ class Nettoolkit():
 					success = self.event_catchers[event](i)
 				if not success:
 					sg.Popup("Mandatory inputs missing or incorrect.\nPlease refill and resubmit.")
+
+			if event == 'go_count_ips':
+				self.event_update_element(ss_ip_counts={'value': count_ips(i['pfxs'], i['till'])})
 
 			if event == 'file_md5_hash_check':
 				self.event_update_element(file_md5_hash_value={'value': ""})
@@ -142,7 +146,8 @@ class Nettoolkit():
 if __name__ == '__main__':
 	pass
 	# Test UI #
-	u = Nettoolkit()
+	# u = Nettoolkit()
 	# pprint(u.dic)
-	del(u)
+	# del(u)
+
 # ------------------------------------------------------------------------------

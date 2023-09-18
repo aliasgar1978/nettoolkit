@@ -72,6 +72,23 @@ class Juniper():
 			IO.to_file(self.output_file, H.output)
 		return H.output
 
+def convert_to_set_from_captures(conf_file, output_file=None):
+	with open(conf_file, 'r') as f:
+		ops = f.readlines()
+	toggle = False
+	conflist = ""
+	for line in ops:
+		if line.startswith("# output for command: show configuration| no-more"):
+			toggle=True
+			continue
+		if not toggle: continue
+		if line.startswith("# output for command: "): 
+			break
+		conflist+=line
+	with open(conf_file[:-4]+".tmp", 'w') as f:
+		f.write(conflist)
+	J = Juniper(conf_file[:-4]+".tmp", output_file)
+	return J.convert_to_set(output_file)
 
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':

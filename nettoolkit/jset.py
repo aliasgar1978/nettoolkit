@@ -43,9 +43,17 @@ class JSet(Default, STR, Container):
 		"""
 		varL, varS, varR, c = "", "set ", [], 0
 		try :
+			line1 = ""
 			for line in self.lst:
 				c += 1
 				l = line.strip()
+				# apply-group multiline string concate::
+				if not line1 and l.startswith("apply-groups [ "):
+					line1 = l 
+					continue
+				elif line1:
+					line = line1 + " " + l
+
 				# operate
 				l = self.delete_trailing_remarks(l) 					# Remove Trailing remarks
 				llen = len(l)

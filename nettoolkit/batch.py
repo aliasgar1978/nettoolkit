@@ -2,7 +2,7 @@
 provide prefixes and names of prefixes to it. 
 """
 
-from nettoolkit.addressing import addressing
+from .addressing import addressing
 import PySimpleGUI as sg
 
 # -----------------------------------------------------------------------------

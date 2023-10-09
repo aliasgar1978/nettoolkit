@@ -2,7 +2,7 @@
 import PySimpleGUI as sg
 
 import nettoolkit as nt
-from nettoolkit.gpl import STR, LOG
+from nettoolkit_common.gpl import STR, LOG
 from nettoolkit.forms.formitems import *
 
 from nettoolkit.forms.subnet_scanner import subnet_scanner_exec, subnet_scanner_frame, count_ips

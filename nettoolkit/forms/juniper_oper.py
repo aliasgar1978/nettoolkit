@@ -5,7 +5,7 @@ from pathlib import *
 import sys
 
 from nettoolkit.forms.formitems import *
-from nettoolkit.juniper import Juniper
+from pyJuniper.juniper import Juniper
 
 
 def juniper_oper_to_jset_exec(i):

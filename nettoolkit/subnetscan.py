@@ -2,13 +2,11 @@
 # -----------------------------------------------------------------------------
 import pandas as pd
 import PySimpleGUI as sg
-import nettoolkit as nt
+from nettoolkit_common.gpl import Multi_Execution, IP, nslookup
+from nettoolkit_db.database import write_to_xl, read_xl, get_merged_DataFrame_of_file
+
 from nettoolkit.addressing import addressing
-from nettoolkit.gpl import Multi_Execution
 from nettoolkit.forms.formitems import *
-from nettoolkit.gpl import IP
-from nettoolkit.gpl import nslookup
-from nettoolkit.database import write_to_xl, read_xl, get_merged_DataFrame_of_file
 ping = IP.ping_average
 
 # -----------------------------------------------------------------------------
@@ -149,17 +147,6 @@ def compare_ping_sweeps(first, second):
 
 	return None
 
-
-# -----------------------------------------------------------------------------
-# Class to initiate UserForm
-# -----------------------------------------------------------------------------
-class SubnetScan():
-	"""Deprycated class, use `Nettoolkit` instead
-	"""	
-	def __init__(self):
-		s = "Deprycated class, use `Nettoolkit` instead"
-		print(s)
-		sg.Popup(s)
 
 
 # -----------------------------------------------------------------------------

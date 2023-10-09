@@ -3,7 +3,7 @@
 
 from collections import OrderedDict
 
-from nettoolkit.gpl import STR, LST, IO
+from nettoolkit_common.gpl import STR, LST, IO
 
 # from errors import incorrectinput
 incorrectinput = 'INCORRECT SUBNET OR SUBNET MASK DETECTED NULL RETURNED'

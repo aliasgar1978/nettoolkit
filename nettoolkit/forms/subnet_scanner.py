@@ -1,8 +1,8 @@
 
 
 import PySimpleGUI as sg
+from nettoolkit_common.gpl import STR, LOG
 
-from nettoolkit.gpl import STR, LOG
 from nettoolkit import addressing
 from nettoolkit.forms.formitems import *
 from nettoolkit.subnetscan import Ping

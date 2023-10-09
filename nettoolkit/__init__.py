@@ -56,7 +56,7 @@ __all__ = [
 	"CreateBatch", "create_batch_file",
 
 	#subnetscan
-	"SubnetScan", "compare_ping_sweeps", "Ping",
+	"compare_ping_sweeps", "Ping",
 
 	#gui
 	"Nettoolkit",
@@ -95,7 +95,7 @@ from .database import write_to_xl, append_to_xl, read_xl
 
 from .batch import CreateBatch, create_batch_file
 
-from .subnetscan import SubnetScan, compare_ping_sweeps, Ping
+from .subnetscan import compare_ping_sweeps, Ping
 
 from .gui import Nettoolkit
 

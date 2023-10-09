@@ -63,7 +63,7 @@ __all__ = [
 
 	]
 
-__version__ = "0.0.26"
+__version__ = "0.1.0"
 
 from .juniper import Juniper, convert_to_set_from_captures
 from .jset import JSet

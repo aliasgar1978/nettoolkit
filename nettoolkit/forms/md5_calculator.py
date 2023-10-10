@@ -2,7 +2,7 @@
 import PySimpleGUI as sg
 
 from nettoolkit.forms.formitems import *
-from pyJuniper import get_md5
+from pyNetCrypt import get_md5
 
 
 

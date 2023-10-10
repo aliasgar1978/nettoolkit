@@ -22,7 +22,7 @@ __all__ = [
 
 	]
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 from .addressing import (
 	IPv4, IPv6, addressing, Validation, get_summaries, isSubset,

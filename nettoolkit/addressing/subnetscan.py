@@ -5,8 +5,8 @@ import PySimpleGUI as sg
 from nettoolkit_common.gpl import Multi_Execution, IP, nslookup
 from nettoolkit_db.database import write_to_xl, read_xl, get_merged_DataFrame_of_file
 
-from nettoolkit.addressing import addressing
-from nettoolkit.forms.formitems import *
+from .addressing import addressing
+
 ping = IP.ping_average
 
 # -----------------------------------------------------------------------------

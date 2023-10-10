@@ -2,7 +2,7 @@
 import PySimpleGUI as sg
 
 from nettoolkit.forms.formitems import *
-from nettoolkit.batch import create_batch_file
+from nettoolkit.addressing.batch import create_batch_file
 
 def create_batch_exec(i):
 	"""executor function

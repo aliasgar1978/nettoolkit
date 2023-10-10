@@ -89,6 +89,9 @@ Version Control
    * - 0.0.25
      - Sep 8, 2023
      - added multi-tab ip subnet scanner feature, defult full subnet scan feature.
+   * - 0.1.0
+     - Sep 10, 2023
+     - New major version change. Multiple changes.  Not compatible with old version.
 
 
 

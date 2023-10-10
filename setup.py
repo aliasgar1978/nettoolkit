@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nettoolkit",
-    version="0.0.6",
+    version="0.1.1",
     author="ALIASGAR - ALI",
     author_email="aholo2000@gmail.com",
     description="Tool Set for Networking Geeks",
@@ -19,5 +19,8 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.7',
+    install_requires=['pandas', 'openpyxl', 'PySimpleGUI', 'numpy',
+        'nettoolkit_common', 'nettoolkit_db', 'pyNetCrypt', 'pyJuniper',
+        'facts-finder', 'capture-it', 'j2config', 'compare-it',
+    ]
 )
-

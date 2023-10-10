@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.9. A few additional String operations &mdash; nettoolkit 0.0.12 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. Technical documentation!" href="../_tech_doc.html" />
+    <link rel="prev" title="3.8. Prefix Operations" href="prefix.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../_preface.html">1. Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_install.html">2. Insall Instructions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../_user_doc.html">3. User Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">3.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="juniper_to_set.html">3.2. Juniper - to-Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="juniper_to_hierachy.html">3.3. Juniper - to-hierachy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="juniper_remove_remarks.html">3.4. Juniper - Remove Remarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v4_addressing.html">3.5. IPv4 Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="v6_addressing.html">3.6. IPv6 Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addressing.html">3.7. Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prefix.html">3.8. Prefix Operations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.9. String Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#string-functions">3.9.1. string functions:</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#found">3.9.1.1. found()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#foundpos">3.9.1.2. foundPos()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#find-within">3.9.1.3. find_within()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#string-within">3.9.1.4. string_within()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suffix-index-within">3.9.1.5. suffix_index_within()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#find-all">3.9.1.6. find_all()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#find-any">3.9.1.7. find_any()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#find-multi">3.9.1.8. find_multi()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update">3.9.1.9. update()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#replace-dual-and-split">3.9.1.10. replace_dual_and_split()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#finddualnreplacesingle">3.9.1.11. finddualnreplacesingle()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#indention">3.9.1.12. indention()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#is-blank-line">3.9.1.13. is_blank_line()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#is-hostname-line">3.9.1.14. is_hostname_line()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hostname">3.9.1.15. hostname()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hostname-from-cli">3.9.1.16. hostname_from_cli()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shrink-if">3.9.1.17. shrink_if()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#if-prefix">3.9.1.18. if_prefix()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#string-concate">3.9.1.19. string_concate()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#right">3.9.1.20. right()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mid">3.9.1.21. mid()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-trailing-remarks">3.9.1.22. delete_trailing_remarks()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#to-list">3.9.1.23. to_list()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#to-set">3.9.1.24. to_set()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prepend-bgp-as">3.9.1.25. prepend_bgp_as()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../_tech_doc.html">4. API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../_user_doc.html"><span class="section-number">3. </span>User documentation!</a> &raquo;</li>
+      <li><span class="section-number">3.9. </span>A few additional String operations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/u_doc/string.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="a-few-additional-string-operations">
+<h1><span class="section-number">3.9. </span>A few additional String operations<a class="headerlink" href="#a-few-additional-string-operations" title="Permalink to this headline"></a></h1>
+<p><strong>Before starting, let’s assume we already imported nettoolkit as below.</strong>
+it will be used than after for each function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">nettoolkit</span> <span class="kn">import</span> <span class="n">STR</span>
+</pre></div>
+</div>
+<div class="section" id="string-functions">
+<h2><span class="section-number">3.9.1. </span>string functions:<a class="headerlink" href="#string-functions" title="Permalink to this headline"></a></h2>
+<p>There are many string methods available under <code class="docutils literal notranslate"><span class="pre">STR</span></code> class in <code class="docutils literal notranslate"><span class="pre">nettoolkit</span></code>.</p>
+<dl class="simple">
+<dt>Such available functions are:</dt><dd><ul class="simple">
+<li><p>found(), foundPos()</p></li>
+<li><p>find_within(), string_within(), suffix_index_within()</p></li>
+<li><p>find_all(), find_any(), find_multi()</p></li>
+<li><p>update()</p></li>
+<li><p>replace_dual_and_split(), finddualnreplacesingle()</p></li>
+<li><p>indention()</p></li>
+<li><p>is_blank_line()</p></li>
+<li><p>is_hostname_line(), hostname(), hostname_from_cli()</p></li>
+<li><p>shrink_if(), if_prefix()</p></li>
+<li><p>string_concate()</p></li>
+<li><p>right(), mid()</p></li>
+<li><p>delete_trailing_remarks()</p></li>
+<li><p>to_list(), to_set()</p></li>
+<li><p>prepend_bgp_as()</p></li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="found">
+<h3><span class="section-number">3.9.1.1. </span>found()<a class="headerlink" href="#found" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Checks sub-string withing a string and provides True/False based on finding.</p></li>
+<li><p>This is python native str.find() alternative, to use in conditions. b/c native function returns -1 if not found, which becomes True in codition check if not matched exclusively with -1.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">found</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="foundpos">
+<h3><span class="section-number">3.9.1.2. </span>foundPos()<a class="headerlink" href="#foundpos" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Checks sub-string withing a string and returns position index based on finding.</p></li>
+<li><p>This is exactly as native str.find()</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">foundPos</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="go">31</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="find-within">
+<h3><span class="section-number">3.9.1.3. </span>find_within()<a class="headerlink" href="#find-within" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Finds characters between prefix and suffix substrings from string</p></li>
+<li><p>returns a tuple with ( match string, index )</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">find_within</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="s2">&quot;BROWN&quot;</span><span class="p">,</span> <span class="s2">&quot;OVER&quot;</span><span class="p">)</span>
+<span class="go">(&#39; FOX JUMP &#39;, 25)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="string-within">
+<h3><span class="section-number">3.9.1.4. </span>string_within()<a class="headerlink" href="#string-within" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Finds characters between prefix and suffix substrings from string</p></li>
+<li><p>returns only match string</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">string_within</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="s2">&quot;BROWN&quot;</span><span class="p">,</span> <span class="s2">&quot;OVER&quot;</span><span class="p">)</span>
+<span class="go">&#39; FOX JUMP &#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="suffix-index-within">
+<h3><span class="section-number">3.9.1.5. </span>suffix_index_within()<a class="headerlink" href="#suffix-index-within" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Finds characters between prefix and suffix substrings from string</p></li>
+<li><p>returns only match string start index</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">suffix_index_within</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="s2">&quot;BROWN&quot;</span><span class="p">,</span> <span class="s2">&quot;OVER&quot;</span><span class="p">)</span>
+<span class="go">25</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="find-all">
+<h3><span class="section-number">3.9.1.6. </span>find_all()<a class="headerlink" href="#find-all" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Search for multiple substrings (list, tuple, set) within string.</p></li>
+<li><p>all sub-strings should be found in order to return True.</p></li>
+<li><dl class="simple">
+<dt>additional arguments that can be added are:</dt><dd><ul>
+<li><p>start = Optional: integer - position/index to start search from</p></li>
+<li><p>count = Optional: integer - count of characters to seach from start index</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f1</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;LAZY&quot;</span><span class="p">,</span> <span class="s2">&quot;BROWN&quot;</span><span class="p">,</span> <span class="s2">&quot;QUICK&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f2</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;LAZY&quot;</span><span class="p">,</span> <span class="s2">&quot;RED&quot;</span><span class="p">,</span> <span class="s2">&quot;QUICK&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="n">f2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="find-any">
+<h3><span class="section-number">3.9.1.7. </span>find_any()<a class="headerlink" href="#find-any" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Search for multiple substrings (list, tuple, set) within string.</p></li>
+<li><p>any sub-strings should be found in order to return True.</p></li>
+<li><dl class="simple">
+<dt>additional arguments that can be added are:</dt><dd><ul>
+<li><p>start = Optional: integer - position/index to start search from</p></li>
+<li><p>count = Optional: integer - count of characters to seach from start index</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f1</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;LAZY&quot;</span><span class="p">,</span> <span class="s2">&quot;BROWN&quot;</span><span class="p">,</span> <span class="s2">&quot;QUICK&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f2</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;LAZY&quot;</span><span class="p">,</span> <span class="s2">&quot;RED&quot;</span><span class="p">,</span> <span class="s2">&quot;QUICK&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">find_any</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">find_any</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="n">f2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="find-multi">
+<h3><span class="section-number">3.9.1.8. </span>find_multi()<a class="headerlink" href="#find-multi" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Search for multiple substrings (list, tuple, set) within string.</p></li>
+<li><p>returns Either boolean for each sub-str match or the index values.</p></li>
+<li><dl class="simple">
+<dt>additional arguments that can be added are:</dt><dd><ul>
+<li><p>start = Optional: integer - position/index to start search from</p></li>
+<li><p>count = Optional: integer - count of characters to seach from start index</p></li>
+<li><p>index = Optional: Bool - False to get boolean instead of indexes, (default: True)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f1</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;LAZY&quot;</span><span class="p">,</span> <span class="s2">&quot;BROWN&quot;</span><span class="p">,</span> <span class="s2">&quot;QUICK&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f2</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;LAZY&quot;</span><span class="p">,</span> <span class="s2">&quot;RED&quot;</span><span class="p">,</span> <span class="s2">&quot;QUICK&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">find_multi</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+<span class="go">[30, 10, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">find_multi</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="n">f2</span><span class="p">)</span>
+<span class="go">[30, -1, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">find_multi</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">[True, False, True]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="update">
+<h3><span class="section-number">3.9.1.9. </span>update()<a class="headerlink" href="#update" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Updates string for search item with replace item</p></li>
+<li><p>This is same as native str.replace()</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span><span class="p">,</span> <span class="s2">&quot;DOG&quot;</span><span class="p">,</span> <span class="s2">&quot;GOAT&quot;</span><span class="p">)</span>
+<span class="go">&#39;THE QUICK BROWN FOX JUMP OVER LAZY GOAT&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="replace-dual-and-split">
+<h3><span class="section-number">3.9.1.10. </span>replace_dual_and_split()<a class="headerlink" href="#replace-dual-and-split" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Finds subsequent characters in string and replace those with single. And splits the string using provided Find character (duo).</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;SRNO____ITEM_____DESCRIPTION________QTY______AMOUNT&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">replace_dual_and_split</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="go">[&#39;SRNO&#39;, &#39;ITEM&#39;, &#39;DESCRIPTION&#39;, &#39;QTY&#39;, &#39;AMOUNT&#39;]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="finddualnreplacesingle">
+<h3><span class="section-number">3.9.1.11. </span>finddualnreplacesingle()<a class="headerlink" href="#finddualnreplacesingle" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Finds subsequent characters in string and replace those with single.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;SRNO____ITEM_____DESCRIPTION________QTY______AMOUNT&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">finddualnreplacesingle</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+<span class="go">&#39;SRNO_ITEM_DESCRIPTION_QTY_AMOUNT&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="indention">
+<h3><span class="section-number">3.9.1.12. </span>indention()<a class="headerlink" href="#indention" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>get string indention value</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;    this is indented line&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">indention</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">4               # there are four spaces there as indention</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="is-blank-line">
+<h3><span class="section-number">3.9.1.13. </span>is_blank_line()<a class="headerlink" href="#is-blank-line" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>provided string/line a blank line or not</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;      </span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">is_blank_line</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="is-hostname-line">
+<h3><span class="section-number">3.9.1.14. </span>is_hostname_line()<a class="headerlink" href="#is-hostname-line" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>string/line containing hostname of device</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;somehostname&gt; show ip int brie&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">is_hostname_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="s2">&quot;somehostname&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="hostname">
+<h3><span class="section-number">3.9.1.15. </span>hostname()<a class="headerlink" href="#hostname" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>returns hostname of device from paramiko netconnection</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">hostname</span><span class="p">(</span><span class="n">net_connect</span><span class="p">)</span>   <span class="c1"># where net_connect is active paramiko netconnection</span>
+<span class="go">//hostname//</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="hostname-from-cli">
+<h3><span class="section-number">3.9.1.16. </span>hostname_from_cli()<a class="headerlink" href="#hostname-from-cli" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>input standard text input line, for which command was entered.</p></li>
+<li><p>hostname from command line</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;sh int status&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;somehostname&gt; sh int status&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">hostname_from_cli</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">cmd</span><span class="p">)</span>
+<span class="go">&#39;somehostname&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="shrink-if">
+<h3><span class="section-number">3.9.1.17. </span>shrink_if()<a class="headerlink" href="#shrink-if" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Interface Name shortening, input length will decide number of charactes to be included in shortened output</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">shrink_if</span><span class="p">(</span><span class="s2">&quot;FastEthernet0/1&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">&#39;Fa0/1&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="if-prefix">
+<h3><span class="section-number">3.9.1.18. </span>if_prefix()<a class="headerlink" href="#if-prefix" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Interface type or beginning prefix</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">if_prefix</span><span class="p">(</span><span class="s2">&quot;FastEthernet0/1&quot;</span><span class="p">)</span>
+<span class="go">&#39;FastEthernet&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="string-concate">
+<h3><span class="section-number">3.9.1.19. </span>string_concate()<a class="headerlink" href="#string-concate" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Concatenate strings s and s1 with conjuctor conj</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="s2">&quot;this is beginning&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="s2">&quot;this is end&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conj</span> <span class="o">=</span> <span class="s2">&quot; &lt;-&gt; &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">string_concate</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">conj</span><span class="p">)</span>
+<span class="go">&#39;this is beginning &lt;-&gt; this is end&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="right">
+<h3><span class="section-number">3.9.1.20. </span>right()<a class="headerlink" href="#right" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>N-number of characters from right side of string</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">right</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">&#39;R LAZY DOG&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="mid">
+<h3><span class="section-number">3.9.1.21. </span>mid()<a class="headerlink" href="#mid" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>N-number of characters from given position in string</p></li>
+<li><p>Default n-characters is till end</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;THE QUICK BROWN FOX JUMP OVER LAZY DOG&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">mid</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">&#39;BROWN&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="delete-trailing-remarks">
+<h3><span class="section-number">3.9.1.22. </span>delete_trailing_remarks()<a class="headerlink" href="#delete-trailing-remarks" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Deletes trailing remarks from Juniper config line/string</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;  root-authentication encrypted-password &quot;$9$xxxxxxxx&quot;;  ## encrypted-pass&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">delete_trailing_remarks</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">&#39;  root-authentication encrypted-password &quot;$9$xxxxxxxx&quot;;&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="to-list">
+<h3><span class="section-number">3.9.1.23. </span>to_list()<a class="headerlink" href="#to-list" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Returns list for the provided string - s</p></li>
+<li><p>split by Carriage Return</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">multiline_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;This is line 1</span>
+<span class="go">this one is 2nd</span>
+<span class="go">this is 3rd</span>
+<span class="go">and so on&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">to_list</span><span class="p">(</span><span class="n">multiline_str</span><span class="p">)</span>
+<span class="go">[&#39;This is line 1\n&#39;, &#39;this one is 2nd\n&#39;, &#39;this is 3rd\n&#39;, &#39;and so on\n&#39;]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="to-set">
+<h3><span class="section-number">3.9.1.24. </span>to_set()<a class="headerlink" href="#to-set" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Returns set for the provided string - s</p></li>
+<li><p>split by Carriage Return and Commas</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">list_of_ips</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;1.1.1.1</span>
+<span class="go">2.2.2.2,3.3.3.3</span>
+<span class="go">4.4.4.4&quot;&quot;&quot;</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">to_set</span><span class="p">(</span><span class="n">list_of_ips</span><span class="p">)</span>
+<span class="go">{&#39;1.1.1.1&#39;, &#39;3.3.3.3&#39;, &#39;2.2.2.2&#39;, &#39;4.4.4.4&#39;}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="prepend-bgp-as">
+<h3><span class="section-number">3.9.1.25. </span>prepend_bgp_as()<a class="headerlink" href="#prepend-bgp-as" title="Permalink to this headline"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘n’ number of BGP AS Number prepending string</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">STR</span><span class="o">.</span><span class="n">prepend_bgp_as</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">&#39;12345 12345 12345 12345 12345 12345 12345 12345 12345 12345&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>For More Details check out the API docuementation for STR class.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://nettoolkit.readthedocs.io/en/latest/docs/t_doc/__gpl.html#nettoolkit.gpl.STR">STR</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="prefix.html" class="btn btn-neutral float-left" title="3.8. Prefix Operations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../_tech_doc.html" class="btn btn-neutral float-right" title="4. Technical documentation!" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

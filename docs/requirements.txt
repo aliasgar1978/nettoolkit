@@ -8,3 +8,5 @@ pyJuniper
 facts-finder
 capture-it
 j2config
+numpy
+compare-it

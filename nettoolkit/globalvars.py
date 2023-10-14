@@ -102,7 +102,7 @@ IPSCANNER_RETRACTABLES = {
 	'op_folder_create_batch', 'pfxs_create_batch', 'names_create_batch', 'ips_create_batch',
 }
 CAPTUREIT_RETRACTABLES = {
-	'op_folder', 'cred_en', 'cred_un', 'cred_pw', 
+	'cit_op_folder', 'cred_en', 'cred_un', 'cred_pw', 
 	'device_ip_list_file', 'device_ips',
 	'cisco_cmd_list_file', 'cisco_cmds',
 	'juniper_cmd_list_file', 'juniper_cmds',

@@ -1,9 +1,11 @@
 
+# ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
-
-from nettoolkit.forms.formitems import *
 from pyNetCrypt import get_md5
 
+from nettoolkit.forms.formitems import *
+
+# ---------------------------------------------------------------------------------------
 
 
 def md5_calculator_exec(obj, i):
@@ -50,3 +52,5 @@ def md5_calculator_frame():
 		[sg.Button("Start", change_submits=True, key='go_md5_calculator')],
 
 		])
+
+# ---------------------------------------------------------------------------------------

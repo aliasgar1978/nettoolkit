@@ -1,10 +1,12 @@
 
+# ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
+from compare_it import *
 
 from nettoolkit.forms.formitems import *
 from nettoolkit_common import IO
-from compare_it import *
 
+# ---------------------------------------------------------------------------------------
 
 def compare_config_texts_exec(i):
 	"""executor function
@@ -103,10 +105,20 @@ def compare_config_texts_frame():
 
 		])
 
-
+# ---------------------------------------------------------------------------------------
 
 
 def text_diff(f1, f2, output_folder):
+	"""text files difference using compare-it
+
+	Args:
+		f1 (str): text file reference
+		f2 (str): text file reference
+		output_folder (str): folder reference
+
+	Returns:
+		str: differences (multi-line)
+	"""	
 	output_file = output_folder+"/compare-text.op.txt"
 	diff = {}
 	removals = CompareText(f1, f2, "- ")
@@ -125,6 +137,19 @@ def text_diff(f1, f2, output_folder):
 
 
 def xl_diff(f1, f2, output_folder, sheet_name, index_col):
+	"""excel file tab difference using compare-it
+	default difference output file name is `compare-xl.op.txt`
+
+	Args:
+		f1 (_type_): excel file reference
+		f2 (_type_): excel file reference
+		output_folder (str): folder reference
+		sheet_name (str): sheet/tab name
+		index_col (str): index column name
+
+	Returns:
+		str: differences (multi-line)
+	"""	
 	output_file = output_folder+"/compare-xl.op.txt"
 
 	diff = {}
@@ -138,3 +163,5 @@ def xl_diff(f1, f2, output_folder, sheet_name, index_col):
 
 	IO.to_file(output_file, matter=diff_str)
 	return diff_str
+
+# ---------------------------------------------------------------------------------------

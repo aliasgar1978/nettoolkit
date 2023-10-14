@@ -1,9 +1,11 @@
 
+# ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
 
 from nettoolkit.forms.formitems import *
 from nettoolkit.addressing.subnetscan import compare_ping_sweeps
 
+# ---------------------------------------------------------------------------------------
 
 def compare_scanner_outputs_exec(i):
 	"""executor function
@@ -46,4 +48,6 @@ def compare_scanner_outputs_frame():
 		[sg.Button("Start", change_submits=True, key='go_compare_scanner_outputs')],
 
 		])
+
+# ---------------------------------------------------------------------------------------
 

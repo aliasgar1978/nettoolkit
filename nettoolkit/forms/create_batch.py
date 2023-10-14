@@ -1,8 +1,11 @@
 
+# ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
 
 from nettoolkit.forms.formitems import *
 from nettoolkit.addressing.batch import create_batch_file
+
+# ---------------------------------------------------------------------------------------
 
 def create_batch_exec(i):
 	"""executor function
@@ -82,4 +85,5 @@ def create_batch_frame():
 
 		])
 
+# ---------------------------------------------------------------------------------------
 

@@ -1,8 +1,11 @@
+
+# ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
 
 from nettoolkit.forms.formitems import *
 from nettoolkit.addressing.addressing import get_summaries, addressing, isSubset
 
+# ---------------------------------------------------------------------------------------
 
 def prefixes_oper_summary_exec(obj, i):
 	"""executor function
@@ -112,3 +115,4 @@ def prefixes_oper_frame():
 		],
 		])
 
+# ---------------------------------------------------------------------------------------

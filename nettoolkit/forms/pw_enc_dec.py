@@ -1,11 +1,12 @@
 
+# ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
-
-from nettoolkit.forms.formitems import *
 from pyNetCrypt import decrypt_type7, encrypt_type7, decrypt_file_passwords, mask_file_passwords
 from pyNetCrypt import juniper_decrypt, juniper_encrypt, decrypt_doller9_file_passwords, mask_doller9_file_passwords
 
+from nettoolkit.forms.formitems import *
 
+# ---------------------------------------------------------------------------------------
 
 def pw_enc_cisco_exec(obj, i):
 	"""executor function
@@ -114,3 +115,4 @@ def pw_enc_decr_frame():
 
 		])
 
+# ---------------------------------------------------------------------------------------

@@ -1,12 +1,13 @@
 
 
+# ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
 from pathlib import *
-import sys
-
-from nettoolkit.forms.formitems import *
 from pyJuniper.juniper import Juniper
 
+from nettoolkit.forms.formitems import *
+
+# ---------------------------------------------------------------------------------------
 
 def juniper_oper_to_jset_exec(i):
 	"""executor function
@@ -78,3 +79,4 @@ def juniper_oper_frame():
 
 		])
 
+# ---------------------------------------------------------------------------------------

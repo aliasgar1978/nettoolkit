@@ -1,5 +1,5 @@
 
-
+# ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
 from nettoolkit_common.gpl import STR, LOG
 
@@ -7,6 +7,7 @@ from nettoolkit.addressing import addressing
 from nettoolkit.forms.formitems import *
 from nettoolkit.addressing.subnetscan import Ping
 
+# ---------------------------------------------------------------------------------------
 
 def subnet_scanner_exec(i):
 	"""executor function
@@ -65,6 +66,7 @@ def subnet_scanner_frame():
 		[sg.Button("Start", change_submits=True, key='go_subnet_scanner')],
 		])
 
+# ---------------------------------------------------------------------------------------
 
 def count_ips(pfxs, till):
 	"""counts ips for given subnets / prefixes
@@ -95,3 +97,5 @@ def count_ips(pfxs, till):
 		return count
 	except:
 		pass
+
+# ---------------------------------------------------------------------------------------

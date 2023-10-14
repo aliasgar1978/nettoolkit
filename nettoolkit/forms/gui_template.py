@@ -1,8 +1,17 @@
 
+# ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
 from abc import abstractclassmethod, abstractproperty
 
 from nettoolkit.forms.formitems import *
+
+
+# ---------------------------------------------------------------------------------------
+# GLOBAL VARS
+# ---------------------------------------------------------------------------------------
+IPSCANNER_TABS = ['Subnet Scanner', 'Compare Scanner Outputs', 'Create Batch']
+MINITOOLS_TABS = ['MD5 Calculate', 'P/W Enc/Dec', 'Prefix Operations', 'Juniper']
+CAPTUREIT_TABS = ['cred', 'options', 'custom', 'Common']
 
 # -----------------------------------------------------------------------------
 # Class to Define a standard UserForm Template
@@ -17,8 +26,9 @@ class GuiTemplate():
 	def __init__(self):
 		self.tabs_dic = {}
 		self.event_catchers = {}
-		self.event_updaters = {}
-		self.tab_updaters = {}
+		self.event_updaters = set()
+		self.tab_updaters = set()
+		self.retractables = set()
 		self.standard_button_pallete_buttons()
 
 	def __call__(self):
@@ -69,6 +79,8 @@ class GuiTemplate():
 		return []
 
 	def standard_button_pallete_buttons(self):
+		"""get list of standard button pallete
+		"""		
 		self._button_pallete_buttons = [ 
 			button_cancel("Cancel"),
 			sg.Button("Clear", change_submits=True,size=(10, 1), key='Clear')
@@ -79,11 +91,16 @@ class GuiTemplate():
 		return self._button_pallete_buttons
 
 	def add_to_button_pallete_buttons(self, nbpb):
+		"""add new buttons to button pallete
+
+		Args:
+			nbpb (list): list of additional buttons in pysimplegui format
+		"""		
 		self._button_pallete_buttons.extend(nbpb)
 
 
 	def button_pallete(self):
-		"""button pallete containing standard OK  and Cancel buttons 
+		"""button pallete frame 
 
 		Returns:
 			list: list with sg.Frame containing buttons
@@ -100,14 +117,22 @@ class GuiTemplate():
 			self.w.Element(element).Update(**update_values)
 
 	def clear_fields(self):
+		"""clear field values to null
+		"""		
 		for field in self.cleanup_fields:
 			d = {field:{'value':''}}
 			self.event_update_element(**d)
 
-
-# ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- 
+# ---------------------------------------------------------------------------------------
 
 def enable_disable(obj, tabs_to_disable, tabs_to_enable):
+	"""enable/disable provided object frames
+
+	Args:
+		obj (Nettoolkit): Nettoolkit class instance object
+		tabs_to_disable (list): list of tabs to be disabled
+		tabs_to_enable (list): list of tabs to be enabled
+	"""	
 	for tab in tabs_to_disable:
 		d = {tab: {'visible':False}}
 		obj.event_update_element(**d)	
@@ -116,25 +141,48 @@ def enable_disable(obj, tabs_to_disable, tabs_to_enable):
 		obj.event_update_element(**e)
 		if i ==0: obj.w[tab].select()
 
-ipscannertabs = ['Subnet Scanner', 'Compare Scanner Outputs', 'Create Batch']
-minitoolstabs = ['MD5 Calculate', 'P/W Enc/Dec', 'Prefix Operations', 'Juniper']
-captureittabs = ['cred', 'options', 'custom', 'Common']
+# ---------------------------------------------------------------------------------------
 
 def btn_ipscanner_exec(obj):
-	tabs_to_disable = minitoolstabs + captureittabs
-	enable_disable(obj, tabs_to_disable, ipscannertabs)
+	"""executor function to switch and enable ipscanner tabs
+
+	Args:
+		obj (Nettoolkit): Nettoolkit class instance object
+
+	Returns:
+		True: when succeded
+	"""	
+	tabs_to_disable = MINITOOLS_TABS + CAPTUREIT_TABS
+	enable_disable(obj, tabs_to_disable, IPSCANNER_TABS)
 	return True
 
 def btn_minitools_exec(obj):
-	tabs_to_disable = ipscannertabs + captureittabs
-	enable_disable(obj, tabs_to_disable, minitoolstabs)
+	"""executor function to switch and enable minitools tabs
+
+	Args:
+		obj (Nettoolkit): Nettoolkit class instance object
+
+	Returns:
+		True: when succeded
+	"""	
+	tabs_to_disable = IPSCANNER_TABS + CAPTUREIT_TABS
+	enable_disable(obj, tabs_to_disable, MINITOOLS_TABS)
 	return True
 
 def btn_captureit_exec(obj):
-	tabs_to_disable = ipscannertabs+ minitoolstabs
-	enable_disable(obj, tabs_to_disable, captureittabs)
+	"""executor function to switch and enable captureit tabs
+
+	Args:
+		obj (Nettoolkit): Nettoolkit class instance object
+
+	Returns:
+		True: when succeded
+	"""	
+	tabs_to_disable = IPSCANNER_TABS+ MINITOOLS_TABS
+	enable_disable(obj, tabs_to_disable, CAPTUREIT_TABS)
 	return True
 
+# ---------------------------------------------------------------------------------------
 
 
 # ------------------------------------------------------------------------------

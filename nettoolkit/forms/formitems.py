@@ -1,5 +1,8 @@
 
+# ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
+
+# ---------------------------------------------------------------------------------------
 
 def blank_line(): 
 	"""to insert a blank row
@@ -31,7 +34,6 @@ def under_line(length):
 		list: underline row
 	"""		
 	return [sg.Text('_'*length)]
-
 
 def banner(version):
 	"""Banner / Texts with bold center aligned fonts
@@ -112,8 +114,6 @@ def get_list(raw_items):
 		lst[i] = item.strip()		
 	return lst
 
-
-
 def tabs_display(**tabs_dic):
 	"""define tabs display
 
@@ -122,3 +122,4 @@ def tabs_display(**tabs_dic):
 	"""    		
 	return [tabs(**tabs_dic),]
 
+# ---------------------------------------------------------------------------------------

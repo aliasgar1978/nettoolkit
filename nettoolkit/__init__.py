@@ -1,14 +1,6 @@
 __doc__ = '''Networking ToolSet
 '''
 
-__all__ = [
-
-	#gui
-	"Nettoolkit",
-
-
-	]
-
 __version__ = "0.1.2"
 
 from .gui import Nettoolkit

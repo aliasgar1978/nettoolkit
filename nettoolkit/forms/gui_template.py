@@ -11,7 +11,8 @@ from nettoolkit.forms.formitems import *
 # ---------------------------------------------------------------------------------------
 IPSCANNER_TABS = ['Subnet Scanner', 'Compare Scanner Outputs', 'Create Batch']
 MINITOOLS_TABS = ['MD5 Calculate', 'P/W Enc/Dec', 'Prefix Operations', 'Juniper']
-CAPTUREIT_TABS = ['cred', 'options', 'custom', 'Common']
+CAPTUREIT_TABS = ['cred', 'options', 'custom',  'custom-facts', 'Common']
+FACTSFINDER_TAB = ['facts-finder', 'custom-facts']
 
 # -----------------------------------------------------------------------------
 # Class to Define a standard UserForm Template
@@ -155,7 +156,7 @@ def btn_ipscanner_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	tabs_to_disable = MINITOOLS_TABS + CAPTUREIT_TABS
+	tabs_to_disable = MINITOOLS_TABS + CAPTUREIT_TABS + FACTSFINDER_TAB
 	enable_disable(obj, tabs_to_disable, IPSCANNER_TABS)
 	return True
 
@@ -168,7 +169,7 @@ def btn_minitools_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	tabs_to_disable = IPSCANNER_TABS + CAPTUREIT_TABS
+	tabs_to_disable = IPSCANNER_TABS + CAPTUREIT_TABS + FACTSFINDER_TAB
 	enable_disable(obj, tabs_to_disable, MINITOOLS_TABS)
 	return True
 
@@ -181,8 +182,21 @@ def btn_captureit_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	tabs_to_disable = IPSCANNER_TABS+ MINITOOLS_TABS
+	tabs_to_disable = IPSCANNER_TABS + MINITOOLS_TABS + FACTSFINDER_TAB
 	enable_disable(obj, tabs_to_disable, CAPTUREIT_TABS)
+	return True
+
+def btn_factsfinder_exec(obj):
+	"""executor function to switch and enable factsfinder tabs
+
+	Args:
+		obj (Nettoolkit): Nettoolkit class instance object
+
+	Returns:
+		True: when succeded
+	"""	
+	tabs_to_disable = IPSCANNER_TABS+ MINITOOLS_TABS + CAPTUREIT_TABS
+	enable_disable(obj, tabs_to_disable, FACTSFINDER_TAB)
 	return True
 
 # ---------------------------------------------------------------------------------------

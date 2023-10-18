@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nettoolkit",
-    version="0.1.2",
+    version="0.1.3",
     author="ALIASGAR - ALI",
     author_email="aholo2000@gmail.com",
     description="Tool Set for Networking Geeks",

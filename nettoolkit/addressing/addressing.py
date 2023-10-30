@@ -191,6 +191,9 @@ def addressing(subnet):
 def get_summaries(*net_list):
 	"""summarize the provided network prefixes, provide all networks as arguments.
 
+	Args:
+		net_list (*arg): variable arguments ( networks )
+
 	Returns:
 		list: summaries
 	"""    	
@@ -207,6 +210,29 @@ def get_summaries(*net_list):
 		if summaries == ss.prefixes: break
 		summaries = ss.prefixes
 	return sorted(summaries)
+
+
+def calc_summmaries(min_subnet_size, *net_list):
+	"""summarize the provided network prefixes, provide all networks as arguments.
+	minimum subnet summarized to provided min_subnet_size parameter
+
+	Args:
+		min_subnet_size (int): minimuze subnet mask to be summarized up on
+		net_list (*arg): variable arguments ( networks )
+
+	Returns:
+		list: summaries
+	"""    	
+	summaries = get_summaries(*net_list)
+	nset = set()
+	for subnet in summaries:
+		if isinstance(subnet, IPv4) and subnet.mask > min_subnet_size:
+			nset.add(subnet.expand(min_subnet_size))
+		elif isinstance(subnet, str) and int(subnet.split("/")[-1]) > min_subnet_size:
+			nset.add(IPv4(subnet).expand(min_subnet_size))
+	summaries.extend(nset)
+	nSummaries = get_summaries(*set(summaries))
+	return nSummaries
 
 
 def isSplittedRoute(line):
@@ -774,6 +800,20 @@ class IPv4(IP):
 	# Available Methods & Public properties of class
 	# ------------------------------------------------------------------------
 
+	@property
+	def ip_number(self):
+		selfinteger = int(binsubnet(str(self)).encode('ascii'), 2)
+		networkinteger = int(binsubnet(str(IPv4(self.NetworkIP()))).encode('ascii'), 2)
+		return selfinteger - networkinteger
+
+	def expand(self, new_mask):
+		if not isinstance(new_mask, int):
+			raise(f"Invalid mask provided {new_mask}.  Expected integer got {type(new_mask)}")
+		if new_mask < self.mask:
+			_ns = IPv4(self.subnet_zero(withMask=False) + f"/{new_mask}")
+			return _ns.subnet_zero()
+		return self.subnet_zero()
+
 	def subnet_zero(self, withMask=True):
 		"""Network IP Address (subnet zero) of subnet from provided IP/Subnet.
 		same as: NetworkIP
@@ -1118,13 +1158,29 @@ class Summary(IPv4):
 			_sumy = self.summary(prev_network, network)
 			prev_network = _sumy if _sumy is not None else network
 			if _sumy is not None: 
+				# prev_network = _sumy
 				if isinstance(prev_network, str): 
 					_sumy = IPv4(_sumy)
 					prev_network = IPv4(prev_network)
-				self.summaries.append(_sumy)
+				self.summaries.append(str(_sumy))
 			else:
-				self.summaries.append(network)
-				continue
+				self.summaries.append(str(network))
+		# self.summaries = list(set(self.summaries))
+		self.calc_subset_prefixes()
+		self.remove_subset_prefixes()
+
+	def remove_subset_prefixes(self):
+		for pfx in self.del_eligibles:
+			self.summaries.remove(pfx)
+
+	def calc_subset_prefixes(self):
+		del_eligibles = set()
+		for i, pfx in enumerate(self.summaries):
+			for j, varify_pfx in enumerate(self.summaries):
+				if j == i: continue
+				if str(pfx) != str(varify_pfx) and isSubset(pfx, varify_pfx):
+					del_eligibles.add(pfx)
+		self.del_eligibles = del_eligibles
 
 	def summary(self, s1, s2):
 		"""summary of given two network addresses s1 and s2

@@ -175,16 +175,26 @@ def binsubnet(subnet):
 		pass
 
 
-def addressing(subnet):
+def addressing(subnet, ddc_mask=None):
 	"""proives ip-subnet object for various functions on it
 
 	Args:
-		subnet (str): either ipv4 or ipv6 subnet with /mask
+		subnet (str): ipv4 or ipv6 subnet with/without mask
+		ddc_mask (str, None): provide dottel decimal mask (v4 only) or None.
 
 	Returns:
 		IPv4, IPv6: IPv4 or IPv6 object
 	"""    	
-	v_obj = Validation(subnet)
+	if ddc_mask is not None:
+		try:
+			mask = to_dec_mask(ddc_mask)
+			if len(subnet.split("/")) == 1:
+				subnet += "/" + str(mask)
+			else:
+				print(f"Multiple mask entries received.\nsubnet mask value will {subnet} override, ddc_mask value {ddc_mask}")
+		except:
+			raise Exception("Invalid dotted decimal mask provided... required format [255.255.255.0] got [{ddc_mask}]")
+	v_obj = Validation(subnet)	
 	if v_obj.validated: return v_obj.ip_obj
 
 

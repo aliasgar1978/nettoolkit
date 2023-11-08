@@ -144,7 +144,7 @@ CAPTUREIT_RETRACTABLES = {
 	'custom_cit_file', 'custom_dynamic_cmd_class_name', 'custom_dynamic_cmd_class_str',
 	'custom_ff_file', 'custom_ff_class_name', 'custom_ff_class_str',
 	'custom_fk_file', 'custom_fk_name','custom_fk_str',
-	'append_to', 'common_log_file', 'cred_log_type', 'concurrent_connections', 'visual_progress',
+	'append_to', 'common_log_file', 'cred_log_type', 'max_connections', 'visual_progress',
 }
 FACTSFINDER_RETRACTABLES = {
 	'ff_log_files', 	

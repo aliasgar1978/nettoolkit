@@ -1,6 +1,7 @@
 
 # ---------------------------------------------------------------------------------------
-from nettoolkit.forms import btn_ipscanner_exec, btn_minitools_exec, btn_captureit_exec, btn_factsfinder_exec
+from nettoolkit.forms import (btn_ipscanner_exec, btn_minitools_exec, btn_captureit_exec, 
+	btn_factsfinder_exec, btn_pyvig_exec, btn_j2config_exec)
 #
 from nettoolkit.forms.md5_calculator import md5_calculator_exec, md5_calculator_frame
 from nettoolkit.forms.pw_enc_dec import pw_enc_cisco_exec, pw_dec_cisco_exec, pw_enc_juniper_exec, pw_dec_juniper_exec, pw_enc_decr_frame
@@ -18,6 +19,12 @@ from capture_it.forms.custom import *
 #
 from nettoolkit.forms.ff_generate import *
 from nettoolkit.forms.ff_custom import *
+#
+from pyVig.forms.input_data import *
+from pyVig.forms.custom import *
+#
+from j2config.forms.input_data import *
+#
 # ---------------------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------------------
@@ -45,8 +52,12 @@ FACTSFINDER_FRAMES = {
 	'facts-finder': btn_ff_gen_frame(),	
 	'custom-facts': exec_ff_custom_frame(),
 }
+J2CONFIG_FRAMES = {
+	'configs gen': j2_gen_frame(),
+}
 PYVIG_FRAMES = {
-	# 'Input pyVig Data': pv_input_data_frame(),   # self.input_data()
+	'pyVig Data': pv_input_data_frame(),   # self.input_data()
+	'Customize': pv_custom_data_frame(),
 	# 'pyVig Filters': pv_apply_filters_frame(),  # self.select_filters()
 	# 'pyVig Options': pv_options_frame(),   # self.other_options()
 }
@@ -92,14 +103,18 @@ FACTSFINDER_EVENT_FUNCS = {
 	'custom_ff_class_name': custom_ff_name_exec,
 	'custom_fk_name': custom_fk_name_exec,
 }
+J2CONFIG_EVENT_FUNCS = {
+	'btn_j2config': btn_j2config_exec,
+	'btn_j2_gen': btn_j2_gen_exec,
+	'j2_custom_reg': j2_custom_reg_exec,
+	# 'j2_custom_cls': j2_custom_cls_exec,
+	# 'j2_custom_fn': j2_custom_fn_exec,
+}
 PYVIG_EVENT_FUNCS = {
-	# 'is_sheet_filter': is_sheet_filter_exec, #event_update_filter 
-	# 'filt_col_add': filt_col_add_exec, # sheet_filter_add_col_value
-	# 'def_stn': def_stn_exec, #update_default_stencil
-	# 'enable_description_merge': enable_description_merge_exec, #update_description_col_dropbox
-	# 'desc_col_add': desc_col_add_exec, # append_description_column
-	# 'data_file': data_file_exec, # update_cabling_sheet_columns & update_devices_sheet_columns
-	# 'btn_pv_gen': btn_pv_gen_exec,  # check_basics, and event_update_Go
+	'btn_pyvig': btn_pyvig_exec,
+	'pv_radio_input_data_files': pv_radio_input_data_files_exec,
+	'pv_radio_cm_file': pv_radio_cm_file_exec,
+	'pv_start': pv_start_exec,
 }
 # --------------------------------------------------------
 MINITOOLS_EVENT_UPDATERS = {
@@ -115,15 +130,27 @@ CAPTUREIT_EVENT_UPDATERS = {
 	'generate_facts', 'custom_ff_file', 'custom_ff_class_name', 'custom_fk_file', 'custom_fk_name',	
 }
 
-TAB_EVENT_UPDATERS = { 'btn_ipscanner', 'btn_minitools', 'btn_captureit', 'btn_factsfinder'}
 FACTSFINDER_EVENT_UPDATERS = {
 	'btn_ff_gen',
 	'generate_facts', 'custom_ff_file', 'custom_ff_class_name', 'custom_fk_file', 'custom_fk_name',	
 }
+J2CONFIG_EVENT_UPDATERS = {
+	'btn_j2_gen', 'j2_custom_reg', 'j2_custom_cls', 'j2_custom_fn', 
+}
 PYVIG_EVENT_UPDATERS = {
-	'is_sheet_filter', 'enable_description_merge', 'desc_col_add', 
+	'pv_radio_input_data_files', 'pv_radio_cm_file', 
+	'pv_start',
 }
 # --------------------------------------------------------
+TAB_EVENT_UPDATERS = { 	'btn_ipscanner', 
+						'btn_minitools', 
+						'btn_captureit', 
+						'btn_factsfinder', 
+						'btn_j2config',
+						'btn_pyvig',
+}
+# --------------------------------------------------------
+
 MINITOOLS_RETRACTABLES = {
 	'file_md5_hash_check', 'file_md5_hash_value',
 	'pw_result_juniper', 'pw_result_cisco', 'pw_cisco', 'pw_juniper',
@@ -151,8 +178,9 @@ FACTSFINDER_RETRACTABLES = {
 	'custom_ff_file', 'custom_ff_class_name', 'custom_ff_class_str',
 	'custom_fk_file', 'custom_fk_name','custom_fk_str',
 }
+J2CONFIG_RETRACTABLES = set()
 PYVIG_RETRACTABLES = {
-	
+	'py_stencil_folder', 'py_default_stencil', 'py_output_folder', 'py_op_file', 'pv_input_data_files', 'pv_cm_file', 
 }
 
 # --------------------------------------------------------

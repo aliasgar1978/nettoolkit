@@ -9,10 +9,21 @@ from nettoolkit.forms.formitems import *
 # ---------------------------------------------------------------------------------------
 # GLOBAL VARS
 # ---------------------------------------------------------------------------------------
+#### ADD FRAMES HERE ####
 IPSCANNER_TABS = ['Subnet Scanner', 'Compare Scanner Outputs', 'Create Batch']
 MINITOOLS_TABS = ['MD5 Calculate', 'P/W Enc/Dec', 'Prefix Operations', 'Juniper']
 CAPTUREIT_TABS = ['cred', 'options', 'custom',  'custom-facts', 'Common']
 FACTSFINDER_TAB = ['facts-finder', 'custom-facts']
+J2CONFIG_TAB = ['configs gen', ]
+PYVIG_TAB = ['pyVig Data', 'Customize']
+
+ALL_TABS = set()
+ALL_TABS = ALL_TABS.union(IPSCANNER_TABS)
+ALL_TABS = ALL_TABS.union(MINITOOLS_TABS)
+ALL_TABS = ALL_TABS.union(CAPTUREIT_TABS)
+ALL_TABS = ALL_TABS.union(FACTSFINDER_TAB)
+ALL_TABS = ALL_TABS.union(J2CONFIG_TAB)
+ALL_TABS = ALL_TABS.union(PYVIG_TAB)
 
 # -----------------------------------------------------------------------------
 # Class to Define a standard UserForm Template
@@ -129,14 +140,14 @@ class GuiTemplate():
 
 # ---------------------------------------------------------------------------------------
 
-def enable_disable(obj, tabs_to_disable, tabs_to_enable):
+def enable_disable(obj, tabs_to_enable):
 	"""enable/disable provided object frames
 
 	Args:
 		obj (Nettoolkit): Nettoolkit class instance object
-		tabs_to_disable (list): list of tabs to be disabled
 		tabs_to_enable (list): list of tabs to be enabled
 	"""	
+	tabs_to_disable = ALL_TABS.difference(tabs_to_enable)
 	for tab in tabs_to_disable:
 		d = {tab: {'visible':False}}
 		obj.event_update_element(**d)	
@@ -146,6 +157,8 @@ def enable_disable(obj, tabs_to_disable, tabs_to_enable):
 		if i ==0: obj.w[tab].select()
 
 # ---------------------------------------------------------------------------------------
+#  ADD / EDIT FRAMES UPDATE HERE
+#
 
 def btn_ipscanner_exec(obj):
 	"""executor function to switch and enable ipscanner tabs
@@ -156,8 +169,7 @@ def btn_ipscanner_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	tabs_to_disable = MINITOOLS_TABS + CAPTUREIT_TABS + FACTSFINDER_TAB
-	enable_disable(obj, tabs_to_disable, IPSCANNER_TABS)
+	enable_disable(obj, IPSCANNER_TABS)
 	return True
 
 def btn_minitools_exec(obj):
@@ -169,8 +181,7 @@ def btn_minitools_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	tabs_to_disable = IPSCANNER_TABS + CAPTUREIT_TABS + FACTSFINDER_TAB
-	enable_disable(obj, tabs_to_disable, MINITOOLS_TABS)
+	enable_disable(obj, MINITOOLS_TABS)
 	return True
 
 def btn_captureit_exec(obj):
@@ -182,8 +193,7 @@ def btn_captureit_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	tabs_to_disable = IPSCANNER_TABS + MINITOOLS_TABS + FACTSFINDER_TAB
-	enable_disable(obj, tabs_to_disable, CAPTUREIT_TABS)
+	enable_disable(obj, CAPTUREIT_TABS)
 	return True
 
 def btn_factsfinder_exec(obj):
@@ -195,8 +205,31 @@ def btn_factsfinder_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	tabs_to_disable = IPSCANNER_TABS+ MINITOOLS_TABS + CAPTUREIT_TABS
-	enable_disable(obj, tabs_to_disable, FACTSFINDER_TAB)
+	enable_disable(obj, FACTSFINDER_TAB)
+	return True
+
+def btn_j2config_exec(obj):
+	"""executor function to switch and enable j2config tabs
+
+	Args:
+		obj (Nettoolkit): Nettoolkit class instance object
+
+	Returns:
+		True: when succeded
+	"""	
+	enable_disable(obj, J2CONFIG_TAB)
+	return True
+
+def btn_pyvig_exec(obj):
+	"""executor function to switch and enable pyvig tabs
+
+	Args:
+		obj (Nettoolkit): Nettoolkit class instance object
+
+	Returns:
+		True: when succeded
+	"""	
+	enable_disable(obj, PYVIG_TAB)
 	return True
 
 # ---------------------------------------------------------------------------------------

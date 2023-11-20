@@ -29,16 +29,22 @@ class Nettoolkit(GuiTemplate):
 		self.tabs_dic.update(IPSCANNER_FRAMES)
 		self.tabs_dic.update(CAPTUREIT_FRAMES)
 		self.tabs_dic.update(FACTSFINDER_FRAMES)
+		self.tabs_dic.update(J2CONFIG_FRAMES)
+		self.tabs_dic.update(PYVIG_FRAMES)
 		#
 		self.event_catchers.update(MINITOOLS_EVENT_FUNCS)
 		self.event_catchers.update(IPSCANNER_EVENT_FUNCS)
 		self.event_catchers.update(CATPUREIT_EVENT_FUNCS)
 		self.event_catchers.update(FACTSFINDER_EVENT_FUNCS)
+		self.event_catchers.update(J2CONFIG_EVENT_FUNCS)
+		self.event_catchers.update(PYVIG_EVENT_FUNCS)
 		#
 		self.event_updaters = self.event_updaters.union(MINITOOLS_EVENT_UPDATERS)
 		self.event_updaters = self.event_updaters.union(IPSCANNER_EVENT_UPDATERS)
 		self.event_updaters = self.event_updaters.union(CAPTUREIT_EVENT_UPDATERS)
 		self.event_updaters = self.event_updaters.union(FACTSFINDER_EVENT_UPDATERS)
+		self.event_updaters = self.event_updaters.union(J2CONFIG_EVENT_UPDATERS)
+		self.event_updaters = self.event_updaters.union(PYVIG_EVENT_UPDATERS)
 		#
 		self.tab_updaters = self.tab_updaters.union(TAB_EVENT_UPDATERS)
 		#
@@ -46,6 +52,8 @@ class Nettoolkit(GuiTemplate):
 		self.retractables = self.retractables.union(IPSCANNER_RETRACTABLES)
 		self.retractables = self.retractables.union(CAPTUREIT_RETRACTABLES)
 		self.retractables = self.retractables.union(FACTSFINDER_RETRACTABLES)
+		self.retractables = self.retractables.union(J2CONFIG_RETRACTABLES)
+		self.retractables = self.retractables.union(PYVIG_RETRACTABLES)
 		#
 		self.custom_dynamic_cmd_class = None      # custom dynamic commands execution class
 		self.custom_ff_class = None  # custom facts-finder class
@@ -65,8 +73,10 @@ class Nettoolkit(GuiTemplate):
 		nbpb = [
 			sg.Button("Minitools", change_submits=True, key='btn_minitools'), 
 			sg.Button("IPScanner", change_submits=True, key='btn_ipscanner'), 
-			sg.Button("CaptureIT", change_submits=True, key='btn_captureit'), 
-			sg.Button("facts-finder", change_submits=True, key='btn_factsfinder'), 
+			sg.Button("Capture-IT", change_submits=True, key='btn_captureit'), 
+			sg.Button("Facts Gen", change_submits=True, key='btn_factsfinder'), 
+			sg.Button("Config Gen", change_submits=True, key='btn_j2config'), 
+			sg.Button("Drawing Gen", change_submits=True, key='btn_pyvig'), 
 		]
 		self.add_to_button_pallete_buttons(nbpb)
 

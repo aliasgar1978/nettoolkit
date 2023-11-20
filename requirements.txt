@@ -10,3 +10,8 @@ capture-it>0.1.0
 j2config
 numpy
 compare-it
+xlrd
+jinja2
+paramiko
+netmiko
+ntc-templates

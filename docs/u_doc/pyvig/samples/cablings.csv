@@ -1,0 +1,31 @@
+﻿a_device,a_device_port,b_device,connector_type,color,weight,pattern,draw_type
+Internet Link,gig0/0,ISP Router - A,straight,,2,,core
+MPLS Link,gig0/1,ISP Router - B,straight,,2,,core
+ISP Router - A,gig0/2,Core Switch - a,straight,red,1.5,23,core
+ISP Router - B,gig0/3,Core Switch - b,straight,blue,1.5,23,core
+ISP Router - A,gig0/4,ISP Router - B,straight,gray,1.5,23,core
+Core Switch - a,gig0/5,Distribution 1a,straight,red,1.5,23,core
+Core Switch - a,gig0/6,Distribution 1b,straight,red,1.5,23,core
+Core Switch - a,gig0/7,Distribution 2a,straight,red,1.5,23,core
+Core Switch - a,gig0/8,Distribution 2b,straight,red,1.5,23,core
+Core Switch - b,gig0/9,Distribution 1a,straight,blue,1.5,23,core
+Core Switch - b,gig0/10,Distribution 1b,straight,blue,1.5,23,core
+Core Switch - b,gig0/11,Distribution 2a,straight,blue,1.5,23,core
+Core Switch - b,gig0/12,Distribution 2b,straight,blue,1.5,23,core
+Core Switch - a,gig0/13,Core Switch - b,straight,gray,1.5,23,core
+Distribution 1a,gig0/14,Access-1-1,straight,red,1.5,12,access
+Distribution 1a,gig0/15,Access-1-2,straight,red,1.5,12,access
+Distribution 1a,gig0/16,Access-1-3,straight,red,1.5,12,access
+Distribution 1a,gig0/17,Distribution 1b,straight,gray,1.5,12,access
+Distribution 1b,gig0/18,Access-1-1,straight,blue,1.5,12,access
+Distribution 1b,gig0/19,Access-1-2,straight,blue,1.5,12,access
+Distribution 1b,gig0/20,Access-1-3,straight,blue,1.5,12,access
+Distribution 2a,gig0/21,Access-2-1,straight,red,1.5,12,access
+Distribution 2a,gig0/22,Access-2-2,straight,red,1.5,12,access
+Distribution 2a,gig0/23,Distribution 2b,straight,gray,1.5,12,access
+Distribution 2b,gig0/24,Access-2-1,straight,blue,1.5,12,access
+Distribution 2b,gig0/25,Access-2-2,straight,blue,1.5,12,access
+Distribution 2a,gig0/26,Border Router - 2a,angled,red,1.5,,access
+Distribution 2b,gig0/27,Border Router - 2b,angled,blue,1.5,,access
+Border Router - 2a,gig0/28,Customer Environment,curved,,2,,access
+Border Router - 2b,gig0/29,Customer Environment,curved,,2,,access

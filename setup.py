@@ -20,7 +20,7 @@ setuptools.setup(
     ],
     python_requires='>=3.7',
     install_requires=['pandas', 'openpyxl', 'PySimpleGUI', 'numpy',
-        'nettoolkit_common', 'nettoolkit_db', 'pyNetCrypt', 'pyJuniper',
-        'facts-finder>0.1.0', 'capture-it>0.1.0', 'j2config', 'compare-it',
+        'xlrd', 'pywin32', 'jinja2', 'paramiko', 'netmiko', 'ntc-templates',
+        'compare-it',
     ]
 )

@@ -1,0 +1,19 @@
+﻿hostname,y-axis,x-axis,stencils,device_type,device_model,serial_number,ip_address,blg_hubroom,rack_details
+Internet Link,16,5,Network and Peripherals,9,,,,,
+MPLS Link,16,8,Network and Peripherals,9,,,,,
+ISP Router - A,13,5,Network and Peripherals,10,ASR1001,SR 1,1.1.1.1,Loc 1A,Rack 1A
+ISP Router - B,13,8,Network and Peripherals,10,ASR1001,SR 2,1.1.1.2,Loc 1B,Rack 1B
+Core Switch - a,10,5,Network and Peripherals,Master.35,C9500,SR 3,8.8.8.3,Loc 8a,Rack 8a
+Core Switch - b,10,8,Network and Peripherals,Master.35,C9500,SR 4,8.8.8.4,Loc 8b,Rack 8b
+Distribution 1a,7,2,Network and Peripherals,Master.35,Juniper QFX5100,SR 5,6.6.6.5,Loc 6a,Rack 6a
+Distribution 1b,7,5,Network and Peripherals,Master.35,Juniper QFX5100,SR 6,6.6.6.6,Loc 6b,Rack 6b
+Distribution 2a,7,9,Network and Peripherals,Master.35,Juniper QFX5100,SR 7,6.6.6.7,Loc 6a,Rack 6a
+Distribution 2b,7,12,Network and Peripherals,Master.35,Juniper QFX5100,SR 8,6.6.6.8,Loc 6b,Rack 6b
+Access-1-1,1,1,Network and Peripherals,Master.38,Juniper EX4200,SR 9,2.2.2.9,Loc 2Access-1-1,Rack 1
+Access-1-2,1,4,Network and Peripherals,Master.38,Cisco 2960X,SR 10,2.2.2.10,Loc 2Access-1-2,Rack 2
+Access-1-3,1,7,Network and Peripherals,Master.38,Cisco 2960X,SR 11,2.2.2.11,Loc 2Access-1-3,Rack 3
+Access-2-1,1,10,,Master.38,Cisco 2960X,SR 12,2.2.2.12,Loc 2Access-2-1,Rack 4
+Access-2-2,1,13,,Master.38,Cisco 2960X,SR 13,2.2.2.13,Loc 2Access-2-2,Rack 5
+Border Router - 2a,1,16,Network and Peripherals,Router,Juniper QFX5100,SR 14,2.2.2.14,Loc 22a,Rack 6
+Border Router - 2b,1,19,Network and Peripherals,Router,Juniper QFX5100,SR 15,2.2.2.15,Loc 22b,Rack 7
+Customer Environment,4,17.5,Network and Peripherals,2,Vodafone-Airtel,SR 16,1.1.1.16,Loc 1Environment,Rack 8

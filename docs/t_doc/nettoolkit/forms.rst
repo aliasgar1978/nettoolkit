@@ -67,7 +67,7 @@ Prefixes operations
 Password Encryption Decryption
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: nettoolkit.pyjuniper.forms.pw_enc_dec
+.. automodule:: nettoolkit.nettoolkit.forms.pw_enc_dec
 	:members:
 	:undoc-members:
 	:show-inheritance:

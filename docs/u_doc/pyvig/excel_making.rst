@@ -16,32 +16,26 @@ Read Below to understand it.
 
 -----
 
-Mandatory columns
------------------
-
-**Devices Tab**
-^^^^^^^^^^^^^^^
+**Devices Tab - Mandatory Columns**
+-----------------------------------
 
 
      #. ``hostname`` Define hostname / identity of device. *( No Exception and column name modification not allowed )*
      #. ``x-axis`` Define horizontal position of device. *( column name can be changed by defining var argument `x` in input)*
      #. ``y-axis`` Define vertical position of device. *( column name can be changed by defining var argument `y` in input)*
 
-**Cablings Tab**
-^^^^^^^^^^^^^^^
+**Cablings Tab - Mandatory Columns**
+-------------------------------------
 
      #. ``a_device`` Define identity of a-end device for connectivity. *(column name can be changed by defining var argument `dev_a` in input)*
      #. ``b_device`` Define identity of b-end device for connectivity. *(column name can be changed by defining var argument `dev_b` in input)*
 
 -----
 
-Optional columns
-----------------
 
 
-
-**Devices Tab**
-^^^^^^^^^^^^^^^
+**Devices Tab - Optional Columns**
+-----------------------------------
 
      #. ``stencil`` Define stencil file of individual device *( column name modification not allowed )*
      #. ``item`` Define stencil name/number from stencil *( column name modification not allowed )*
@@ -54,8 +48,8 @@ Optional columns
         * Arrange these in list as desired sequence in output.
 
 
-**Cablings Tab**
-^^^^^^^^^^^^^^^
+**Cablings Tab - Optional Columns**
+-------------------------------------
 
      #. ``aport`` Define port number for a-end device. Will appear on middle. *( column name modification not allowed )*
      #. ``connector_type`` Define connector type. (default: *straight*, other options: *angled, curved*). *( column name modification not allowed )*

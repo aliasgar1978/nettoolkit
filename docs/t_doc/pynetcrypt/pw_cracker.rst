@@ -1,17 +1,25 @@
 
-cpw_cracker
+cisco passwords
 -------------------------------------------------------------------------------
 
-.. automodule:: nettoolkit.pynetcrypt.cpw_cracker
+.. automodule:: nettoolkit.pyNetCrypt.cpw_cracker
 	:members:
 	:undoc-members:
 	:show-inheritance:
 
 
-jpw_cracker
+juniper passwords
 -------------------------------------------------------------------------------
 
-.. automodule:: nettoolkit.pynetcrypt.jpw_cracker
+.. automodule:: nettoolkit.pyNetCrypt.jpw_cracker
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+md5 calculate
+-------------------------------------------------------------------------------
+
+.. automodule:: nettoolkit.pyNetCrypt.generate
 	:members:
 	:undoc-members:
 	:show-inheritance:

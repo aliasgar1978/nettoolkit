@@ -1,6 +1,6 @@
 
-User documentation!
-########################
+Configuration Generation User documentation!
+###############################################
 
 .. toctree::
    :maxdepth: 4

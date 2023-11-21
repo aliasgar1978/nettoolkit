@@ -88,7 +88,8 @@ class Default():
 class Container(ABC):
 	"""Abstract base class providing template for standard dunder 
 	methods template.  Object should contain objVar property
-	"""
+	"""	
+
 	@abstractproperty
 	@property
 	def objVar(self): pass
@@ -1314,9 +1315,9 @@ class DB():
 class XL_WRITE():
 	'''EXEL FILE CREATE, 
 	hostname  - excel file name
-	**sht_df    - sht_name=dataframe
-		df        - dataframe which data to be copied to Excel.
-		sht_name  - Sheet Name of Excel where data to be copied
+	sht_df    - sht_name=dataframe
+	df        - dataframe which data to be copied to Excel.
+	sht_name  - Sheet Name of Excel where data to be copied
 	Excel O/P file will go inside - ./output/ - path
 	'''
 

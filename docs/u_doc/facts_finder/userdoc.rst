@@ -1,6 +1,6 @@
 
-User documentation!
-########################
+Facts-Finder User documentation!
+######################################
 
 .. toctree::
    :maxdepth: 4

@@ -1,8 +1,6 @@
 nettoolkit
 ##############
 
-Welcome to nettoolkit's documentation!
-******************************************
 
 What is nettoolkit?
 ==========================

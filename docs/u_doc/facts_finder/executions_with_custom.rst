@@ -8,8 +8,8 @@ Using facts-finder - CleanFacts - add custom config
 
 
 
-Detailed How To
---------------------
+Detailed How To (custom)
+------------------------
 
 	Once CleanFacts are generated ( Point. 3 from previous page ), go ahead with below steps.
 

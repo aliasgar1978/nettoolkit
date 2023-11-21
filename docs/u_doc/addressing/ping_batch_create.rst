@@ -3,8 +3,8 @@ Create ping batch script file(s)
 ============================================
 
 
-CLI Way
-------------------
+Batch Create: CLI Way
+----------------------
 
 **Steps Involved:**
 
@@ -29,7 +29,7 @@ CLI Way
 
 
 
-GUI Way
+Batch Create: GUI Way
 -------------------------------
 
 **Steps Involved:**

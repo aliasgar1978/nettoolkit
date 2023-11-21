@@ -1,6 +1,6 @@
 
-Technical documentation!
-#########################
+Nettoolkit API documentation!
+################################
 
 .. toctree::
 	:maxdepth: 2

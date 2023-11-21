@@ -2,7 +2,7 @@
 IPv6 addressing
 ============================================
 
-Overview
+Overview - IPv6
 -----------------------------------------
 
 .. admonition:: Overview

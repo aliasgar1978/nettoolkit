@@ -13,8 +13,8 @@ Using facts-finder - Method 2 (CleanFacts)
 	This will enables more advanced technique to modify for the custom variables later on.
 
 
-Detailed How To
---------------------
+Detailed How To  (CleanFacts)
+-----------------------------
 
 	#. Import necessary package, modules
 

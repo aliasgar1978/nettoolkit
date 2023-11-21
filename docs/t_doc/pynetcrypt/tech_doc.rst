@@ -1,6 +1,6 @@
 
-Technical documentation!
-#########################
+pyNetCrypt API documentation!
+###################################
 
 .. toctree::
 	:maxdepth: 2

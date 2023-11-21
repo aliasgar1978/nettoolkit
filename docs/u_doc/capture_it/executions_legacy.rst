@@ -195,7 +195,7 @@ Execution Steps - Explained (common)
 
 
 
-A Sample Execution File
+A Sample Execution File (common)
 ----------------------------------------------
 
 
@@ -206,7 +206,7 @@ A Sample Execution File
 :download:`List of JUNIPER Commands <files/juniper_cmds_txtfsm.txt>`. A sample command list file for juniper.
 
 
-Folder Tree Structure
+Folder Tree Structure (common)
 ----------------------------------------------
 
 	#. Either maintain the tree structure as mentioned in file or modify the code as per your requirement::

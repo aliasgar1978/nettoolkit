@@ -10,8 +10,8 @@ Activities that can be done are:
 -----
 
 
-Password encrypt
-------------------
+Password encrypt ($9)
+----------------------
 
 **Steps Involved:**
 
@@ -27,7 +27,7 @@ Password encrypt
 
 
 
-Password decrypt
+Password decrypt ($9)
 -------------------------------
 
 **Steps Involved:**

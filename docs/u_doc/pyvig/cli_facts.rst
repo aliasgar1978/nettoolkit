@@ -23,7 +23,6 @@ Capture
 	Use *capture-it* to capture a few commands output and to prepare commands parsed Excel Files as a first step. 
 
 		* Use ``capture-it`` package for this purpose.
-		.. * `Refer: capture-it documentation <https://capture-it.readthedocs.io>`_
 	
 	
 Clean files generation
@@ -32,7 +31,6 @@ Clean files generation
 	Using the captures and parsed Excel files, generate clean excel files (-clean.xlsx).
 
 		* Use ``facts_finder`` package for this purpose.
-		.. * `Refer: facts-finder documentation <https://facts-finder.readthedocs.io>`_
 
 
 

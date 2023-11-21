@@ -1,6 +1,6 @@
 
-User documentation!
-########################
+Visio Generation User documentation!
+####################################
 
 .. toctree::
    :maxdepth: 4
@@ -11,3 +11,4 @@ User documentation!
    GUI Execution <gui_general>
    Cable Matrix - Manual <excel_making>
    Cable Matrix - using facts-finder <cli_facts>
+   Samples <sample>

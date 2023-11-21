@@ -1,6 +1,6 @@
 
-User documentation!
-########################
+Capture-IT User documentation!
+#################################
 
 .. toctree::
    :maxdepth: 4

@@ -14,8 +14,8 @@ Using facts-finder - Method 1 (DeviceDB)
 	Go for more advanced method-2 (using CleanFacts), if parsed excel device facts are also available along with device commands output captures.
 
 
-Detailed How To
---------------------
+Detailed How To (DeviceDB)
+--------------------------
 
 	#. Import necessary package, modules
 

@@ -1,5 +1,3 @@
-"""IPv4, IPv6 subnets, routes, summaries and its properties, definitions.
-"""
 
 from collections import OrderedDict
 
@@ -417,8 +415,18 @@ class Validation():
 # --------------------------------------------------------------------------------------------------
 
 class IP():
-	"""defines common properties and methods for IPV4 and IPV6 Objects
-	"""
+	'''defines common properties and methods
+
+	Raises:
+		Exception: incorrect input
+
+	Returns:
+		IP: object
+
+	Yields:
+		IP: object
+	'''
+
 	def __init__(self, subnet):
 		self.subnet = subnet
 		self.mask = int(self.subnet.split("/")[1])

@@ -7,7 +7,7 @@ Follow below steps for GUI based Execution
 -----
 
 
-Prepare Excel
+Prepare Excel (GUI)
 ----------------------
 
    #. Prepare Excel as per guidelines given in previous **Excel database Preparation page**.
@@ -36,10 +36,6 @@ Import and run pyVig_gui from pyVig
 		Once Finished save the file as required.
 
 		Verify drawing,  Modify Excel Database if need adjustments, re-run pyVig() to regenerate drawing.
-
-
-
-------------------------------
 
 
 

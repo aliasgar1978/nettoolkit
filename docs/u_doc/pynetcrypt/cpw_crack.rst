@@ -11,8 +11,8 @@ Activities that can be done are:
 -----
 
 
-Password encrypt
-------------------
+Password encrypt (type-7)
+-------------------------
 
 **Steps Involved:**
 
@@ -28,7 +28,7 @@ Password encrypt
 
 
 
-Password decrypt
+Password decrypt (type-7)
 -------------------------------
 
 **Steps Involved:**

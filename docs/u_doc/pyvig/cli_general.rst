@@ -7,7 +7,7 @@ Follow below steps for Command Line Execution steps
 
 ----------------------------
 
-Prepare Excel
+Prepare Excel (CLI)
 ----------------------
 
    #. Prepare Excel as per guidelines given in previous **Excel database Preparation Page**.

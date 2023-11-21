@@ -3,8 +3,8 @@ IP Subnet scanner
 ============================================
 
 
-CLI Way
-------------------
+Subnet Scan: CLI Way
+---------------------
 
 **Steps Involved:**
 
@@ -33,7 +33,7 @@ CLI Way
 
 
 
-GUI Way
+Subnet Scan: GUI Way
 -------------------------------
 
 **Steps Involved:**

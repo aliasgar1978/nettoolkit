@@ -1,6 +1,6 @@
 
-User documentation!
-########################
+pyJuniper User documentation!
+##############################
 
 .. toctree::
    :maxdepth: 4

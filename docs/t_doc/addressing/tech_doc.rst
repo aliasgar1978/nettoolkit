@@ -1,6 +1,6 @@
 
-Technical documentation!
-#########################
+Addressing API documentation!
+##############################
 
 .. toctree::
 	:maxdepth: 2

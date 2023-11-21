@@ -4,7 +4,7 @@ Sample Execution Code
 
 
 
-A Sample Execution File
+A Sample Execution File (j2config.py)
 ----------------------------------------------
 
 
@@ -16,7 +16,7 @@ Given script follows below file tree structure.
 -----
 
 
-Folder Tree Structure
+Folder Tree Structure (j2config)
 ----------------------------------------------
 
 	#. Either maintain the tree structure as mentioned here or modify the code as per your requirement::

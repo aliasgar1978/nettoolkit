@@ -13,7 +13,7 @@ Follow these three simple steps.
 	#. Define your input/output file.
 	#. Convert it.
 
-Explanation in detail with sample code
+Explanation (to hierarchy)
 -----------------------------------------
 
 	Follow this. Create an execution .py file and use below code to run the utility::

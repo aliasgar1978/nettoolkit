@@ -3,8 +3,8 @@ Compare two subnet scanner output files
 ============================================
 
 
-CLI Way
-------------------
+CLI Way: compare output
+-----------------------
 
 **Steps Involved:**
 
@@ -19,7 +19,7 @@ CLI Way
 
 
 
-GUI Way
+GUI Way: compare output 
 -------------------------------
 
 **Steps Involved:**

@@ -1,8 +1,8 @@
 
-Using facts-finder - CleanFacts - add custom config
+Add custom data
 ==========================================================
 
-	#. Generate clean config using CleanFacts
+	#. Generate clean config using CleanFacts.  Using CleanFacts steps.
 	#. Apply custom chages on database
 	#. rearrange database columns of Excel
 

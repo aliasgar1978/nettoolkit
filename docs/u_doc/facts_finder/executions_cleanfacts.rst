@@ -1,6 +1,12 @@
 
-Using facts-finder - Method 2 (CleanFacts)
+Using CleanFacts [Deprycated]
 ============================================
+
+.. warning::
+
+	* Deprycated method.  Not supported for nettoolkit version >= 0.1.0
+	* Use only if you have standalone facts-finder package installed with nettoolkit version <= 0.0.20 
+
 
 	#. Import necessary package, modules
 	#. Define your input files ( i.e. capture files )
@@ -20,7 +26,7 @@ Detailed How To  (CleanFacts)
 
 		.. code::
 
-			from nettoolkit.facts_finder import CleanFacts, rearrange_tables
+			from facts_finder import CleanFacts, rearrange_tables
 
 
 	#. Define input files ( i.e. captures-log, facts-excel )

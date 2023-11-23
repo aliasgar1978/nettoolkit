@@ -1,6 +1,14 @@
 
-Using facts-finder - Method 1 (DeviceDB)
-============================================
+Using DeviceDB [Deprycated]
+=====================================================
+
+.. warning::
+
+	* Deprycated method. Soon will be withdrawn.
+	* Use `facts_finder` as a parent package instead of `nettoolkit.factsfinder`, if you have standalone facts-finder package installed with nettoolkit version <= 0.0.20 
+
+
+
 
 	#. Import necessary package, modules
 	#. Define your input files ( i.e. capture files )

@@ -3,6 +3,11 @@
 Capture - Common Commands outputs for all devices
 =================================================
 
+.. warning::
+
+	* Deprycated method.  Not supported for version >= 0.1.0
+	* Use only if you have standalone Capture-it package installed and version <= 0.0.20 
+
 
 
 Execution Steps - summary (common)
@@ -25,7 +30,7 @@ Execution Steps - Explained (common)
 
 	#. Import the necessary module::
 
-		from netoolkit.capture_it import capture, LogSummary
+		from capture_it import capture, LogSummary
 
 
 	#. Authentication Parameters::

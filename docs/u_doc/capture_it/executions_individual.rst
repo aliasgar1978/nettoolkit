@@ -3,6 +3,10 @@
 Capture - Individual Commands outputs of each devices
 ==================================================================
 
+.. warning::
+
+	* Deprycated method.  Not supported for version >= 0.1.0
+	* Use only if you have standalone Capture-it package installed and version <= 0.0.20 
 
 
 Execution Steps - summary (individual)
@@ -24,7 +28,7 @@ Execution Steps - Explained (individual)
 
 	#. Import the necessary module::
 
-		from netoolkit.capture_it import capture_individual, LogSummary
+		from capture_it import capture_individual, LogSummary
 
 
 	#. Authentication Parameters::

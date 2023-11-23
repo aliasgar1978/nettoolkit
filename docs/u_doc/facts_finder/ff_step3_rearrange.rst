@@ -3,7 +3,8 @@
 ============================================
 
 
-_ continued from previous page.
+* Use below code snippet to update clean facts file columns in specifc order.
+* foreign_keys defines custom columns arrangement.
 
 
 #. **Rearrange**
@@ -14,7 +15,7 @@ _ continued from previous page.
         # --------------------------------------------
         # IMPORTS
         # --------------------------------------------
-		from nettoolkit.facts_finder import rearrange_tables
+        from nettoolkit.facts_finder import rearrange_tables
 
         # -------------------------------------------------------------------------------------------------------------
         # Rearrange tables.  

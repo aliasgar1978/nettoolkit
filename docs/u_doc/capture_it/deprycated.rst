@@ -7,6 +7,5 @@ Capture-IT User documentation!
    :caption: Contents:
 
 
-   Capture-All [New] <executions_captureit>
-   Quick Show <quick_display>
-   Deprycated <deprycated>
+   Capture-All [Deprycated] <executions_legacy>
+   Capture-Individual [Deprycated] <executions_individual>

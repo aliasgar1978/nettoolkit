@@ -7,7 +7,7 @@ Configuration Generation User documentation!
    :caption: Contents:
 
 
-   Use case <usecase>
-   Custom Modifications <customedit>
-   sample jinja template <template>
-   sample execution code <sample>
+   Prepare Config Building Instance <j2_step1_prepare>
+   Customize <j2_step2_customize>
+   Generate <j2_step3_generate>
+   Jinja Template - Sample <template>

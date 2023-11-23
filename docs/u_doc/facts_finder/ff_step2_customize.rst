@@ -1,5 +1,5 @@
 
-2. Customize CleanFacts
+Customize CleanFacts
 ============================================
 
 * Use below given code/process to modify the generated clean facts file.

@@ -1,6 +1,6 @@
 
-Capture-IT User documentation!
-#################################
+Capture-IT User documentation! [Deprycated]
+############################################
 
 .. toctree::
    :maxdepth: 4

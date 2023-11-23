@@ -1,5 +1,5 @@
 
-2. Rearrange CleanFacts
+Rearrange CleanFacts
 ============================================
 
 

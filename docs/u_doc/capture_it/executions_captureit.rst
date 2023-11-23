@@ -24,7 +24,7 @@ NT Capture-it - common commands for all devices
         # -------------------------------------------------------------------------------------------------------------
         # Custom Project Imports (Optional/Additional), a sample project import mentioned as below. (modify as per own)
         # -------------------------------------------------------------------------------------------------------------
-        from custom.custom_captureit.cisco_bgp import CiscoBgp   ## Where CiscoBgp is a class which has a cmds property to return show commands for specific neighbours advertising route
+        from custom.custom_captureit.cisco_bgp import BgpAdv   ## Where BgpAdv is a class which has a cmds property to return show commands for specific neighbours advertising route
         from custom.custom_factsgen import CustomDeviceFacts     ## CustomDeviceFacts is a class to modify output database as per custom requirement.
         from custom.custom_factsgen import FOREIGN_KEYS          ## FOREIGN_KEYS, define dictionary with additional custom columns require in output databse {tab_name : [column names]} format.
 
@@ -75,25 +75,25 @@ NT Capture-it - common commands for all devices
         #    Additional [optional] key settings ( Remove if do not want to change )
         # -------------------------------------------------------------------------
         c.cumulative = 'both'    # default: True ( options: True, False, 'both')
-        c.forced_login = False   # default: True ( options: True/False )
-        c.parsed_output = True   # default: False ( options: True/False )
-        c.visual_progress = 9    # default: 3 ( Option range: 0 - 10 )
-        c.max_connections = 1    # default: 100 ( Options: any number input )
+        c.forced_login = False   # default: True ( options: True, False )
+        c.parsed_output = True   # default: False ( options: True, False )
+        c.visual_progress = 9    # default: 3 ( Option range: 0 - 10 ) 
+        c.max_connections = 1    # default: 100 ( Options: any number input ) ( define max concurrent connections, 1 for sequencial )
         c.log_type = 'common'    # default: None ( Options: 'common', individual', 'both', None )
         c.common_log_file = 'common-debug.log' # default: None ( provide filename if log_type is common )
 
         # -----------------------------------------------------------------------------
         #    Additional [optional] run dynamic custom commands ( Remove if not needed )
         # -----------------------------------------------------------------------------
-        c.dependent_cmds(custom_dynamic_cmd_class=CiscoBgp)  # where CiscoBgp is custom class imported above
+        c.dependent_cmds(custom_dynamic_cmd_class=BgpAdv)  # where BgpAdv is custom class imported above
 
         # -------------------------------------------------------------------------------
         #    Additional [optional] to generate Facts file ( Remove if not needed )
         #    provide CustomDeviceFactsClass, foreign_keys if want to customize Facts file
         # --------------------------------------------------------------------------------
         c.generate_facts(
-            CustomDeviceFactsClass=CustomDeviceFacts,  # optional (provide if need)
-            foreign_keys=FOREIGN_KEYS,                 # optional (provide if need)
+            CustomDeviceFactsClass=CustomDeviceFacts,  # optional (provide if need, custom class imported above )
+            foreign_keys=FOREIGN_KEYS,                 # optional (provide if need, custom variable imported above )
         )
 
         # -----------------------------------------------------------------------------
@@ -115,14 +115,10 @@ NT Capture-it - common commands for all devices
 
 
 
-.. Important::
 
-    Since we are providing all commands at a time for all devices, Script will automatically identifies whether device is ``Cisco/Juniper/Arista`` and push respective commands to the system without needing to mention explicitly.
+#. **custom_dynamic_cmd_class**
 
-
-#. custom_dynamic_cmd_class
-
-    #. custom_dynamic_cmd_class : Is usefull to fork in additional dynamic commands which requires output based on some previous show output capture.   
+    It Is usefull to fork in additional dynamic commands which requires output based on some previous show output capture.   
 
       * Scenario: **show bgp summary** lists bgp neighbors. If we want to see advertised routes of selected neighbor of those.  Here *neighbor* is variable based on previous output. 
       * In above case, We can define a custom class which . 
@@ -134,7 +130,7 @@ NT Capture-it - common commands for all devices
         * which can be called/returned  with `cmds` property of custom class.
 
 
-#. Sample of custom_dynamic_cmd_class
+#. **Sample of custom_dynamic_cmd_class**
 
     .. code-block:: python
 
@@ -148,9 +144,9 @@ NT Capture-it - common commands for all devices
 
         # Custom dynamic command class to get additional bgp advertising routes.
 
-        class CiscoBgp():
+        class BgpAdv():
 
-            def __init__(self, conf_file, dtype):
+            def __init__(self, output_of_prev_show_cmd, dtype):
                 self.peers = set()
                 self.show_peer_adv_route_cmds = set()
                 func_maps = {
@@ -164,19 +160,23 @@ NT Capture-it - common commands for all devices
                     } ,
                 }
                 #
-                self.peers = func_maps[dtype]['get_bgp_peers'](conf_file)
+                self.peers = func_maps[dtype]['get_bgp_peers'](output_of_prev_show_cmd)
                 for peer in self.peers:
                     adv_routes = func_maps[dtype]['get_adv_route_string'](peer)
                     self.show_peer_adv_route_cmds.add(adv_routes)
 
             @property
             def cmds(self):
-                ## add more as need
                 return sorted(self.show_peer_adv_route_cmds)
 
 
 
+.. Important::
+
+    * Here We are providing, all commands at a time, for all devices
+    * Script will automatically identifies whether device is ``Cisco/Juniper/Arista`` and push respective commands to the system without needing to mention them explicitly.
+
 
 -----------------------
 
-Watch out for the terminal if any errors and see your output in given output path.
+Watch out terminal if any errors and see your output in given output path.

@@ -5,8 +5,8 @@ Capture - Individual Commands outputs of each devices
 
 .. warning::
 
-	* Deprycated method.  Not supported for version >= 0.1.0
-	* Use only if you have standalone Capture-it package installed and version <= 0.0.20 
+	* Deprycated method.  Not supported for nettoolkit version >= 0.1.0
+	* Use only if you have standalone Capture-it package installed and nettoolkit version <= 0.0.20 
 
 
 Execution Steps - summary (individual)

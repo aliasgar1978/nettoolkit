@@ -1,5 +1,5 @@
 
-Cisco type 7 passwords Encryption/Decryption
+Cisco type-7 key encryption/decryption
 ============================================
 
 Activities that can be done are:

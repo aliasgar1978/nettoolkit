@@ -7,8 +7,7 @@ Visio Generation User documentation!
    :caption: Contents:
 
 
-   CLI Execution <cli_general>
-   GUI Execution <gui_general>
-   Cable Matrix - Manual <excel_making>
-   Cable Matrix - using facts-finder <cli_facts>
+   Cable Matrix Preparation <pyvig_db>
+   Visio Generation <generate_visio>
    Samples <sample>
+   Deprycated Methods <deprycated>

@@ -1,6 +1,10 @@
 Option 1: CLI Execution - Manual XL
 ==========================================================
 
+.. warning::
+
+	* Deprycated method.  Not supported for nettoolkit version >= 0.1.0
+	* Use only if you have standalone pyVig package installed with nettoolkit version < 1.0.0 
 
 Follow below steps for Command Line Execution steps
 
@@ -26,7 +30,7 @@ Prepare python code
 		# 1. Import package
 		# 2. Call pyVig with necessary inputs ( remove undesired optional input arguments )
 		# --------------------------------------------------------------------------------------
-		from nettoolkit.pyVig import pyVig
+		from pyVig import pyVig
 		pyVig(
 			# ------------- Two Mandatory arguments -------------
 			stencil_folder = '/fullpath_stencil_folder',

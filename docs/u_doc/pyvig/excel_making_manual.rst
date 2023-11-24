@@ -1,5 +1,5 @@
 
-Excel database Preparation Guidelines
+Excel database Preparation - Manual
 =====================================
 
 

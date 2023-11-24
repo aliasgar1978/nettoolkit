@@ -1,5 +1,5 @@
 
-Juniper Configuration - Part 3
+Juniper - Remarks Removals
 ============================================
 
 Remove the remarks and make clean configuration

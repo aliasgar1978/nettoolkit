@@ -91,7 +91,14 @@ Version Control
      - added multi-tab ip subnet scanner feature, defult full subnet scan feature.
    * - 0.1.0
      - Sep 10, 2023
-     - New major version change. Multiple changes.  Not compatible with old version.
+     - New Major version change. Multiple changes.  Not compatible with old version.
+   * - 1.0.0
+     - Sep 10, 2023
+     - * New Major Release. 
+       * Multiple changes. Not compatible with old version.
+       * incorporated ( capture-it, facts-finder, j2config, pyVig, pyJUniper, pyNetCrypt ) pacakages in to single package.
+       * GUI interface added for a few modules: ( minitools, addressing, capture-it, facts-finder )
+
 
 
 

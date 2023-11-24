@@ -6,6 +6,6 @@ pyJuniper User documentation!
    :maxdepth: 4
    :caption: Contents:
 
-   convert-to-Set <juniper_to_set>
-   convert-to-hierachy <juniper_to_hierachy>
-   Remove Remarks <juniper_remove_remarks>
+   Set Converter <juniper_to_set>
+   Hierachical Converter <juniper_to_hierachy>
+   Remarks Removals <juniper_remove_remarks>

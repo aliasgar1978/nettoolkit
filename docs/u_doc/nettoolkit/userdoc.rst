@@ -1,6 +1,6 @@
 
-Nettoolkit User documentation!
-#################################
+Nettoolkit class extensions User documentation!
+#################################################
 
 .. toctree::
    :maxdepth: 4

@@ -79,6 +79,8 @@ Import these functions.
   from custom.custom_pyvig import add_sheet_filter_columns, get_sheet_filter_columns
 
 
+-----
+-----
 
 
 Provide Necessary Input Parameters
@@ -108,12 +110,11 @@ Lets start by define a few static inputs. Modify it as needed.
     # ... add all those need in drawing
   ]
 
+-----
 
-
-Generate
---------
-
-**Import necessary Modules**
+  
+Generate Excel
+--------------
 
 Lets import necessary packages first. Followed by some steps to generate excel.
 

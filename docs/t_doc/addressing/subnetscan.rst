@@ -2,7 +2,7 @@
 subnet scan functions
 -------------------------------------------------------------------------------
 
-.. automodule:: nettoolkit.nettoolkit.addressing.subnetscan
+.. automodule:: nettoolkit.addressing.subnetscan
 	:members:
 	:undoc-members:
 	:show-inheritance:

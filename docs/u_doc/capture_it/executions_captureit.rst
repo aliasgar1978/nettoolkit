@@ -1,7 +1,7 @@
 NT Capture-it - common commands for all devices
 =================================================
 
-.. information::
+.. note::
 
     * Supported for version >= 0.1.0, and integrated Nettoolkit versions
 
@@ -171,7 +171,7 @@ NT Capture-it - common commands for all devices
 
 
 
-.. Important::
+.. note::
 
     * Here We are providing, all commands at a time, for all devices
     * Script will automatically identifies whether device is ``Cisco/Juniper/Arista`` and push respective commands to the system without needing to mention them explicitly.

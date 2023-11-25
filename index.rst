@@ -19,6 +19,7 @@ Welcome to nettoolkit's documentation!
    Juniper <docs/u_doc/pyjuniper/userdoc>
    Password Enc/Dec <docs/u_doc/pynetcrypt/userdoc>
    NT Classes <docs/u_doc/nettoolkit/userdoc>
+   GUI Access <docs/u_doc/gui/nt_gui>
 
    API Documentation <docs/tech_doc>
 

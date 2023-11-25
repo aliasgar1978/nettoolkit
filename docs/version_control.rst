@@ -101,8 +101,12 @@ Version Control
    * - 1.1.0
      - Nov 24, 2023
      - missing form error fixed 
-
-
+   * - 1.2.0
+     - Nov 25, 2023
+     - * capture-it: updated to delete old log and start logging with fresh file(s), pw input enabled for `*`.
+       * GUI: a few bug fixes
+       * Direct class/methods import enabled for modules nettoolkit_db, nettoolkit_common, addressing, pyNetCrypt, GUI
+       * addressing module brought outside of inner nettoolkit package, and relevant changes to other modules
 
 
 -----

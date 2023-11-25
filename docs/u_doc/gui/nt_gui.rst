@@ -8,11 +8,15 @@ Many of the nettoolkit functions can be executed with the help of GUI interface.
 
 
     # launch GUI by entering below commands
-        from nettoolkit import Nettoolkit
-        N = Nettoolkit()
-        N()
+    from nettoolkit import Nettoolkit
+    N = Nettoolkit()
+    N()
 
-    # once you exit out of window, delete object instance to release memory
+Once you exit out of window, delete object instance to release memory
+
+.. code-block:: python
+
+    # cleanup memory
     del(N)
 
 

@@ -105,7 +105,7 @@ Version Control
      - Nov 25, 2023
      - * capture-it: updated to delete old log and start logging with fresh file(s), pw input enabled for `*`.
        * GUI: a few bug fixes
-       * Direct class/methods import enabled for modules nettoolkit_db, nettoolkit_common, addressing, pyNetCrypt, GUI
+       * Direct class/methods import enabled for modules nettoolkit_db, nettoolkit_common, pyNetCrypt, GUI
        * addressing module brought outside of inner nettoolkit package, and relevant changes to other modules
 
 

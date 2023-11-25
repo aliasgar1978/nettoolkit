@@ -17,7 +17,6 @@ __all__ = [
 ]
 
 
-__version__ = "0.0.3"
 
 
 from .gpl import (Default, Container, Numeric, 
@@ -34,5 +33,3 @@ from .common import (
 	)
 
 
-def version():
-	return __version__

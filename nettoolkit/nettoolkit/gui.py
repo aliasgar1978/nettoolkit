@@ -2,13 +2,12 @@
 # ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
 
-import nettoolkit.nettoolkit as nt
+import nettoolkit as nt
 from nettoolkit.nettoolkit.forms import GuiTemplate
 from nettoolkit.nettoolkit.forms.formitems import *
 from nettoolkit.nettoolkit.forms.subnet_scanner import count_ips
 from nettoolkit.nettoolkit.globalvars import *
 # ---------------------------------------------------------------------------------------
-
 
 # -----------------------------------------------------------------------------
 # Class to initiate UserForm
@@ -91,8 +90,8 @@ class Nettoolkit(GuiTemplate):
 if __name__ == '__main__':
 	pass
 	# Test UI #
-	u = Nettoolkit()
-	u()
-	del(u)
+	# u = Nettoolkit()
+	# u()
+	# del(u)
 
 # ------------------------------------------------------------------------------

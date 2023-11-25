@@ -3,7 +3,7 @@
 import PySimpleGUI as sg
 
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit.addressing.addressing import get_summaries, addressing, isSubset
+from nettoolkit.addressing.addressing import get_summaries, addressing, isSubset
 
 # ---------------------------------------------------------------------------------------
 

@@ -12,8 +12,8 @@ from nettoolkit.nettoolkit.forms.formitems import *
 #### ADD FRAMES HERE ####
 IPSCANNER_TABS = ['Subnet Scanner', 'Compare Scanner Outputs', 'Create Batch']
 MINITOOLS_TABS = ['MD5 Calculate', 'P/W Enc/Dec', 'Prefix Operations', 'Juniper']
-CAPTUREIT_TABS = ['cred', 'options', 'custom',  'custom-facts', 'Common']
-FACTSFINDER_TAB = ['facts-finder', 'custom-facts']
+CAPTUREIT_TABS = ['cred', 'options', 'custom',  'facts-customize', 'Common']
+FACTSFINDER_TAB = ['facts-finder', 'facts-customize']
 J2CONFIG_TAB = ['configs gen', ]
 PYVIG_TAB = ['pyVig Data', 'Customize']
 

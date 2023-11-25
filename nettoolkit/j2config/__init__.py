@@ -1,6 +1,3 @@
-"""Package which helps simplifying text output generation from template. 
-"""
-
 __doc__ = '''Package which helps simplifying text output generation from template.'''
 
 
@@ -16,4 +13,3 @@ __all__ = [
 	
 ]
 
-__version__ = '0.1.1'

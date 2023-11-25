@@ -46,6 +46,7 @@ class Captures(CLP):
 		self.visual_progress = visual_progress
 		self.cumulative = cumulative
 		self.cumulative_filename = None
+		self.initialize_capture = True
 
 
 	def grp_cmd_capture(self, cmds):
@@ -76,7 +77,8 @@ class Captures(CLP):
 			if self.dtype == 'juniper_junos': 
 				cmd = juniper_add_no_more(cmd)
 			#
-			cc = self.cmd_capture(cmd, self.cumulative, banner)
+			cc = self.cmd_capture(cmd, self.cumulative, banner, self.initialize_capture)
+			self.initialize_capture = False
 			try:
 				output = cc.output
 			except:

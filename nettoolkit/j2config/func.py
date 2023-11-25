@@ -4,7 +4,7 @@
 
 # import fields
 from .cmn.common_fn import *
-from nettoolkit.nettoolkit.addressing import IPv4
+from nettoolkit.addressing import IPv4
 
 # -----------------------------------------------------------------------------------------------
 

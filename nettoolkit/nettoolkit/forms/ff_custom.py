@@ -97,9 +97,9 @@ def exec_ff_custom_frame():
 					relief=sg.RELIEF_SUNKEN, 
 					layout=[
 
-		[sg.Text('facts genearation', font='Bold', text_color="black") ],
+		[sg.Text('Customize facts', font='Bold', text_color="black") ],
 
-		[sg.Checkbox('generate facts files', key='generate_facts', default=False, text_color='yellow', change_submits=True)],
+		[sg.Checkbox('customize facts files', key='generate_facts', default=False, text_color='yellow', change_submits=True)],
 
 		[sg.Text('select custom facts-finder package file:'), 
 			sg.InputText('', key='custom_ff_file', change_submits=True, disabled=True), sg.FileBrowse(key='custom_ff_file_button', disabled=True),

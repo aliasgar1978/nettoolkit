@@ -1,6 +1,6 @@
 
 
-from nettoolkit.nettoolkit_common import LST
+from nettoolkit.nettoolkit_common import LST, STR
 
 
 def get_conditions(jinja_flie):

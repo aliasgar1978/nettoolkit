@@ -3,9 +3,9 @@
 import PySimpleGUI as sg
 from nettoolkit.nettoolkit_common.gpl import STR, LOG
 
-from nettoolkit.nettoolkit.addressing import addressing
+from nettoolkit.addressing import addressing
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit.addressing.subnetscan import Ping
+from nettoolkit.addressing.subnetscan import Ping
 
 # ---------------------------------------------------------------------------------------
 

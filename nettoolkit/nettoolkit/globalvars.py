@@ -1,7 +1,9 @@
 
 # ---------------------------------------------------------------------------------------
-from nettoolkit.nettoolkit.forms import (btn_ipscanner_exec, btn_minitools_exec, btn_captureit_exec, 
-	btn_factsfinder_exec, btn_pyvig_exec, btn_j2config_exec)
+from nettoolkit.nettoolkit.forms import (
+	btn_ipscanner_exec, btn_minitools_exec, btn_captureit_exec, 
+	btn_factsfinder_exec, btn_pyvig_exec, btn_j2config_exec
+)
 #
 from nettoolkit.nettoolkit.forms.md5_calculator import md5_calculator_exec, md5_calculator_frame
 from nettoolkit.nettoolkit.forms.pw_enc_dec import pw_enc_cisco_exec, pw_dec_cisco_exec, pw_enc_juniper_exec, pw_dec_juniper_exec, pw_enc_decr_frame
@@ -45,12 +47,12 @@ CAPTUREIT_FRAMES = {
 	'cred': exec_cred_frame(),
 	'options': exec_options_frame(),
 	'custom': exec_custom_frame(),
-	'custom-facts': exec_ff_custom_frame(),
+	'facts-customize': exec_ff_custom_frame(),
 	'Common': exec_common_to_all_frame(),
 }
 FACTSFINDER_FRAMES = {
 	'facts-finder': btn_ff_gen_frame(),	
-	'custom-facts': exec_ff_custom_frame(),
+	'facts-customize': exec_ff_custom_frame(),
 }
 J2CONFIG_FRAMES = {
 	'configs gen': j2_gen_frame(),
@@ -97,6 +99,7 @@ CATPUREIT_EVENT_FUNCS = {
 }
 FACTSFINDER_EVENT_FUNCS = {
 	'btn_ff_gen': btn_ff_gen_exec, 
+	'generate_facts': generate_facts_exec,
 	'btn_factsfinder': btn_factsfinder_exec,
 	'custom_ff_file': custom_ff_file_exec,
 	'custom_fk_file': custom_fk_file_exec,

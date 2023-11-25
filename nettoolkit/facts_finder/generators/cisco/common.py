@@ -2,7 +2,7 @@
 
 # ------------------------------------------------------------------------------
 from nettoolkit.nettoolkit_common.gpl import *
-from nettoolkit.nettoolkit.addressing import *
+from nettoolkit.addressing import *
 # ------------------------------------------------------------------------------
 
 

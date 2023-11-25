@@ -3,7 +3,7 @@
 import PySimpleGUI as sg
 
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit.addressing.batch import create_batch_file
+from nettoolkit.addressing.batch import create_batch_file
 
 # ---------------------------------------------------------------------------------------
 

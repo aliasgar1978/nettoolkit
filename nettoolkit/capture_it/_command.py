@@ -1,6 +1,7 @@
 # -----------------------------------------------------------------------------
 # Imports
 # -----------------------------------------------------------------------------
+import os
 from nettoolkit.nettoolkit_common import STR, IO
 
 from .common import visual_print
@@ -28,7 +29,7 @@ class COMMAND():
 	"""    	
 
 	# INITIALIZE class vars
-	def __init__(self, conn, cmd, path, parsed_output, visual_progress, logger_list):
+	def __init__(self, conn, cmd, path, parsed_output, visual_progress, logger_list, initialize_capture):
 		"""initialize a command object
 
 		Args:
@@ -45,6 +46,7 @@ class COMMAND():
 		self.parsed_output = parsed_output
 		self.visual_progress = visual_progress
 		self.logger_list = logger_list
+		self.initialize_capture = initialize_capture
 		self._commandOP(conn)
 
 
@@ -56,7 +58,7 @@ class COMMAND():
 
 		Returns:
 			str: file name where output get stored
-		"""    		
+		"""
 		if cumulative is True or (isinstance(cumulative, str) and cumulative.lower() == 'both'):
 			self.cumulative_filename = self.add_to_file(self.commandOP)    # add to file
 			self.fname = self.cumulative_filename
@@ -134,5 +136,13 @@ class COMMAND():
 		msg_level, msg = 3, f"{self.conn.hn} : adding output to a file {fname}"
 		visual_print(msg, msg_level, self.visual_progress, self.logger_list)
 
+		if self.initialize_capture: delete_file_ifexist(fname)
+
 		IO.add_to_file(filename=fname, matter=banner+cmd_header+output)
 		return fname
+
+def delete_file_ifexist(fname):
+	try:
+		os.remove(fname)
+	except:
+		pass

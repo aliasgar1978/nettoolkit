@@ -10,12 +10,9 @@ __all__ = [
 	]
 
 
-__version__ = "0.0.2"
+
 
 
 from .juniper import Juniper, convert_to_set_from_captures
 from .jset import JSet
 
-
-def version():
-	return __version__

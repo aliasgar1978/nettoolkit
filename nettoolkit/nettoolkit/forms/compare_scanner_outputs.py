@@ -3,7 +3,7 @@
 import PySimpleGUI as sg
 
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit.addressing.subnetscan import compare_ping_sweeps
+from nettoolkit.addressing.subnetscan import compare_ping_sweeps
 
 # ---------------------------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 """common modifier functions/classes
 """
 
-from nettoolkit.nettoolkit.addressing import *
+from nettoolkit.addressing import *
 import pandas as pd
 
 # ================================================================================================

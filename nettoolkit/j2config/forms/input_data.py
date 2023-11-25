@@ -136,6 +136,7 @@ def j2_gen_frame():
 		under_line(80),
 
 		[sg.Button("Generate", change_submits=True, key='btn_j2_gen')],
+		[sg.Text('Under Development: GUI Not fully operatable', text_color="black"), ],
 
 		])
 

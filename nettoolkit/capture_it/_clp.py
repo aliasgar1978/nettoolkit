@@ -67,7 +67,7 @@ class CLP():
 			return False
 		return True
 
-	def cmd_capture(self, cmd, cumulative=False, banner=False):
+	def cmd_capture(self, cmd, cumulative=False, banner=False, initialize_capture=False):
 		"""start command capture for given command
 
 		Args:
@@ -79,16 +79,17 @@ class CLP():
 			[type]: [description]
 		"""    	
 		self.cmd_exec_logs.append({'command':cmd})
-		cmdObj = self._cmd_capture_raw(cmd, cumulative, banner)
+		cmdObj = self._cmd_capture_raw(cmd, cumulative, banner, initialize_capture)
 		if cmdObj is not None:
 			self._cmd_capture_parsed(cmd, cumulative, banner)
 		return cmdObj
 
 	# Raw Command Capture
-	def _cmd_capture_raw(self, cmd, cumulative=False, banner=False):
+	def _cmd_capture_raw(self, cmd, cumulative=False, banner=False, initialize_capture=False):
 		try:
 			cmdObj = COMMAND(conn=self.conn, cmd=cmd, path=self.path, parsed_output=False, 
-				visual_progress=self.visual_progress, logger_list=self.logger_list)
+				visual_progress=self.visual_progress, logger_list=self.logger_list,
+				initialize_capture=initialize_capture)
 		except:
 			msg_level, msg = 2, f"{self.hn} - Error executing command {cmd}"
 			visual_print(msg, msg_level, self.visual_progress, self.logger_list)

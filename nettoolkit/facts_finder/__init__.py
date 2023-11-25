@@ -19,4 +19,3 @@ __all__ = [
 	'get_necessary_cmds', 'get_absolute_command',
 	]
 
-__ver__ = "0.1.2"

@@ -2,7 +2,7 @@
 import os
 from copy import deepcopy
 from nettoolkit.nettoolkit_common import *
-from nettoolkit.nettoolkit.addressing import *
+from nettoolkit.addressing import *
 
 import nettoolkit.facts_finder as ff
 from collections import OrderedDict

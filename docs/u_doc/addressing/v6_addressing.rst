@@ -117,9 +117,9 @@ Bonus
 -----
 
 
-**Identify, Validate & Create - IPv4 object dynamically**
+**Identify, Validate & Create - IPv6 object dynamically**
 
-* Creating IPv4 or IPv6 object dynamically is possible via ``addressing()``  
+* Creating IPv4 or IPv6 object dynamically is possible via ``addressing()`` function 
 * This is useful if we don't know the version about provided subnet.
 * It automatically detects version and returns appropriate object after checking validitiy of input.
 

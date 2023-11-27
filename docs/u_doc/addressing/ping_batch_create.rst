@@ -8,7 +8,7 @@ ping batch-script prepare
 .. code-block:: python
     :emphasize-lines: 2
 
-    >>> from nettoolkit.nettoolkit import create_batch_file
+    >>> from nettoolkit.addressing import create_batch_file
     >>> create_batch_file(prefixes, names, ip, op_folder)
 
 

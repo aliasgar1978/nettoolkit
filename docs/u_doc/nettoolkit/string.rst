@@ -377,4 +377,15 @@ prepend_bgp_as()
 		>>> STR.prepend_bgp_as("12345", 10)
 		'12345 12345 12345 12345 12345 12345 12345 12345 12345 12345'
 
+header_indexes()
+~~~~~~~~~~~~~~~~~
+
+	* returns index numbers for the provided header line items.
+
+	.. code-block:: python
+
+		>>> STR.prepend_bgp_as("12345", 10)
+		'12345 12345 12345 12345 12345 12345 12345 12345 12345 12345'
+
+
 

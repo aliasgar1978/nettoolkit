@@ -1,13 +1,14 @@
 
-A few more addressing functions
+addressing - module functions
 ============================================
 
-**Before starting, let's assume we already imported nettoolkit as below.**
-it will be used than after for each function.
+**import addressing module from nettoolkit as below.**
+
+Functions of addressing will be available to be used than after.
 
 .. code-block:: python
 	
-	>>> import nettoolkit.nettoolkit as nt
+	>>> from nettoolkit.addressing import *
 
 
 addressing functions:
@@ -30,7 +31,7 @@ bin_mask()
 
 	.. code-block:: python
 
-		>>> nt.bin_mask(24)
+		>>> bin_mask(24)
 		'255.255.255.0'
 
 
@@ -41,7 +42,7 @@ to_dec_mask()
 
 	.. code-block:: python
 
-		>>> nt.to_dec_mask("255.255.255.0")
+		>>> to_dec_mask("255.255.255.0")
 		24
 
 
@@ -52,7 +53,7 @@ bin2dec()
 
 	.. code-block:: python
 
-		>>> nt.bin2dec('11111111111111111111111111110000')
+		>>> bin2dec('11111111111111111111111111110000')
 		4294967280
 
 bin2decmask()
@@ -62,7 +63,7 @@ bin2decmask()
 
 	.. code-block:: python
 
-		>>> nt.bin2decmask('11111111111111111111111111110000')
+		>>> bin2decmask('11111111111111111111111111110000')
 		28
 
 binsubnet()
@@ -72,54 +73,31 @@ binsubnet()
 
 	.. code-block:: python
 
-		>>> nt.binsubnet('10.10.10.0/24')
+		>>> binsubnet('10.10.10.0/24')
 		'00001010000010100000101000000000'
 
 
+-----
 
-ns-lookup:
-------------------------
+
+ns-lookup
+~~~~~~~~~~~~~~~
 
 Use the ``nslookup()``  to get the dns name programatically.
 
 .. code-block:: python
 
-	>>> nt.nslookup("8.8.8.8")
+	>>> nslookup("8.8.8.8")
 	'dns.google'
 
 
-IP.ping:
------------------
+IP.ping
+~~~~~~~~~~~~~~~
 
 Use the ``IP.ping_average()`` from nettoolkit to get the average responce time (in ms) for given ip.
 
 .. code-block:: python
 
-	>>> nt.IP.ping_average("8.8.8.8")
+	>>> IP.ping_average("8.8.8.8")
 	289
 
-
-create IPv4 or IPv6 object dynamically:
--------------------------------------------
-
-	* Creating IPv4 or IPv6 object dynamically is possible via ``addressing()``.  
-	* This is useful if we don't know the version about provided subnet.
-	* It automatically detects version and returns appropriate object after checking validitiy of input.
-
-Respective operations on returned IPv4 or IPv6 object can be done there after, as mentioned in previous pages.
-
-.. code-block:: python
-
-	# // check below with ipv4 input // #
-	>>> ip = nt.addressing("10.10.10.0/24")
-	>>> type(ip)
-	'nettoolkit.addressing.IPv4'
-	>>> ip.version
-	4
-
-	# // check below with ipv6 input // #
-	>>> ip = nt.addressing("2620:ABCD:1234::/64")
-	>>> type(ip)
-	'nettoolkit.addressing.IPv6'
-	>>> ip.version
-	6

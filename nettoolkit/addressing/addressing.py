@@ -10,7 +10,7 @@ incorrectinput = 'INCORRECT SUBNET OR SUBNET MASK DETECTED NULL RETURNED'
 # Module Functions
 # ----------------------------------------------------------------------------
 
-def expand(v6subnet):
+def expand(v6subnet, withMask=False):
 	"""Expand the V6 subnet to its full length.
 
 	Args:
@@ -22,6 +22,7 @@ def expand(v6subnet):
 	# try:
 	p = ''
 	sip = v6subnet.split("/")[0].split("::")
+	mask = v6subnet.split("/")[1]
 	if len(sip) == 2:
 		# ~~~~~~ No padding, inserting zeros in middle ~~~~~~~
 		for x in range(1, 9):
@@ -34,7 +35,10 @@ def expand(v6subnet):
 			p = STR.string_concate(p, '0', conj=":")
 		if p != '':
 			v6subnet = p + ':' + v6subnet
-	return v6subnet
+	if withMask:
+		return f'{v6subnet}/{mask}'
+	else:
+		return v6subnet
 	# except:
 	# 	return False
 
@@ -742,6 +746,15 @@ class IPv6(IP):
 		return ip+"/"+mask if withMask else ip
 
 	@property
+	def expanded(self):
+		"""expanded format of ipv6 address.
+
+		Returns:
+			str: expanded format ipv6 address.
+		"""		
+		return expand(self.subnet)
+
+	@property
 	def decimalMask(self):
 		'''decimal mask of given subnet
 		same as: decmask
@@ -820,11 +833,24 @@ class IPv4(IP):
 
 	@property
 	def ip_number(self):
+		"""distance of provided ip from its network number
+
+		Returns:
+			int: difference of ips from provided ip to its network number
+		"""		
 		selfinteger = int(binsubnet(str(self)).encode('ascii'), 2)
 		networkinteger = int(binsubnet(str(IPv4(self.NetworkIP()))).encode('ascii'), 2)
 		return selfinteger - networkinteger
 
 	def expand(self, new_mask):
+		"""expand the provided subnet to given bigger size subnet. provided subnet mask `new_mask` should be less in number to the existing subnet mask in such case.
+
+		Args:
+			new_mask (int): subnet mask to which subnet to be expanded.
+
+		Returns:
+			str: expanded subnet string value
+		"""		
 		if not isinstance(new_mask, int):
 			raise(f"Invalid mask provided {new_mask}.  Expected integer got {type(new_mask)}")
 		if new_mask < self.mask:

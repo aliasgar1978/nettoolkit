@@ -1,52 +1,25 @@
 
-Create ping batch script file(s)
+ping batch-script prepare
 ============================================
 
+* Import necessary functions
+* execute function by providing necessary input parameters
 
-Batch Create: CLI Way
-----------------------
+.. code-block:: python
+    :emphasize-lines: 2
 
-**Steps Involved:**
-
-    * Import necessary functions
-    * execute function by providing necessary input parameters
-
-    .. code-block:: python
-        :emphasize-lines: 2
-
-        >>> from nettoolkit.nettoolkit import create_batch_file
-        >>> create_batch_file(prefixes, names, ip, op_folder)
+    >>> from nettoolkit.nettoolkit import create_batch_file
+    >>> create_batch_file(prefixes, names, ip, op_folder)
 
 
-    .. note::
-        
-        **inputs**
+.. note::
+    
+    **inputs**
 
-          * pfxs (list): list of prefixes
-          * names (list): list of prefix names
-          * ip (list): ip(s) for which batch file(s) to be created
-          * op_folder (str): output folder where batch file(s) should be created
-
-
-
-Batch Create: GUI Way
--------------------------------
-
-**Steps Involved:**
-
-    * Import necessary class
-    * call class
-    * Provide inputs on  tab,  click 'Go' to execute.
-    * delete class instance
-
-    .. code-block:: python
-        :emphasize-lines: 2
-
-        >>> from nettoolkit.nettoolkit import Nettoolkit
-        >>> NTK = Nettoolkit()
-        ## A new GUI Popup window will open for user inputs. provide inputs on tab `Create Batch` and click 'Create' 
-        >>> del(NTK)
-
+        * pfxs (list): list of prefixes
+        * names (list): list of prefix names
+        * ip (list): ip(s) for which batch file(s) to be created
+        * op_folder (str): output folder where batch file(s) should be created
 
 -----
 

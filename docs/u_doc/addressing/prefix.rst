@@ -11,14 +11,14 @@ Check prefix:
 
 **Steps Involved:**
 
-	* import the ``isSubset()`` function from ``nettoolkit`` to verify whether a prefix is part of supernet or not.
+	* import the ``isSubset()`` function from ``nettoolkit.addressing`` to verify whether a prefix is part of supernet or not.
 	* First argument for the function is - *prefix that need to be match*
 	* Second argument for the function is - *supernet within which the prefix needs to be matched*.
 
 	.. code-block:: python
 		:emphasize-lines: 5,7
 
-		>>> from nettoolkit.nettoolkit import isSubset
+		>>> from nettoolkit.addressing import isSubset
 		>>> prefix1 = "10.10.10.0/24"
 		>>> prefix2 = "10.10.100.0/24"
 		>>> supernet = "10.10.0.0/19"
@@ -34,7 +34,7 @@ Create Summaries:
 
 **Steps Involved:**
 
-	* import the ``get_summaries()`` function from ``nettoolkit`` to summarize provided prefixes.
+	* import the ``get_summaries()`` function from ``nettoolkit.addressing`` to summarize provided prefixes.
 	* list down all prefixes in an **iterator (list, tuple, set)** that needs to be summarized.
 	* execute the ``get_summaries()`` by providing those list of prefixes as arguments. **Kindly note on asterisk sign `*` in argument; if list is directly provided, instead of individual arguments**
 	* Function will evaluate all prefixes, generate and return **least possible sumamries** for those prefixes.
@@ -43,7 +43,7 @@ Create Summaries:
 	.. code-block:: python
 		:emphasize-lines: 5
 
-		>>> from nettoolkit.nettoolkit import get_summaries
+		>>> from nettoolkit.addressing import get_summaries
 		>>> networks = (
 			"10.10.0.0/24", "10.10.1.0/24", "10.20.6.0/23", 
 			"10.10.2.0/23", "10.20.4.0/23", "10.10.4.0/22"  )

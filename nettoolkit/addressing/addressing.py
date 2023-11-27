@@ -22,7 +22,7 @@ def expand(v6subnet, withMask=False):
 	# try:
 	p = ''
 	sip = v6subnet.split("/")[0].split("::")
-	mask = v6subnet.split("/")[1]
+	if withMask and len(v6subnet.split("/"))>1: mask = v6subnet.split("/")[1]
 	if len(sip) == 2:
 		# ~~~~~~ No padding, inserting zeros in middle ~~~~~~~
 		for x in range(1, 9):

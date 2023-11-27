@@ -12,7 +12,7 @@ it will be used than after for each function.
 
 .. code-block:: python
 	
-	>>> from nettoolkit.nettoolkit import DIC
+	>>> from nettoolkit.nettoolkit_common import DIC
 
 
 There are many dictionary methods available under ``DIC`` class in ``nettoolkit``.
@@ -98,7 +98,7 @@ Dictionary Differences:
 	.. code-block:: python
 
 		# Step 1.  Import necessary class
-		>>> from nettoolkit.nettoolkit import DifferenceDict
+		>>> from nettoolkit.nettoolkit_common import DifferenceDict
 
 		# Step 2.  provide the two dictionaries to be compare, say pre and post activitites.
 		>>> pre = {

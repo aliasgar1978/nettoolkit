@@ -7,7 +7,7 @@ it will be used than after for each function.
 
 .. code-block:: python
 	
-	>>> from nettoolkit.nettoolkit import STR
+	>>> from nettoolkit.nettoolkit_common import STR
 
 
 string functions:
@@ -24,7 +24,8 @@ Such available functions are:
 	* indention()
 	* is_blank_line()
 	* is_hostname_line(), hostname(), hostname_from_cli()
-	* shrink_if(), if_prefix()
+	* shrink_if(), if_prefix(), if_suffix()
+	* if_standardize()
 	* string_concate()
 	* right(), mid()
 	* delete_trailing_remarks()
@@ -252,16 +253,37 @@ shrink_if()
 		>>> STR.shrink_if("FastEthernet0/1", 2)
 		'Fa0/1'
 
+if_standardize()
+~~~~~~~~~~~~~~~~~~
+
+	* Interface Name shortening/expanding, interface type string length will be auto-calculated default here.
+
+	.. code-block:: python
+
+		>>> STR.if_standardize("Giga0/1")
+		'GigabitEthernet0/1'
+		>>> STR.if_standardize("Giga0/1", expand=False)
+		'Gi0/1'
 
 if_prefix()
 ~~~~~~~~~~~
 
-	* Interface type or beginning prefix
+	* Interface type
 
 	.. code-block:: python
 
 		>>> STR.if_prefix("FastEthernet0/1")
 		'FastEthernet'
+
+if_suffix()
+~~~~~~~~~~~
+
+	* Interface number
+
+	.. code-block:: python
+
+		>>> STR.if_suffix("FastEthernet0/1")
+		'0/1'
 
 string_concate()
 ~~~~~~~~~~~~~~~~

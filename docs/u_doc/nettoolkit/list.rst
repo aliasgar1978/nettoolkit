@@ -7,7 +7,7 @@ it will be used than after for each function.
 
 .. code-block:: python
 	
-	>>> from nettoolkit.nettoolkit import LST
+	>>> from nettoolkit.nettoolkit_common import LST
 
 
 List functions:

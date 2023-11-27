@@ -380,12 +380,10 @@ prepend_bgp_as()
 header_indexes()
 ~~~~~~~~~~~~~~~~~
 
-	* returns index numbers for the provided header line items.
+	* returns index numbers (range) for the provided header line items.
 
 	.. code-block:: python
 
-		>>> STR.prepend_bgp_as("12345", 10)
-		'12345 12345 12345 12345 12345 12345 12345 12345 12345 12345'
-
-
-
+	>>> h = " Port            Speed    Duplex    Mode       Vlan     InterfaceType"
+	>>> STR.header_indexes(h)
+	OrderedDict([('', [0, 1]), ('Port', [1, 17]), ('Speed', [17, 26]), ('Duplex', [26, 36]), ('Mode', [36, 47]), ('Vlan', [47, 56]), ('InterfaceType', [56, 90])])

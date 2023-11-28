@@ -45,7 +45,7 @@ def md5_calculator_frame():
 			sg.FileBrowse()],
 		under_line(80),
 
-		[sg.Text('Generated MD5 Hex:',  text_color="dark green"), 
+		[sg.Text('Generated MD5 Hex:',  text_color="light yellow"), 
 			sg.InputText(key='file_md5_hash_value', disabled=True), ],
 		under_line(80),
 

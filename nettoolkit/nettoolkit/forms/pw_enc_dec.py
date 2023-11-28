@@ -99,7 +99,7 @@ def pw_enc_decr_frame():
 		sg.Button("Encrypt", change_submits=True, key='go_pw_enc_cisco'),
 		sg.Button("Decrypt", change_submits=True, key='go_pw_dec_cisco'),
 		],
-		[sg.Text('Result:',  text_color="dark green"), 
+		[sg.Text('Result:',  text_color="light yellow"), 
 		sg.InputText(key='pw_result_cisco', disabled=True), ],
 		under_line(80),
 
@@ -109,7 +109,7 @@ def pw_enc_decr_frame():
 		sg.Button("Encrypt", change_submits=True, key='go_pw_enc_juniper'),
 		sg.Button("Decrypt", change_submits=True, key='go_pw_dec_juniper'),
 		],
-		[sg.Text('Result:',  text_color="dark green"), 
+		[sg.Text('Result:',  text_color="light yellow"), 
 		sg.InputText(key='pw_result_juniper', disabled=True), ],
 		under_line(80),
 

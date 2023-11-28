@@ -111,7 +111,7 @@ def j2_gen_frame():
 
 		[sg.Text('Configurations Generator', font='Bold', text_color="black") ],
 		under_line(80),
-
+		# ------------------------------------------------------------------------------------
 		[sg.Text('Template file', text_color="yellow"), 
 			sg.InputText('', key='j2_tfile'), sg.FilesBrowse(key='btn_j2_tfile') ],
 		[sg.Text('Data file', text_color="yellow"), 
@@ -131,9 +131,12 @@ def j2_gen_frame():
 		# ------------------------------------------------------------------------------------
 		[sg.Text('Custom classes module(s) hook [optional]', text_color="black"), 
 			sg.InputText('', key='j2_custom_cls', change_submits=False), sg.FileBrowse(key='btn_j2_custom_cls') ],
+		under_line(80),
+		# ------------------------------------------------------------------------------------
 		[sg.Text('Custom methods module(s) hook [optional]', text_color="black"), 
 			sg.InputText('', key='j2_custom_fn', change_submits=False), sg.FilesBrowse(key='btn_j2_custom_fn') ],
 		under_line(80),
+		# ------------------------------------------------------------------------------------
 
 		[sg.Button("Generate", change_submits=True, key='btn_j2_gen')],
 		[sg.Text('Under Development: GUI Not fully operatable', text_color="black"), ],

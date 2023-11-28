@@ -147,13 +147,13 @@ def exec_common_to_all_frame():
 					relief=sg.RELIEF_SUNKEN, 
 					layout=[
 
-		[sg.Text('Same commands Output for All', font='Bold', text_color="black") ],
+		[sg.Text('Capture commands Output', font='Bold', text_color="black") ],
 
 
 		[sg.Text('List of device IPs:', text_color="yellow"),
 		sg.Multiline("", key='device_ips', autoscroll=True, size=(15,5), disabled=False),
 		],
-		[sg.Text('Device IPs list-file:', text_color="yellow"), 
+		[sg.Text('Device IPs list-file:', text_color="black"), 
 			sg.InputText('', key='device_ip_list_file', change_submits=True,),
 			sg.FileBrowse(),
 		],
@@ -162,7 +162,7 @@ def exec_common_to_all_frame():
 		[sg.Text('List of cisco show commands:', text_color="yellow"),
 		sg.Multiline("", key='cisco_cmds', autoscroll=True, size=(50,5), disabled=False),
 		],
-		[sg.Text('Cisco commands list-file:', text_color="yellow"), 
+		[sg.Text('Cisco commands list-file:', text_color="black"), 
 			sg.InputText('', key='cisco_cmd_list_file', change_submits=True,),
 			sg.FileBrowse(),
 		],
@@ -171,7 +171,7 @@ def exec_common_to_all_frame():
 		[sg.Text('List of juniper show commands:', text_color="yellow"),
 		sg.Multiline("", key='juniper_cmds', autoscroll=True, size=(50,5), disabled=False),
 		],
-		[sg.Text('Juniper commands list-file:', text_color="yellow"), 
+		[sg.Text('Juniper commands list-file:', text_color="black"), 
 			sg.InputText('', key='juniper_cmd_list_file', change_submits=True,),
 			sg.FileBrowse(),
 		],

@@ -66,6 +66,23 @@ def pv_input_data_frame():
 		[sg.Text('Input your data', font='Bold', text_color="black") ],
 		under_line(80),
 
+		### Database ####
+		[sg.Radio('clean data files', 'pv_radio_grp1', key='pv_radio_input_data_files', text_color="yellow", default=True, change_submits=True),
+		sg.Text('     or      ', text_color="yellow"), 
+		sg.Radio('cable-matrix file', 'pv_radio_grp1', key='pv_radio_cm_file', text_color="yellow", change_submits=True),
+		],
+
+		[sg.Text('clean data files: ', text_color="yellow"), 
+			sg.InputText('', key='pv_input_data_files'),  
+			sg.FilesBrowse(key='pv_input_data_files_btn'),
+		],
+		[sg.Text('cable-matrix file:', text_color="yellow"), 
+			sg.InputText('', key='pv_cm_file', change_submits=True),  
+			sg.FileBrowse(key='pv_cm_file_btn')
+		],
+		under_line(80),
+
+		### Database ####
 		[sg.Text('stencils folder :', size=(20, 1), text_color="yellow"), 
 			sg.InputText('', key='py_stencil_folder'),  
 			sg.FolderBrowse()
@@ -75,33 +92,20 @@ def pv_input_data_frame():
 			sg.FileBrowse(key='py_default_stencil_btn')
 		],
 		#
-		[sg.Text('output folder :', size=(20, 1)), 
-			sg.InputText('', key='py_output_folder'),  
+		[sg.Text('output folder :', size=(20, 1), text_color='black'), 
+			sg.InputText('.', key='py_output_folder'),  
 			sg.FolderBrowse(key='py_output_folder_btn')
 		],
-		[sg.Text('output file name :', size=(20, 1)), 
-			sg.InputText("abc.vsd", key='py_op_file', change_submits=True),
+		[sg.Text('output file name :', size=(20, 1), text_color='black'), 
+			sg.InputText("pyVig_output.vsd", key='py_op_file', change_submits=True),
 		],
 		under_line(80),
 
-		[sg.Radio('clean data files', 'pv_radio_grp1', key='pv_radio_input_data_files', default=True, change_submits=True),
-		sg.Radio('cable-matrix file', 'pv_radio_grp1', key='pv_radio_cm_file', change_submits=True),
-		],
-
-		[sg.Text('clean data files: ', text_color="purple"), 
-			sg.InputText('', key='pv_input_data_files'),  
-			sg.FilesBrowse(key='pv_input_data_files_btn'),
-			sg.Text('Or', text_color="purple"), 
-		],
-		[sg.Text('cable-matrix file:', text_color="purple"), 
-			sg.InputText('', key='pv_cm_file', change_submits=True),  
-			sg.FileBrowse(key='pv_cm_file_btn')
-		],
-		under_line(80),
 
 		### OPTIONS ####
 		[ sg.Text('x-axis spacing:', text_color="black"),  sg.InputText(2.5, size=(5, 1), key='pv_spacing_x',),  
 		sg.Text('y-axis spacing:', text_color="black"),  sg.InputText(2.5, size=(5, 1), key='pv_spacing_y',),] , 
+		under_line(80),
 		[ sg.Text('line pattern separate on column:', text_color="black"), sg.InputText("", size=(5, 1),  key='pv_line_pattern_sep_column',),  
 		sg.Text('line pattern style shift by:', text_color="black"),  sg.InputText(2, size=(3, 1), key='pv_line_pattern_style_shift_number',), 
 		], 

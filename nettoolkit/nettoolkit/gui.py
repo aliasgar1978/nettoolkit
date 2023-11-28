@@ -5,7 +5,7 @@ import PySimpleGUI as sg
 import nettoolkit as nt
 from nettoolkit.nettoolkit.forms import GuiTemplate
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit.forms.subnet_scanner import count_ips
+from nettoolkit.addressing.forms.subnet_scanner import count_ips
 from nettoolkit.nettoolkit.globalvars import *
 # ---------------------------------------------------------------------------------------
 
@@ -71,7 +71,7 @@ class Nettoolkit(GuiTemplate):
 	def set_button_pallete(self):
 		nbpb = [
 			sg.Button("Minitools", change_submits=True, key='btn_minitools'), 
-			sg.Button("IPScanner", change_submits=True, key='btn_ipscanner'), 
+			sg.Button("Addressing", change_submits=True, key='btn_ipscanner'), 
 			sg.Button("Capture-IT", change_submits=True, key='btn_captureit'), 
 			sg.Button("Facts Gen", change_submits=True, key='btn_factsfinder'), 
 			sg.Button("Config Gen", change_submits=True, key='btn_j2config'), 

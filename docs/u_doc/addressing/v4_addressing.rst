@@ -152,7 +152,7 @@ Two adjacent IPv4 Objects can be clubbed together to get the summary out of it (
         'nettoolkit.addressing.IPv4'
 
 
-Non-contiguous, un-summarizable or more than 2 subnets cannot be clubbed this way.
+*Non-contiguous*, *un-summarizable*, *greater than 2* - subnets **cannot club** this way.  Refer *Create Summaries* section on *Prefix Operation* page for more.
 
     .. code-block:: python
         :emphasize-lines: 10,11

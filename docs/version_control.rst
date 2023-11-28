@@ -107,6 +107,15 @@ Version Control
        * GUI: a few bug fixes
        * Direct class/methods import enabled for modules nettoolkit_db, nettoolkit_common, pyNetCrypt, GUI
        * addressing module brought outside of inner nettoolkit package, and relevant changes to other modules
+   * - 1.3.0
+     - Nov 28, 2023
+     - Error uploading forms
+   * - 1.3.1
+     - Nov 28, 2023
+     - Error uploading forms
+   * - 1.3.2
+     - Nov 28, 2023
+     - Bug fix
 
 
 -----

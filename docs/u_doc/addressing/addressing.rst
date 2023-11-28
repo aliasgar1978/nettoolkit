@@ -11,22 +11,21 @@ Functions of addressing will be available to be used than after.
 	>>> from nettoolkit.addressing import *
 
 
-addressing functions:
-------------------------
+* There are few addressing functions - which can be used after creating IPv4 or IPv6 Object. These are described in following two pages.
+* There are few addressing functions - which can be used without creating IPv4 or IPv6 Object. These are  desscribed as below.
 
-There are a few addressing functions which can be used without creating IPv4 or IPv6 Object as mentioned in previous pages.
-
-Such available functions are:
 	* bin_mask()
 	* to_dec_mask()
 	* bin2dec()
 	* bin2decmask()
 	* binsubnet
 
+-----
+
+
 
 bin_mask()
-~~~~~~~~~~~~~~~
-
+------------------------
 	* converts and provides binary mask
 
 	.. code-block:: python
@@ -36,7 +35,7 @@ bin_mask()
 
 
 to_dec_mask()
-~~~~~~~~~~~~~~~
+------------------------
 
 	* exactly opposite of above
 
@@ -47,7 +46,7 @@ to_dec_mask()
 
 
 bin2dec()
-~~~~~~~~~~~~~~~
+------------------------
 
 	* decimal number of mask for provided binary mask input
 
@@ -57,7 +56,7 @@ bin2dec()
 		4294967280
 
 bin2decmask()
-~~~~~~~~~~~~~~~
+------------------------
 
 	* subnet-mask for provided binary mask input
 
@@ -67,7 +66,7 @@ bin2decmask()
 		28
 
 binsubnet()
-~~~~~~~~~~~~~~~
+------------------------
 
 	* binary representation of given subnet
 
@@ -81,7 +80,7 @@ binsubnet()
 
 
 ns-lookup
-~~~~~~~~~~~~~~~
+------------------------
 
 Use the ``nslookup()``  to get the dns name programatically.
 
@@ -92,7 +91,7 @@ Use the ``nslookup()``  to get the dns name programatically.
 
 
 IP.ping
-~~~~~~~~~~~~~~~
+------------------------
 
 Use the ``IP.ping_average()`` from nettoolkit to get the average responce time (in ms) for given ip.
 

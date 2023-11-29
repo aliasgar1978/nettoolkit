@@ -3,10 +3,16 @@
 import PySimpleGUI as sg
 
 import nettoolkit as nt
-from nettoolkit.nettoolkit.forms import GuiTemplate
-from nettoolkit.nettoolkit.forms.formitems import *
+#
+from .forms.gui_template import GuiTemplate
+from .forms.tab_event_funcs import TAB_EVENT_UPDATERS
+from .forms.formitems import *
+from .forms.var_frames import *
+from .forms.var_event_funcs import *
+from .forms.var_event_updators import *
+from .forms.var_retractables import *
+#
 from nettoolkit.addressing.forms.subnet_scanner import count_ips
-from nettoolkit.nettoolkit.globalvars import *
 # ---------------------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------

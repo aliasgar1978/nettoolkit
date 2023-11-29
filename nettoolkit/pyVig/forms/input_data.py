@@ -1,7 +1,7 @@
 
 # ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
-from nettoolkit.pyVig import pyVig, pyVig_gui, DFGen
+from nettoolkit.pyVig import pyVig, DFGen
 import nettoolkit.nettoolkit_db  as nt
 import importlib
 from pathlib import *
@@ -12,6 +12,18 @@ from nettoolkit.nettoolkit_common import IO
 
 # ---------------------------------------------------------------------------------------
 
+def pv_data_start_exec(obj, i):
+	files = i['pv_input_data_files'].split(";")
+	dic = {}
+	if i['pv_input_data_files']:
+		dic['data_file'] = f"{i['py_datafile_output_folder']}/{i['py_datafile']}"
+		print(f'Collecting Data and creating cable-matrix..')
+		opd = gen_pyvig_excel(files, i, **dic)
+		dic.update(opd)
+		print(f'Finished..')
+	obj.pyVig_dic = dic
+	return True
+
 def pv_start_exec(obj, i):
 	"""executor function
 
@@ -21,9 +33,10 @@ def pv_start_exec(obj, i):
 	Returns:
 		bool: wheter executor success or not.
 	"""	
-
-	files = i['pv_input_data_files'].split(";")
-	dic = {}
+	try:
+		dic = obj.pyVig_dic
+	except:
+		dic = {}
 	dic['stencil_folder'] = i['py_stencil_folder']
 	dic['default_stencil'] = ".".join(Path(i['py_default_stencil']).name.split(".")[:-1])
 	dic['op_file'] =  f"{i['py_output_folder']}/{i['py_op_file']}"
@@ -35,16 +48,8 @@ def pv_start_exec(obj, i):
 	dic['connector_type'] = i['pv_connector_type']
 	dic['color'] = i['pv_line_color']
 	dic['weight'] = float(i['pv_line_weight'])
+	dic['data_file'] = i['pv_cm_file']
 	#
-	if i['pv_input_data_files']:
-		dic['data_file'] = f"{i['py_output_folder']}/cable-matrix-pyvig.xlsx"
-		print(f'Collecting Data and creating cable-matrix')
-		opd = gen_pyvig_excel(files, i, **dic)
-		dic.update(opd)
-		print(f'Finished Collecting Data..')
-	else:
-		dic['data_file'] = i['pv_cm_file']
-	# #
 	print(f'Start Generating Visio')
 	pyVig(**dic)
 	print(f'Finished Generating Visio..')	
@@ -63,19 +68,45 @@ def pv_input_data_frame():
 					relief=sg.RELIEF_SUNKEN, 
 					layout=[
 
-		[sg.Text('Input your data', font='Bold', text_color="black") ],
+		[sg.Text('Generate pyVig Database', font='Bold', text_color="black") ],
 		under_line(80),
 
 		### Database ####
-		[sg.Radio('clean data files', 'pv_radio_grp1', key='pv_radio_input_data_files', text_color="yellow", default=True, change_submits=True),
-		sg.Text('     or      ', text_color="yellow"), 
-		sg.Radio('cable-matrix file', 'pv_radio_grp1', key='pv_radio_cm_file', text_color="yellow", change_submits=True),
-		],
-
 		[sg.Text('clean data files: ', text_color="yellow"), 
 			sg.InputText('', key='pv_input_data_files'),  
 			sg.FilesBrowse(key='pv_input_data_files_btn'),
 		],
+		under_line(80),
+		#
+		[sg.Text('output folder:', size=(20, 1), text_color='yellow'), 
+			sg.InputText('', key='py_datafile_output_folder'),  
+			sg.FolderBrowse(key='py_output_folder_btn'),
+		],
+		[sg.Text('output filename: ', text_color="yellow"), 
+			sg.InputText('', key='py_datafile'),  
+		],
+		under_line(80),
+
+		[ sg.Button('Generate Database', key='pv_data_start', change_submits=True),],
+
+		])
+
+# ---------------------------------------------------------------------------------------
+
+def pv_input_visio_frame():
+	"""pyVig  - input data
+
+	Returns:
+		sg.Frame: Frame with filter selection components
+	"""    		
+	return sg.Frame(title=None, 
+					relief=sg.RELIEF_SUNKEN, 
+					layout=[
+
+		[sg.Text('Generate Visio', font='Bold', text_color="black") ],
+		under_line(80),
+
+		### Database ####
 		[sg.Text('cable-matrix file:', text_color="yellow"), 
 			sg.InputText('', key='pv_cm_file', change_submits=True),  
 			sg.FileBrowse(key='pv_cm_file_btn')
@@ -115,28 +146,15 @@ def pv_input_data_frame():
 		],
 		under_line(80),
 
-
-
-		[ sg.Button('Start', key='pv_start', change_submits=True),],
+		[ sg.Button('Generate Visio', key='pv_start', change_submits=True),],
 
 		])
 
 # ---------------------------------------------------------------------------------------
 
 
-def pv_radio_input_data_files_exec(obj, i):
-	obj.event_update_element(pv_input_data_files={'value': ''})	
-	obj.event_update_element(pv_cm_file={'value': ''})	
-	obj.event_update_element(pv_input_data_files_btn={'disabled': not i['pv_radio_input_data_files']})	
-	obj.event_update_element(pv_cm_file_btn={'disabled': i['pv_radio_input_data_files']})	
-	return True
 
-def pv_radio_cm_file_exec(obj, i):
-	obj.event_update_element(pv_input_data_files={'value': ''})	
-	obj.event_update_element(pv_cm_file={'value': ''})	
-	obj.event_update_element(pv_input_data_files_btn={'disabled': i['pv_radio_cm_file']})	
-	obj.event_update_element(pv_cm_file_btn={'disabled': not i['pv_radio_cm_file']})	
-	return True
+
 
 # ------------------------------------------------------------------------- 
 # Functions

@@ -3,33 +3,10 @@
 import PySimpleGUI as sg
 from abc import abstractclassmethod, abstractproperty
 
-from nettoolkit.nettoolkit.forms.formitems import *
+from .formitems import *
+from .tab_event_funcs import btn_minitools_exec
 
 # ---------------------------------------------------------------------------------------
-# GLOBAL VARS
-# ---------------------------------------------------------------------------------------
-TAB_EVENT_UPDATERS = { 	'btn_ipscanner', 
-						'btn_minitools', 
-						'btn_captureit', 
-						'btn_factsfinder', 
-						'btn_j2config',
-						'btn_pyvig',
-}
-#### ADD FRAMES HERE ####
-IPSCANNER_TABS = ['1.Subnet Scanner', '2.Scan Compare', '3.Create Batch', '4.Summarize', '5.Break Prefix', '6.isSubset']
-MINITOOLS_TABS = ['1.Juniper',  '2.P/W Enc/Dec', '3.MD5 Calculate',]
-CAPTUREIT_TABS = ['1.Capture','2.Cred', '3.Options', '4.Customize Capture',  '5.Facts Gen', ]
-FACTSFINDER_TAB = ['1.Facts Gen', '2.Customize Facts']
-J2CONFIG_TAB = ['1.Config Gen', ]
-PYVIG_TAB = ['1.Visio Gen', '2.Customize pyVig']
-
-ALL_TABS = set()
-ALL_TABS = ALL_TABS.union(IPSCANNER_TABS)
-ALL_TABS = ALL_TABS.union(MINITOOLS_TABS)
-ALL_TABS = ALL_TABS.union(CAPTUREIT_TABS)
-ALL_TABS = ALL_TABS.union(FACTSFINDER_TAB)
-ALL_TABS = ALL_TABS.union(J2CONFIG_TAB)
-ALL_TABS = ALL_TABS.union(PYVIG_TAB)
 
 # -----------------------------------------------------------------------------
 # Class to Define a standard UserForm Template
@@ -144,110 +121,7 @@ class GuiTemplate():
 			d = {field:{'value':''}}
 			self.event_update_element(**d)
 
-# ---------------------------------------------------------------------------------------
-
-def enable_disable(obj, tabs_to_enable, button=set()):
-	"""enable/disable provided object frames
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-		tabs_to_enable (list): list of tabs to be enabled
-	"""	
-	tabs_to_disable = ALL_TABS.difference(tabs_to_enable)
-	buttons_to_rev = TAB_EVENT_UPDATERS.difference(button)
-	for tab in tabs_to_disable:
-		d = {tab: {'visible':False}}
-		obj.event_update_element(**d)	
-	for i, tab in enumerate(tabs_to_enable):
-		e = {tab: {'visible':True}}
-		obj.event_update_element(**e)
-		if i ==0: obj.w[tab].select()
-	if button:
-		for tab in buttons_to_rev:
-			e = {tab: {'button_color': 'gray'}}
-			obj.event_update_element(**e)
-		e = {button: {'button_color': 'blue'}}
-		obj.event_update_element(**e)
-
-
-
-# ---------------------------------------------------------------------------------------
-#  ADD / EDIT FRAMES UPDATE HERE
-#
-
-def btn_ipscanner_exec(obj):
-	"""executor function to switch and enable ipscanner tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
-	enable_disable(obj, IPSCANNER_TABS, button='btn_ipscanner')
-	return True
-
-def btn_minitools_exec(obj):
-	"""executor function to switch and enable minitools tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
-	enable_disable(obj, MINITOOLS_TABS, button='btn_minitools')
-	return True
-
-def btn_captureit_exec(obj):
-	"""executor function to switch and enable captureit tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
-	enable_disable(obj, CAPTUREIT_TABS, button='btn_captureit')
-	return True
-
-def btn_factsfinder_exec(obj):
-	"""executor function to switch and enable factsfinder tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
-	enable_disable(obj, FACTSFINDER_TAB, button='btn_factsfinder')
-	return True
-
-def btn_j2config_exec(obj):
-	"""executor function to switch and enable j2config tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
-	enable_disable(obj, J2CONFIG_TAB, button='btn_j2config')
-	return True
-
-def btn_pyvig_exec(obj):
-	"""executor function to switch and enable pyvig tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
-	enable_disable(obj, PYVIG_TAB, button='btn_pyvig')
-	return True
-
-# ---------------------------------------------------------------------------------------
+# # ---------------------------------------------------------------------------------------
 
 
 # ------------------------------------------------------------------------------

@@ -20,7 +20,7 @@ Welcome to nettoolkit's documentation!
    Password Enc/Dec <docs/u_doc/pynetcrypt/userdoc>
    Compare It <docs/u_doc/compare_it/userdoc> 
    NT Classes <docs/u_doc/nettoolkit/userdoc>
-   GUI Access <docs/u_doc/gui/nt_gui>
+   Nettoolkit GUI <docs/u_doc/gui/userdoc>
 
    API Documentation <docs/tech_doc>
 

@@ -13,16 +13,16 @@ Welcome to nettoolkit's documentation!
 
    Addressing <docs/u_doc/addressing/userdoc>
    Capture-IT <docs/u_doc/capture_it/userdoc>
-   Facts-Finder <docs/u_doc/facts_finder/userdoc>
+   Compare It <docs/u_doc/compare_it/userdoc> 
    Config-Gen <docs/u_doc/j2config/userdoc>
    Drawing-Gen (visio) <docs/u_doc/pyvig/userdoc>
+   Facts-Finder <docs/u_doc/facts_finder/userdoc>
    Juniper <docs/u_doc/pyjuniper/userdoc>
    Password Enc/Dec <docs/u_doc/pynetcrypt/userdoc>
-   Compare It <docs/u_doc/compare_it/userdoc> 
-   NT Classes <docs/u_doc/nettoolkit/userdoc>
+   Nettoolkit Class Extension <docs/u_doc/nettoolkit/userdoc>
    Nettoolkit GUI <docs/u_doc/gui/userdoc>
 
-   API Documentation <docs/tech_doc>
+   Nettoolkit API Documentation <docs/tech_doc>
 
 
 

@@ -14,6 +14,8 @@ Minitools
 
 .. image:: img/compare_it.png
 
+-----
+
 
 
 Addressing
@@ -31,6 +33,9 @@ Addressing
 
 .. image:: img/isSubset.png
 
+-----
+
+
 
 Capture-IT
 **********
@@ -45,6 +50,8 @@ Capture-IT
 
 .. image:: img/capture_it_5.png
 
+-----
+
 
 
 Facts-Generation
@@ -54,12 +61,16 @@ Facts-Generation
 
 .. image:: img/facts_generation_2.png
 
+-----
+
 
 
 Configs Generation
 ******************
 
 .. image:: img/configs_generation.png
+
+-----
 
 
 

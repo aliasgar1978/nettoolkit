@@ -20,8 +20,9 @@ Once you exit out of window, delete object instance to release memory
     del(N)
 
 
-TRY IT YOURSELF!!!
+-----
 
-Documentation on GUI not yet drafted. will launch as ready!
 
-Till that time Enjoy!!
+Documentation on GUI Not prepared. TRY IT YOURSELF!!! 
+
+Enjoy!!

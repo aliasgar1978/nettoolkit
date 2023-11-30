@@ -154,7 +154,7 @@ class CalculateXY():
 				prev_ho = ho
 				continue
 			c = ho_dict[ho] + ho_dict[prev_ho]
-			ih = c/2 * self.spacing_y
+			ih += c/2 * self.spacing_y
 			y[ho] = ih
 		y = self.inverse_y(y)
 		return y

@@ -137,7 +137,7 @@ def get_multi_idx_item(item, lst):
 def get_administrative_dist(spl, next_hop, idx_distance):
 	adminisrative_distance = ''
 	if (
-			('Null0' in spl and spl[idx_distance+5].isnumeric())
+			('Null0' in spl and len(spl)>=idx_distance+6 and spl[idx_distance+5].isnumeric())
 		or 	(next_hop != '' and len(spl)>=idx_distance+5 and spl[idx_distance+4].isnumeric())
 		):
 		adminisrative_distance = get_singel_idx_item('Null0', spl)

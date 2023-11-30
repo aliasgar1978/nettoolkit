@@ -25,7 +25,7 @@ from nettoolkit.pyVig.forms.custom import *
 #
 from nettoolkit.j2config.forms.input_data import *
 #
-from compare_it.forms.compare_configs import *
+from nettoolkit.compare_it.forms.compare_configs import *
 #
 # ---------------------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ MINITOOLS_FRAMES = {
 	'1.Juniper': juniper_oper_frame(),
 	'2.P/W Enc/Dec': pw_enc_decr_frame(),
 	'3.MD5 Calculate': md5_calculator_frame(),
-	# '4.Compare-it': compare_config_texts_frame(),
+	'4.Compare-it': compare_config_texts_frame(),
 }
 IPSCANNER_FRAMES = {
 	'1.Subnet Scanner': subnet_scanner_frame(),

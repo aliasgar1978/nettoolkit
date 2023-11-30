@@ -27,7 +27,7 @@ from nettoolkit.pyVig.forms.custom import *
 #
 from nettoolkit.j2config.forms.input_data import *
 #
-from compare_it.forms.compare_configs import *
+from nettoolkit.compare_it.forms.compare_configs import *
 #
 # ---------------------------------------------------------------------------------------
 

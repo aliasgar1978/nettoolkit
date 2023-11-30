@@ -116,6 +116,11 @@ Version Control
    * - 1.3.2
      - Nov 28, 2023
      - Bug fix
+   * - 1.4.0
+     - Nov 28, 2023
+     - * Bug fix for pyVig y-axis alignment error
+       * Forms view updated and shuffled form files to its respective parent project folder.
+       * compare-it added
 
 
 -----

@@ -115,7 +115,7 @@ Version Control
      - Error uploading forms
    * - 1.3.2
      - Nov 28, 2023
-     - Bug fix
+     - Bug fix - for error uploading forms
    * - 1.4.0
      - Nov 30, 2023
      - * Bug fix for pyVig y-axis alignment error

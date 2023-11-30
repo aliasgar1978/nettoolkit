@@ -14,3 +14,4 @@ Technical documentation!
     capture-it <t_doc/capture_it/tech_doc>
     facts-finder <t_doc/facts_finder/tech_doc>
     j2config <t_doc/j2config/tech_doc>
+    Compare It <t_doc/compare_it/tech_doc> 

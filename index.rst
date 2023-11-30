@@ -18,6 +18,7 @@ Welcome to nettoolkit's documentation!
    Drawing-Gen (visio) <docs/u_doc/pyvig/userdoc>
    Juniper <docs/u_doc/pyjuniper/userdoc>
    Password Enc/Dec <docs/u_doc/pynetcrypt/userdoc>
+   Compare It <docs/u_doc/compare_it/userdoc> 
    NT Classes <docs/u_doc/nettoolkit/userdoc>
    GUI Access <docs/u_doc/gui/nt_gui>
 

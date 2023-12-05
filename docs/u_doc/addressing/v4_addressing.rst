@@ -187,9 +187,10 @@ Respective operations on returned IPv4 / IPv6 object can be done there after, as
 
 .. code-block:: python
 
-    # // check below with ipv6 input // #
-    >>> ip = addressing("2620:ABCD:1234::/64")
+    # // check below with ipv4 input // #
+    >>> from nettoolkit.addressing import addressing
+    ip = addressing("10.10.10.0/24")
     >>> type(ip)
-    'nettoolkit.addressing.IPv6'
+    <class 'nettoolkit.addressing.addressing.IPv4'>
     >>> ip.version
-    6
+    4

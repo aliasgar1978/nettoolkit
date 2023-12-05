@@ -127,13 +127,13 @@ Respective operations on returned IPv4 / IPv6 object can be done there after, as
 
 .. code-block:: python
 
-	# // check below with ipv6 input // #
+    # // check below with ipv6 input // #
     >>> from nettoolkit.addressing import addressing
-	>>> ip = addressing("2620:ABCD:1234::/64")
-	>>> type(ip)
-	<class 'nettoolkit.addressing.addressing.IPv6'>
-	>>> ip.version
-	6
+    >>> ip = addressing("2620:ABCD:1234::/64")
+    >>> type(ip)
+    <class 'nettoolkit.addressing.addressing.IPv6'>
+    >>> ip.version
+    6
 
 
 

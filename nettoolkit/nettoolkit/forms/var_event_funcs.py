@@ -17,6 +17,7 @@ from nettoolkit.capture_it.forms.cred import *
 from nettoolkit.capture_it.forms.options import *
 from nettoolkit.capture_it.forms.common_to_all import *
 from nettoolkit.capture_it.forms.custom import *
+from nettoolkit.capture_it.forms.quick_show import *
 #
 from nettoolkit.facts_finder.forms.ff_generate import *
 from nettoolkit.facts_finder.forms.ff_custom import *
@@ -46,6 +47,7 @@ MINITOOLS_EVENT_FUNCS = {
 	'go_juniper_remove_remarks': juniper_oper_remove_remarks_exec,
 	'go_compare_config_text': go_compare_config_text_exec,
 	'go_compare_config_xl': go_compare_config_xl_exec,
+	'btn_quick_show': btn_quick_show_exec,
 }
 IPSCANNER_EVENT_FUNCS = {
 	'btn_ipscanner': btn_ipscanner_exec,

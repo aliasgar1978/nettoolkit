@@ -31,7 +31,7 @@ def exec_cred_frame():
 					layout=[
 
 		[sg.Text('Credentials', font='Bold', text_color="black") ],
-		[sg.Text("Username [MechID]:", text_color="yellow"),sg.InputText("", key='cred_un', size=(10,1)),],
+		[sg.Text("Username:", text_color="yellow"),sg.InputText("", key='cred_un', size=(10,1)),],
 		[sg.Text("Password:", text_color="yellow"),sg.InputText("", key='cred_pw', password_char='*', size=(32,1),),],
 		[sg.Text("Enable:", text_color="black"),sg.InputText("", key='cred_en',  password_char='*', size=(32,1)),],
 		under_line(80),

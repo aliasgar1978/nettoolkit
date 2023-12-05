@@ -8,6 +8,7 @@ MINITOOLS_RETRACTABLES = {
 	'file_md5_hash_check', 'file_md5_hash_value',
 	'pw_result_juniper', 'pw_result_cisco', 'pw_cisco', 'pw_juniper',
 	'file_juniper', 'op_folder_juniper',
+	'quick_show_device_ip', 'quick_show_cmds', 'quick_sh_cred_un', 'quick_sh_cred_pw', 'quick_sh_cred_en',
 }
 IPSCANNER_RETRACTABLES = {
 	'op_folder', 'pfxs', 'sockets', 'till', 

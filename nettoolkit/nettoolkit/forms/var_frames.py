@@ -15,6 +15,7 @@ from nettoolkit.capture_it.forms.cred import *
 from nettoolkit.capture_it.forms.options import *
 from nettoolkit.capture_it.forms.common_to_all import *
 from nettoolkit.capture_it.forms.custom import *
+from nettoolkit.capture_it.forms.quick_show import *
 #
 from nettoolkit.facts_finder.forms.ff_generate import *
 from nettoolkit.facts_finder.forms.ff_custom import *
@@ -37,6 +38,7 @@ MINITOOLS_FRAMES = {
 	'2.P/W Enc/Dec': pw_enc_decr_frame(),
 	'3.MD5 Calculate': md5_calculator_frame(),
 	'4.Compare-it': compare_config_texts_frame(),
+	'5.Quick Show': exec_quick_show_output_frame(),
 }
 IPSCANNER_FRAMES = {
 	'1.Subnet Scanner': subnet_scanner_frame(),

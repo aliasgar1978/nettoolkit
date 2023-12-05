@@ -13,6 +13,16 @@ from nettoolkit.pyJuniper import Juniper
 # Text Config Comparisions
 # ----------------------------------------------------------------------------------
 def get_string_diffs(difference_dict, header="", difference_dict_labels={}):
+	"""get the string difference from provided difference dictionary. Provide optional additional header or difference dictionary labels for additional informations.
+
+	Args:
+		difference_dict (dict): difference dictionary with add/remove items.
+		header (str, optional): main header. Defaults to "".
+		difference_dict_labels (dict, optional): item headers. Defaults to {}.
+
+	Returns:
+		str: returns differences in string format 
+	"""	
 	s = header + "\n"
 	if not difference_dict: return s
 	for key, value in difference_dict.items():
@@ -32,11 +42,13 @@ def get_string_diffs(difference_dict, header="", difference_dict_labels={}):
 	return new_s
 
 class CompareText():
-	"""Class to start comparing for two configs
-	readfiles-> convert to lists, -> detects device/config tpyes, ->
-	run appropriate comparetext object.
-	change_type: str: either add/del (+, -)
-	"""
+	"""Class to start comparing for two configs. readfiles than convert to lists, than detects device/config tpyes, run appropriate comparetext object.
+
+	Args:
+		file1 (_type_): first file
+		file2 (_type_): second file to compare with previous
+		change_type (str, optional): either add/del (+, -). Defaults to ''.
+	"""		
 
 	def __init__(self, file1, file2, change_type=''):
 		self.file1, self.file2 = file1.strip(), file2.strip()
@@ -77,7 +89,7 @@ class CompareText():
 		self.detected_dev_types[devconf[0]]['config_type'] = devconf[2]
 
 	def is_cfg_match(self):
-		"""-->Boolean if config matched"""
+		"""Returns boolean value, for config matched"""
 		self.cfg_matched = True
 		for k, v in self.cfg[0].items():
 			if v != self.cfg[1][k]: 
@@ -110,17 +122,35 @@ class Compare_Text_Papa(ABC):
 		self.get_diff(self.serialized_config[0], self.serialized_config[1])
 
 	@abstractclassmethod
-	def serialize_files(self, file1, file2): pass
+	def serialize_files(self, file1, file2): 
+		"""provide two serialized configuration files to be compared with.
+
+		Args:
+			file1 (str): first file to compare
+			file2 (str): second file to compare
+		"""	
+		pass
 
 	@property
-	def differences(self): return self.diff
+	def differences(self): 
+		"""property that returns the differences
+
+		Returns:
+			dict: differences dictionary with adds/removals
+		"""		
+		return self.diff
 
 
 class Compare_Text_Cisco(Compare_Text_Papa):
 	"""Child class defining Cisco methods for Text config compare """
 
 	def serialize_files(self, file1, file2):
-		"""Convert files to linear format """
+		"""Convert files to linear format
+
+		Args:
+			file1 (str): first file to compare
+			file2 (str): second file to compare
+		"""		
 		self.files = {0:file1, 1:file2}
 		self.serialized_config = {}
 		for i, file in self.files.items():
@@ -128,7 +158,8 @@ class Compare_Text_Cisco(Compare_Text_Papa):
 				self.serialized_config[i] = CiscoHierarchy(f, 0, "")
 
 	def get_diff(self, conf0, conf1):
-		"""Generate differences between two configs """
+		"""Generate differences between two configs.
+		"""		
 		dd1 = DifferenceDict(self.serialized_config[0].config)
 		dd2 = DifferenceDict(self.serialized_config[1].config)
 		if self.change_type == "- ":
@@ -141,7 +172,12 @@ class Compare_Text_Juniper(Compare_Text_Papa):
 	"""Child class defining Juniper methods for Text config compare """
 
 	def serialize_files(self, file1, file2):
-		"""Convert files to JSET format if not already """
+		"""Convert files to JSET format if not already
+
+		Args:
+			file1 (str): first file to compare
+			file2 (str): second file to compare
+		"""		
 		self.serialized_config = {}
 		if self.config_type != 'Set':
 			for i, file in enumerate((file1, file2)):
@@ -150,12 +186,24 @@ class Compare_Text_Juniper(Compare_Text_Papa):
 			self.serialized_config[0], self.serialized_config[1] = file1, file2
 
 	def to_set(self, file):
-		"""Convert files to JSET format if not already /child"""
+		"""Convert files to JSET format if not already /child
+
+		Args:
+			file (str): juniper config file name 
+
+		Returns:
+			list: converted set configuration
+		"""		
 		j = Juniper(file)
 		return j.convert_to_set(to_file=False)
 
 	def check_diff(self, dst_config, sectLine):
-		"""check line difference in destined config """
+		"""check line difference in destined config
+
+		Args:
+			dst_config (tuple, list): destination configuration
+			sectLine (str, tuple, list): section of line(s)
+		"""		
 		if isinstance(sectLine, str):
 			if sectLine not in dst_config:
 				self.diff[self.change_type + sectLine] = ''
@@ -164,13 +212,24 @@ class Compare_Text_Juniper(Compare_Text_Papa):
 				self.check_diff(dst_config, item)
 
 	def get_diff(self, conf0, conf1):
-		"""Generate differences between two configs """
+		"""Generate differences between two configs
+
+		Args:
+			conf0 (list): list of config 0
+			conf1 (list): list of config 1
+		"""		
 		self.diff = {}
 		for sectLine in conf0:
 			self.check_diff(conf1, sectLine)
 
 class CiscoHierarchy(dict):
-	"""Convert Cisco Normal Configuration to a Dictionary"""
+	"""Convert Cisco Normal Configuration to a Dictionary
+
+	Args:
+		f (str): section
+		indention (int): indention
+		sect_pfx (str): section prefix
+	"""		
 
 	def __init__(self, f, indention, sect_pfx):
 		self.f = f
@@ -186,33 +245,87 @@ class CiscoHierarchy(dict):
 	def config(self): return self.dic
 
 	def mask_passwords(self, line):
+		"""masks password in given line (if present)
+
+		Args:
+			line (str): configuration line
+
+		Returns:
+			str: updated line
+		"""		
 		pw_chars = {" password ", " key ", " secret ", " authentication-key "}
 		for pw_char in pw_chars:
 			pos = STR.foundPos(line, pw_char)
 			if pos > 0: line = line[:pos].rstrip() + pw_char + "XXXXXXXX"
 			return line
+
 	def remarked_lines(self, line):
+		"""adds previous line to section prefix if remarked line
+
+		Args:
+			line (str): input line
+
+		Returns:
+			bool: if line is a remarked line
+		"""		
 		rem_line = line.lstrip().startswith("!")
 		if rem_line: self.prev_line = self.sect_pfx
 		return rem_line
+
 	def exceptional_lines_maps(self, line):
+		"""returns exceptional lines from exceptional lines map, which doesn't follows standard indention.
+
+		Args:
+			line (str): input line
+
+		Returns:
+			str: line or exceptional indention corrected line
+		"""		
 		exc_maps = {
 			' auto qos ': 'auto qos ',
 		}
 		return exc_maps[line] if exc_maps.get(line) else line
+
 	def trailing_remarks_update(self, line):
+		"""remove trailing remark string from input line
+
+		Args:
+			line (str): input line
+
+		Returns:
+			str: updated line
+		"""		
 		pos = STR.foundPos(line, "!")
 		if pos > 0: line = line[:pos].rstrip()
 		return line
 
 	def add_line_to_dict(self, line): 
+		"""add line to self.dic
+
+		Args:
+			line (str): input line
+		"""		
 		self.dic[line] = ""
+
 	def indented_block(self, line_indention, line):
+		"""update indented block for given line
+
+		Args:
+			line_indention (int): line indention
+			line (str): input line
+		"""		
 		sc = CiscoHierarchy(self.f, indention=line_indention, sect_pfx=line)
 		# print(sc.prev_line)
 		self.dic[self.prev_line] = {line: ''}
 		self.dic[self.prev_line].update(sc.dic)
+
 	def descent_block(self, line_indention, line):
+		"""descent block for line
+
+		Args:
+			line_indention (int): line indention
+			line (str): input line
+		"""		
 		if self.indention_diff < -1:
 			self.indention -= 1
 		else:
@@ -246,18 +359,39 @@ class CiscoHierarchy(dict):
 
 
 class CompareExcelData():
+	"""compares two excel databases 
+
+	Args:
+		file1 (str): first excel file
+		file2 (str): second excel file
+		sheet_name (str): sheet name to be compared
+		change_type (str): change types ("+ ", "- ")
+	"""		
 
 	def __init__(self, file1, file2, sheet_name, change_type):
 		self.file1, self.file2, self.sheet_name = file1, file2, sheet_name
 		self.change_type = change_type
 
 	def diff(self, idx):
+		"""difference with respect to indexed column
+
+		Args:
+			idx (str): index column
+
+		Returns:
+			dict: differences
+		"""		
 		self.get_df(idx)
 		self.conv_df_to_dict()
 		self.get_dict_diffs()
 		return self._diff
 
 	def get_df(self, idx):
+		"""dataframes for provided two files.
+
+		Args:
+			idx (str): index columns
+		"""		
 		self.df1 = pd.read_excel(self.file1, sheet_name=self.sheet_name).fillna("")
 		self.df2 = pd.read_excel(self.file2, sheet_name=self.sheet_name).fillna("")
 		self.df1.reset_index()
@@ -267,10 +401,14 @@ class CompareExcelData():
 		self.df2 = self.df2.set_index(idx)
 
 	def conv_df_to_dict(self):
+		"""convert dataframes to dictionaries
+		"""		
 		self.td1 = self.df1.to_dict()
 		self.td2 = self.df2.to_dict()
 
 	def get_dict_diffs(self):
+		"""dictionary differences
+		"""		
 		dd1 = DifferenceDict(self.td1)
 		dd2 = DifferenceDict(self.td2)
 		if self.change_type == "- ":

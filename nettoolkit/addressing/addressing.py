@@ -661,7 +661,7 @@ class IPv6(IP):
 			return self.network
 
 	def _add_ip_to_network_address(self, num=0, _=''):
-		'''-->Adds num of IP to Network IP and return address'''
+		'''Adds num of IP to Network IP and return address'''
 		self._network_address
 		s = self._subnet_zero
 		if _ != '':
@@ -674,7 +674,7 @@ class IPv6(IP):
 	def _broadcast_address(self): return self._endpoint(addtype='BC')
 	@property
 	def _network_address(self):
-		'''-->Returns only NETWORK ADDRESS for given subnet'''
+		'''Returns only NETWORK ADDRESS for given subnet'''
 		if not self._network_address_bool:
 			self._subnet_zero = self._endpoint(addtype='NET')
 			self._network_address_bool = True

@@ -44,7 +44,7 @@ class TableInterfaceJuniper(DataFrameInit, TableInterfaces):
 	def merge_interface_data(self):
 		"""merges interface related data frames from the parsed excel sheet command output 
 		which was originated from capture_it along with ntctemplate.
-		--> DataFrame: A single pandas dataframe clubbed with all interface related details. 
+		A single pandas dataframe clubbed with all interface related details. 
 		"""
 		pdf = pd.DataFrame({'interface':[]})
 		for sheet, df in self.dfd.items():

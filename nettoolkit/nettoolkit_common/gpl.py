@@ -60,8 +60,13 @@ JUNIPER_IFS_IDENTIFIERS = {
 
 def nslookup(ip):
 	"""return discovered hostname for provided ip
-	-->int
-	"""
+
+	Args:
+		ip (str): ip address
+
+	Returns:
+		str: domain name string
+	"""	
 	lst = popen(f"nslookup {ip}").read().split("\n")
 	for line in lst:
 		if line.startswith("Name"): return line.split()[-1]
@@ -69,10 +74,20 @@ def nslookup(ip):
 
 
 def get_username():
-	return input("Enter Username: ")
-def get_password():
-	return getpass("Enter Password: ")
+	"""input username prompt
 
+	Returns:
+		str: entered username
+	"""	
+	return input("Enter Username: ")
+
+def get_password():
+	"""input password prompt
+
+	Returns:
+		str: entered password
+	"""	
+	return getpass("Enter Password: ")
 
 
 class Default():
@@ -160,33 +175,29 @@ class STR(Container):
 	@staticmethod
 	def foundPos(s, sub, pos=0):
 		'''Search for substring in string and return index value result
-		--> int
 
-		:param s: main string to be search within
-		:type s: str
+		Args:
+			s (str): main string to be search within
+			sub (str): substring which is to be search in to main string
+			pos (int, optional): position index, search to be start from. Defaults to 0.
 
-		:param sub: substring which is to be search in to main string
-		:type sub: str
-
-		:param pos: position index, search to be start from
-		:type pos: int
-		'''
+		Returns:
+			int: find index value
+		'''		
 		return s.find(sub, pos)
 
 	@staticmethod
 	def found(s, sub, pos=0):
-		'''Search for substring in string and return Boolean result
-		--> bool
+		"""Search for substring in string and return Boolean result
 
-		:param s: main string to be search within
-		:type s: str
+		Args:
+			s (str): main string to be search within
+			sub (str): substring which is to be search in to main string
+			pos (int, optional): position index, search to be start from. Defaults to 0.
 
-		:param sub: substring which is to be search in to main string
-		:type sub: str
-
-		:param pos: position index, search to be start from
-		:type pos: int
-		'''
+		Returns:
+			bool: find or not
+		"""		
 		try:
 			return True if s.find(sub, pos) > -1 else False
 		except:
@@ -194,26 +205,17 @@ class STR(Container):
 
 	@staticmethod
 	def find_within(s, prefix, suffix=None, pos=0):
-		'''finds characters between prefix and suffix substrings from string,
-		--> tuple: (str, int)
+		"""finds characters between prefix and suffix substrings from string
 
-		:param s: main string to be search within
-		:type s: str
+		Args:
+			s (str): main string to be search within
+			prefix (str): starting substring
+			suffix (str, optional): ending substring. Defaults to None.
+			pos (int, optional): position index, search to be start from. Defaults to 0.
 
-		:param prefix: starting substring
-		:type prefix: str
-
-		:param suffix: ending substring
-		:type suffix: str
-
-		:param pos: position index, search to be start from
-		:type pos: int
-
-		-->Tuple
-		--------
-		index-0 is returned string
-		index-1 is position of returned suffix position
-		'''
+		Returns:
+			tuple: (str, int) (returned string, position of returned suffix position)
+		"""		
 		p = STR.foundPos(s, prefix, pos=pos)+len(prefix)
 		if suffix is None:
 			ln = len(s)
@@ -227,63 +229,51 @@ class STR(Container):
 
 	@staticmethod
 	def string_within(line, prefix, suffix=None, pos=0):
-		'''finds characters between prefix and suffix substrings from string,
-		--> str
+		"""finds characters between prefix and suffix substrings from string
 
-		:param s: main string to be search within
-		:type s: str
+		Args:
+			line (str): main string to be search within
+			prefix (str): starting substring
+			suffix (str, optional): ending substring. Defaults to None.
+			pos (int, optional): position index, search to be start from. Defaults to 0.
 
-		:param prefix: starting substring
-		:type prefix: str
+		Returns:
+			tuple: (str, int) (returned string, position of returned suffix position)
+		"""		
 
-		:param suffix: ending substring
-		:type suffix: str
-
-		:param pos: position index, search to be start from
-		:type pos: int
-		'''
 		return STR.find_within(line, prefix, suffix, pos)[0]
 
 	@staticmethod
 	def suffix_index_within(line, prefix, suffix=None, pos=0):
-		'''finds characters between prefix and suffix substrings from string,
-		--> int: index of suffix
+		"""finds characters between prefix and suffix substrings from string
 
-		:param s: main string to be search within
-		:type s: str
+		Args:
+			line (str): main string to be search within
+			prefix (str): starting substring
+			suffix (str, optional): ending substring. Defaults to None.
+			pos (int, optional): position index, search to be start from. Defaults to 0.
 
-		:param prefix: starting substring
-		:type prefix: str
-
-		:param suffix: ending substring
-		:type suffix: str
-
-		:param pos: position index, search to be start from
-		:type pos: int
-		'''
+		Returns:
+			int: index of suffix
+		"""	
 		return STR.find_within(line, prefix, suffix, pos)[1]
 
 	@staticmethod
 	def find_multi(s, sub, start=0, count=None, index=True, beginwith=False):
-		'''search for multiple substrings 'sub' within string 's'
-		usage: find_multi(s, sub, [start=n, [count=c], index=True])
-		--> list of indexes/bool
+		"""search for multiple substrings 'sub' within string 's'.
+		Usage: find_multi(s, sub, [start=n, [count=c], index=True])
 
-		:param s: main string
-		:type s: str
+		Args:
+			s (str): main string
+			sub (str, tuple, list): sub string ( to be search within main string )
+			start (int, optional): Optional: substring to be start search from index . Defaults to 0.
+			count (int, optional): Optional: count of character from start index. Defaults to None.
+			index (bool, optional): Optional: return index or boolean values. Defaults to True.
+			beginwith (bool, optional): Optional: check if substring is at beginning. Defaults to False.
 
-		:param sub: sub string ( to be search within main string )
-		:type sub: (str, tuple, list)
-
-		:param start: Optional: substring to be start search from index (def:0)
-		:type start: int
-
-		:param count: Optional: count of character from start index (def:end)
-		:type count: int
-
-		:param index: Optional: return index or boolean values(def:True=Index)
-		:type index: bool
-		'''
+		Returns:
+			list: list of indexes/bool
+		"""		
 		count = len(s) if count is None else count+start
 		if isinstance(sub, str):
 			i = s.find(sub, start, count) 
@@ -307,22 +297,19 @@ class STR(Container):
 
 	@staticmethod
 	def find_all(s, sub, start=0, count=None, beginwith=False):
-		'''search for multiple substrings 'sub' within string 's' 
-		usage: find_all(s, sub, [start=n, [count=c]])
-		--> (all matches) -> bool
+		"""search for multiple substrings 'sub' within string 's' 
+		Usage: find_all(s, sub, [start=n, [count=c]])
 
-		:param s: main string
-		:type s: str
+		Args:
+			s (str): main string
+			sub (str): sub string ( to be search within main string )
+			start (int, optional): Optional: substring to be start search from index. Defaults to 0.
+			count (int, optional): Optional: count of character from start index. Defaults to None.
+			beginwith (bool, optional): Optional: check if substring is at beginning. . Defaults to False.
 
-		:param sub: sub string ( to be search within main string )
-		:type sub: (str, tuple, list)
-
-		:param start: Optional: substring to be start search from index (def:0)
-		:type start: int
-
-		:param count: Optional: count of character from start index (def:end)
-		:type count: int
-		'''
+		Returns:
+			bool: all matches or not
+		"""		
 		sl = STR.find_multi(s, sub, start, count, False, beginwith)
 		try:
 			return False if False in sl else True
@@ -331,22 +318,19 @@ class STR(Container):
 
 	@staticmethod
 	def find_any(s, sub, start=0, count=None, beginwith=False):
-		'''search for multiple substrings 'sub' within string 's' 
-		usage: find_any(s, sub, [start=n, [count=c]])
-		--> (any matches) -> bool
+		"""search for multiple substrings 'sub' within string 's' 
+		Usage: find_any(s, sub, [start=n, [count=c]])
 
-		:param s: main string
-		:type s: str
+		Args:
+			s (str): main string
+			sub (str): sub string ( to be search within main string )
+			start (int, optional): Optional: substring to be start search from index. Defaults to 0.
+			count (int, optional): Optional: count of character from start index. Defaults to None.
+			beginwith (bool, optional): Optional: check if substring is at beginning. . Defaults to False.
 
-		:param sub: sub string ( to be search within main string )
-		:type sub: (str, tuple, list)
-
-		:param start: Optional: substring to be start search from index (def:0)
-		:type start: int
-
-		:param count: Optional: count of character from start index (def:end)
-		:type count: int
-		'''
+		Returns:
+			bool: for atleast one matches
+		"""		
 		sl = STR.find_multi(s, sub, start, count, False, beginwith)
 		try:
 			return True if True in sl else False
@@ -355,24 +339,24 @@ class STR(Container):
 
 	@staticmethod
 	def update(s, searchItem='', replaceItem=''):
-		'''Updates string for search item with replace item
-		--> str
+		"""find n replace string s
 
-		:param s: main string
-		:type s: str	
+		Args:
+			s (str): main string
+			searchItem (str, optional): search string. Defaults to ''.
+			replaceItem (str, optional): replacement string. Defaults to ''.
 
-		:param searchItem: search string
-		:type searchItem: str
-
-		:param replaceItem: replace string
-		:type replaceItem: str	'''
+		Returns:
+			str: updated string
+		"""		
 		return s.replace(searchItem, replaceItem)
 
 	@staticmethod
 	def replace_dual_and_split(s, duo=' ', strip=None):
 		'''Finds subsequent characters in string and replace those with single,
 		plus, splits the string using provided character (duo).
-		--> list
+		
+		Returns list
 
 		:param s: Source string
 		:type s: str
@@ -388,7 +372,8 @@ class STR(Container):
 	@staticmethod
 	def finddualnreplacesingle(s, duo=' ', strip=None):
 		'''Finds subsequent characters in string and replace those with single.
-		--> str
+		
+		Returns str
 
 		:param s: Source string
 		:type s: str
@@ -419,7 +404,8 @@ class STR(Container):
 	@staticmethod
 	def indention(s):
 		'''get string indention value 
-		--> int
+		
+		Returns int
 
 		:param s: string
 		:type s: str
@@ -429,7 +415,8 @@ class STR(Container):
 	@staticmethod
 	def is_blank_line(s):
 		'''Is provided string/line a blank line
-		---> bool
+		
+		Returns bool
 
 		:param s: string
 		:type s: str
@@ -441,7 +428,8 @@ class STR(Container):
 	@staticmethod
 	def is_hostname_line(s, host):
 		'''string/line containing hostname of device
-		-->bool
+		
+		Returns bool
 
 		:param s: string
 		:type s: str
@@ -454,7 +442,8 @@ class STR(Container):
 	@staticmethod
 	def hostname(net_connect):
 		'''input paramiko netconnection, returns hostname from device.
-		-->str (Hostname from connection)
+		
+		Returns str (Hostname from connection)
 		'''
 		try:
 			hns = net_connect.find_prompt()[:-1]
@@ -467,7 +456,8 @@ class STR(Container):
 	@staticmethod
 	def hostname_from_cli(line, command):
 		'''input standard text input line, for which command was entered.
-		-->str (hostname from command line)
+		
+		Returns str (hostname from command line)
 		'''
 		if not STR.found(line, command): return None
 		cmdPos = STR.foundPos(line, command)
@@ -478,7 +468,8 @@ class STR(Container):
 	def shrink_if(intName, length=2):
 		'''Interface Name shortening, input length will decide number of 
 		charactes to be included in shortened output
-		-->str (short name of interface)
+		
+		Returns str (short name of interface)
 		'''
 		if not intName: return ""
 		if intName.lower().startswith("tw"): length=3
@@ -488,7 +479,8 @@ class STR(Container):
 	@staticmethod
 	def if_prefix(intName):
 		'''Interface beginning Name
-		-->str (interface prefix)
+		
+		Returns str (interface prefix)
 		'''
 		if not intName: return ""
 		iBW = intBeginWith.match(intName)
@@ -497,7 +489,8 @@ class STR(Container):
 	@staticmethod
 	def if_suffix(intName):
 		'''Interface ending ports
-		-->str (interface suffix)
+		
+		Returns str (interface suffix)
 		'''
 		if not intName: return ""
 		try:
@@ -510,7 +503,8 @@ class STR(Container):
 	def if_standardize(intName, expand=True):
 		'''standardize the interface for uneven length strings.
 		expand will give fulllength, otherwise it will shrink it to its standard size given
-		-->str (standardized interface)
+		
+		Returns str (standardized interface)
 		'''
 		if not intName: return intName
 		pfx = STR.if_prefix(standardize_if(intName))
@@ -528,7 +522,8 @@ class STR(Container):
 	def update_str(s, searchItem='', replaceItem=''):
 		'''Updates line for search item with replace item
 		(Find/Repalace)
-		-->str
+		
+		Returns str
 		'''
 		return s.replace(searchItem, replaceItem)
 
@@ -542,7 +537,8 @@ class STR(Container):
 		ts = file name containing additional time stamp
 		separator = hn-cmd-ts separator 
 		extn = extension of filename
-		--> str (filename along with full path)
+		
+		Returns  str (filename along with full path)
 		'''
 		if ts: ts = separator + ts
 		cmd += ts
@@ -559,7 +555,8 @@ class STR(Container):
 	@staticmethod
 	def string_concate(s, s1, conj=''):
 		'''Concatenate strings s and s1 with conjuctor conj
-		--> str
+		
+		Returns str
 
 		:param s: string
 		:type s: str
@@ -575,7 +572,8 @@ class STR(Container):
 	@staticmethod
 	def right(strg, n):
 		'''N-number of characters from right side of string
-		--> str
+		
+		Returns str
 
 		:param strg: string
 		:type strg: str
@@ -589,7 +587,9 @@ class STR(Container):
 	@staticmethod
 	def mid(strg, pos, n=0):
 		'''N-number of characters from position in string; default n is till end
-		-->str
+		
+		Returns str
+
 		:param strg: string
 		:type strg: str
 
@@ -608,7 +608,9 @@ class STR(Container):
 	@staticmethod
 	def delete_trailing_remarks(s):
 		'''Deletes trailing remarks from Juniper config line/string
-		-->str
+		
+		Returns str
+
 		:param s: number of characters from right
 		:type s: str
 		'''
@@ -628,7 +630,8 @@ class STR(Container):
 	def to_list(s):
 		'''Returns list for the provided string - s, 
 		splits string by lines
-		--> list
+		
+		Returns list
 		'''
 		s = s.split("\n")
 		for i, x in enumerate(s):
@@ -639,7 +642,8 @@ class STR(Container):
 	def to_set(s):
 		'''Return set of values for the provided string - s.
 		splits string by lines and comma
-		--> set
+		
+		Returns set
 		'''
 		if isinstance(s, str):
 			_s = []
@@ -654,7 +658,8 @@ class STR(Container):
 		"""input header string line of a text table.
 		returns dictionary with key:value pair where 
 		keys are header string and value are string index (position) of string in line
-		--> OrderedDict
+		
+		Returns OrderedDict
 		"""
 		exceptional_headers = {}#'Type', }
 		headers = OrderedDict()
@@ -673,7 +678,8 @@ class STR(Container):
 	@staticmethod
 	def prepend_bgp_as(bgp_as, n):
 		"""'n' number of BGP AS Number prepending string.
-		--> str
+		
+		Returns str
 		"""
 		s = ''
 		for x in range(n): s += str(bgp_as) + " "
@@ -683,7 +689,8 @@ class STR(Container):
 	def ending(line, c): 
 		"""check if line ends with c or not, same as native string.endswith()
 		addition is it first strips the line and then checks
-		-->boolean
+		
+		Returns boolean
 		"""
 		return line.strip().endswith(c)
 
@@ -691,7 +698,8 @@ class STR(Container):
 	def starting(line, c): 
 		"""check if line starts with c or not, same as native string.startswith()
 		addition is it first strips the line and then checks
-		-->boolean
+		
+		Returns boolean
 		"""
 		return line.strip().startswith(c)
 
@@ -782,7 +790,8 @@ class IO():
 	@staticmethod
 	def copy_text_file(file):
 		"""copy file.txt to file-copy.txt
-		--> None
+		
+		Returns None
 		"""
 		dst = file[:-4] + "-copy.txt"
 		with open(file, 'r') as sf:
@@ -793,7 +802,8 @@ class IO():
 	def file_list_for_time_stamp(hn, ts, folder, splitter="_@_" ):
 		"""collection of files from given folder where hostname (hn) 
 		and timestamp (ts) found in the file name.
-		--> set
+		
+		Returns set
 		"""
 		files = set()
 		for file in os.listdir(folder):
@@ -805,7 +815,8 @@ class IO():
 	@staticmethod
 	def devices_on_log_files(folder, splitter="_@_"):
 		"""collection of files from given folder where file extensions are .log
-		--> set
+		
+		Returns set
 		"""
 		devices = set()
 		for file in os.listdir(folder):
@@ -819,7 +830,8 @@ class IO():
 	def timestamps_for_device(devname, folder, splitter="_@_"):
 		"""collection of time stamps of files from given folder
 		for given hostnames.
-		--> set
+		
+		Returns set
 		"""
 		stamps = set()
 		for file in os.listdir(folder):
@@ -833,7 +845,8 @@ class IO():
 	@staticmethod
 	def file_to_str(file):
 		'''Returns string output for the provided file 
-		--> str
+		
+		Returns str
 
 		:param file: text input file name/with path
 		:type file: str
@@ -845,7 +858,8 @@ class IO():
 	@staticmethod
 	def file_to_list(file):
 		'''Returns list for the provided file 
-		--> list
+		
+		Returns list
 
 		:param file: text input file name/with path
 		:type file: str
@@ -859,7 +873,8 @@ class IO():
 	@staticmethod
 	def csv_to_tuple(csv):
 		'''Returns tuple from the provided comma separated text values 
-		--> tuple
+		
+		Returns tuple
 
 		:param csv: comma separated value
 		:type csv: str
@@ -873,7 +888,8 @@ class IO():
 	@staticmethod
 	def to_file(filename, matter):
 		'''Creates a file with matter
-		--> None
+		
+		Returns None
 
 		:param filename: filename with path to be creaed.
 		:type filename: str
@@ -890,7 +906,9 @@ class IO():
 	@staticmethod
 	def add_to_file(filename, matter, cr=True):
 		'''Writes List/text to output filename.
-		--> None
+		
+		Returns None
+
 		:param filename: Existing filename with path
 		:type filename: str
 
@@ -913,7 +931,9 @@ class IO():
 	def update(file, find_item, replace_item):
 		'''
 		Find and Replace on provided file and saves file
-		---> None
+		
+		Returns None
+
 		:param file: on which find and replace to be apply
 		:type str:
 
@@ -936,7 +956,8 @@ class IO():
 	def jinja_verification(folder):
 		"""check all text files from provided folder for verification of 
 		self jinja strings descrepencies
-		--> str with outcome
+		
+		Returns str with outcome
 		"""
 		s = ''
 		for file in os.listdir(folder):
@@ -967,7 +988,8 @@ class LST():
 	def remove_empty_members(lst):
 		"""house keeping of list
 		removes empty members from list
-		-->list
+		
+		Returns list
 		"""
 		empty_members = ('', None, 'N/A', 'nil')
 		tmp_lst = [m for m in lst if not m in empty_members]
@@ -976,7 +998,8 @@ class LST():
 	@staticmethod
 	def expand_vlan_list(vlan_list):
 		"""takes input vlan list, expands it's ranges if any within
-		--> set of individual vlans.
+		
+		Returns set of individual vlans.
 		"""
 		exp_vl_list = set()
 		for v in vlan_list:
@@ -998,7 +1021,8 @@ class LST():
 	@staticmethod
 	def convert_vlans_list_to_range_of_vlans_list(vlan_list):
 		"""converts list of individual vlans to a list of range of vlans
-		--> list
+		
+		Returns list
 		"""
 		vlans_dict, vlans_list, prev, last_key = {}, [], "", ""
 		vlan_list = sorted(LST.expand_vlan_list(vlan_list))
@@ -1031,7 +1055,8 @@ class LST():
 		list of vlans,
 		space separated string,
 		comma separated string,		
-		--> dict
+		
+		Returns dict
 		"""
 		str_list = [str(_) 
 			for _ in LST.convert_vlans_list_to_range_of_vlans_list(input_list)]
@@ -1046,7 +1071,8 @@ class LST():
 	@staticmethod
 	def list_of_devices(list_of_files):
 		"""get hostnames (first index item) from list of files.
-		--> set
+		
+		Returns set
 		"""
 		devices = set()
 		for file in list_of_files:
@@ -1059,7 +1085,8 @@ class LST():
 	@staticmethod
 	def split(lst, n):
 		"""yield provided list with group of n number of items
-		--> generator of list
+		
+		Returns generator of list
 		"""
 		s = 0
 		lst = tuple(lst)
@@ -1071,7 +1098,8 @@ class LST():
 	def list_to_octet(lst):
 		"""joins and return string with provided list with '.'
 		helpful in created ipv4 string with list of 4 numeric items
-		--> str
+		
+		Returns str
 		"""
 		l = ''
 		for x in lst: l = str(x) if l == '' else l +'.'+ str(x)
@@ -1104,7 +1132,9 @@ class DIC():
 	@staticmethod
 	def merge_dict(dx, dy):
 		'''Merges two dictionaries for identical keys 
-		--> dict
+		
+		Returns dict
+
 		:param dx, dy: Two dictionaries to be merged
 		:type dx, dy: dict
 		'''
@@ -1119,7 +1149,8 @@ class DIC():
 	def recursive_dic(dic, indention=0):
 		"""convert dictionary (dic) to string. 
 		recursive dictionary increases indention.
-		--> str
+		
+		Returns str
 		"""
 		s = ""
 		if isinstance(dic, dict):
@@ -1253,7 +1284,8 @@ class DictMethods():
 	def append(self, item, value):
 		"""appends value to self[item] dictionary.
 		create new list if no value found for item, appends to list if available.
-		--> None
+		
+		Returns None
 		"""
 		try:
 			if not self.dic.get(item):
@@ -1294,7 +1326,8 @@ class DB():
 	def read_excel(file, sheet='Sheet1', **kwargs):
 		'''
 		reads a sheet from an excel 
-		--->returns dataframe of that sheet data
+		
+		Returns returns dataframe of that sheet data
 
 		:param file: source excel database file
 		:type str:
@@ -1455,7 +1488,8 @@ class IP():
 	@staticmethod
 	def ping_average(ip):
 		"""return average ping responce for provided ip
-		-->int
+		
+		Returns int
 		"""
 		lst = popen(f"ping {ip}").read().split("\n")
 		for x in lst:
@@ -1469,7 +1503,8 @@ class IP():
 	@staticmethod
 	def bin2dec(binmask):
 		'''convert binary mask to decimal mask
-		---> decimal mask
+		
+		Returns decimal mask
 		:param binmask str: binary mask as string
 		'''
 		return 32 - IP.inv2dec(binmask)
@@ -1477,7 +1512,9 @@ class IP():
 	@staticmethod
 	def inv2dec(invmask):
 		'''convert inverse mask to decimal mask
-		---> decimal mask
+		
+		Returns decimal mask
+
 		:param invmask str: inverse mask as string
 		'''
 		m_octs = invmask.split(".")

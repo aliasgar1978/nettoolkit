@@ -171,7 +171,7 @@ class Var():
 
 	def convert_to_dataframe(self):
 		"""creates a new dictionary of data frame from local variables 
-		--> Dictionary of Pandas DataFrame as value
+		Dictionary of Pandas DataFrame as value
 		"""
 		df = pd.DataFrame(self.var, index=[0]).T
 		df = df.reset_index()

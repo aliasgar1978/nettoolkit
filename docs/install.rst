@@ -38,7 +38,7 @@ Inherited python packages
 	* paramiko
 	* netmiko
 	* ntc-templates
-	* compare-it
+
 
 -------------------------------------
 

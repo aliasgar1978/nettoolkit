@@ -1,5 +1,6 @@
 # ------------------------------------------------------------------------------
 from nettoolkit.nettoolkit_common.gpl import *
+from nettoolkit.pyNetCrypt.jpw_cracker import juniper_decrypt
 
 # ------------------------------------------------------------------------------
 

@@ -173,7 +173,7 @@ class TableInterfaceCisco(DataFrameInit, TableInterfaces):
 	def merge_interface_data(self):
 		"""merges interface related data frames from the parsed excel sheet command output 
 		which was originated from capture_it along with ntctemplate.
-		--> DataFrame: A single pandas dataframe clubbed with all interface related details. 
+		DataFrame: A single pandas dataframe clubbed with all interface related details. 
 		"""
 		# Note: Some of the duplicate columns will get generated during merge 
 		#       which will be taken care in next step

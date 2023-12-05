@@ -21,7 +21,8 @@ class JSet(Default, STR, Container):
 
 	def set_input(self, input_file=None, input_list=None):
 		"""set input list from either provided input.
-		--> None
+		
+		Returns None
 
 		:param input_file: input text file i/o
 		:type input_file: i/o
@@ -39,7 +40,8 @@ class JSet(Default, STR, Container):
 	@property
 	def to_set(self):
 		"""reads juniper standard config and convert it to set, store it to output
-		--> None
+		
+		Returns None
 		"""
 		varL, varS, varR, c = "", "set ", [], 0
 		try :
@@ -92,7 +94,8 @@ class JSet(Default, STR, Container):
 
 	def read_input_list(self, input_list):
 		"""Reads input list as input list
-		--> None
+		
+		Returns None
 
 		:param input_list: input in format of list or tuple
 		:type input_list: list, tuple
@@ -104,7 +107,8 @@ class JSet(Default, STR, Container):
 
 	def read_input_file(self, input_file):
 		"""Reads input file and set input list
-		--> None
+		
+		Returns None
 
 		:param input_file: input text file i/o
 		:type input_file: i/o

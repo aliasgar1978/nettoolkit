@@ -14,6 +14,8 @@ Minitools
 
 .. image:: img/compare_it.png
 
+.. image:: img/minitools_quick_show_output.png
+
 -----
 
 

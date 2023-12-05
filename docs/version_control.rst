@@ -121,6 +121,9 @@ Version Control
      - * Bug fix for pyVig y-axis alignment error
        * Forms view updated and shuffled form files to its respective parent project folder.
        * compare-it added
+   * - 1.4.1
+     - Dec 5, 2023
+     - Added GUI tab for quick show
 
 
 -----

@@ -22,7 +22,7 @@ Password encrypt (type-7)
 	.. code-block:: python
 		:emphasize-lines: 2
 
-		>>> from nettoolkit.pynetcrypt import encrypt_type7
+		>>> from nettoolkit.pyNetCrypt import encrypt_type7
 		>>> encrypt_type7("Cisco1234")
 		'062506324f41584b5643'				## Encrypted password string.
 
@@ -39,7 +39,7 @@ Password decrypt (type-7)
 	.. code-block:: python
 		:emphasize-lines: 2
 
-		>>> from nettoolkit.pynetcrypt import decrypt_type7
+		>>> from nettoolkit.pyNetCrypt import decrypt_type7
 		>>> decrypt_type7("062506324f41584b5643")
 		'Cisco1234'			## Decrypted password string
 
@@ -60,7 +60,7 @@ Decrypt type7 passwords from cisco configuration file
 	.. code-block:: python
 		:emphasize-lines: 2
 
-		>>> from nettoolkit.pynetcrypt import decrypt_file_passwords
+		>>> from nettoolkit.pyNetCrypt import decrypt_file_passwords
 		>>> decrypt_file_passwords("input_file.log", "output_file.log")
 
 
@@ -78,7 +78,7 @@ Mask type7 passwords from cisco configuration file
 	.. code-block:: python
 		:emphasize-lines: 2
 
-		>>> from nettoolkit.pynetcrypt import mask_file_passwords
+		>>> from nettoolkit.pyNetCrypt import mask_file_passwords
 		>>> mask_file_passwords("input_file.log", "output_file.log")
 
 

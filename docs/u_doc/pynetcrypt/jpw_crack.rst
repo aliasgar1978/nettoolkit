@@ -21,7 +21,7 @@ Password encrypt ($9)
 	.. code-block:: python
 		:emphasize-lines: 2
 
-		>>> from nettoolkit.pynetcrypt import juniper_encrypt
+		>>> from nettoolkit.pyNetCrypt import juniper_encrypt
 		>>> juniper_encrypt("welcome1234")
 		'$9$DDk5FCA0Rhrmf0IEyW8-VwYaZDikPTzji'				## Encrypted password string.
 
@@ -38,7 +38,7 @@ Password decrypt ($9)
 	.. code-block:: python
 		:emphasize-lines: 2
 
-		>>> from nettoolkit.pynetcrypt import juniper_decrypt
+		>>> from nettoolkit.pyNetCrypt import juniper_decrypt
 		>>> juniper_decrypt("$9$DDk5FCA0Rhrmf0IEyW8-VwYaZDikPTzji")
 		'welcome1234'			## Decrypted password string
 
@@ -59,7 +59,7 @@ Decrypt all $9 passwords from Juniper configuration file
 	.. code-block:: python
 		:emphasize-lines: 2
 
-		>>> from nettoolkit.pynetcrypt import decrypt_doller9_file_passwords
+		>>> from nettoolkit.pyNetCrypt import decrypt_doller9_file_passwords
 		>>> decrypt_doller9_file_passwords("input_file.log", "output_file.log")
 
 
@@ -77,7 +77,7 @@ Mask all $9 passwords from juniper configuration file
 	.. code-block:: python
 		:emphasize-lines: 2
 
-		>>> from nettoolkit.pynetcrypt import mask_doller9_file_passwords
+		>>> from nettoolkit.pyNetCrypt import mask_doller9_file_passwords
 		>>> mask_doller9_file_passwords("input_file.log", "output_file.log")
 
 

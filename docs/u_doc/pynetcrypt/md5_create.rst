@@ -14,7 +14,7 @@ Generate MD5 Hash value for given file.
 	.. code-block:: python
 		:emphasize-lines: 2
 
-		>>> from nettoolkit.pynetcrypt import get_md5
+		>>> from nettoolkit.pyNetCrypt import get_md5
 		>>> get_md5("c:/users/testuser/desktop/testfile.ext")
 		'0df62506324f41584b5643'				## Encrypted password string.
 

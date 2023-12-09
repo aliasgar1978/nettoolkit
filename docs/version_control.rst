@@ -122,7 +122,7 @@ Version Control
        * Forms view updated and shuffled form files to its respective parent project folder.
        * compare-it added
    * - 1.4.1
-     - Dec 5, 2023
+     - Dec 9, 2023
      - * Added a new GUI tab for quick show command
        * Added cache functionality for some of GUI fields.
        * Bug fix an import error

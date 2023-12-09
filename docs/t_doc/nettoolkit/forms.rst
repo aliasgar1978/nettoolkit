@@ -17,7 +17,7 @@ Compare scanner outputs
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. automodule:: nettoolkit.nettoolkit.forms.compare_scanner_outputs
+.. automodule:: nettoolkit.addressing.forms.compare_scanner_outputs
 	:members:
 	:undoc-members:
 	:show-inheritance:
@@ -27,28 +27,7 @@ Compare scanner outputs
 Create batch
 ^^^^^^^^^^^^
 
-.. automodule:: nettoolkit.nettoolkit.forms.create_batch
-	:members:
-	:undoc-members:
-	:show-inheritance:
-
-
-
-
-Juniper operations
-^^^^^^^^^^^^^^^^^^
-
-.. automodule:: nettoolkit.nettoolkit.forms.juniper_oper
-	:members:
-	:undoc-members:
-	:show-inheritance:
-
-
-
-MD5 calculator
-^^^^^^^^^^^^^^
-
-.. automodule:: nettoolkit.nettoolkit.forms.md5_calculator
+.. automodule:: nettoolkit.addressing.forms.create_batch
 	:members:
 	:undoc-members:
 	:show-inheritance:
@@ -58,7 +37,37 @@ MD5 calculator
 Prefixes operations
 ^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: nettoolkit.nettoolkit.forms.prefixes_oper
+.. automodule:: nettoolkit.addressing.forms.prefixes_oper
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+
+
+Subnet scanner
+^^^^^^^^^^^^^^
+
+.. automodule:: nettoolkit.addressing.forms.subnet_scanner
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+
+
+Juniper operations
+^^^^^^^^^^^^^^^^^^
+
+.. automodule:: nettoolkit.pyJuniper.forms.juniper_oper
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+
+
+MD5 calculator
+^^^^^^^^^^^^^^
+
+.. automodule:: nettoolkit.pyJuniper.forms.md5_calculator
 	:members:
 	:undoc-members:
 	:show-inheritance:
@@ -67,17 +76,10 @@ Prefixes operations
 Password Encryption Decryption
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. automodule:: nettoolkit.nettoolkit.forms.pw_enc_dec
+.. automodule:: nettoolkit.pyJuniper.forms.pw_enc_dec
 	:members:
 	:undoc-members:
 	:show-inheritance:
 
 
-Subnet scanner
-^^^^^^^^^^^^^^
-
-.. automodule:: nettoolkit.nettoolkit.forms.subnet_scanner
-	:members:
-	:undoc-members:
-	:show-inheritance:
 

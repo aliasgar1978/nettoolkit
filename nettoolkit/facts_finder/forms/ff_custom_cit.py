@@ -28,6 +28,7 @@ def custom_ff_file_cit_exec(obj, i):
 	try:
 		classes = get_classes(i['custom_ff_file_cit'])
 		obj.event_update_element(custom_ff_class_name_cit={'values': classes})
+		update_cache(CACHE_FILE, custom_facts_finder_pkg_module=i['custom_ff_file_cit'])
 		return True
 	except:
 		return False
@@ -37,6 +38,7 @@ def custom_fk_file_cit_exec(obj, i):
 	try:
 		v = get_variables(i['custom_fk_file_cit'])
 		obj.event_update_element(custom_fk_name_cit={'values': v})
+		update_cache(CACHE_FILE, custom_facts_finder_foreign_key_module=i['custom_fk_file_cit'])
 		return True
 	except:
 		return False
@@ -51,6 +53,7 @@ def custom_ff_name_cit_exec(obj, i):
 		obj.event_update_element(custom_ff_class_str_cit={'value': s})
 		exec(s)
 		obj.custom_ff_class = eval(i["custom_ff_class_name_cit"])
+		update_cache(CACHE_FILE, custom_facts_finder_module_class=i['custom_ff_class_name_cit'])
 		return True
 	except:
 		return False
@@ -64,6 +67,7 @@ def custom_fk_name_cit_exec(obj, i):
 		s = f'from {p.parts[-2]}.{file} import {i["custom_fk_name_cit"]}'
 		obj.event_update_element(custom_ff_class_str_cit={'value': s})
 		exec(s)
+		update_cache(CACHE_FILE, custom_facts_finder_module_foreign_keys=i['custom_fk_name_cit'])		
 		if eval(f'isinstance({i["custom_fk_name_cit"]}, dict)'):
 			obj.custom_fk = eval(i["custom_fk_name_cit"])
 			return True
@@ -93,18 +97,18 @@ def exec_ff_custom_cit_frame():
 
 
 		[sg.Text('custom facts-finder package file:', text_color='black'), 
-		 sg.InputText('', key='custom_ff_file_cit', change_submits=True, ), sg.FileBrowse(),
+		 sg.InputText(get_cache(CACHE_FILE, 'custom_facts_finder_pkg_module'), key='custom_ff_file_cit', change_submits=True, ), sg.FileBrowse(),
 		],
 		[sg.Text('custom facts-finder class from above package', text_color='black'), 
-		 sg.InputCombo([], key='custom_ff_class_name_cit', size=(20,1), change_submits=True, ),
+		 sg.InputCombo([], default_value=get_cache(CACHE_FILE, 'custom_facts_finder_module_class'), key='custom_ff_class_name_cit', size=(20,1), change_submits=True, ),
 		], 
 		[sg.Text('', key='custom_ff_class_str_cit', text_color='light yellow',),], 
 		[sg.Text(''),], 
 		[sg.Text('custom file having foreign keys dictionary:', text_color='black'), 
-		 sg.InputText('', key='custom_fk_file_cit', change_submits=True, ), sg.FileBrowse(),
+		 sg.InputText(get_cache(CACHE_FILE, 'custom_facts_finder_foreign_key_module'), key='custom_fk_file_cit', change_submits=True, ), sg.FileBrowse(),
 		],
 		[sg.Text('foreign key dictionary variable from above package', text_color='black'), 
-		 sg.InputCombo([], key='custom_fk_name_cit', size=(20,1), change_submits=True, ),
+		 sg.InputCombo([], default_value=get_cache(CACHE_FILE, 'custom_facts_finder_module_foreign_keys'), key='custom_fk_name_cit', size=(20,1), change_submits=True, ),
 		], 
 		[sg.Text('', key='custom_fk_str_cit', text_color='light yellow'),], 
 		under_line(80),

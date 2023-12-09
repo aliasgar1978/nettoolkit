@@ -35,7 +35,7 @@ def exec_quick_show_output_frame():
 		],
 		under_line(80),
 
-		[sg.Text("Username:", text_color="yellow"),sg.InputText("", key='quick_sh_cred_un', size=(10,1)),],
+		[sg.Text("Username:", text_color="yellow"),sg.InputText(get_cache(CACHE_FILE, 'username'), key='quick_sh_cred_un', size=(10,1), change_submits=True),],
 		[sg.Text("Password:", text_color="yellow"),sg.InputText("", key='quick_sh_cred_pw', password_char='*', size=(32,1),),],
 		[sg.Text("Enable:", text_color="black"),sg.InputText("", key='quick_sh_cred_en',  password_char='*', size=(32,1)),],
 		under_line(80),
@@ -49,3 +49,6 @@ def exec_quick_show_output_frame():
 
 		])
 
+def update_quick_sh_cred_un(i):
+	update_cache(CACHE_FILE, username=i['quick_sh_cred_un'])
+	return True

@@ -12,31 +12,13 @@ from nettoolkit.nettoolkit_common import IO
 
 # ---------------------------------------------------------------------------------------
 
-def pv_data_start_exec(obj, i):
-	files = i['pv_input_data_files'].split(";")
-	dic = {}
-	if i['pv_input_data_files']:
-		dic['data_file'] = f"{i['py_datafile_output_folder']}/{i['py_datafile']}"
-		print(f'Collecting Data and creating cable-matrix..')
-		opd = gen_pyvig_excel(files, i, **dic)
-		dic.update(opd)
-		print(f'Finished..')
-	obj.pyVig_dic = dic
-	return True
-
-def pv_start_exec(obj, i):
-	"""executor function
-
-	Args:
-		i (itemobject): item object of frame
-
-	Returns:
-		bool: wheter executor success or not.
-	"""	
+def obj_pyVig_dic_update(obj, i):
 	try:
 		dic = obj.pyVig_dic
 	except:
-		dic = {}
+		obj.pyVig_dic = {}
+		dic = obj.pyVig_dic
+	#
 	dic['stencil_folder'] = i['py_stencil_folder']
 	dic['default_stencil'] = ".".join(Path(i['py_default_stencil']).name.split(".")[:-1])
 	dic['op_file'] =  f"{i['py_output_folder']}/{i['py_op_file']}"
@@ -48,6 +30,36 @@ def pv_start_exec(obj, i):
 	dic['connector_type'] = i['pv_connector_type']
 	dic['color'] = i['pv_line_color']
 	dic['weight'] = float(i['pv_line_weight'])
+
+
+
+def pv_data_start_exec(obj, i):
+	files = i['pv_input_data_files'].split(";")
+	obj_pyVig_dic_update(obj, i)
+	dic = obj.pyVig_dic
+	if i['pv_input_data_files']:
+		dic['data_file'] = f"{i['py_datafile_output_folder']}/{i['py_datafile']}"
+		print(f'Collecting Data and creating cable-matrix..')
+		opd = gen_pyvig_excel(files, i, **dic)
+		dic.update(opd)
+		obj.event_update_element(pv_cm_file={'value': dic['data_file']})
+		print(f'Finished..')
+	return True
+
+def pv_start_exec(obj, i):
+	"""executor function
+
+	Args:
+		i (itemobject): item object of frame
+
+	Returns:
+		bool: wheter executor success or not.
+	"""	
+	obj_pyVig_dic_update(obj, i)
+	try:
+		dic = obj.pyVig_dic
+	except:
+		dic = {}
 	dic['data_file'] = i['pv_cm_file']
 	#
 	print(f'Start Generating Visio')
@@ -79,15 +91,15 @@ def pv_input_data_frame():
 		under_line(80),
 		#
 		[sg.Text('output folder:', size=(20, 1), text_color='yellow'), 
-			sg.InputText('', key='py_datafile_output_folder'),  
+			sg.InputText(get_cache(CACHE_FILE, 'pyvig_database_output_folder'), key='py_datafile_output_folder', change_submits=True),  
 			sg.FolderBrowse(key='py_output_folder_btn'),
 		],
 		[sg.Text('output filename: ', text_color="yellow"), 
-			sg.InputText('', key='py_datafile'),  
+			sg.InputText(get_cache(CACHE_FILE, 'pyvig_database_output_file'), key='py_datafile', change_submits=True),  
 		],
 		under_line(80),
 
-		[ sg.Button('Generate Database', key='pv_data_start', change_submits=True),],
+		[ sg.Button('Generate Database', key='pv_data_start', change_submits=False),],
 
 		])
 
@@ -115,16 +127,16 @@ def pv_input_visio_frame():
 
 		### Database ####
 		[sg.Text('stencils folder :', size=(20, 1), text_color="yellow"), 
-			sg.InputText('', key='py_stencil_folder'),  
+			sg.InputText(get_cache(CACHE_FILE, 'pyvig_visio_stencils_folder'), key='py_stencil_folder', change_submits=True),  
 			sg.FolderBrowse()
 		],
 		[sg.Text('default stencil file :', size=(20, 1), text_color="yellow"), 
-			sg.InputText("", key='py_default_stencil', change_submits=True),
+			sg.InputText(get_cache(CACHE_FILE, 'pyvig_default_stencil'), key='py_default_stencil', change_submits=True),
 			sg.FileBrowse(key='py_default_stencil_btn')
 		],
 		#
 		[sg.Text('output folder :', size=(20, 1), text_color='black'), 
-			sg.InputText('.', key='py_output_folder'),  
+			sg.InputText(get_cache(CACHE_FILE, 'pyvig_drawing_output_folder'), key='py_output_folder', change_submits=True),  
 			sg.FolderBrowse(key='py_output_folder_btn')
 		],
 		[sg.Text('output file name :', size=(20, 1), text_color='black'), 
@@ -152,8 +164,25 @@ def pv_input_visio_frame():
 
 # ---------------------------------------------------------------------------------------
 
+def update_cache_py_datafile_output_folder(i):
+	update_cache(CACHE_FILE, pyvig_database_output_folder=i['py_datafile_output_folder'])
+	return True
 
+def update_cache_py_datafile(i):
+	update_cache(CACHE_FILE, pyvig_database_output_file=i['py_datafile'])
+	return True
 
+def update_cache_py_stencil_folder(i):
+	update_cache(CACHE_FILE, pyvig_visio_stencils_folder=i['py_stencil_folder'])
+	return True
+
+def update_cache_py_default_stencil(i):
+	update_cache(CACHE_FILE, pyvig_default_stencil=i['py_default_stencil'])
+	return True
+
+def update_cache_py_output_folder(i):
+	update_cache(CACHE_FILE, pyvig_drawing_output_folder=i['py_output_folder'])
+	return True
 
 
 # ------------------------------------------------------------------------- 

@@ -108,6 +108,9 @@ def cisco_cmd_list_file_exec(obj, i):
 				lns = f.readlines()
 			lns = ''.join(lns)
 			obj.event_update_element(cisco_cmds={'value': lns})
+			#
+			update_cache(CACHE_FILE, cisco_commands_list_file=i['cisco_cmd_list_file'])
+			#
 			return True
 	except:
 		return None
@@ -129,6 +132,9 @@ def juniper_cmd_list_file_exec(obj, i):
 				lns = f.readlines()
 			lns = ''.join(lns)
 			obj.event_update_element(juniper_cmds={'value': lns})
+			#
+			update_cache(CACHE_FILE, juniper_commands_list_file=i['juniper_cmd_list_file'])
+			#
 			return True
 	except:
 		return None
@@ -163,7 +169,7 @@ def exec_common_to_all_frame():
 		sg.Multiline("", key='cisco_cmds', autoscroll=True, size=(50,5), disabled=False),
 		],
 		[sg.Text('Cisco commands list-file:', text_color="black"), 
-			sg.InputText('', key='cisco_cmd_list_file', change_submits=True,),
+			sg.InputText(get_cache(CACHE_FILE, 'cisco_commands_list_file'), key='cisco_cmd_list_file', change_submits=True,),
 			sg.FileBrowse(),
 		],
 		under_line(80),
@@ -172,7 +178,7 @@ def exec_common_to_all_frame():
 		sg.Multiline("", key='juniper_cmds', autoscroll=True, size=(50,5), disabled=False),
 		],
 		[sg.Text('Juniper commands list-file:', text_color="black"), 
-			sg.InputText('', key='juniper_cmd_list_file', change_submits=True,),
+			sg.InputText(get_cache(CACHE_FILE, 'juniper_commands_list_file'), key='juniper_cmd_list_file', change_submits=True,),
 			sg.FileBrowse(),
 		],
 		under_line(80),

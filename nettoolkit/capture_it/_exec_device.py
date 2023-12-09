@@ -65,6 +65,12 @@ class Execute_Device():
 		logger.add_host(self.log_key)
 		self.logger_list = logger.log[self.log_key]
 		#
+		ip = ip.strip()
+		if not ip:
+			msg_level, msg = 0, f"Missing device ip: [{ip}] - skipping it"
+			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			return None
+		#
 		pinging = self.check_ping(ip)
 		if forced_login or pinging:
 			self.get_device_type(ip)

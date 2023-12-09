@@ -32,7 +32,7 @@ def _df_columns_rearrange(pdf_dict, all_cols):
 	"""	
 	for sht, df in pdf_dict.items():
 		if sht in ('var',): continue
-		if sht in ('bgp', 'vrf',):
+		if sht in ('bgp', 'vrf', 'static'):
 			cols = all_cols[sht]
 		elif sht in ('aggregated', 'vlan', 'physical', 'loopback', 'management', 'tunnel', ):
 			cols = all_cols['interfaces']
@@ -91,7 +91,7 @@ def rearrange_tables(clean_file, foreign_keys=None):
 	# Statics Propoerties/Columns
 	# =====================================================================================================
 	STATIC_PROPS = [
-		"filter", "version", "pfx_vrf", "prefix", "next_hop", "adminisrative_distance",  "tag_value", "remark", 		
+		"static", "filter", "version", "pfx_vrf", "prefix", "next_hop", "adminisrative_distance",  "tag_value", "remark", "track", 		
 	]
 
 	# =====================================================================================================

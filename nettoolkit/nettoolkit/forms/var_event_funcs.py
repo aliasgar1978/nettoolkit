@@ -38,6 +38,7 @@ from nettoolkit.compare_it.forms.compare_configs import *
 # ---------------------------------------------------------------------------------------
 
 MINITOOLS_EVENT_FUNCS = {
+	'quick_sh_cred_un': update_quick_sh_cred_un,
 	'go_md5_calculator': md5_calculator_exec,
 	'go_pw_enc_cisco': pw_enc_cisco_exec,
 	'go_pw_dec_cisco': pw_dec_cisco_exec,
@@ -60,6 +61,8 @@ IPSCANNER_EVENT_FUNCS = {
 	'go_pfxs_break': prefixes_oper_pieces_exec,
 }
 CATPUREIT_EVENT_FUNCS = {
+	'cred_un': 	update_cache_cred_un,
+	'cit_op_folder': update_cache_cit_op_folder,
 	'device_ip_list_file': device_ip_list_file_exec,
 	'cisco_cmd_list_file': cisco_cmd_list_file_exec,
 	'juniper_cmd_list_file': juniper_cmd_list_file_exec,
@@ -81,11 +84,24 @@ FACTSFINDER_EVENT_FUNCS = {
 	'custom_fk_name': custom_fk_name_exec,
 }
 J2CONFIG_EVENT_FUNCS = {
+	'j2_output_folder': update_cache_j2_output_folder,
+	'j2_rfile': update_cache_j2_rfile,
+	'j2_reg_class': update_cache_j2_reg_class,
+	'j2_custom_cls': update_cache_j2_custom_cls,
+	'j2_custom_fn': update_cache_j2_custom_fn,
 	'btn_j2config': btn_j2config_exec,
 	'btn_j2_gen': btn_j2_gen_exec,
 	'j2_custom_reg': j2_custom_reg_exec,
 }
 PYVIG_EVENT_FUNCS = {
+	'py_datafile_output_folder': update_cache_py_datafile_output_folder,
+	'py_datafile': update_cache_py_datafile,
+	'py_stencil_folder': update_cache_py_stencil_folder,
+	'py_default_stencil': update_cache_py_default_stencil,
+	'py_output_folder': update_cache_py_output_folder,
+	'pv_custom_pkg': update_cache_pv_custom_pkg,
+	'pv_custom_mandatory_fns': update_cache_pv_custom_mandatory_fns,
+	'pv_custom_opt_var_fns': update_cache_pv_custom_opt_var_fns,
 	'btn_pyvig': btn_pyvig_exec,
 	'pv_data_start': pv_data_start_exec,
 	'pv_start': pv_start_exec,

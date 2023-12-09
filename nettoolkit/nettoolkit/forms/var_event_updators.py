@@ -23,7 +23,7 @@ FACTSFINDER_EVENT_UPDATERS = {
 	'custom_ff_file', 'custom_ff_class_name', 'custom_fk_file', 'custom_fk_name',	
 }
 J2CONFIG_EVENT_UPDATERS = {
-	'btn_j2_gen', 'j2_custom_reg', 'j2_custom_cls', 'j2_custom_fn', 
+	'btn_j2_gen', 'j2_custom_reg', 
 }
 PYVIG_EVENT_UPDATERS = {
 	'pv_data_start', 'pv_start',

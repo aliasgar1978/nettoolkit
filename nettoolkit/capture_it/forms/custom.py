@@ -17,6 +17,7 @@ def custom_cit_file_exec(obj, i):
 	try:
 		classes = get_classes(i['custom_cit_file'])
 		obj.event_update_element(custom_dynamic_cmd_class_name={'values': classes})
+		update_cache(CACHE_FILE, custom_pkg_module_capture_it=i['custom_cit_file'])
 		return True
 	except:
 		return False
@@ -34,6 +35,7 @@ def custom_dynamic_cmd_class_name_exec(obj, i):
 		obj.event_update_element(custom_dynamic_cmd_class_depenedt_str={'value':s1})
 		exec(s)
 		obj.custom_dynamic_cmd_class = eval(i["custom_dynamic_cmd_class_name"])
+		update_cache(CACHE_FILE, custom_module_class_capture_it=i['custom_dynamic_cmd_class_name'])
 		return True
 	except:
 		return False
@@ -57,10 +59,10 @@ def exec_custom_frame():
 		[sg.Text('custom dynamic commands class', font='Bold', text_color="black") ],
 
 		[sg.Text('select custom package file:', text_color='black'), 
-			sg.InputText('', key='custom_cit_file', change_submits=True,), sg.FileBrowse(),
+			sg.InputText(get_cache(CACHE_FILE, 'custom_pkg_module_capture_it'), key='custom_cit_file', change_submits=True,), sg.FileBrowse(),
 		],
 		[sg.Text('select custom class', text_color='black'), 
-		 sg.InputCombo([], key='custom_dynamic_cmd_class_name', size=(10,1), change_submits=True),
+		 sg.InputCombo([], default_value=get_cache(CACHE_FILE, 'custom_module_class_capture_it'), key='custom_dynamic_cmd_class_name', size=(10,1), change_submits=True),
 		], 
 		under_line(80),
 		[sg.Text('custom Entries will be added as follows::', text_color='light yellow'), ],

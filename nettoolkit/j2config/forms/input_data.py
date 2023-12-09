@@ -58,6 +58,7 @@ def j2_custom_reg_exec(obj, i):
 	grc = get_regional_class(i['j2_custom_reg'])
 	if grc:
 		obj.event_update_element(j2_reg_class={'values': grc,  'value': grc[0]})
+		update_cache_j2_custom_reg(i)
 		return True
 
 def get_regional_class(j2_custom_reg):
@@ -117,24 +118,27 @@ def j2_gen_frame():
 		[sg.Text('Data file', text_color="yellow"), 
 			sg.InputText('', key='j2_dfile'), sg.FilesBrowse(key='btn_j2_dfile') ],
 		[sg.Text('Output Folder', text_color="yellow"), 
-			sg.InputText('', key='j2_output_folder'), sg.FolderBrowse(key='btn_j2_output_folder') ],
+			sg.InputText(get_cache(CACHE_FILE, 'j2config_output_folder'), key='j2_output_folder', change_submits=True), 
+			sg.FolderBrowse(key='btn_j2_output_folder') ],
 		under_line(80),
 		# ------------------------------------------------------------------------------------
 		[sg.Text('Regional Data Excel [optional]', text_color="black"), 
-			sg.InputText('', key='j2_rfile'), sg.FilesBrowse(key='btn_j2_rfile') ],
+			sg.InputText(get_cache(CACHE_FILE, 'j2config_custom_regional_database'), key='j2_rfile', change_submits=True), 
+			sg.FilesBrowse(key='btn_j2_rfile') ],
 		[sg.Text('Custom Regional Processing module hook [optional]', text_color="black"), 
-			sg.InputText('', key='j2_custom_reg', change_submits=True), sg.FileBrowse(key='btn_j2_custom_reg') ],
+			sg.InputText(get_cache(CACHE_FILE, 'j2config_custom_regional_module'), key='j2_custom_reg', change_submits=True), 
+			sg.FileBrowse(key='btn_j2_custom_reg') ],
 		[sg.Text('Select Regional Processing class', text_color="black"), 
-			sg.InputCombo([], key='j2_reg_class', size=(20,1)), ],
+			sg.InputCombo([], default_value=get_cache(CACHE_FILE, 'j2config_custom_regional_class'), key='j2_reg_class', size=(20,1), change_submits=True), ],
 
 		under_line(80),
 		# ------------------------------------------------------------------------------------
 		[sg.Text('Custom classes module(s) hook [optional]', text_color="black"), 
-			sg.InputText('', key='j2_custom_cls', change_submits=False), sg.FileBrowse(key='btn_j2_custom_cls') ],
+			sg.InputText(get_cache(CACHE_FILE, 'j2config_custom_class_filters'), key='j2_custom_cls', change_submits=True), sg.FileBrowse(key='btn_j2_custom_cls') ],
 		under_line(80),
 		# ------------------------------------------------------------------------------------
 		[sg.Text('Custom methods module(s) hook [optional]', text_color="black"), 
-			sg.InputText('', key='j2_custom_fn', change_submits=False), sg.FilesBrowse(key='btn_j2_custom_fn') ],
+			sg.InputText(get_cache(CACHE_FILE, 'j2config_custom_function_filters'), key='j2_custom_fn', change_submits=True), sg.FilesBrowse(key='btn_j2_custom_fn') ],
 		under_line(80),
 		# ------------------------------------------------------------------------------------
 
@@ -144,3 +148,28 @@ def j2_gen_frame():
 		])
 
 # ---------------------------------------------------------------------------------------
+
+def update_cache_j2_output_folder(i):
+	update_cache(CACHE_FILE, j2config_output_folder=i['j2_output_folder'])
+	return True
+
+def update_cache_j2_rfile(i):
+	update_cache(CACHE_FILE, j2config_custom_regional_database=i['j2_rfile'])
+	return True
+
+def update_cache_j2_custom_reg(i):
+	update_cache(CACHE_FILE, j2config_custom_regional_module=i['j2_custom_reg'])
+	return True
+
+def update_cache_j2_reg_class(i):
+	update_cache(CACHE_FILE, j2config_custom_regional_class=i['j2_reg_class'])
+	return True
+
+def update_cache_j2_custom_cls(i):
+	update_cache(CACHE_FILE, j2config_custom_class_filters=i['j2_custom_cls'])
+	return True
+
+def update_cache_j2_custom_fn(i):
+	update_cache(CACHE_FILE, j2config_custom_function_filters=i['j2_custom_fn'])
+	return True
+

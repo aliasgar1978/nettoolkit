@@ -6,7 +6,6 @@ from .stencils import get_list_of_stencils
 from .database import DeviceData, CableMatrixData
 from .entities import ItemObjects, Connectors
 from .visio import VisioObject
-from .gui import UserForm
 
 # ------------------------------------------------------------------------- 
 # ## pyvig boiler plate code.
@@ -143,19 +142,6 @@ def pyVig(**dic):
 	visio_operations(devices_data, cable_matrix_data, stencils, **dic)
 	return None
 
-def pyVig_gui():
-	"""main function starting the gui input - visio generation
-
-	Returns:
-		None: None
-	"""	
-	u = UserForm()
-	try: 
-		dic = u.dic
-	except: 
-		return None
-	pyVig(**dic)
-	return None
 
 
 # ------------------------------------------------------------------------- 

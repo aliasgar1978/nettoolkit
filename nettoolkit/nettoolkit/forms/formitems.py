@@ -1,6 +1,15 @@
 
 # ---------------------------------------------------------------------------------------
 import PySimpleGUI as sg
+import pandas as pd
+from pathlib import *
+import nettoolkit.nettoolkit.forms as frm
+
+# ---------------------------------------------------------------------------------------
+formpath_str = str(frm).split('from')[-1].split(">")[0].strip()[1:-1]
+p = Path(formpath_str)
+previous_path = p.resolve().parents[0]
+CACHE_FILE = previous_path.joinpath('caches.xlsx')
 
 # ---------------------------------------------------------------------------------------
 
@@ -122,4 +131,60 @@ def tabs_display(**tabs_dic):
 	"""    		
 	return [tabs(**tabs_dic),]
 
+# ---------------------------------------------------------------------------------------
+
+def update_cache(cache_file, **kwargs):
+	"""add/update cache item/value
+
+	Args:
+		cache_file (str): cache file name with full path
+	"""		
+	#
+	df = pd.read_excel(cache_file).fillna("")
+	dic = df.to_dict()
+	#
+	for input_key, input_value in kwargs.items():
+		prev_value = ""
+		prev_value_idx = None
+		if input_key in dic['VARIABLE'].values():
+			for (vrk, vr), (vlk, vl) in zip(dic['VARIABLE'].items(), dic['VALUE'].items()):
+				if vr == input_key:
+					prev_value_idx = vlk
+					prev_value = vl
+		v = input_value or prev_value
+		if not prev_value or v != prev_value:
+			if prev_value_idx is None:
+				try:
+					prev_value_idx = max(dic['VARIABLE'].keys())+1
+				except:
+					prev_value_idx = 0
+			dic['VARIABLE'][prev_value_idx] = input_key
+			dic['VALUE'][prev_value_idx] = v
+	ndf = pd.DataFrame(dic, columns=['VARIABLE', 'VALUE'])
+	ndf.to_excel(cache_file, index=False)
+
+
+def get_cache(cache_file, key):
+	"""retrive the value for provided key(item) from cache file
+
+	Args:
+		cache_file (str): cache file name with full path
+		key (str): name of item
+
+	Returns:
+		str: matched item value from cache file
+	"""	
+	#
+	try:
+		df = pd.read_excel(cache_file).fillna("")
+	except FileNotFoundError:
+		df = pd.DataFrame({'VARIABLE': [], 'VALUE':[]})
+		df.to_excel(cache_file, index=False)
+	dic = df.to_dict()
+	#
+	for vrk, vr in dic['VARIABLE'].items():
+		if key == vr:
+			return dic['VALUE'][vrk]
+	#
+	return ""
 # ---------------------------------------------------------------------------------------

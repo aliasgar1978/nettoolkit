@@ -423,24 +423,27 @@ class STR(Container):
 
 	@staticmethod
 	def is_hostname_line(s, host):
-		'''string/line containing hostname of device
-		
-		Returns bool
+		"""string/line containing hostname of device
 
-		:param s: string
-		:type s: str
+		Args:
+			s (str): input string
+			host (str): hostname to be find in provided string
 
-		:param host: hostname to be find in provided string
-		:type host: str
-		'''
+		Returns:
+			bool: boolean value for result
+		"""		
 		return s.find(host) == 0
 
 	@staticmethod
 	def hostname(net_connect):
-		'''input paramiko netconnection, returns hostname from device.
-		
-		Returns str (Hostname from connection)
-		'''
+		"""input paramiko netconnection, returns hostname from device.
+
+		Args:
+			net_connect (connection object): paramiko connection object
+
+		Returns:
+			str: hostname from connection
+		"""		
 		try:
 			hns = net_connect.find_prompt()[:-1]
 			atPos = STR.foundPos(hns, "@")
@@ -451,10 +454,15 @@ class STR(Container):
 
 	@staticmethod
 	def hostname_from_cli(line, command):
-		'''input standard text input line, for which command was entered.
-		
-		Returns str (hostname from command line)
-		'''
+		"""input standard text input line, for which command was entered
+
+		Args:
+			line (str): input line string
+			command (str): command
+
+		Returns:
+			str: hostname from command line
+		"""		
 		if not STR.found(line, command): return None
 		cmdPos = STR.foundPos(line, command)
 		hn = line[:cmdPos].strip()[:-1]
@@ -462,11 +470,16 @@ class STR(Container):
 
 	@staticmethod
 	def shrink_if(intName, length=2):
-		'''Interface Name shortening, input length will decide number of 
+		"""Interface Name shortening, input length will decide number of 
 		charactes to be included in shortened output
-		
-		Returns str (short name of interface)
-		'''
+
+		Args:
+			intName (str): interface
+			length (int, optional): interface identifier prefix length. Defaults to 2.
+
+		Returns:
+			str: short name of interface
+		"""		
 		if not intName: return ""
 		if intName.lower().startswith("tw"): length=3
 		iBW = intBeginWith.match(intName)
@@ -474,20 +487,28 @@ class STR(Container):
 
 	@staticmethod
 	def if_prefix(intName):
-		'''Interface beginning Name
-		
-		Returns str (interface prefix)
-		'''
+		"""Interface beginning Name
+
+		Args:
+			intName (str): interface
+
+		Returns:
+			str: interface prefix
+		"""		
 		if not intName: return ""
 		iBW = intBeginWith.match(intName)
 		return intName[iBW.start(): iBW.end()]
 
 	@staticmethod
 	def if_suffix(intName):
-		'''Interface ending ports
-		
-		Returns str (interface suffix)
-		'''
+		"""Interface ending ports
+
+		Args:
+			intName (str): interface
+
+		Returns:
+			str: interface suffix
+		"""		
 		if not intName: return ""
 		try:
 			iBW = intBeginWith.match(intName)
@@ -497,11 +518,16 @@ class STR(Container):
 
 	@staticmethod
 	def if_standardize(intName, expand=True):
-		'''standardize the interface for uneven length strings.
+		"""standardize the interface for uneven length strings.
 		expand will give fulllength, otherwise it will shrink it to its standard size given
-		
-		Returns str (standardized interface)
-		'''
+
+		Args:
+			intName (str): interface
+			expand (bool, optional): expansion of interface. Defaults to True.
+
+		Returns:
+			str: standardized interface
+		"""		
 		if not intName: return intName
 		pfx = STR.if_prefix(standardize_if(intName))
 		sfx = STR.if_suffix(intName)
@@ -516,30 +542,37 @@ class STR(Container):
 
 	@staticmethod
 	def update_str(s, searchItem='', replaceItem=''):
-		'''Updates line for search item with replace item
+		"""Updates line for search item with replace item
 		(Find/Repalace)
-		
-		Returns str
-		'''
+
+		Args:
+			s (str): input string
+			searchItem (str, optional): search item. Defaults to ''.
+			replaceItem (str, optional): replacement item. Defaults to ''.
+
+		Returns:
+			str: updated string
+		"""		
 		return s.replace(searchItem, replaceItem)
 
 	@staticmethod
 	def get_logfile_name(folder, hn, cmd='', ts='', separator="_@_", extn='.log'):
-		'''return log file name for the command on device with/wo provided 
-		time_stamp.
-		folder = path to where file should be saved
-		hn = file name starting with provided host-name
-		cmd = file name containing additional commands string
-		ts = file name containing additional time stamp
-		separator = hn-cmd-ts separator 
-		extn = extension of filename
-		
-		Returns  str (filename along with full path)
-		'''
+		"""return log file name for the command on device with/wo provided time_stamp
+
+		Args:
+			folder (str): path to where file should be saved
+			hn (str): file name starting with provided host-name
+			cmd (str, optional): file name containing additional commands string. Defaults to ''.
+			ts (str, optional): file name containing additional time stamp. Defaults to ''.
+			separator (str, optional): hn-cmd-ts separator . Defaults to "_@_".
+			extn (str, optional): extension of filename. Defaults to '.log'.
+
+		Returns:
+			str: filename along with full path
+		"""		
 		if ts: ts = separator + ts
 		cmd += ts
 		if cmd:
-			# cmd += ts
 			replaceCandidates = ('|',  '\\', '/', ':', '*', '?', '"', '<', '>')
 			for x in replaceCandidates:
 				cmd = STR.update_str(cmd, x, "_")
@@ -550,51 +583,44 @@ class STR(Container):
 
 	@staticmethod
 	def string_concate(s, s1, conj=''):
-		'''Concatenate strings s and s1 with conjuctor conj
-		
-		Returns str
+		"""Concatenate strings s and s1 with conjuctor conj
 
-		:param s: string
-		:type s: str
+		Args:
+			s (str): input string
+			s1 (str): adder string
+			conj (str, optional): conjuctor. Defaults to ''.
 
-		:param s1: adder string
-		:type s1: string
-
-		:param conj: conjuctor
-		:type conj: string
-		'''
+		Returns:
+			str: updated string
+		"""		
 		return s + s1 if s == '' else s + conj + s1
 
 	@staticmethod
 	def right(strg, n):
-		'''N-number of characters from right side of string
-		
-		Returns str
+		"""N-number of characters from right side of string
 
-		:param strg: string
-		:type strg: str
+		Args:
+			strg (str): input string
+			n (int): number of characters from right
 
-		:param n: number of characters from right
-		:type n: int
-		'''
+		Returns:
+			str: string portion from right
+		"""		
 		l = len(strg)
 		return strg[l-n:l]
 		
 	@staticmethod
 	def mid(strg, pos, n=0):
-		'''N-number of characters from position in string; default n is till end
-		
-		Returns str
+		"""N-number of characters from position in string; default n is till end
 
-		:param strg: string
-		:type strg: str
+		Args:
+			strg (str): input string
+			pos (int): position from where slice to begin
+			n (int): number of characters from from slice(pos)
 
-		:param pos: position from where slice to begin
-		:type pos: int
-
-		:param n: number of characters from slice(pos)
-		:type n: int
-		'''
+		Returns:
+			str: string portion from middle
+		"""		
 		l = len(strg)
 		if n > 0 :
 			return strg[pos-1:pos+n-1]
@@ -603,13 +629,14 @@ class STR(Container):
 
 	@staticmethod
 	def delete_trailing_remarks(s):
-		'''Deletes trailing remarks from Juniper config line/string
-		
-		Returns str
+		"""Deletes trailing remarks from Juniper config line/string
 
-		:param s: number of characters from right
-		:type s: str
-		'''
+		Args:
+			s (str): number of characters from right
+
+		Returns:
+			str: updated string
+		"""		
 		terminal = s.find(";")
 		br_open = s.find("{")
 		br_close = s.find("}")
@@ -624,11 +651,15 @@ class STR(Container):
 
 	@staticmethod
 	def to_list(s):
-		'''Returns list for the provided string - s, 
+		"""Returns list for the provided string - s, 
 		splits string by lines
-		
-		Returns list
-		'''
+
+		Args:
+			s (str): multiline input string
+
+		Returns:
+			list: splitted lines
+		"""		
 		s = s.split("\n")
 		for i, x in enumerate(s):
 			s[i] = x + "\n"
@@ -636,11 +667,15 @@ class STR(Container):
 
 	@staticmethod
 	def to_set(s):
-		'''Return set of values for the provided string - s.
+		"""Return set of values for the provided string - s.
 		splits string by lines and comma
-		
-		Returns set
-		'''
+
+		Args:
+			s (str): multiline input string
+
+		Returns:
+			set: splitted lines/items
+		"""		
 		if isinstance(s, str):
 			_s = []
 			for _ in s.split('\n'):
@@ -654,10 +689,14 @@ class STR(Container):
 		"""input header string line of a text table.
 		returns dictionary with key:value pair where 
 		keys are header string and value are string index (position) of string in line
-		
-		Returns OrderedDict
-		"""
-		exceptional_headers = {}#'Type', }
+
+		Args:
+			line (str): input header string
+
+		Returns:
+			dict: header with its index numbers
+		"""		
+		exceptional_headers = {}
 		headers = OrderedDict()
 		prev_k = None
 		for k in STR.replace_dual_and_split(line.rstrip()):
@@ -673,10 +712,15 @@ class STR(Container):
 
 	@staticmethod
 	def prepend_bgp_as(bgp_as, n):
-		"""'n' number of BGP AS Number prepending string.
-		
-		Returns str
-		"""
+		"""`n` number of BGP AS Number prepending string.
+
+		Args:
+			bgp_as (str): bgp as number
+			n (int): to repeat with
+
+		Returns:
+			str: as-path prepend string
+		"""		
 		s = ''
 		for x in range(n): s += str(bgp_as) + " "
 		return s[:-1]
@@ -685,18 +729,29 @@ class STR(Container):
 	def ending(line, c): 
 		"""check if line ends with c or not, same as native string.endswith()
 		addition is it first strips the line and then checks
-		
-		Returns boolean
-		"""
+
+		Args:
+			line (str): input string
+			c (str): condition string
+
+		Returns:
+			bool: boolean value for result
+		"""		
 		return line.strip().endswith(c)
 
 	@staticmethod
 	def starting(line, c): 
 		"""check if line starts with c or not, same as native string.startswith()
 		addition is it first strips the line and then checks
-		
-		Returns boolean
-		"""
+
+		Args:
+			line (str): input string
+			c (str): condition string
+
+
+		Returns:
+			bool: boolean value for result
+		"""		
 		return line.strip().startswith(c)
 
 # -----------------------------------------------------------------------------
@@ -786,9 +841,10 @@ class IO():
 	@staticmethod
 	def copy_text_file(file):
 		"""copy file.txt to file-copy.txt
-		
-		Returns None
-		"""
+
+		Args:
+			file (str): file name
+		"""	
 		dst = file[:-4] + "-copy.txt"
 		with open(file, 'r') as sf:
 			with open(dst, 'w') as dt:
@@ -798,9 +854,16 @@ class IO():
 	def file_list_for_time_stamp(hn, ts, folder, splitter="_@_" ):
 		"""collection of files from given folder where hostname (hn) 
 		and timestamp (ts) found in the file name.
-		
-		Returns set
-		"""
+
+		Args:
+			hn (str): hostname
+			ts (str): time-stamp
+			folder (str): folder ptah
+			splitter (str, optional): splitter. Defaults to "_@_".
+
+		Returns:
+			set: files from log files
+		"""		
 		files = set()
 		for file in os.listdir(folder):
 			if not splitter in file: continue
@@ -811,9 +874,14 @@ class IO():
 	@staticmethod
 	def devices_on_log_files(folder, splitter="_@_"):
 		"""collection of files from given folder where file extensions are .log
-		
-		Returns set
-		"""
+
+		Args:
+			folder (str): folder path
+			splitter (str, optional): splitter. Defaults to "_@_".
+
+		Returns:
+			set: devices names from log files
+		"""		
 		devices = set()
 		for file in os.listdir(folder):
 			if not splitter in file: continue
@@ -826,9 +894,15 @@ class IO():
 	def timestamps_for_device(devname, folder, splitter="_@_"):
 		"""collection of time stamps of files from given folder
 		for given hostnames.
-		
-		Returns set
-		"""
+
+		Args:
+			devname (str): hostname
+			folder (str): folder path
+			splitter (str, optional): splitter. Defaults to "_@_".
+
+		Returns:
+			set: time stampls from log files.
+		"""		
 		stamps = set()
 		for file in os.listdir(folder):
 			if not splitter in file: continue
@@ -840,26 +914,28 @@ class IO():
 
 	@staticmethod
 	def file_to_str(file):
-		'''Returns string output for the provided file 
-		
-		Returns str
+		"""Returns string output content of the provided file 
 
-		:param file: text input file name/with path
-		:type file: str
-		'''
+		Args:
+			file (str): input file
+
+		Returns:
+			str: content of file
+		"""		
 		with open(file, 'r') as f: 
 			s = f.read()
 		return s
 
 	@staticmethod
 	def file_to_list(file):
-		'''Returns list for the provided file 
-		
-		Returns list
+		"""Returns list output content of the provided file 
 
-		:param file: text input file name/with path
-		:type file: str
-		'''
+		Args:
+			file (str): input file
+
+		Returns:
+			list: content of file
+		"""		
 		file = file.strip()
 		if file is None: return None
 		with open(file, 'r') as f:
@@ -868,13 +944,14 @@ class IO():
 
 	@staticmethod
 	def csv_to_tuple(csv):
-		'''Returns tuple from the provided comma separated text values 
-		
-		Returns tuple
+		"""Returns tuple from the provided comma separated text values 
 
-		:param csv: comma separated value
-		:type csv: str
-		'''
+		Args:
+			csv (str): input string
+
+		Returns:
+			tuple: comma separated values
+		"""		
 		if csv.find('"') and not csv.find('\"'):
 			ln = csv.lstrip().split('"')
 			return tuple([x for i, x in enumerate(ln) if i % 2 != 0])
@@ -883,16 +960,12 @@ class IO():
 
 	@staticmethod
 	def to_file(filename, matter):
-		'''Creates a file with matter
-		
-		Returns None
+		"""Creates a file with matter
 
-		:param filename: filename with path to be creaed.
-		:type filename: str
-
-		:param matter: matter to write to new created file.
-		:type matter: str, list, tuple
-		'''
+		Args:
+			filename (str): filename with path to be creaed.
+			matter (str, list, tuple): matter to write to new created file.
+		"""		
 		with open(filename, 'w') as f:
 			if isinstance(matter, str):
 				f.write(matter)
@@ -901,19 +974,16 @@ class IO():
 
 	@staticmethod
 	def add_to_file(filename, matter, cr=True):
-		'''Writes List/text to output filename.
-		
-		Returns None
+		"""Writes List/text to output filename.
 
-		:param filename: Existing filename with path
-		:type filename: str
+		Args:
+			filename (str): input file
+			matter (str, tuple, list): matter to write to new created file.
+			cr (bool, optional): carriage return to add at end of each string/line. Defaults to True.
 
-		:param matter: matter to write to new created file.
-		:type matter: str, tuple, list
-
-		:param cr: carriage return to add at end of each string/line.(default True)
-		:type cr: bool
-		'''
+		Returns:
+			_type_: _description_
+		"""	
 		if not filename: return None
 		if isinstance(matter, str):
 			if cr and matter and matter[-1] != "\n": matter += "\n"
@@ -925,21 +995,13 @@ class IO():
 
 	@staticmethod
 	def update(file, find_item, replace_item):
-		'''
-		Find and Replace on provided file and saves file
-		
-		Returns None
+		"""Find and Replace on provided file and saves file
 
-		:param file: on which find and replace to be apply
-		:type str:
-
-		:param find_item: Search item 
-		:type str:
-
-		:param replace_item: Repalce item for the matched find_item
-		:type str:
-
-		'''
+		Args:
+			file (str): input file
+			find_item (str): search item
+			replace_item (str): replacement item
+		"""		
 		with open(file, 'r') as f:
 			filedata = f.read()
 		replace_item = str(replace_item)
@@ -950,11 +1012,14 @@ class IO():
 
 	@staticmethod
 	def jinja_verification(folder):
-		"""check all text files from provided folder for verification of 
-		self jinja strings descrepencies
-		
-		Returns str with outcome
-		"""
+		"""check all text files from provided folder for verification of jinja strings descrepencies
+
+		Args:
+			folder (str): folder to check all jinja files from
+
+		Returns:
+			str: verification outcomes
+		"""		
 		s = ''
 		for file in os.listdir(folder):
 			goahead = {'GOAHEAD FOR': 0, 'GOAHEAD END': 0,}
@@ -982,11 +1047,14 @@ class LST():
 
 	@staticmethod
 	def remove_empty_members(lst):
-		"""house keeping of list
-		removes empty members from list
-		
-		Returns list
-		"""
+		"""house keeping of list, removes empty members from list
+
+		Args:
+			lst (list): input list
+
+		Returns:
+			list: updated list
+		"""		
 		empty_members = ('', None, 'N/A', 'nil')
 		tmp_lst = [m for m in lst if not m in empty_members]
 		return tmp_lst
@@ -994,9 +1062,16 @@ class LST():
 	@staticmethod
 	def expand_vlan_list(vlan_list):
 		"""takes input vlan list, expands it's ranges if any within
-		
-		Returns set of individual vlans.
-		"""
+
+		Args:
+			vlan_list (list): input vlans list
+
+		Raises:
+			Exception: Invalid vlan number
+
+		Returns:
+			list: list of vlans (individual)
+		"""		
 		exp_vl_list = set()
 		for v in vlan_list:
 			if not v: continue
@@ -1017,9 +1092,13 @@ class LST():
 	@staticmethod
 	def convert_vlans_list_to_range_of_vlans_list(vlan_list):
 		"""converts list of individual vlans to a list of range of vlans
-		
-		Returns list
-		"""
+
+		Args:
+			vlan_list (str): input list
+
+		Returns:
+			list: list of vlans (with ranges)
+		"""		
 		vlans_dict, vlans_list, prev, last_key = {}, [], "", ""
 		vlan_list = sorted(LST.expand_vlan_list(vlan_list))
 		for i, vlan in enumerate(vlan_list):
@@ -1047,13 +1126,14 @@ class LST():
 
 	@staticmethod
 	def list_variants(input_list):
-		"""list of vlans in different format
-		list of vlans,
-		space separated string,
-		comma separated string,		
-		
-		Returns dict
-		"""
+		"""list of vlans in different format list of vlans, space separated string, comma separated string,		
+
+		Args:
+			input_list (list): input list
+
+		Returns:
+			dict: list variants (str, csv, ssv)
+		"""		
 		str_list = [str(_) 
 			for _ in LST.convert_vlans_list_to_range_of_vlans_list(input_list)]
 		ssv_list = " ".join(str_list)
@@ -1067,9 +1147,13 @@ class LST():
 	@staticmethod
 	def list_of_devices(list_of_files):
 		"""get hostnames (first index item) from list of files.
-		
-		Returns set
-		"""
+
+		Args:
+			list_of_files (list): input file list
+
+		Returns:
+			set: devices from file list
+		"""		
 		devices = set()
 		for file in list_of_files:
 			if not file.strip(): continue
@@ -1081,9 +1165,14 @@ class LST():
 	@staticmethod
 	def split(lst, n):
 		"""yield provided list with group of n number of items
-		
-		Returns generator of list
-		"""
+
+		Args:
+			lst (list): list of items
+			n (int): items per group 
+
+		Yields:
+			list generator: group of items
+		"""		
 		s = 0
 		lst = tuple(lst)
 		for _ in range(s, len(lst), n):
@@ -1092,8 +1181,15 @@ class LST():
 
 	@staticmethod
 	def list_to_octet(lst):
-		"""joins and return string with provided list with '.'
-		helpful in created ipv4 string with list of 4 numeric items
+		"""joins and return string with provided list with '.', helpful in created ipv4 string with list of 4 numeric items.  Doesn't verify correctness of ip. any number can be concatenated with any numbers of instances.
+
+		Args:
+			lst (list): input ip address splitted by "."
+
+		Returns:
+			str: concatenated ip address
+		"""		
+		"""
 		
 		Returns str
 		"""
@@ -1127,13 +1223,15 @@ class DIC():
 
 	@staticmethod
 	def merge_dict(dx, dy):
-		'''Merges two dictionaries for identical keys 
-		
-		Returns dict
+		"""Merges two dictionaries for identical keys 
 
-		:param dx, dy: Two dictionaries to be merged
-		:type dx, dy: dict
-		'''
+		Args:
+			dx (dict): first dictionary
+			dy (dict): second dictionary
+
+		Returns:
+			dict: merged dictionary
+		"""		
 		for k, v in dy.items():
 			try:
 				dx[k] = DIC.__update_keyValue(dx[k], dy[k])
@@ -1143,11 +1241,15 @@ class DIC():
 
 	@staticmethod
 	def recursive_dic(dic, indention=0):
-		"""convert dictionary (dic) to string. 
-		recursive dictionary increases indention.
-		
-		Returns str
-		"""
+		"""convert dictionary (dic) to string. recursive dictionary increases indention. (deprycated, will be replaced with `dict_to_str`)
+
+		Args:
+			dic (dict): input dictionary
+			indention (int, optional): number of spaces. Defaults to 0.
+
+		Returns:
+			str: Multiline string
+		"""		
 		s = ""
 		if isinstance(dic, dict):
 			for k, v in dic.items():
@@ -1161,6 +1263,19 @@ class DIC():
 		elif isinstance(dic, str):
 			if dic: s+= f"  {' '*indention}{dic}\n"
 		return s
+
+	@staticmethod
+	def dict_to_str(dic, indention=0):
+		"""convert dictionary (dic) to string. recursive dictionary increases indention.
+
+		Args:
+			dic (dict): input dictionary
+			indention (int, optional): number of spaces. Defaults to 0.
+
+		Returns:
+			str: Multiline string
+		"""		
+		LST.recursive_dic(dic, indention)
 
 # -----------------------------------------------------------------------------
 #                         DICTIONARY DIFFERECES                               #
@@ -1183,6 +1298,15 @@ class DifferenceDict(dict):
 	def get_change(self, d, change):
 		"""compare current object/dict with provided new object/dict (ie: d) 
 		and return differences based on change required ("- "/"+ ")
+
+		Args:
+			d (dict): dictionary of differences
+			change (str): change type from ("- "/"+ ")  i.e. removed/added
+
+		Returns:
+			_type_: _description_
+		"""		
+		"""
 		"""
 		if isinstance(d, DifferenceDict):
 			return dict_differences(self.d, d.d, change)
@@ -1220,7 +1344,18 @@ def dict_differences(d1, d2, change):
 	input d1, d2 type: string/int/float/set/dictionary
 	input change is change type prefix (ex: " -", " +")
 	return value type depends on input d1, d2 type.
-	"""
+
+	Args:
+		d1 (str, int, float, set, dict): input 1
+		d2 (str, int, float, set, dict): input 2
+		change (str):  change type from ("- "/"+ ")  i.e. removed/added
+
+	Raises:
+		Exception: TypeMismatch
+
+	Returns:
+		dict: differences in dictionary format
+	"""	
 	diff = {}
 	if d1 == d2: return None
 	if (not (isinstance(d1, (dict, set)) or isinstance(d2, (dict, set))) and
@@ -1246,6 +1381,7 @@ def dict_differences(d1, d2, change):
 # -----------------------------------------------------------------------------
 class DictMethods():
 	"""PAPA DUNDER EXTENSIONS FOR DICTIONARY OBJECTS
+
 	[self.dic is abstract property which gets iterates over]
 	"""
 
@@ -1278,11 +1414,15 @@ class DictMethods():
 			raise KeyError
 
 	def append(self, item, value):
-		"""appends value to self[item] dictionary.
-		create new list if no value found for item, appends to list if available.
-		
-		Returns None
-		"""
+		"""appends value to self[item] dictionary. create new list if no value found for item, appends to list if available.
+
+		Args:
+			item (str, int): key of dictionary
+			value (list): value to be added to dictionary item
+
+		Raises:
+			Exception: WrongInput
+		"""		
 		try:
 			if not self.dic.get(item):
 				self.dic[item] = []
@@ -1304,9 +1444,11 @@ class LOG():
 
 	@staticmethod
 	def time_stamp():
-		'''current time stamp (for log purpose)
-		--> str
-		'''
+		"""current time stamp (for log purpose)
+
+		Returns:
+			str: current datetime string
+		"""		
 		return str(datetime.datetime.now())[:19]
 
 # -----------------------------------------------------------------------------
@@ -1320,20 +1462,15 @@ class DB():
 
 	@staticmethod
 	def read_excel(file, sheet='Sheet1', **kwargs):
-		'''
-		reads a sheet from an excel 
-		
-		Returns returns dataframe of that sheet data
+		"""reads a sheet from an excel
 
-		:param file: source excel database file
-		:type str:
+		Args:
+			file (str): input excel file
+			sheet (str, optional): sheet name. Defaults to 'Sheet1'.
 
-		:param sheet: sheet name on source excel which is to be read.
-		:type str:
-
-		:param kwargs: pandas df arguments to read excel
-		:type kwargs: mutli
-		'''
+		Returns:
+			DataFrame: pandas Dataframe Object
+		"""		
 		return pd.read_excel(file, sheet_name=sheet, **kwargs)
 
 
@@ -1342,16 +1479,21 @@ class DB():
 # Excel Data WRITE Class, use with context manager
 # ------------------------------------------------------------------------------
 class XL_WRITE():
-	'''EXEL FILE CREATE, 
-	hostname  - excel file name
-	sht_df    - sht_name=dataframe
-	df        - dataframe which data to be copied to Excel.
-	sht_name  - Sheet Name of Excel where data to be copied
-	Excel O/P file will go inside - ./output/ - path
-	'''
+	"""Excel file generate
+
+	Args:
+		hostname (str): excel file
+		folder (str): folder path
+		index (bool, optional): write with index or not. Defaults to False.
+
+	Returns:
+		XL_WRITE: object instance
+	"""	
 
 	# Object Initializer
 	def __init__(self, hostname, folder, index=False, **sht_df):
+		"""initializer
+		"""		
 		i = 0
 		self.hostname = hostname
 		self.folder = folder
@@ -1391,52 +1533,22 @@ class XL_WRITE():
 # Excel Data Read Class
 # ------------------------------------------------------------------------------
 class XL_READ:
-	'''EXCEL FILE READING,
-	xl      - Excel file to be read
-	shtName - SheetName to be read from given read
+	"""Excel file read
 
-	RETURNS
-	-------
-	df      - DataFrame object (iterable, lenth, etc. available )
+	Args:
+		xl (str): Excel file name
+		shtName (str, optional): sheet name. Defaults to 'Sheet1'.
 
-	USAGE EXAMPLE
-	-------------
-	obj = XL_READ('data/cmd_list.xlsx')					# get xl df Object
+	Returns:
+		XL_READ: object instance
 
-	### Length of records ###
-	print(len(obj))
-
-	### Go thru each record ###
-	for header, value in obj:
-		print(header, value)
-
-	### Get a particular column ###
-	print(obj["command"])
-
-	### FILTERING RECORDS ###
-	# Option:1
-	flt = {'level':1, 'dev_type':'cisco_ios'}    # get arguments in a dict
-	x = obj.filter(**flt)                        # apply filter dict
-
-	# Option:2
-	x = obj.filter(dev_type='cisco_ios', level=1)# apply filter manually
-
-	# Option:3 - pass external df for filter
-	x = obj.filter(level=1)                   # created a new DataFrame-x
-	x = obj.filter(df=x, dev_type='cisco_ios')# apply flt manually on new DF-x
-
-	# Option:4 Filter Column & return specific columns only.
-	flt = {'level':1, 'dev_type':'cisco_ios'} # get arguments in a dict
-	col = ['command', 'level']
-	x = obj.column_values(column=col, **flt)
-
-	# Check Output for above options
-	print(x)             # filtered output all columns
-	print(x['xl_col'])   # filtered output with specific col only
-
-	'''
+	Yields:
+		tuple: sheetname, dataframe of the sheet
+	"""	
 
 	def __init__(self, xl, shtName='Sheet1'):
+		"""initializer
+		"""		
 		self.df = pd.read_excel(xl, sheet_name=shtName)
 
 	def __repr__(self):
@@ -1451,10 +1563,14 @@ class XL_READ:
 		
 
 	def filter(self, df=None, **kwarg):
-		'''Filter Records
-		df    - external data frame ( default object dataframe )
-		kwarg - filters to be applied on df.
-		'''
+		"""Filter Records
+
+		Args:
+			df (DataFrame, optional): pandas DataFrame. Defaults to None.
+
+		Returns:
+			DataFrame: filtered DataFrame
+		"""		
 		tmpdf = self.df if df is None else df
 		for k, v in kwarg.items():
 			try:
@@ -1463,10 +1579,14 @@ class XL_READ:
 		return tmpdf
 
 	def column_values(self, column, **kwarg):
-		'''selected column output, after filters applied
-		column - a single column name or , list of column names
-		kwarg  - filters to be applied
-		'''
+		"""selected column output, after filters applied
+
+		Args:
+			column (str, list): a single column name or , list of column names
+
+		Returns:
+			DataFrame: filtered columns
+		"""		
 		return self.filter(**kwarg)[column]
 
 
@@ -1484,9 +1604,13 @@ class IP():
 	@staticmethod
 	def ping_average(ip):
 		"""return average ping responce for provided ip
-		
-		Returns int
-		"""
+
+		Args:
+			ip (str): ip address string
+
+		Returns:
+			int, None: responce time or None
+		"""		
 		lst = popen(f"ping {ip}").read().split("\n")
 		for x in lst:
 			if "Average" in x:
@@ -1498,21 +1622,26 @@ class IP():
 
 	@staticmethod
 	def bin2dec(binmask):
-		'''convert binary mask to decimal mask
-		
-		Returns decimal mask
-		:param binmask str: binary mask as string
-		'''
+		"""convert binary mask to decimal mask
+
+		Args:
+			binmask (str): binary mask value
+
+		Returns:
+			int: Decimal mask
+		"""		
 		return 32 - IP.inv2dec(binmask)
 
 	@staticmethod
 	def inv2dec(invmask):
-		'''convert inverse mask to decimal mask
-		
-		Returns decimal mask
+		"""convert inverse mask to decimal mask
 
-		:param invmask str: inverse mask as string
-		'''
+		Args:
+			invmask (str): inverse mask value
+
+		Returns:
+			int: Decimal mask
+		"""		
 		m_octs = invmask.split(".")
 		count_of_ones = 0
 		for x in m_octs:
@@ -1538,11 +1667,22 @@ class Multi_Execution(Default):
 		self.items = items
 
 	def execute_steps(self, multi_thread=True):
-		"""steps defining executions """
+		"""steps defining executions
+
+		Args:
+			multi_thread (bool, optional): Multithread or Sequencial. Defaults to True.
+		"""		
 		self.start(multi_thread)
 
 	def start(self, multi_thread=True):
-		"""starting up executins either threaded/sequencial """
+		"""starting up executins either threaded/sequencial
+
+		Args:
+			multi_thread (bool, optional): Multithread or Sequencial. Defaults to True.
+
+		Returns:
+			None: None
+		"""		
 		if not self.items: return None 
 		if multi_thread:
 			self.execute_mt()
@@ -1550,7 +1690,7 @@ class Multi_Execution(Default):
 			self.execute_sequencial()
 
 	def end(self):
-		"""Closure process """		
+		"""Closure process"""		
 		pass
 
 	def get_devices(self):
@@ -1566,7 +1706,10 @@ class Multi_Execution(Default):
 
 	def execute_threads_max(self, item_list):
 		"""threaded execution of a group
-		"""
+
+		Args:
+			item_list (list, set, tuple): items to be iterated on
+		"""		
 		ts = []
 		for hn in item_list:
 			t = threading.Thread(target=self.execute, args=(hn,) )
@@ -1582,12 +1725,23 @@ class Multi_Execution(Default):
 	@abstractclassmethod
 	def execute(self, hn): 
 		"""abstract class method, to be executed for each item in self.items
-		"""
+
+		Args:
+			hn (str, int, float): individual items to be executed for each
+		"""		
 		pass
 
 
 
 def get_juniper_int_type(intf):
+	"""returns juniper interface type
+
+	Args:
+		intf (str): juniper interface
+
+	Returns:
+		str: interface type (ge, xe, etc)
+	"""	
 	int_type = ""
 	for k, v in JUNIPER_IFS_IDENTIFIERS.items():
 		if intf.startswith(v):
@@ -1596,10 +1750,26 @@ def get_juniper_int_type(intf):
 	return int_type
 
 def get_cisco_int_type(intf):
+	"""returns cisco interface type
+
+	Args:
+		intf (str): cisco interface
+
+	Returns:
+		str: interface type (FastEthernet, GigEthernet, etc..)
+	"""	
 	return interface_type(intf)[0].lower()
 
 
 def get_device_manu(intf):
+	"""returns device type from provided interface
+
+	Args:
+		intf (str): interface
+
+	Returns:
+		device type: manufacturer (cisco, juniper, ``)
+	"""	
 	jit = get_juniper_int_type(intf)
 	cit = get_cisco_int_type(intf)
 	if jit.lower() == 'physical': return "juniper"

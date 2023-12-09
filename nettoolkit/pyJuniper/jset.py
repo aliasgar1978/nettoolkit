@@ -9,9 +9,16 @@ from nettoolkit.nettoolkit_common.gpl import Default, STR, Container
 # ---------------------------------------------------------------------------- #
 
 class JSet(Default, STR, Container):
-	"""Juniper Standard to set converter"""
+	"""Juniper Standard to set converter. Either one input is required.
+
+	Args:
+		input_file (str, optional): juniper standard configuration file. Defaults to None.
+		input_list (list, optional): configuration in format of list. Defaults to None.
+	"""
 
 	def __init__(self, input_file=None, input_list=None):
+		"""jset converter initializer
+		"""		
 		self.output = []
 		self.err = False
 		if input_file or input_list: self.set_input(input_file, input_list)
@@ -21,15 +28,11 @@ class JSet(Default, STR, Container):
 
 	def set_input(self, input_file=None, input_list=None):
 		"""set input list from either provided input.
-		
-		Returns None
 
-		:param input_file: input text file i/o
-		:type input_file: i/o
-
-		:param input_list: input in format of list or tuple
-		:type input_list: list, tuple
-		"""
+		Args:
+			input_file (str, optional): juniper standard configuration file. Defaults to None.
+			input_list (list, optional): configuration in format of list. Defaults to None.
+		"""		
 		if not input_file and not input_list:
 			pass
 		elif input_file:
@@ -40,8 +43,6 @@ class JSet(Default, STR, Container):
 	@property
 	def to_set(self):
 		"""reads juniper standard config and convert it to set, store it to output
-		
-		Returns None
 		"""
 		varL, varS, varR, c = "", "set ", [], 0
 		try :
@@ -94,12 +95,13 @@ class JSet(Default, STR, Container):
 
 	def read_input_list(self, input_list):
 		"""Reads input list as input list
-		
-		Returns None
 
-		:param input_list: input in format of list or tuple
-		:type input_list: list, tuple
-		"""
+		Args:
+			input_list (list, tuple): input in format of list or tuple
+
+		Raises:
+			Exception: InputListReadError
+		"""		
 		if isinstance(input_list, (list, tuple)):
 			self.lst = input_list
 		else:
@@ -107,12 +109,13 @@ class JSet(Default, STR, Container):
 
 	def read_input_file(self, input_file):
 		"""Reads input file and set input list
-		
-		Returns None
 
-		:param input_file: input text file i/o
-		:type input_file: i/o
-		"""
+		Args:
+			input_file (str): input text file i/o
+
+		Raises:
+			Exception: InputFileReadError
+		"""		
 		try:
 			with open(input_file, "r") as f:
 				self.lst = f.readlines()

@@ -103,6 +103,14 @@ def bin_mask(mask):
 
 
 def invmask_to_mask(invmask):
+	"""convert inverse mask to decimal mask
+
+	Args:
+		invmask (str): mask representation in inverse format (ex: 0.0.0.31)
+
+	Returns:
+		int: mask (ex: 27)
+	"""	
 	m = binsubnet(invmask)
 	return 32 - m.count("1")
 
@@ -293,13 +301,14 @@ def isSubset(pfx, supernet):
 # ----------------------------------------------------------------------------
 class Validation():
 	"""ip-subnet validation class, provide ipv4 or ipv6 subnet with "/" mask
+
+	Args:
+		subnet (str): ipv4 or ipv6 subnet with "/" mask
+
 	"""    	
 
 	def __init__(self, subnet):
 		"""Initialise the validation.
-
-		Args:
-			subnet (str): ipv4 or ipv6 subnet with "/" mask
 		"""    		
 		self.mask = None
 		self.subnet = subnet
@@ -512,6 +521,9 @@ class IP():
 
 class IPv6(IP):
 	'''IPv6 object
+
+	Args:
+		subnet (str): ipv6 subnet with mask.
 	'''
 
 	version = 6
@@ -520,9 +532,6 @@ class IPv6(IP):
 	# Object Initializer
 	def __init__(self, subnet=''):
 		"""initialize the IPv6 object for provided v6 subnet
-
-		Args:
-			subnet (str): ipv6 subnet with mask.
 		"""    		
 		super().__init__(subnet)
 		self._network_ip()
@@ -547,28 +556,6 @@ class IPv6(IP):
 		# if not self.subnet: return False
 		return self.subnet
 
-	# update Subnet to actual length / expand zeros 
-	# def _to_actualsize(self):		
-	# 	try:
-	# 		if not self.__actualv6subnet:
-	# 			p = ''
-	# 			sip = self.subnet.split("/")[0].split("::")
-	# 			if len(sip) == 2:
-	# 				# ~~~~~~ No padding, inserting zeros in middle ~~~~~~~
-	# 				for x in range(1, 9):
-	# 					p = STR.string_concate(p, self._get_hext(hexTnum=x), conj=':')
-	# 				self.subnet = p
-	# 			else :
-	# 				# ~~~~~~~ pad leading zeros ~~~~~~~
-	# 				lsip = sip[0].split(":")
-	# 				for x in range(8-len(lsip), 0, -1):
-	# 					p = STR.string_concate(p, '0', conj=":")
-	# 				if p != '':
-	# 					self.subnet = p + ':' + self.subnet
-	# 			self.__actualv6subnet = True
-	# 	except:
-	# 		return False
-
 	# IP Portion of Input
 	def _network_ip(self):
 		try:
@@ -588,36 +575,6 @@ class IPv6(IP):
 
 	# Return a specific Hextate (hexTnum) from IPV6 address
 	def _get_hext(self, hexTnum, s=''):	return get_hext(self.subnet, hexTnum, s)
-
-	# Return a specific Hextate (hexTnum) from IPV6 address
-	# def _get_hext(self, hexTnum, s=''):	
-	# 	test = hexTnum == 1
-	# 	if s == '':
-	# 		s = self.subnet.split("/")[0]
-	# 	try:
-	# 		if s != '' and all([hexTnum>0, hexTnum<=8]):
-	# 			sip = s.split("/")[0].split("::")
-	# 			# if test: print(hexTnum, s)
-	# 			lsip = sip[0].split(":")
-	# 			if hexTnum <= len(lsip):
-	# 				lsiphext = lsip[hexTnum-1]
-	# 				if lsiphext: return lsip[hexTnum-1]
-	# 				return '0'
-	# 			else:
-	# 				rsip = sip[1].split(":")
-	# 				if rsip[0] == '': rsip = []
-	# 				if 8-hexTnum < len(rsip):
-	# 					# if test: print(">>", rsip[(9-hexTnum)*-1])
-	# 					return rsip[(9-hexTnum)*-1]
-	# 				else:
-	# 					# if test: print(">>> 0", )
-	# 					return '0'
-	# 		else:
-	# 			raise Exception(incorrectinput)
-	# 			return None
-	# 	except:
-	# 		raise Exception(incorrectinput)
-	# 		return None
 
 	# Return Number of Network Hextates (hxts) from IPV6 address
 	def _get_hextates(self, hxts=1, s=''):
@@ -1009,17 +966,17 @@ class IPv4(IP):
 # ------------------------------------------------------------------------------
 class Routes(object):
 	"""Routes Object
+	Either one input is require (route_list, route_file)
+
+	Args:
+		hostname (str): device hostname
+		route_list (list, optional): cisco sh route command in list format. Defaults to None.
+		route_file (str, optional): text file of sh route output. Defaults to None.
 	"""    	
 
 
 	def __init__(self, hostname, route_list=None, route_file=None):
 		"""Initialize Route object
-		Either one input is require (route_list, route_file)
-
-		Args:
-			hostname (str): device hostname
-			route_list (list, optional): cisco sh route command in list format. Defaults to None.
-			route_file (str, optional): text file of sh route output. Defaults to None.
 		"""    		
 		if route_file != None: route_list = IO.file_to_list(route_file)
 		self.__parse(route_list, hostname)
@@ -1214,10 +1171,14 @@ class Summary(IPv4):
 		self.remove_subset_prefixes()
 
 	def remove_subset_prefixes(self):
+		"""revmoes subset of prefixes from already calculated summary
+		"""		
 		for pfx in self.del_eligibles:
 			self.summaries.remove(pfx)
 
 	def calc_subset_prefixes(self):
+		"""calculates subbsets of prefixes to identify delete eligibles
+		"""		
 		del_eligibles = set()
 		for i, pfx in enumerate(self.summaries):
 			for j, varify_pfx in enumerate(self.summaries):
@@ -1228,7 +1189,14 @@ class Summary(IPv4):
 
 	def summary(self, s1, s2):
 		"""summary of given two network addresses s1 and s2
-		"""
+
+		Args:
+			s1 (IPv4): IPv4 object1
+			s2 (IPv4): IPv4 object2
+
+		Returns:
+			_type_: _description_
+		"""		
 		if s2 is None: return s1
 		if s1 is None: return s2
 		if self._are_equal(s1, s2): return s1

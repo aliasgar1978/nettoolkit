@@ -7,14 +7,14 @@ from .jset import JSet
 
 class Juniper():
 	"""Juniper configuration file related class
+
+	Args:
+		input_file (str): _description_
+		output_file (str, optional): output file name. Defaults to None.
 	"""    	
 
 	def __init__(self, input_file, output_file=None):
 		"""Initialize object by giving input file name
-
-		Args:
-			input_file (str): _description_
-			output_file (str, optional): output file name. Defaults to None.
 		"""    		
 		self.input_file = input_file
 		self.output_file = output_file
@@ -73,6 +73,15 @@ class Juniper():
 		return H.output
 
 def convert_to_set_from_captures(conf_file, output_file=None):
+	"""enhanced version of jset conversion, which identify the show configuration from multiple show output captures, captured by capture-it and convert it to set.
+
+	Args:
+		conf_file (str): configuration capture file, using capture-it
+		output_file (str, optional): output file name. Defaults to None.
+
+	Returns:
+		_type_: _description_
+	"""	
 	with open(conf_file, 'r') as f:
 		ops = f.readlines()
 	toggle = False

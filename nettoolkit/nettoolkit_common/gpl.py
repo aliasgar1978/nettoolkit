@@ -353,37 +353,31 @@ class STR(Container):
 
 	@staticmethod
 	def replace_dual_and_split(s, duo=' ', strip=None):
-		'''Finds subsequent characters in string and replace those with single,
+		"""Finds subsequent characters in string and replace those with single,
 		plus, splits the string using provided character (duo).
-		
-		Returns list
 
-		:param s: Source string
-		:type s: str
+		Args:
+			s (str): main string
+			duo (str, optional): characters which requires reductions if susequent. Defaults to ' '.
+			strip (int, optional): values (-1=lstrip ,0=strip ,1=rstrip) . Defaults to None.
 
-		:param duo:characters which requires reductions if susequent
-		:type duo: str
-
-		:param strip: values (-1=lstrip ,0=strip ,1=rstrip) - def:None
-		:type strip: int
-		'''
+		Returns:
+			list: split using dual characters
+		"""		
 		return STR.finddualnreplacesingle(s, duo, strip=strip).split(duo)
 
 	@staticmethod
 	def finddualnreplacesingle(s, duo=' ', strip=None):
-		'''Finds subsequent characters in string and replace those with single.
-		
-		Returns str
+		"""Finds subsequent characters in string and replace those with single.
 
-		:param s: Source string
-		:type s: str
+		Args:
+			s (str): Source string
+			duo (str, optional): characters which requires reductions if susequent. Defaults to ' '.
+			strip (int, optional): values (-1=lstrip ,0=strip ,1=rstrip). Defaults to None.
 
-		:param duo: characters which requires reductions if susequent
-		:type duo: str
-
-		:param strip: values (-1=lstrip ,0=strip ,1=rstrip) - def:None
-		:type strip: int
-		'''
+		Returns:
+			_type_: _description_
+		"""		
 		while s.find(duo+duo) > -1:
 			s = s.replace(duo+duo, duo)
 		if strip is not None and isinstance(strip, int):
@@ -403,24 +397,26 @@ class STR(Container):
 
 	@staticmethod
 	def indention(s):
-		'''get string indention value 
-		
-		Returns int
+		"""get string indention value
 
-		:param s: string
-		:type s: str
-		'''
+		Args:
+			s (str): input string
+
+		Returns:
+			int: number of indentants
+		"""		
 		return len(s)-len(s.lstrip())
 
 	@staticmethod
 	def is_blank_line(s):
-		'''Is provided string/line a blank line
-		
-		Returns bool
+		"""is provided string/line a blank line
 
-		:param s: string
-		:type s: str
-		'''
+		Args:
+			s (str): input string
+
+		Returns:
+			bool: boolean value for result
+		"""		
 		try:
 			return True if len(s.strip()) == 0 else False
 		except Exception: pass

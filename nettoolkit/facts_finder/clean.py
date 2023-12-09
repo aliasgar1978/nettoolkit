@@ -83,6 +83,11 @@ class CleanFacts:
 		self.Fg()
 
 	def set_config(self):
+		"""set the appropriate configuration for device types.
+
+		Raises:
+			Exception: undetected device type
+		"""		
 		if self.Fg.dev_type == 'cisco':
 			self._config = cisco_config(self.capture_log_file)
 		elif self.Fg.dev_type == 'juniper':

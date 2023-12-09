@@ -30,6 +30,8 @@ class Nettoolkit(GuiTemplate):
 		self.set_button_pallete()
 
 	def initialize_variables(self):
+		"""Initialize all variables
+		"""		
 		self.tabs_dic.update(MINITOOLS_FRAMES)
 		self.tabs_dic.update(IPSCANNER_FRAMES)
 		self.tabs_dic.update(CAPTUREIT_FRAMES)
@@ -65,6 +67,12 @@ class Nettoolkit(GuiTemplate):
 		self.custom_fk = {}          # custom facts-finder foreign keys
 
 	def user_events(self, i, event):
+		"""specific event catchers
+
+		Args:
+			i (dict): dictionary of GUI fields variables
+			event (str): event
+		"""		
 		if event == 'file_md5_hash_check':
 			self.event_update_element(file_md5_hash_value={'value': ""})
 		if event == 'go_count_ips':
@@ -72,9 +80,16 @@ class Nettoolkit(GuiTemplate):
 
 	@property
 	def cleanup_fields(self):
+		"""fields variables which are to be cleaned
+
+		Returns:
+			set: retractables
+		"""		
 		return self.retractables
 
 	def set_button_pallete(self):
+		"""button pallete definition
+		"""		
 		nbpb = [
 			sg.Button("Minitools", change_submits=True, key='btn_minitools'), 
 			sg.Button("Addressing", change_submits=True, key='btn_ipscanner'), 
@@ -95,9 +110,4 @@ class Nettoolkit(GuiTemplate):
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':
 	pass
-	# Test UI #
-	# u = Nettoolkit()
-	# u()
-	# del(u)
-
 # ------------------------------------------------------------------------------

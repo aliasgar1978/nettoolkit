@@ -1,6 +1,6 @@
-"""
-# Dictionary converter for extremely nested dictionary to and from to excel data tabular format
-"""
+# """
+# # Dictionary converter for extremely nested dictionary to and from to excel data tabular format
+# """
 import pandas as pd
 
 # ----------------------------------------------------------------------------
@@ -260,19 +260,3 @@ class ConvDict():
 if __name__ == '__main__':
 	pass
 # ----------------------------------------------------------------------------
-	# from pprint import pprint
-	
-	# # d is an input nested dictionary
-	# CD = ConvDict(d)
-	# CD.set_var_table_keys(var='var', table='table')
-	# CD.set_index_keys_parents(('phyint', 'vlint', ))
-
-	# dfv = CD.to_dataframe('var')
-	# dft = CD.to_dataframe('table')	
-
-	# opd = CD.expand_to_dict(df_var=dfv, df_table=dft)
-
-	# print(opd)
-	# print(d == opd)
-# ----------------------------------------------------------------------------
-	

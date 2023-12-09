@@ -1,6 +1,3 @@
-"""activities on devices tab on databse
-"""
-
 
 import pandas as pd
 from .general import update_vlans_info, drop_empty
@@ -9,15 +6,15 @@ from .general import update_vlans_info, drop_empty
 
 class AdevDevices():
 	"""A single Device details
+
+	Args:
+		stencil (str): name of default stencil file
+		var_func_dict (dict): dictionary of `var` attributes of device
+		var_df (DataFrame): DataFrame of `var` tab from the -clean excel file generated.
 	"""
 
 	def __init__(self, stencil, var_func_dict, var_df):
 		"""Object Initializer for a single device.
-
-		Args:
-			stencil (str): name of default stencil file
-			var_func_dict (dict): dictionary of `var` attributes of device
-			var_df (DataFrame): DataFrame of `var` tab from the -clean excel file generated.
 		"""
 		self.stencil = stencil
 		self.var_func_dict = var_func_dict
@@ -95,10 +92,11 @@ class AdevDevices():
 # --------------------------------------------- 
 def device_df_drop_empty_duplicates(devices):
 	"""generate pandas DataFrame from provides `devices` dictionary of lists. 
-	Removes empty entries from hostname column,
-	Convert case to lowercases,
-	Removes duplicate entries (if any)
-	Returns generated DataFrame.
+	
+	* Removes empty entries from hostname column,
+	* Convert case to lowercases,
+	* Removes duplicate entries (if any)
+	* Returns generated DataFrame.
 
 	Args:
 		devices (dict): dictionary of list (compatible to convert to DataFrame)

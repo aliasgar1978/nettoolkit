@@ -1,11 +1,7 @@
-""" Some Maths
-"""
-
-
 import numpy as np
 import pandas as pd
 
-
+# -------------------------------------------------------------------------------------
 
 def df_with_slops_and_angles(df, x1_col, x2_col, y1_col, y2_col):
 	"""add the dataframe with slop and angle for the given co-ordinates on plane.
@@ -65,16 +61,16 @@ def slop_to_angled_connector(m):
 # --------------------------------------------- 
 class CalculateXY():
 	"""Co-ordinate calculator
+
+	Args:
+		dev_df (DataFrame): Device DataFrame
+		default_x_spacing (int, float): horizontal spacing between two devices
+		default_y_spacing (int, float): vertical spacing between two devices
+		cbl_df (DataFrame): Cabling DataFrame
+		sheet_filter_dict (dict): sheet filters for multi tab drawing
 	"""	
 	def __init__(self, dev_df, default_x_spacing, default_y_spacing, cbl_df, sheet_filter_dict):
 		"""initialize object by providing device DataFrame, default x & y - axis spacing values.
-
-		Args:
-			dev_df (DataFrame): Device DataFrame
-			default_x_spacing (int, float): horizontal spacing between two devices
-			default_y_spacing (int, float): vertical spacing between two devices
-			cbl_df (DataFrame): Cabling DataFrame
-			sheet_filter_dict (dict): sheet filters for multi tab drawing
 		"""		
 		self.df = dev_df
 		self.cbl_df = cbl_df

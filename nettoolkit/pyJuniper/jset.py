@@ -24,7 +24,13 @@ class JSet(Default, STR, Container):
 		if input_file or input_list: self.set_input(input_file, input_list)
 
 	@property
-	def objVar(self): return self.output
+	def objVar(self): 
+		"""output list
+
+		Returns:
+			list: set command output list
+		"""		
+		return self.output
 
 	def set_input(self, input_file=None, input_list=None):
 		"""set input list from either provided input.

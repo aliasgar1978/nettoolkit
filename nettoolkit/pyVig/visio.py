@@ -1,5 +1,4 @@
-"""Module to interact with MS-Visio
-"""
+
 # ------------------------------------------------------------------------------
 #  IMPORTS
 # ------------------------------------------------------------------------------
@@ -17,6 +16,10 @@ from nettoolkit.pyVig.common import get_filename
 class VisioObject():
 	"""Creates a Visio Object. 
 
+	Args:
+		stencils (list, optional): List of stencils. Defaults to None.
+		outputFile (str, optional): output filename. Defaults to None.
+
 	Returns:
 		_type_: _description_
 	"""	
@@ -24,19 +27,12 @@ class VisioObject():
 	# stencils dictionary
 	stn = {}
 
-	# --------------------------------------------------------------------------
-	#  dunders
-	# --------------------------------------------------------------------------
-
 	# object initializer
 	def __init__(self, stencils=None, outputFile=None):
 		"""Initialize Visio Object by starting Visio Application, 
 		Opens a blank Visio Document/Page inside it.
 		open all stencils mentioned
 
-		Args:
-			stencils (list, optional): List of stencils. Defaults to None.
-			outputFile (str, optional): output filename. Defaults to None.
 		"""		
 		self.page_number = 0
 		self.no_of_icons = 0
@@ -342,11 +338,16 @@ class VisioObject():
 # A Single Connector Class defining connector properties and methods.
 # ------------------------------------------------------------------------------
 class Connector():
-	'''s1_s2_Connector = self.connector()
-	Drops a connector to visio page.
+	'''s1_s2_Connector = self.connector(), Drops a connector to visio page.
+
+	Args:
+		visObj (visObj): visio object
+		connector_type (str, optional): connector type. Defaults to None.
 	'''
 
 	def __init__(self, visObj, connector_type=None):
+		"""connector
+		"""		
 		self.visObj = visObj
 		self.connector_type = connector_type
 
@@ -354,8 +355,7 @@ class Connector():
 		"""drops a connector to visio page.
 
 		Args:
-			connector_type (str, optional): connector tpe (valid options are: 
-				angled, straight, curved). Defaults to None=angled.
+			connector_type (str, optional): connector tpe (valid options are:  angled, straight, curved). Defaults to None=angled.
 
 		Returns:
 			connectorObj: Connector Object from visio
@@ -391,8 +391,7 @@ class Connector():
 		"""formatting of line
 
 		Args:
-			color (str, optional): set color of line (blue, red, gray etc.). Defaults to None=black.
-				see line_color for all available options.
+			color (str, optional): set color of line (blue, red, gray etc.). Defaults to None=black.  see line_color for all available options.
 			weight (int, optional): thickness of line. Defaults to None=1.
 			pattern (int, optional): line patterns. Defaults to solid line.
 		"""		
@@ -438,9 +437,7 @@ class Connector():
 		"""color of a line object
 
 		Args:
-			color (str tuple, optional): color of line. Defaults to black.
-				valid string options are (red, green, blue, gray, lightgray, darkgray )
-				Other option is to provide RGB color in tuple ex: (10, 10, 10)
+			color (str tuple, optional): color of line. Defaults to black. valid string options are (red, green, blue, gray, lightgray, darkgray ). Other option is to provide RGB color in tuple ex: (10, 10, 10)
 
 		Returns:
 			None: None
@@ -490,15 +487,15 @@ class Connector():
 # ------------------------------------------------------------------------------
 class Device():
 	"""A Device Object
+
+	Args:
+		visObj (Visio): visio object
+		x (int): x-coordinate
+		y (int): y-coordinate
 	"""		
 
 	def __init__(self, visObj, x, y, **kwargs):
 		"""Initialize Device Object
-
-		Args:
-			visObj (Visio): visio object
-			x (int): x-coordinate
-			y (int): y-coordinate
 		"""		
 		self.visObj = visObj
 		self.x = x

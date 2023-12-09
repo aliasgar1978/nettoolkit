@@ -1,5 +1,3 @@
-"""Visio Entities item objects, connector objects etc.
-"""
 # -----------------------------------------------------------------------------------
 
 from nettoolkit.nettoolkit_common import Multi_Execution
@@ -11,6 +9,12 @@ from nettoolkit.pyVig.visio import device
 # -----------------------------------------------------------------------------------
 class ItemObjects(Multi_Execution):
 	"""Execution of Devices/Item objects on visio
+
+	Args:
+		visObj (visObj): visio object
+		devices_data (AdevDevices): Device object
+		connectors (ADevCablings): Cabling object
+		filterOnCables (bool, optional): multi tab filters. Defaults to True.
 	"""		
 
 	def __init__(self, 
@@ -19,6 +23,8 @@ class ItemObjects(Multi_Execution):
 		connectors,
 		filterOnCables=True
 		):
+		"""object initializer
+		"""		
 		self.visObj = visObj
 		self.devices_data = devices_data
 		self.devices_details_list = (dev for i, dev in devices_data.df.iterrows())
@@ -155,10 +161,16 @@ class ItemObjects(Multi_Execution):
 # -----------------------------------------------------------------------------------
 class Connectors(Multi_Execution):
 	"""Execution of Cabling/Connector objects on visio
+
+	Args:
+		cable_matrix_data (ADevCablings): cablnig object
+		devices (AdevDevices): devices object
 	"""		
 
 
 	def __init__(self, cable_matrix_data, devices):
+		"""object initializer
+		"""		
 		self.connectors = cable_matrix_data
 		self.connectors_list = (connector for i, connector in cable_matrix_data.df.iterrows())
 		self.devices = devices

@@ -113,16 +113,43 @@ def get_system_running_routes(cmd_op, *args):
 # ------------------------------------------------------------------------------
 
 def index_of(item, lst):
+	"""index of an item from list
+
+	Args:
+		item (str): item
+		lst (list): list of items
+
+	Returns:
+		int: index of found item else ``
+	"""	
 	if item in lst:
 		return lst.index(item)
 	return ""
 
 def get_singel_idx_item(item, lst):
+	"""gives next item if found item from list
+
+	Args:
+		item (str): item
+		lst (list): list of items
+
+	Returns:
+		str: Next index item found in list
+	"""	
 	idx = index_of(item, lst)
 	if idx: return lst[idx+1]
 	return ""
 
 def get_multi_idx_item(item, lst):
+	"""get multi indexex item from list
+
+	Args:
+		item (str): item
+		lst (list): list of items
+
+	Returns:
+		str: index till end of list
+	"""	
 	candidates = {'vrf', 'Null0', 'tag', 'name', 'track'}
 	my_idx = index_of(item, lst)
 	if not my_idx: return ""
@@ -135,6 +162,16 @@ def get_multi_idx_item(item, lst):
 	return " ".join(lst[my_idx+1:max_idx])
 
 def get_administrative_dist(spl, next_hop, idx_distance):
+	"""get administrative distance value from ip route command list
+
+	Args:
+		spl (list): ip route command splitted
+		next_hop (str): next hop value
+		idx_distance (int): index distance
+
+	Returns:
+		str: value of administrative distance configured or ``
+	"""	
 	adminisrative_distance = ''
 	if (
 			('Null0' in spl and len(spl)>=idx_distance+6 and spl[idx_distance+5].isnumeric())
@@ -144,6 +181,16 @@ def get_administrative_dist(spl, next_hop, idx_distance):
 	return adminisrative_distance
 
 def get_pfx_nh_idxdist(version, spl, idx_distance):
+	"""get tuple of prefix, nexthop, indexdistance for give ip route split line
+
+	Args:
+		version (int): ip route version
+		spl (list): list of splitted ip route command
+		idx_distance (int): index distance
+
+	Returns:
+		_type_: _description_
+	"""	
 	if version == 4:
 		prefix, subnet_mask, next_hop = spl[idx_distance+2], spl[idx_distance+3], ''
 		prefix = inet_address(prefix, subnet_mask)

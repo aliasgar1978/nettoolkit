@@ -1,13 +1,3 @@
-"""
-database operations
-
-class, method,  function  defining the excel database write/read operations.
-
-index:
-	* read_xl = to read file
-	* append_to_xl = to append to an existing file.
-	* write_to_xl = to create a new file and write.
-"""
 # ------------------------------------------------------------------------------
 from collections import OrderedDict
 import os
@@ -200,6 +190,3 @@ class XL_WRITE():
 		return file
 
 # ------------------------------------------------------------------------------
-
-# __all__ = ['read_xl', 'get_merged_DataFrame_of_file', 'append_to_xl', 'write_to_xl']
-# # ------------------------------------------------------------------------------

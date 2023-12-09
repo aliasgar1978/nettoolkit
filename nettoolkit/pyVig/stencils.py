@@ -1,5 +1,3 @@
-"""visio stencils related
-"""
 
 import os
 from PySimpleGUI import Popup

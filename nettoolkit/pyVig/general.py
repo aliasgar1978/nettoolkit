@@ -1,6 +1,3 @@
-"""general functions
-"""
-
 
 import nettoolkit.nettoolkit_common as nt
 

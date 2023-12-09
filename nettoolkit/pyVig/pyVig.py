@@ -1,5 +1,3 @@
-"""python visio genrator boiler plate code
-"""
 
 from copy import deepcopy
 from .stencils import get_list_of_stencils
@@ -121,7 +119,7 @@ def pyVig(**dic):
 	"""main function starting the python based cli - visio generation
 
 	Args:
-		dic (dict): inputs dictionary ( valid and mandatory keys = stencil_folder, data_file ) (valid but optional keys = default_stencil, cols_to_merge, is_sheet_filter, sheet_filters ... and many more from DEFAULT_DIC )
+		**dic (dict): inputs dictionary ( valid and mandatory keys = stencil_folder, data_file ) (valid but optional keys = default_stencil, cols_to_merge, is_sheet_filter, sheet_filters ... and many more from DEFAULT_DIC )
 
 	Returns:
 		None: None

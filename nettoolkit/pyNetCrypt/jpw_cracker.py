@@ -1,5 +1,5 @@
 #############################################################################
-## Thx you Mhite & Minsuk for providing such wonderful script.
+## Thx you Mhite & Minsuk for providing wonderful script to build my project.
 ## matt hite (mhite@hotmail.com)
 ## Minsuk Song <msuk.song@gmail.com>
 #############################################################################

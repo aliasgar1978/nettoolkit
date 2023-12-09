@@ -294,6 +294,15 @@ def get_item(lst, n):
 		return lst
 
 def as_path_repeat(asn, times):
+	"""as-path repeat function
+
+	Args:
+		asn (str): as number
+		times (int): number of time to be repeated.
+
+	Returns:
+		str: as path appended string
+	"""	
 	if not asn: return ""
 	asn = asn.strip() + " "
 	asp_prep_string = asn*times

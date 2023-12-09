@@ -1,5 +1,3 @@
-"""pyVig Excel Preparation -  A Single Device Cabling Details.
-"""
 
 import pandas as pd
 from .general import *
@@ -11,13 +9,13 @@ from .general import *
 # ----------------------------------------------------------------------------------------------------
 class ADevCablings():
 	"""A single Device Cabling details
+
+	Args:
+		self_device (str): device hostname (self)
 	"""	
 
 	def __init__(self, self_device, **kwargs):
 		"""Object Initializer for A single device cabling details.
-
-		Args:
-			self_device (str): device hostname (self)
 		"""		
 		self.self_device = self_device
 		self.cablings = {}

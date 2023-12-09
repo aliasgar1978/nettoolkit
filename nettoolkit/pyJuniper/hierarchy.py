@@ -6,7 +6,7 @@ from collections import OrderedDict
 from .hierarchy_rules import *
 from nettoolkit.nettoolkit_common.gpl import STR, IO
 
-# Enable only if Max Recursion depth reach.
+# # -- Enablebelow - only if Max Recursion depth reach.
 # import sys
 # sys.setrecursionlimit(10**5)
 
@@ -209,7 +209,19 @@ class Section():
 
 
 class Convert():
-	"""Converts Dicationary to Hierarchical config string"""
+	"""Converts Dicationary to Hierarchical config string
+
+	Args:
+		dic (dict): dictionary
+		tabs (int): front tabs
+		is_tailed (bool, optional): tailed config. Defaults to True.
+		is_grouped (bool, optional): grouped config. Defaults to False.
+		is_distributed (bool, optional): distributed config. Defaults to False.
+		is_straight (bool, optional): straight config. Defaults to False.
+		is_straight_anyway (bool, optional): straight anyway config. Defaults to False.
+		parent_prefix (str, optional): parent prefix. Defaults to ''.
+
+	"""
 
 	def __init__(self, 
 		dic, 
@@ -222,6 +234,8 @@ class Convert():
 		parent_prefix = '',
 		test=False
 		):
+		"""Initializer
+		"""		
 		self.dic = dic
 		self.tabs = tabs
 		self.is_tailed = is_tailed
@@ -247,10 +261,20 @@ class Convert():
 	def add_to_str(self, s): self.s += s
 
 	def update_front_tabs(self, n):
+		"""update front tab value with add of n
+
+		Args:
+			n (int): adds n to tabs
+		"""		
 		self.tabs += n
 		self.front_tabs = self.tabs
 
 	def update_prefix(self, k):
+		"""update prefix value to k
+
+		Args:
+			k (str): key to be added
+		"""		
 		if self.parent_prefix:
 			self.prefix = self.front_tabs + self.parent_prefix + " " + k
 		else:
@@ -290,6 +314,11 @@ class Convert():
 	# - LOGICS -----------------------------------------------------
 
 	def exception(self, dic_key):
+		"""Exceptional identifiex configurations - Add more as found any
+
+		Args:
+			dic_key (str): key to be found in set line
+		"""		
 		if self.tabs == -1:
 			if dic_key == 'policy-options':
 				# candidates_not_expand_in_anycase.clear()
@@ -403,14 +432,6 @@ class Convert():
 		
 
 	# - TERMINATORS -----------------------------------------------------
-	"""
-	Args:
-		dic_key (str): key/string to be added to config
-		dic_value (dict): sub-section config (if any)
-
-	Returns:
-		None: None
-	"""
 
 	@property
 	def terminator_line(self):
@@ -418,14 +439,24 @@ class Convert():
 		self.add_to_str(s)
 
 	def clubbed_candidate_terminator_lines(self, dic_key, dic_value):
-		"""Clubbed candidates terminator words getting added to string"""
+		"""Clubbed candidates terminator words getting added to string
+
+		Args:
+			dic_key (str): key/string to be added to config
+			dic_value (dict): sub-section config (if any)
+		"""		
 		# if self.test : print(dic_key)
 		sObj = Convert(dic_value, self.tabs, is_tailed=True, is_grouped=True)
 		s = dic_key + " " + str(sObj)
 		self.add_to_str(s)
 
 	def distributed_candidate_terminator_lines(self, dic_key, dic_value):
-		"""Distributed terminator candidate words getting added to string"""
+		"""Distributed terminator candidate words getting added to string
+
+		Args:
+			dic_key (str): key/string to be added to config
+			dic_value (dict): sub-section config (if any)
+		"""		
 		# if self.test : print(dic_key)
 		for k, v in dic_value.items():
 			s = self.prefix + " " + k + ";\n"
@@ -443,6 +474,12 @@ class Convert():
 	"""
 
 	def grp_candidate_straight(self, dic_key, dic_value):
+		"""group config, which has straight candidate
+
+		Args:
+			dic_key (str): key/string to be added to config
+			dic_value (dict): sub-section config (if any)
+		"""		
 		# if self.test : print(self.is_straight, dic_key)
 		sObj = Convert(dic_value, self.tabs, is_tailed=True, is_straight=self.is_straight)
 		# if self.test: print(">", self.prefix, sObj.s)
@@ -459,7 +496,12 @@ class Convert():
 
 		
 	def grp_has_suffix_candidate(self, dic_key, dic_value):
-		"""group config, which has suffix candidate."""
+		"""group config, which has suffix candidate.
+
+		Args:
+			dic_key (str): key/string to be added to config
+			dic_value (dict): sub-section config (if any)
+		"""		
 		# if self.test : print(self.is_straight, dic_key)
 		if len(dic_value) > 1:
 			sObj = Convert(dic_value, self.tabs, is_tailed=True, parent_prefix=self.prefix)
@@ -470,7 +512,12 @@ class Convert():
 		self.add_to_str(s)
 
 	def grp_suffixes(self, dic_key, dic_value):
-		"""group config"""
+		"""group config
+
+		Args:
+			dic_key (str): key/string to be added to config
+			dic_value (dict): sub-section config (if any)
+		"""		
 		# if self.test : print(dic_key)
 		self.update_front_tabs(-1)
 		sObj = Convert(dic_value, self.tabs, is_tailed=False)
@@ -479,7 +526,12 @@ class Convert():
 		self.update_front_tabs(1)
 
 	def grp_candidates_clubbed(self, dic_key, dic_value):
-		"""clubbed group config"""
+		"""clubbed group config
+
+		Args:
+			dic_key (str): key/string to be added to config
+			dic_value (dict): sub-section config (if any)
+		"""		
 		# if self.test : print(dic_key)
 		sObj = Convert(dic_value, self.tabs, is_tailed=True, is_grouped=True)
 		if dic_value.get("") and len(dic_value[""]) > 1:
@@ -489,7 +541,12 @@ class Convert():
 		self.add_to_str(s)
 
 	def grp_candidates_distributed(self, dic_key, dic_value):
-		"""Distributed group config"""
+		"""Distributed group config
+
+		Args:
+			dic_key (str): key/string to be added to config
+			dic_value (dict): sub-section config (if any)
+		"""		
 		# if self.test : print(dic_key)
 		pp = self.parent_prefix + dic_key
 		sObj = Convert(dic_value, self.tabs-1, is_tailed=True, is_distributed=True, parent_prefix=pp)
@@ -498,7 +555,12 @@ class Convert():
 
 	# DEFAUT AT END
 	def grp_nested(self, dic_key, dic_value):
-		"""nested group config"""
+		"""nested group config
+
+		Args:
+			dic_key (str): key/string to be added to config
+			dic_value (dict): sub-section config (if any)
+		"""		
 		# ELSE AFTER ALL grp matches
 		# if self.test : print(dic_key)
 		sObj = Convert(dic_value, self.tabs, is_tailed=False)
@@ -507,11 +569,23 @@ class Convert():
 
 
 class Hierarchy():
+	"""Hierarchical config conversion
+
+	Args:
+		input_file (str): input set config file
+		output_file (str): output file
+
+	"""	
+
 	def __init__(self, input_file, output_file):
+		"""Object initializer
+		"""		
 		self.input_file = input_file
 		self.output_file = output_file
 
 	def convert(self):
+		"""convert input file
+		"""		
 		section = self._gen_section_dict( IO.file_to_str(self.input_file) )
 		self._conv_dict_to_hierarchy(section)
 

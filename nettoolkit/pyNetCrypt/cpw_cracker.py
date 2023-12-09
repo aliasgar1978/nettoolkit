@@ -1,6 +1,6 @@
-"""
-Cisco type-7 password breaker. open-source from web.
-"""
+# """
+# Cisco type-7 password breaker. open-source from web.
+# """
 
 import re
 import random

@@ -18,8 +18,8 @@ from .common import visual_print, Log, write_log
 class Execute_Common():
 	"""common methods/variables declaration in a Execute Common class
 
-		Args:
-			auth (dict): authentication parameters
+	Args:
+		auth (dict): authentication parameters
 
 
 	Raises:

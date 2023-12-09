@@ -1,5 +1,4 @@
-""" Operations
-"""
+
 import pandas as pd
 from copy import deepcopy
 from nettoolkit.nettoolkit_db import *
@@ -17,12 +16,12 @@ pd.set_option('mode.chained_assignment', None)
 # --------------------------------------------- 
 class DFGen():
 	"""DataFrame generator
+
+	Args:
+		files (list): list of input excel -clean files 
 	"""	
 	def __init__(self, files):
 		"""initializer of DF Generator
-
-		Args:
-			files (list): list of input excel -clean files 
 		"""		
 		self.files = files
 		self.default_stencil = None
@@ -93,7 +92,7 @@ class DFGen():
 
 		Args:
 			DCT (DF_ConverT): DataFrame Convertor object
-			file (str): a single database. -clean excel file.
+			file (str): a single database. -clean excel file. ( not in use )
 		"""		
 		ddf = DCT.update_devices()
 		#
@@ -125,6 +124,8 @@ class DFGen():
 		self.df_dict = {'Devices': CXY.df, 'Cablings': self.cabling_merged_df }
 
 	def remove_duplicate_cabling_entries(self):
+		"""removes duplicate cabling entries between a-b devices
+		"""		
 		a_to_b = {}
 		copy_full_df = deepcopy(self.cabling_merged_df)
 		for i, data in copy_full_df.iterrows():
@@ -139,6 +140,8 @@ class DFGen():
 			a_to_b[data.a_device]['remotedev'].append(data.b_device)
 
 	def remove_undefined_cabling_entries(self):
+		"""removes undefined cabling entries where device doesn't exist in devices tab
+		"""		
 		dev_hosts = set(self.devices_merged_df.hostname) 
 		copy_full_df = deepcopy(self.cabling_merged_df)
 		for i, data in copy_full_df.iterrows():
@@ -152,6 +155,12 @@ class DFGen():
 # --------------------------------------------- 
 class DF_ConverT():
 	"""Data Frame Converter
+
+	Args:
+		file (str): a single database. -clean excel file.
+		default_stencil (str): default visio stencil file.
+		line_pattern_style_separation_on (str): column name on which line pattern separation should be decided on
+		line_pattern_style_shift_no (int): line pattern change/shift number/steps
 	"""	
 
 	def __init__(self, file, 
@@ -160,12 +169,6 @@ class DF_ConverT():
 		line_pattern_style_shift_no,
 		):
 		"""object initializer
-
-		Args:
-			file (str): a single database. -clean excel file.
-			default_stencil (str): default visio stencil file.
-			line_pattern_style_separation_on (str): column name on which line pattern separation should be decided on
-			line_pattern_style_shift_no (int): line pattern change/shift number/steps
 		"""		
 		self.file = file
 		self.full_df = read_xl(file)

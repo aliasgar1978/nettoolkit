@@ -1,8 +1,6 @@
-"""Defined static global variables here.
 
-"""
 # ------------------------------------------------------------------------------
-#  Visio static CONSTANTS
+#  Visio VBA static CONSTANTS
 # ------------------------------------------------------------------------------
 visCharStyle = {
 	'Bold': 17,

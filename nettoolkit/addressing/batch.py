@@ -1,6 +1,6 @@
-""" creates ping script xxxx.bat file for ping test during / after cr
-provide prefixes and names of prefixes to it. 
-"""
+# """ creates ping script xxxx.bat file for ping test during / after cr
+# provide prefixes and names of prefixes to it. 
+# """
 
 from .addressing import addressing
 import PySimpleGUI as sg

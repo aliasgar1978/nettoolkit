@@ -123,7 +123,9 @@ Version Control
        * compare-it added
    * - 1.4.1
      - Dec 5, 2023
-     - Added GUI tab for quick show
+     - * Added a new GUI tab for quick show command
+       * Added cache functionality for some of GUI fields.
+       * Bug fix an import error
 
 
 -----

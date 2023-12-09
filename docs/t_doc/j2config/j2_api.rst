@@ -1,5 +1,5 @@
 
-DATA COLLECTION
+Data Collection
 -------------------------------------------------------------------------------
 
 .. automodule:: nettoolkit.j2config.data_collect
@@ -17,7 +17,7 @@ Common Functions/Classes for Jinja tables Processing
 	:show-inheritance:
 
 
-GENERAL PYTHON FUNCTIONS
+General Python Functions
 -------------------------------------------------------------------------------
 
 .. automodule:: nettoolkit.j2config.general
@@ -27,7 +27,7 @@ GENERAL PYTHON FUNCTIONS
 
 
 
-j2
+j2_preparations
 -------------------------------------------------------------------------------
 
 .. automodule:: nettoolkit.j2config.j2

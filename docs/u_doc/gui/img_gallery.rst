@@ -3,8 +3,9 @@ Image Gallery
 ###############################################
 
 
-Minitools
-*********
+Minitools tab
+*************
+
 
 .. image:: img/juniper_to_set.png
 
@@ -20,8 +21,8 @@ Minitools
 
 
 
-Addressing
-**********
+Addressing tab
+*****************
 
 .. image:: img/subnet_scanner.png
 
@@ -39,8 +40,8 @@ Addressing
 
 
 
-Capture-IT
-**********
+Capture-IT tab
+**************
 
 .. image:: img/capture_it_1.png
 
@@ -56,8 +57,8 @@ Capture-IT
 
 
 
-Facts-Generation
-****************
+Facts-Generation tab
+********************
 
 .. image:: img/facts_generation_1.png
 
@@ -67,8 +68,8 @@ Facts-Generation
 
 
 
-Configs Generation
-******************
+Configs Generation tab
+***********************
 
 .. image:: img/configs_generation.png
 
@@ -76,8 +77,8 @@ Configs Generation
 
 
 
-Drawing Generation
-******************
+Drawing Generation tab
+***********************
 
 .. image:: img/drawing_gen_1.png
 

@@ -1,5 +1,5 @@
 
-capture-it API documentation!
+compare-it API documentation!
 ###############################
 
 .. toctree::

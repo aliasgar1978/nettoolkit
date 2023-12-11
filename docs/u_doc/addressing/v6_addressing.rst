@@ -112,9 +112,11 @@ see below for example.
         >>> s / 3		# breaks to nearest possible maximum prefix size.
         ('2002:ABCD:1000:256:0:0:0:0/66', '2002:ABCD:1000:256:0:0:0:4000000000000000/66', '2002:ABCD:1000:256:0:0:0:8000000000000000/66', '2002:ABCD:1000:256:0:0:0:c000000000000000/66')
 
-
-Bonus
 -----
+
+
+Bonus IPv6
+----------
 
 
 **Identify, Validate & Create - IPv6 object dynamically**
@@ -127,7 +129,6 @@ Respective operations on returned IPv4 / IPv6 object can be done there after, as
 
 .. code-block:: python
 
-    # // check below with ipv6 input // #
     >>> from nettoolkit.addressing import addressing
     >>> ip = addressing("2620:ABCD:1234::/64")
     >>> type(ip)

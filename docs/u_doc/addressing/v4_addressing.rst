@@ -40,7 +40,7 @@ IPv4 object - Properties:
     * invmask 
     * ip_number
 
-    .. code:: python
+    .. code-block:: python
         :emphasize-lines: 1,3,5,7,9,11,13,15,17,19
     
         >>> s.version
@@ -75,7 +75,7 @@ IPv4 object - methods:
     * expand()
     * ipbinmask(), ipdecmask(), ipinvmask()
 
-    .. code:: python
+    .. code-block:: python
         :emphasize-lines: 1,3,5,7,9,11,13,15,17,19,21,23,25
     
         >>> s.subnet_zero()
@@ -173,8 +173,9 @@ Two adjacent IPv4 Objects can be clubbed together to get the summary out of it (
 
 -----
 
-Bonus
------
+Bonus IPV4
+----------
+
 
 
 **Identify, Validate & Create - IPv4 object dynamically**
@@ -187,7 +188,6 @@ Respective operations on returned IPv4 / IPv6 object can be done there after, as
 
 .. code-block:: python
 
-    # // check below with ipv4 input // #
     >>> from nettoolkit.addressing import addressing
     ip = addressing("10.10.10.0/24")
     >>> type(ip)

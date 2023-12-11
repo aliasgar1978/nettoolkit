@@ -212,7 +212,7 @@ def get_summaries(*net_list):
 	"""summarize the provided network prefixes, provide all networks as arguments.
 
 	Args:
-		net_list (*arg): variable arguments ( networks )
+		net_list (args): variable arguments ( networks )
 
 	Returns:
 		list: summaries
@@ -238,7 +238,7 @@ def calc_summmaries(min_subnet_size, *net_list):
 
 	Args:
 		min_subnet_size (int): minimuze subnet mask to be summarized up on
-		net_list (*arg): variable arguments ( networks )
+		net_list (args): variable arguments ( networks )
 
 	Returns:
 		list: summaries

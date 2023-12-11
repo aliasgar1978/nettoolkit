@@ -45,8 +45,8 @@ Import these functions.
 
 * Use this step if want to add more data to device details, apart from hostname
 * Define a few custom functions to derive the additional device details, Such as Serial Number, IP Address, Model etc.
-* All these functions should accept **kwargs (keyword arguments) and process input data to derive the necessary detail. one of important argument is var_df DataFrame.
-* All these functions should derive and return respective necessary device detail from input **kwargs.
+* All these functions should accept keyword arguments and process input data to derive the necessary detail. one of important argument is var_df DataFrame.
+* All these functions should derive and return respective necessary device detail from input kwargs.
 
 Import these functions.
 

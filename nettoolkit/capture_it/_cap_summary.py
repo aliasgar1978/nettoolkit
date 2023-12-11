@@ -87,7 +87,7 @@ class LogSummary():
 			print(f'Info:\tcommands capture log write to {file}.. failed')
 
 	def trim_juniper_no_more(self):
-		"""trip juniper commands by removing `| no-more ` word
+		"""trip juniper commands by removing no-more word
 		"""		
 		for host, cmd_exec_logs in self.cmd_exec_logs_all.items():
 			for i, item in enumerate(cmd_exec_logs):

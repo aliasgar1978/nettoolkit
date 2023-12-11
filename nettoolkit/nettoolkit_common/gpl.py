@@ -1768,7 +1768,7 @@ def get_device_manu(intf):
 		intf (str): interface
 
 	Returns:
-		device type: manufacturer (cisco, juniper, ``)
+		device type: manufacturer (cisco, juniper)
 	"""	
 	jit = get_juniper_int_type(intf)
 	cit = get_cisco_int_type(intf)

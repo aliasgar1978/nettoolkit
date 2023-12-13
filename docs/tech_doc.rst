@@ -15,3 +15,4 @@ Technical documentation!
     facts-finder <t_doc/facts_finder/tech_doc>
     j2config <t_doc/j2config/tech_doc>
     Compare It <t_doc/compare_it/tech_doc> 
+    pyVig <t_doc/pyvig/tech_doc>

@@ -529,6 +529,7 @@ class STR(Container):
 			str: standardized interface
 		"""		
 		if not intName: return intName
+		intName = intName.replace(" ", "")
 		pfx = STR.if_prefix(standardize_if(intName))
 		sfx = STR.if_suffix(intName)
 		for _, inttype_length in CISCO_IFSH_IDENTIFIERS.items():
@@ -700,6 +701,34 @@ class STR(Container):
 		headers = OrderedDict()
 		prev_k = None
 		for k in STR.replace_dual_and_split(line.rstrip()):
+			k = k.strip()
+			key = k
+			if key in exceptional_headers: key = "__"+key
+			headers[key] = [STR.foundPos(line, k), None]
+			if prev_k is not None:
+				headers[prev_k][1] = STR.foundPos(line, k)
+			prev_k = key
+		headers[key][1] = 90
+		return headers
+
+	@staticmethod
+	def header_indexes_using_splitby(line, split_by="  "):
+		"""input header string line of a text table.
+		returns dictionary with key:value pair where 
+		keys are header string and value are string index (position) of string in line
+
+		Args:
+			line (str): input header string
+			split_by (str): string using which line is to be broken
+
+		Returns:
+			dict: header with its index numbers
+		"""		
+		exceptional_headers = {}
+		headers = OrderedDict()
+		prev_k = None
+		spl_line = LST.remove_empty_members(line.split(split_by))
+		for k in spl_line:
 			k = k.strip()
 			key = k
 			if key in exceptional_headers: key = "__"+key

@@ -147,7 +147,7 @@ class RunningSystem(Running):
 		if ip and spl[4] == 'port':
 			op_dict['tacacs_tcp_port'] = spl[5]
 		if ip and spl[4] == 'secret':
-				op_dict['tacacs_key'] = juniper_decrypt(get_juniper_pw_string(spl, 5))
+			op_dict['tacacs_key'] = get_juniper_pw_string(spl, 5)
 		return op_dict
 
 

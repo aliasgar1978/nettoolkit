@@ -125,7 +125,7 @@ class RunningOSPF(Running):
 			None: None
 		"""
 		if len(spl)>6 and spl[4] == 'authentication':
-			password = juniper_decrypt(get_juniper_pw_string(spl, 6))
+			password = get_juniper_pw_string(spl, 6)
 			interface = spl[3]
 			if not vrf_op_dict.get('auth'):
 				vrf_op_dict['auth'] = {}

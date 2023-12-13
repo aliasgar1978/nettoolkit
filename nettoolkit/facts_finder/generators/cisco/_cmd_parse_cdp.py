@@ -26,8 +26,9 @@ def get_cdp_neighbour(cmd_op, *args, dsr=True):
 	nbr_d, remote_hn, prev_line = {}, "", ""
 	nbr_table_start = False
 	for i, line in enumerate(cmd_op):
-		line = line.strip()
+
 		if line.startswith("Device ID"): 
+			hdr_idx = STR.header_indexes_using_splitby(line)
 			nbr_table_start = True
 			continue
 		if not nbr_table_start: continue
@@ -36,33 +37,25 @@ def get_cdp_neighbour(cmd_op, *args, dsr=True):
 		if line.startswith("!"): continue			# Remarked line
 
 		### NBR TABLE PROCESS ###
-
 		if len(line.strip().split()) == 1:  
-			prev_line = line
+			remote_hn = line[hdr_idx['Device ID'][0]:hdr_idx['Device ID'][-1]]
+			prev_line = True
 			continue
-		if prev_line:
-			l = prev_line.strip() + " " + line
-			prev_line = ""
 		else:
-			l = line
-		dbl_spl = l.split("  ")
+			if not prev_line: remote_hn = line[hdr_idx['Device ID'][0]:hdr_idx['Device ID'][-1]]
+			local_if = STR.if_standardize(line[hdr_idx['Local Intrfce'][0]:hdr_idx['Local Intrfce'][-1]].strip())
+			remote_if = STR.if_standardize(line[hdr_idx['Port ID'][0]:hdr_idx['Port ID'][-1]].strip())
+			remote_plateform = line[hdr_idx['Platform'][0]:hdr_idx['Platform'][-1]]
+			prev_line = False
 
-		# // NBR HOSTNAME //
-		if not remote_hn:
-			remote_hn = dbl_spl[0].strip()
-			if dsr: remote_hn = remove_domain(remote_hn)
-
-		# // LOCAL/NBR INTERFACE, NBR PLATFORM //
-		local_if = STR.if_standardize("".join(dbl_spl[0].split()))
-		remote_if = STR.if_standardize("".join(dbl_spl[-1].split()[1:]))
-		remote_plateform = dbl_spl[-1].split()[0]
+		if remote_hn and dsr: remote_hn = remove_domain(remote_hn)
 
 		# SET / RESET
-		nbr_d[local_if] = {'nbr': {}}
-		nbr = nbr_d[local_if]['nbr']
-		nbr['hostname'] = remote_hn
-		nbr['interface'] = remote_if
-		nbr['plateform'] = remote_plateform
+		nbr_d[local_if] = {}
+		nbr = nbr_d[local_if]
+		nbr['nbr_hostname'] = remote_hn
+		nbr['nbr_interface'] = remote_if
+		nbr['nbr_plateform'] = remote_plateform
 		remote_hn, remote_if, remote_plateform = "", "", ""
 	return nbr_d
 # ------------------------------------------------------------------------------

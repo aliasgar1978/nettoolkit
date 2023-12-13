@@ -20,7 +20,7 @@ LEN_CMD_LINE = len(CMD_LINE_START_WITH)
 # ------------------------------------------------------------------------------
 cisco_cmds_list = OrderedDict([
 	('sh lldp nei', {'dsr': True}),			# dsr = domain suffix removal
-	# ('sh cdp nei', {'dsr': True}),			# dsr = domain suffix removal
+	('sh cdp nei', {'dsr': True}),			# dsr = domain suffix removal
 	('sh int status', {}),
 	('sh int desc', {}),           # N/R - part of running interface config 
 	# ('show mac address-table', {}),  # N/W - as expected
@@ -35,7 +35,7 @@ cisco_cmds_list = OrderedDict([
 # ------------------------------------------------------------------------------
 cisco_cmds_op_hierachy_level = OrderedDict([
 	('sh lldp nei', 'Interfaces'),
-	# ('sh cdp nei', 'Interfaces'),
+	('sh cdp nei', 'Interfaces'),
 	('sh int status', 'Interfaces'),
 	('sh int desc', 'Interfaces'),
 	# 'show mac address-table': 'arp',
@@ -57,7 +57,7 @@ cisco_cmds_op_hierachy_level = OrderedDict([
 # ------------------------------------------------------------------------------
 cisco_commands_parser_map = OrderedDict([
 	('show lldp neighbors', get_lldp_neighbour),
-	# ('show cdp neighbors', get_cdp_neighbour),       # removed due to multiline problem
+	('show cdp neighbors', get_cdp_neighbour),
 	('show interfaces status', get_interface_status),
 	('show interfaces description', get_interface_description),
 	# 'show mac address-table': get_mac_address_table,

@@ -36,9 +36,12 @@ def get_version(cmd_op, *args):
 			srno = spl[-1]
 		if l.startswith("Model Number"):
 			model = spl[-1]
+		if "processor" in spl: 
+			model = spl[1]
 	op_dict['ios_version'] = sw
 	op_dict['bootvar'] = bootfile
 	op_dict['serial'] = srno
 	op_dict['hardware'] = model
+	op_dict['model'] = model
 	return op_dict
 # ------------------------------------------------------------------------------

@@ -126,6 +126,9 @@ Version Control
      - * Added a new GUI tab for quick show command
        * Added cache functionality for some of GUI fields.
        * Bug fix an import error
+   * - 1.4.2
+     - Dec 13, 2023
+     - Bug fixes 1.cisco device model capture. 2.cdp neighbor parse enabled and fixed. 3.juniper password capture error fixed for ospf and tacacs.  4.header index capture based on split added.
 
 
 -----

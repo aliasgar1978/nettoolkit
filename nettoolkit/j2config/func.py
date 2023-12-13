@@ -1,6 +1,3 @@
-"""helper functions/classes for jinja variables ( aka: filters )
-"""
-
 
 # import fields
 from .cmn.common_fn import *

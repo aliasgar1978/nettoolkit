@@ -11,7 +11,7 @@ __all__ = [
 
 
 # __version__ = "0.0.2"
-__version__ = "1.4.0"
+__version__ = "1.4.2"
 
 
 from .convertdict import ConvDict

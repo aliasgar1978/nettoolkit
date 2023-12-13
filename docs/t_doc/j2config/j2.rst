@@ -1,0 +1,10 @@
+
+
+jinja operations
+-------------------------------------------------------------------------------
+
+.. automodule:: nettoolkit.j2config.j2
+	:members:
+	:undoc-members:
+	:show-inheritance:
+

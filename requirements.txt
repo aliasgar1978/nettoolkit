@@ -7,4 +7,3 @@ jinja2
 paramiko
 netmiko
 ntc-templates
-pypiwin32

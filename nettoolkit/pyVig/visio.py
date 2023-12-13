@@ -2,8 +2,11 @@
 # ------------------------------------------------------------------------------
 #  IMPORTS
 # ------------------------------------------------------------------------------
-import win32com.client
-from win32com.client import constants
+try:
+	import win32com.client
+	from win32com.client import constants
+except:
+	print("Please install the win32com client using - pip install pywin32")
 import traceback
 from random import randint
 

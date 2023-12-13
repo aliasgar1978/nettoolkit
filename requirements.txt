@@ -2,7 +2,6 @@ pandas
 openpyxl
 PySimpleGUI
 numpy
-compare-it
 xlrd
 jinja2
 paramiko

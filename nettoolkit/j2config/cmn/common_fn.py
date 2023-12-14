@@ -5,6 +5,7 @@ from nettoolkit.nettoolkit_common import LST
 from nettoolkit.addressing import addressing as ip_addressing
 from nettoolkit.addressing import IPv4
 from nettoolkit.addressing import get_summaries as nt_get_summaries
+from nettoolkit.addressing import recapsulate
 
 
 def str_to_list(item):

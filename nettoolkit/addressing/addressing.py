@@ -254,6 +254,20 @@ def calc_summmaries(min_subnet_size, *net_list):
 	nSummaries = get_summaries(*set(summaries))
 	return nSummaries
 
+def recapsulate(subnet, size):
+	"""capsulate provided subnet (str, IPv4) with given sizing.
+
+	Args:
+		subnet (str, IPv4): string or IPv4 Object
+		size (int): subnet mask, for sizing
+
+	Returns:
+		str: sized/capsulated subnet
+	"""    	
+	if isinstance(subnet, IPv4): subnet = str(subnet)
+	s = subnet.split("/")[0] + "/" + str(size)
+	v4s = IPv4(s).subnet_zero(withMask=True)
+	return v4s
 
 def isSplittedRoute(line):
 	"""checks if ip route is splitted in multiple lines or not.

@@ -6,7 +6,7 @@ Activities that can be done are:
 	* Check that provided prefix is part of another prefix (supernet). 
 	* Create Summaries out of provided prefixes.
 
-Check prefix:
+Check prefix
 ------------------
 
 **Steps Involved:**
@@ -29,7 +29,7 @@ Check prefix:
 
 
 
-Create Summaries:
+Create Summaries
 ------------------
 
 **Steps Involved:**
@@ -51,7 +51,7 @@ Create Summaries:
 		[10.10.0.0/21, 10.20.4.0/22]			# // here is summary created for you // #
 
 
-Encapsulate subnet:
+Encapsulate subnet
 --------------------
 
   * Use this function to encapsulate the subnet to different sizing.
@@ -60,7 +60,7 @@ Encapsulate subnet:
 
 
 	.. code-block:: python
-		:emphasize-lines: 3,4
+		:emphasize-lines: 3,5
 
 		>>> from nettoolkit.addressing import recapsulate
 		s = "10.10.0.5/29"

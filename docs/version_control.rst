@@ -129,6 +129,9 @@ Version Control
    * - 1.4.2
      - Dec 13, 2023
      - Bug fixes 1.cisco device model capture. 2.cdp neighbor parse enabled and fixed. 3.juniper password capture error fixed for ospf and tacacs.  4.header index capture based on split added.
+   * - 1.4.3
+     - Dec 14, 2023
+     - Added addressing.recapsulate function
 
 
 -----

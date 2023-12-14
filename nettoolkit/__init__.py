@@ -1,6 +1,6 @@
 __doc__ = '''Networking Tool Set'''
 
-__version__ = "1.4.2"
+__version__ = "1.4.3"
 
 
 def version():

@@ -49,3 +49,23 @@ Create Summaries:
 			"10.10.2.0/23", "10.20.4.0/23", "10.10.4.0/22"  )
 		>>> get_summaries(*networks)
 		[10.10.0.0/21, 10.20.4.0/22]			# // here is summary created for you // #
+
+
+Encapsulate subnet:
+--------------------
+
+  * Use this function to encapsulate the subnet to different sizing.
+  * Available only for IPv4 objects for now.
+  * available from nettoolkit version **1.4.3** 
+
+
+	.. code-block:: python
+		:emphasize-lines: 3,4
+
+		>>> from nettoolkit.addressing import recapsulate
+		s = "10.10.0.5/29"
+		>>> recapsulate(s, 27)
+		'10.10.0.0/27'
+		>>> recapsulate(s, 30)
+		'10.10.0.4/30'
+

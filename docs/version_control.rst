@@ -132,6 +132,9 @@ Version Control
    * - 1.4.3
      - Dec 14, 2023
      - Added addressing.recapsulate function
+   * - 1.4.4
+     - To be released
+     - Juniper device: include the comments as well in set converter and facts-finder,
 
 
 -----

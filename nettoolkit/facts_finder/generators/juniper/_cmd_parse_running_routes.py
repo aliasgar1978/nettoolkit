@@ -92,7 +92,11 @@ class RunningRoutes(Running):
 		if route_spl_sect[1] == 'preference': dic['adminisrative_distance'] = route_spl_sect[2] 
 		if route_spl_sect[1] == 'tag': dic['tag_value'] = route_spl_sect[2] 
 		if not dic.get('version'): dic['version'] = v
-		if not dic.get('remark'): dic['remark'] = ""
+		if not dic.get('remark'): 
+			if l.find("  ## comment: ")>1:
+				dic['remark'] = l.split("  ## comment: ")[-1]
+			else:
+				dic['remark'] = ""
 		# return dic
 
 

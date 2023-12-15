@@ -50,7 +50,7 @@ class JSet(Default, STR, Container):
 	def to_set(self):
 		"""reads juniper standard config and convert it to set, store it to output
 		"""
-		varL, varS, varR, c = "", "set ", [], 0
+		varL, varS, varR, c, comment = "", "set ", [], 0, ''
 		try :
 			line1 = ""
 			for line in self.lst:
@@ -66,7 +66,10 @@ class JSet(Default, STR, Container):
 				# operate
 				l = self.delete_trailing_remarks(l) 					# Remove Trailing remarks				
 				llen = len(l)
-				if l[:1] == "#" or self.right(l, 1) == "/" : continue 	# Remark lines - bypass
+				if l[:1] == "#" : 
+					continue 	# Remark lines - bypass
+				elif self.right(l, 1) == "/" :   # /comment/ lines
+					comment = "  ## comment: " + l.strip()
 				elif len(l) == 0 : continue								# Empty lines - bypass
 				elif self.right(l, 1) == "{" :							# Hierarchical config follows
 					varR.append(varL)
@@ -91,6 +94,10 @@ class JSet(Default, STR, Container):
 					# Normal lines
 					else :
 						self.output.append(varS+varL.strip()+" "+l[:llen - 1])
+					# Add comments if any
+					if comment:
+						self.output[-1] = self.output[-1] + comment
+						comment = ''
 				else:
 					self.err = True
 					raise Exception(f"UndefinedTypeLine-{c}:{line}")

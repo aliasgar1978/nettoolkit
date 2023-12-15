@@ -4,7 +4,7 @@ Welcome to nettoolkit's documentation!
 
 .. toctree::
    :maxdepth: 4
-   :caption: Nettoolkit v1.4.4:
+   :caption: Nettoolkit:
    :numbered:
 
    Preface <docs/preface>

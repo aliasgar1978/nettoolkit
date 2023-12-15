@@ -82,21 +82,21 @@ binsubnet()
 ns-lookup
 ------------------------
 
-Use the ``nslookup()``  to get the dns name programatically.
+	* Use the ``nslookup()``  to get the dns name programatically.
 
-.. code-block:: python
+	.. code-block:: python
 
-	>>> nslookup("8.8.8.8")
-	'dns.google'
+		>>> nslookup("8.8.8.8")
+		'dns.google'
 
 
 IP.ping
 ------------------------
 
-Use the ``IP.ping_average()`` from nettoolkit to get the average responce time (in ms) for given ip.
+	* Use the ``IP.ping_average()`` from nettoolkit to get the average responce time (in ms) for given ip.
 
-.. code-block:: python
+	.. code-block:: python
 
-	>>> IP.ping_average("8.8.8.8")
-	289
+		>>> IP.ping_average("8.8.8.8")
+		289
 

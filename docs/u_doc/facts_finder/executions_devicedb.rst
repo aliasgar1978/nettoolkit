@@ -8,7 +8,7 @@ Using DeviceDB [Deprycated]
 	* Use `facts_finder` as a parent package instead of `nettoolkit.factsfinder`, if you have standalone facts-finder package installed with nettoolkit version <= 0.0.20 
 
 
-
+.. admonition:: steps
 
 	#. Import necessary package, modules
 	#. Define your input files ( i.e. capture files )
@@ -49,7 +49,7 @@ Detailed How To (DeviceDB)
 
 	#. Generate and evaluate database from device
 
-		.. code:: python
+		.. code::
 
 			_model = device(file)		# select the model based on input file
 			device_database = DeviceDB()	# create a new device database object
@@ -58,7 +58,7 @@ Detailed How To (DeviceDB)
 
 	#. Write database to Excel
 
-		.. code:: python
+		.. code::
 			
 			write_to_xl("output_file.xlsx", df_dict, index=True, overwrite=True)	# write output to Excel
 

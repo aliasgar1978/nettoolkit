@@ -29,6 +29,6 @@ Customize CleanFacts
 
     **Rearrange**
 
-    * continue next page for re-arranging colums, otherwise skip it.
+    * continue next page for adding and re-arranging additional custom colums.
 
 

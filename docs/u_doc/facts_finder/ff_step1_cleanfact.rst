@@ -68,7 +68,7 @@ Use here given process to generate the clean excel facts file from show commands
 
     **Rearrange**
 
-    * If you want to arrange colums in particular way, than read following pages on rearrange, otherwise skip it.
+    * To add and arrange additional custom colums in a particular way, read following pages on rearrange.
 
 
 

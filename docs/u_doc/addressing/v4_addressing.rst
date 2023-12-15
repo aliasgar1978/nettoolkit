@@ -23,7 +23,7 @@ IPv4 Object - Create:
 See below sample on how to create an IPv4 Object, This is mandatory step in order to work on the respective properties or methods.  
 It will be used in following steps.	
 
-    .. code:: python
+    .. code-block:: python
     
         >>> from nettoolkit.addressing import IPv4   # import IPv4
         >>> subnet = "10.10.10.10/23"                # example ip string 
@@ -32,78 +32,119 @@ It will be used in following steps.
 IPv4 object - Properties:
 ----------------------------------
 
-    * version
-    * bit_length
-    * subnet, net, mask
-    * decmask or decimalMask
-    * binmask
-    * invmask 
-    * ip_number
+    version
 
-    .. code-block:: python
-        :emphasize-lines: 1,3,5,7,9,11,13,15,17,19
+        .. code-block:: python
+
+            >>> s.version
+            4
     
-        >>> s.version
-        4
-        >>> s.bit_length
-        32
-        >>> s.subnet
-        '10.10.10.10/23'
-        >>> s.net
-        '10.10.10.10'
-        >>> s.mask 	# decimal mask
-        23
-        >>> s.decmask 	# decimal mask
-        23
-        >>> s.binmask 	# binary mask
-        '255.255.254.0'
-        >>> s.invmask 	# inverse mask
-        '0.0.1.255'
-        >>> s 		# provided ip/mask string format
-        10.10.10.10/23
-        >>> s.ip_number
-        10
+    bit_length
+
+        .. code-block:: python
+
+            >>> s.bit_length
+            32
+
+    subnet, net, mask
+
+        .. code-block:: python
+
+            >>> s.subnet
+            '10.10.10.10/23'
+            >>> s.net
+            '10.10.10.10'
+            >>> s.mask 	# decimal mask
+            23
+
+
+    decmask or decimalMask
+
+        .. code-block:: python
+
+            >>> s.decmask 	# decimal mask
+            23
+
+
+    binmask
+
+        .. code-block:: python
+
+            >>> s.binmask 	# binary mask
+            '255.255.254.0'
+
+    invmask
+
+        .. code-block:: python
+
+            >>> s.invmask 	# inverse mask
+            '0.0.1.255'
+
+
+    ip_number
+
+        .. code-block:: python
+
+            >>> s.ip_number
+            10
 
     
 
 IPv4 object - methods:
 ----------------------------------
 
-    * NetworkIP() or subnet_zero()
-    * BroadcastIP() or broadcast_address()
-    * n_thIP()
-    * expand()
-    * ipbinmask(), ipdecmask(), ipinvmask()
+    NetworkIP() or subnet_zero()
 
-    .. code-block:: python
-        :emphasize-lines: 1,3,5,7,9,11,13,15,17,19,21,23,25
+        .. code-block:: python
+
+            >>> s.subnet_zero()
+            '10.10.10.0/23'
+            >>> s.subnet_zero(withMask=False)
+            '10.10.10.0'
+
+    BroadcastIP() or broadcast_address()
+
+        .. code-block:: python
+
+            >>> s.broadcast_address()
+            '10.10.11.255'
+            >>> s.broadcast_address(withMask=True)
+            '10.10.11.255/23'
+
+
+    n_thIP()
+
+        .. code-block:: python
+
+            >>> s.n_thIP(5)
+            '10.10.10.5'
+            >>> s.n_thIP(5, withMask=True)
+            '10.10.10.5/23'
+
+
+    expand()
     
-        >>> s.subnet_zero()
-        '10.10.10.0/23'
-        >>> s.subnet_zero(withMask=False)
-        '10.10.10.0'
-        >>> s.broadcast_address()
-        '10.10.11.255'
-        >>> s.broadcast_address(withMask=True)
-        '10.10.11.255/23'
-        >>> s.n_thIP(5)
-        '10.10.10.5'
-        >>> s.n_thIP(5, withMask=True)
-        '10.10.10.5/23'
-        >>> s.expand(22)
-        '10.10.8.0/22'
-        >>> s.ipbinmask()
-        '10.10.10.0 255.255.254.0'
-        >>> s.ipbinmask(5)
-        '10.10.10.5 255.255.254.0'
-        >>> s.ipdecmask()
-        '10.10.10.0/23'
-        >>> s.ipdecmask(5)
-        '10.10.10.5/23'
-        >>> s.ipinvmask()
-        '10.10.10.0 0.0.1.255'
-        >>> s.ipinvmask(5)
-        '10.10.10.5 0.0.1.255'
+        .. code-block:: python
+
+            >>> s.expand(22)
+            '10.10.8.0/22'
+
+    ipbinmask(), ipdecmask(), ipinvmask()
+
+        .. code-block:: python
+    
+            >>> s.ipbinmask()
+            '10.10.10.0 255.255.254.0'
+            >>> s.ipbinmask(5)
+            '10.10.10.5 255.255.254.0'
+            >>> s.ipdecmask()
+            '10.10.10.0/23'
+            >>> s.ipdecmask(5)
+            '10.10.10.5/23'
+            >>> s.ipinvmask()
+            '10.10.10.0 0.0.1.255'
+            >>> s.ipinvmask(5)
+            '10.10.10.5 0.0.1.255'
 
 
 
@@ -128,6 +169,7 @@ IPv4 object can be sliced and portion can be extracted out of it.
         ('10.10.10.0/25', '10.10.10.128/25', '10.10.11.0/25', '10.10.11.128/25')
         >>> s/3			# breaks to nearest possible maximum prefix size.
         ('10.10.10.0/25', '10.10.10.128/25', '10.10.11.0/25', '10.10.11.128/25')
+
 
 IPv4 Object - addition:
 -----------------------
@@ -176,8 +218,6 @@ Two adjacent IPv4 Objects can be clubbed together to get the summary out of it (
 Bonus IPV4
 ----------
 
-
-
 **Identify, Validate & Create - IPv4 object dynamically**
 
 * Creating IPv4 or IPv6 object dynamically is possible via ``addressing()`` function
@@ -186,11 +226,11 @@ Bonus IPV4
 
 Respective operations on returned IPv4 / IPv6 object can be done there after, as mentioned above.
 
-.. code-block:: python
+    .. code-block:: python
 
-    >>> from nettoolkit.addressing import addressing
-    ip = addressing("10.10.10.0/24")
-    >>> type(ip)
-    <class 'nettoolkit.addressing.addressing.IPv4'>
-    >>> ip.version
-    4
+        >>> from nettoolkit.addressing import addressing
+        ip = addressing("10.10.10.0/24")
+        >>> type(ip)
+        <class 'nettoolkit.addressing.addressing.IPv4'>
+        >>> ip.version
+        4

@@ -384,6 +384,6 @@ header_indexes()
 
 	.. code-block:: python
 
-	>>> h = " Port            Speed    Duplex    Mode       Vlan     InterfaceType"
-	>>> STR.header_indexes(h)
-	OrderedDict([('', [0, 1]), ('Port', [1, 17]), ('Speed', [17, 26]), ('Duplex', [26, 36]), ('Mode', [36, 47]), ('Vlan', [47, 56]), ('InterfaceType', [56, 90])])
+		>>> h = " Port            Speed    Duplex    Mode       Vlan     InterfaceType"
+		>>> STR.header_indexes(h)
+		OrderedDict([('', [0, 1]), ('Port', [1, 17]), ('Speed', [17, 26]), ('Duplex', [26, 36]), ('Mode', [36, 47]), ('Vlan', [47, 56]), ('InterfaceType', [56, 90])])

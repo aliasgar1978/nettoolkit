@@ -21,41 +21,62 @@ IPv6 Object - Create:
 
 See below sample on how to create an IPv6 Object, This is mandatory step in order to work on the respective properties or methods.  It will be used in following steps.	
 
-    .. code:: python
+    .. code-block:: python
     
         >>> from nettoolkit.addrressing import IPv6   # import IPv6
         >>> subnet = "2002:ABCD:1000:256::/64"        # example ipv6 string 
         >>> s = IPv6(subnet)                          # created IPv6 object with provided prefix.
 
+
 IPv6 object - Properties:
 ----------------------------------
 Available properties: 
 
-    * version
-    * bit_length
-    * mask, decmask
-    * NetworkAddress
-    * subnet
-    * network
+    version
 
-    .. code:: python
+        .. code-block:: python
+
+            >>> s.version
+            6
+
+    bit_length
+
+        .. code-block:: python
+
+            >>> s.bit_length
+            128
+
+    mask, decmask
+
+        .. code-block:: python
+
+            >>> s.mask
+            64
+            >>> s.decmask
+            '64'
+
+    NetworkAddress
+
+        .. code-block:: python
+
+            >>> s.NetworkAddress
+            '2002:ABCD:1000:256:0:0:0:0'
+
+    network
+
+        .. code-block:: python
     
-        >>> s.version
-        6
-        >>> s.bit_length
-        128
-        >>> s.mask
-        64
-        >>> s.decmask
-        '64'
-        >>> s.NetworkAddress
-        '2002:ABCD:1000:256:0:0:0:0'
-        >>> s.subnet
-        '2002:ABCD:1000:256:0:0:0:0'
-        >>> s.network
-        '2002:ABCD:1000:256::'
-        >>> s
-        2002:ABCD:1000:256:0:0:0:0
+            >>> s.network
+            '2002:ABCD:1000:256::'
+            >>> s
+            2002:ABCD:1000:256:0:0:0:0
+
+    subnet
+
+        .. code-block:: python
+
+            >>> s.subnet
+            '2002:ABCD:1000:256:0:0:0:0'
 
     
 
@@ -63,33 +84,54 @@ IPv6 object - methods:
 ----------------------------------
 Available methods: 
 
-    * len()
-    * NetworkIP() or subnet_zero()
-    * BroadcastIP() or broadcast_address()
-    * n_thIP()
-    * ipdecmask()
-    * get_hext() or getHext()
+    len()
 
-    .. code:: python
+        .. code-block:: python
 
-        >>> s.len()				# subnet size
-        18446744073709551616
-        >>> s.subnet_zero()			# network address with mask(default)
-        '2002:ABCD:1000:256:0:0:0:0/64'
-        >>> s.subnet_zero(withMask=False)	# network address without mask
-        '2002:ABCD:1000:256:0:0:0:0'
-        >>> s.broadcast_address()		# broadcast address with mask(default)
-        '2002:ABCD:1000:256:ffff:ffff:ffff:ffff/64'
-        >>> s.broadcast_address(withMask=False)	# broadcast address without mask
-        '2002:ABCD:1000:256:ffff:ffff:ffff:ffff'
-        >>> s.n_thIP(5)				# 5th IP with mask(default)
-        '2002:ABCD:1000:256:0:0:0:5'
-        >>> s.n_thIP(5, withMask=False)		# 5th IP without mask
-        '2002:ABCD:1000:256:0:0:0:5'
-        >>> s.ipdecmask()			# ip with mask
-        '2002:ABCD:1000:256:0:0:0:0/64'
-        >>> s.get_hext(3)			# a hextate value
-        '1000'
+            >>> s.len()				# subnet size
+            18446744073709551616
+
+    NetworkIP() or subnet_zero()
+
+        .. code-block:: python
+
+            >>> s.subnet_zero()			# network address with mask(default)
+            '2002:ABCD:1000:256:0:0:0:0/64'
+            >>> s.subnet_zero(withMask=False)	# network address without mask
+            '2002:ABCD:1000:256:0:0:0:0'
+
+    BroadcastIP() or broadcast_address()
+
+        .. code-block:: python
+
+            >>> s.broadcast_address()		# broadcast address with mask(default)
+            '2002:ABCD:1000:256:ffff:ffff:ffff:ffff/64'
+            >>> s.broadcast_address(withMask=False)	# broadcast address without mask
+            '2002:ABCD:1000:256:ffff:ffff:ffff:ffff'
+
+    n_thIP()
+
+        .. code-block:: python
+
+            >>> s.n_thIP(5)				# 5th IP with mask(default)
+            '2002:ABCD:1000:256:0:0:0:5'
+            >>> s.n_thIP(5, withMask=False)		# 5th IP without mask
+            '2002:ABCD:1000:256:0:0:0:5'
+
+    ipdecmask()
+
+        .. code-block:: python
+
+            >>> s.ipdecmask()			# ip with mask
+            '2002:ABCD:1000:256:0:0:0:0/64'
+
+    get_hext() or getHext()
+
+        .. code-block:: python
+
+            >>> s.get_hext(3)			# a hextate value
+            '1000'
+
 
 
 IPv6 object - slices:
@@ -127,14 +169,14 @@ Bonus IPv6
 
 Respective operations on returned IPv4 / IPv6 object can be done there after, as mentioned above.
 
-.. code-block:: python
+    .. code-block:: python
 
-    >>> from nettoolkit.addressing import addressing
-    >>> ip = addressing("2620:ABCD:1234::/64")
-    >>> type(ip)
-    <class 'nettoolkit.addressing.addressing.IPv6'>
-    >>> ip.version
-    6
+        >>> from nettoolkit.addressing import addressing
+        >>> ip = addressing("2620:ABCD:1234::/64")
+        >>> type(ip)
+        <class 'nettoolkit.addressing.addressing.IPv6'>
+        >>> ip.version
+        6
 
 
 

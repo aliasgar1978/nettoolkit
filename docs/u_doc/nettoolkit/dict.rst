@@ -20,7 +20,7 @@ There are many dictionary methods available under ``DIC`` class in ``nettoolkit`
 Such available functions are:
 
 	* merge_dict()
-	* recursive_dic()
+	* dict_to_str()
 
 merge_dict()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -48,7 +48,7 @@ merge_dict()
 
 
 
-recursive_dic()
+dict_to_str()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	* convert dictionary (dic) to string. 
@@ -64,7 +64,7 @@ recursive_dic()
 				                'FA3': {'description': 'description of FA3',
 				                        'ip': 'ip of FA3'}}}
 
-		>>> print(DIC.recursive_dic(d, 4))
+		>>> print(DIC.dict_to_str(d, 4))
 		    interfaces
 		     FA1
 		      description
@@ -154,7 +154,7 @@ Dictionary Differences:
 
 		# Extra Steps:: convert dictionary to string to see hierachical data
 		>>> deltadd = postdd + predd
-		>>> print(DIC.recursive_dic(deltadd))
+		>>> print(DIC.dict_to_str(deltadd))
 		FA1
 		 ip
 		    + 1.121.1.121/24
@@ -171,7 +171,7 @@ Dictionary Differences:
 		    + new born
 
 		>>> deltaremoves = predd - postdd
-		>>> print(DIC.recursive_dic(deltaremoves))
+		>>> print(DIC.dict_to_str(deltaremoves))
 		FA1
 		 ip
 		    - 1.1.1.1/24

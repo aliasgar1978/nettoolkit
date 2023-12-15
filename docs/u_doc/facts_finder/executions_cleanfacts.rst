@@ -8,6 +8,8 @@ Using CleanFacts [Deprycated]
 	* Use only if you have standalone facts-finder package installed with nettoolkit version <= 0.0.20 
 
 
+.. admonition:: steps
+
 	#. Import necessary package, modules
 	#. Define your input files ( i.e. capture files )
 	#. Generate and evaluate database from device

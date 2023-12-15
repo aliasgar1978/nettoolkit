@@ -82,6 +82,8 @@ class RunningRoutes(Running):
 		Returns:
 			None: None
 		"""
+		## Do not use negative index for any items other than remark, it may not work.
+		#
 		if not dic.get('prefix'): dic['prefix'] = route_spl_sect[0]
 		if not dic.get('pfx_vrf') and len(vrf_spl_sect)> 1: dic['pfx_vrf'] = vrf_spl_sect[2]
 		if route_spl_sect[1] == 'next-hop': 
@@ -101,7 +103,7 @@ class RunningRoutes(Running):
 
 
 
-	# # Add more interface related methods as needed.
+	# # Add more static route related methods as needed.
 
 
 # ------------------------------------------------------------------------------

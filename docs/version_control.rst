@@ -134,7 +134,7 @@ Version Control
      - Added addressing.recapsulate function
    * - 1.4.4
      - To be released
-     - Juniper device: include the comments as well in set converter and facts-finder,
+     - Juniper device: include the comments in set converter & facts-finder.
 
 
 -----

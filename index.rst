@@ -4,12 +4,18 @@ Welcome to nettoolkit's documentation!
 
 .. toctree::
    :maxdepth: 4
-   :caption: Contents:
+   :caption: Nettoolkit v1.4.4:
    :numbered:
 
    Preface <docs/preface>
    Insall Instructions <docs/install>
    Version Control <docs/version_control>
+
+
+.. toctree::
+   :maxdepth: 4
+   :caption: User Documentation:
+   :numbered:
 
    Addressing <docs/u_doc/addressing/userdoc>
    Capture-IT <docs/u_doc/capture_it/userdoc>
@@ -17,13 +23,26 @@ Welcome to nettoolkit's documentation!
    Config-Gen <docs/u_doc/j2config/userdoc>
    Drawing-Gen (visio) <docs/u_doc/pyvig/userdoc>
    Facts-Finder <docs/u_doc/facts_finder/userdoc>
+   GUI Interface <docs/u_doc/gui/userdoc>
    Juniper <docs/u_doc/pyjuniper/userdoc>
-   Password Enc/Dec <docs/u_doc/pynetcrypt/userdoc>
    Nettoolkit Class Extension <docs/u_doc/nettoolkit/userdoc>
-   Nettoolkit GUI <docs/u_doc/gui/userdoc>
+   Password Enc/Dec <docs/u_doc/pynetcrypt/userdoc>
 
-   Nettoolkit API Documentation <docs/tech_doc>
 
+.. toctree::
+   :maxdepth: 4
+   :caption: API Documentation:
+   :numbered:
+
+   Addressing <docs/t_doc/addressing/tech_doc>
+   capture-it <docs/t_doc/capture_it/tech_doc>
+   compare-it <docs/t_doc/compare_it/tech_doc> 
+   facts-finder <docs/t_doc/facts_finder/tech_doc>
+   j2config <docs/t_doc/j2config/tech_doc>
+   nettoolkit <docs/t_doc/nettoolkit/tech_doc>
+   pyjuniper <docs/t_doc/pyjuniper/tech_doc>
+   pynetcrypt <docs/t_doc/pynetcrypt/tech_doc>
+   pyvig <docs/t_doc/pyvig/tech_doc>
 
 
 Indices and tables

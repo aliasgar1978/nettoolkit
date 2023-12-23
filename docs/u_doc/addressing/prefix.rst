@@ -68,3 +68,75 @@ Encapsulate subnet
         >>> recapsulate(s, 30)
         '10.10.0.4/30'
 
+
+
+sort list of addresses
+-----------------------
+
+    * Use this function to sort the ip addresses in desired order.
+    * Available only for IPv4 objects for now.
+    * available from nettoolkit version **1.5.0** 
+    * use ascending=False for reversed order, Specify list for multiple sort orders
+
+    .. code-block:: python
+        :emphasize-lines: 18,32,46
+
+        from nettoolkit.addressing import sorted_v4_addresses
+        from pprint import pprint
+        list_of_ips = [
+            "10.10.10.0/25",
+            "10.10.2.0/24",
+            "10.20.10.0/24",
+            "10.10.5.0/24",
+            "10.10.10.128/25",
+            "10.1.10.0/24",
+            "10.10.7.0/24",
+            "10.10.1.0/24",
+            "100.10.10.0/24",
+            "192.168.10.0/24",
+            "192.168.1.0/24",
+            "172.16.10.0/24",
+            "172.16.2.0/24",
+        ]
+        pprint(sorted_v4_addresses(list_of_ips))
+        ['10.1.10.0/24',
+        '10.10.1.0/24',
+        '10.10.2.0/24',
+        '10.10.5.0/24',
+        '10.10.7.0/24',
+        '10.10.10.0/25',
+        '10.10.10.128/25',
+        '10.20.10.0/24',
+        '100.10.10.0/24',
+        '172.16.2.0/24',
+        '172.16.10.0/24',
+        '192.168.1.0/24',
+        '192.168.10.0/24']
+        pprint(sorted_v4_addresses(list_of_ips, ascending=False))
+        ['192.168.10.0/24',
+        '192.168.1.0/24',
+        '172.16.10.0/24',
+        '172.16.2.0/24',
+        '100.10.10.0/24',
+        '10.20.10.0/24',
+        '10.10.10.128/25',
+        '10.10.10.0/25',
+        '10.10.7.0/24',
+        '10.10.5.0/24',
+        '10.10.2.0/24',
+        '10.10.1.0/24',
+        '10.1.10.0/24']
+        pprint(sorted_v4_addresses(list_of_ips, ascending=[True,True,False,False,True]))
+        ['10.1.10.0/24',
+        '10.10.10.128/25',
+        '10.10.10.0/25',
+        '10.10.7.0/24',
+        '10.10.5.0/24',
+        '10.10.2.0/24',
+        '10.10.1.0/24',
+        '10.20.10.0/24',
+        '100.10.10.0/24',
+        '172.16.10.0/24',
+        '172.16.2.0/24',
+        '192.168.10.0/24',
+        '192.168.1.0/24']

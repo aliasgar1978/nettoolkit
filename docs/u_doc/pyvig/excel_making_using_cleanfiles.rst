@@ -2,7 +2,9 @@
 Excel database Preparation - Auto Generate
 ==========================================
 
-Supported for nettoolkit version >= 0.1.0
+**AKA: Cable-Matrix Preparation**
+
+Supported for nettoolkit version >= 1.5.0
 
 
 Add Custom Functions
@@ -184,6 +186,16 @@ Lets import necessary packages first. Followed by some steps to generate excel.
   DFG.calculate_cordinates(sheet_filter_dict=sheet_filter_dict['sheet_filters'])
 
   # ----------------------------------------------------------------------------------
+  # Remove undefined cabling entries where device doesn't exist in devices tab
+  # ----------------------------------------------------------------------------------
+	DFG.remove_undefined_cabling_entries()
+
+  # ----------------------------------------------------------------------------------
+  # arrange cabling tab in to appropriate order
+  # ----------------------------------------------------------------------------------
+	DFG.arrange_cablings()
+
+  # ----------------------------------------------------------------------------------
   # 6. write out
   # ----------------------------------------------------------------------------------
   CABLE_MATRIX_OP_FILE = 'pyVig_supported_cablematrix.xlsx'   # output Excel file with full path
@@ -195,5 +207,5 @@ Lets import necessary packages first. Followed by some steps to generate excel.
 At this point a new Cable Matrix Excel file will be generated.  
 We are going to use it for the generation of the visio.
 
-Script will continue on next step to generate the visio file using the above cable matrix excel file.
+Script will continue on next step to generate the visio file using the above cable matrix excel file. Or stop here if you wish only cable-matrix file
 

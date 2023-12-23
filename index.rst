@@ -21,12 +21,13 @@ Welcome to nettoolkit's documentation!
    Capture-IT <docs/u_doc/capture_it/userdoc>
    Compare It <docs/u_doc/compare_it/userdoc> 
    Config-Gen <docs/u_doc/j2config/userdoc>
-   Drawing-Gen (visio) <docs/u_doc/pyvig/userdoc>
+   Cable-Matrix-Gen <docs/u_doc/pyvig/excel_making_using_cleanfiles>
    Facts-Finder <docs/u_doc/facts_finder/userdoc>
    GUI Interface <docs/u_doc/gui/userdoc>
    Juniper <docs/u_doc/pyjuniper/userdoc>
    Nettoolkit Class Extension <docs/u_doc/nettoolkit/userdoc>
    Password Enc/Dec <docs/u_doc/pynetcrypt/userdoc>
+   Visio Drawing-Gen <docs/u_doc/pyvig/userdoc>
 
 
 .. toctree::

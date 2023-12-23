@@ -1,9 +1,10 @@
-NT Capture-it - common commands for all devices
+NT Capture-it - Normal
 =================================================
 
 .. note::
 
-    * Supported for version >= 0.1.0, and integrated Nettoolkit versions
+    * for networking version >= 0.1.0, integrated.
+    * for nettoolkig version < 0.1.0, install capture-it as separate project
 
 
 #. **Execution Steps**
@@ -97,7 +98,7 @@ NT Capture-it - common commands for all devices
         )
 
         # -----------------------------------------------------------------------------
-        #    Execute
+        #    Start Capture
         # -----------------------------------------------------------------------------
         c()
 
@@ -105,9 +106,9 @@ NT Capture-it - common commands for all devices
         #    Log-Summary ( Modify/Enable keys as requires )
         # -----------------------------------------------------------------------------
         LogSummary(c, 
-            print=True,                        ## use to display on screen. (default: False)
-            # write_to='cmds_log_summary.log', ## use if create a fresh log summary (default: None)
-            # append_to='cmds_log_summary.log',## use if append to an existing log summary (default: None) 
+            print=True,                        ## display on screen. (default: False)
+            # write_to='cmds_log_summary.log', ## create a fresh log summary file (default: None)
+            # append_to='cmds_log_summary.log',## append to log summary file (default: None) 
         )
 
         # -----------------------------------------------------------------------------
@@ -118,7 +119,7 @@ NT Capture-it - common commands for all devices
 
 #. **custom_dynamic_cmd_class**
 
-    It Is usefull to fork in additional dynamic commands which requires output based on some previous show output capture.   
+    It Is possible to fork in **additional dynamic commands** which requires output *based* on some *previous show output capture*.   
 
       * Scenario: **show bgp summary** lists bgp neighbors. If we want to see advertised routes of selected neighbor of those.  Here *neighbor* is variable based on previous output. 
       * In above case, We can define a custom class which . 
@@ -142,6 +143,16 @@ NT Capture-it - common commands for all devices
         def get_adv_route_string_juniper(nbr):
             return f'show route advertising-protocol bgp {nbr}'
 
+        def get_bgp_peers_cisco(show_output):
+            peers = []
+            ## Do it Your Self to derive peer ip addresses from cisco show output
+            return peers
+
+        def get_bgp_peers_juniper(show_output):
+            peers = []
+            ## Do it Your Self to derive peer ip addresses from juniper show output
+            return peers
+
         # Custom dynamic command class to get additional bgp advertising routes.
 
         class BgpAdv():
@@ -151,11 +162,11 @@ NT Capture-it - common commands for all devices
                 self.show_peer_adv_route_cmds = set()
                 func_maps = {
                     'cisco_ios':{
-                        'get_bgp_peers': get_bgp_peers_cisco,               # function to derive bgp peers from show output (cisco) - DIY
+                        'get_bgp_peers': get_bgp_peers_cisco,               # function to derive bgp peers from show output (cisco)
                         'get_adv_route_string': get_adv_route_string_cisco, # function to get string (cisco)
                     } ,
                     'juniper_junos':{
-                        'get_bgp_peers': get_bgp_peers_juniper,               # function to derive bgp peers from show output (juniper) - DIY
+                        'get_bgp_peers': get_bgp_peers_juniper,               # function to derive bgp peers from show output (juniper)
                         'get_adv_route_string': get_adv_route_string_juniper, # function to get string (juniper)
                     } ,
                 }
@@ -170,11 +181,13 @@ NT Capture-it - common commands for all devices
                 return sorted(self.show_peer_adv_route_cmds)
 
 
+-----
+
 
 .. note::
 
-    * Here We are providing, all commands at a time, for all devices
-    * Script will automatically identifies whether device is ``Cisco/Juniper/Arista`` and push respective commands to the system without needing to mention them explicitly.
+    * We provide, all commands at a time, for all model devices
+    * Script identifies device type ``Cisco/Juniper/Arista`` and push appropriate list of commands to respective device.
 
 
 -----------------------

@@ -3,8 +3,13 @@ Prefix Operations
 ============================================
 
 Activities that can be done are:
-    * Check that provided prefix is part of another prefix (supernet). 
-    * Create Summaries out of provided prefixes.
+    * Check that provided prefix is part of another prefix (supernet)
+    * Create Summaries out of provided prefixes
+    * Encapsulate subnet to a different sizing
+    * sort list of ip addresses in desired order
+
+-----
+
 
 Check prefix
 ------------------
@@ -27,7 +32,7 @@ Check prefix
         >>> isSubset(prefix2, supernet)
         False			# // Here prefix is not part of supernet // #
 
-
+-----
 
 Create Summaries
 ------------------
@@ -50,6 +55,8 @@ Create Summaries
         >>> get_summaries(*networks)
         [10.10.0.0/21, 10.20.4.0/22]			# // here is summary created for you // #
 
+-----
+
 
 Encapsulate subnet
 --------------------
@@ -68,6 +75,8 @@ Encapsulate subnet
         >>> recapsulate(s, 30)
         '10.10.0.4/30'
 
+
+-----
 
 
 sort list of addresses

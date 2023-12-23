@@ -2,6 +2,10 @@
 Configuration Generation User documentation!
 ###############################################
 
+Generate device configuration using jinja tempalte and excel database.
+
+-----
+
 .. toctree::
    :maxdepth: 4
    :caption: Contents:

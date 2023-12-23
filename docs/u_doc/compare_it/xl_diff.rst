@@ -1,7 +1,9 @@
 Compare two Excel File / Sheet for differences
 ===============================================
 
-Here is how to do
+**Example Use Case:** 
+
+Compare Pre/Post captured -clean files tabs and provides differences
 
 
 Sample Execution Code for XL Compare

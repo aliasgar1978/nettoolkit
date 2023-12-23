@@ -1,9 +1,8 @@
 
-ping batch-script prepare
+ping batch-file prepare
 ============================================
 
-* Import necessary functions
-* execute function by providing necessary input parameters
+Create batch file(s) for each ip's for the given prefixes and its names
 
 .. code-block:: python
     :emphasize-lines: 2
@@ -27,5 +26,3 @@ ping batch-script prepare
 .. note::
         
 	The feature is made available from the package >= 0.0.23, 
-	And clubbed together in 0.0.24
-

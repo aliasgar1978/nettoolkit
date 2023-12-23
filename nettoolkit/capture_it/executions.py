@@ -307,14 +307,15 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 		path (str): path where output(s), logs(s) should be stored.
 
 	Properties:
-		cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and 'both' will do both.
-		forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)
-		parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)
-		visual_progress (int, optional): 0 will not show any progress, 10 will show all progress (default=3).
-		log_type (str): what type of log output requires. choices are = common, individual, both
-		common_log_file (str): output file name of a common log file
-		max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.
-		CustomClass (class): Custom class definitition to execute additional custom commands
+
+		* cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and 'both' will do both.
+		* forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)
+		* parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)
+		* visual_progress (int, optional): 0 will not show any progress, 10 will show all progress (default=3).
+		* log_type (str): what type of log output requires. choices are = common, individual, both
+		* common_log_file (str): output file name of a common log file
+		* max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.
+		* CustomClass (class): Custom class definitition to execute additional custom commands
 
 	Raises:
 		Exception: raise exception if any issue with authentication or connections.

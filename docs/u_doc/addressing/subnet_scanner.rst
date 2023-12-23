@@ -3,8 +3,7 @@ IP Subnets Scanner
 ============================================
 
 
-* Import necessary class
-* call function with two files as arguments
+Ping to multiple ip addresses from given subnets and get the report in Excel file
 
 .. code-block:: python
     :emphasize-lines: 4
@@ -33,5 +32,4 @@ IP Subnets Scanner
 .. note::
         
 	The feature is made available from the package >= 0.0.23, 
-	And clubbed together in 0.0.24
 

@@ -2,8 +2,7 @@
 Compare subnet scanner results
 ============================================
 
-* Import necessary functions
-* call function with two files as arguments
+IP scanner output file comparision
 
 .. code-block:: python
 	:emphasize-lines: 2
@@ -18,5 +17,3 @@ Compare subnet scanner results
 .. note::
 		
 	The feature is made available from the package >= 0.0.23, 
-	And clubbed together in 0.0.24
-

@@ -49,13 +49,12 @@ Prepare Config Building Instance
     * It is advisable to generate the facts using  **facts_finder** package. So manual editing will be minimal. Otherwise a fresh manually prepared database will work either.
     * There must be a ``var`` tab in excel file. with **var** as jinja variable and **default** as replacement value of the jinja variable.
         * multiple values for a single variable can be added in a same cell by separating either by ``comma`` or ``enter``
-    * There must be atleast one tabular column consisting interfaces details.
-        * multiple type interface details can be in separate sheet as well. sheet name can be arbitrary any thing.
-    * There can be a ``vrf`` tab consisting of instances details of device.
-    * There can be a ``bgp`` tab consisting of bgp and its properties of device.
+    * There must be atleast one tab with tabular column consisting interfaces details.
+      * multiple type interface details can be in separate sheet as well. sheet name can be arbitrary any thing.
+      * There can be a ``vrf`` tab consisting of instances details of device.
+      * There can be a ``bgp`` tab consisting of bgp and its properties of device.
 
-
-    * **regional_file** can be identical to ``var`` tab of data file, with two columns as **var** and **default**.
+    * **regional_file** can be identical to ``var`` tab of data file, with two ``columns`` as **var** and **default**.
 
 
 

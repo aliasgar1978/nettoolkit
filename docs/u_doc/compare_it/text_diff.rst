@@ -2,9 +2,10 @@ Compare two Text files for differences
 ============================================
 
 
-**Example Use Case:** Compare Pre/Post configuration files and provides differences between two configuration files
+**Example Use Case:** 
 
-Here is how to do
+Compare Pre/Post configuration files and provides differences between two configuration files
+
 
 
 Sample Execution Code for text configuration Compare

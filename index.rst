@@ -21,7 +21,7 @@ Welcome to nettoolkit's documentation!
    Capture-IT <docs/u_doc/capture_it/userdoc>
    Compare It <docs/u_doc/compare_it/userdoc> 
    Config-Gen <docs/u_doc/j2config/userdoc>
-   Cable-Matrix-Gen <docs/u_doc/pyvig/excel_making_using_cleanfiles>
+   Cable-Matrix-Gen <docs/u_doc/pyvig/cable_matrix>
    Facts-Finder <docs/u_doc/facts_finder/userdoc>
    GUI Interface <docs/u_doc/gui/userdoc>
    Juniper <docs/u_doc/pyjuniper/userdoc>

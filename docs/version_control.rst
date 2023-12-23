@@ -134,7 +134,7 @@ Version Control
      - Added addressing.recapsulate function
    * - 1.5.0
      - Dec 23, 2023
-     - * Juniper device: include the comments in set converter & facts-finder.
+     - * Juniper: included the comments in set-converter & facts-finder.
        * addressing: added ipv4 sort functionality (sorted_v4_addresses)
        * capture_it: bug fixes, and log display output modified
        * facts_finder: bug fixes on cisco - cdp neighbor output, and show run for ospf details, added dhcp ip verification (parser verifications display msg updated)

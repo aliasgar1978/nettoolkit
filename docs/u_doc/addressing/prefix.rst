@@ -81,9 +81,9 @@ sort list of addresses
     .. code-block:: python
         :emphasize-lines: 18,32,46
 
-        from nettoolkit.addressing import sorted_v4_addresses
-        from pprint import pprint
-        list_of_ips = [
+        >>> from nettoolkit.addressing import sorted_v4_addresses
+        >>> from pprint import pprint
+        >>> list_of_ips = [
             "10.10.10.0/25",
             "10.10.2.0/24",
             "10.20.10.0/24",
@@ -98,7 +98,7 @@ sort list of addresses
             "172.16.10.0/24",
             "172.16.2.0/24",
         ]
-        pprint(sorted_v4_addresses(list_of_ips))
+        >>> pprint(sorted_v4_addresses(list_of_ips))
         ['10.1.10.0/24',
         '10.10.1.0/24',
         '10.10.2.0/24',
@@ -112,7 +112,7 @@ sort list of addresses
         '172.16.10.0/24',
         '192.168.1.0/24',
         '192.168.10.0/24']
-        pprint(sorted_v4_addresses(list_of_ips, ascending=False))
+        >>> pprint(sorted_v4_addresses(list_of_ips, ascending=False))
         ['192.168.10.0/24',
         '192.168.1.0/24',
         '172.16.10.0/24',
@@ -126,7 +126,7 @@ sort list of addresses
         '10.10.2.0/24',
         '10.10.1.0/24',
         '10.1.10.0/24']
-        pprint(sorted_v4_addresses(list_of_ips, ascending=[True,True,False,False,True]))
+        >>> pprint(sorted_v4_addresses(list_of_ips, ascending=[True,True,False,False,True]))
         ['10.1.10.0/24',
         '10.10.10.128/25',
         '10.10.10.0/25',

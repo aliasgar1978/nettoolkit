@@ -5,6 +5,7 @@ Version Control
 
 .. list-table:: Version Control updates
    :widths: 10 15 200
+   :align: left
    :header-rows: 1
 
    * - Version

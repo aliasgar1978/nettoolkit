@@ -186,12 +186,12 @@ Lets import necessary packages first. Followed by some steps to generate excel.
   # ----------------------------------------------------------------------------------
   # Remove undefined cabling entries where device doesn't exist in devices tab
   # ----------------------------------------------------------------------------------
-	DFG.remove_undefined_cabling_entries()
+  DFG.remove_undefined_cabling_entries()
 
   # ----------------------------------------------------------------------------------
   # arrange cabling tab in to appropriate order
   # ----------------------------------------------------------------------------------
-	DFG.arrange_cablings()
+  DFG.arrange_cablings()
 
   # ----------------------------------------------------------------------------------
   # 6. write out
@@ -209,4 +209,4 @@ We are going to use it for the generation of the visio.
 Script will continue on next step to generate the visio file using the above cable matrix excel file see link below. 
 Stop here if you wish only cable-matrix file.
 
-	* `Visio Gen <./generate_visio.html>`_
+  * `Visio Gen <./generate_visio.html>`_

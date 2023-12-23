@@ -69,7 +69,8 @@ class OSPF():
 		Returns:
 			None: None
 		"""
-		if spl[0] == 'router-id':
+
+		if len(spl)>0 and spl[0] == 'router-id':
 			vrf_op_dict['router_id'] = spl[-1]
 
 
@@ -111,7 +112,7 @@ class OSPF():
 		Returns:
 			None: None
 		"""
-		if spl[0] == 'network':
+		if len(spl) > 0 and spl[0] == 'network':
 			subnet = spl[1]
 			mask = invmask_to_mask(spl[2])
 			area = spl[4] if spl[3] == 'area' else ''

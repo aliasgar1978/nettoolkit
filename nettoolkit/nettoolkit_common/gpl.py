@@ -542,6 +542,24 @@ class STR(Container):
 		return intName
 
 	@staticmethod
+	def intf_standardize_or_null(intName, intf_type=None, expand=True):
+		"""standardize the interface for uneven length strings.
+		expand will give fulllength, otherwise it will shrink it to its standard size given
+		for incorrect interface returns blank (None)
+
+		Args:
+			intName (str): interface
+			expand (bool, optional): expansion of interface. Defaults to True.
+
+		Returns:
+			str: standardized interface or blank 
+		"""		
+		try:
+			return standardize_if(intName)
+		except:
+			return ""
+
+	@staticmethod
 	def update_str(s, searchItem='', replaceItem=''):
 		"""Updates line for search item with replace item
 		(Find/Repalace)

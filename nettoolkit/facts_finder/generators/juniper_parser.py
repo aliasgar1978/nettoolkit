@@ -154,9 +154,8 @@ class Juniper(DevicePapa):
 		missing_op_cmds = mandatory_cmds.difference(found_cmds)
 		if missing_op_cmds:
 			for moc in missing_op_cmds:
-				print(f'Missing capture for command: {moc}')
+				print(f'Missing capture for command: {moc}, in file {self.file}')
 			raise Exception(f'Cannot Continue due to missing mandatory capture(s)')
-		print(f'Capture Verified...,', end='\t')
 
 
 # ------------------------------------------------------------------------------

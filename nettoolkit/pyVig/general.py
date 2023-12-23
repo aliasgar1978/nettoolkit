@@ -6,7 +6,7 @@ import nettoolkit.nettoolkit_common as nt
 # ----------------------------------------------------------------------------------------------------
 DEFAULT_CONNECTOR_TYPE = 'straight'  ## other options = 'curved', 'angled'
 DEFAULT_LINE_COLOR = 'blue'
-DEFAULT_LINE_WT = 3
+DEFAULT_LINE_WT = 1
 DEFAULT_LINE_PATTERN = 1
 DEFAULT_STENCIL = None
 DEFAULT_X_COLUMN = 'x-axis'
@@ -30,7 +30,9 @@ def get_physical_if_up(df):
 	except:
 		return df
 
-def get_physical_if_relevants(df, relevant_cols = ['interface', 'nbr_dev_type', 'int_filter', 'nbr_hostname',   'nbr_interface', 'vlan_members',]):
+def get_physical_if_relevants(df, 
+	relevant_cols = ['interface', 'nbr_dev_type', 'int_filter', 'nbr_hostname',   'nbr_interface', 'vlan_members', 'media_type']
+	):
 	"""filters the DataFrame columns for relevant columns
 
 	Args:

@@ -31,7 +31,7 @@ def get_chassis_hardware(cmd_op, *args):
 		sfp = JCH.get_sfp(p)
 		if not sfp: continue
 		op_dict[p] = {}
-		op_dict[p]["port_type"] = sfp
+		op_dict[p]["media_type"] = sfp
 	return op_dict
 
 

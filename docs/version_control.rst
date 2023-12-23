@@ -132,9 +132,15 @@ Version Control
    * - 1.4.3
      - Dec 14, 2023
      - Added addressing.recapsulate function
-   * - 1.4.4
-     - To be released
-     - Juniper device: include the comments in set converter & facts-finder.
+   * - 1.5.0
+     - Dec 23, 2023
+     - * Juniper device: include the comments in set converter & facts-finder.
+       * addressing: added ipv4 sort functionality (sorted_v4_addresses)
+       * capture_it: bug fixes, and log display output modified
+       * facts_finder: bug fixes on cisco - cdp neighbor output, and show run for ospf details, added dhcp ip verification (parser verifications display msg updated)
+       * facts_finder: bug fixes on juniper - port_type changed to media_type (parser verifications display msg updated)
+       * pyVig: cache functionality added for cables and connectors to prepare cable matrix, cabling details revamped to capture more cable and connector information,  bug fix on default line color. 
+       * Added a new functionality to get cable-matrix file with more details
 
 
 -----

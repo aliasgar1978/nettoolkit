@@ -80,7 +80,7 @@ class CLP():
 		"""    	
 		self.cmd_exec_logs.append({'command':cmd})
 		cmdObj = self._cmd_capture_raw(cmd, cumulative, banner, initialize_capture)
-		if cmdObj is not None:
+		if cmdObj is not None and self.parsed_output:
 			self._cmd_capture_parsed(cmd, cumulative, banner)
 		return cmdObj
 

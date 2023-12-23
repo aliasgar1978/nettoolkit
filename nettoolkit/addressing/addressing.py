@@ -1,5 +1,6 @@
 
 from collections import OrderedDict
+import pandas as pd
 
 from nettoolkit.nettoolkit_common.gpl import STR, LST, IO
 
@@ -229,7 +230,7 @@ def get_summaries(*net_list):
 		ss.calculate()
 		if summaries == ss.prefixes: break
 		summaries = ss.prefixes
-	return sorted(summaries)
+	return sorted_v4_addresses(summaries)
 
 
 def calc_summmaries(min_subnet_size, *net_list):
@@ -1133,17 +1134,20 @@ class Summary(IPv4):
 	'''Defines Summaries of prefixes
 	'''
 
+	# __slots__ = ['networks', 'summaries', 'del_eligibles','mask','first','second',
+	# 	'first_len','second_len','total']
+
 	def __init__(self, *args):		
 		"""initialize object with provided args=prefixes
-		"""		
+		"""
 		self.networks = set()
+		args = sorted_v4_addresses(args)
 		for arg in args:
 			if isinstance(arg, str):
 				if arg.strip():
 					arg=IPv4(arg)
 			self.networks.add(arg)
 		self.summaries = []
-		self.networks = sorted(self.networks)
 		self._validate_and_update_networks()
 
 	@property
@@ -1268,6 +1272,64 @@ class Summary(IPv4):
 		return self.first.n_thIP(self.total-1, summary_calc=True) == self.second.broadcast_address()
 
 
+
+def ipv4_octets(ip):
+	"""get octets in a list for provided ip/subnet
+
+	Args:
+		ip (str): ip/mask
+
+	Returns:
+		dict: dictionary with octets list and mask
+	"""	
+	fs = str(ip).strip().split("/")
+	octets = fs[0].split(".")
+	try:
+		mask = int(fs[1])
+	except:
+		mask = 32
+	return { 'octets': octets, 'mask':mask }
+
+# sorted dataframe based on ip octets
+def _get_sorted_dataframe(dic, ascending):
+	df = pd.DataFrame(dic)
+	for x in range(4):
+		df[x] = pd.to_numeric(df[x], errors='coerce')
+	df['mm'] = pd.to_numeric(df['mm'], errors='coerce')
+	df.sort_values([0,1,2,3,'mm'], inplace=True, ascending=ascending)
+	return df
+
+# converts octets list to dictionary
+def _convert_list_to_dict(lst):
+	dic,mm = {0:[], 1:[], 2:[], 3:[]},[]
+	for oNm in lst:
+		mm.append(oNm['mask'])
+		for n in range(4):
+			dic[n].append(oNm['octets'][n])
+	dic['mm'] = mm
+	return dic
+
+# join list format octet back to string in dataframe
+def _join_octets_fr_df(df):
+	for x in range(4):
+		df[x] = df[x].apply(lambda x: str(x))
+	return [ ".".join([row[n] for n in range(4)]) + "/" + str(row['mm']) for k, row in df.iterrows() ]
+
+
+def sorted_v4_addresses(args, ascending=True):
+	"""sort IPv4 addresses (subnets)
+
+	Args:
+		args (list): list of addresses/subnets
+		ascending (bool or list of bool, optional): Sort ascending vs. descending. Specify list for multiple sort orders. If this is a list of bools, must match the length of the by. Defaults to True.
+
+	Returns:
+		list: sorted list
+	"""	
+	return _join_octets_fr_df(
+		_get_sorted_dataframe(
+			_convert_list_to_dict([ ipv4_octets(ip) for ip in args ]), ascending=ascending )
+		)
 
 # ----------------------------------------------------------------------------
 # Main Function

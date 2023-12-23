@@ -38,13 +38,21 @@ def get_cdp_neighbour(cmd_op, *args, dsr=True):
 
 		### NBR TABLE PROCESS ###
 		if len(line.strip().split()) == 1:  
-			remote_hn = line[hdr_idx['Device ID'][0]:hdr_idx['Device ID'][-1]]
+			remote_hn = line[hdr_idx['Device ID'][0]:]
 			prev_line = True
 			continue
 		else:
 			if not prev_line: remote_hn = line[hdr_idx['Device ID'][0]:hdr_idx['Device ID'][-1]]
-			local_if = STR.if_standardize(line[hdr_idx['Local Intrfce'][0]:hdr_idx['Local Intrfce'][-1]].strip())
-			remote_if = STR.if_standardize(line[hdr_idx['Port ID'][0]:hdr_idx['Port ID'][-1]].strip())
+			local_if = line[hdr_idx['Local Intrfce'][0]:hdr_idx['Local Intrfce'][-1]].strip()
+			try:
+				local_if = STR.if_standardize(local_if)
+			except:
+				pass
+			remote_if = line[hdr_idx['Port ID'][0]:hdr_idx['Port ID'][-1]].strip()
+			try:
+				remote_if = STR.if_standardize(remote_if)
+			except:
+				pass
 			remote_plateform = line[hdr_idx['Platform'][0]:hdr_idx['Platform'][-1]]
 			prev_line = False
 

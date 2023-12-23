@@ -107,6 +107,7 @@ def get_inet_address(line):
 	if line.strip().startswith("ip address "):
 		spl = line.strip().split()
 		ip  = spl[2]
+		if ip == 'dhcp': return ""
 		mask = to_dec_mask(spl[3])
 		s = ip+"/"+str(mask)
 		return s

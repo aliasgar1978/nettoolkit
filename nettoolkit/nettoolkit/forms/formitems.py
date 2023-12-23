@@ -10,6 +10,7 @@ formpath_str = str(frm).split('from')[-1].split(">")[0].strip()[1:-1]
 p = Path(formpath_str)
 previous_path = p.resolve().parents[0]
 CACHE_FILE = previous_path.joinpath('caches.xlsx')
+CONNECTOR_TYPES_FILE = previous_path.joinpath('cable_n_connectors.xlsx')
 
 # ---------------------------------------------------------------------------------------
 
@@ -188,3 +189,43 @@ def get_cache(cache_file, key):
 	#
 	return ""
 # ---------------------------------------------------------------------------------------
+
+
+def get_cable_n_connectors(file, column, item):
+	"""retrive the value for provided item for given column
+
+	Args:
+		file (str): cached cable and connector file name with full path
+		column (str): column name (attribute)
+		item (str): row item (connector type)
+
+	Returns:
+		str: matched item value from cached file
+	"""	
+	try:
+		df = pd.read_excel(file).fillna("")
+	except FileNotFoundError:
+		df = pd.DataFrame({'media_type': [], 'cable_type':[], '_connector_type':[], 'speed':[] })
+		df.to_excel(file, index=False)
+	dic = df.to_dict()
+	#
+	for vrk, vr in dic['media_type'].items():
+		if item == vr:
+			return dic[column][vrk]
+	#
+	return ""
+
+def add_cable_n_connectors(file, **kwargs):
+	"""add item/value
+
+	Args:
+		file (str): cached cable and connector excel file name with full path
+	"""		
+	#
+	df = pd.read_excel(file).fillna("")
+	df2 = pd.DataFrame(kwargs)
+	df = pd.concat([df, df2], ignore_index=True).fillna("")
+	df.to_excel(file, index=False)
+
+# ---------------------------------------------------------------------------------------
+

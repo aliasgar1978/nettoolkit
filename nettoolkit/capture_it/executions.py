@@ -26,18 +26,16 @@ class Execute_Common():
 		Exception: raise exception if any issue with authentication or connections.
 	"""	
 
+	# set authentication and default parameters
 	def __init__(self, auth):
-		"""Initiatlize the connections for the provided iplist, authenticate with provided auth parameters, and execute given commands.
-		"""    		
 		self.add_auth_para(auth)
 		self.set_defaults()
-		#
 
+	# verify data, start capture, write logs
 	def __call__(self):
 		self.verifications()
 		self.start()
 		write_log(self.lg, self.log_type, self.common_log_file, self.path)
-
 
 	def add_auth_para(self, auth):
 		"""add authentication parameters to self instance
@@ -64,7 +62,7 @@ class Execute_Common():
 		self.cumulative = True
 		self.forced_login = True
 		self.parsed_output = False
-		self.visual_progress = 10
+		self.visual_progress = 3
 		self.log_type = None
 		self.common_log_file = None
 		self.CustomClass = None
@@ -78,19 +76,16 @@ class Execute_Common():
 		if not isinstance(self.visual_progress, (int, float)):
 			print(f"visual_progress level to be entered in number, default value (3) selected")
 			self.visual_progress = 3
-		if not self.cumulative in (True, False, 'both'):
+		if self.cumulative not in (True, False, 'both'):
 			print( f"cumulative arument is set to {self.cumulative}. No capture-log files will be generated." )
 		if self.log_type in ('common', 'both') and not self.common_log_file:
-			print( f"common_log_file is missing, debug log will not be generated" )
+			print( f"common_log_file name is missing, common debug log will not be generated" )
 			self.common_log_file = None
 		if not isinstance(self.max_connections, int):
 			print(f"Invalid number of `max_connections` defined {self.max_connections}, default 100 taken.")
 			self.max_connections = 100
 
-
-
-
-	## variable user inputs ##
+	## -------------- variable user inputs hook -------------- ##
 
 	def dependent_cmds(self, custom_dynamic_cmd_class):
 		"""Provide dependent commands via a class definition.  A new variable set of commands can be passed
@@ -117,8 +112,7 @@ class Execute_Common():
 		self.CustomClass = custom_dynamic_cmd_class
 
 
-	## other common functions ##
-
+	##  -------------- Some other common functions --------------  ##
 
 	def is_valid(self, ip):
 		"""Validation function to check if provided ip is valid IPv4 or IPv6 address
@@ -137,7 +131,7 @@ class Execute_Common():
 			return False
 
 
-	## generate Facts usings Facts-Finder ##
+	## -------------- generate Facts usings Facts-Finder hook -------------- ##
 
 	def generate_facts(self, CustomDeviceFactsClass=None, foreign_keys={}):
 		"""generate excel facts -clean.xlsx file using facts finder
@@ -174,20 +168,40 @@ class Execute_Common():
 			new_suffix='-clean',
 			use_cdp=False,
 		)
-		print(f"{ED.cumulative_filename.split('/')[-1][:-4]} -", end='\t')
-		# -- execute it --
-		cleaned_fact()
-		print(f"Cleaning done...,", end='\t')
-		# -- custom facts additions --
+		# ------------------------------------------------------------------------
+		try:
+			hn = ED.hostname
+			# -- execute it --
+			print(f"{hn} - Starting Data Cleaning...")
+			cleaned_fact()
+			print(f"{hn} - Data Cleaning done...")
+		except:
+			print(f"{hn} - Data Cleaning failed, facts will NOT be generated !!!")
+			return None
+		# ------------------------------------------------------------------------
 		if CustomDeviceFactsClass:
-			ADF = CustomDeviceFactsClass(cleaned_fact)
-			ADF()
-			ADF.write()
-			print(f"Custom Data Modifications done...,", end='\t')
-		# -- rearranging tables columns --
-		ff.rearrange_tables(cleaned_fact.clean_file, foreign_keys=foreign_keys)
-		print(f"Column Rearranged done..., ", end='\t')
-		print(f"Facts-Generation Tasks Completed !! {ED.hostname} !!\n{'-'*80}")
+		# -- custom facts additions --
+			try:
+				print(f"{hn} - starting Custom Data Modifications...")
+				ADF = CustomDeviceFactsClass(cleaned_fact)
+				ADF()
+				ADF.write()
+				print(f"{hn} - Custom Data Modifications done...")
+			except:
+				print(f"{hn} - Custom Data Modifications failed, custom facts will NOT be added !!")
+				pass
+		# ------------------------------------------------------------------------
+		try:
+			# -- rearranging tables columns --
+			print(f"{hn} - Column Rearranging..., ")
+			ff.rearrange_tables(cleaned_fact.clean_file, foreign_keys=foreign_keys)
+			print(f"{hn} - Column Rearrangemnet done...")
+		except:
+			print(f"{hn} - Column Rearrangemnet failed, facts columns may not be in proper order !")
+			pass
+		# ------------------------------------------------------------------------
+		print(f"{hn} - Facts-Generation Tasks Finished !!! {hn} !!")
+		# ------------------------------------------------------------------------
 
 
 # -----------------------------------------------------------------------------------------------
@@ -204,14 +218,15 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		path (str): path where output(s), logs(s) should be stored.
 
 	Properties:
-		cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and 'both' will do both.
-		forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)
-		parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)
-		visual_progress (int, optional): 0 will not show any progress, 10 will show all progress (default=3).
-		log_type (str): what type of log output requires. choices are = common, individual, both
-		common_log_file (str): output file name of a common log file
-		max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.
-		CustomClass (class): Custom class definitition to execute additional custom commands
+
+		* cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and 'both' will do both.
+		* forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)
+		* parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)
+		* visual_progress (int, optional): 0 will not show any progress, 10 will show all progress (default=3).
+		* log_type (str): what type of log output requires. choices are = common, individual, both
+		* common_log_file (str): output file name of a common log file
+		* max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.
+		* CustomClass (class): Custom class definitition to execute additional custom commands
 
 	Raises:
 		Exception: raise exception if any issue with authentication or connections.
@@ -219,9 +234,6 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 	"""    	
 
 	def __init__(self, ip_list, auth, cmds, path="."):
-		"""Initiatlize the connections for the provided iplist, authenticate with provided auth parameters, 
-		and execute given commands.
-		"""    		
 		Execute_Common.__init__(self, auth)
 		self.devices = STR.to_set(ip_list) if isinstance(ip_list, str) else set(ip_list)
 		self.cmds = cmds
@@ -230,13 +242,11 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		#
 		self.ips = []
 		if not isinstance(cmds, dict):
-			raise Exception("commands to be executed are to be in proper dict format")
+			raise Exception("Commands to be executed, are to be in proper dict format")
 		self.cmd_exec_logs_all = OrderedDict()
 		self.device_type_all = OrderedDict()
 		#
 		super().__init__(self.devices)
-
-
 
 	def execute(self, ip):
 		"""execution function for a single device. hn == ip address in this case.
@@ -256,20 +266,22 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 			logger=self.lg,
 			CustomClass=self.CustomClass,
 			fg=self.fg,
-			)
+		)
 
 		# - capture logs -
 		if self.log_type and self.log_type.lower() in ('individual', 'both'):
 			self.lg.write_individuals(self.path)
-		self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
-		self.device_type_all[ED.hostname] =  ED.dev.dtype
-		self.ips.append(ip)
+		if ED.pinging:
+			self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
+			self.device_type_all[ED.hostname] =  ED.dev.dtype
+			self.ips.append(ip)
 
-		# - update all cmds
-		self.update_all_cmds(ED)
+			# - update all cmds
+			self.update_all_cmds(ED)
 
-		# - facts generations -
-		if self.fg: self.ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
+			# - facts generations -
+			if self.fg: 
+				self.ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
 
 
 	def update_all_cmds(self, ED):

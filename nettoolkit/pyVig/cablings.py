@@ -21,8 +21,12 @@ class ADevCablings():
 		self.cablings = {}
 		self.cablings['a_device'] = []
 		self.cablings['b_device'] = []
+		self.cablings['aport'] = []
+		self.cablings['bport'] = []
+		self.cablings['a_media_type'] = []
+		self.cablings['b_media_type'] = []
 		self.cabling_mandatory_columns = set(self.cablings.keys())
-		self.cabling_optional_columns = {'connector_type', 'color', 'weight', 'pattern'}
+		self.cabling_optional_columns = {'connector_type', 'color', 'weight', 'pattern',}
 		self.connector_type, self.color, self.weight, self.pattern = DEFAULT_CONNECTOR_TYPE, DEFAULT_LINE_COLOR, DEFAULT_LINE_WT, DEFAULT_LINE_PATTERN 
 		self.update_attrib(**kwargs)
 
@@ -40,17 +44,20 @@ class ADevCablings():
 			'b_device': 'nbr_hostname' ,
 			'aport': 'interface',
 			'bport': 'nbr_interface',
+			'a_media_type': 'media_type',
 		}
 		#
 		for k in self.cablings:
 			if k == 'a_device':
 				self.cablings[k].append(self.self_device)
+			elif k in ( 'b_media_type'):
+				self.cablings[k].append("")
 			elif k in self.cabling_mandatory_columns:
 				try:
 					self.cablings[k].append(kwargs[mandatory_col_maps[k]])
 				except:
 					self.cablings[k].append("")
-					if k != 'b_device':
+					if k != 'b_device' and k != 'a_media_type':
 						print(f"Mandatory requirement missing, df gen may fails {k}")
 
 		for k in self.cabling_optional_columns:
@@ -81,6 +88,7 @@ class ADevCablings():
 		"""
 		df =  pd.DataFrame(self.cablings)
 		df = drop_empty(df, column='b_device')
+		self.merged_df = df
 		return df
 
 # --------------------------------------------- 

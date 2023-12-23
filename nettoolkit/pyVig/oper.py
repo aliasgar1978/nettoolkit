@@ -3,6 +3,7 @@ import pandas as pd
 from copy import deepcopy
 from nettoolkit.nettoolkit_db import *
 from nettoolkit.nettoolkit_common import *
+from nettoolkit.nettoolkit.forms.formitems import get_cable_n_connectors, add_cable_n_connectors, CONNECTOR_TYPES_FILE
 from .devices import AdevDevices, device_df_drop_empty_duplicates, update_var_df_details_to_table_df
 from .cablings import ADevCablings
 from .maths import CalculateXY
@@ -11,6 +12,12 @@ from .general import *
 pd.set_option('mode.chained_assignment', None)
 
 
+# ------------------------------------------------------------------------- 
+CABLING_COLUMNS = ['a_device', 'aport', 'a_media_type', 'a_connector_type', 
+	'b_device',  'bport',  'b_media_type', 'b_connector_type', 
+	'cable_type', 'speed', 'cable',
+	'connector_type', 'color', 'pattern', 'weight',
+]
 # --------------------------------------------- 
 # Data Frame Generator
 # --------------------------------------------- 
@@ -59,7 +66,8 @@ class DFGen():
 		for k, v in kwargs.items():
 			self.var_func_dict[k] = v
 
-	def run(self):
+
+	def run(self, visio_gen=False):
 		"""iterate over all files for generating devices/cabling DataFrame details.
 		"""		
 		self.DCT = {}
@@ -70,18 +78,37 @@ class DFGen():
 			self.update_devices_df(DCT, file)
 			self.update_cabling_df(DCT, file)
 			self.DCT[DCT.hostname] = DCT
-
+		#
 		self.devices_merged_df = device_df_drop_empty_duplicates(self.devices_merged_df)
 		self.devices_merged_df = update_var_df_details_to_table_df(self.devices_merged_df, self.DCT, self.var_func_dict)
 		#
-		# self.calculate_cordinates()  # do after update for multi tab calculations (delete line in next release)
-		#
 		self.cabling_merged_df.reset_index(inplace=True)
-		self.remove_duplicate_cabling_entries()
-		self.remove_undefined_cabling_entries()
+		self.add_b_device_media_types()
+		self.add_cable_connector_details()
+		#
+		self.remove_subintf_from_ports()
+		self.standardize_intf_on_ports()
+		self.remove_duplicate_cablings()
+		self.update_weight()
+		self.update_color()
+		#
+		# if visio_gen:
+		# ----- Cable matrix tab filteration ----- #
+		# self.remove_duplicate_cabling_entries()
+		# self.remove_undefined_cabling_entries()
+		# ---------------------------------------- #
 		#
 		self.df_dict = {'Devices': self.devices_merged_df, 'Cablings': self.cabling_merged_df }
 		#
+
+
+	def arrange_cablings(self):
+		"""arrange cabling tab in to appropriate order given in CABLING COLUMNS
+		"""		
+		cabeling_columns = set(self.df_dict['Cablings'].columns)
+		extra_cols = cabeling_columns.difference(set(CABLING_COLUMNS))
+		arranged_cols = CABLING_COLUMNS + list(extra_cols)
+		self.df_dict['Cablings'] = self.df_dict['Cablings'][arranged_cols]
 
 	def update(self, *funcs):
 		for f in funcs:
@@ -123,8 +150,21 @@ class DFGen():
 		CXY.calc()
 		self.df_dict = {'Devices': CXY.df, 'Cablings': self.cabling_merged_df }
 
+
+	def remove_duplicate_cablings(self):
+		"""removes redundant cabling entries between two devices with same port identified
+		"""
+		self.cabling_merged_df["a_dev_duplicate"] = self.cabling_merged_df.b_device
+		self.cabling_merged_df["aport_duplicate"] = self.cabling_merged_df.bport
+		self.cabling_merged_df["b_dev_duplicate"] = self.cabling_merged_df.a_device
+		self.cabling_merged_df["bport_duplicate"] = self.cabling_merged_df.aport
+		self.cabling_merged_df = remove_duplicates(self.cabling_merged_df)
+		self.cabling_merged_df = self.cabling_merged_df.drop(
+			columns=["a_dev_duplicate", "aport_duplicate", "b_dev_duplicate", "bport_duplicate"]
+		)
+
 	def remove_duplicate_cabling_entries(self):
-		"""removes duplicate cabling entries between a-b devices
+		"""removes duplicate cabling entries between a-b devices / deprycated.
 		"""		
 		a_to_b = {}
 		copy_full_df = deepcopy(self.cabling_merged_df)
@@ -140,7 +180,7 @@ class DFGen():
 			a_to_b[data.a_device]['remotedev'].append(data.b_device)
 
 	def remove_undefined_cabling_entries(self):
-		"""removes undefined cabling entries where device doesn't exist in devices tab
+		"""removes undefined cabling entries where device doesn't exist in devices tab / deprycated
 		"""		
 		dev_hosts = set(self.devices_merged_df.hostname) 
 		copy_full_df = deepcopy(self.cabling_merged_df)
@@ -148,6 +188,196 @@ class DFGen():
 			if not data.a_device in dev_hosts or not data.b_device in dev_hosts:
 				self.cabling_merged_df.drop(i, inplace=True)
 				continue
+
+	def add_b_device_media_types(self):
+		"""add b-device media types to database
+		"""		
+		self.cabling_merged_df['b_media_type'] = self.cabling_merged_df.apply(lambda x: 
+				update_b_media_type(x.b_device, x.bport, self.DCT), axis=1)
+
+	def add_cable_connector_details(self):		
+		"""add cable and connector details to database (such as: media_type, cable_type, connector_types, mediaspeed, cable-type )
+		"""		
+		self.additional_sfp_cts = {'media_type':[], 'cable_type': [],'_connector_type': [], 'speed':[]}
+		self.cabling_merged_df['cable_type'] = self.cabling_merged_df.apply(lambda x: self.update_cable_connector(x, 'cable_type'), axis=1)
+		self.cabling_merged_df['a_connector_type'] = self.cabling_merged_df.apply(lambda x: self.update_cable_connector(x, '_connector_type', 'a_media_type'), axis=1)
+		self.cabling_merged_df['b_connector_type'] = self.cabling_merged_df.apply(lambda x: self.update_cable_connector(x, '_connector_type', 'b_media_type'), axis=1)
+		self.cabling_merged_df['speed'] = self.cabling_merged_df.apply(lambda x: self.update_cable_connector(x, 'speed',), axis=1)
+		self.cabling_merged_df['cable'] = self.cabling_merged_df.apply(lambda x: self.merge_cable_type(x), axis=1)
+
+		add_cable_n_connectors(CONNECTOR_TYPES_FILE, **self.additional_sfp_cts)
+
+
+	def merge_cable_type(self, df):
+		"""checks a side and b side connectors, media speed and returns desired cable type
+
+		Args:
+			df (DataFrame): Pandas DataFrame (cabling)
+
+		Returns:
+			str: cable type (ex: lc to lc 10g Multimode OM3 Cable)
+		"""		
+		ac = df.a_connector_type if df.a_connector_type else "??"
+		bc = df.b_connector_type if df.b_connector_type else "??"
+		s = f"{ac} to {bc} {df.speed} {df.cable_type}"
+		return s
+
+	def update_cable_connector(self, cm_df, what, mt_col=None):
+		"""common definition to update attributes: cable_type, connector_types, mediaspeed
+
+		Args:
+			cm_df (DataFrame): Pandas DataFrame (cabling)
+			what (str): attribute name to be updated
+			mt_col (str, optional): mediatype column name. Defaults to None.
+
+		Returns:
+			str: found atribute value
+		"""		
+		if mt_col is None:
+			media_type = cm_df.a_media_type if cm_df.a_media_type else cm_df.b_media_type
+		else:
+			media_type = cm_df[mt_col]
+
+		if not media_type: return ""
+		if media_type in self.additional_sfp_cts['media_type']:
+			try:
+				if self.additional_sfp_cts[what][self.additional_sfp_cts['media_type'].index(media_type)]:
+					return self.additional_sfp_cts[what][self.additional_sfp_cts['media_type'].index(media_type)]
+			except:
+				pass
+		#
+		c = get_cable_n_connectors(CONNECTOR_TYPES_FILE, what, media_type)
+		if c: return c
+		#
+		c = input(f"Provide [{what}] - New SFP identified: [{media_type}]:")
+		if c:
+			self._update_additional_sfp_cts(media_type, what, c)
+			return c
+		#
+		return ''
+
+	# support to above
+	def _update_additional_sfp_cts(self, media_type, what, c):
+		if media_type not in self.additional_sfp_cts['media_type']:
+			self.additional_sfp_cts['media_type'].append(media_type)
+			for _ in {'cable_type', '_connector_type', 'speed'}: 
+				self.additional_sfp_cts[_].append("")
+		self.additional_sfp_cts[what][self.additional_sfp_cts['media_type'].index(media_type)] = c
+
+	def update_weight(self):
+		"""define thickness of connector
+		"""		
+		update_weight(self.cabling_merged_df, self.weight)
+
+	def update_color(self):
+		"""define color of connector
+		"""		
+		update_color(self.cabling_merged_df)
+
+	def remove_subintf_from_ports(self):
+		"""removes subninterface value/string from ports
+		"""		
+		self.cabling_merged_df['aport'] = self.cabling_merged_df['aport'].apply(lambda x: x.split(".")[0])
+		self.cabling_merged_df['bport'] = self.cabling_merged_df['bport'].apply(lambda x: x.split(".")[0])
+
+	def standardize_intf_on_ports(self):
+		"""standardize all interfaces
+		"""		
+		self.cabling_merged_df['aport'] = self.cabling_merged_df['aport'].apply(lambda x: STR.intf_standardize_or_null(x, intf_type='PHYSICAL'))
+		self.cabling_merged_df['bport'] = self.cabling_merged_df['bport'].apply(lambda x: STR.intf_standardize_or_null(x, intf_type='PHYSICAL'))
+
+# --------------------------------------------------------------------------------------------------
+
+def update_weight(df, base_weight=1):
+	"""update line thickness for all connectors, where found multiple connectivities between two devices
+
+	Args:
+		df (DataFrame): Pandas DataFrame (cabling)
+		base_weight (int, optional): base weight. Defaults to 1.
+	"""	
+	for i, v in df.iterrows():
+		minidf = df[ (df.a_device == v.a_device) & (df.b_device == v.b_device) ]
+		minidf_len = len(minidf)
+		if minidf_len == 1:
+			continue
+		elif minidf_len > 1:
+			df.loc[ ((df.a_device == v.a_device) & (df.b_device == v.b_device)), 'weight' ] = minidf_len * base_weight
+
+def update_color(df):
+	"""update line color for all connectors, based on the found cable type.  Available options are 
+	# ( white, black, red, green, skyblue, blue, yellow, gray, lightgray, darkgray, orange )
+
+	Args:
+		df (DataFrame): Pandas DataFrame (cabling)
+	"""
+	colors = {
+		'aoc': 'red',
+		'fiber om3 mm': 'skyblue',
+		'fiber om4 mm': 'skyblue',
+		'fiber mm': 'orange',
+		'fiber sm': 'yellow',
+		'copper': 'darkgray',
+		#
+		# ... add more as and when need ... #
+		# --- adding new color will require respective edit in visio.py ---
+	}
+	df.color = df.apply(lambda x: get_color(x, colors), axis=1)
+
+def get_color(df, colors):
+	"""get color of a connector
+
+	Args:
+		df (DataFrame): Pandas DataFrame (cabling)
+		colors (dict): fibertype v/s color dictionary
+
+	Returns:
+		str: color for given found cable (Default: black)
+	"""	
+	if df.cable_type.lower() in colors:
+		return colors[df.cable_type.lower()]
+	return 'black'
+
+
+def update_b_media_type(cable_df_b_device, cable_df_bport, DCT):
+	"""update media type for b-end device.
+
+	Args:
+		cable_df_b_device (str): hostname of b-end device 
+		cable_df_bport (str): connected b-end device port
+		DCT (DF_ConverT): DataFrame Convertor object
+
+	Returns:
+		str: media type information detected for b-end device/port (Default: "")
+	"""	
+	if cable_df_b_device not in DCT: 
+		return ""
+	remote_ph_df = DCT[cable_df_b_device].full_df['physical']
+	filtered_df = remote_ph_df[remote_ph_df['interface'] == STR.if_standardize(cable_df_bport)]
+	if filtered_df.empty: 
+		return ""
+	if 'media_type' not in  filtered_df.columns: return ""
+	if not filtered_df.fillna("")['media_type'][filtered_df.index[0]]: return ""
+	return filtered_df['media_type'][filtered_df.index[0]]
+
+
+def remove_duplicates(df):
+	"""removes duplicate cabling entries between a-b devices
+	"""		
+	#
+	df2 = deepcopy(df)
+	for i, v in df.iterrows():
+		bdev = v.b_device
+		bport = v.bport
+		adev = v.a_device
+		aport = v.aport
+		minidf = df[(df.a_dev_duplicate == adev) & (df.aport_duplicate == aport) & (df.b_dev_duplicate == bdev) & (df.bport_duplicate == bport)]
+		if minidf.empty:
+			continue
+		df2 = df2.drop(minidf.index)
+		break
+	if len(df) == len(df2): 
+		return df2
+	return remove_duplicates(df2)
 
 
 # --------------------------------------------- 
@@ -236,15 +466,16 @@ class DF_ConverT():
 
 		Returns:
 			DataFrame: pandas DataFrame
-		"""		
+		"""	
 		self.C = ADevCablings(self.self_device, **default_dic)
 		for k, v in self.u_ph_df.iterrows():
 			kwargs = {}
 			for x, y in v.items():
 				kwargs[x] = y
 			self.C.add_to_cablings(**kwargs)
-		df = self.C.cabling_dataframe()
-		return df
+		#
+		self.C.cabling_dataframe()
+		return self.C.merged_df
 
 	def update_devices(self):
 		"""creates Devices object, and its DataFrame, adds vlan informations.

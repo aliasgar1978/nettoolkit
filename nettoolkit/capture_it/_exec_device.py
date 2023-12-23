@@ -71,8 +71,8 @@ class Execute_Device():
 			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
 			return None
 		#
-		pinging = self.check_ping(ip)
-		if forced_login or pinging:
+		self.pinging = self.check_ping(ip)
+		if forced_login or self.pinging:
 			self.get_device_type(ip)
 			try:
 				self.dev.dtype

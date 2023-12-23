@@ -445,11 +445,16 @@ class Connector():
 		Returns:
 			None: None
 		"""	
-		clr = "THEMEGUARD(RGB(255,255,255))"
+		clr = "THEMEGUARD(RGB(0,0,0))"
 		if isinstance(color, str):
+			if color.lower() == "white": clr = "THEMEGUARD(RGB(255,255,255))"
+			if color.lower() == "black": clr = "THEMEGUARD(RGB(0,0,0))"
 			if color.lower() == "red": clr = "THEMEGUARD(RGB(255,0,0))"
+			if color.lower() == "orange": clr = "THEMEGUARD(RGB(255,192,0))"
 			if color.lower() == "green": clr = "THEMEGUARD(RGB(0,255,0))"
+			if color.lower() == "skyblue": clr = "THEMEGUARD(RGB(0,176,240))"
 			if color.lower() == "blue": clr = "THEMEGUARD(RGB(0,0,255))"
+			if color.lower() == "yellow": clr = "THEMEGUARD(RGB(255,255,0))"
 			if color.lower() == "gray": clr = "THEMEGUARD(RGB(127,127,127))"
 			if color.lower() == "lightgray": clr = "THEMEGUARD(RGB(55,55,55))"
 			if color.lower() == "darkgray": clr = "THEMEGUARD(RGB(200,200,200))"

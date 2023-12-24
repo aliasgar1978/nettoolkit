@@ -19,7 +19,7 @@ Lets start by defining a few more required static inputs. Modify it as needed.
 
 
   # --------------------------------------------
-  #  INPUTS
+  #  INPUTS - modify as desired
   # --------------------------------------------
   STENCIL_FOLDER = 'path/where/stencilfiles/stored'
   VISIO_OP_FILE = 'output.vsd'
@@ -38,13 +38,16 @@ Lets start by defining a few more required static inputs. Modify it as needed.
     'default_stencil': DEFAULT_STENCIL,
 
     # Optional /  list of additional columns to be merged with device details., example given below.
-    # modify as needed
-    'cols_to_merge': ['ip_address', 'device_model', 'serial_number' ],
+    # modify and add more custom columns as needed
+    'cols_to_merge': [ 'device_model', 'serial_number' ],
   }
-  dic.update(sheet_filter_dict)
+  dic.update(sheet_filter_dict)   # sheet_filter_dict >> from previous page
 
   # ----------------------------------------------------------------------------------
   # Create Visio
   # ----------------------------------------------------------------------------------
   pyVig(**dic)
 
+-----
+
+Enjoy!

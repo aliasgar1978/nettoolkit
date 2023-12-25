@@ -14,11 +14,6 @@ Functions of addressing will be available to be used than after.
 * There are few addressing functions - which can be used after creating IPv4 or IPv6 Object. These are described in following two pages.
 * There are few addressing functions - which can be used without creating IPv4 or IPv6 Object. These are  desscribed as below.
 
-	* bin_mask()
-	* to_dec_mask()
-	* bin2dec()
-	* bin2decmask()
-	* binsubnet
 
 -----
 
@@ -74,6 +69,80 @@ binsubnet()
 
 		>>> binsubnet('10.10.10.0/24')
 		'00001010000010100000101000000000'
+
+dec2dotted_ip
+-------------
+
+	* converts decimal ip address to dotted decimal ip notation
+
+	.. code-block:: python
+
+		>>> n = 183490304
+		>>> dec2dotted_ip(n)
+		'10.239.215.0'
+
+
+subnet_size_to_mask
+-------------------
+
+	* converts subnet size to get subnet mask value
+
+	.. code-block:: python
+
+		>>> subnet_size_to_mask(256)
+		24
+		>>> subnet_size_to_mask(512)
+		23
+
+inv_subnet_size_to_mask
+-----------------------
+
+	* converts inverse subnet to get subnet mask value
+
+	.. code-block:: python
+
+		>>> inv_subnet_size_to_mask(255)
+		24
+		>>> inv_subnet_size_to_mask(511)
+		23
+
+get_subnet
+----------
+
+	* get subnet/mask from decimal network ip and size of subnet (unvalidated)
+
+	.. code-block:: python
+
+		>>> get_subnet(183490304, 256)
+		'10.239.215.0/24'
+		>>> get_subnet(183490304, 512)
+		Invalid subnet/mask cannot return 10.239.215.0/23
+		''
+
+ipv4_octets
+-----------
+
+	* get octets in a list for provided ip/subnet
+
+	.. code-block:: python
+
+		>>> ipv4_octets("10.11.12.0/24")
+		{'octets': ['10', '11', '12', '0'], 'mask': 24}
+
+
+
+range_subset
+------------
+
+	* check whether range1 is a subset of range2
+
+	.. code-block:: python
+
+		>>> range_subset(range(0,50), range(0,100))
+		True
+		>>> range_subset(range(0,120), range(0,100))
+		False
+
 
 
 -----

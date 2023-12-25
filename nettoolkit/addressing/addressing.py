@@ -238,7 +238,13 @@ def get_subnet(decimal_network_ip, length):
 	Returns:
 		str: string repr of subnet (subnet/mask)
 	"""	
-	return dec2dotted_ip(decimal_network_ip) + "/" + str(inv_subnet_size_to_mask(length))
+	breakup = decimal_network_ip/length 
+	s = dec2dotted_ip(decimal_network_ip) + "/" + str(subnet_size_to_mask(length))
+	if breakup.is_integer():
+		return s
+	else:
+		print(f"Invalid subnet/mask cannot return {s}")
+		return ""
 
 def range_subset(range1, range2):
 	"""check whether range1 is a subset of range2

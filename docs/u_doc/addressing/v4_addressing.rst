@@ -88,7 +88,15 @@ IPv4 object - Properties:
             >>> s.ip_number
             10
 
-    
+    size
+
+        .. code-block:: python
+
+            >>> s.size
+            512
+
+
+
 
 IPv4 object - methods:
 ----------------------------------
@@ -145,6 +153,13 @@ IPv4 object - methods:
             '10.10.10.0 0.0.1.255'
             >>> s.ipinvmask(5)
             '10.10.10.5 0.0.1.255'
+
+    to_decimal()
+
+        .. code-block:: python
+
+            >>> s.to_decimal()
+            168430080
 
 
 

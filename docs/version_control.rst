@@ -144,8 +144,8 @@ Version Control
        * Added a new functionality to get cable-matrix file with more details
    * - 1.5.1
      - Dec 25, 2023
-     - * Bug fixes: facts-finder
-       * Addressing: Added a few new definitions
+     - * Bug fixes: facts-finder, addressing
+       * addressing: Added a few new definitions
        * Cable-Matrix: Added a few more columns
 
 

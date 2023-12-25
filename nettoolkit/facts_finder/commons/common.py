@@ -31,7 +31,14 @@ def update_int_number(number):
 				nm = int(pfx)*multiplier
 				s += nm+sfx
 		else:
-			s += int(spl_n[-1])
+			ps = spl_n[0].split(":")
+			nm = int(ps[0])
+			if len(ps)>1:
+				nm_dec = int(ps[1])/(100**i)
+				nm += nm_dec
+			s += nm
+			#
+			# s += int(spl_n[-1])
 	return s
 
 def generate_int_number(pdf):

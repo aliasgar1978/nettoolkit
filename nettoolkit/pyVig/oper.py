@@ -13,9 +13,11 @@ pd.set_option('mode.chained_assignment', None)
 
 
 # ------------------------------------------------------------------------- 
-CABLING_COLUMNS = ['a_device', 'aport', 'a_media_type', 'a_connector_type', 
-	'b_device',  'bport',  'b_media_type', 'b_connector_type', 
+CABLING_COLUMNS = ['a_device', 'a_dev_model', 'a_dev_serial', 'aport', 'a_media_type', 'a_connector_type', 
+	'b_device', 'b_dev_model', 'b_dev_serial', 'bport',  'b_media_type', 'b_connector_type', 
 	'cable_type', 'speed', 'cable',
+]
+VISIO_DRAWING_COLUMNS= [
 	'connector_type', 'color', 'pattern', 'weight',
 ]
 # --------------------------------------------- 
@@ -36,8 +38,13 @@ class DFGen():
 		self.default_y_spacing = 2
 		self.line_pattern_style_separation_on = None
 		self.line_pattern_style_shift_no = 2
+		self.weight = DEFAULT_LINE_WT
 		self.func_dict = {}
-		self.var_func_dict = {}
+		self.var_func_dict = {
+			'hostname': get_dev_hostname,
+			'device_model': get_dev_model,
+			'serial_number': get_dev_serial,
+		}
 		self.pattern = 1
 		self.blank_dfs()
 
@@ -89,10 +96,12 @@ class DFGen():
 		self.remove_subintf_from_ports()
 		self.standardize_intf_on_ports()
 		self.remove_duplicate_cablings()
-		self.update_weight()
-		self.update_color()
+		self.add_model_n_serial_number_to_cabling()
+		#
 		#
 		# if visio_gen:
+		# self.update_weight()
+		# self.update_color()
 		# ----- Cable matrix tab filteration ----- #
 		# self.remove_duplicate_cabling_entries()
 		# self.remove_undefined_cabling_entries()
@@ -102,12 +111,15 @@ class DFGen():
 		#
 
 
-	def arrange_cablings(self):
+	def arrange_cablings(self, keep_all_cols=True):
 		"""arrange cabling tab in to appropriate order given in CABLING COLUMNS
 		"""		
 		cabeling_columns = set(self.df_dict['Cablings'].columns)
-		extra_cols = cabeling_columns.difference(set(CABLING_COLUMNS))
-		arranged_cols = CABLING_COLUMNS + list(extra_cols)
+		extra_cols = cabeling_columns.difference(set(CABLING_COLUMNS)).difference(set(VISIO_DRAWING_COLUMNS))
+		arranged_cols = CABLING_COLUMNS
+		if keep_all_cols:
+			arranged_cols += VISIO_DRAWING_COLUMNS
+			arranged_cols += extra_cols
 		self.df_dict['Cablings'] = self.df_dict['Cablings'][arranged_cols]
 
 	def update(self, *funcs):
@@ -286,7 +298,46 @@ class DFGen():
 		self.cabling_merged_df['aport'] = self.cabling_merged_df['aport'].apply(lambda x: STR.intf_standardize_or_null(x, intf_type='PHYSICAL'))
 		self.cabling_merged_df['bport'] = self.cabling_merged_df['bport'].apply(lambda x: STR.intf_standardize_or_null(x, intf_type='PHYSICAL'))
 
+	def add_model_n_serial_number_to_cabling(self):
+		"""cabling tab - add device model and serial numbers
+		"""		
+		self.cabling_merged_df['a_dev_model'] = self.cabling_merged_df.apply(lambda x: get_model_number(x, self.devices_merged_df, 'a_device'), axis=1)
+		self.cabling_merged_df['b_dev_model'] = self.cabling_merged_df.apply(lambda x: get_model_number(x, self.devices_merged_df, 'b_device'), axis=1)
+		self.cabling_merged_df['a_dev_serial'] = self.cabling_merged_df.apply(lambda x: get_serial_number(x, self.devices_merged_df, 'a_device'), axis=1)
+		self.cabling_merged_df['b_dev_serial'] = self.cabling_merged_df.apply(lambda x: get_serial_number(x, self.devices_merged_df, 'b_device'), axis=1)
+
 # --------------------------------------------------------------------------------------------------
+
+def get_serial_number(df, devices_merged_df, device):
+	"""get serial number for match device
+
+	Args:
+		df (DataFrame): Cable Matrix DataFrame
+		devices_merged_df (DataFrame): Devices DetaFrame
+		device (str): device hostname
+
+	Returns:
+		str: serial number of device
+	"""	
+	mini_dev_df = devices_merged_df[(devices_merged_df.hostname == df[device])]
+	idx = mini_dev_df.index[0]
+	return mini_dev_df['serial_number'][idx]
+
+def get_model_number(df, devices_merged_df, device):
+	"""get model number for match device
+
+	Args:
+		df (DataFrame): Cable Matrix DataFrame
+		devices_merged_df (DataFrame): Devices DetaFrame
+		device (str): device hostname
+
+	Returns:
+		str: model number of device
+	"""	
+	mini_dev_df = devices_merged_df[(devices_merged_df.hostname == df[device])]
+	idx = mini_dev_df.index[0]
+	return mini_dev_df['device_model'][idx]
+
 
 def update_weight(df, base_weight=1):
 	"""update line thickness for all connectors, where found multiple connectivities between two devices

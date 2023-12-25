@@ -185,6 +185,79 @@ def binsubnet(subnet):
 	except:
 		pass
 
+# integer to octet
+def dec2dotted_ip(n):
+	"""convert decimal ip address to dotted decimal ip notation.
+
+	Args:
+		n (int): integer/decimal number
+
+	Returns:
+		str: ip address (dotted decimal format)
+	"""	
+	bin_bytes = bin(n)[2:]
+	o4 = str(int(bin_bytes[-8:], 2))
+	o3 = str(int(bin_bytes[-16:-8], 2))
+	o2 = str(int(bin_bytes[-24:-16], 2))
+	o1 = str(int(bin_bytes[:-24], 2))
+	return o1+"."+o2+"."+o3+"."+o4
+
+# 255 -> 24
+def inv_subnet_size_to_mask(n):
+	"""converts inverse subnet size to get subnet mask value
+
+	Args:
+		n (int): number of ips in a subnet excluding networkip (ex: 127)
+
+	Returns:
+		int: subnet mask (25)
+	"""	
+	return 32-bin(n)[2:].count('1')
+
+# 256 -> 24
+def subnet_size_to_mask(n):
+	"""converts subnet size to get subnet mask value
+
+	Args:
+		n (int): number of ips in a subnet (ex: 128)
+
+	Returns:
+		int: subnet mask (25)
+	"""	
+	n = bin(n)
+	return 32- (len(n) - n.rfind('1')  -1)
+
+# decimal network ip and length -> subnet/mask
+def get_subnet(decimal_network_ip, length):
+	"""get subnet/mask from decimal network ip and size of subnet
+
+	Args:
+		decimal_network_ip (int): integer/decimal number
+		length (int): number of ips in a subnet (ex: 128)
+
+	Returns:
+		str: string repr of subnet (subnet/mask)
+	"""	
+	return dec2dotted_ip(decimal_network_ip) + "/" + str(inv_subnet_size_to_mask(length))
+
+def range_subset(range1, range2):
+	"""check whether range1 is a subset of range2
+
+	Args:
+		range1 (range): range1 of items
+		range2 (range): range2 of items
+
+	Returns:
+		bool: whether range1 is part of range2 or not.
+	"""	
+	if not range1:
+		return True  # empty range cannot subset of anything
+	if not range2:
+		return False  # non-empty range can not subset of empty range
+	if len(range1) > 1 and range1.step % range2.step:
+		return False  # steps check
+	return range1.start in range2 and range1[-1] in range2
+
 
 def addressing(subnet, ddc_mask=None):
 	"""proives ip-subnet object for various functions on it
@@ -230,7 +303,8 @@ def get_summaries(*net_list):
 		ss.calculate()
 		if summaries == ss.prefixes: break
 		summaries = ss.prefixes
-	return sorted_v4_addresses(summaries)
+	return sorted(summaries)
+	# return sorted_v4_addresses(summaries)
 
 
 def calc_summmaries(min_subnet_size, *net_list):
@@ -974,6 +1048,22 @@ class IPv4(IP):
 		except:
 			raise Exception(f'Invalid Input : detected')
 
+	def to_decimal(self):
+		"""decimal number of subnet number
+
+		Returns:
+			int: integer/decimal value
+		"""		
+		return bin2dec(binsubnet(self.ipdecmask()))
+
+	@property
+	def size(self):
+		"""number of ips available in subnet
+
+		Returns:
+			int: number of ips (subnet size)
+		"""		
+		return 2**(32-int(self.mask))
 
 
 # ------------------------------------------------------------------------------
@@ -1141,7 +1231,7 @@ class Summary(IPv4):
 		"""initialize object with provided args=prefixes
 		"""
 		self.networks = set()
-		args = sorted_v4_addresses(args)
+			# args = sorted_v4_addresses(args)
 		for arg in args:
 			if isinstance(arg, str):
 				if arg.strip():
@@ -1184,7 +1274,7 @@ class Summary(IPv4):
 				self.summaries.append(str(_sumy))
 			else:
 				self.summaries.append(str(network))
-		# self.summaries = list(set(self.summaries))
+		self.summaries = list(set(self.summaries))
 		self.calc_subset_prefixes()
 		self.remove_subset_prefixes()
 

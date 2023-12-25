@@ -20,7 +20,7 @@ class Ping(Multi_Execution):
 		create_tabs (bool, optional): want to create individual tab (True) for each subnet or clubbed (False)
 	"""	
 
-	def __init__(self, pfxs, till, concurrent_connections=1000, create_tabs=False):
+	def __init__(self, pfxs, till=None, concurrent_connections=1000, create_tabs=False):
 		"""instance initializer
 		"""		
 		self.pfxs = pfxs
@@ -49,12 +49,14 @@ class Ping(Multi_Execution):
 		for pfx in self.pfxs:
 			subnet = addressing(pfx)
 			try:
-				if self.till:
-					hosts = subnet[1:int(self.till)+1]
+				if self.till==0:
+					hosts = subnet[0]
+				elif self.till:
+					hosts = subnet[0:int(self.till)+1]
 				else:
-					hosts =subnet[1:len(subnet)]
+					hosts =subnet[0:len(subnet)]
 			except:
-				hosts =subnet[1:len(subnet)]
+				hosts =subnet[0:len(subnet)]
 			self.pfx_dict[pfx] = [host for host in hosts]
 			new_iplist.extend(self.pfx_dict[pfx])
 		return new_iplist

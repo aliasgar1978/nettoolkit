@@ -393,7 +393,11 @@ def get_physical_port_number(port):
 	port_id = 0
 	for i, n in enumerate(reversed(port_lst)):
 		multiplier = 100**i
-		nm = int(n)*multiplier
+		ps = n.split(":")[0]
+		nm = int(ps[0])*multiplier
+		if len(ps)>1:
+			nm_dec = int(ps[1])/multiplier
+			nm += nm_dec
 		port_id += nm
 	return port_id
 

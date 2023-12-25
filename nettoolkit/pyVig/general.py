@@ -204,3 +204,99 @@ def drop_empty(df, column):
 		DataFrame: data filtered DataFrame
 	"""
 	return df[df[column] != ""]
+
+# --------------------------------------------- 
+
+def get_item_first(s):
+	"""get first index item
+
+	Args:
+		s (series): pandas series
+
+	Returns:
+		str: first item from provided Pandas Series
+	"""	
+	for x in s:
+		return x
+
+def update_merged_df_series(merged_df_ser_hostname, merged_df_series_key, key, value, hostname):
+	"""update merged dataframe series
+
+	Args:
+		merged_df_ser_hostname (series): hostname series
+		merged_df_series_key (series): key series
+		key (str): key value
+		value (str): value
+		hostname (str): hostname to match with
+
+	Returns:
+		str: matched result
+	"""	
+	if merged_df_ser_hostname == hostname:
+		if merged_df_series_key:
+			r = merged_df_series_key
+		else:
+			r = value
+	else:
+		r = merged_df_series_key
+	return r
+
+def get_dev_serial(var_df=None, update=False, merged_df_ser_hostname=None, merged_df_series_key=None, key=None, value=None, hostname=None):
+	"""either get serial number from var tab or update full series with serial numbers
+
+	Args:
+		var_df (DataFrame, optional): var DataFrame. Defaults to None.
+		update (bool, optional): updating full series or not. Defaults to False.
+		merged_df_ser_hostname (series, optional): hostnames series. Defaults to None.
+		merged_df_series_key (key, optional): series key name. Defaults to None.
+		key (str, optional): series key. Defaults to None.
+		value (value, optional): result value. Defaults to None.
+		hostname (str, optional): hostname to match with. Defaults to None.
+
+	Returns:
+		str, series: return serial number based on update
+	"""	
+	if not update:
+		return get_item_first(var_df[(var_df['var'] == 'serial')]['default'])
+	else:
+		return update_merged_df_series(merged_df_ser_hostname, merged_df_series_key, key, value, hostname)
+
+def get_dev_model(var_df=None, update=False, merged_df_ser_hostname=None, merged_df_series_key=None, key=None, value=None, hostname=None):
+	"""either get device model from var tab or update full series with device model
+
+	Args:
+		var_df (DataFrame, optional): var DataFrame. Defaults to None.
+		update (bool, optional): updating full series or not. Defaults to False.
+		merged_df_ser_hostname (series, optional): hostnames series. Defaults to None.
+		merged_df_series_key (key, optional): series key name. Defaults to None.
+		key (str, optional): series key. Defaults to None.
+		value (value, optional): result value. Defaults to None.
+		hostname (str, optional): hostname to match with. Defaults to None.
+
+	Returns:
+		str, series: return device model based on update
+	"""	
+	if not update:
+		return get_item_first(var_df[(var_df['var'] == 'model')]['default'])
+	else:
+		return update_merged_df_series(merged_df_ser_hostname, merged_df_series_key, key, value, hostname)
+
+def get_dev_hostname(var_df=None, update=False, merged_df_ser_hostname=None, merged_df_series_key=None, key=None, value=None, hostname=None):
+	"""either get device hostname from var tab or update full series with device hostname
+
+	Args:
+		var_df (DataFrame, optional): var DataFrame. Defaults to None.
+		update (bool, optional): updating full series or not. Defaults to False.
+		merged_df_ser_hostname (series, optional): hostnames series. Defaults to None.
+		merged_df_series_key (key, optional): series key name. Defaults to None.
+		key (str, optional): series key. Defaults to None.
+		value (value, optional): result value. Defaults to None.
+		hostname (str, optional): hostname to match with. Defaults to None.
+
+	Returns:
+		str, series: return device hostname based on update
+	"""	
+	if not update:
+		return get_item_first(var_df[(var_df['var'] == 'hostname')]['default'])
+	else:
+		return update_merged_df_series(merged_df_ser_hostname, merged_df_series_key, key, value, hostname)

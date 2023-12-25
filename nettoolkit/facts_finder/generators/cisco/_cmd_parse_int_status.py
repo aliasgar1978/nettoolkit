@@ -30,6 +30,9 @@ def get_interface_status(cmd_op, *args):
 	for l in cmd_op:
 		if blank_line(l): continue
 		if l.strip().startswith("!"): continue
+		if l.strip().startswith("^"): 
+			print('missing or invalid input  show interface status, skipped')			
+			return int_status_dict
 		# // HEADER ROW // #
 		if l.startswith("Port"):
 			type_begin_at = l.find("Type")

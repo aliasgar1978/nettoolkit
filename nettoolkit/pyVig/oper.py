@@ -1,6 +1,6 @@
 
 import pandas as pd
-from copy import deepcopy
+from copy import deepcopy, copy
 from nettoolkit.nettoolkit_db import *
 from nettoolkit.nettoolkit_common import *
 from nettoolkit.nettoolkit.forms.formitems import get_cable_n_connectors, add_cable_n_connectors, CONNECTOR_TYPES_FILE
@@ -116,7 +116,7 @@ class DFGen():
 		"""		
 		cabeling_columns = set(self.df_dict['Cablings'].columns)
 		extra_cols = cabeling_columns.difference(set(CABLING_COLUMNS)).difference(set(VISIO_DRAWING_COLUMNS))
-		arranged_cols = CABLING_COLUMNS
+		arranged_cols = copy(CABLING_COLUMNS)
 		if keep_all_cols:
 			arranged_cols += VISIO_DRAWING_COLUMNS
 			arranged_cols += extra_cols
@@ -320,6 +320,7 @@ def get_serial_number(df, devices_merged_df, device):
 		str: serial number of device
 	"""	
 	mini_dev_df = devices_merged_df[(devices_merged_df.hostname == df[device])]
+	if mini_dev_df.empty: return ""
 	idx = mini_dev_df.index[0]
 	return mini_dev_df['serial_number'][idx]
 
@@ -335,6 +336,7 @@ def get_model_number(df, devices_merged_df, device):
 		str: model number of device
 	"""	
 	mini_dev_df = devices_merged_df[(devices_merged_df.hostname == df[device])]
+	if mini_dev_df.empty: return ""
 	idx = mini_dev_df.index[0]
 	return mini_dev_df['device_model'][idx]
 

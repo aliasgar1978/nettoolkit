@@ -183,6 +183,7 @@ Lets import packages first; than generate excel.
   # update and get custom filter columns
   # we will use the two custom functions which we imported abve from custom module
   # ----------------------------------------------------------------------------------
+  sheet_filter_dict = {}
   DFG.update(add_sheet_filter_columns)
   sheet_filter_dict['sheet_filters'] = get_sheet_filter_columns(DFG.df_dict)
   sheet_filter_dict['is_sheet_filter'] = True if sheet_filter_dict['sheet_filters'] else False 

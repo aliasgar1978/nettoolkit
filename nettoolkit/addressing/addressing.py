@@ -1231,13 +1231,14 @@ class Summary(IPv4):
 		"""initialize object with provided args=prefixes
 		"""
 		self.networks = set()
-			# args = sorted_v4_addresses(args)
+		args = sorted_v4_addresses(args)
 		for arg in args:
 			if isinstance(arg, str):
 				if arg.strip():
 					arg=IPv4(arg)
 			self.networks.add(arg)
 		self.summaries = []
+		self.networks = sorted(self.networks)
 		self._validate_and_update_networks()
 
 	@property

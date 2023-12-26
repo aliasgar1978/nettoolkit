@@ -6,8 +6,9 @@ Supported for nettoolkit version >= 1.5.0
 
 
 
-Provide Necessary Input Parameters
-----------------------------------
+Provide Necessary Input Parameters for cable matrix
+---------------------------------------------------
+
 
 First define a few static inputs. Modify as actual.
 
@@ -25,8 +26,9 @@ First define a few static inputs. Modify as actual.
 -----
 
   
-Generate Excel
---------------
+Generate cable-matrix Excel file
+--------------------------------
+
 
 Lets import necessary packages first. Followed by some steps to generate excel.
 

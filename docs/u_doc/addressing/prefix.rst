@@ -89,7 +89,7 @@ sort list of addresses
     * Use ``sort_by_size()`` for sorting the prefixes by mask.
 
     .. code-block:: python
-        :emphasize-lines: 18,32,46,61
+        :emphasize-lines: 18,32,46,60
 
         >>> from nettoolkit.addressing import sorted_v4_addresses, sort_by_size
         >>> from pprint import pprint

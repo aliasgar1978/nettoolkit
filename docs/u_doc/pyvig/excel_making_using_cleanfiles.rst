@@ -94,8 +94,9 @@ Lets start now working on visio project
 
 
 
-Provide Necessary Input Parameters
-----------------------------------
+Provide Necessary Input Parameters for visio database preparation
+-----------------------------------------------------------------
+
 
 Lets start by defining a few static inputs. Modify these as needed. or exclude those which you want to go with default.
 
@@ -124,8 +125,9 @@ Lets start by defining a few static inputs. Modify these as needed. or exclude t
 -----
 
   
-Generate Excel
---------------
+Generate pyVig readable Excel file
+-----------------------------------
+
 
 Lets import packages first; than generate excel.
 

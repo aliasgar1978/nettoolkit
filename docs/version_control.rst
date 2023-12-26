@@ -143,9 +143,9 @@ Version Control
        * pyVig: cache functionality added for cables and connectors to prepare cable matrix, cabling details revamped to capture more cable and connector information,  bug fix on default line color. 
        * Added a new functionality to get cable-matrix file with more details
    * - 1.5.1
-     - Dec 25, 2023
+     - Dec 26, 2023
      - * Bug fixes: facts-finder, addressing
-       * addressing: Added a few new definitions
+       * addressing: Added a few new functionalities
        * Cable-Matrix: Added a few more columns
 
 

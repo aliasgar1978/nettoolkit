@@ -86,11 +86,12 @@ sort list of addresses
     * Available only for IPv4 objects for now.
     * available from nettoolkit version **1.5.0** 
     * use ascending=False for reversed order, Specify list for multiple sort orders
+    * Use ``sort_by_size()`` for sorting the prefixes by mask.
 
     .. code-block:: python
-        :emphasize-lines: 18,32,46
+        :emphasize-lines: 18,32,46,61
 
-        >>> from nettoolkit.addressing import sorted_v4_addresses
+        >>> from nettoolkit.addressing import sorted_v4_addresses, sort_by_size
         >>> from pprint import pprint
         >>> list_of_ips = [
             "10.10.10.0/25",
@@ -149,3 +150,17 @@ sort list of addresses
         '172.16.2.0/24',
         '192.168.10.0/24',
         '192.168.1.0/24']
+        >>> pprint(sort_by_size(list_of_ips))
+        ['10.1.10.0/24',
+        '10.10.1.0/24',
+        '10.10.2.0/24',
+        '10.10.5.0/24',
+        '10.10.7.0/24',
+        '10.20.10.0/24',
+        '100.10.10.0/24',
+        '172.16.2.0/24',
+        '172.16.10.0/24',
+        '192.168.1.0/24',
+        '192.168.10.0/24',
+        '10.10.10.0/25',
+        '10.10.10.128/25']

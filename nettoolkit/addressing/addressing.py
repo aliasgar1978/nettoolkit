@@ -1650,7 +1650,7 @@ def _join_octets_fr_df(df):
 	return [ ".".join([row[n] for n in range(4)]) + "/" + str(row['mm']) for k, row in df.iterrows() ]
 
 
-def sorted_v4_addresses(args):
+def sorted_v4_addresses(args, ascending=True):
 	"""sort IPv4 addresses (subnets)
 
 	Args:
@@ -1662,7 +1662,7 @@ def sorted_v4_addresses(args):
 	"""	
 	return _join_octets_fr_df(
 		_get_sorted_dataframe(
-			_convert_list_to_dict([ ipv4_octets(ip) for ip in args ]), ascending=True )
+			_convert_list_to_dict([ ipv4_octets(ip) for ip in args ]), ascending=ascending )
 		)
 
 

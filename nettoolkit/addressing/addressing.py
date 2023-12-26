@@ -246,6 +246,34 @@ def get_subnet(decimal_network_ip, length):
 		print(f"Invalid subnet/mask cannot return {s}")
 		return ""
 
+def get_subnets(decimal_network_ip, length):
+	"""get subnets and sizes from decimal network ip and subnet length (under development)
+
+	Args:
+		decimal_network_ip (int): integer/decimal number
+		length (int): number of ips in a subnet (ex: 128)
+
+	Returns:
+		dict: dictionary of counts and size
+	"""	
+	breakup = decimal_network_ip/length 
+	s = dec2dotted_ip(decimal_network_ip) + "/" + str(subnet_size_to_mask(length))
+	if breakup.is_integer():
+		return s
+	else:
+		c = 0
+		for x in range(256):
+			point = breakup%int(breakup)
+			counts = 1/point
+			if counts.is_integer():
+				new_sizes = length/counts
+				return {'counts': counts+c, 'size': new_sizes}
+			else:
+				c += 1
+				breakup = counts
+
+
+
 def range_subset(range1, range2):
 	"""check whether range1 is a subset of range2
 
@@ -1368,6 +1396,209 @@ class Summary(IPv4):
 		# condition 2 - length subnet 1 + lenght subnet 2 == bc ip of subnet 2
 		return self.first.n_thIP(self.total-1, summary_calc=True) == self.second.broadcast_address()
 
+# =====================================================================================================
+
+class Allocations():
+	"""Store Allocations of subnets
+	"""	
+
+	def __init__(self):
+		self.ranges = []
+		self.what_list = []
+		self.assignment_dict = {}
+
+
+	def add(self, rng, forwhat):
+		"""add decimal range address to allocation. provide forwhat for additional information on for what this prefix is allocated
+
+		Args:
+			rng (range): decimal range object
+			forwhat (str): additional information of range
+		"""		
+		self.ranges.append(rng)
+		self.what_list.append(forwhat)
+		self.assignment_dict[forwhat] = self.get_subnet(rng)
+
+	def check_ip_in(self, ip):
+		"""verify if provided ip is falling in the allocated range(s)
+
+		Args:
+			ip (str): single ip address
+
+		Returns:
+			bool, range: if found returns matched range, else False
+		"""		
+		for range_x in  self.ranges:
+			if ip in range_x:
+				return range_x
+		return False
+
+	def check_range_in(self, rng):
+		"""verify if provided range is part of any allocated range(s)
+
+		Args:
+			rng (range): decimal range of ips 
+
+		Returns:
+			bool, range: if found returns matched range, else False
+		"""		
+		for range_x in self.ranges:
+			if range_subset(rng, range_x):
+				return range_x
+		return False
+
+	@staticmethod
+	def get_subnet(rng):
+		"""get subnet/mask information for the provided range
+
+		Args:
+			rng (range): decimal range of ips
+
+		Returns:
+			str: string representation of subnet/mask for given range
+		"""		
+		sr = [x for x in rng]
+		return get_subnet(sr[0], sr[-1]-sr[0]+1)
+
+
+class Subnet_Allocate():
+	"""Allocate a subnet
+
+	Args:
+		proposed (str): initial based / proposed ip
+		forwhat (str): additional information of prefix
+	"""	
+
+	def __init__(self, proposed, forwhat):
+		"""instance initializer
+		"""		
+		self.proposed = proposed
+		self.forwhat = forwhat
+		self.get_attributes()
+
+	def get_attributes(self):
+		"""initial attributes setting
+		"""		
+		self.subnet = IPv4(self.proposed)
+		self.decimal = self.subnet.to_decimal()
+		self.subnet_size = self.subnet.size
+		self.subnet_zero = self.subnet.subnet_zero()
+		self.subnet_range = range(self.decimal, self.decimal+self.subnet_size)
+
+	def verification(self, Alloc):
+		"""verifications to check range(s)
+
+		Args:
+			Alloc (Allocations): allocations object
+		"""		
+		self.checked_range = self.check_range(Alloc)
+		Alloc.add(self.checked_range, self.forwhat)
+
+	def check_range(self, Alloc):
+		"""check range against already allocated ranges
+
+		Args:
+			Alloc (Allocations): allocations object
+
+		Returns:
+			range: verify if subnet-range is already part of any range
+		"""		
+		current_range_in = Alloc.check_range_in(self.subnet_range)
+		if not current_range_in:
+			return self.subnet_range
+		else:
+			sr = [x for x in current_range_in]
+			self.subnet_range = range(sr[-1]+1, sr[-1]+1+self.subnet_size)
+			return self.check_range(Alloc)
+
+	def get_subnet(self):
+		"""get subnet/mask information for the checked range
+
+		Returns:
+			str: string representation of subnet/mask for given range
+		"""	
+		sr = [x for x in self.checked_range]
+		return get_subnet(sr[0], self.subnet_size)
+
+	def get_nxt_subnet_decimal(self):
+		"""get next available ip in decimal format
+
+		Returns:
+			str: dotted decimal format next available ip
+		"""		
+		sr = [x for x in self.checked_range]
+		return dec2dotted_ip(sr[-1]+1)
+
+
+class Allocate(object):
+	"""Allocation series
+
+	Args:
+		size_wise_dict (dict): size wise allocation requirements dictionary
+		base_ip (str): sample base ip
+		what_list_dict_key (str, optional): additional information of prefix. Defaults to None.
+	"""	
+
+	def __init__(self, size_wise_dict, base_ip, what_list_dict_key=None):
+		self.size_wise_dict = size_wise_dict
+		self.base_ip = base_ip
+		self.what_list_dict_key = what_list_dict_key
+		self.Alloc = Allocations()
+		self.ssize = reversed(sorted(size_wise_dict.keys()))
+
+	def subnet_allocate(self, size, what):
+		"""allocate subnet for given size and prefix information
+
+		Args:
+			size (int): decimal ip
+			what (str): information of prefix
+		"""		
+		msk = str(subnet_size_to_mask(size))
+		SA = Subnet_Allocate(self.base_ip + "/" + msk, what)
+		SA.verification(self.Alloc)
+		self.base_ip = SA.get_nxt_subnet_decimal()
+
+	def go_thru_each_section(self, size, size_dict_values):
+		"""repeate thru each section (if any) to allocate subnets.
+
+		Args:
+			size (int): decimal ip
+			size_dict_values (dict, set, list, tuple, str, int): input information on prefix(es)
+
+		Raises:
+			Exception: _description_
+		"""		
+		if isinstance(size_dict_values, dict):
+			if not self.what_list_dict_key:
+				raise Exception('what_list_dict_key is mandatory when providing nested size_wise_dict')
+			for k, v in size_dict_values.items():
+				if k != self.what_list_dict_key: continue
+				for what in v:
+					self.subnet_allocate(size, what)
+		elif isinstance(size_dict_values, (set, list, tuple)):
+			for what in size_dict_values:
+				self.subnet_allocate(size, what)
+		elif isinstance(size_dict_values, (str, int)):
+			self.subnet_allocate(size, size_dict_values)
+
+	def start(self):
+		"""start executions for all size wise dictionary informations
+		"""		
+		for size in self.ssize:
+			for s, size_dict_values in self.size_wise_dict.items():
+				if s != size: continue
+				self.go_thru_each_section(size, size_dict_values)
+
+	@property
+	def assignments(self):
+		"""return allocations/assignments dictionary
+
+		Returns:
+			dict: allocated subnet/prefixes
+		"""		
+		return self.Alloc.assignment_dict
+
+# =====================================================================================================
 
 
 def ipv4_octets(ip):
@@ -1379,6 +1610,7 @@ def ipv4_octets(ip):
 	Returns:
 		dict: dictionary with octets list and mask
 	"""	
+	if not ip: return {}
 	fs = str(ip).strip().split("/")
 	octets = fs[0].split(".")
 	try:
@@ -1388,18 +1620,23 @@ def ipv4_octets(ip):
 	return { 'octets': octets, 'mask':mask }
 
 # sorted dataframe based on ip octets
-def _get_sorted_dataframe(dic, ascending):
+def _get_sorted_dataframe(dic, ascending, byip=True, bymask=False):
 	df = pd.DataFrame(dic)
 	for x in range(4):
 		df[x] = pd.to_numeric(df[x], errors='coerce')
 	df['mm'] = pd.to_numeric(df['mm'], errors='coerce')
-	df.sort_values([0,1,2,3,'mm'], inplace=True, ascending=ascending)
+	byip = not bymask
+	if byip:
+		df.sort_values([0,1,2,3,'mm'], inplace=True, ascending=ascending)
+	else:
+		df.sort_values(['mm', 0,1,2,3], inplace=True, ascending=ascending)
 	return df
 
 # converts octets list to dictionary
 def _convert_list_to_dict(lst):
 	dic,mm = {0:[], 1:[], 2:[], 3:[]},[]
 	for oNm in lst:
+		if not oNm: continue
 		mm.append(oNm['mask'])
 		for n in range(4):
 			dic[n].append(oNm['octets'][n])
@@ -1413,7 +1650,7 @@ def _join_octets_fr_df(df):
 	return [ ".".join([row[n] for n in range(4)]) + "/" + str(row['mm']) for k, row in df.iterrows() ]
 
 
-def sorted_v4_addresses(args, ascending=True):
+def sorted_v4_addresses(args):
 	"""sort IPv4 addresses (subnets)
 
 	Args:
@@ -1425,7 +1662,22 @@ def sorted_v4_addresses(args, ascending=True):
 	"""	
 	return _join_octets_fr_df(
 		_get_sorted_dataframe(
-			_convert_list_to_dict([ ipv4_octets(ip) for ip in args ]), ascending=ascending )
+			_convert_list_to_dict([ ipv4_octets(ip) for ip in args ]), ascending=True )
+		)
+
+
+def sort_by_size(args):
+	"""sort IPv4 addresses (sort by mask)
+
+	Args:
+		args (list): list of addresses/subnets
+
+	Returns:
+		list: sorted list
+	"""	
+	return _join_octets_fr_df(
+		_get_sorted_dataframe(
+			_convert_list_to_dict([ ipv4_octets(ip) for ip in args ]),ascending=True, bymask=True )
 		)
 
 # ----------------------------------------------------------------------------

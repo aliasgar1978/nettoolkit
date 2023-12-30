@@ -10,8 +10,7 @@ __all__ = [
 ]
 
 
-# __version__ = "0.0.2"
-__version__ = "1.5.1"
+__version__ = "1.5.2"
 
 
 from .convertdict import ConvDict

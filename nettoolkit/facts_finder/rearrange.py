@@ -56,7 +56,7 @@ def rearrange_tables(clean_file, foreign_keys=None):
 	# Interface Propoerties/Columns
 	# =====================================================================================================
 	IF_PROPS = {
-		1: ["filter", "interface", "int_number",  ],
+		1: ["filter", "interface", "int_number", "logical_int_number", ],
 		2: [ "link_status", "protocol_status", "speed", "duplex", "media_type", ],
 		3: ["nbr_dev_type", "nbr_hostname", "nbr_ip", "nbr_platform", "nbr_serial", "nbr_vlan", "nbr_interface",],
 		4: ["switchport", "admin_mode", "switchport_negotiation", "interface_mode", "access_vlan", "voice_vlan", 

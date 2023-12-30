@@ -314,10 +314,12 @@ class RunningInterfaces(Running):
 		for k, v in self.interface_dict.items():
 			if v['filter'] == 'physical':
 				v['int_number'] = get_physical_port_number(k)
+				v['logical_int_number'] = get_logical_port_number(k)
 				continue
 			if v['filter'] == 'aggregated':
 				try:
 					v['int_number'] = int(k[2:])
+					v['logical_int_number'] = get_logical_port_number(int(k[2:]))
 				except: pass
 			try:
 				int_num = int(k)
@@ -328,7 +330,8 @@ class RunningInterfaces(Running):
 			kspl = k.split(".")
 			if k.startswith("lo") or not k.endswith(".0"):
 				try:
-					v['int_number'] = kspl[1]				
+					v['int_number'] = kspl[1]
+					v['logical_int_number'] = get_logical_port_number(k)
 					if not k.startswith("lo") and not k.endswith(".0"):
 						v['filter'] = 'vlan'
 				except: pass
@@ -385,21 +388,38 @@ def get_physical_port_number(port):
 	Returns:
 		int: a number assign to port value (sequencial)
 	"""
-	org_port = port
-	port = port.split(".")[0]
-	if port == org_port:
-		port = port.split(":")[0]
+	spl_port_sc = port.split(":")
+	port = spl_port_sc[0]
+	spl_port_dot = port.split(".")
+	port = spl_port_dot[0]
+	#
 	port_lst = port.split("-")[-1].split("/")
 	port_id = 0
 	for i, n in enumerate(reversed(port_lst)):
 		multiplier = 100**i
-		ps = n.split(":")[0]
-		nm = int(ps[0])*multiplier
-		if len(ps)>1:
-			nm_dec = int(ps[1])/multiplier
-			nm += nm_dec
+		nm = int(n)*multiplier
 		port_id += nm
 	return port_id
+
+def get_logical_port_number(port):
+	""" physical interface - logical interface number calculator.
+
+	Args:
+		port (str): string lateral for various types of juniper interface/port
+
+	Returns:
+		int: a logical port number assign to port value (sequencial)
+	"""
+	spl_port_sc = port.split(":")
+	port = spl_port_sc[0]
+	spl_port_dot = port.split(".")
+	port = spl_port_dot[0]
+	#
+	if len(spl_port_sc) > 1:
+		return spl_port_sc[-1]
+	if len(spl_port_dot) > 1:
+		return spl_port_dot[-1]
+	return ''
 
 def get_interfaces_running(cmd_op, *args):
 	"""defines set of methods executions. to get various inteface parameters.

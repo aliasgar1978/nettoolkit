@@ -2,7 +2,7 @@
 
 # ------------------------------------------------------------------------------
 from nettoolkit.nettoolkit_common.gpl import *
-from nettoolkit.addressing import *
+from nettoolkit.addressing import to_dec_mask, invmask_to_mask, addressing
 # ------------------------------------------------------------------------------
 
 

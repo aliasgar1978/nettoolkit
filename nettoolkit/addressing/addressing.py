@@ -6,6 +6,7 @@ from nettoolkit.nettoolkit_common.gpl import STR, LST, IO
 
 # from errors import incorrectinput
 incorrectinput = 'INCORRECT SUBNET OR SUBNET MASK DETECTED NULL RETURNED'
+SQRS = [2**x for x in range(32)]
 
 # ----------------------------------------------------------------------------
 # Module Functions
@@ -62,7 +63,6 @@ def get_hext(v6subnet, hexTnum, s=''):
 	try:
 		if s != '' and all([hexTnum>0, hexTnum<=8]):
 			sip = s.split("/")[0].split("::")
-			# if test: print(hexTnum, s)
 			lsip = sip[0].split(":")
 			if hexTnum <= len(lsip):
 				lsiphext = lsip[hexTnum-1]
@@ -72,10 +72,8 @@ def get_hext(v6subnet, hexTnum, s=''):
 				rsip = sip[1].split(":")
 				if rsip[0] == '': rsip = []
 				if 8-hexTnum < len(rsip):
-					# if test: print(">>", rsip[(9-hexTnum)*-1])
 					return rsip[(9-hexTnum)*-1]
 				else:
-					# if test: print(">>> 0", )
 					return '0'
 		else:
 			raise Exception(incorrectinput)
@@ -214,6 +212,17 @@ def inv_subnet_size_to_mask(n):
 	"""	
 	return 32-bin(n)[2:].count('1')
 
+def mask2subnetsize(m):
+	"""get subnet size from mask
+
+	Args:
+		m (n): subnet mask
+
+	Returns:
+		int: number of ip available in given subnet
+	"""	
+	return 2**m
+
 # 256 -> 24
 def subnet_size_to_mask(n):
 	"""converts subnet size to get subnet mask value
@@ -224,8 +233,23 @@ def subnet_size_to_mask(n):
 	Returns:
 		int: subnet mask (25)
 	"""	
-	n = bin(n)
-	return 32- (len(n) - n.rfind('1')  -1)
+	subs = []
+	for x in reversed(SQRS):
+		if x > n: continue
+		if x == n: 
+			subs.append(n)
+			break
+		subs.append(x)
+		subs.append(n-x)
+		break
+	masks = []
+	for n in subs:
+		n = bin(n)
+		masks.append(  32- (len(n) - n.rfind('1')  -1))
+	if len(masks) == 1:
+		return masks[0]
+	else:
+		return masks
 
 # decimal network ip and length -> subnet/mask
 def get_subnet(decimal_network_ip, length):
@@ -243,8 +267,7 @@ def get_subnet(decimal_network_ip, length):
 	if breakup.is_integer():
 		return s
 	else:
-		print(f"Invalid subnet/mask cannot return {s}")
-		return ""
+		raise Exception(f"Invalid subnet/mask cannot return {s}")
 
 def get_subnets(decimal_network_ip, length):
 	"""get subnets and sizes from decimal network ip and subnet length (under development)
@@ -272,7 +295,19 @@ def get_subnets(decimal_network_ip, length):
 				c += 1
 				breakup = counts
 
+def is_overlap(range1, range2):
+	"""check if range1 and range2 are overlaping
 
+	Args:
+		range1 (range): range1 of items
+		range2 (range): range2 of items
+
+	Returns:
+		bool: whether range1 and range2 are overlaping or not.
+	"""	
+	if range1.start not in range2 and range1.stop-1 not in range2:
+		return False
+	return True
 
 def range_subset(range1, range2):
 	"""check whether range1 is a subset of range2
@@ -1443,7 +1478,7 @@ class Allocations():
 			bool, range: if found returns matched range, else False
 		"""		
 		for range_x in self.ranges:
-			if range_subset(rng, range_x):
+			if is_overlap(rng, range_x):
 				return range_x
 		return False
 
@@ -1458,7 +1493,12 @@ class Allocations():
 			str: string representation of subnet/mask for given range
 		"""		
 		sr = [x for x in rng]
-		return get_subnet(sr[0], sr[-1]-sr[0]+1)
+		for x in range(1048576):
+			try:
+				return get_subnet(sr[0]+x, sr[-1]-sr[0]+1)
+			except:
+				pass
+
 
 
 class Subnet_Allocate():
@@ -1518,7 +1558,12 @@ class Subnet_Allocate():
 			str: string representation of subnet/mask for given range
 		"""	
 		sr = [x for x in self.checked_range]
-		return get_subnet(sr[0], self.subnet_size)
+		for x in range(1048576):
+			try:
+				return get_subnet(sr[0]+x, self.subnet_size)
+			except:
+				pass
+
 
 	def get_nxt_subnet_decimal(self):
 		"""get next available ip in decimal format
@@ -1544,7 +1589,12 @@ class Allocate(object):
 		self.base_ip = base_ip
 		self.what_list_dict_key = what_list_dict_key
 		self.Alloc = Allocations()
-		self.ssize = reversed(sorted(size_wise_dict.keys()))
+		self.rearrange_size()
+
+	def rearrange_size(self):
+		"""rearrange size wise dictionary in reversed order bigger to smaller
+		"""		
+		self.ssize = reversed(sorted(self.size_wise_dict.keys()))
 
 	def subnet_allocate(self, size, what):
 		"""allocate subnet for given size and prefix information

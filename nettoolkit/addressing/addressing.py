@@ -1134,6 +1134,19 @@ class IPv4(IP):
 		"""		
 		return 2**(32-int(self.mask))
 
+	def ipn(self, ip):
+		"""get the ip number for provided ip address in the current subnet
+
+		Args:
+			ip (str): ip address
+
+		Returns:
+			int: ip number
+		"""		
+		if isinstance(ip, str):
+			child = addressing(ip)
+		return child.to_decimal() - self.to_decimal()
+
 
 # ------------------------------------------------------------------------------
 # Routes Class

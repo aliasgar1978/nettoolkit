@@ -136,7 +136,7 @@ class conn(object):
 		Returns:
 			str: device hostname
 		"""    
-		return self._devvar['host']
+		return self._devvar['host'].lower()
 
 	# set connection var|properties
 	def __set_local_var(self, un, pw, en):
@@ -165,7 +165,7 @@ class conn(object):
 			self.connectionsuccess = False
 
 		if self.connectionsuccess:
-			self._devvar['host'] = STR.hostname(self.net_connect)
+			self._devvar['host'] = STR.hostname(self.net_connect).lower()
 			self._hn = self._devvar['host']
 			if any( [
 				self._devvar['device_type'].lower() == 'cisco_ios'

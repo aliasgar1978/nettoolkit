@@ -86,11 +86,15 @@ class RunningRoutes(Running):
 		#
 		if not dic.get('prefix'): dic['prefix'] = route_spl_sect[0]
 		if not dic.get('pfx_vrf') and len(vrf_spl_sect)> 1: dic['pfx_vrf'] = vrf_spl_sect[2]
+		#
+		if not dic.get('next_hop'):
+			dic['next_hop'] = ''
+		#
 		if route_spl_sect[1] == 'next-hop': 
-			if not dic.get('next_hop'):
-				dic['next_hop'] = route_spl_sect[2]
-			else:
+			if dic['next_hop']:
 				dic['next_hop'] += "\n"+route_spl_sect[2] 
+			else:
+				dic['next_hop'] = route_spl_sect[2]
 		if route_spl_sect[1] == 'preference': dic['adminisrative_distance'] = route_spl_sect[2] 
 		if route_spl_sect[1] == 'tag': dic['tag_value'] = route_spl_sect[2] 
 		if not dic.get('version'): dic['version'] = v

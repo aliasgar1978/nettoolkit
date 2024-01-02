@@ -147,6 +147,11 @@ Version Control
      - * Bug fixes: facts-finder, addressing
        * addressing: Added a few new functionalities
        * Cable-Matrix: Added a few more columns
+   * - 1.5.2
+     - Jan 2, 2024
+     - * Bug fixes: facts-finder juniper static route section
+       * capture-it: device log output file name to lower case.
+       * addressing: bug fixes, and enhancements to Allocations.  IPv4.ipn method added
 
 
 -----

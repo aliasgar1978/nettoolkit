@@ -9,3 +9,4 @@ Nettoolkit class extensions User documentation!
    String Operations <string>
    List Operations <list>
    Dict Operations <dict>
+   Database Operations <db>

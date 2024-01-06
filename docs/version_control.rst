@@ -152,7 +152,9 @@ Version Control
      - * Bug fixes: facts-finder juniper static route section
        * capture-it: device log output file name to lower case.
        * addressing: bug fixes, and enhancements to Allocations.  IPv4.ipn method added
-
+   * - 1.5.3
+     - Jan 10, 2024
+     - * Added: Dataframe sort functionality based on subnets column
 
 -----
 

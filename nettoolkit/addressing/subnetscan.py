@@ -67,6 +67,7 @@ class Ping(Multi_Execution):
 		Args:
 			ip (str): ip address
 		"""		
+		# print(f"pinging -{ip}")
 		self.ping_ms[ip] = ping(ip)
 		self.ping_results[ip] = True if self.ping_ms[ip]  else False
 		self.dns_result[ip] = nslookup(ip)

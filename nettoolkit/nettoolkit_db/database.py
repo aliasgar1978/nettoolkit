@@ -70,6 +70,27 @@ def write_to_xl(file, df_dict, index=False, overwrite=False, index_label=""):
 		index_label (str, optional): index label for each tab
 	"""
 	XL_WRITE(file, df_dict=df_dict, index=index, overwrite=overwrite, index_label=index_label)
+
+
+def sort_dataframe_on_subnet(df, col, ascending=True):
+	"""sort provided dataframe on the provided subnet column. default ascending order.
+
+	Args:
+		df (DataFrame): pandas DataFrame
+		col (str): subnet column name
+		ascending (bool, optional): sort dataframe on ascending subnet order. Defaults to True.
+
+	Returns:
+		DataFrame: sorted DataFrame
+	"""	
+	for x in range(4):
+		df[x] = df[col].apply(lambda y: y.split(".")[x])	
+	for x in range(4):
+		df[x] = pd.to_numeric(df[x], errors='coerce')
+	df.sort_values([0,1,2,3], inplace=True, ascending=ascending)
+	df.drop([0,1,2,3], axis=1, inplace=True)	
+	return df
+
 # ------------------------------------------------------------------------------
 
 class XL_READ:

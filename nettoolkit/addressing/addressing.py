@@ -637,6 +637,7 @@ class IP():
 	def __truediv__(self, n): return self._sub_subnets(n)
 	def __iter__(self): return self._subnetips()
 	def __getitem__(self, n):
+		if isinstance(n, int) and n < 0: n = len(self)+n
 		try:
 			return self.n_thIP(n, False)
 		except:

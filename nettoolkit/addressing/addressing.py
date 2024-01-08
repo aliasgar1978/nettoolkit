@@ -1,5 +1,6 @@
 
 from collections import OrderedDict
+from functools import total_ordering
 import pandas as pd
 
 from nettoolkit.nettoolkit_common.gpl import STR, LST, IO
@@ -585,6 +586,7 @@ class Validation():
 # Parent IP class defining default methods for v4 and v6 objects
 # --------------------------------------------------------------------------------------------------
 
+@total_ordering
 class IP():
 	'''defines common properties and methods
 
@@ -618,7 +620,9 @@ class IP():
 				)
 	def __gt__(self, ip): return bin2dec(binsubnet(self.NetworkIP())) - bin2dec(binsubnet(ip.broadcast_address())) > 0
 	def __lt__(self, ip): return bin2dec(binsubnet(self.NetworkIP())) - bin2dec(binsubnet(ip.broadcast_address())) < 0
-	def __eq__(self, ip): return bin2dec(binsubnet(self.NetworkIP())) - bin2dec(binsubnet(ip.broadcast_address())) == 0
+	def __eq__(self, ip): 
+		return (bin2dec(binsubnet(self.NetworkIP())) - bin2dec(binsubnet(ip.NetworkIP())) == 0
+			and bin2dec(binsubnet(self.broadcast_address())) - bin2dec(binsubnet(ip.broadcast_address())) == 0)
 	def __add__(self, n):
 		'''add n-ip's to given subnet and return udpated subnet'''
 		if isinstance(n, int):
@@ -1455,21 +1459,71 @@ class Allocations():
 		self.ranges = []
 		self.what_list = []
 		self.assignment_dict = {}
+		self.increamental = 0
+		self.allocation_type = 'additive'   ## options: 'comparative', 'override'
+		self.display_warning = True
 
+
+	def add_prefix(self, pfx, forwhat=None):
+		"""add subnet to allocation. 
+		provide additional information forwhat this prefix is allocated
+
+		Args:
+			pfx (str, IPv4): string or IPv4 subnet object
+			forwhat (str): additional information of range (defaults to None, will be increamental)
+		"""
+		if forwhat is None:
+			self.increamental += 1
+			forwhat = self.increamental
+		if isinstance(pfx, str):
+			pfx = IPv4(pfx)
+		start = pfx.to_decimal()
+		cri = self.check_range_in(range(start, start + len(pfx)))
+		if cri:
+			conflict = get_subnet(cri[0], cri[-1]-cri[0]+1)
+			if self.display_warning: print(f"Prefix {pfx} is already allocated, or it has clash with existing assignment {conflict}")
+		else:
+			self.add(range(start, start + len(pfx)), forwhat)
 
 	def add(self, rng, forwhat):
-		"""add decimal range address to allocation. provide forwhat for additional information on for what this prefix is allocated
+		"""add decimal range address to allocation. 
+		provide additional information forwhat this prefix is allocated
 
 		Args:
 			rng (range): decimal range object
 			forwhat (str): additional information of range
 		"""		
-		self.ranges.append(rng)
-		self.what_list.append(forwhat)
-		self.assignment_dict[forwhat] = self.get_subnet(rng)
+		if forwhat in self.assignment_dict:
+			if self.allocation_type == 'additive':
+				self.ranges.append(rng)
+				if isinstance(self.assignment_dict[forwhat], str):
+					self.assignment_dict[forwhat] = {self.assignment_dict[forwhat], }
+				self.assignment_dict[forwhat].add(self.get_subnet(rng))
+			elif self.allocation_type == 'override':
+				self.ranges.append(rng)
+				self.assignment_dict[forwhat] = self.get_subnet(rng)
+			elif self.allocation_type == 'comparative':
+				# print( int(self.assignment_dict[forwhat]) ,   int(self.get_subnet(rng).split("/")) )
+				if isinstance(self.assignment_dict[forwhat], str):
+					if IPv4(self.assignment_dict[forwhat]).size >= IPv4(self.get_subnet(rng)).size:
+						if self.display_warning: print(f"Subneet already found same or bigger, comparative allocations will not add")
+					else:
+						self.ranges.append(rng)
+						self.assignment_dict[forwhat] = {self.assignment_dict[forwhat], self.get_subnet(rng)}
+				elif isinstance(self.assignment_dict[forwhat], set):
+					for ad_fw in self.assignment_dict[forwhat]:
+						if IPv4(ad_fw).size >= IPv4(self.get_subnet(rng)).size:
+							if self.display_warning: print(f"Subneet already found same or bigger, comparative allocations will not add")
+						else:
+							self.assignment_dict[forwhat].add(self.get_subnet(rng))
+
+		else:
+			self.ranges.append(rng)
+			self.what_list.append(forwhat)
+			self.assignment_dict[forwhat] = self.get_subnet(rng)
 
 	def check_ip_in(self, ip):
-		"""verify if provided ip is falling in the allocated range(s)
+		"""verify if provided ip is falling in the already allocated range(s)
 
 		Args:
 			ip (str): single ip address
@@ -1598,11 +1652,14 @@ class Allocate(object):
 		what_list_dict_key (str, optional): additional information of prefix. Defaults to None.
 	"""	
 
-	def __init__(self, size_wise_dict, base_ip, what_list_dict_key=None):
+	def __init__(self, size_wise_dict, base_ip, what_list_dict_key=None, Alloc=None):
 		self.size_wise_dict = size_wise_dict
 		self.base_ip = base_ip
 		self.what_list_dict_key = what_list_dict_key
-		self.Alloc = Allocations()
+		if Alloc is None:
+			self.Alloc = Allocations()
+		else:
+			self.Alloc = Alloc
 		self.rearrange_size()
 
 	def rearrange_size(self):

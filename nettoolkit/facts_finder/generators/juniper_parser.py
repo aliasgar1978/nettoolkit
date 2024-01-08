@@ -33,7 +33,16 @@ juniper_cmds_list = OrderedDict([
 juniper_cmds_op_hierachy_level = OrderedDict([
 	('show interfaces descriptions', 'Interfaces'),
 	('show lldp neighbors', 'Interfaces'),
-	('show configuration', ('Interfaces', 'var', 'vrf', 'bgp', 'ospf', 'static', )),
+	('show configuration', (
+			'Interfaces', 
+			'var', 
+			'vrf', 
+			'bgp', 
+			'ospf', 
+			'static', 
+			'prefix_list' 
+		)
+	),
 	('show version', 'var'),
 	('show chassis hardware', ('Interfaces', 'var')),
 	# 'show arp': 'arp',
@@ -54,8 +63,16 @@ juniper_commands_parser_map = OrderedDict([
 
 	('show interfaces descriptions', get_int_description),
 	('show lldp neighbors', get_lldp_neighbour),
-	('show configuration', (get_interfaces_running, get_running_system, get_instances_running, 
-				get_instances_bgps, get_instances_ospfs, get_system_running_routes)),
+	('show configuration', (
+			get_interfaces_running, 
+			get_running_system, 
+			get_instances_running, 
+			get_instances_bgps, 
+			get_instances_ospfs, 
+			get_system_running_routes, 
+			get_system_running_prefix_lists
+		)
+	),
 	('show version', get_version),
 	('show chassis hardware', (get_chassis_hardware, get_chassis_serial)),
 	# 'show interfaces terse': None,

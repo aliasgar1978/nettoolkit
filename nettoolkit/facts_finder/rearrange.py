@@ -61,7 +61,7 @@ def rearrange_tables(clean_file, foreign_keys=None):
 		3: ["nbr_dev_type", "nbr_hostname", "nbr_ip", "nbr_platform", "nbr_serial", "nbr_vlan", "nbr_interface",],
 		4: ["switchport", "admin_mode", "switchport_negotiation", "interface_mode", "access_vlan", "voice_vlan", 
 			"native_vlan", "vlan_members",],
-		5: ["subnet", "h4block", "v4_helpers", "v6_helpers", ],
+		5: ["subnet", "subnet_secondary", "h4block", "v4_helpers", "v6_helpers", ],
 		6: ["ospf_auth", "ospf_auth_type",],
 		7: ["intvrf", "channel_group_interface", "channel_grp", "channel_group_mode"],
 		8: ["description",  "int_filter", ],

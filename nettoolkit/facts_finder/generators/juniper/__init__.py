@@ -15,3 +15,4 @@ from ._cmd_parse_running_routing_instances import get_instances_running
 from ._cmd_parse_running_bgp import get_instances_bgps
 from ._cmd_parse_running_ospf import get_instances_ospfs
 from ._cmd_parse_running_routes import get_system_running_routes
+from ._cmd_parse_running_prefix_lists import get_system_running_prefix_lists

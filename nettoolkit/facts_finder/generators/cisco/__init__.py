@@ -16,4 +16,5 @@ from ._cmd_parse_bgp import get_bgp_running
 from ._cmd_parse_running_vrfs import get_vrfs_running
 from ._cmd_parse_ospf import get_ospf_running
 from ._cmd_parse_running_routes import get_system_running_routes
+from ._cmd_parse_running_prefix_list import get_system_running_prefix_lists
 

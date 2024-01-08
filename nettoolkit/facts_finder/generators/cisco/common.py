@@ -104,7 +104,7 @@ def get_inet_address(line):
 	Returns:
 		str: ipv4 address with /mask , None if not found.
 	"""    	
-	if line.strip().startswith("ip address "):
+	if line.strip().startswith("ip address ") and not line.strip().endswith('secondary'):
 		spl = line.strip().split()
 		ip  = spl[2]
 		if ip == 'dhcp': return ""
@@ -112,6 +112,25 @@ def get_inet_address(line):
 		s = ip+"/"+str(mask)
 		return s
 	return None
+
+def get_secondary_inet_address(line):
+	"""derive the secondary ipv4 information from provided line
+
+	Args:
+		line (str): interface config line
+
+	Returns:
+		str: ipv4 address with /mask , None if not found.
+	"""    	
+	if line.strip().startswith("ip address ") and line.strip().endswith('secondary'):
+		spl = line.strip().split()
+		ip  = spl[2]
+		if ip == 'dhcp': return ""
+		mask = to_dec_mask(spl[3])
+		s = ip+"/"+str(mask)
+		return s
+	return None
+
 
 def inet_address(ip, mask):
 	"""return inet address from cisco standard ip and mask format

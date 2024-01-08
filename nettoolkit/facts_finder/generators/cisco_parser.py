@@ -47,6 +47,7 @@ cisco_cmds_op_hierachy_level = OrderedDict([
 			'vrf',
 			'ospf',
 			'static',
+			'prefix_list'
 			)),
 	('sh ver', 'var'),
 	## ADD More as grow ##
@@ -69,6 +70,7 @@ cisco_commands_parser_map = OrderedDict([
 			get_vrfs_running,
 			get_ospf_running,
 			get_system_running_routes,
+			get_system_running_prefix_lists,
 			)),
 	('show version', get_version),
 ])

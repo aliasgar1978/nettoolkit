@@ -108,8 +108,9 @@ class RunningInterfaces():
 			None: None
 		"""    		
 		address = get_inet_address(l)
-		if not address: return None
-		port_dict['subnet'] = get_subnet(address)
+		secondary_address = get_secondary_inet_address(l)
+		if address: port_dict['subnet'] = get_subnet(address)
+		if secondary_address: port_dict['subnet_secondary'] = get_subnet(secondary_address)
 
 
 	def interface_v6_ips(self):

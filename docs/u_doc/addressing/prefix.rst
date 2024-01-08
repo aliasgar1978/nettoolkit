@@ -23,13 +23,13 @@ Check prefix
     .. code-block:: python
         :emphasize-lines: 5,7
 
-        >>> from nettoolkit.addressing import isSubset
-        >>> prefix1 = "10.10.10.0/24"
-        >>> prefix2 = "10.10.100.0/24"
-        >>> supernet = "10.10.0.0/19"
-        >>> isSubset(prefix1, supernet)
+        from nettoolkit.addressing import isSubset
+        prefix1 = "10.10.10.0/24"
+        prefix2 = "10.10.100.0/24"
+        supernet = "10.10.0.0/19"
+        isSubset(prefix1, supernet)
         True			# // Here prefix is part of supernet // #
-        >>> isSubset(prefix2, supernet)
+        isSubset(prefix2, supernet)
         False			# // Here prefix is not part of supernet // #
 
 -----
@@ -48,11 +48,11 @@ Create Summaries
     .. code-block:: python
         :emphasize-lines: 5
 
-        >>> from nettoolkit.addressing import get_summaries
-        >>> networks = (
+        from nettoolkit.addressing import get_summaries
+        networks = (
             "10.10.0.0/24", "10.10.1.0/24", "10.20.6.0/23", 
             "10.10.2.0/23", "10.20.4.0/23", "10.10.4.0/22"  )
-        >>> get_summaries(*networks)
+        get_summaries(*networks)
         [10.10.0.0/21, 10.20.4.0/22]			# // here is summary created for you // #
 
 -----
@@ -68,12 +68,78 @@ Encapsulate subnet
     .. code-block:: python
         :emphasize-lines: 3,5
 
-        >>> from nettoolkit.addressing import recapsulate
+        from nettoolkit.addressing import recapsulate
         s = "10.10.0.5/29"
-        >>> recapsulate(s, 27)
+        recapsulate(s, 27)
         '10.10.0.0/27'
-        >>> recapsulate(s, 30)
+        recapsulate(s, 30)
         '10.10.0.4/30'
+
+
+-----
+
+Subnet allocations
+--------------------
+
+    * We can allocate the subnets dynamically easily.
+
+    Lets Import necessary class from addressing module and initialize it.    
+
+    .. code-block:: python
+
+        from nettoolkit.addressing import Allocations
+        Alloc = Allocations()
+        Alloc.allocation_type = 'comparative'
+        Alloc.display_warning = False        # Turn off dispay of warning messages if you want
+
+    allocation_type: options are 
+
+        * **comparative** - prefers first assignment whatever made.
+        * **additive** - keeps all assignment type, duplicate assignment will happen
+        * **override** - prefers last assignment type
+
+
+    There are many ways we can add the prefix to the allocations. Here are listed two methods.
+
+    1. Load from Excel 
+
+    As an example here, lets first load prefixes from an existing excel file; where subnets (row values) are allocated to multiple places (column header). 
+    And than allocating each prefix to Allocation (Alloc) object
+
+    .. code-block:: python
+
+        import pandas as pd
+        alloted_summary_df = pd.read_excel("summary_file.xlsx").T.fillna("")
+        for place, pfxs in alloted_summary_df.iterrows():
+            if not pfx: continue
+            Alloc.add_prefix(pfx, place)
+
+    2. Add an individual prefix manually
+
+    * A few things require for that
+
+        * **base ip** ( from where allocation should start seeking availability ) 
+        * **prefix size** to be alloted, along with it's description/usage
+
+    .. code-block:: python
+
+        from nettoolkit.addressing import Subnet_Allocate
+
+        base_ip = "172.16.20.0"
+        prefix_size = 24
+        description = "Store-User-3rdFloor"
+
+        SA = Subnet_Allocate(f'{base_ip}/{prefix_size}', description)
+        SA.verification(Alloc)    # this will verify next available slot and allocate.
+
+
+    And Lastly, allocated prefixes can be retrived from **Alloc.assignment_dict** property.
+
+    .. code-block:: python
+
+        from pprint import pprint
+        pprint(Alloc.assignment_dict)
+        ## output not displayed ##
 
 
 -----
@@ -91,9 +157,9 @@ sort list of addresses
     .. code-block:: python
         :emphasize-lines: 18,32,46,60
 
-        >>> from nettoolkit.addressing import sorted_v4_addresses, sort_by_size
-        >>> from pprint import pprint
-        >>> list_of_ips = [
+        from nettoolkit.addressing import sorted_v4_addresses, sort_by_size
+        from pprint import pprint
+        list_of_ips = [
             "10.10.10.0/25",
             "10.10.2.0/24",
             "10.20.10.0/24",
@@ -108,7 +174,7 @@ sort list of addresses
             "172.16.10.0/24",
             "172.16.2.0/24",
         ]
-        >>> pprint(sorted_v4_addresses(list_of_ips))
+        pprint(sorted_v4_addresses(list_of_ips))
         ['10.1.10.0/24',
         '10.10.1.0/24',
         '10.10.2.0/24',
@@ -122,7 +188,7 @@ sort list of addresses
         '172.16.10.0/24',
         '192.168.1.0/24',
         '192.168.10.0/24']
-        >>> pprint(sorted_v4_addresses(list_of_ips, ascending=False))
+        pprint(sorted_v4_addresses(list_of_ips, ascending=False))
         ['192.168.10.0/24',
         '192.168.1.0/24',
         '172.16.10.0/24',
@@ -136,7 +202,7 @@ sort list of addresses
         '10.10.2.0/24',
         '10.10.1.0/24',
         '10.1.10.0/24']
-        >>> pprint(sorted_v4_addresses(list_of_ips, ascending=[True,True,False,False,True]))
+        pprint(sorted_v4_addresses(list_of_ips, ascending=[True,True,False,False,True]))
         ['10.1.10.0/24',
         '10.10.10.128/25',
         '10.10.10.0/25',
@@ -150,7 +216,7 @@ sort list of addresses
         '172.16.2.0/24',
         '192.168.10.0/24',
         '192.168.1.0/24']
-        >>> pprint(sort_by_size(list_of_ips))
+        pprint(sort_by_size(list_of_ips))
         ['10.1.10.0/24',
         '10.10.1.0/24',
         '10.10.2.0/24',

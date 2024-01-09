@@ -15,7 +15,7 @@ Nt Capture-it - Individual
         # --------------------------------------------
         # IMPORTS
         # --------------------------------------------
-        from capture_it import capture_individual, LogSummary
+        from nettoolkit.capture_it import capture_individual, LogSummary
 
         # --------------------------------------------
         #    INPUT: Credentials

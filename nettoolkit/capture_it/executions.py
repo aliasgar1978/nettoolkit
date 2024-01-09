@@ -69,7 +69,7 @@ class Execute_Common():
 		self.fg = False
 		self.lg = Log()
 		self.max_connections = 100
-		self.retry_mandatory_cmds_retries = 3
+		self.mandatory_cmds_retries = 3
 
 	def verifications(self):
 		"""Verification/Validation of input values
@@ -205,6 +205,19 @@ class Execute_Common():
 		# ------------------------------------------------------------------------
 
 
+	def update_all_cmds(self, ED):
+		"""update executed commands for all commands dictionary 
+
+		Args:
+			ED (Execute_Device): Device Execution object instance
+		"""		
+		dt = ED.dev.dtype
+		if not self.all_cmds.get(dt):
+			self.all_cmds[dt] = []
+		self.all_cmds[dt].extend(list(ED.all_cmds[dt]))
+
+
+
 # -----------------------------------------------------------------------------------------------
 # Execute class - capture_it - for common commands to all devices
 # -----------------------------------------------------------------------------------------------
@@ -267,7 +280,7 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 			logger=self.lg,
 			CustomClass=self.CustomClass,
 			fg=self.fg,
-			retry_mandatory_cmds_retries=self.retry_mandatory_cmds_retries,
+			mandatory_cmds_retries=self.mandatory_cmds_retries,
 		)
 
 		# - capture logs -
@@ -285,15 +298,6 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 			if self.fg: 
 				self.ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
 
-
-	def update_all_cmds(self, ED):
-		"""update executed commands for all commands dictionary 
-
-		Args:
-			ED (Execute_Device): Device Execution object instance
-		"""		
-		dt = ED.dev.dtype
-		self.all_cmds[dt].extend(ED.all_cmds[dt])
 
 
 
@@ -338,6 +342,7 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 		#
 		self.ips = []
 		self.cmds = {}
+		self.all_cmds = {}
 		self.cmd_exec_logs_all = OrderedDict()
 		self.device_type_all = OrderedDict()
 		#
@@ -362,8 +367,7 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 				for x in ip:
 					if not isinstance(addressing(x), IPv4):
 						raise Exception(f"`dev_cmd_dict` key expecting IPv4 address, received {ip}")
-			elif isinstance(ip, str) and not isinstance(addressing(ip), IPv4):
-				raise Exception(f"`dev_cmd_dict` key expecting IPv4 address, received {ip}")
+
 			if not isinstance(cmds, (list, set, tuple, dict)):
 				raise Exception(f"`dev_cmd_dict` values expecting iterable, received {cmds}")
 
@@ -439,7 +443,7 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 			logger=self.lg,
 			CustomClass=self.CustomClass,
 			fg=self.fg,
-			retry_mandatory_cmds_retries=self.retry_mandatory_cmds_retries,
+			mandatory_cmds_retries=self.mandatory_cmds_retries,
 			)
 		# - log capture -
 		if self.log_type and self.log_type.lower() in ('individual', 'both'):
@@ -448,11 +452,14 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 		self.device_type_all[ED.hostname] =  ED.dev.dtype
 		self.ips.append(ip)
 		#
-		if not self.cmds.get(ED.dev.dtype):
-			self.cmds[ED.dev.dtype] = set()
-		self.cmds[ED.dev.dtype] = self.cmds[ED.dev.dtype].union(set(cmds))
-		# - facts generation -
-		if self.fg: self.ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
+
+		# - update all cmds
+		self.update_all_cmds(ED)
+
+		# - facts generations -
+		if self.fg: 
+			self.ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
+
 
 
 

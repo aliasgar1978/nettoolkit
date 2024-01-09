@@ -44,14 +44,14 @@ class Execute_Device():
 		logger,
 		CustomClass,
 		fg,
-		retry_mandatory_cmds_retries,
+		mandatory_cmds_retries,
 		):
 		"""initialize execution
 		"""    		
 		self.log_key = ip
 		self.auth = auth
 		self.cmds = deepcopy(cmds)
-		self.all_cmds = deepcopy(cmds)
+		self.all_cmds = {'cisco_ios': set(), 'juniper_junos':set(),}
 		self.path = path
 		self.cumulative = cumulative
 		self.cumulative_filename = None
@@ -60,7 +60,7 @@ class Execute_Device():
 		self.visual_progress = visual_progress
 		self.CustomClass = CustomClass
 		self.fg = fg
-		self.retry_mandatory_cmds_retries = retry_mandatory_cmds_retries
+		self.mandatory_cmds_retries = mandatory_cmds_retries
 		self.delay_factor, self.dev = None, None
 		self.cmd_exec_logs = []
 		#
@@ -195,31 +195,48 @@ class Execute_Device():
 
 				cc = self.command_capture(c)
 				cc.grp_cmd_capture(self.cmds)
+				if self.cmds: self.add_cmd_to_all_cmd_dict(self.cmds)
 
-				# -- if facts generation - check mandary commands present, otherwise capture those --
+				# -- for facts generation -- presence of mandary commands, and capture if not --
 				if self.fg:
 					missed_cmds = self.check_facts_finder_requirements(c)
 					self.retry_missed_cmds(c, cc, missed_cmds)
 					self.add_cmds_to_self(missed_cmds)
-					self.all_cmds[self.dev.dtype].extend(missed_cmds)
+					if missed_cmds: self.add_cmd_to_all_cmd_dict(missed_cmds)
 
-				# -- custom commands -- only log entries, no parser
+				# -- custom commands -- only log entries, no parser --
 				if self.CustomClass:
 					CC = self.CustomClass(self.path+"/"+c.hn+".log", self.dev.dtype)
 					cc.grp_cmd_capture(CC.cmds)
 					self.add_cmds_to_self(CC.cmds)
-					self.all_cmds[self.dev.dtype].extend(CC.cmds)
+					if CC.cmds: self.add_cmd_to_all_cmd_dict(CC.cmds)
 
-				# -- add command execution logs dataframe
+				# -- add command execution logs dataframe --
 				cc.add_exec_logs()
 
-				# -- write facts to excel
+				# -- write facts to excel --
 				if not self.cumulative_filename: self.cumulative_filename = cc.cumulative_filename 
 				if self.parsed_output: 
 					self.xl_file = cc.write_facts()
 
 				# -- add command execution logs
 				self.cmd_exec_logs = cc.cmd_exec_logs
+
+	def add_cmd_to_all_cmd_dict(self, cmds):
+		"""add command to all cmd dictionary
+
+		Args:
+			cmds (str, list, tuple, set, dict): commands in any format
+		"""    	
+		if not self.all_cmds.get(self.dev.dtype):
+			self.all_cmds[self.dev.dtype] = set()
+		if isinstance(cmds, (set, list, tuple)):
+			self.all_cmds[self.dev.dtype] = self.all_cmds[self.dev.dtype].union(set(cmds))
+		elif isinstance(cmds, dict):
+			for dt, _cmds in cmds.items():
+				self.add_cmd_to_all_cmd_dict(_cmds)
+		elif isinstance(cmds, str):
+			self.all_cmds[self.dev.dtype].add(cmds)
 
 	def add_cmds_to_self(self, cmds):
 		"""add additional commands to cmds list
@@ -323,7 +340,7 @@ class Execute_Device():
 		Returns:
 			None: No retuns
 		"""		
-		for x in range(self.retry_mandatory_cmds_retries):
+		for x in range(self.mandatory_cmds_retries):
 			if not missed_cmds: return None
 			self.missed_commands_capture(c, cc, missed_cmds, x)
 			missed_cmds = self.is_any_ff_cmds_missed(c)

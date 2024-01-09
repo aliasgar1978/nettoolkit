@@ -153,7 +153,7 @@ Version Control
        * capture-it: device log output file name to lower case.
        * addressing: bug fixes, and enhancements to Allocations.  IPv4.ipn method added
    * - 1.5.3
-     - Jan 10, 2024
+     - Jan 9, 2024
      - * nettoolkit database: Dataframe sort functionality based on subnets column added.
        * facts-finder: Command parsers added for prefix-lists (cisco & juniper), parser edited for secondary ip address retrival.
        * addressing: Bug fix on comparision of two IP objects equality comparision.  

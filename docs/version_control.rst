@@ -154,11 +154,11 @@ Version Control
        * addressing: bug fixes, and enhancements to Allocations.  IPv4.ipn method added
    * - 1.5.3
      - Jan 9, 2024
-     - * nettoolkit database: Dataframe sort functionality based on subnets column added.
-       * facts-finder: Command parsers added for prefix-lists (cisco & juniper), parser edited for secondary ip address retrival.
-       * addressing: Bug fix on comparision of two IP objects equality comparision.  
-       * addressing.Allocations added allocation_type property to specify which type of allocation follows. Added method add_prefix to add prefix to allocation.
-       * addressing.Allocate instances can be now initialized with an existing Allocations object instead of creating a new each time.
+     - * nettoolkit database: Dataframe **sort** functionality based **on subnets** column added.
+       * facts-finder: Command parsers added for ``prefix-lists`` (cisco & juniper), parser edited for secondary ip address retrival.
+       * addressing: Bug fix on comparision of two IP objects. (equality comparision).  
+       * addressing.Allocations added with **allocation_type** property to specify which type of allocation follows.   Added method **add_prefix** to add prefix to allocation.
+       * addressing.Allocate instances can be now initialized with an existing Allocations object instead of creating fresh each time.
        * pyvig: update_self_details fixed for singleton.
        * capture-it: added a new propery - **retry_mandatory_cmds_retries**
 

@@ -82,6 +82,7 @@ NT Capture-it - Normal
         c.max_connections = 1    # default: 100 ( Options: any number input ) ( define max concurrent connections, 1 for sequencial )
         c.log_type = 'common'    # default: None ( Options: 'common', individual', 'both', None )
         c.common_log_file = 'common-debug.log' # default: None ( provide filename if log_type is common )
+        c.retry_mandatory_cmds_retries = 1     # default: 3
 
         # -----------------------------------------------------------------------------
         #    Additional [optional] run dynamic custom commands ( Remove if not needed )

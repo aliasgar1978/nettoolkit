@@ -2,13 +2,6 @@
 Prefix Operations
 ============================================
 
-Activities that can be done are:
-    * Check that provided prefix is part of another prefix (supernet)
-    * Create Summaries out of provided prefixes
-    * Encapsulate subnet to a different sizing
-    * sort list of ip addresses in desired order
-
------
 
 
 Check prefix
@@ -81,9 +74,10 @@ Encapsulate subnet
 Subnet allocations
 --------------------
 
-    * We can allocate the subnets dynamically easily.
+    We can allocate the subnets from given pool dynamically.  Follow below steps.
 
-    Lets Import necessary class from addressing module and initialize it.    
+
+    1. Import necessary class from addressing module and initialize it.    
 
     .. code-block:: python
 
@@ -98,48 +92,50 @@ Subnet allocations
         * **additive** - keeps all assignment type, duplicate assignment will happen
         * **override** - prefers last assignment type
 
+    2. Add Prefix(es) 
 
-    There are many ways we can add the prefix to the allocations. Here are listed two methods.
+        There are many ways we can add the prefix to the allocations. Here are listed two methods.
 
-    1. Load from Excel 
+        2.1. Load from Excel 
 
-    As an example here, lets first load prefixes from an existing excel file; where subnets (row values) are allocated to multiple places (column header). 
-    And than allocating each prefix to Allocation (Alloc) object
+        As an example here, lets first load prefixes from an existing excel file; where subnets (row values) are allocated to multiple locations (defined by column header). 
+        And than allocating each prefix to Allocation (Alloc) object
 
-    .. code-block:: python
+        .. code-block:: python
 
-        import pandas as pd
-        alloted_summary_df = pd.read_excel("summary_file.xlsx").T.fillna("")
-        for place, pfxs in alloted_summary_df.iterrows():
-            if not pfx: continue
-            Alloc.add_prefix(pfx, place)
+            import pandas as pd
+            alloted_summary_df = pd.read_excel("summary_file.xlsx").T.fillna("")
+            for place, pfxs in alloted_summary_df.iterrows():
+                for pfx in pfxs:
+                    if not pfx: continue
+                    Alloc.add_prefix(pfx, place)
 
-    2. Add an individual prefix manually
+        2.2. Add an individual prefix manually
 
-    * A few things require for that
+        * A few things require for that
 
-        * **base ip** ( from where allocation should start seeking availability ) 
-        * **prefix size** to be alloted, along with it's description/usage
+            * **base ip** ( from where allocation should start seeking availability ) 
+            * **prefix size** to be alloted, along with it's description/usage
 
-    .. code-block:: python
+        .. code-block:: python
 
-        from nettoolkit.addressing import Subnet_Allocate
+            from nettoolkit.addressing import Subnet_Allocate
 
-        base_ip = "172.16.20.0"
-        prefix_size = 24
-        description = "Store-User-3rdFloor"
+            base_ip = "172.16.20.0"
+            prefix_size = 24
+            description = "Store-User-3rdFloor"
 
-        SA = Subnet_Allocate(f'{base_ip}/{prefix_size}', description)
-        SA.verification(Alloc)    # this will verify next available slot and allocate.
+            SA = Subnet_Allocate(f'{base_ip}/{prefix_size}', description)
+            SA.verification(Alloc)    # this will verify next available slot and allocate.
 
 
-    And Lastly, allocated prefixes can be retrived from **Alloc.assignment_dict** property.
+    3. And Lastly, allocated prefixes can be retrived from **Alloc.assignment_dict** property.
 
     .. code-block:: python
 
         from pprint import pprint
         pprint(Alloc.assignment_dict)
-        ## output not displayed ##
+        ## output not displayed here ##
 
 
 -----

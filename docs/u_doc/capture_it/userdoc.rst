@@ -8,5 +8,6 @@ Capture-IT User documentation!
 
 
    Capture-All [New] <executions_captureit>
+   Capture-Individual [New] <executions_individual>
    Quick Show <quick_display>
-   Deprycated <deprycated>
+   Capture-All [Deprycated] <executions_legacy>

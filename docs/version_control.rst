@@ -159,6 +159,8 @@ Version Control
        * addressing: Bug fix on comparision of two IP objects equality comparision.  
        * addressing.Allocations added allocation_type property to specify which type of allocation follows. Added method add_prefix to add prefix to allocation.
        * addressing.Allocate instances can be now initialized with an existing Allocations object instead of creating a new each time.
+       * pyvig: update_self_details fixed for singleton.
+       * capture-it: added a new propery - **retry_mandatory_cmds_retries**
 
 -----
 

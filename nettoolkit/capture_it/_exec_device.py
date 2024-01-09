@@ -44,6 +44,7 @@ class Execute_Device():
 		logger,
 		CustomClass,
 		fg,
+		retry_mandatory_cmds_retries,
 		):
 		"""initialize execution
 		"""    		
@@ -59,6 +60,7 @@ class Execute_Device():
 		self.visual_progress = visual_progress
 		self.CustomClass = CustomClass
 		self.fg = fg
+		self.retry_mandatory_cmds_retries = retry_mandatory_cmds_retries
 		self.delay_factor, self.dev = None, None
 		self.cmd_exec_logs = []
 		#
@@ -321,7 +323,7 @@ class Execute_Device():
 		Returns:
 			None: No retuns
 		"""		
-		for x in range(3):   # 3-tries
+		for x in range(self.retry_mandatory_cmds_retries):
 			if not missed_cmds: return None
 			self.missed_commands_capture(c, cc, missed_cmds, x)
 			missed_cmds = self.is_any_ff_cmds_missed(c)

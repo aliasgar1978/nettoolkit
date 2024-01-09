@@ -113,8 +113,6 @@ class COMMAND():
 			str: filename where output got stored
 		"""    		
 		fname = STR.get_logfile_name(self.path, hn=self.conn.hn, cmd=self.cmd, ts=self.conn.conn_time_stamp)
-		msg_level, msg = 3, f"{self.conn.hn} : sending output to file, {fname}"
-		visual_print(msg, msg_level, self.visual_progress, self.logger_list)
 
 		IO.to_file(filename=fname, matter=output)
 		return fname
@@ -133,8 +131,6 @@ class COMMAND():
 		rem = "#" if self.conn.devtype == 'juniper_junos' else "!"
 		cmd_header = f"\n{rem}{'='*80}\n{rem} output for command: {self.cmd}\n{rem}{'='*80}\n\n"
 		fname = STR.get_logfile_name(self.path, hn=self.conn.hn, cmd="", ts="")
-		msg_level, msg = 3, f"{self.conn.hn} : adding output to a file {fname}"
-		visual_print(msg, msg_level, self.visual_progress, self.logger_list)
 
 		if self.initialize_capture: delete_file_ifexist(fname)
 

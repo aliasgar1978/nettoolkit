@@ -69,6 +69,7 @@ class Execute_Common():
 		self.fg = False
 		self.lg = Log()
 		self.max_connections = 100
+		self.retry_mandatory_cmds_retries = 3
 
 	def verifications(self):
 		"""Verification/Validation of input values
@@ -266,6 +267,7 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 			logger=self.lg,
 			CustomClass=self.CustomClass,
 			fg=self.fg,
+			retry_mandatory_cmds_retries=self.retry_mandatory_cmds_retries,
 		)
 
 		# - capture logs -
@@ -437,6 +439,7 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 			logger=self.lg,
 			CustomClass=self.CustomClass,
 			fg=self.fg,
+			retry_mandatory_cmds_retries=self.retry_mandatory_cmds_retries,
 			)
 		# - log capture -
 		if self.log_type and self.log_type.lower() in ('individual', 'both'):

@@ -135,8 +135,8 @@ class DFGen():
 		"""		
 		ddf = DCT.update_devices()
 		#
-		# ddf_dev = DCT.update_device_self_detils(self.func_dict)
-		# ddf = pd.concat([ddf, ddf_dev], axis=0, join='outer')
+		ddf_dev = DCT.update_device_self_detils(self.func_dict)
+		ddf = pd.concat([ddf, ddf_dev], axis=0, join='outer')
 		#
 		self.devices_merged_df = pd.concat([self.devices_merged_df, ddf], axis=0, join='outer')
 
@@ -552,7 +552,7 @@ class DF_ConverT():
 		"""		
 		self_device_df = self.D.get_self_device_df()
 		self_dev_df = self.update_devices_for(df=self_device_df, dic=self.D.self_device)
-		self_dev_df = self.update_devices_df_pattern_n_custom_func(self_dev_df, func_dict, True)
+		self_dev_df = self.update_devices_df_pattern_n_custom_func(self_dev_df, func_dict)
 		return self_dev_df
 
 	def update_devices_for(self, df, dic):

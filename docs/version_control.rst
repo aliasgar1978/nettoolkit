@@ -160,7 +160,11 @@ Version Control
        * addressing.Allocations added with **allocation_type** property to specify which type of allocation follows.   Added method **add_prefix** to add prefix to allocation.
        * addressing.Allocate instances can be now initialized with an existing Allocations object instead of creating fresh each time.
        * pyvig: update_self_details fixed for singleton.
-       * capture-it: added a new propery - **retry_mandatory_cmds_retries**
+       * capture-it: added a new propery - **mandatory_cmds_retries**
+   * - 1.5.4
+     - Jan 10, 2024
+     - * capture-it: **individual capture** device specific commands capture functionality added, and a few minor flow changes.
+
 
 -----
 

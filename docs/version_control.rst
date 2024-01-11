@@ -164,6 +164,11 @@ Version Control
    * - 1.5.4
      - Jan 10, 2024
      - * capture-it: **individual capture** device specific commands capture functionality added, and a few minor flow changes.
+   * - 1.5.5
+     - Jan 11, 2024
+     - * capture-it: Fixed, log summary duplication on cross device types.
+       * pyVig: change match type to case-insensitive SFP type instead of case sensitive
+       * pyVig: Added Line Color & Weight auto selection based on detected Cable type
 
 
 -----

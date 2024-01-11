@@ -228,12 +228,13 @@ class Execute_Device():
 		Args:
 			cmds (str, list, tuple, set, dict): commands in any format
 		"""    	
-		if not self.all_cmds.get(self.dev.dtype):
+		if self.dev.dtype not in self.all_cmds.keys():
 			self.all_cmds[self.dev.dtype] = set()
 		if isinstance(cmds, (set, list, tuple)):
 			self.all_cmds[self.dev.dtype] = self.all_cmds[self.dev.dtype].union(set(cmds))
 		elif isinstance(cmds, dict):
 			for dt, _cmds in cmds.items():
+				if dt != self.dev.dtype: continue
 				self.add_cmd_to_all_cmd_dict(_cmds)
 		elif isinstance(cmds, str):
 			self.all_cmds[self.dev.dtype].add(cmds)

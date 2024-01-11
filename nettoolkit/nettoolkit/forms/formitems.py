@@ -210,7 +210,7 @@ def get_cable_n_connectors(file, column, item):
 	dic = df.to_dict()
 	#
 	for vrk, vr in dic['media_type'].items():
-		if item == vr:
+		if item.lower() == vr.lower():
 			return dic[column][vrk]
 	#
 	return ""

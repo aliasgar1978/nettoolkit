@@ -251,7 +251,7 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		Execute_Common.__init__(self, auth)
 		self.devices = STR.to_set(ip_list) if isinstance(ip_list, str) else set(ip_list)
 		self.cmds = cmds
-		self.all_cmds = deepcopy(self.cmds)
+		self.all_cmds = {}
 		self.path = path
 		#
 		self.ips = []

@@ -99,12 +99,11 @@ class DFGen():
 		self.add_model_n_serial_number_to_cabling()
 		#
 		#
-		# if visio_gen:
-		# self.update_weight()
-		# self.update_color()
+		self.update_weight()
+		self.update_color()
 		# ----- Cable matrix tab filteration ----- #
-		# self.remove_duplicate_cabling_entries()
-		# self.remove_undefined_cabling_entries()
+		# self.remove_duplicate_cabling_entries()  ## deprycated
+		# self.remove_undefined_cabling_entries()  ## deprycated
 		# ---------------------------------------- #
 		#
 		self.df_dict = {'Devices': self.devices_merged_df, 'Cablings': self.cabling_merged_df }
@@ -405,7 +404,11 @@ def update_b_media_type(cable_df_b_device, cable_df_bport, DCT):
 	if cable_df_b_device not in DCT: 
 		return ""
 	remote_ph_df = DCT[cable_df_b_device].full_df['physical']
-	filtered_df = remote_ph_df[remote_ph_df['interface'] == STR.if_standardize(cable_df_bport)]
+	try:
+		filtered_df = remote_ph_df[remote_ph_df['interface'] == STR.if_standardize(cable_df_bport)]
+	except:
+		print(f"ERROR getting b-device info for port {cable_df_b_device} - {cable_df_bport}")
+		return ""
 	if filtered_df.empty: 
 		return ""
 	if 'media_type' not in  filtered_df.columns: return ""

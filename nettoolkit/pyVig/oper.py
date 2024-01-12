@@ -6,7 +6,7 @@ from nettoolkit.nettoolkit_common import *
 from nettoolkit.nettoolkit.forms.formitems import get_cable_n_connectors, add_cable_n_connectors, CONNECTOR_TYPES_FILE
 from .devices import AdevDevices, device_df_drop_empty_duplicates, update_var_df_details_to_table_df
 from .cablings import ADevCablings
-from .maths import CalculateXY
+from .maths import CalculateXY, CalculateXYNative
 from .general import *
 
 pd.set_option('mode.chained_assignment', None)
@@ -157,8 +157,14 @@ class DFGen():
 			sheet_filter_dict (dict): sheet filter dictionary for mutitab executions.
 		"""		
 		if self.cabling_merged_df.empty: return
-		CXY = CalculateXY(self.devices_merged_df, self.default_x_spacing, self.default_y_spacing, self.cabling_merged_df, sheet_filter_dict)
-		CXY.calc()
+
+		if 'hierarchical_order' in self.func_dict:
+			CXY = CalculateXY(self.devices_merged_df, self.default_x_spacing, self.default_y_spacing, self.cabling_merged_df, sheet_filter_dict)
+			CXY.calc()
+		else:
+			CXY = CalculateXYNative(self.devices_merged_df, self.cabling_merged_df)
+			CXY.calc()
+
 		self.df_dict = {'Devices': CXY.df, 'Cablings': self.cabling_merged_df }
 
 

@@ -90,8 +90,9 @@ class CalculateXY():
 		self.update_ys(self.df, 'y-axis', ho_dict)
 		self.update_xs(self.df, 'x-axis', ho_dict)
 		#
-		self.update_xy_for_sheet_filter_dict()
-		self.merge_xy_filter_dfs_with_dev_df()
+		if not self.sheet_filter_dict:
+			self.update_xy_for_sheet_filter_dict()
+			self.merge_xy_filter_dfs_with_dev_df()
 
 
 	def update_xy_for_sheet_filter_dict(self):
@@ -242,3 +243,126 @@ class CalculateXY():
 
 # --------------------------------------------- 
 
+class CalculateXYNative():
+	"""Calculate co-ordinate default Native way
+
+	Args:
+		ddf (DataFrame): Devices DataFrame
+		cdf (DataFrame): Cabling DataFrame
+
+	"""    	
+
+	def __init__(self, ddf, cdf):
+		"""Initializer
+		"""    		
+		self.ddf = ddf
+		self.df = self.ddf
+		self.cdf = cdf
+		self.item_indexes = {}
+		self.indexes = [] 
+		self._x = 0
+		self._y = 0
+
+	def count_of_devices(self, dev):
+		"""identify devices from cable matrix and provide its occurances number.
+
+		Args:
+			dev (str): Device hostname to match with 
+
+		Returns:
+			int: number of occurances
+		"""    		
+		return len(self.cdf[(self.cdf.a_device == dev)]) + len(self.cdf[(self.cdf.b_device == dev)])
+
+	def dev_connectors_dict(self):
+		"""set device connectors dictionary and its inverse dictionary
+		"""    		
+		self.dcd = {device:self.count_of_devices(device) for device in set(self.ddf.hostname)}
+		self.ddc = {}
+		for k, v in self.dcd.items():
+			if not self.ddc.get(v):
+				self.ddc[v] = set()
+			self.ddc[v].add(k)
+
+	def calc(self):
+		"""start calculator
+		"""    		
+		self.dev_connectors_dict()
+		self.iterate()
+		self.add_x_y_to_df()
+
+	def add(self, item, x, y):
+		"""add an item to provided co-ordinates
+
+		Args:
+			item (str): device hostname
+			x (int): x-coordinate
+			y (int): y-coordinate
+		"""    		
+		if item not in self.item_indexes:
+			self.item_indexes[item] = (x,y)
+			self.indexes.append((x,y))
+
+	def iterate(self):
+		"""iterate thru all devices and add its co-ordinates
+		"""    		
+		for n in sorted(self.ddc.keys()):
+			devices = self.ddc[n]
+			for device in devices:
+				self.device_add(device, root=True)
+
+	def device_add(self, device, root):
+		"""check if device and its childs is added or not and add its co-ordinates.
+
+		Args:
+			device (str): hostname of device
+			root (bool): is it root path or not
+
+		Returns:
+			None: No return
+		"""    		
+		if device not in self.item_indexes and (self._x, self._y) not in self.indexes:
+			self.add(device, self._x, self._y)
+			return None
+		if root:
+			nbr_devices = self.get_nbr_devices(device)
+			for dev in nbr_devices:
+				self._x += 2
+				self.device_add(dev, root=False)
+			self._y += 2
+
+
+	def get_nbr_devices(self, device):
+		"""get set of neighbor devices for provided host/device
+
+		Args:
+			device (str): device hostname
+
+		Returns:
+			set: set of devices
+		"""    		
+		return set(self.cdf[(self.cdf.a_device == device)].b_device).union(set(self.cdf[(self.cdf.b_device == device)].a_device))
+
+	def add_x_y_to_df(self):
+		"""add x,y axis columns to devices data frame.
+		"""    		
+		self.ddf['x-axis'] = self.ddf.hostname.apply(lambda x: self.get_xy(x, 0))
+		self.ddf['y-axis'] = self.ddf.hostname.apply(lambda x: self.get_xy(x, 1))
+
+	def get_xy(self, dev, i):
+		"""retrive (x,y) co-ordinate for provided device. (i=0 for x, i=1 for y)
+
+		Args:
+			dev (str): device hostname
+			i (int): index number from tuple for x, y
+
+		Returns:
+			int: respective co-ordinate
+		"""    		
+		try:
+			return self.item_indexes[dev][i]
+		except: pass
+		try:
+			return self.item_indexes[dev.strip()][i]
+		except: pass
+		return -10

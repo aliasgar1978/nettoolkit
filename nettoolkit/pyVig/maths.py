@@ -90,7 +90,7 @@ class CalculateXY():
 		self.update_ys(self.df, 'y-axis', ho_dict)
 		self.update_xs(self.df, 'x-axis', ho_dict)
 		#
-		if not self.sheet_filter_dict:
+		if self.sheet_filter_dict:
 			self.update_xy_for_sheet_filter_dict()
 			self.merge_xy_filter_dfs_with_dev_df()
 
@@ -252,12 +252,13 @@ class CalculateXYNative():
 
 	"""    	
 
-	def __init__(self, ddf, cdf):
+	def __init__(self, ddf, cdf, sfd):
 		"""Initializer
 		"""    		
 		self.ddf = ddf
 		self.df = self.ddf
 		self.cdf = cdf
+		self.sfd = sfd
 		self.item_indexes = {}
 		self.indexes = [] 
 		self._x = 0
@@ -345,9 +346,12 @@ class CalculateXYNative():
 
 	def add_x_y_to_df(self):
 		"""add x,y axis columns to devices data frame.
-		"""    		
+		"""
 		self.ddf['x-axis'] = self.ddf.hostname.apply(lambda x: self.get_xy(x, 0))
 		self.ddf['y-axis'] = self.ddf.hostname.apply(lambda x: self.get_xy(x, 1))
+		for k in self.sfd:
+			self.ddf[f'{k}-x-axis'] = self.ddf.hostname.apply(lambda x: self.get_xy(x, 0))
+			self.ddf[f'{k}-y-axis'] = self.ddf.hostname.apply(lambda x: self.get_xy(x, 1))
 
 	def get_xy(self, dev, i):
 		"""retrive (x,y) co-ordinate for provided device. (i=0 for x, i=1 for y)

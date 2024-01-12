@@ -162,7 +162,7 @@ class DFGen():
 			CXY = CalculateXY(self.devices_merged_df, self.default_x_spacing, self.default_y_spacing, self.cabling_merged_df, sheet_filter_dict)
 			CXY.calc()
 		else:
-			CXY = CalculateXYNative(self.devices_merged_df, self.cabling_merged_df)
+			CXY = CalculateXYNative(self.devices_merged_df, self.cabling_merged_df, sheet_filter_dict)
 			CXY.calc()
 
 		self.df_dict = {'Devices': CXY.df, 'Cablings': self.cabling_merged_df }

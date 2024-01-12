@@ -100,7 +100,7 @@ class DFGen():
 		#
 		#
 		self.update_weight()
-		self.update_color()
+		if not self.__dict__.get('color'): self.update_color()
 		# ----- Cable matrix tab filteration ----- #
 		# self.remove_duplicate_cabling_entries()  ## deprycated
 		# self.remove_undefined_cabling_entries()  ## deprycated

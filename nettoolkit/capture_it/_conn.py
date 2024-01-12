@@ -13,14 +13,14 @@ from ._detection import DeviceType
 BAD_CONNECTION_MSG = ': BAD CONNECTION DETECTED, TEARED DOWN'
 cisco_banner ="""
 ! ---------------------------------------------------------------------------- !
-! This output is generated using capture_it utility.
+! This output is generated using Nettoolkit utility.
 ! Script written by : Aliasgar Hozaifa Lokhandwala (aholo2000@gmail.com)
 ! Write an email if any errors found.
 ! ---------------------------------------------------------------------------- !
 """
 juniper_banner = """
 # ---------------------------------------------------------------------------- #
-# This output is generated using capture_it utility.
+# This output is generated using Nettoolkit utility.
 # Script written by : Aliasgar Hozaifa Lokhandwala (aholo2000@gmail.com)
 # Write an email if any errors found.
 # ---------------------------------------------------------------------------- #

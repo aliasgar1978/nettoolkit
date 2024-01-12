@@ -91,17 +91,26 @@ Lets start now working on visio project
 
 -----
 
-
-
+  
+Generate pyVig readable Excel file
+-----------------------------------
 
 Provide Necessary Input Parameters for visio database preparation
------------------------------------------------------------------
 
 
-Lets start by defining a few static inputs. Modify these as needed. or exclude those which you want to go with default.
 
 .. code-block:: python
 
+  # --------------------------------------------
+  # IMPORTS
+  # --------------------------------------------
+  from nettoolkit.pyVig import DFGen, pyVig
+  import nettoolkit.nettoolkit_db  as nt
+
+
+  # ------------------------------------------------------
+  # Define a few static inputs. Modify/Exclude as needed.
+  # ------------------------------------------------------
   DEFAULT_STENCIL = 'My Shapes/Network and Peripherals.vssx'  # (optional, Default: None) Provide stencil name with full path 
   SPACING_X = 2      # horizontal spacing between two adjecent devices  (number, float )
   SPACING_Y = 2      # vertical spacing between two adjecent devices  (number, float)
@@ -112,33 +121,15 @@ Lets start by defining a few static inputs. Modify these as needed. or exclude t
   DEFAULT_LINE_WT = 2                    # connector/line thickness (number)
   sheet_filter_dict = {'sheet_filters': {}}    # blank sheet filter dictionary initialization, it will be updated later stage.
   #
-  # --- clean files to make cable matrix ---
+  # --- List of clean files to consider for cable matrix/visio generation ---
   CLEAN_FILES_LIST = [          # Provide All devices list of clean excel files
     'file1-clean.xlsx',
     'file2-clean.xlsx',
     'file3-clean.xlsx',
     'file4-clean.xlsx',
     'file5-clean.xlsx',
-    # ... add all those need in drawing
+    # ... update/add all those needed
   ]
-
------
-
-  
-Generate pyVig readable Excel file
------------------------------------
-
-
-Lets import packages first; than generate excel.
-
-
-.. code-block:: python
-
-  # --------------------------------------------
-  # IMPORTS
-  # --------------------------------------------
-  from nettoolkit.pyVig import DFGen, pyVig
-  import nettoolkit.nettoolkit_db  as nt
 
   # --------------------------------------------
   # create DataFrame Generateion Object  
@@ -160,7 +151,7 @@ Lets import packages first; than generate excel.
   )
 
   # ----------------------------------------------------------------------------------
-  # add custom mandatory functions to object,	to decide on hierarchical order and items. 
+  # add custom required functions to object,	to decide on hierarchical order and items. 
   # we will use two custom functions which we imported above from custom module
   # ----------------------------------------------------------------------------------
   DFG.custom_functions(
@@ -185,7 +176,7 @@ Lets import packages first; than generate excel.
   # update and get custom filter columns
   # we will use the two custom functions which we imported abve from custom module
   # ----------------------------------------------------------------------------------
-  sheet_filter_dict = {}
+  sheet_filter_dict = {'sheet_filters': {}}
   DFG.update(add_sheet_filter_columns)
   sheet_filter_dict['sheet_filters'] = get_sheet_filter_columns(DFG.df_dict)
   sheet_filter_dict['is_sheet_filter'] = True if sheet_filter_dict['sheet_filters'] else False 
@@ -213,6 +204,17 @@ Lets import packages first; than generate excel.
 
 
 -----
+
+.. note::
+
+  Implecations of not providing ``custom required functions`` will be as below.
+
+    * **hierarchical_order:** drawing will be generated using standard linear logic to place devices on plane.
+    * **item:** items icons will not be available, instead text box will appear. 
+  
+
+
+
 
 At this point a new Cable Matrix Excel file will be generated.  
 We are going to use it for the generation of the visio.

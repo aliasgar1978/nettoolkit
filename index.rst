@@ -8,7 +8,7 @@ Welcome to nettoolkit's documentation!
    :numbered:
 
    Preface <docs/preface>
-   Insall Instructions <docs/install>
+   Install Instructions <docs/install>
    Version Control <docs/version_control>
 
 

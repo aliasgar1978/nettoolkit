@@ -170,6 +170,9 @@ Version Control
        * pyVig: change match type to case-insensitive SFP type instead of case sensitive
        * pyVig: Added Line Color & Weight auto selection based on detected Cable type
        * pyVig: custom mandatory functions, dependancy removed.
+   * - 1.5.6
+     - Jan 15, 2024
+     - * pyVig: line color map editing functionality added.
 
 
 -----

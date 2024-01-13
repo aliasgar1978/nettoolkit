@@ -47,6 +47,18 @@ class DFGen():
 		}
 		self.pattern = 1
 		self.blank_dfs()
+		self.color_map = {
+			'aoc': 'red',
+			'copper': 'darkgray',
+			'fiber om3 mm': 'skyblue',
+			'fiber om4 mm': 'skyblue',
+			'fiber mm': 'green',
+			'fiber sm': 'yellow',
+			#
+			# ... add more as and when need ... #
+			# --- adding new color will require respective edit in visio.py ---
+		}
+
 
 	def blank_dfs(self):
 		"""creates devices/cabling blank DataFrames
@@ -101,14 +113,16 @@ class DFGen():
 		#
 		self.update_weight()
 		if not self.__dict__.get('color'): self.update_color()
-		# ----- Cable matrix tab filteration ----- #
-		# self.remove_duplicate_cabling_entries()  ## deprycated
-		# self.remove_undefined_cabling_entries()  ## deprycated
 		# ---------------------------------------- #
 		#
 		self.df_dict = {'Devices': self.devices_merged_df, 'Cablings': self.cabling_merged_df }
 		#
 
+	def map_color(self, **kwargs):
+		"""add, edit  line color map
+		"""    		
+		for k, v in kwargs.items():
+			self.color_map[k] = v
 
 	def arrange_cablings(self, keep_all_cols=True):
 		"""arrange cabling tab in to appropriate order given in CABLING COLUMNS
@@ -289,7 +303,7 @@ class DFGen():
 	def update_color(self):
 		"""define color of connector
 		"""		
-		update_color(self.cabling_merged_df)
+		update_color(self.cabling_merged_df, self.color_map)
 
 	def remove_subintf_from_ports(self):
 		"""removes subninterface value/string from ports
@@ -361,24 +375,13 @@ def update_weight(df, base_weight=1):
 		elif minidf_len > 1:
 			df.loc[ ((df.a_device == v.a_device) & (df.b_device == v.b_device)), 'weight' ] = minidf_len * base_weight
 
-def update_color(df):
+def update_color(df, colors):
 	"""update line color for all connectors, based on the found cable type.  Available options are 
 	# ( white, black, red, green, skyblue, blue, yellow, gray, lightgray, darkgray, orange )
 
 	Args:
 		df (DataFrame): Pandas DataFrame (cabling)
 	"""
-	colors = {
-		'aoc': 'red',
-		'fiber om3 mm': 'skyblue',
-		'fiber om4 mm': 'skyblue',
-		'fiber mm': 'orange',
-		'fiber sm': 'yellow',
-		'copper': 'darkgray',
-		#
-		# ... add more as and when need ... #
-		# --- adding new color will require respective edit in visio.py ---
-	}
 	df.color = df.apply(lambda x: get_color(x, colors), axis=1)
 
 def get_color(df, colors):

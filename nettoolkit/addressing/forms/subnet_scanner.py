@@ -26,7 +26,7 @@ def subnet_scanner_exec(i):
 			try:
 				concurrent_connections = int(i['sockets'])
 			except:
-				concurrent_connections = 1000
+				concurrent_connections = 500
 			#
 			P = Ping(pfxs, i['till'], concurrent_connections, i['subnet_scanner_create_tabs'])
 			P.op_to_xl(op_file)
@@ -57,7 +57,7 @@ def subnet_scanner_frame():
 		[sg.Button("Count_ips", change_submits=True, key='go_count_ips'), sg.Text('', key="ss_ip_counts") ],
 
 		[sg.Text('[n]', text_color="black"), sg.InputCombo(list(range(1,256)), key='till', size=(20,1)),  
-		sg.Text('Concurrent connections', text_color="black"), sg.InputText(1000, key='sockets', size=(20,1))],  
+		sg.Text('Concurrent connections', text_color="black"), sg.InputText(500, key='sockets', size=(20,1))],  
 		under_line(80),
 
 		[sg.Checkbox('create separate tab for each subnet', key='subnet_scanner_create_tabs', default=False, text_color='black')],

@@ -16,11 +16,11 @@ class Ping(Multi_Execution):
 	Args:
 		pfxs (list): list of prefixes
 		till (int, optional): how many ips to select. Defaults to 5.
-		concurrent_connections (int, optional): number of simultaneous pings. Defaults to 1000.
+		concurrent_connections (int, optional): number of simultaneous pings. Defaults to 500.
 		create_tabs (bool, optional): want to create individual tab (True) for each subnet or clubbed (False)
 	"""	
 
-	def __init__(self, pfxs, till=None, concurrent_connections=1000, create_tabs=False):
+	def __init__(self, pfxs, till=None, concurrent_connections=500, create_tabs=False):
 		"""instance initializer
 		"""		
 		self.pfxs = pfxs

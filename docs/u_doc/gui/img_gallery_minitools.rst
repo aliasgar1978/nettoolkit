@@ -5,7 +5,7 @@ Image Gallery - Minitools
 
 .. figure:: img/juniper_to_set.png
    :scale: 25%
-   :alt: Aliasgar Hozaifa Lokhandwala
+   :alt: juniper operations
    :align: right
 
 +-----------------------------------------------------------------------------+
@@ -23,7 +23,7 @@ Image Gallery - Minitools
 
 .. figure:: img/pw_enc_dec.png
    :scale: 25%
-   :alt: Aliasgar Hozaifa Lokhandwala
+   :alt: password encryption decryption
    :align: left
 
 +-----------------------------------------------------------------------------+
@@ -42,7 +42,7 @@ Image Gallery - Minitools
 
 .. figure:: img/md5_calculate.png
    :scale: 25%
-   :alt: Aliasgar Hozaifa Lokhandwala
+   :alt: MD5 calculator
    :align: right
 
 +-----------------------------------------------------------------------------+
@@ -61,7 +61,7 @@ Image Gallery - Minitools
 
 .. figure:: img/compare_it.png
    :scale: 25%
-   :alt: Aliasgar Hozaifa Lokhandwala
+   :alt: compare-it
    :align: left
 
 +-----------------------------------------------------------------------------+
@@ -80,7 +80,7 @@ Image Gallery - Minitools
 
 .. figure:: img/minitools_quick_show_output.png
    :scale: 25%
-   :alt: Aliasgar Hozaifa Lokhandwala
+   :alt: quick show
    :align: right
 
 +-----------------------------------------------------------------------------+

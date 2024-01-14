@@ -23,6 +23,6 @@ Once you exit out of window, delete object instance to release memory
 -----
 
 
-Documentation on GUI Not prepared. TRY IT YOURSELF!!! 
+Documentation on GUI Not completely prepared. EXPLORE IT!!! 
 
 Enjoy!!

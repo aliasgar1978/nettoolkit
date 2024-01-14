@@ -8,4 +8,5 @@ Nettoolkit GUI User documentation!
 
 
    Launch GUI Interface <nt_gui>
+   Minitools <img_gallery_minitools>
    Image Gallery <img_gallery>

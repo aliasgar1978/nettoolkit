@@ -172,6 +172,9 @@ Version Control
        * pyVig: custom mandatory functions, dependancy removed.
    * - 1.5.6
      - Jan 15, 2024
+     - Version Upload failed.
+   * - 1.5.7
+     - Jan 15, 2024
      - * pyVig: manually line color map add/edit functionality added.
 
 

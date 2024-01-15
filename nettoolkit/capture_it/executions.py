@@ -384,9 +384,9 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 		for ip, cmds in dev_cmd_dict.items():
 			if isinstance(ip, (tuple, set)):
 				for x in ip:
-					devs.add(x)
+					devs.add(x.strip())
 			elif isinstance(ip, str):
-				devs.add(ip)
+				devs.add(ip.strip())
 		self.devices = devs
 
 	def individual_device_cmds_dict(self, dev_cmd_dict):
@@ -400,16 +400,19 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 		"""
 		self.dev_cmd_dict = {}
 		for device in self.devices:
+			device = device.strip()
 			if not self.dev_cmd_dict.get(device):
 				self.dev_cmd_dict[device] = set()
 			for ips, cmds in dev_cmd_dict.items():
 				if isinstance(ips, (tuple, set, list)):
 					for ip in ips:
+						ip = ip.strip()
 						if device == ip:
-							self.add_to(ip, cmds)
-				if isinstance(ips, str):
+							self.add_to(ip.strip(), cmds)
+				elif isinstance(ips, str):
+					ips = ips.strip()
 					if device == ips:
-						self.add_to(ips, cmds)
+						self.add_to(ips.strip(), cmds)
 
 	def add_to(self, ip, cmds):
 		"""adds `cmds` to the set of commands for given ip in device commands dictionary 
@@ -444,7 +447,7 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 			CustomClass=self.CustomClass,
 			fg=self.fg,
 			mandatory_cmds_retries=self.mandatory_cmds_retries,
-			)
+		)
 		# - log capture -
 		if self.log_type and self.log_type.lower() in ('individual', 'both'):
 			self.lg.write_individuals(self.path)

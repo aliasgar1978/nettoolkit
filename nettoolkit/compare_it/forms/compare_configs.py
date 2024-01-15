@@ -96,7 +96,7 @@ def compare_config_texts_frame():
 
 		[sg.Text('tab name:',  text_color="yellow"), 
 			sg.InputText(key='compare_config_tab_name'),],
-		[sg.Text('index column nmae:',  text_color="yellow"), 
+		[sg.Text('index column name:',  text_color="yellow"), 
 			sg.InputText(key='compare_config_index_col'),],
 
 

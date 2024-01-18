@@ -193,6 +193,7 @@ class DFGen():
 		self.cabling_merged_df = self.cabling_merged_df.drop(
 			columns=["a_dev_duplicate", "aport_duplicate", "b_dev_duplicate", "bport_duplicate"]
 		)
+		self.cabling_merged_df = merge_port_for_duplicates(self.cabling_merged_df)		
 
 	def remove_duplicate_cabling_entries(self):
 		"""removes duplicate cabling entries between a-b devices / deprycated.
@@ -443,6 +444,31 @@ def remove_duplicates(df):
 	if len(df) == len(df2): 
 		return df2
 	return remove_duplicates(df2)
+
+def merge_port_for_duplicates(df):
+	"""merge multiple cabling for a-b devices
+	"""	
+	df2 = deepcopy(df)
+	for i, r in  df.iterrows():
+		mdf = df[((df.a_device == r.a_device) & (df.b_device == r.b_device))]
+		if len(mdf.a_device) == 1: 
+			continue
+		idx = 0
+		for j, m in mdf.iterrows():
+			if idx == 0:
+				idx = j
+				prv_aport = m.aport
+				prv_bport = m.bport
+				continue
+			prv_aport += "\n"+m.aport
+			prv_bport += "\n"+m.bport
+			df2.at[idx, 'aport'] = prv_aport
+			df2.at[idx, 'bport'] = prv_aport
+			df2 = df2.drop(j)
+		break
+	if len(df) == len(df2): 
+		return df2
+	return merge_port_for_duplicates(df2)
 
 
 # --------------------------------------------- 

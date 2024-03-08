@@ -80,6 +80,46 @@ def pw_dec_juniper_exec(obj, i):
 	except:
 		return None
 
+
+def go_cisco_pw_decrypt_exec(obj, i):
+	try:
+		input_file = i['pw_file_cisco']
+		output_file = input_file[:-4] + '-pw-decrypted.' + input_file[-3:]
+		decrypt_file_passwords(input_file, output_file)
+		return True
+	except:
+		return None
+
+def go_cisco_pw_mask_exec(obj, i):
+	try:
+		input_file = i['pw_file_cisco']
+		output_file = input_file[:-4] + '-pw-masked.' + input_file[-3:]
+		mask_file_passwords(input_file, output_file)
+		return True
+	except:
+		return None
+
+def go_juniper_pw_decrypt_exec(obj, i):
+	try:
+		input_file = i['pw_file_juniper']
+		output_file = input_file[:-4] + '-pw-decrypted.' + input_file[-3:]
+		decrypt_doller9_file_passwords(input_file, output_file)
+		return True
+	except:
+		return None
+
+def go_juniper_pw_mask_exec(obj, i):
+	try:
+		input_file = i['pw_file_juniper']
+		output_file = input_file[:-4] + '-pw-masked.' + input_file[-3:]
+		mask_doller9_file_passwords(input_file, output_file)
+		return True
+	except:
+		return None
+
+
+
+
 def pw_enc_decr_frame():
 	"""tab display - Password Encryptor Decryptor
 
@@ -101,6 +141,12 @@ def pw_enc_decr_frame():
 		],
 		[sg.Text('Result:',  text_color="light yellow"), 
 		sg.InputText(key='pw_result_cisco', disabled=True), ],
+		blank_line(),
+		[sg.Text('Select Cisco Configuration file:',  text_color="yellow"), 
+			sg.InputText(key='pw_file_cisco'),
+			sg.FileBrowse()],
+		[sg.Button("Decrypt Passwords", size=(20,1),  change_submits=True, key='go_cisco_pw_decrypt'),
+		 sg.Button("Mask Passwords", size=(20,1),  change_submits=True, key='go_cisco_pw_mask')],
 		under_line(80),
 
 		[sg.Text('Juniper $9', text_color="black") ],
@@ -111,6 +157,12 @@ def pw_enc_decr_frame():
 		],
 		[sg.Text('Result:',  text_color="light yellow"), 
 		sg.InputText(key='pw_result_juniper', disabled=True), ],
+		blank_line(),
+		[sg.Text('Select Juniper Configuration file:',  text_color="yellow"), 
+			sg.InputText(key='pw_file_juniper'),
+			sg.FileBrowse()],
+		[sg.Button("Decrypt Passwords", size=(20,1),  change_submits=True, key='go_juniper_pw_decrypt'),
+		 sg.Button("Mask Passwords", size=(20,1),  change_submits=True, key='go_juniper_pw_mask')],
 		under_line(80),
 
 		])

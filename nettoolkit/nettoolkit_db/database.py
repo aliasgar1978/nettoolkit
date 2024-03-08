@@ -84,12 +84,18 @@ def sort_dataframe_on_subnet(df, col, ascending=True):
 		DataFrame: sorted DataFrame
 	"""	
 	for x in range(4):
-		df[x] = df[col].apply(lambda y: y.split(".")[x])	
+		df[x] = df[col].apply(lambda y: _split_ip_octs(y, x))
 	for x in range(4):
 		df[x] = pd.to_numeric(df[x], errors='coerce')
 	df.sort_values([0,1,2,3], inplace=True, ascending=ascending)
 	df.drop([0,1,2,3], axis=1, inplace=True)	
 	return df
+
+def _split_ip_octs(ip, x):
+	if ip:
+		return ip.split(".")[x]
+	else:
+		return ''
 
 # ------------------------------------------------------------------------------
 

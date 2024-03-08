@@ -103,7 +103,13 @@ class RunningRoutes(Running):
 				dic['remark'] = l.split("  ## comment: ")[-1]
 			else:
 				dic['remark'] = ""
-		# return dic
+		#
+		if not dic.get('resolve'): 
+			dic['resolve'] = True if l.find(" resolve")>1 else ""
+		if not dic.get('retain'): 
+			dic['retain'] = True if l.find(" retain")>1 else ""
+		#
+
 
 
 

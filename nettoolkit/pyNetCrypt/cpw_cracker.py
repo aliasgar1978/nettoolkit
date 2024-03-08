@@ -42,16 +42,16 @@ def encrypt_type7(pt):
 
 def _update_pw_line(line, mask):
 	# updates line if password string found, encrypt or mask it and return updated line	
-	regex7 = re.compile('(7 )([0-9A-Fa-f]+)($)')
+	regex7 = re.compile('( 7 )([0-9A-Fa-f]+)($)')
 	regex9 = re.compile('secret 9 ')
 	result7 = regex7.search(line)
 	result9 = regex9.search(line)
 	if mask:
-		if result7: line = line[:line.find(result7.group(0))] + "XXXXXXXX\n"
+		if result7: line = line[:line.find(result7.group(0))] + " " + "XXXXXXXX\n"
 		if result9: 
 			line = line[:line.find(result9.group(0))] + "secret 9 XXXXXXXX\n"
 	elif result7:
-		line = line[:line.find(result7.group(0))] + decrypt_type7(result7.group(2)) + "\n"
+		line = line[:line.find(result7.group(0))] + " " + decrypt_type7(result7.group(2)) + "\n"
 	return line
 
 

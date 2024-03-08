@@ -91,7 +91,8 @@ def rearrange_tables(clean_file, foreign_keys=None):
 	# Statics Propoerties/Columns
 	# =====================================================================================================
 	STATIC_PROPS = [
-		"static", "filter", "version", "pfx_vrf", "prefix", "next_hop", "adminisrative_distance",  "tag_value", "remark", "track", 		
+		"static", "filter", "version", "pfx_vrf", "prefix", "next_hop", "adminisrative_distance",  "tag_value", 
+		"remark", "track", "resolve", "retain",
 	]
 
 	# =====================================================================================================

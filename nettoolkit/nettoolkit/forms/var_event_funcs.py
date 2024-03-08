@@ -49,6 +49,10 @@ MINITOOLS_EVENT_FUNCS = {
 	'go_compare_config_text': go_compare_config_text_exec,
 	'go_compare_config_xl': go_compare_config_xl_exec,
 	'btn_quick_show': btn_quick_show_exec,
+	'go_cisco_pw_decrypt': go_cisco_pw_decrypt_exec,
+	'go_cisco_pw_mask': go_cisco_pw_mask_exec, 
+	'go_juniper_pw_decrypt': go_juniper_pw_decrypt_exec,
+	'go_juniper_pw_mask': go_juniper_pw_mask_exec,
 }
 IPSCANNER_EVENT_FUNCS = {
 	'btn_ipscanner': btn_ipscanner_exec,

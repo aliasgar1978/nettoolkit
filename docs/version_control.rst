@@ -176,6 +176,14 @@ Version Control
    * - 1.5.7
      - Jan 15, 2024
      - * pyVig: manually line color map add/edit functionality added.
+   * - 1.5.8
+     - Mar 08, 2024
+     - * pyNetCrypt: bug fix in cpwcracker. File p/w encryption/decryption added in Forms
+       * database subnet sort: added nettoolkit_db.sort_dataframe_on_subnet functionality.
+       * facts-finder: Juniper static routes - resolve/retain parser added., bug fix on juniper prefix-list parser.
+       * capture-it: configure (beta) module added. A few bug fixes. read-timeout increased from 20 to 30
+       * addressing: Allocate ( added **iterate_base_ip** argument, in order to change or not to change after each allocation )
+       
 
 
 -----

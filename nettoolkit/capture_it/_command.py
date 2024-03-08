@@ -87,7 +87,7 @@ class COMMAND():
 		self.output = ''
 
 		op = self.conn.net_connect.send_command(self.cmd, 
-				read_timeout=20, 
+				read_timeout=30, 
 				delay_factor=self.conn.delay_factor,
 				use_textfsm=self.parsed_output,
 				)

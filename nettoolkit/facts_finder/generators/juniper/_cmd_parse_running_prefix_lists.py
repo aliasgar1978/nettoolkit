@@ -69,9 +69,9 @@ class RunningPrefixLists(Running):
 			None: None
 		"""
 		pl_name = spl[3]
-		pfx = spl[4]
+		if len(spl) > 4: pfx = spl[4]
 		try:
-			p = addressing(pfx)
+			if pfx: p = addressing(pfx)
 			version = p.version
 		except:
 			return None

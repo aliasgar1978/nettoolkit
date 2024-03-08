@@ -20,7 +20,7 @@ Explanation (to-set)
 	Follow this. Create an execution .py file and use below code to run the utility::
 
 		# step 1. - Import::
-		from nettoolkit.pyjuniper import Juniper
+		from nettoolkit.pyJuniper import Juniper
 
 		# step 2. - Providing input and output
 		input_file = "input_file_name.txt"

@@ -211,6 +211,7 @@ class Execute_Device():
 					self.add_cmds_to_self(CC.cmds)
 					if CC.cmds: self.add_cmd_to_all_cmd_dict(CC.cmds)
 
+
 				# -- add command execution logs dataframe --
 				cc.add_exec_logs()
 
@@ -308,8 +309,13 @@ class Execute_Device():
 			set: missed mandatory commands
 		"""		
 		necessary_cmds = ff.get_necessary_cmds(self.dev.dtype)
-		with open(self.path+"/"+c.hn+".log", 'r') as f:
-			log_lines = f.readlines()
+		try:
+			file = self.path+"/"+c.hn+".log"
+			with open(file, 'r') as f:
+				log_lines = f.readlines()
+		except:
+			print(f'Cumulative capture file is required for Facts-Finder File not found {self.path+"/"+c.hn+".log"}')
+			return []
 		captured_cmds = set()
 		for log_line in log_lines:
 			if log_line[1:].startswith(" output for command: "):

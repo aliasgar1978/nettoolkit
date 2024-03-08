@@ -1652,9 +1652,10 @@ class Allocate(object):
 		what_list_dict_key (str, optional): additional information of prefix. Defaults to None.
 	"""	
 
-	def __init__(self, size_wise_dict, base_ip, what_list_dict_key=None, Alloc=None):
+	def __init__(self, size_wise_dict, base_ip, what_list_dict_key=None, Alloc=None, iterate_base_ip=False):
 		self.size_wise_dict = size_wise_dict
 		self.base_ip = base_ip
+		self.iterate_base_ip = iterate_base_ip
 		self.what_list_dict_key = what_list_dict_key
 		if Alloc is None:
 			self.Alloc = Allocations()
@@ -1677,7 +1678,8 @@ class Allocate(object):
 		msk = str(subnet_size_to_mask(size))
 		SA = Subnet_Allocate(self.base_ip + "/" + msk, what)
 		SA.verification(self.Alloc)
-		self.base_ip = SA.get_nxt_subnet_decimal()
+		if self.iterate_base_ip:
+			self.base_ip = SA.get_nxt_subnet_decimal()
 
 	def go_thru_each_section(self, size, size_dict_values):
 		"""repeate thru each section (if any) to allocate subnets.

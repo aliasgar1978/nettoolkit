@@ -7,6 +7,7 @@
 MINITOOLS_EVENT_UPDATERS = {
 	'go_md5_calculator',
 	'go_pw_enc_cisco', 'go_pw_dec_cisco', 'go_pw_enc_juniper', 'go_pw_dec_juniper',
+	'go_cisco_pw_decrypt', 'go_cisco_pw_mask', 'go_juniper_pw_decrypt', 'go_juniper_pw_mask',
 }
 IPSCANNER_EVENT_UPDATERS = {
 	'go_pfxs_summary', 'go_pfxs_issubset', 'go_pfxs_break',

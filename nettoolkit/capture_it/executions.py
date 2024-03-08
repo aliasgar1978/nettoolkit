@@ -103,7 +103,12 @@ class Execute_Common():
 		Raises:
 			Exception: invalid input `custom_dynamic_cmd_class` for wront types
 			Exception: mandatory property missing `cmds` for missing property in provided class
-		"""		
+		"""	
+		if not self.cumulative and custom_dynamic_cmd_class:
+			print(f"Cumulative should be True or `both` in order to execute custom commands, else it will be skipped.")
+			self.CustomClass = None
+			return None
+		#
 		if not hasattr(custom_dynamic_cmd_class, '__class__'):
 			raise Exception(f"invalid input `custom_dynamic_cmd_class`,  expected `class`, got `{type(custom_dynamic_cmd_class)}`")
 		try:
@@ -144,7 +149,10 @@ class Execute_Common():
 		Raises:
 			Exception: Invalid type: foreign_keys if recieved in format other than dict.
 		"""		
-		self.fg = True
+		self.fg = True if self.cumulative else False
+		if not self.fg and CustomDeviceFactsClass:
+			print(f"Cumulative should be True or `both` in order to generate facts, else it will be skipped.")
+			return None
 		self.CustomDeviceFactsClass = CustomDeviceFactsClass
 		if isinstance(foreign_keys, dict):
 			self.foreign_keys = foreign_keys
@@ -286,17 +294,17 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		# - capture logs -
 		if self.log_type and self.log_type.lower() in ('individual', 'both'):
 			self.lg.write_individuals(self.path)
-		if ED.pinging:
-			self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
-			self.device_type_all[ED.hostname] =  ED.dev.dtype
-			self.ips.append(ip)
+		##
+		self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
+		self.device_type_all[ED.hostname] =  ED.dev.dtype
+		self.ips.append(ip)
 
-			# - update all cmds
-			self.update_all_cmds(ED)
+		# - update all cmds
+		self.update_all_cmds(ED)
 
-			# - facts generations -
-			if self.fg: 
-				self.ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
+		# - facts generations -
+		if self.fg: 
+			self.ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
 
 
 

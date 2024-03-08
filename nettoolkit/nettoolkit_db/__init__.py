@@ -6,7 +6,7 @@ __all__ = [
 	# .convertdict
 	'ConvDict',
 	#databse
-	"write_to_xl", "append_to_xl", "read_xl", "get_merged_DataFrame_of_file"
+	"write_to_xl", "append_to_xl", "read_xl", "get_merged_DataFrame_of_file", "sort_dataframe_on_subnet",
 ]
 
 

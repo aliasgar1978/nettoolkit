@@ -5,7 +5,6 @@ from netmiko import ConnectHandler
 import traceback
 from nettoolkit.nettoolkit_common import STR, LOG
 
-from .common import visual_print
 from ._detection import DeviceType
 
 # -----------------------------------------------------------------------------
@@ -40,8 +39,8 @@ class conn(object):
 		pw (str): user password to login to device
 		en (str): enable password (For cisco)
 		delay_factor (int): connection stability factor
-		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.
-		logger(list): device logging messages list
+		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.              ## Removed
+		logger_list(list): device logging messages list                               ## Removed
 		devtype (str, optional): device type from DeviceType class. Defaults to ''.
 		hostname (str, optional): hostname of device ( if known ). Defaults to ''.
 
@@ -57,8 +56,8 @@ class conn(object):
 		pw, 
 		en, 
 		delay_factor, 
-		visual_progress,
-		logger_list,
+		# visual_progress,                              ## Removed
+		# logger_list,                                  ## Removed
 		devtype='', 
 		hostname='', 
 		):
@@ -75,11 +74,11 @@ class conn(object):
 			devtype (str, optional): device type from DeviceType class. Defaults to ''.
 			hostname (str, optional): hostname of device ( if known ). Defaults to ''.
 		"""	
-		self.logger_list = logger_list
+		# self.logger_list = logger_list                                     ## Removed
+		# self.visual_progress = visual_progress                               ## Removed
 		self.conn_time_stamp = LOG.time_stamp()
 		self._devtype = devtype 						# eg. cisco_ios
 		self._devvar = {'ip': ip, 'host': hostname }	# device variables
-		self.visual_progress = visual_progress
 		self.__set_local_var(un, pw, en)				# setting 
 		self.banner = juniper_banner if self.devtype == 'juniper_junos' else cisco_banner
 		self.delay_factor = delay_factor
@@ -92,14 +91,12 @@ class conn(object):
 		if self.connectionsuccess:
 			self.__set_hostname
 			self.clsString = f'Device Connection: {self.devtype}/{self._devvar["ip"]}/{self._devvar["host"]}'
-			msg_level, msg = 10, f"{self._devvar['ip']} - conn - enter - {self.clsString}"
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			print(f"{self._devvar['ip']} - conn - enter - {self.clsString}")
 		return self      # ip connection object
 
 	# cotext end
 	def __exit__(self, exc_type, exc_value, tb):
-		msg_level, msg = 10, f"{self._devvar['ip']} - conn - terminate - {self.clsString}"
-		visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+		print(f"{self._devvar['ip']} - conn - terminate - {self.clsString}")
 		self.__terminate
 		if exc_type is not None:
 			traceback.print_exception(exc_type, exc_value, tb)
@@ -141,23 +138,21 @@ class conn(object):
 	# set connection var|properties
 	def __set_local_var(self, un, pw, en):
 		'''Inherit User Variables'''
-		msg_level, msg = 10, f"{self._devvar['ip']} - conn - setting up auth parameters"
-		visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+		print(f"{self._devvar['ip']} - conn - setting up auth parameters")
 		self._devvar['username'] = un
 		self._devvar['password'] = pw
 		self._devvar['secret'] = en
 		if self._devtype == '':
 			self._devtype = DeviceType(self._devvar['ip'], 
 				self._devvar['username'], self._devvar['password'],
-				self.visual_progress, self.logger_list,
+				# self.visual_progress, self.logger_list,                  ## Removed
 				).device_type 
 		self._devvar['device_type'] = self._devtype
 
 	# establish connection
 	@property
 	def __connect(self):
-		msg_level, msg = 10, f"{self._devvar['ip']} - conn - start ConnectHandler"
-		visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+		print(f"{self._devvar['ip']} - conn - start ConnectHandler")
 		try:
 			self.net_connect = ConnectHandler(**self._devvar) 
 			self.connectionsuccess = True			

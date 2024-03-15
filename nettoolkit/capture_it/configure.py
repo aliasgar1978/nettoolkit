@@ -4,6 +4,7 @@
 # -----------------------------------------------------------------------------
 from netmiko import ConnectHandler
 import traceback
+from nettoolkit.nettoolkit_common.gpl import STR
 
 from ._detection import DeviceType
 # -----------------------------------------------------------------------------
@@ -191,7 +192,7 @@ class Configure(Config_common):
 		if check == 2:
 			self.write_exec_log(self.conn.host, f"...done")
 		else:
-			self.write_exec_log(self.conn.host, f"...Failed\nGot\n{commit_return}")
+			self.write_exec_log(self.conn.host, f"...Failed\nGot\n{op}")
 
 	def juniper_commit(self):
 		self.write_exec_log(self.conn.host, f"commiting configurations to {self.device_type} // {self.conn.host} // {self.ip}", ends="\t")

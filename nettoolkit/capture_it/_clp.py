@@ -2,7 +2,6 @@
 # Imports
 # -----------------------------------------------------------------------------
 import pandas as pd
-from .common import visual_print
 from ._command import COMMAND
 
 # -----------------------------------------------------------------------------
@@ -17,10 +16,12 @@ class CLP():
 		conn (conn): connection object
 		path (str): path to store the captured output	
 		parsed_output(bool): Need to parse output and generate excel or not.
-		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.
-		logger(list): device logging messages list
+		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.                   ## Removed
+		logger_list(list): device logging messages list                                    ## Removed
 	"""    	
-	def __init__(self, dtype, conn, path, parsed_output, visual_progress, logger_list):
+	def __init__(self, dtype, conn, path, parsed_output, 
+		# visual_progress, logger_list                                                ## Removed
+		):
 		"""Initialize object
 
 		Args:
@@ -34,9 +35,9 @@ class CLP():
 		self.dtype = dtype
 		self.conn = conn
 		self.path = path
-		self.parsed_output = parsed_output
-		self.visual_progress = visual_progress
-		self.logger_list = logger_list
+		self.parsed_output = parsed_output                                                
+		# self.visual_progress = visual_progress                                            ## Removed
+		# self.logger_list = logger_list													## Removed
 		self.cumulative_filename = None
 		self.parsed_cmd_df = {}
 		self.cmd_exec_logs = []
@@ -62,8 +63,7 @@ class CLP():
 			bool: True/False
 		"""    		
 		if not self._configure and 'config' == cmd.lstrip()[:6].lower():
-			msg_level, msg = 0, f"{self.hn} - Config Mode disabled, Exiting"
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			print(f"{self.hn} : CRIT : error entering config mode, Mode disabled, Exiting")
 			return False
 		return True
 
@@ -88,11 +88,10 @@ class CLP():
 	def _cmd_capture_raw(self, cmd, cumulative=False, banner=False, initialize_capture=False):
 		try:
 			cmdObj = COMMAND(conn=self.conn, cmd=cmd, path=self.path, parsed_output=False, 
-				visual_progress=self.visual_progress, logger_list=self.logger_list,
+				# visual_progress=self.visual_progress, logger_list=self.logger_list,
 				initialize_capture=initialize_capture)
 		except:
-			msg_level, msg = 2, f"{self.hn} - Error executing command {cmd}"
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			print(f"{self.hn} : ERROR: error executing command {cmd}")
 			self.cmd_exec_logs[-1]['raw'] = False
 			return None
 		try:
@@ -102,10 +101,7 @@ class CLP():
 			if cumulative: self.cumulative_filename = cmdObj.cumulative_filename
 			return cmdObj
 		except:
-			msg_level, msg = 2, (f"{self.hn} : Error writing output for command {cmd}\n",
-								f"{cmdObj.output}\n",
-								f"{self.cmd_exec_logs}")
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			print(f"{self.hn} : ERROR: error writing output of command {cmd}  <<<<<< !!!!!!",)
 			self.cmd_exec_logs[-1]['raw'] = False
 			return False
 
@@ -113,19 +109,18 @@ class CLP():
 	def _cmd_capture_parsed(self, cmd, cumulative=False, banner=False):
 		try:
 			cmdObj_parsed = COMMAND(conn=self.conn, cmd=cmd, path=self.path, parsed_output=True, 
-				visual_progress=self.visual_progress, logger_list=self.logger_list)
+				# visual_progress=self.visual_progress, logger_list=self.logger_list
+				)
 		except:
-			msg_level, msg = 2, f"{self.hn} - Error executing command - Parse Run {cmd}"
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			print(f"{self.hn} : ERROR: error executing command - Parse Run {cmd}")
 			self.cmd_exec_logs[-1]['parsed'] = False
 			return None
 		try:
 			self.parsed_cmd_df[cmd] = pd.DataFrame(cmdObj_parsed.output)
 			self.cmd_exec_logs[-1]['parsed'] = True
 		except:
-			msg_level, msg = 2, (f"{self.hn} : No ntc-template parser available for the output of command {cmd}, "
+			print(f"{self.hn} : INFO : Ntc-template parser unavailable for the output of command {cmd}, "
 								f"data facts will not be available for this command")
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
 			self.cmd_exec_logs[-1]['parsed'] = False
 			return False
 

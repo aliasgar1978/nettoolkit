@@ -6,7 +6,6 @@ from nettoolkit.nettoolkit_common import STR, IP
 
 from copy import deepcopy
 import nettoolkit.facts_finder as ff
-from .common import visual_print
 from ._detection import DeviceType
 from ._conn import conn
 from ._captures import Captures
@@ -26,8 +25,8 @@ class Execute_Device():
 		cumulative (bool, optional): True,False,both. Defaults to False.
 		forced_login (bool): True will try login even if device ping fails.
 		parsed_output (bool): parse output and generate Excel or not.
-		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.
-		logger(list): device logging messages list
+		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.                 ## Removed
+		logger(list): device logging messages list                                       ## Removed
 		CustomClass(class): Custom class definition to provide additinal custom variable commands
 		fg(bool): facts generation
 	"""    	
@@ -40,8 +39,8 @@ class Execute_Device():
 		cumulative, 
 		forced_login, 
 		parsed_output,
-		visual_progress,
-		logger,
+		# visual_progress,                                  ## Removed
+		# logger,                                          ## Removed
 		CustomClass,
 		fg,
 		mandatory_cmds_retries,
@@ -57,20 +56,19 @@ class Execute_Device():
 		self.cumulative_filename = None
 		self.forced_login = forced_login
 		self.parsed_output = parsed_output
-		self.visual_progress = visual_progress
+		# self.visual_progress = visual_progress                            ## Removed
 		self.CustomClass = CustomClass
 		self.fg = fg
 		self.mandatory_cmds_retries = mandatory_cmds_retries
 		self.delay_factor, self.dev = None, None
 		self.cmd_exec_logs = []
 		#
-		logger.add_host(self.log_key)
-		self.logger_list = logger.log[self.log_key]
+		# logger.add_host(self.log_key)
+		# self.logger_list = logger.log[self.log_key]              ## Removed
 		#
 		ip = ip.strip()
 		if not ip:
-			msg_level, msg = 0, f"Missing device ip: [{ip}] - skipping it"
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			print(f"Missing device ip: [{ip}] - skipping it")
 			return None
 		#
 		self.pinging = self.check_ping(ip)
@@ -81,25 +79,19 @@ class Execute_Device():
 				execute = True
 			except:
 				execute = False
-				msg_level, msg = 0, f"{ip} - DeviceType not detected"
-				visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+				print(f"{ip} - DeviceType not detected")
 
 			if execute and self.dev is not None and self.dev.dtype == 'cisco_ios': 
 				try:
 					self.execute(ip)
 				except:
-					msg_level, msg = 10, f"{ip} - sleeping progress for 65 seconds due to known cisco ios bug"
-					visual_print(msg, msg_level, self.visual_progress, self.logger_list)
-					
+					print(f"{ip} - sleeping progress for 65 seconds due to known cisco ios bug")					
 					sleep(65)
 					self.execute(ip)
 			elif execute:
 				self.execute(ip)
 			else:
-				msg_level, msg = 0, f"{ip} - skipping device since unable to get device type"
-				visual_print(msg, msg_level, self.visual_progress, self.logger_list)
-
-
+				print(f"{ip} - skipping device since unable to get device type")
 
 	def check_ping(self, ip):
 		"""check device reachability
@@ -111,18 +103,12 @@ class Execute_Device():
 			int: delay factor if device reachable,  else False
 		"""    		
 		try:
-			msg_level, msg = 8, f"{ip} - Checking ping response"
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
-
+			print(f"{ip} - Checking ping response")
 			self.delay_factor = IP.ping_average (ip)/100 + 3
-			msg_level, msg = 8, f"{ip} - Delay Factor={self.delay_factor}"
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
-
+			print(f"{ip} - Delay Factor={self.delay_factor}")
 			return self.delay_factor
 		except:
-			msg_level, msg = 10, f"{ip} - Ping was unsuccessful"
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
-
+			print(f"{ip} - Ping was unsuccessful")
 			return False
 
 	def get_device_type(self, ip):
@@ -138,14 +124,12 @@ class Execute_Device():
 			self.dev = DeviceType(dev_ip=ip, 
 				un=self.auth['un'], 
 				pw=self.auth['pw'],
-				visual_progress=self.visual_progress,
-				logger_list=self.logger_list,
+				# visual_progress=self.visual_progress,            ## Removed
+				# logger_list=self.logger_list,                    ## Removed
 			)
 			return self.dev
 		except Exception as e:
-			msg_level, msg = 0, f"{ip} - Device Type Detection Failed with Exception \n{e}"
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
-
+			print(f"{ip} - Device Type Detection Failed with Exception \n{e}")
 			return None
 
 	def is_connected(self, c, ip):
@@ -162,10 +146,9 @@ class Execute_Device():
 		if STR.found(str(c), "FAILURE"): connection = None
 		if c.hn == None or c.hn == 'dummy': connection = None
 		if connection is None:
-			msg_level, msg = 0, f"{ip} - Connection establishment failed"
+			print(f"{ip} - Connection establishment failed")
 		else:
-			msg_level, msg = 0, f"{ip} - Connection establishment success"
-		visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			print(f"{ip} - Connection establishment success")
 
 		return connection
 
@@ -175,23 +158,21 @@ class Execute_Device():
 
 		Args:
 			ip (str): device ip
-		"""    		
-		msg_level, msg = 8, f"{ip} - Initializing"
-		visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+		"""
+		print(f"{ip} - Initializing")
 
 		with conn(	ip=ip, 
 					un=self.auth['un'], 
 					pw=self.auth['pw'], 
 					en=self.auth['en'], 
 					delay_factor=self.delay_factor,
-					visual_progress=self.visual_progress,
-					logger_list=self.logger_list,
+					# visual_progress=self.visual_progress,            ## Removed
+					# logger_list=self.logger_list,                    ## Removed
 					devtype=self.dev.dtype,
 					) as c:
 			if self.is_connected(c, ip):
 				self.hostname = c.hn
-				msg_level, msg = 10, f"Connection established : {ip} == {c.hn}"
-				visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+				print(f"Connection established : {ip} == {c.hn}")
 
 				cc = self.command_capture(c)
 				cc.grp_cmd_capture(self.cmds)
@@ -270,15 +251,14 @@ class Execute_Device():
 
 		Args:
 			c (conn): connection object
-		"""    		
-		msg_level, msg = 8, f"{c.hn} - Starting Capture"
-		visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+		"""
+		print(f"{c.hn} - Starting Capture")
 
 		cc = Captures(dtype=self.dev.dtype, 
 			conn=c, 
 			path=self.path, 
-			visual_progress=self.visual_progress,
-			logger_list=self.logger_list,
+			# visual_progress=self.visual_progress,                          ## Removed
+			# logger_list=self.logger_list,											## Removed
 			cumulative=self.cumulative,
 			parsed_output=self.parsed_output,
 			)
@@ -295,8 +275,7 @@ class Execute_Device():
 			missed_cmds (set): list/set of commands for which output to be recapture
 			x (int, optional): iteration value
 		"""		
-		msg_level, msg = 7, f"{c.hn} - Retrying missed_cmds({x+1}): {missed_cmds}"
-		visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+		print(f"{c.hn} - Retrying missed_cmds({x+1}): {missed_cmds}")
 		cc.grp_cmd_capture(missed_cmds)
 
 	def is_any_ff_cmds_missed(self, c):
@@ -352,5 +331,4 @@ class Execute_Device():
 			self.missed_commands_capture(c, cc, missed_cmds, x)
 			missed_cmds = self.is_any_ff_cmds_missed(c)
 		if missed_cmds:	
-			msg_level, msg = 3, f"{c.hn} - Error capture all mandatory commands, try do manually.."
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			print(f"{c.hn} - Error capture all mandatory commands, try do manually..")

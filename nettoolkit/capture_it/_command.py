@@ -4,7 +4,6 @@
 import os
 from nettoolkit.nettoolkit_common import STR, IO
 
-from .common import visual_print
 
 # -----------------------------------------------------------------------------
 # Command Execution on a conn(connection) object, store to file
@@ -18,8 +17,8 @@ class COMMAND():
 		cmd (str): a command to be executed
 		path (str): path where output to be stored
 		parsed_output(bool): Need to parse output and generate excel or not.
-		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.
-		logger(list): device logging messages list
+		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.            ## Removed
+		logger_list(list): device logging messages list                             ## Removed
 
 
 	Properties:
@@ -29,7 +28,9 @@ class COMMAND():
 	"""    	
 
 	# INITIALIZE class vars
-	def __init__(self, conn, cmd, path, parsed_output, visual_progress, logger_list, initialize_capture):
+	def __init__(self, conn, cmd, path, parsed_output, 
+		# visual_progress, logger_list,                                               ## Removed
+		initialize_capture):
 		"""initialize a command object
 
 		Args:
@@ -44,8 +45,8 @@ class COMMAND():
 		self.cmd = cmd
 		self.path = path
 		self.parsed_output = parsed_output
-		self.visual_progress = visual_progress
-		self.logger_list = logger_list
+		# self.visual_progress = visual_progress                            ## Removed
+		# self.logger_list = logger_list                                    ## Removed
 		self.initialize_capture = initialize_capture
 		self._commandOP(conn)
 
@@ -62,14 +63,13 @@ class COMMAND():
 		if cumulative is True or (isinstance(cumulative, str) and cumulative.lower() == 'both'):
 			self.cumulative_filename = self.add_to_file(self.commandOP)    # add to file
 			self.fname = self.cumulative_filename
-			msg_level, msg = 3, f"{self.conn.hn} : {self.cmd} >> {self.fname}"
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			print(f"{self.conn.hn} : INFO : {self.cmd} >> {self.fname}")
 		if cumulative is False or (isinstance(cumulative, str) and cumulative.lower() == 'both'):
 			self.fname = self.send_to_file(self.commandOP)    # save to file
-			msg_level, msg = 3, f"{self.conn.hn} : {self.cmd} >> {self.fname}"
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			print(f"{self.conn.hn} : INFO : {self.cmd} >> {self.fname}")
 		if cumulative is None:
-			print(self.commandOP)
+			pass
+			# print(self.commandOP)
 
 
 	# Representation of Command object
@@ -96,8 +96,7 @@ class COMMAND():
 		if any([								
 			STR.found(op,'Connection refused')
 			]):                                 ### ADD More as needed ###
-			msg_level, msg = 0, f"{self.conn.hn} : Connection was refused by remote host.."
-			visual_print(msg, msg_level, self.visual_progress, self.logger_list)
+			print(f"{self.conn.hn} : ERROR: Connection was refused by remote host..")
 			return None
 
 		self.output = op

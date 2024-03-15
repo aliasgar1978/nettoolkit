@@ -8,7 +8,7 @@ import nettoolkit.facts_finder as ff
 from collections import OrderedDict
 
 from ._exec_device import Execute_Device
-from .common import visual_print, Log, write_log
+# from .common import write_log, Log, visual_print                             ## Removed 
 
 # -----------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ class Execute_Common():
 	def __call__(self):
 		self.verifications()
 		self.start()
-		write_log(self.lg, self.log_type, self.common_log_file, self.path)
+		# write_log(self.lg, self.log_type, self.common_log_file, self.path)        ## Removed
 
 	def add_auth_para(self, auth):
 		"""add authentication parameters to self instance
@@ -62,21 +62,21 @@ class Execute_Common():
 		self.cumulative = True
 		self.forced_login = True
 		self.parsed_output = False
-		self.visual_progress = 3
+		# self.visual_progress = 3             ## Removed
+		# self.lg = Log()                       ## Removed
 		self.log_type = None
 		self.common_log_file = None
 		self.CustomClass = None
 		self.fg = False
-		self.lg = Log()
 		self.max_connections = 100
 		self.mandatory_cmds_retries = 3
 
 	def verifications(self):
 		"""Verification/Validation of input values
 		"""
-		if not isinstance(self.visual_progress, (int, float)):
-			print(f"visual_progress level to be entered in number, default value (3) selected")
-			self.visual_progress = 3
+		# if not isinstance(self.visual_progress, (int, float)):                                     ## Removed
+		# 	print(f"visual_progress level to be entered in number, default value (3) selected")
+		# 	self.visual_progress = 3
 		if self.cumulative not in (True, False, 'both'):
 			print( f"cumulative arument is set to {self.cumulative}. No capture-log files will be generated." )
 		if self.log_type in ('common', 'both') and not self.common_log_file:
@@ -132,8 +132,7 @@ class Execute_Common():
 		try:
 			return ip and Validation(ip).version in (4, 6)
 		except:
-			msg_level, msg = 0, f'Device Connection: {ip} :: Skipped due to bad Input'
-			visual_print(msg, msg_level, self.visual_progress)
+			print(f'Device Connection: {ip} :: Skipped due to bad Input')
 			return False
 
 
@@ -244,7 +243,7 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		* cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and 'both' will do both.
 		* forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)
 		* parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)
-		* visual_progress (int, optional): 0 will not show any progress, 10 will show all progress (default=3).
+		* visual_progress (int, optional): 0 will not show any progress, 10 will show all progress (default=3).          ## Removed
 		* log_type (str): what type of log output requires. choices are = common, individual, both
 		* common_log_file (str): output file name of a common log file
 		* max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.
@@ -284,16 +283,16 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 			cumulative=self.cumulative,
 			forced_login=self.forced_login, 
 			parsed_output=self.parsed_output,
-			visual_progress=self.visual_progress,
-			logger=self.lg,
+			# visual_progress=self.visual_progress,            ## Removed
+			# logger=self.lg,                                 ## Removed
 			CustomClass=self.CustomClass,
 			fg=self.fg,
 			mandatory_cmds_retries=self.mandatory_cmds_retries,
 		)
 
-		# - capture logs -
-		if self.log_type and self.log_type.lower() in ('individual', 'both'):
-			self.lg.write_individuals(self.path)
+		# - capture logs -                                                    ## Removed
+		# if self.log_type and self.log_type.lower() in ('individual', 'both'):
+		# 	self.lg.write_individuals(self.path)
 		##
 		self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
 		self.device_type_all[ED.hostname] =  ED.dev.dtype
@@ -325,7 +324,7 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 		* cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and 'both' will do both.
 		* forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)
 		* parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)
-		* visual_progress (int, optional): 0 will not show any progress, 10 will show all progress (default=3).
+		* visual_progress (int, optional): 0 will not show any progress, 10 will show all progress (default=3).                            ## Removed
 		* log_type (str): what type of log output requires. choices are = common, individual, both
 		* common_log_file (str): output file name of a common log file
 		* max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.
@@ -450,15 +449,15 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 			cumulative=self.cumulative,
 			forced_login=self.forced_login, 
 			parsed_output=self.parsed_output,
-			visual_progress=self.visual_progress,
-			logger=self.lg,
+			# visual_progress=self.visual_progress,                    ## Removed
+			# logger=self.lg,                                         ## Removed
 			CustomClass=self.CustomClass,
 			fg=self.fg,
 			mandatory_cmds_retries=self.mandatory_cmds_retries,
 		)
-		# - log capture -
-		if self.log_type and self.log_type.lower() in ('individual', 'both'):
-			self.lg.write_individuals(self.path)
+		# - log capture -                                                            ## Removed
+		# if self.log_type and self.log_type.lower() in ('individual', 'both'):
+		# 	self.lg.write_individuals(self.path)
 		self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
 		self.device_type_all[ED.hostname] =  ED.dev.dtype
 		self.ips.append(ip)

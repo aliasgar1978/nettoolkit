@@ -89,6 +89,10 @@ Nt Capture-it - Individual
         # -----------------------------------------------------------------------------
         c()
 
+        # -----------------------------------------------------------------------------
+        #    Display failures
+        # -----------------------------------------------------------------------------
+        c.show_failures
 
         # -----------------------------------------------------------------------------
         #    Log-Summary ( Modify/Enable keys as requires )
@@ -96,14 +100,34 @@ Nt Capture-it - Individual
         LogSummary(c, 
             print=True,                        ## display on screen. (default: False)
             # write_to='cmds_log_summary.log', ## create a fresh log summary file (default: None)
-            # append_to='cmds_log_summary.log',## append to log summary file (default: None) 
         )
 
         # -----------------------------------------------------------------------------
 
 
+----
+
 
 .. important::
+    
+    **Parameters for capture**
+
+    * ``dev_cmd_dict``  dictionary of devices of list of commands
+    * ``auth``  authentication Parameters
+    * ``path``  output path ( use "." for storing in same relative folder )
+    * ``cumulative``  (Options: True, False, 'Both', None) defines how to store each command output. True=Save all output in a single file. False=Save all command output in individual file. 'Both'=will generate both kinds of output. None=will not save text log outout to any file, but display it on screen
+    * ``forced_login``  (Options: True, False) (Default: False)  Forced login to device even if device ping doesn't succeded.
+    * ``parsed_output``  (Options: True, False) (Default: False) Parse the command output and generates device database in excel file.  Each command output try to generate a pased detail tab.
+    * ``max_connections``  (numeric) (Default: 100), change the number of simultaneous device connections as per link connection and your pc cpu processng performance.
+
+    **Parameters for LogSummary**
+
+    * ``c`` (capture_individual): capture_individual object instance
+    * ``print`` (bool): displays result summary on screen. Defaults to False.
+    * ``write_to`` (str): filename, writes result summary to file. Defaults to None (i.e. no file write out).
+
+
+.. note::
     
     Since we are providing individual commands for each device, pay attention on device type  ``Cisco/Juniper/Arista`` and apply respective commands to the system appropriatly.
 

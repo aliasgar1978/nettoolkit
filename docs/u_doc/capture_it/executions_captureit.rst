@@ -78,10 +78,7 @@ NT Capture-it - Normal
         c.cumulative = 'both'    # default: True ( options: True, False, 'both')
         c.forced_login = False   # default: True ( options: True, False )
         c.parsed_output = True   # default: False ( options: True, False )
-        c.visual_progress = 9    # default: 3 ( Option range: 0 - 10 ) 
         c.max_connections = 1    # default: 100 ( Options: any number input ) ( define max concurrent connections, 1 for sequencial )
-        c.log_type = 'common'    # default: None ( Options: 'common', individual', 'both', None )
-        c.common_log_file = 'common-debug.log' # default: None ( provide filename if log_type is common )
         c.retry_mandatory_cmds_retries = 1     # default: 3
 
         # -----------------------------------------------------------------------------
@@ -104,12 +101,16 @@ NT Capture-it - Normal
         c()
 
         # -----------------------------------------------------------------------------
+        #    Display failures
+        # -----------------------------------------------------------------------------
+        c.show_failures
+
+        # -----------------------------------------------------------------------------
         #    Log-Summary ( Modify/Enable keys as requires )
         # -----------------------------------------------------------------------------
         LogSummary(c, 
             print=True,                        ## display on screen. (default: False)
             # write_to='cmds_log_summary.log', ## create a fresh log summary file (default: None)
-            # append_to='cmds_log_summary.log',## append to log summary file (default: None) 
         )
 
         # -----------------------------------------------------------------------------
@@ -183,6 +184,26 @@ NT Capture-it - Normal
 
 
 -----
+
+.. important::
+    
+    **Parameters for capture**
+
+    * ``devices``  list of ip addresses
+    * ``auth``  authentication Parameters
+    * ``cmds``  dictionary of list of commands to be captred (cisco, juniper, arista).
+    * ``path``  output path ( use "." for storing in same relative folder )
+    * ``cumulative``  (Options: True, False, 'Both', None) defines how to store each command output. True=Save all output in a single file. False=Save all command output in individual file. 'Both'=will generate both kinds of output. None=will not save text log outout to any file, but display it on screen
+    * ``forced_login``  (Options: True, False) (Default: False)  Forced login to device even if device ping doesn't succeded.
+    * ``parsed_output``  (Options: True, False) (Default: False) Parse the command output and generates device database in excel file.  Each command output try to generate a pased detail tab.
+    * ``max_connections``  (numeric) (Default: 100), change the number of simultaneous device connections as per link connection and your pc cpu processng performance.
+
+    **Parameters for LogSummary**
+
+    * ``c`` (capture_individual): capture_individual object instance
+    * ``print`` (bool): displays result summary on screen. Defaults to False.
+    * ``write_to`` (str): filename, writes result summary to file. Defaults to None (i.e. no file write out).
+
 
 
 .. note::

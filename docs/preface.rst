@@ -1,6 +1,12 @@
 nettoolkit
 ##############
 
+.. figure:: images/nettoolkit_logo.jpg
+   :scale: 25%
+   :alt: Nettoolkit
+   :align: right
+
+
 
 What is nettoolkit?
 ==========================

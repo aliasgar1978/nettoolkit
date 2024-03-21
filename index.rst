@@ -1,5 +1,7 @@
-Welcome to nettoolkit's documentation!
-=========================================
+
+
+.. figure:: docs/images/nettoolkit_logo.jpg
+   :alt: Nettoolkit
 
 
 .. toctree::

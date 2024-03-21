@@ -12,6 +12,7 @@ capture-it API documentation!
 	clp <clp>
 	command <command>
 	common <common>
+	configure <configure>
 	conn <conn>
 	detection <detection>
 	exec_device <exec_device>

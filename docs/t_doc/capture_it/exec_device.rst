@@ -1,8 +1,8 @@
 
-_exec_device module
+execution of a device module
 ---------------------------------------------------
 
-.. automodule:: nettoolkit.capture_it._exec_device
+.. automodule:: nettoolkit.capture_it.exec_device
 	:members:
 	:undoc-members:
 	:show-inheritance:

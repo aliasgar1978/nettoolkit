@@ -1,8 +1,8 @@
 
-_detection module
+detection module
 ---------------------------------------------------
 
-.. automodule:: nettoolkit.capture_it._detection
+.. automodule:: nettoolkit.detect.detection
 	:members:
 	:undoc-members:
 	:show-inheritance:

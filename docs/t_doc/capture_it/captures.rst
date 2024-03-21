@@ -1,8 +1,8 @@
 
-_captures module
+captures module
 ---------------------------------------------------
 
-.. automodule:: nettoolkit.capture_it._captures
+.. automodule:: nettoolkit.capture_it.captures
 	:members:
 	:undoc-members:
 	:show-inheritance:

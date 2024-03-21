@@ -252,3 +252,16 @@ def dataframe_generate(d):
 		new_d[k] = flatten(v, "")
 	return pd.DataFrame(new_d).fillna("").T
 # ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------
+def printmsg(pre=None, post=None, pre_ends="\n"):
+	def outer(func):
+		def inner(*args, **kwargs):
+			if pre: print(pre, end=pre_ends)
+			fo = func(*args, **kwargs)
+			if post: print(post)
+			return fo
+		return inner
+	return outer
+
+# ------------------------------------------------------------------------

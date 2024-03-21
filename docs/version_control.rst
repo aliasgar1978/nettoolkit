@@ -183,7 +183,7 @@ Version Control
        * facts-finder: Juniper static routes - resolve/retain parser added., bug fix on juniper prefix-list parser.
        * capture-it: configure (beta) module added. A few bug fixes. read-timeout increased from 20 to 30
        * addressing: Allocate ( added **iterate_base_ip** argument, in order to change or not to change after each allocation )
-   * - 1.6.0
+   * - 1.6.1
      - Mar 22, 2024
      - * capture-it: rewamp code, separate out device detection module. Removed a few extra overhead logging feature. Added failure devices listing.
        

@@ -11,91 +11,13 @@ from nettoolkit.nettoolkit_common import STR
 # Device Type Detection (1st Connection)
 # -----------------------------------------------------------------------------
 class DeviceType():
-	"""'Defines Device type ( 'cisco_ios', 'arista_eos', 'juniper_junos')
+	"""Deprycated"""    	
 
-	Args:
-		dev_ip (str): ip address of device
-		un (str): username to login to device
-		pw (str): password to login to device
-		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.  ## Removed
-		logger(list): device logging messages list                        ## Removed
-	
-	Properties:
-		dtype (str): device type (default/or exception will return 'cisco_ios')
-	"""    	
-
-	# INITIALIZER - DEVICE TYPE
-	def __init__(self, dev_ip, un, pw, 
-		# visual_progress=False, logger_list=False                          ## Unused, Removed
-		):
-		"""initialize object with given ip and credentials
-
-		Args:
-			dev_ip (str): ip address of device
-			un (str): username to login to device
-			pw (str): password to login to device
-			visual_progress (int): scale 0 to 10. 0 being no output, 10 all.   ## Removed
-			logger(list): device logging messages list                         ## Removed
-
-		"""    		
-		'''class initializer'''
-		self.dev_ip = dev_ip
-		# self.visual_progress = visual_progress
-		# self.logger_list = logger_list  
-		self.device_types = {'cisco': 'cisco_ios',
-						'arista': 'arista_eos',
-						'juniper': 'juniper_junos'}
-		self.dtype = self.__device_make(dev_ip, un, pw)
-
-	# device type
-	@property
-	def dtype(self):
-		"""device type
-		* 'cisco': 'cisco_ios',
-		* 'arista': 'arista_eos',
-		* 'juniper': 'juniper_junos'
-
-		Returns:
-			str: device type
-		"""    		
-		return self.device_type
-
-	# set device type
-	@dtype.setter
-	def dtype(self, devtype='cisco'):
-		self.device_type = self.device_types.get(devtype, 'cisco_ios')
-		print(f"{self.dev_ip} - Detected Device Type - {self.device_type}")
-		return self.device_type
-
-	# device make retrival by login
-	def __device_make(self, dev_ip, un, pw):
-		with paramiko.SSHClient() as ssh:
-			ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-			try:
-				ssh.connect(dev_ip, username=un, password=pw)
-				print(f"{dev_ip} - Device SSH Connection Success - using username {un}")
-
-			except (paramiko.SSHException, 
-					paramiko.ssh_exception.AuthenticationException, 
-					paramiko.AuthenticationException
-					) as e:
-				print(f"{dev_ip} - Device SSH Connection Failure - using username {un}")
-				pass
-
-			with ssh.invoke_shell() as remote_conn:
-				remote_conn.send('\n')
-				sleep(1)
-				print(f"{dev_ip} - Verifying show version output")
-
-				remote_conn.send('ter len 0 \nshow version\n')
-				sleep(2)
-				output = remote_conn.recv(5000000).decode('UTF-8').lower()
-				print(f"{dev_ip} - show version output - {output}")
-
-				for k, v in self.device_types.items():
-					if STR.found(output, k): 
-						print(f"{dev_ip} - Returning - {k}")
-						return k
+	def __init__(self, dev_ip, un, pw):
+		print("DEPRYCATION WARNING: nettoolkit.capture_it._detection.DeviceType is deprycated."
+			"Your code is failing. Start using nettoolkit.detect.detection.DeviceType instead."
+			)
+# -----------------------------------------------------------------------------
 
 
 def quick_display(dev_ip, auth, cmds, wait):

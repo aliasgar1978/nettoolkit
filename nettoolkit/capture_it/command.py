@@ -2,7 +2,8 @@
 # Imports
 # -----------------------------------------------------------------------------
 import os
-from nettoolkit.nettoolkit_common import STR, IO
+from nettoolkit.nettoolkit_common import STR, IO, printmsg
+from .common import cmd_line_pfx
 
 
 # -----------------------------------------------------------------------------
@@ -15,11 +16,7 @@ class COMMAND():
 	Args:
 		conn (conn): connection object
 		cmd (str): a command to be executed
-		path (str): path where output to be stored
 		parsed_output(bool): Need to parse output and generate excel or not.
-		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.            ## Removed
-		logger_list(list): device logging messages list                             ## Removed
-
 
 	Properties:
 		cmd (str): command executed
@@ -28,26 +25,20 @@ class COMMAND():
 	"""    	
 
 	# INITIALIZE class vars
-	def __init__(self, conn, cmd, path, parsed_output, 
-		# visual_progress, logger_list,                                               ## Removed
-		initialize_capture):
+	def __init__(self, conn, cmd, parsed_output, 
+		del_old_file
+		):
 		"""initialize a command object
 
 		Args:
 			conn (conn): connection object
 			cmd (str): a command to be executed
-			path (str): path where output to be stored
 			parsed_output(bool): Need to parse output and generate excel or not.
-			visual_progress (int): scale 0 to 10. 0 being no output, 10 all.
-			logger(list): device logging messages list
 		"""    		
 		self.conn = conn
 		self.cmd = cmd
-		self.path = path
 		self.parsed_output = parsed_output
-		# self.visual_progress = visual_progress                            ## Removed
-		# self.logger_list = logger_list                                    ## Removed
-		self.initialize_capture = initialize_capture
+		self.del_old_file = del_old_file    ## internal use only
 		self._commandOP(conn)
 
 
@@ -69,7 +60,6 @@ class COMMAND():
 			print(f"{self.conn.hn} : INFO : {self.cmd} >> {self.fname}")
 		if cumulative is None:
 			pass
-			# print(self.commandOP)
 
 
 	# Representation of Command object
@@ -86,11 +76,12 @@ class COMMAND():
 	def _commandOP(self, conn):
 		self.output = ''
 
-		op = self.conn.net_connect.send_command(self.cmd, 
-				read_timeout=30, 
-				delay_factor=self.conn.delay_factor,
-				use_textfsm=self.parsed_output,
-				)
+		op = self.conn.net_connect.send_command(
+			self.cmd, 
+			read_timeout=30, 
+			delay_factor=self.conn.delay_factor,
+			use_textfsm=self.parsed_output,
+		)
 
 		# exclude missed ones
 		if any([								
@@ -111,7 +102,7 @@ class COMMAND():
 		Returns:
 			str: filename where output got stored
 		"""    		
-		fname = STR.get_logfile_name(self.path, hn=self.conn.hn, cmd=self.cmd, ts=self.conn.conn_time_stamp)
+		fname = STR.get_logfile_name(self.conn.output_path, hn=self.conn.hn, cmd=self.cmd, ts=self.conn.conn_time_stamp)
 
 		IO.to_file(filename=fname, matter=output)
 		return fname
@@ -128,10 +119,10 @@ class COMMAND():
 		"""    		
 		banner = self.banner if self.banner else ""
 		rem = "#" if self.conn.devtype == 'juniper_junos' else "!"
-		cmd_header = f"\n{rem}{'='*80}\n{rem} output for command: {self.cmd}\n{rem}{'='*80}\n\n"
-		fname = STR.get_logfile_name(self.path, hn=self.conn.hn, cmd="", ts="")
+		cmd_header = f"\n{rem}{'='*80}\n{rem}{cmd_line_pfx}{self.cmd}\n{rem}{'='*80}\n\n"
+		fname = STR.get_logfile_name(self.conn.output_path, hn=self.conn.hn, cmd="", ts="")
 
-		if self.initialize_capture: delete_file_ifexist(fname)
+		if self.del_old_file: delete_file_ifexist(fname)
 
 		IO.add_to_file(filename=fname, matter=banner+cmd_header+output)
 		return fname

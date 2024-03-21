@@ -3,12 +3,12 @@ import os
 from copy import deepcopy
 from nettoolkit.nettoolkit_common import *
 from nettoolkit.addressing import *
+from pprint import pprint
 
 import nettoolkit.facts_finder as ff
 from collections import OrderedDict
 
-from ._exec_device import Execute_Device
-# from .common import write_log, Log, visual_print                             ## Removed 
+from .exec_device import Execute_Device
 
 # -----------------------------------------------------------------------------
 
@@ -28,16 +28,15 @@ class Execute_Common():
 
 	# set authentication and default parameters
 	def __init__(self, auth):
-		self.add_auth_para(auth)
-		self.set_defaults()
+		self._add_auth_para(auth)
+		self._set_defaults()
 
 	# verify data, start capture, write logs
 	def __call__(self):
-		self.verifications()
+		self._verifications()
 		self.start()
-		# write_log(self.lg, self.log_type, self.common_log_file, self.path)        ## Removed
 
-	def add_auth_para(self, auth):
+	def _add_auth_para(self, auth):
 		"""add authentication parameters to self instance
 		
 		Args:
@@ -56,34 +55,28 @@ class Execute_Common():
 			auth['en'] = auth['pw']
 		self.auth = auth
 
-	def set_defaults(self):
+	def _set_defaults(self):
 		"""setting the default value for optional user input parameters
 		"""		
 		self.cumulative = True
 		self.forced_login = True
 		self.parsed_output = False
-		# self.visual_progress = 3             ## Removed
-		# self.lg = Log()                       ## Removed
-		self.log_type = None
-		self.common_log_file = None
 		self.CustomClass = None
 		self.fg = False
 		self.max_connections = 100
 		self.mandatory_cmds_retries = 3
+		#
+		self.cmd_exec_logs_all = OrderedDict()
+		self.device_type_all = OrderedDict()
+		self.failed_devices = {}
 
-	def verifications(self):
+	def _verifications(self):
 		"""Verification/Validation of input values
 		"""
-		# if not isinstance(self.visual_progress, (int, float)):                                     ## Removed
-		# 	print(f"visual_progress level to be entered in number, default value (3) selected")
-		# 	self.visual_progress = 3
 		if self.cumulative not in (True, False, 'both'):
-			print( f"cumulative arument is set to {self.cumulative}. No capture-log files will be generated." )
-		if self.log_type in ('common', 'both') and not self.common_log_file:
-			print( f"common_log_file name is missing, common debug log will not be generated" )
-			self.common_log_file = None
+			print(f"Invalid cumulative arument found: [{self.cumulative}]. capture-log files will not be generated." )
 		if not isinstance(self.max_connections, int):
-			print(f"Invalid number of `max_connections` defined {self.max_connections}, default 100 taken.")
+			print(f"Invalid number of `max_connections` defined [{self.max_connections}], default [100].")
 			self.max_connections = 100
 
 	## -------------- variable user inputs hook -------------- ##
@@ -105,16 +98,16 @@ class Execute_Common():
 			Exception: mandatory property missing `cmds` for missing property in provided class
 		"""	
 		if not self.cumulative and custom_dynamic_cmd_class:
-			print(f"Cumulative should be True or `both` in order to execute custom commands, else it will be skipped.")
+			print(f"Cumulative should be [True] or ['both'], in order to execute custom commands. Otherwise it will be skipped.")
 			self.CustomClass = None
 			return None
 		#
 		if not hasattr(custom_dynamic_cmd_class, '__class__'):
-			raise Exception(f"invalid input `custom_dynamic_cmd_class`,  expected `class`, got `{type(custom_dynamic_cmd_class)}`")
+			raise Exception(f"invalid input [custom_dynamic_cmd_class],  expected instance of [class], got [{type(custom_dynamic_cmd_class)}]")
 		try:
 			custom_dynamic_cmd_class.cmds
 		except AttributeError:
-			raise Exception(f"mandatory property missing `cmds` in provided class, please implement.")
+			raise Exception(f"mandatory property [cmds] is missing in provided class, please implement.")
 		self.CustomClass = custom_dynamic_cmd_class
 
 
@@ -150,23 +143,24 @@ class Execute_Common():
 		"""		
 		self.fg = True if self.cumulative else False
 		if not self.fg and CustomDeviceFactsClass:
-			print(f"Cumulative should be True or `both` in order to generate facts, else it will be skipped.")
+			print(f"Cumulative should be [True] or [`both`] in order to generate facts. Otherwise it will be skipped.")
 			return None
 		self.CustomDeviceFactsClass = CustomDeviceFactsClass
 		if isinstance(foreign_keys, dict):
 			self.foreign_keys = foreign_keys
 		else:
-			raise Exception(f'Invalid type: foreign_keys: required `dict` got {type(foreign_keys)}')
+			raise Exception(f'Invalid type: [foreign_keys]. Required [dict] got [{type(foreign_keys)}]')
 
 
-	def ff_sequence(self, ED, CustomDeviceFactsClass, foreign_keys):
-		"""facts finder execution sequences
+	def _ff_sequence(self, ED, CustomDeviceFactsClass, foreign_keys):
+		"""facts finder execution sequences, BPC
 
 		Args:
 			ED (Execute_Device): Execute_Device class instance post capture finishes
 			CustomDeviceFactsClass (class): class definition for the modification of excel facts with custom properties.
 			foreign_keys (_type_): custom keys(aka: custom columns) 
 		"""	
+		info_banner = " : INFO : Facts-Generation : "
 		# -- cleate an instance --
 		cleaned_fact = ff.CleanFacts(
 			capture_log_file=ED.cumulative_filename, 
@@ -180,48 +174,58 @@ class Execute_Common():
 		try:
 			hn = ED.hostname
 			# -- execute it --
-			print(f"{hn} - Starting Data Cleaning...")
+			print(f"{hn}{info_banner}Starting Data Cleaning...")
 			cleaned_fact()
-			print(f"{hn} - Data Cleaning done...")
+			print(f"{hn}{info_banner}Data Cleaning done...")
 		except:
-			print(f"{hn} - Data Cleaning failed, facts will NOT be generated !!!")
+			print(f"{hn}{info_banner}Data Cleaning failed, facts will NOT be generated !!!")
 			return None
 		# ------------------------------------------------------------------------
 		if CustomDeviceFactsClass:
 		# -- custom facts additions --
 			try:
-				print(f"{hn} - starting Custom Data Modifications...")
+				print(f"{hn}{info_banner}starting Custom Data Modifications...")
 				ADF = CustomDeviceFactsClass(cleaned_fact)
 				ADF()
 				ADF.write()
-				print(f"{hn} - Custom Data Modifications done...")
+				print(f"{hn}{info_banner}Custom Data Modifications done...")
 			except:
-				print(f"{hn} - Custom Data Modifications failed, custom facts will NOT be added !!")
+				print(f"{hn}{info_banner}Custom Data Modifications failed, custom facts will NOT be added !!")
 				pass
 		# ------------------------------------------------------------------------
 		try:
 			# -- rearranging tables columns --
-			print(f"{hn} - Column Rearranging..., ")
+			print(f"{hn}{info_banner}Column Rearranging..., ")
 			ff.rearrange_tables(cleaned_fact.clean_file, foreign_keys=foreign_keys)
-			print(f"{hn} - Column Rearrangemnet done...")
+			print(f"{hn}{info_banner}Column Rearrangemnet done...")
 		except:
-			print(f"{hn} - Column Rearrangemnet failed, facts columns may not be in proper order !")
+			print(f"{hn}{info_banner}Column Rearrangemnet failed, facts columns may not be in proper order !")
 			pass
 		# ------------------------------------------------------------------------
-		print(f"{hn} - Facts-Generation Tasks Finished !!! {hn} !!")
+		print(f"{hn}{info_banner}Facts-Generation Tasks Finished !!! {hn} !!")
 		# ------------------------------------------------------------------------
 
 
-	def update_all_cmds(self, ED):
+	def _update_all_cmds(self, ED):
 		"""update executed commands for all commands dictionary 
 
 		Args:
 			ED (Execute_Device): Device Execution object instance
-		"""		
+		"""	
+		if not ED.dev: return
 		dt = ED.dev.dtype
 		if not self.all_cmds.get(dt):
 			self.all_cmds[dt] = []
 		self.all_cmds[dt].extend(list(ED.all_cmds[dt]))
+
+	@property
+	def show_failures(self):
+		"""Displays failure summary
+		"""    		
+		banner = f"\n! {'='*20} [ FAILED DEVICES AND REASONS ] {'='*20} !\n"
+		print(banner)
+		pprint(self.failed_devices)
+		print(f"\n! {'='*72} !\n")
 
 
 
@@ -243,9 +247,6 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		* cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and 'both' will do both.
 		* forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)
 		* parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)
-		* visual_progress (int, optional): 0 will not show any progress, 10 will show all progress (default=3).          ## Removed
-		* log_type (str): what type of log output requires. choices are = common, individual, both
-		* common_log_file (str): output file name of a common log file
 		* max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.
 		* CustomClass (class): Custom class definitition to execute additional custom commands
 
@@ -263,9 +264,7 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		#
 		self.ips = []
 		if not isinstance(cmds, dict):
-			raise Exception("Commands to be executed, are to be in proper dict format")
-		self.cmd_exec_logs_all = OrderedDict()
-		self.device_type_all = OrderedDict()
+			raise Exception("Commands are to be in proper dict format")
 		#
 		super().__init__(self.devices)
 
@@ -283,27 +282,25 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 			cumulative=self.cumulative,
 			forced_login=self.forced_login, 
 			parsed_output=self.parsed_output,
-			# visual_progress=self.visual_progress,            ## Removed
-			# logger=self.lg,                                 ## Removed
 			CustomClass=self.CustomClass,
 			fg=self.fg,
 			mandatory_cmds_retries=self.mandatory_cmds_retries,
 		)
 
-		# - capture logs -                                                    ## Removed
-		# if self.log_type and self.log_type.lower() in ('individual', 'both'):
-		# 	self.lg.write_individuals(self.path)
 		##
-		self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
-		self.device_type_all[ED.hostname] =  ED.dev.dtype
+		if ED.dev:
+			self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
+			self.device_type_all[ED.hostname] =  ED.dev.dtype
+		else:
+			self.failed_devices[ip] = ED.failed_reason
 		self.ips.append(ip)
 
 		# - update all cmds
-		self.update_all_cmds(ED)
+		self._update_all_cmds(ED)
 
 		# - facts generations -
-		if self.fg: 
-			self.ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
+		if self.fg and ED.dev: 
+			self._ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
 
 
 
@@ -324,9 +321,6 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 		* cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and 'both' will do both.
 		* forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)
 		* parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)
-		* visual_progress (int, optional): 0 will not show any progress, 10 will show all progress (default=3).                            ## Removed
-		* log_type (str): what type of log output requires. choices are = common, individual, both
-		* common_log_file (str): output file name of a common log file
 		* max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.
 		* CustomClass (class): Custom class definitition to execute additional custom commands
 
@@ -342,21 +336,19 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 		#
 		Execute_Common.__init__(self, auth)
 		#
-		self.verify_dev_cmd_dict(dev_cmd_dict)
-		self.add_devices(dev_cmd_dict)
 		self.path = path
-		self.individual_device_cmds_dict(dev_cmd_dict)
+		self._verify_dev_cmd_dict(dev_cmd_dict)
+		self._add_devices(dev_cmd_dict)
+		self._set_individual_device_cmds_dict(dev_cmd_dict)
 		#
 		self.ips = []
 		self.cmds = {}
 		self.all_cmds = {}
-		self.cmd_exec_logs_all = OrderedDict()
-		self.device_type_all = OrderedDict()
 		#
 		super().__init__(self.devices)
 
 
-	def verify_dev_cmd_dict(self, dev_cmd_dict):
+	def _verify_dev_cmd_dict(self, dev_cmd_dict):
 		"""Verify device commands dictionary `dev_cmd_dict` format and values. and raises Exceptions for errors.
 		dev_cmd_dict dictionary keys are to be from either of non-iterable type such as (string, tuple, set).
 		dev_cmd_dict dictionary values are to be from either of iterable type such as (list, set, tuple, dict).
@@ -368,17 +360,17 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 			None
 		"""
 		if not isinstance(dev_cmd_dict, dict):
-			raise Exception(f"`capture_individual` requires `dev_cmd_dict` parameter in dictionary format")
+			raise Exception(f"individual capture mandates [dev_cmd_dict] parameter as dictionary format")
 		for ip, cmds in dev_cmd_dict.items():
 			if isinstance(ip, (tuple, set)):
 				for x in ip:
 					if not isinstance(addressing(x), IPv4):
-						raise Exception(f"`dev_cmd_dict` key expecting IPv4 address, received {ip}")
+						raise Exception(f"[dev_cmd_dict] keys expects IPv4 addresses, received {ip}")
 
 			if not isinstance(cmds, (list, set, tuple, dict)):
-				raise Exception(f"`dev_cmd_dict` values expecting iterable, received {cmds}")
+				raise Exception(f"[dev_cmd_dict] values expects iterables, received {type(cmds)}, {cmds}")
 
-	def add_devices(self, dev_cmd_dict):
+	def _add_devices(self, dev_cmd_dict):
 		"""check device commands dictionary and returns set of devices
 
 		Args:
@@ -396,7 +388,7 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 				devs.add(ip.strip())
 		self.devices = devs
 
-	def individual_device_cmds_dict(self, dev_cmd_dict):
+	def _set_individual_device_cmds_dict(self, dev_cmd_dict):
 		"""check device commands dictionary and sets commands list for each of device
 
 		Args:
@@ -415,13 +407,13 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 					for ip in ips:
 						ip = ip.strip()
 						if device == ip:
-							self.add_to(ip.strip(), cmds)
+							self._add_to(ip.strip(), cmds)
 				elif isinstance(ips, str):
 					ips = ips.strip()
 					if device == ips:
-						self.add_to(ips.strip(), cmds)
+						self._add_to(ips.strip(), cmds)
 
-	def add_to(self, ip, cmds):
+	def _add_to(self, ip, cmds):
 		"""adds `cmds` to the set of commands for given ip in device commands dictionary 
 
 		Args:
@@ -449,26 +441,22 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 			cumulative=self.cumulative,
 			forced_login=self.forced_login, 
 			parsed_output=self.parsed_output,
-			# visual_progress=self.visual_progress,                    ## Removed
-			# logger=self.lg,                                         ## Removed
 			CustomClass=self.CustomClass,
 			fg=self.fg,
 			mandatory_cmds_retries=self.mandatory_cmds_retries,
 		)
-		# - log capture -                                                            ## Removed
-		# if self.log_type and self.log_type.lower() in ('individual', 'both'):
-		# 	self.lg.write_individuals(self.path)
+		###
 		self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
 		self.device_type_all[ED.hostname] =  ED.dev.dtype
 		self.ips.append(ip)
 		#
 
 		# - update all cmds
-		self.update_all_cmds(ED)
+		self._update_all_cmds(ED)
 
 		# - facts generations -
 		if self.fg: 
-			self.ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
+			self._ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
 
 
 

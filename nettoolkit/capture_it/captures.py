@@ -5,7 +5,7 @@ import pandas as pd
 from nettoolkit.nettoolkit_db import append_to_xl
 	
 from .common import juniper_add_no_more
-from ._clp import CLP
+from .clp import CLP
 
 # -----------------------------------------------------------------------------
 # Captures Class
@@ -17,9 +17,6 @@ class Captures(CLP):
 		dtype (str): device type
 		conn (conn): connection object
 		cmds (dict, set, list, tuple): set of commands or commands dictionary 
-		path (str): path to store the captured output
-		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.         ## Removed
-		logger_list(list): device logging messages list                             ## Removed
 		cumulative (bool, optional): True/False/both. Defaults to False.
 		parsed_output(bool): Need to parse output and generate excel or not.
 
@@ -28,13 +25,10 @@ class Captures(CLP):
 
 	"""    	
 
-	def __init__(self, dtype, conn, path, 
-		# visual_progress, logger_list,                                  ## Removed
-		cumulative=False, parsed_output=False):
+	def __init__(self, conn, cumulative=False, parsed_output=False):
 		"""Initiate captures
 
 		Args:
-			dtype (str): device type
 			conn (conn): connection object
 			path (str): path to store the captured output
 			visual_progress (int): scale 0 to 10. 0 being no output, 10 all.
@@ -43,12 +37,11 @@ class Captures(CLP):
 			parsed_output(bool): Need to parse output and generate excel or not.
 		"""    		
 		# self.logger_list = logger_list
-		super().__init__(dtype, conn, path, parsed_output)    # , visual_progress, logger_list)
+		super().__init__(conn, parsed_output)    # , visual_progress, logger_list)
 		self.op = ''
-		# self.visual_progress = visual_progress
 		self.cumulative = cumulative
 		self.cumulative_filename = None
-		self.initialize_capture = True
+		self.del_old_file = True
 
 
 	def grp_cmd_capture(self, cmds):
@@ -64,7 +57,7 @@ class Captures(CLP):
 		banner = self.conn.banner
 		#
 		if isinstance(cmds, dict):
-			commands = cmds[self.dtype] 
+			commands = cmds[self.conn.dev_type] 
 		if isinstance(cmds, (set, list, tuple)):
 			commands = cmds 
 		#
@@ -74,11 +67,11 @@ class Captures(CLP):
 				return None
 
 			# if juniper update no-more if unavailable.
-			if self.dtype == 'juniper_junos': 
+			if self.conn.dev_type == 'juniper_junos': 
 				cmd = juniper_add_no_more(cmd)
 			#
-			cc = self.cmd_capture(cmd, self.cumulative, banner, self.initialize_capture)
-			self.initialize_capture = False
+			cc = self.cmd_capture(cmd, self.cumulative, banner, self.del_old_file)
+			self.del_old_file = False
 			try:
 				output = cc.output
 			except:
@@ -98,7 +91,7 @@ class Captures(CLP):
 		"""writes commands facts in to excel tab
 		"""
 		try:
-			xl_file = self.path + "/" + self.conn.hn + ".xlsx"
+			xl_file = self.conn.output_path + "/" + self.conn.hn + ".xlsx"
 			append_to_xl(xl_file, self.parsed_cmd_df, overwrite=True)
 			print(f"{self.hn} : INFO :writing facts to excel: {xl_file}...Success!")
 		except:

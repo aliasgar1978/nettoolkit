@@ -6,9 +6,10 @@ from nettoolkit.nettoolkit_common import STR, IP
 
 from copy import deepcopy
 import nettoolkit.facts_finder as ff
-from ._detection import DeviceType
-from ._conn import conn
-from ._captures import Captures
+from nettoolkit.detect import DeviceType
+from .conn import conn
+from .captures import Captures
+from .common import cmd_line_pfx
 
 # -----------------------------------------------------------------------------
 # Execution of Show Commands on a single device. 
@@ -25,10 +26,9 @@ class Execute_Device():
 		cumulative (bool, optional): True,False,both. Defaults to False.
 		forced_login (bool): True will try login even if device ping fails.
 		parsed_output (bool): parse output and generate Excel or not.
-		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.                 ## Removed
-		logger(list): device logging messages list                                       ## Removed
 		CustomClass(class): Custom class definition to provide additinal custom variable commands
 		fg(bool): facts generation
+		mandatory_cmds_retries(int): number of retries for missing mandatory commands captures
 	"""    	
 
 	def __init__(self, 
@@ -39,61 +39,38 @@ class Execute_Device():
 		cumulative, 
 		forced_login, 
 		parsed_output,
-		# visual_progress,                                  ## Removed
-		# logger,                                          ## Removed
 		CustomClass,
 		fg,
 		mandatory_cmds_retries,
 		):
 		"""initialize execution
-		"""    		
+		"""
 		self.log_key = ip
 		self.auth = auth
 		self.cmds = deepcopy(cmds)
 		self.all_cmds = {'cisco_ios': set(), 'juniper_junos':set(),}
-		self.path = path
+		self.output_path = path
 		self.cumulative = cumulative
 		self.cumulative_filename = None
 		self.forced_login = forced_login
 		self.parsed_output = parsed_output
-		# self.visual_progress = visual_progress                            ## Removed
 		self.CustomClass = CustomClass
 		self.fg = fg
 		self.mandatory_cmds_retries = mandatory_cmds_retries
 		self.delay_factor, self.dev = None, None
 		self.cmd_exec_logs = []
-		#
-		# logger.add_host(self.log_key)
-		# self.logger_list = logger.log[self.log_key]              ## Removed
+		self.failed_reason = ''
 		#
 		ip = ip.strip()
 		if not ip:
-			print(f"Missing device ip: [{ip}] - skipping it")
+			self.failed_reason = f"Missing device ip: [{ip}]"
+			print(f"{self.failed_reason} - skipping it")
 			return None
 		#
-		self.pinging = self.check_ping(ip)
-		if forced_login or self.pinging:
-			self.get_device_type(ip)
-			try:
-				self.dev.dtype
-				execute = True
-			except:
-				execute = False
-				print(f"{ip} - DeviceType not detected")
+		self.pinging = self._check_ping(ip)
+		self._start_execution(ip)
 
-			if execute and self.dev is not None and self.dev.dtype == 'cisco_ios': 
-				try:
-					self.execute(ip)
-				except:
-					print(f"{ip} - sleeping progress for 65 seconds due to known cisco ios bug")					
-					sleep(65)
-					self.execute(ip)
-			elif execute:
-				self.execute(ip)
-			else:
-				print(f"{ip} - skipping device since unable to get device type")
-
-	def check_ping(self, ip):
+	def _check_ping(self, ip):
 		"""check device reachability
 
 		Args:
@@ -111,7 +88,22 @@ class Execute_Device():
 			print(f"{ip} - Ping was unsuccessful")
 			return False
 
-	def get_device_type(self, ip):
+	def _start_execution(self, ip):
+		if not (self.forced_login or self.pinging): return
+		if not self.pinging:
+			print(f"{ip} - Trying for Forced login")
+		dtype_result = self._get_device_type(ip)
+		if not dtype_result: return
+		if self.dev is None: return
+		try:
+			self._execute(ip)
+		except:
+			if self.dev.dtype != 'cisco_ios': return
+			print(f"{ip} - sleeping progress for 65 seconds due to known cisco ios bug")					
+			sleep(65)
+			self._execute(ip)
+
+	def _get_device_type(self, ip):
 		"""detect device type (cisco, juniper)
 
 		Args:
@@ -124,15 +116,14 @@ class Execute_Device():
 			self.dev = DeviceType(dev_ip=ip, 
 				un=self.auth['un'], 
 				pw=self.auth['pw'],
-				# visual_progress=self.visual_progress,            ## Removed
-				# logger_list=self.logger_list,                    ## Removed
 			)
 			return self.dev
-		except Exception as e:
-			print(f"{ip} - Device Type Detection Failed with Exception \n{e}")
+		except Exception as e:			
+			self.failed_reason = f"[{ip}] - Device Type Detection Failed with Exception \n{e}"
+			print(f"{'- '*40}\n{self.failed_reason}\n{'- '*40}")
 			return None
 
-	def is_connected(self, c, ip):
+	def _is_not_connected(self, c, ip):
 		"""check if connection is successful
 
 		Args:
@@ -141,18 +132,13 @@ class Execute_Device():
 
 		Returns:
 			conn: connection object if successful, otherwise None
-		"""    		
-		connection = True
-		if STR.found(str(c), "FAILURE"): connection = None
-		if c.hn == None or c.hn == 'dummy': connection = None
-		if connection is None:
-			print(f"{ip} - Connection establishment failed")
-		else:
-			print(f"{ip} - Connection establishment success")
+		"""
+		connected = True
+		if STR.found(str(c), "FAILURE"): connected = None
+		if c.hn == None or c.hn == 'dummy': connected = None
+		return not connected
 
-		return connection
-
-	def execute(self, ip):
+	def _execute(self, ip):
 		"""login to given device(ip) using authentication parameters from uservar (u).
 		if success start command captuers
 
@@ -166,43 +152,46 @@ class Execute_Device():
 					pw=self.auth['pw'], 
 					en=self.auth['en'], 
 					delay_factor=self.delay_factor,
-					# visual_progress=self.visual_progress,            ## Removed
-					# logger_list=self.logger_list,                    ## Removed
 					devtype=self.dev.dtype,
-					) as c:
-			if self.is_connected(c, ip):
-				self.hostname = c.hn
-				print(f"Connection established : {ip} == {c.hn}")
+			) as c:
+			# ------------------------------------------------------------------
+			if self._is_not_connected(c, ip):
+				self.failed_reason = self.failed_reason or "Connection Failure"
+				return None
+			# ------------------------------------------------------------------
+			self.hostname = c.hn
+			c.output_path = self.output_path
+			c.dev_type = self.dev.dtype
 
-				cc = self.command_capture(c)
-				cc.grp_cmd_capture(self.cmds)
-				if self.cmds: self.add_cmd_to_all_cmd_dict(self.cmds)
+			cc = self.command_capture(c)
+			cc.grp_cmd_capture(self.cmds)
+			if self.cmds: self.add_cmd_to_all_cmd_dict(self.cmds)
 
-				# -- for facts generation -- presence of mandary commands, and capture if not --
-				if self.fg:
-					missed_cmds = self.check_facts_finder_requirements(c)
-					self.retry_missed_cmds(c, cc, missed_cmds)
-					self.add_cmds_to_self(missed_cmds)
-					if missed_cmds: self.add_cmd_to_all_cmd_dict(missed_cmds)
+			# -- for facts generation -- presence of mandary commands, and capture if not --
+			if self.fg:
+				missed_cmds = self.check_facts_finder_requirements(c)
+				self.retry_missed_cmds(c, cc, missed_cmds)
+				self.add_cmds_to_self(missed_cmds)
+				if missed_cmds: self.add_cmd_to_all_cmd_dict(missed_cmds)
 
-				# -- custom commands -- only log entries, no parser --
-				if self.CustomClass:
-					CC = self.CustomClass(self.path+"/"+c.hn+".log", self.dev.dtype)
-					cc.grp_cmd_capture(CC.cmds)
-					self.add_cmds_to_self(CC.cmds)
-					if CC.cmds: self.add_cmd_to_all_cmd_dict(CC.cmds)
+			# -- custom commands -- only log entries, no parser --
+			if self.CustomClass:
+				CC = self.CustomClass(c.output_path+"/"+c.hn+".log", self.dev.dtype)
+				cc.grp_cmd_capture(CC.cmds)
+				self.add_cmds_to_self(CC.cmds)
+				if CC.cmds: self.add_cmd_to_all_cmd_dict(CC.cmds)
 
 
-				# -- add command execution logs dataframe --
-				cc.add_exec_logs()
+			# -- add command execution logs dataframe --
+			cc.add_exec_logs()
 
-				# -- write facts to excel --
-				if not self.cumulative_filename: self.cumulative_filename = cc.cumulative_filename 
-				if self.parsed_output: 
-					self.xl_file = cc.write_facts()
+			# -- write facts to excel --
+			if not self.cumulative_filename: self.cumulative_filename = cc.cumulative_filename 
+			if self.parsed_output: 
+				self.xl_file = cc.write_facts()
 
-				# -- add command execution logs
-				self.cmd_exec_logs = cc.cmd_exec_logs
+			# -- add command execution logs
+			self.cmd_exec_logs = cc.cmd_exec_logs
 
 	def add_cmd_to_all_cmd_dict(self, cmds):
 		"""add command to all cmd dictionary
@@ -254,11 +243,8 @@ class Execute_Device():
 		"""
 		print(f"{c.hn} - Starting Capture")
 
-		cc = Captures(dtype=self.dev.dtype, 
+		cc = Captures(
 			conn=c, 
-			path=self.path, 
-			# visual_progress=self.visual_progress,                          ## Removed
-			# logger_list=self.logger_list,											## Removed
 			cumulative=self.cumulative,
 			parsed_output=self.parsed_output,
 			)
@@ -289,16 +275,16 @@ class Execute_Device():
 		"""		
 		necessary_cmds = ff.get_necessary_cmds(self.dev.dtype)
 		try:
-			file = self.path+"/"+c.hn+".log"
+			file = c.output_path+"/"+c.hn+".log"
 			with open(file, 'r') as f:
 				log_lines = f.readlines()
 		except:
-			print(f'Cumulative capture file is required for Facts-Finder File not found {self.path+"/"+c.hn+".log"}')
+			print(f'Cumulative capture file is required for Facts-Finder File not found {c.output_path+"/"+c.hn+".log"}')
 			return []
 		captured_cmds = set()
 		for log_line in log_lines:
-			if log_line[1:].startswith(" output for command: "):
-				captured_cmd = ff.get_absolute_command(self.dev.dtype, log_line.split(" output for command: ")[-1])
+			if log_line[1:].startswith(cmd_line_pfx):
+				captured_cmd = ff.get_absolute_command(self.dev.dtype, log_line.split(cmd_line_pfx)[-1])
 				captured_cmds.add(captured_cmd)
 		missed_cmds = necessary_cmds.difference(captured_cmds)
 		return missed_cmds

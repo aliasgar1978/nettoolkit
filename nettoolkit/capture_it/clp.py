@@ -2,7 +2,7 @@
 # Imports
 # -----------------------------------------------------------------------------
 import pandas as pd
-from ._command import COMMAND
+from .command import COMMAND
 
 # -----------------------------------------------------------------------------
 # Execution of Show Commands on a single device. 
@@ -12,32 +12,18 @@ class CLP():
 	"""parent class for Command processing
 
 	Args:
-		dtype (str): device type
 		conn (conn): connection object
-		path (str): path to store the captured output	
 		parsed_output(bool): Need to parse output and generate excel or not.
-		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.                   ## Removed
-		logger_list(list): device logging messages list                                    ## Removed
 	"""    	
-	def __init__(self, dtype, conn, path, parsed_output, 
-		# visual_progress, logger_list                                                ## Removed
-		):
+	def __init__(self, conn, parsed_output):
 		"""Initialize object
 
 		Args:
-			dtype (str): device type
 			conn (conn): connection object
-			path (str): path to store the captured output	
 			parsed_output(bool): Need to parse output and generate excel or not.
-			visual_progress (int): scale 0 to 10. 0 being no output, 10 all.
-			logger(list): device logging messages list
-		"""    		
-		self.dtype = dtype
+		"""   
 		self.conn = conn
-		self.path = path
 		self.parsed_output = parsed_output                                                
-		# self.visual_progress = visual_progress                                            ## Removed
-		# self.logger_list = logger_list													## Removed
 		self.cumulative_filename = None
 		self.parsed_cmd_df = {}
 		self.cmd_exec_logs = []
@@ -67,7 +53,7 @@ class CLP():
 			return False
 		return True
 
-	def cmd_capture(self, cmd, cumulative=False, banner=False, initialize_capture=False):
+	def cmd_capture(self, cmd, cumulative=False, banner=False, del_old_file=False):
 		"""start command capture for given command
 
 		Args:
@@ -79,17 +65,16 @@ class CLP():
 			[type]: [description]
 		"""    	
 		self.cmd_exec_logs.append({'command':cmd})
-		cmdObj = self._cmd_capture_raw(cmd, cumulative, banner, initialize_capture)
+		cmdObj = self._cmd_capture_raw(cmd, cumulative, banner, del_old_file)
 		if cmdObj is not None and self.parsed_output:
 			self._cmd_capture_parsed(cmd, cumulative, banner)
 		return cmdObj
 
 	# Raw Command Capture
-	def _cmd_capture_raw(self, cmd, cumulative=False, banner=False, initialize_capture=False):
+	def _cmd_capture_raw(self, cmd, cumulative=False, banner=False, del_old_file=False):
 		try:
-			cmdObj = COMMAND(conn=self.conn, cmd=cmd, path=self.path, parsed_output=False, 
-				# visual_progress=self.visual_progress, logger_list=self.logger_list,
-				initialize_capture=initialize_capture)
+			cmdObj = COMMAND(conn=self.conn, cmd=cmd, parsed_output=False, 
+				del_old_file=del_old_file)
 		except:
 			print(f"{self.hn} : ERROR: error executing command {cmd}")
 			self.cmd_exec_logs[-1]['raw'] = False
@@ -108,11 +93,9 @@ class CLP():
 	# Parsed Command Capture
 	def _cmd_capture_parsed(self, cmd, cumulative=False, banner=False):
 		try:
-			cmdObj_parsed = COMMAND(conn=self.conn, cmd=cmd, path=self.path, parsed_output=True, 
-				# visual_progress=self.visual_progress, logger_list=self.logger_list
-				)
+			cmdObj_parsed = COMMAND(conn=self.conn, cmd=cmd, parsed_output=True)
 		except:
-			print(f"{self.hn} : ERROR: error executing command - Parse Run {cmd}")
+			print(f"{self.hn} : ERROR: error parsing command - {cmd}")
 			self.cmd_exec_logs[-1]['parsed'] = False
 			return None
 		try:

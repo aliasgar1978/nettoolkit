@@ -6,7 +6,7 @@ from netmiko import ConnectHandler
 import traceback
 from nettoolkit.nettoolkit_common.gpl import STR
 
-from ._detection import DeviceType
+from nettoolkit.detect import DeviceType
 # -----------------------------------------------------------------------------
 
 class Config_common():

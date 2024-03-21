@@ -5,7 +5,7 @@ from netmiko import ConnectHandler
 import traceback
 from nettoolkit.nettoolkit_common import STR, LOG
 
-from ._detection import DeviceType
+from nettoolkit.detect import DeviceType
 
 # -----------------------------------------------------------------------------
 
@@ -39,8 +39,6 @@ class conn(object):
 		pw (str): user password to login to device
 		en (str): enable password (For cisco)
 		delay_factor (int): connection stability factor
-		visual_progress (int): scale 0 to 10. 0 being no output, 10 all.              ## Removed
-		logger_list(list): device logging messages list                               ## Removed
 		devtype (str, optional): device type from DeviceType class. Defaults to ''.
 		hostname (str, optional): hostname of device ( if known ). Defaults to ''.
 
@@ -56,26 +54,9 @@ class conn(object):
 		pw, 
 		en, 
 		delay_factor, 
-		# visual_progress,                              ## Removed
-		# logger_list,                                  ## Removed
 		devtype='', 
 		hostname='', 
 		):
-		"""initiate a connection object
-
-			Args:
-			ip (str): ip address of device to establish ssh connection with
-			un (str): username to login to device
-			pw (str): user password to login to device
-			en (str): enable password (For cisco)
-			delay_factor (int): connection stability factor
-			visual_progress (int): scale 0 to 10. 0 being no output, 10 all.
-			logger(list): device logging messages list
-			devtype (str, optional): device type from DeviceType class. Defaults to ''.
-			hostname (str, optional): hostname of device ( if known ). Defaults to ''.
-		"""	
-		# self.logger_list = logger_list                                     ## Removed
-		# self.visual_progress = visual_progress                               ## Removed
 		self.conn_time_stamp = LOG.time_stamp()
 		self._devtype = devtype 						# eg. cisco_ios
 		self._devvar = {'ip': ip, 'host': hostname }	# device variables
@@ -91,12 +72,17 @@ class conn(object):
 		if self.connectionsuccess:
 			self.__set_hostname
 			self.clsString = f'Device Connection: {self.devtype}/{self._devvar["ip"]}/{self._devvar["host"]}'
-			print(f"{self._devvar['ip']} - conn - enter - {self.clsString}")
+			print(f"{self._devvar['ip']} - conn - entered - {self.clsString}")
+		else:
+			print(f"{self._devvar['ip']} - conn - entery - failed")
 		return self      # ip connection object
 
 	# cotext end
 	def __exit__(self, exc_type, exc_value, tb):
-		print(f"{self._devvar['ip']} - conn - terminate - {self.clsString}")
+		try:
+			print(f"{self._devvar['host']} : INFO : conn - terminate - {self.clsString}")
+		except:
+			print(f"{self._devvar['ip']} - conn - terminate - {self.clsString}")
 		self.__terminate
 		if exc_type is not None:
 			traceback.print_exception(exc_type, exc_value, tb)
@@ -145,7 +131,6 @@ class conn(object):
 		if self._devtype == '':
 			self._devtype = DeviceType(self._devvar['ip'], 
 				self._devvar['username'], self._devvar['password'],
-				# self.visual_progress, self.logger_list,                  ## Removed
 				).device_type 
 		self._devvar['device_type'] = self._devtype
 
@@ -158,20 +143,20 @@ class conn(object):
 			self.connectionsuccess = True			
 		except:
 			self.connectionsuccess = False
+		if not self.connectionsuccess: return
 
-		if self.connectionsuccess:
-			self._devvar['host'] = STR.hostname(self.net_connect).lower()
-			self._hn = self._devvar['host']
-			if any( [
-				self._devvar['device_type'].lower() == 'cisco_ios'
-				] ):
-				for tries in range(3):
-					try:
-						self.net_connect.enable(cmd="enable")
-						break
-					except:
-						print(f"{self._devvar['host']} - enable failed on attemp {tries}")
-						continue
+		self._devvar['host'] = STR.hostname(self.net_connect).lower()
+		self._hn = self._devvar['host']
+		if any( [
+			self._devvar['device_type'].lower() == 'cisco_ios'
+			] ):
+			for tries in range(3):
+				try:
+					self.net_connect.enable(cmd="enable")
+					break
+				except:
+					print(f"{self._devvar['host']} - enable failed on attemp {tries}")
+					continue
 
 	# set connection hostname property
 	@property

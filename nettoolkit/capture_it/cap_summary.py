@@ -12,6 +12,7 @@ BANNER = '> ~~~ RAW COMMANDS CAPTURE SUMMARY (aholo2000@gmail.com) ~~~ <'
 # -----------------------------------------------------------------------------
 # LogSummary Class
 # -----------------------------------------------------------------------------
+
 class LogSummary():
 	"""class generating summary report for the commands log/raw capture
 
@@ -21,14 +22,17 @@ class LogSummary():
 		write_to (str, optional): filename, writes result summary to file. Defaults to None(i.e. off).
 	"""	
 
-	def __init__(self, c, print=False, write_to=None, append_to=None):
+	def __init__(self, c, 
+		split_cisco_juniper=True,
+		print=False, 
+		write_to=None, 
+		):
 		"""class instance initializer
 
 		Args:
 			c (conn): connection object
 			print (bool, optional): display result summary on screen. Defaults to False.
 			write_to (str, optional): filename, writes result summary to file. Defaults to None(i.e. off).
-			append_to (str, optional): filename, appends result summary to given file. Defaults to None(i.e. off).
 		"""		
 		self.s = ""
 		self.cmd_exec_logs_all = c.cmd_exec_logs_all
@@ -38,13 +42,12 @@ class LogSummary():
 		#
 		self.trim_juniper_no_more()
 		self.hosts = self.cmd_exec_logs_all.keys()
-		self.add_trailing_space_to_cmd()
-		self.add_trailing_space_to_host_result()
-		self.convert_device_type_wise_hosts()
-		self.s = self.concate_cmd_host_data()
+		self.add_trailing_space_to_row_items()
+		self.add_trailing_space_to_result()
+		if split_cisco_juniper: self.split_device_type_wise()
+		self.s = self.concate_row_col_data()
 		if print is True: self.print()
 		if write_to: self.write(write_to, wa='w')
-		if append_to: self.write(append_to, wa='a')
 
 	def set_cmd_listd_dict(self, c):
 		"""set command list dictionary for all commands executed for a given connection
@@ -158,7 +161,7 @@ class LogSummary():
 		if max_len<=11: max_len=11
 		return max_len
 
-	def add_trailing_space_to_cmd(self):
+	def add_trailing_space_to_row_items(self):
 		"""adds trailing spaces to commands to make all same length. stores them in new trailing_cmd_dict dictionary
 		"""		
 		self.trailing_cmd_dict = {}
@@ -186,26 +189,26 @@ class LogSummary():
 		"""		
 		return self.ips[list(d.keys()).index(hostname)]
 
-	def add_trailing_space_to_host_result(self):
-		"""adds trailing spaces to host results to make all same length. stores them in new trailing_host_dict dictionary 
+	def add_trailing_space_to_result(self):
+		"""adds trailing spaces to results to make all same length. stores them in new trailing_results_dict dictionary 
 		"""		
 		d = self.get_all_raw_logs()
 		max_len_static = 9
-		self.trailing_host_dict = {}
+		self.trailing_results_dict = {}
 		for hn, cmd_results in d.items():
 			ip = self.get_ip(hn, d)
 			max_len = len(hn) if len(hn) > max_len_static else max_len_static
 			if len(ip) > max_len: max_len = len(ip) 
 			doubleline = f' {"="*max_len} +'
-			self.trailing_host_dict[hn] = [doubleline, f' {hn}{" "*(max_len-len(hn))} |']
-			self.trailing_host_dict[hn].extend([f' {ip}{" "*(max_len-len(ip))} |', doubleline])
+			self.trailing_results_dict[hn] = [doubleline, f' {hn}{" "*(max_len-len(hn))} |']
+			self.trailing_results_dict[hn].extend([f' {ip}{" "*(max_len-len(ip))} |', doubleline])
 			for cmd_reulst in cmd_results:
 				spaces = max_len - len(cmd_reulst)
-				self.trailing_host_dict[hn].append(f' {cmd_reulst}{" "*spaces} |')
-			self.trailing_host_dict[hn].append(doubleline)
+				self.trailing_results_dict[hn].append(f' {cmd_reulst}{" "*spaces} |')
+			self.trailing_results_dict[hn].append(doubleline)
 
 
-	def concate_cmd_host_data(self):
+	def concate_row_col_data(self):
 		"""concatenates comands and hosts data to generate string summary 
 
 		Returns:
@@ -219,14 +222,14 @@ class LogSummary():
 			for i, cmd in enumerate(tclist):
 				s += cmd
 				for hn in devices:
-					thlist = self.trailing_host_dict[hn]
+					thlist = self.trailing_results_dict[hn]
 					s += thlist[i]
 				s += "\n"
 			s += "\n"
 			fs += s
 		return fs
 
-	def convert_device_type_wise_hosts(self):
+	def split_device_type_wise(self):
 		"""distribute hosts as per device type i.e. cisco_ios, juniper_junos etc.. and stores them in a new dictionary dev_type_hn_dict dictionary.
 
 		Returns:
@@ -241,3 +244,63 @@ class LogSummary():
 		return dev_type_hn_dict
 
 # -----------------------------------------------------------------------------
+
+
+
+class SummaryDisplay():
+
+	def __init__(self, d):
+		self.df = pd.DataFrame(d).fillna("")
+
+	def show(self, rows=0, cols=0, transpose=False, sortrows=0, sortcols=0):
+		if transpose: self.df = self.df.T
+		if not rows: rows = len(self.df)
+		self.set_col_display_options(cols)
+		print(self.df.head(rows))
+
+	def set_col_display_options(self, n):
+		if n ==0: n = None
+		pd.set_option('display.max_columns', n)
+		pd.set_option("max_colwidth", 5)
+
+
+	# def other_set_options(self):
+	# 	pd.set_option('display.max_columns', None)
+	# 	pd.set_option('max_columns', None)
+	# 	pd.set_option("max_rows", None)
+	# 	pd.set_option("max_colwidth", None)
+
+
+# # ==========================================================================================
+# from pprint import pprint
+# import pandas as pd
+
+# d = {
+# 	'hosta': {'cmd-a': 'abfadf jklhad fdf'},
+# 	'hostb': {'cmd-b': 'abfadf jklhad fdf'},
+# 	'hostc': {'cmd-a': 'abfadf jklhad fdf'},
+# 	'hostd': {'cmd-a': 'abfadf jklhad fdf'},
+# 	'hoste': {'cmd-b': 'abfadf jklhad fdf'},
+# 	'hostg': {'cmd-a': 'abfadf jklhad fdf'},
+# 	'hostj': {'cmd-d': 'abfadf jklhad fdf', 'cmd-a': 'abfadf jklhad fdf',},
+# 	'hostf': {'cmd-a': 'abfadf jklhad fdf'},
+# 	'hosth': {'cmd-c': 'abfadf jklhad fdf', 'cmd-a': 'abfadf jklhad fdf'},
+# 	'hostk': {'cmd-a': 'abfadf jklhad fdf'},
+# 	'hosti': {'cmd-a': 'abfadf jklhad fdf', 'cmd-c': 'abfadf jklhad fdf'},
+# 	'hostl': {'cmd-a': 'abfadf jklhad fdf'},
+# 	'hostm': {'cmd-a': 'abfadf jklhad fdf'},
+# }
+
+# df = pd.DataFrame(d)
+
+
+# SD = SummaryDisplay(d)
+# SD.show(
+# 	# rows=5,
+# 	# cols=0, 
+# 	# transpose=True, 
+# 	sortrows=0, 
+# 	sortcols=0,
+# )
+
+# # ==========================================================================================

@@ -12,6 +12,12 @@ Requirements
 
 -----------------
 
+.. figure:: images/nettoolkit_logo.jpg
+   :scale: 5%
+   :alt: Nettoolkit
+   :align: right
+
+
 Installation
 ==================
 

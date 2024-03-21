@@ -1,6 +1,10 @@
 Version Control
 =================================================
 
+.. figure:: images/nettoolkit_logo.jpg
+   :scale: 15%
+   :alt: Nettoolkit
+   :align: right
 
 
 .. list-table:: Version Control updates

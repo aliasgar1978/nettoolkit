@@ -1,6 +1,6 @@
 
-Excel database Preparation - Auto Generate
-==========================================
+Excel Cable Matrix Preparation - Auto Generate for Visio Preparation
+=====================================================================
 
 
 Supported for nettoolkit version >= 1.5.0
@@ -104,7 +104,8 @@ Provide Necessary Input Parameters for visio database preparation
   # --------------------------------------------
   # IMPORTS
   # --------------------------------------------
-  from nettoolkit.pyVig import DFGen, pyVig
+  from nettoolkit.pyVig import pyVig, CableMatrix
+  from nettoolkit.nettoolkit_common import printmsg
   import nettoolkit.nettoolkit_db  as nt
 
 
@@ -134,12 +135,12 @@ Provide Necessary Input Parameters for visio database preparation
   # --------------------------------------------
   # create DataFrame Generateion Object  
   # --------------------------------------------
-  DFG = DFGen(CLEAN_FILES_LIST)
+  CM = CableMatrix(CLEAN_FILES_LIST)
 
   # ----------------------------------------------------------------------------------
   # add static attributes to object, (remove those which you want to go with default)
   # ----------------------------------------------------------------------------------
-  DFG.custom_attributes(			
+  CM.custom_attributes(			
     default_stencil=DEFAULT_STENCIL,
     default_x_spacing=SPACING_X,
     default_y_spacing=SPACING_Y,
@@ -154,7 +155,7 @@ Provide Necessary Input Parameters for visio database preparation
   # add custom required functions to object,	to decide on hierarchical order and items. 
   # we will use two custom functions which we imported above from custom module
   # ----------------------------------------------------------------------------------
-  DFG.custom_functions(
+  CM.custom_functions(
     hierarchical_order=get_hierarchical_order_series,
     item=get_sw_type_series,
   )
@@ -163,44 +164,44 @@ Provide Necessary Input Parameters for visio database preparation
   # add custom optional functions (if any)	to get any additional device informations. 
   # we will use those custom functions which we imported abve from custom module (add more as needed)
   # ----------------------------------------------------------------------------------
-  DFG.custom_var_functions(
+  CM.custom_var_functions(
     ip_address=get_dev_mgmt_ip,
   )
 
   # ----------------------------------------------------------------------------------
   # Generate cable matrix Excel
   # ----------------------------------------------------------------------------------
-  DFG.run()
+  CM.run()
 
   # ----------------------------------------------------------------------------------
   # update and get custom filter columns
   # we will use the two custom functions which we imported abve from custom module
   # ----------------------------------------------------------------------------------
   sheet_filter_dict = {'sheet_filters': {}}
-  DFG.update(add_sheet_filter_columns)
-  sheet_filter_dict['sheet_filters'] = get_sheet_filter_columns(DFG.df_dict)
+  CM.update(add_sheet_filter_columns)
+  sheet_filter_dict['sheet_filters'] = get_sheet_filter_columns(CM.df_dict)
   sheet_filter_dict['is_sheet_filter'] = True if sheet_filter_dict['sheet_filters'] else False 
 
   # ----------------------------------------------------------------------------------
   # Drop Points calculator
   # ----------------------------------------------------------------------------------
-  DFG.calculate_cordinates(sheet_filter_dict=sheet_filter_dict['sheet_filters'])
+  CM.calculate_cordinates(sheet_filter_dict=sheet_filter_dict['sheet_filters'])
 
   # ----------------------------------------------------------------------------------
   # Remove undefined cabling entries where device doesn't exist in devices tab
   # ----------------------------------------------------------------------------------
-  DFG.remove_undefined_cabling_entries()
+  CM.remove_undefined_cabling_entries()
 
   # ----------------------------------------------------------------------------------
   # arrange cabling tab to appropriate order
   # ----------------------------------------------------------------------------------
-  DFG.arrange_cablings(keep_all_cols=True)
+  CM.arrange_cablings(keep_all_cols=True)
 
   # ----------------------------------------------------------------------------------
   # write data to Excel (change filename if you want)
   # ----------------------------------------------------------------------------------
   CABLE_MATRIX_OP_FILE = 'pyVig_supported_cablematrix.xlsx'   # output Excel file with full path
-  nt.write_to_xl(CABLE_MATRIX_OP_FILE, DFG.df_dict, index=False, overwrite=True)
+  nt.write_to_xl(CABLE_MATRIX_OP_FILE, CM.df_dict, index=False, overwrite=True)
 
 
 -----

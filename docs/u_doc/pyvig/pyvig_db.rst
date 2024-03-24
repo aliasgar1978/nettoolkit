@@ -1,5 +1,5 @@
 
-pyVig - Database Prepration User Guidelines!
+pyVig - Cable Matrix Database Prepration User Guidelines!
 ############################################################
 
 **INFORMATION COLLECTION**

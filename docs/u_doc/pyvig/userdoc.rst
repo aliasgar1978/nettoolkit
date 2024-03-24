@@ -10,4 +10,3 @@ Visio Generation User documentation!
    Cable Matrix Preparation <pyvig_db>
    Visio Generation <generate_visio>
    Samples <sample>
-   Deprycated Methods <deprycated>

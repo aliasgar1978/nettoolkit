@@ -38,26 +38,26 @@ Lets import necessary packages first. Followed by some steps to generate excel.
   # --------------------------------------------
   # IMPORTS
   # --------------------------------------------
-  from nettoolkit.pyVig import DFGen
+  from nettoolkit.pyVig import CableMatrix
   import nettoolkit.nettoolkit_db  as nt
 
   # --------------------------------------------
   # create DataFrame Generateion Object, and run  
   # --------------------------------------------
-  DFG = DFGen(CLEAN_FILES_LIST)
-  DFG.run()
+  CM = CableMatrix(CLEAN_FILES_LIST)
+  CM.run()
 
   # ----------------------------------------------------------------------------------
   # arrange cabling tab in appropriate order [optional]
   # change keep_all_cols=True ( if want a few additional informations )
   # ----------------------------------------------------------------------------------
-  DFG.arrange_cablings(keep_all_cols=False)
+  CM.arrange_cablings(keep_all_cols=False)
 
   # ----------------------------------------------------------------------------------
   # write data to Excel
   # ----------------------------------------------------------------------------------
   CABLE_MATRIX_OP_FILE = 'cable-matrix.xlsx'        # output Excel file with full path
-  nt.write_to_xl(CABLE_MATRIX_OP_FILE, DFG.df_dict, index=False, overwrite=True)
+  nt.write_to_xl(CABLE_MATRIX_OP_FILE, CM.df_dict, index=False, overwrite=True)
 
 
 -----

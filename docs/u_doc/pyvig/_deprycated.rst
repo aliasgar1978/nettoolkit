@@ -8,5 +8,5 @@ Visio Generation User documentation [Deprycated] !
    :caption: Contents:
 
 
-   CLI Execution <cli_general>
-   Cable Matrix - using facts-finder <cli_facts>
+   CLI Execution <_cli_general>
+   Cable Matrix - using facts-finder <_cli_facts>

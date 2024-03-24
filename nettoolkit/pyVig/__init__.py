@@ -20,7 +20,7 @@ from .database import DeviceData, CableMatrixData
 from .entities import ItemObjects, Connectors
 from .visio import VisioObject
 
-from .oper import DFGen
+from .oper import DFGen, CableMatrix
 from .devices import AdevDevices
 from .cablings import ADevCablings
 from .general import get_physical_if_up, get_physical_if_relevants

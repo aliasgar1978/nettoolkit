@@ -85,8 +85,10 @@ class DFGen():
 		for k, v in kwargs.items():
 			self.var_func_dict[k] = v
 
+	def __call__(self):
+		self.run()
 
-	def run(self, visio_gen=False):
+	def run(self):
 		"""iterate over all files for generating devices/cabling DataFrame details.
 		"""		
 		self.DCT = {}
@@ -325,6 +327,8 @@ class DFGen():
 		self.cabling_merged_df['b_dev_model'] = self.cabling_merged_df.apply(lambda x: get_model_number(x, self.devices_merged_df, 'b_device'), axis=1)
 		self.cabling_merged_df['a_dev_serial'] = self.cabling_merged_df.apply(lambda x: get_serial_number(x, self.devices_merged_df, 'a_device'), axis=1)
 		self.cabling_merged_df['b_dev_serial'] = self.cabling_merged_df.apply(lambda x: get_serial_number(x, self.devices_merged_df, 'b_device'), axis=1)
+
+CableMatrix = DFGen
 
 # --------------------------------------------------------------------------------------------------
 

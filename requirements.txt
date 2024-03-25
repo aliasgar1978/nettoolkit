@@ -20,7 +20,6 @@ pyserial
 PySimpleGUI
 python-dateutil
 pytz
-pywin32
 PyYAML
 rsa
 scp

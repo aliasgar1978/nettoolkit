@@ -2,6 +2,11 @@
 pyNetCrypt User documentation!
 ##############################
 
+.. figure:: img/pycrypt.png
+   :scale: 15%
+   :alt: pyVig
+   :align: right
+
 .. toctree::
    :maxdepth: 4
    :caption: Contents:

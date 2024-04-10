@@ -2,6 +2,11 @@
 Visio Generation User documentation!
 ####################################
 
+.. figure:: img/visiogen.png
+   :scale: 25%
+   :alt: pyVig
+   :align: right
+
 .. toctree::
    :maxdepth: 4
    :caption: Contents:

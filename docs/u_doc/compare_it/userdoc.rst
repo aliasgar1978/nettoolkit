@@ -2,6 +2,12 @@
 Compare-IT User documentation!
 #################################
 
+.. figure:: img/compare-it.png
+   :scale: 25%
+   :alt: capture-it
+   :align: right
+
+
 * Usefull in comparision of two text or Excel files 
 * Generate the differences in text visuals
 

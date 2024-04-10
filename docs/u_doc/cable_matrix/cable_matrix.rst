@@ -2,6 +2,12 @@
 Cable-Matrix Preparation
 ==========================================
 
+.. figure:: img/cablematrix.jpeg
+   :scale: 10%
+   :alt: cable matrixes
+   :align: right
+
+
 Supported for nettoolkit version >= 1.5.0
 
 

@@ -2,6 +2,12 @@
 Facts-Finder User documentation!
 ######################################
 
+.. figure:: files/factsfinder.png
+   :scale: 25%
+   :alt: facts-finder
+   :align: right
+
+
 Generate Excel Facts file using device show commands captures
 
 -----

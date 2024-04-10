@@ -2,6 +2,12 @@
 Configuration Generation User documentation!
 ###############################################
 
+.. figure:: img/configgen.png
+   :scale: 25%
+   :alt: configuration generations
+   :align: right
+
+
 Generate device configuration using jinja tempalte and excel database.
 
 -----

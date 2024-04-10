@@ -2,6 +2,12 @@
 Addressing User documentation!
 ##################################
 
+.. figure:: img/addressing.png
+   :scale: 25%
+   :alt: capture-it
+   :align: right
+
+
 .. toctree::
    :maxdepth: 4
    :caption: Contents:

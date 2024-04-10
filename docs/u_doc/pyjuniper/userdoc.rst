@@ -2,6 +2,12 @@
 pyJuniper User documentation!
 ##############################
 
+.. figure:: files/pyjuniper.png
+   :scale: 25%
+   :alt: pyJuniper
+   :align: right
+
+
 .. toctree::
    :maxdepth: 4
    :caption: Contents:

@@ -190,6 +190,11 @@ Version Control
    * - 1.6.1
      - Mar 22, 2024
      - * capture-it: rewamp code, separate out device detection module. Removed a few extra overhead logging feature. Added failure devices listing.
+   * - 1.6.2
+     - May 25, 2024
+     - * addressing: added get octet method and devide prefix function.
+       * j2config: added common function for converting value to string.
+       * configure: New draft/beta module added.
        
 
 

@@ -399,6 +399,31 @@ def calc_summmaries(min_subnet_size, *net_list):
 	nSummaries = get_summaries(*set(summaries))
 	return nSummaries
 
+def break_prefix(pfx, mask_size):
+	"""downsize larger prefix size to smaller size
+
+	Args:
+		pfx (str): prefix/subnet
+		mask_size (int): required mask size numeric
+
+	Raises:
+		Exception: InputError: Invalid Prefix
+		Exception: InputError: Invalid mask_size
+
+	Returns:
+		str: broken prefix
+	"""    	
+	try:
+		s = IPv4(pfx)
+	except:
+		raise Exception(f"InputError: Invalid Prefix {pfx}")
+	try:
+		bit_length = 2**(32-mask_size)
+	except:
+		raise Exception(f"InputError: Invalid mask_size {mask_size}")
+	d = s.size/bit_length
+	return s/d
+
 def recapsulate(subnet, size):
 	"""capsulate provided subnet (str, IPv4) with given sizing.
 
@@ -1151,6 +1176,17 @@ class IPv4(IP):
 		if isinstance(ip, str):
 			child = addressing(ip)
 		return child.to_decimal() - self.to_decimal()
+
+	def get_octet(self, o):
+		"""get the desired octet for subnet
+
+		Args:
+			o (int): octet number
+
+		Returns:
+			str: octet number
+		"""    		
+		return ipv4_octets(self)['octets'][o-1]
 
 
 # ------------------------------------------------------------------------------

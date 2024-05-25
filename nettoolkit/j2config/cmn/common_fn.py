@@ -308,3 +308,9 @@ def as_path_repeat(asn, times):
 	asn = asn.strip() + " "
 	asp_prep_string = asn*times
 	return asp_prep_string.strip()
+
+def string(s):
+	return str(s) + " "
+
+def string_as_is(s):
+	return str(s)

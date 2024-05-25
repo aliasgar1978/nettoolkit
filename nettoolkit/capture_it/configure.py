@@ -3,6 +3,7 @@
 # Imports
 # -----------------------------------------------------------------------------
 from netmiko import ConnectHandler
+import traceback
 from nettoolkit.nettoolkit_common.gpl import STR
 
 from nettoolkit.detect import DeviceType

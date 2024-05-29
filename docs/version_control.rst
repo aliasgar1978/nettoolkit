@@ -7,7 +7,118 @@ Version Control
    :align: right
 
 
-.. list-table:: Version Control updates
+
+.. list-table:: Version 1.x updates
+   :widths: 10 15 200
+   :align: left
+   :header-rows: 1
+
+   * - Version
+     - Date   
+     - Updates
+
+   * - 1.6.2
+     - May 25, 2024
+     - * addressing: added get octet method and devide prefix function.
+       * j2config: added common function for converting value to string.
+       * configure: New draft/beta module added.
+   * - 1.6.1
+     - Mar 22, 2024
+     - * capture-it: rewamp code, separate out device detection module. Removed a few extra overhead logging feature. Added failure devices listing.
+   * - 1.5.8
+     - Mar 08, 2024
+     - * pyNetCrypt: bug fix in cpwcracker. File p/w encryption/decryption added in Forms
+       * database subnet sort: added nettoolkit_db.sort_dataframe_on_subnet functionality.
+       * facts-finder: Juniper static routes - resolve/retain parser added., bug fix on juniper prefix-list parser.
+       * capture-it: configure (beta) module added. A few bug fixes. read-timeout increased from 20 to 30
+       * addressing: Allocate ( added **iterate_base_ip** argument, in order to change or not to change after each allocation )
+   * - 1.5.7
+     - Jan 15, 2024
+     - * pyVig: manually line color map add/edit functionality added.
+   * - 1.5.6
+     - Jan 15, 2024
+     - Version Upload failed.
+   * - 1.5.5
+     - Jan 12, 2024
+     - * capture-it: Fixed, log summary duplication on cross device types.
+       * pyVig: change match type to case-insensitive SFP type instead of case sensitive
+       * pyVig: Added Line Color & Weight auto selection based on detected Cable type
+       * pyVig: custom mandatory functions, dependancy removed.
+   * - 1.5.4
+     - Jan 10, 2024
+     - * capture-it: **individual capture** device specific commands capture functionality added, and a few minor flow changes.
+   * - 1.5.3
+     - Jan 9, 2024
+     - * nettoolkit database: Dataframe **sort** functionality based **on subnets** column added.
+       * facts-finder: Command parsers added for ``prefix-lists`` (cisco & juniper), parser edited for secondary ip address retrival.
+       * addressing: Bug fix on comparision of two IP objects. (equality comparision).  
+       * addressing.Allocations added with **allocation_type** property to specify which type of allocation follows.   Added method **add_prefix** to add prefix to allocation.
+       * addressing.Allocate instances can be now initialized with an existing Allocations object instead of creating fresh each time.
+       * pyvig: update_self_details fixed for singleton.
+       * capture-it: added a new propery - **mandatory_cmds_retries**
+   * - 1.5.2
+     - Jan 2, 2024
+     - * Bug fixes: facts-finder juniper static route section
+       * capture-it: device log output file name to lower case.
+       * addressing: bug fixes, and enhancements to Allocations.  IPv4.ipn method added
+   * - 1.5.1
+     - Dec 26, 2023
+     - * Bug fixes: facts-finder, addressing
+       * addressing: Added a few new functionalities
+       * Cable-Matrix: Added a few more columns
+   * - 1.5.0
+     - Dec 23, 2023
+     - * Juniper: included the comments in set-converter & facts-finder.
+       * addressing: added ipv4 sort functionality (sorted_v4_addresses)
+       * capture_it: bug fixes, and log display output modified
+       * facts_finder: bug fixes on cisco - cdp neighbor output, and show run for ospf details, added dhcp ip verification (parser verifications display msg updated)
+       * facts_finder: bug fixes on juniper - port_type changed to media_type (parser verifications display msg updated)
+       * pyVig: cache functionality added for cables and connectors to prepare cable matrix, cabling details revamped to capture more cable and connector information,  bug fix on default line color. 
+       * Added a new functionality to get cable-matrix file with more details
+   * - 1.4.3
+     - Dec 14, 2023
+     - Added addressing.recapsulate function
+   * - 1.4.2
+     - Dec 13, 2023
+     - Bug fixes 1.cisco device model capture. 2.cdp neighbor parse enabled and fixed. 3.juniper password capture error fixed for ospf and tacacs.  4.header index capture based on split added.
+   * - 1.4.1
+     - Dec 9, 2023
+     - * Added a new GUI tab for quick show command
+       * Added cache functionality for some of GUI fields.
+       * Bug fix an import error
+   * - 1.4.0
+     - Nov 30, 2023
+     - * Bug fix for pyVig y-axis alignment error
+       * Forms view updated and shuffled form files to its respective parent project folder.
+       * compare-it added
+   * - 1.3.2
+     - Nov 28, 2023
+     - Bug fix - for error uploading forms
+   * - 1.3.1
+     - Nov 28, 2023
+     - Error uploading forms
+   * - 1.3.0
+     - Nov 28, 2023
+     - Error uploading forms
+   * - 1.2.0
+     - Nov 25, 2023
+     - * capture-it: updated to delete old log and start logging with fresh file(s), pw input enabled for `*`.
+       * GUI: a few bug fixes
+       * Direct class/methods import enabled for modules nettoolkit_db, nettoolkit_common, pyNetCrypt, GUI
+       * addressing module brought outside of inner nettoolkit package, and relevant changes to other modules
+   * - 1.1.0
+     - Nov 24, 2023
+     - missing form error fixed 
+   * - 1.0.0
+     - Nov 22, 2023
+     - * New Major Release. 
+       * Multiple changes. Not compatible with old version.
+       * incorporated ( capture-it, facts-finder, j2config, pyVig, pyJUniper, pyNetCrypt ) pacakages in to single package.
+       * GUI interface added for a few modules: ( minitools, addressing, capture-it, facts-finder )
+       
+
+
+.. list-table:: Version 0.x updates
    :widths: 10 15 200
    :align: left
    :header-rows: 1
@@ -97,105 +208,7 @@ Version Control
    * - 0.1.0
      - Sep 10, 2023
      - New Major version change. Multiple changes.  Not compatible with old version.
-   * - 1.0.0
-     - Nov 22, 2023
-     - * New Major Release. 
-       * Multiple changes. Not compatible with old version.
-       * incorporated ( capture-it, facts-finder, j2config, pyVig, pyJUniper, pyNetCrypt ) pacakages in to single package.
-       * GUI interface added for a few modules: ( minitools, addressing, capture-it, facts-finder )
-   * - 1.1.0
-     - Nov 24, 2023
-     - missing form error fixed 
-   * - 1.2.0
-     - Nov 25, 2023
-     - * capture-it: updated to delete old log and start logging with fresh file(s), pw input enabled for `*`.
-       * GUI: a few bug fixes
-       * Direct class/methods import enabled for modules nettoolkit_db, nettoolkit_common, pyNetCrypt, GUI
-       * addressing module brought outside of inner nettoolkit package, and relevant changes to other modules
-   * - 1.3.0
-     - Nov 28, 2023
-     - Error uploading forms
-   * - 1.3.1
-     - Nov 28, 2023
-     - Error uploading forms
-   * - 1.3.2
-     - Nov 28, 2023
-     - Bug fix - for error uploading forms
-   * - 1.4.0
-     - Nov 30, 2023
-     - * Bug fix for pyVig y-axis alignment error
-       * Forms view updated and shuffled form files to its respective parent project folder.
-       * compare-it added
-   * - 1.4.1
-     - Dec 9, 2023
-     - * Added a new GUI tab for quick show command
-       * Added cache functionality for some of GUI fields.
-       * Bug fix an import error
-   * - 1.4.2
-     - Dec 13, 2023
-     - Bug fixes 1.cisco device model capture. 2.cdp neighbor parse enabled and fixed. 3.juniper password capture error fixed for ospf and tacacs.  4.header index capture based on split added.
-   * - 1.4.3
-     - Dec 14, 2023
-     - Added addressing.recapsulate function
-   * - 1.5.0
-     - Dec 23, 2023
-     - * Juniper: included the comments in set-converter & facts-finder.
-       * addressing: added ipv4 sort functionality (sorted_v4_addresses)
-       * capture_it: bug fixes, and log display output modified
-       * facts_finder: bug fixes on cisco - cdp neighbor output, and show run for ospf details, added dhcp ip verification (parser verifications display msg updated)
-       * facts_finder: bug fixes on juniper - port_type changed to media_type (parser verifications display msg updated)
-       * pyVig: cache functionality added for cables and connectors to prepare cable matrix, cabling details revamped to capture more cable and connector information,  bug fix on default line color. 
-       * Added a new functionality to get cable-matrix file with more details
-   * - 1.5.1
-     - Dec 26, 2023
-     - * Bug fixes: facts-finder, addressing
-       * addressing: Added a few new functionalities
-       * Cable-Matrix: Added a few more columns
-   * - 1.5.2
-     - Jan 2, 2024
-     - * Bug fixes: facts-finder juniper static route section
-       * capture-it: device log output file name to lower case.
-       * addressing: bug fixes, and enhancements to Allocations.  IPv4.ipn method added
-   * - 1.5.3
-     - Jan 9, 2024
-     - * nettoolkit database: Dataframe **sort** functionality based **on subnets** column added.
-       * facts-finder: Command parsers added for ``prefix-lists`` (cisco & juniper), parser edited for secondary ip address retrival.
-       * addressing: Bug fix on comparision of two IP objects. (equality comparision).  
-       * addressing.Allocations added with **allocation_type** property to specify which type of allocation follows.   Added method **add_prefix** to add prefix to allocation.
-       * addressing.Allocate instances can be now initialized with an existing Allocations object instead of creating fresh each time.
-       * pyvig: update_self_details fixed for singleton.
-       * capture-it: added a new propery - **mandatory_cmds_retries**
-   * - 1.5.4
-     - Jan 10, 2024
-     - * capture-it: **individual capture** device specific commands capture functionality added, and a few minor flow changes.
-   * - 1.5.5
-     - Jan 12, 2024
-     - * capture-it: Fixed, log summary duplication on cross device types.
-       * pyVig: change match type to case-insensitive SFP type instead of case sensitive
-       * pyVig: Added Line Color & Weight auto selection based on detected Cable type
-       * pyVig: custom mandatory functions, dependancy removed.
-   * - 1.5.6
-     - Jan 15, 2024
-     - Version Upload failed.
-   * - 1.5.7
-     - Jan 15, 2024
-     - * pyVig: manually line color map add/edit functionality added.
-   * - 1.5.8
-     - Mar 08, 2024
-     - * pyNetCrypt: bug fix in cpwcracker. File p/w encryption/decryption added in Forms
-       * database subnet sort: added nettoolkit_db.sort_dataframe_on_subnet functionality.
-       * facts-finder: Juniper static routes - resolve/retain parser added., bug fix on juniper prefix-list parser.
-       * capture-it: configure (beta) module added. A few bug fixes. read-timeout increased from 20 to 30
-       * addressing: Allocate ( added **iterate_base_ip** argument, in order to change or not to change after each allocation )
-   * - 1.6.1
-     - Mar 22, 2024
-     - * capture-it: rewamp code, separate out device detection module. Removed a few extra overhead logging feature. Added failure devices listing.
-   * - 1.6.2
-     - May 25, 2024
-     - * addressing: added get octet method and devide prefix function.
-       * j2config: added common function for converting value to string.
-       * configure: New draft/beta module added.
-       
+
 
 
 -----

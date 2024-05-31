@@ -7,11 +7,17 @@ Version Control
    :align: right
 
 
+Nettoolkit keeps updated and released on a regular basis. Here is version change detail.
+
+
+
+
 
 .. list-table:: Version 1.x updates
    :widths: 10 15 200
    :align: left
    :header-rows: 1
+
 
    * - Version
      - Date   

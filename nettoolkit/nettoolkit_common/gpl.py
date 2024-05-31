@@ -1102,7 +1102,7 @@ class LST():
 		Returns:
 			list: updated list
 		"""		
-		empty_members = ('', None, 'N/A', 'nil')
+		empty_members = ('', None, 'N/A', 'nil', [])
 		tmp_lst = [m for m in lst if not m in empty_members]
 		return tmp_lst
 
@@ -1243,6 +1243,22 @@ class LST():
 		l = ''
 		for x in lst: l = str(x) if l == '' else l +'.'+ str(x)
 		return l
+
+	@staticmethod
+	def flatten(lst):
+		"""flattens nested list to single list
+
+		Returns:
+			list: flattened list
+		"""		
+		l = []
+		for _ in lst:
+			if isinstance(_, str):
+				l.append(_)
+			elif isinstance(_, (set, tuple, list)):
+				l.extend( LST.flatten(_) )
+		return l
+
 
 # -----------------------------------------------------------------------------
 #                          DICTIONARY MODIFICATIONS                           #

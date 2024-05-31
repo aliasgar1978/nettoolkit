@@ -4,9 +4,10 @@
 # -----------------------------------------------------------------------------
 from netmiko import ConnectHandler
 import traceback
-from nettoolkit.nettoolkit_common.gpl import STR
+from nettoolkit.nettoolkit_common.gpl import STR, LST, Multi_Execution
 
 from nettoolkit.detect import DeviceType
+from pprint import pprint
 # -----------------------------------------------------------------------------
 
 class Config_common():
@@ -110,6 +111,7 @@ class Configure(Config_common):
 			try:
 				with open(self.conf_file, 'r') as f:
 					conf_list = f.readlines()
+					conf_list = [ _.rstrip() for _ in conf_list ]
 			except:
 				self.write_exec_log(self.conn.host, f"Error Reading file {self.conf_file}", ends="\n\n")
 				return None
@@ -232,8 +234,8 @@ class Configure(Config_common):
 		#
 		self.write_config_log(self.conn.host, self.op_return)
 		#
-		check = self.cisco_verify_push_op(self.op_return)
-		if not check: 
+		error = self.cisco_verify_push_op(self.op_return)
+		if error: 
 			self.write_exec_log(self.conn.host, f"ERROR: Termination without configuration apply for {self.device_type} // {self.conn.host} // {self.ip}", ends="\n\n")
 			self.terminate_connection()
 			return None
@@ -266,4 +268,130 @@ class Configure(Config_common):
 		except:
 			self.write_exec_log(self.conn.host, f"...failed\nGot\n{_return}")
 			return False
+
+# ----------------------------------------------------------------------------------------------------
+
+class GroupsConfigure(Multi_Execution):
+
+	def __init__(self, auth,
+		devices_config_dict={},
+		config_by_order=True,
+		order_list=[],
+		dev_apply_at_dict={},
+		log_folder=None,
+		config_log=True,
+		exec_log=True,
+		exec_display=True,
+		configure=False,
+		):
+		self.auth = auth
+		self.devices_config_dict = devices_config_dict
+		self.order_list = order_list
+		self.dev_apply_at_dict = dev_apply_at_dict
+		self.config_by_order = config_by_order
+		self.config_env = {
+			'log_folder': log_folder,
+			'config_log': config_log,
+			'exec_log': exec_log,
+			'exec_display': exec_display,
+		}
+		self.configure = configure
+
+	def __call__(self):
+		self._verify_inputs()
+		if self.config_by_order: self.configure_by_orderlist()
+
+	def _verify_inputs(self):
+		self._get_dev_conf_dict_ip_list()
+		self._get_order_list()
+
+	def configure_by_orderlist(self):
+		for i, order in enumerate(self.order_list):
+			if isinstance(order, (list, set, tuple)):
+				self.items = order
+				self.start()
+			elif isinstance(order, str):
+				self.execute(order)
+
+	def execute(self, ip):
+		conf_list = self.devices_config_dict[ip]['cmds_list']
+		if self.configure:
+			CFG = Configure(ip, self.auth, 
+				conf_list=conf_list,
+				**self.config_env
+			)
+			CFG.apply()
+		else:
+			print(ip)
+			pprint(conf_list)
+			print("-"*80)
+
+
+	def _get_dev_conf_dict_ip_list(self):
+		for ip, value in self.devices_config_dict.items():
+			if not isinstance(value, dict):
+				raise Exception(f"Incorrect input: configuration parameters in devices_config_dict",
+					f"Expected `dict` got {type(value)} for {ip}")
+			if 'cmds_list' in value and 'cmd_file' in value:
+				print(f"Dual configuration input detected for ip {ip}"
+					'file input will be prefered and considered')
+			if 'cmd_file' in value:
+				if not isinstance(value['cmd_file'], str):
+					raise Exception(f"Incorrect input: command file name for ip {ip}: {value['cmd_file']}")
+				try:
+					with open(value['cmd_file'], 'r') as f:
+						value['cmds_list'] = f.readlines()
+						value['cmds_list'] = [ _.rstrip() for _ in value['cmds_list'] ]
+						del(value['cmd_file'])
+					continue
+				except Exception as e:
+					print(f"Error Occured for ip {ip}: {e}")
+					quit()
+			if 'cmds_list' in value:
+				for _ in value['cmds_list']:
+					if isinstance(_, str): continue
+					print(f"Invalid input: command detected for ip {ip},{_}, Expected `str`. got {type(_)} ")
+					quit()
+				continue
+			print(f"No configuration input detected for ip {ip}: {value}. This device will be skipped")
+			value['skip'] = True
+
+	def _get_order_list(self):
+		if not self.order_list:
+			self.order_list = [{ip for ip, value in self.devices_config_dict.items() if not value.get('skip')},]
+			print(f"No order_list provided, cretated one {self.order_list}")
+			return None
+		if not isinstance(self.order_list, (list, tuple)):
+			raise Exception(f"Incorrect input: order_list. expected (tuple/list), got {type(self.order_list)}")
+		self._cd_to_ol()
+		self._ol_to_cd()
+
+	def _cd_to_ol(self):
+		flatten_ol = set(LST.flatten(self.order_list))
+		missing_ones = tuple([ip for ip, value in self.devices_config_dict.items() if not value.get('skip')  and ip not in flatten_ol])
+		print(f"Info: Devices missing in order list {missing_ones} were appened.")
+		self.order_list.append(missing_ones)
+		self.flatten_ol = flatten_ol.union(set(missing_ones))
+		if missing_ones:
+			print(f"updated order_list={self.order_list}")
+
+	def _ol_to_cd(self):
+		removed = False
+		for ol_item in self.flatten_ol:
+			if ol_item not in self.devices_config_dict:
+				self.remove_order_list_item(ol_item, self.order_list)
+				removed = True
+		if removed:
+			self.order_list = LST.remove_empty_members(self.order_list)
+			print(f"updated order_list={self.order_list}")
+
+	def remove_order_list_item(self, item, lst):
+		for _ in lst:
+			if isinstance(_, str):
+				if _ == item:
+					lst.remove(_)
+					print(f"Addititional device `{_}`found in ordered list, which is missing in devices_config_dict.",
+						"Removed from order_list ")
+			elif isinstance(_, (set, tuple, list)):
+				self.remove_order_list_item(item, _)
 

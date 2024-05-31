@@ -5,4 +5,4 @@ from .executions import Execute_By_Login as capture
 from .executions import Execute_By_Individual_Commands as capture_individual
 from ._detection import quick_display
 from .cap_summary import LogSummary
-from .configure import Configure
+from .configure import Configure, GroupsConfigure

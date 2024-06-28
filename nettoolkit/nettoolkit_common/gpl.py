@@ -1018,6 +1018,7 @@ class IO():
 				f.write(matter)
 			elif isinstance(matter, (list, tuple, set)):
 				f.write("\n".join(matter))
+		return filename
 
 	@staticmethod
 	def add_to_file(filename, matter, cr=True):

@@ -5,12 +5,13 @@ import PySimpleGUI as sg
 import nettoolkit as nt
 #
 from .forms.gui_template import GuiTemplate
-from .forms.tab_event_funcs import TAB_EVENT_UPDATERS
+from .forms.tab_event_funcs import BUTTUN_PALLETE_NAMES, TAB_EVENT_UPDATERS
 from .forms.formitems import *
-from .forms.var_frames import *
-from .forms.var_event_funcs import *
-from .forms.var_event_updators import *
-from .forms.var_retractables import *
+from .forms.var_frames import FRAMES
+from .forms.var_event_funcs import EVENT_FUNCTIONS
+from .forms.var_event_updators import EVENT_UPDATORS
+from .forms.var_event_item_updators import EVENT_ITEM_UPDATORS
+from .forms.var_retractables import RETRACTABLES
 #
 from nettoolkit.addressing.forms.subnet_scanner import count_ips
 # ---------------------------------------------------------------------------------------
@@ -32,35 +33,14 @@ class Nettoolkit(GuiTemplate):
 	def initialize_variables(self):
 		"""Initialize all variables
 		"""		
-		self.tabs_dic.update(MINITOOLS_FRAMES)
-		self.tabs_dic.update(IPSCANNER_FRAMES)
-		self.tabs_dic.update(CAPTUREIT_FRAMES)
-		self.tabs_dic.update(FACTSFINDER_FRAMES)
-		self.tabs_dic.update(J2CONFIG_FRAMES)
-		self.tabs_dic.update(PYVIG_FRAMES)
-		#
-		self.event_catchers.update(MINITOOLS_EVENT_FUNCS)
-		self.event_catchers.update(IPSCANNER_EVENT_FUNCS)
-		self.event_catchers.update(CATPUREIT_EVENT_FUNCS)
-		self.event_catchers.update(FACTSFINDER_EVENT_FUNCS)
-		self.event_catchers.update(J2CONFIG_EVENT_FUNCS)
-		self.event_catchers.update(PYVIG_EVENT_FUNCS)
-		#
-		self.event_updaters = self.event_updaters.union(MINITOOLS_EVENT_UPDATERS)
-		self.event_updaters = self.event_updaters.union(IPSCANNER_EVENT_UPDATERS)
-		self.event_updaters = self.event_updaters.union(CAPTUREIT_EVENT_UPDATERS)
-		self.event_updaters = self.event_updaters.union(FACTSFINDER_EVENT_UPDATERS)
-		self.event_updaters = self.event_updaters.union(J2CONFIG_EVENT_UPDATERS)
-		self.event_updaters = self.event_updaters.union(PYVIG_EVENT_UPDATERS)
+		self.tabs_dic = FRAMES
+		self.event_catchers = EVENT_FUNCTIONS
+		self.event_updaters = EVENT_UPDATORS
+		self.event_item_updaters = EVENT_ITEM_UPDATORS
 		#
 		self.tab_updaters = self.tab_updaters.union(TAB_EVENT_UPDATERS)
 		#
-		self.retractables = self.retractables.union(MINITOOLS_RETRACTABLES)
-		self.retractables = self.retractables.union(IPSCANNER_RETRACTABLES)
-		self.retractables = self.retractables.union(CAPTUREIT_RETRACTABLES)
-		self.retractables = self.retractables.union(FACTSFINDER_RETRACTABLES)
-		self.retractables = self.retractables.union(J2CONFIG_RETRACTABLES)
-		self.retractables = self.retractables.union(PYVIG_RETRACTABLES)
+		self.retractables = RETRACTABLES
 		#
 		self.custom_dynamic_cmd_class = None      # custom dynamic commands execution class
 		self.custom_ff_class = None  # custom facts-finder class
@@ -90,14 +70,7 @@ class Nettoolkit(GuiTemplate):
 	def set_button_pallete(self):
 		"""button pallete definition
 		"""		
-		nbpb = [
-			sg.Button("Minitools", change_submits=True, key='btn_minitools'), 
-			sg.Button("Addressing", change_submits=True, key='btn_ipscanner'), 
-			sg.Button("Capture-IT", change_submits=True, key='btn_captureit'), 
-			sg.Button("Facts Gen", change_submits=True, key='btn_factsfinder'), 
-			sg.Button("Config Gen", change_submits=True, key='btn_j2config'), 
-			sg.Button("Drawing Gen", change_submits=True, key='btn_pyvig'), 
-		]
+		nbpb = [sg.Button(name, change_submits=True, key=key) for name, key in BUTTUN_PALLETE_NAMES.items()]
 		self.add_to_button_pallete_buttons(nbpb)
 
 

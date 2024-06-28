@@ -29,3 +29,21 @@ J2CONFIG_EVENT_UPDATERS = {
 PYVIG_EVENT_UPDATERS = {
 	'pv_data_start', 'pv_start',
 }
+CONFIGURE_EVENT_UPDATERS = {
+	'config_excel_files', 'btn_config_by_excel',
+}
+
+
+# ---------------------------------------------------------------------------------------
+EVENT_UPDATORS = set()
+EVENT_UPDATORS = EVENT_UPDATORS.union(MINITOOLS_EVENT_UPDATERS)
+EVENT_UPDATORS = EVENT_UPDATORS.union(IPSCANNER_EVENT_UPDATERS)
+EVENT_UPDATORS = EVENT_UPDATORS.union(CAPTUREIT_EVENT_UPDATERS)
+EVENT_UPDATORS = EVENT_UPDATORS.union(FACTSFINDER_EVENT_UPDATERS)
+EVENT_UPDATORS = EVENT_UPDATORS.union(J2CONFIG_EVENT_UPDATERS)
+EVENT_UPDATORS = EVENT_UPDATORS.union(PYVIG_EVENT_UPDATERS)
+EVENT_UPDATORS = EVENT_UPDATORS.union(CONFIGURE_EVENT_UPDATERS)		
+# ---------------------------------------------------------------------------------------
+
+
+__all__ = [EVENT_UPDATORS]

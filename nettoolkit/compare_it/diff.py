@@ -51,9 +51,11 @@ class CompareText():
 	"""		
 
 	def __init__(self, file1, file2, change_type=''):
-		self.file1, self.file2 = file1.strip(), file2.strip()
+		self.file1 = file1.strip()
+		self.file2 = file2.strip()
 		with open(self.file1, 'r') as f: lst1 = f.readlines()
 		with open(self.file2, 'r') as f: lst2 = f.readlines()
+		#
 		self.lst1, self.lst2 = lst1, lst2
 		self.change_type = change_type
 		self.detected_dev_types = {0:{'dev_type':'', 'config_type':''}, 1:{'dev_type':'', 'config_type':''}}
@@ -111,6 +113,7 @@ class CompareText():
 				if STR.starting(line, 'hostname') or STR.starting(line, 'host-nam'):
 					self.cfg = i, 'Cisco', 'Expanded'
 					break
+
 
 class Compare_Text_Papa(ABC):
 	"""Parent class defining common methods for various vendors """

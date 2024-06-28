@@ -4,6 +4,19 @@ import os
 import pandas as pd
 # ------------------------------------------------------------------------------
 
+def read_xl_all_sheet(file):
+	"""Read all Excel tabs and return it in dictionary format. keys will be tab name and values will be tab in DataFrame format
+
+	Args:
+		file (str): Excel file with full path
+
+	Returns:
+		dict: Dictionary of DataFrames (dfd)
+	"""    
+	dfd = pd.read_excel(file, sheet_name=None)
+	dfd = {sheet: df.fillna("") for sheet, df in dfd.items()}
+	return dfd
+
 
 def read_xl(file):
 	"""reads Excel file and return object XL_READ

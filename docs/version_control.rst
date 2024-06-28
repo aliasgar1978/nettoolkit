@@ -23,6 +23,13 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
      - Date   
      - Updates
 
+   * - 1.6.3
+     - Jun 30, 2024[TBR]
+     - * capture-it: added keys (**missing_captures_only**, **append_capture**).
+       * configure: module updated with various new parameters
+       * compare-it: added (CompareConfig) function
+       * nettoolkit_db: addded (read_xl_all_sheet) function
+       * Forms: restructured & added configure fuction
    * - 1.6.2
      - May 25, 2024
      - * addressing: added get octet method and devide prefix function.

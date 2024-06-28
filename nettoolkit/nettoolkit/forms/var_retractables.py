@@ -37,3 +37,20 @@ J2CONFIG_RETRACTABLES = set()
 PYVIG_RETRACTABLES = {
 	'py_stencil_folder', 'py_default_stencil', 'py_output_folder', 'py_op_file', 'pv_input_data_files', 'pv_cm_file', 
 }
+CONFIGURE_RETRACTABLES = {
+	'config_excel_files',
+	'configuration_log_folder', 'cred_en1', 'cred_un1', 'cred_pw1', 
+}
+
+# -------------------------------------------------------------------------
+RETRACTABLES = set()
+RETRACTABLES = RETRACTABLES.union(MINITOOLS_RETRACTABLES)
+RETRACTABLES = RETRACTABLES.union(IPSCANNER_RETRACTABLES)
+RETRACTABLES = RETRACTABLES.union(CAPTUREIT_RETRACTABLES)
+RETRACTABLES = RETRACTABLES.union(FACTSFINDER_RETRACTABLES)
+RETRACTABLES = RETRACTABLES.union(J2CONFIG_RETRACTABLES)
+RETRACTABLES = RETRACTABLES.union(PYVIG_RETRACTABLES)
+RETRACTABLES = RETRACTABLES.union(CONFIGURE_RETRACTABLES)
+# -------------------------------------------------------------------------
+
+__all__ = [RETRACTABLES]

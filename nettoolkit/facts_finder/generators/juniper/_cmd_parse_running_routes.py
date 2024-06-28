@@ -38,7 +38,7 @@ class RunningRoutes(Running):
 		v6spl_str = ' routing-options rib blue.inet6.0 static route '
 		if v == 4: spl_str = v4spl_str
 		if v == 6: spl_str = v6spl_str
-		prev_prefix = ""		
+		prev_prefix, prev_vrf = "", ""		
 		ports_dict = OrderedDict()
 		for l in self.set_cmd_op:
 			if blank_line(l): continue
@@ -48,10 +48,12 @@ class RunningRoutes(Running):
 			vrf_spl_sect = vrf_spl_route[0].split()
 			route_spl_sect = vrf_spl_route[-1].split()
 			prefix = route_spl_sect[0]
-			if prefix != prev_prefix:
+			vrf = vrf_spl_sect[2] if len(vrf_spl_sect)>2 else ""
+			if prefix != prev_prefix or vrf != prev_vrf:
 				self.n+=1
 				ports_dict[self.n] = {} 
 			prev_prefix = prefix
+			prev_vrf = vrf 
 			rdict = ports_dict[self.n]
 			rdict['filter'] = 'static'
 			func(rdict,  l, vrf_spl_sect, route_spl_sect, v)

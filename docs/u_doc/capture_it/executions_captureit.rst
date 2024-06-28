@@ -80,6 +80,8 @@ NT Capture-it - Normal
         c.parsed_output = True   # default: False ( options: True, False )
         c.max_connections = 1    # default: 100 ( Options: any number input ) ( define max concurrent connections, 1 for sequencial )
         c.retry_mandatory_cmds_retries = 1     # default: 3
+        c.append_capture = True  # default: False ( Options: True, False )
+        c.missing_captures_only = True # default: False ( Options: True, False )
 
         # -----------------------------------------------------------------------------
         #    Additional [optional] run dynamic custom commands ( Remove if not needed )
@@ -197,6 +199,8 @@ NT Capture-it - Normal
     * ``forced_login``  (Options: True, False) (Default: False)  Forced login to device even if device ping doesn't succeded.
     * ``parsed_output``  (Options: True, False) (Default: False) Parse the command output and generates device database in excel file.  Each command output try to generate a pased detail tab.
     * ``max_connections``  (numeric) (Default: 100), change the number of simultaneous device connections as per link connection and your pc cpu processng performance.
+    * ``append_capture``  (Options: True, False) (Default: False)  
+    * ``missing_captures_only``  (Options: True, False) (Default: False)  Instead of capturing all output again, capture only missing outputs from previous capture files.  Useful if there were any missed captures and need to recapture. Kindly Note: Enabling this key will enable **append_capture** as well automatically.
 
     **Parameters for LogSummary**
 

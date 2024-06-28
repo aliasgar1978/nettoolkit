@@ -21,6 +21,7 @@ def cit_common_exec(obj, i):
 		cumulative = i['cred_cumulative']
 	forced_login = i['forced_login']
 	parsed_output = i['parsed_output']
+	append_capture = i['cb_cit_append']
 	# visual_progress = i['visual_progress']                                                ## Removed
 	common_log_file = i['common_log_file']                                              
 	max_connections = int(i['max_connections']) if i['max_connections'].isnumeric() else 100
@@ -40,6 +41,7 @@ def cit_common_exec(obj, i):
 	c.cumulative = cumulative
 	c.forced_login = forced_login
 	c.parsed_output = parsed_output
+	c.append_capture = append_capture
 	# if visual_progress: c.visual_progress = visual_progress                           ## Removed
 	if max_connections: c.max_connections = max_connections
 	if log_type: c.log_type = log_type

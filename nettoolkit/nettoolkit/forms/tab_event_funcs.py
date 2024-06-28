@@ -1,16 +1,22 @@
 
-
 # ---------------------------------------------------------------------------------------
-from .var_frames import MINITOOLS_FRAMES, IPSCANNER_FRAMES, CAPTUREIT_FRAMES, FACTSFINDER_FRAMES, J2CONFIG_FRAMES, PYVIG_FRAMES
-
+from collections import OrderedDict
+from .var_frames import (
+	MINITOOLS_FRAMES, IPSCANNER_FRAMES, CAPTUREIT_FRAMES, FACTSFINDER_FRAMES, J2CONFIG_FRAMES, PYVIG_FRAMES,
+	CONFIGURE_FRAMES
+)
 # ---------------------------------------------------------------------------------------
-TAB_EVENT_UPDATERS = { 	'btn_ipscanner', 
-						'btn_minitools', 
-						'btn_captureit', 
-						'btn_factsfinder', 
-						'btn_j2config',
-						'btn_pyvig',
-}
+#   ADD ANY NEW SERVICE BUTTON HERE 
+# ---------------------------------------------------------------------------------------
+BUTTUN_PALLETE_NAMES = OrderedDict()
+BUTTUN_PALLETE_NAMES["Minitools"] = 'btn_minitools'
+BUTTUN_PALLETE_NAMES["Addressing"] = 'btn_ipscanner'
+BUTTUN_PALLETE_NAMES["Capture-IT"] = 'btn_captureit'
+BUTTUN_PALLETE_NAMES["Facts Gen"] = 'btn_factsfinder'
+BUTTUN_PALLETE_NAMES["Configure"] = 'btn_configure'	
+BUTTUN_PALLETE_NAMES["Config Gen"] = 'btn_j2config'
+BUTTUN_PALLETE_NAMES["Drawing Gen"] = 'btn_pyvig'
+TAB_EVENT_UPDATERS = set(BUTTUN_PALLETE_NAMES.values())
 #
 # ---------------------------------------------------------------------------------------
 ALL_TABS = set()
@@ -20,6 +26,7 @@ ALL_TABS = ALL_TABS.union(CAPTUREIT_FRAMES.keys())
 ALL_TABS = ALL_TABS.union(FACTSFINDER_FRAMES.keys())
 ALL_TABS = ALL_TABS.union(J2CONFIG_FRAMES.keys())
 ALL_TABS = ALL_TABS.union(PYVIG_FRAMES.keys())
+ALL_TABS = ALL_TABS.union(CONFIGURE_FRAMES.keys())
 
 # ---------------------------------------------------------------------------------------
 
@@ -122,6 +129,18 @@ def btn_pyvig_exec(obj):
 		True: when succeded
 	"""	
 	enable_disable(obj, PYVIG_FRAMES.keys(), button='btn_pyvig')
+	return True
+
+def btn_configure_exec(obj):
+	"""executor function to switch and enable configure tabs
+
+	Args:
+		obj (Nettoolkit): Nettoolkit class instance object
+
+	Returns:
+		True: when succeded
+	"""	
+	enable_disable(obj, CONFIGURE_FRAMES.keys(), button='btn_configure')
 	return True
 
 # ---------------------------------------------------------------------------------------

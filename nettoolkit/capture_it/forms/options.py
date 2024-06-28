@@ -36,5 +36,6 @@ def exec_options_frame():
 		[sg.Text('summary log filename: ', text_color="black"), sg.InputText('cmds_log_summary.log', key='append_to'),],
 		[sg.Checkbox('display console summary on console', key='print', default=True, text_color='black')],
 		under_line(80),
+		[sg.Checkbox('append captures to existing file', key='cb_cit_append', default=False, text_color='black')],
 
 		])

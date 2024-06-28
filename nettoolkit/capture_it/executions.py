@@ -65,6 +65,8 @@ class Execute_Common():
 		self.fg = False
 		self.max_connections = 100
 		self.mandatory_cmds_retries = 3
+		self.missing_captures_only = False
+		self.append_capture = False or self.missing_captures_only
 		#
 		self.cmd_exec_logs_all = OrderedDict()
 		self.device_type_all = OrderedDict()
@@ -285,6 +287,8 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 			CustomClass=self.CustomClass,
 			fg=self.fg,
 			mandatory_cmds_retries=self.mandatory_cmds_retries,
+			append_capture=self.append_capture,
+			missing_captures_only=self.missing_captures_only,
 		)
 
 		##
@@ -444,6 +448,8 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 			CustomClass=self.CustomClass,
 			fg=self.fg,
 			mandatory_cmds_retries=self.mandatory_cmds_retries,
+			append_capture=self.append_capture,
+			missing_captures_only=self.missing_captures_only,
 		)
 		###
 		self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs

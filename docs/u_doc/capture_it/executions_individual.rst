@@ -119,6 +119,8 @@ Nt Capture-it - Individual
     * ``forced_login``  (Options: True, False) (Default: False)  Forced login to device even if device ping doesn't succeded.
     * ``parsed_output``  (Options: True, False) (Default: False) Parse the command output and generates device database in excel file.  Each command output try to generate a pased detail tab.
     * ``max_connections``  (numeric) (Default: 100), change the number of simultaneous device connections as per link connection and your pc cpu processng performance.
+    * ``append_capture``  (Options: True, False) (Default: False)  
+    * ``missing_captures_only``  (Options: True, False) (Default: False)  Instead of capturing all output again, capture only missing outputs from previous capture files.  Useful if there were any missed captures and need to recapture. Kindly Note: Enabling this key will enable **append_capture** as well automatically.
 
     **Parameters for LogSummary**
 

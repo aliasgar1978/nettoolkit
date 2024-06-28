@@ -1,7 +1,10 @@
 __doc__ = '''Compare IT Utility'''
 
-__all__ = [ "CompareText", "CompareExcelData", "get_string_diffs"]
+__all__ = [ 
+	"CompareText", "CompareExcelData", "get_string_diffs",
+	"CompareConfig",
+	]
 
-# __version__ = "0.0.6"
 
 from .diff import CompareText, CompareExcelData, get_string_diffs
+from .compare_config import CompareConfig

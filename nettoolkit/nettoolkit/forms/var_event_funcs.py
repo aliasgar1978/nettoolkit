@@ -30,6 +30,9 @@ from nettoolkit.j2config.forms.input_data import *
 #
 from nettoolkit.compare_it.forms.compare_configs import *
 #
+from nettoolkit.configure.forms.config_by_excel import *
+from nettoolkit.configure.forms.cred import *
+#
 # ---------------------------------------------------------------------------------------
 
 
@@ -110,5 +113,25 @@ PYVIG_EVENT_FUNCS = {
 	'pv_data_start': pv_data_start_exec,
 	'pv_start': pv_start_exec,
 }
+CONFIGURE_EVENT_FUNCS = {
+	'btn_configure': btn_configure_exec,
+	'btn_config_by_excel': config_by_excel_exec,
+	'config_excel_files': update_lb_config_excel_files,
+	'cred_un1': update_cache_cred1_un,
+	'configuration_log_folder': update_cache_cit_op1_folder,
+	'lb_config_excel_files': add_to_lb_config_excel_files_sequenced,
+	'lb_config_excel_files_sequenced': remove_from_lb_config_excel_files_sequenced,
+}
 
 # ---------------------------------------------------------------------------------------
+EVENT_FUNCTIONS = {}
+EVENT_FUNCTIONS.update(MINITOOLS_EVENT_FUNCS)
+EVENT_FUNCTIONS.update(IPSCANNER_EVENT_FUNCS)
+EVENT_FUNCTIONS.update(CATPUREIT_EVENT_FUNCS)
+EVENT_FUNCTIONS.update(FACTSFINDER_EVENT_FUNCS)
+EVENT_FUNCTIONS.update(J2CONFIG_EVENT_FUNCS)
+EVENT_FUNCTIONS.update(PYVIG_EVENT_FUNCS)
+EVENT_FUNCTIONS.update(CONFIGURE_EVENT_FUNCS)
+# ---------------------------------------------------------------------------------------
+__all__ = [EVENT_FUNCTIONS]
+

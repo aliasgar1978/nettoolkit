@@ -25,7 +25,12 @@ class Captures(CLP):
 
 	"""    	
 
-	def __init__(self, conn, cumulative=False, parsed_output=False):
+	def __init__(self, 
+		conn, 
+		cumulative=False, 
+		parsed_output=False,
+		append_capture=False,
+		):
 		"""Initiate captures
 
 		Args:
@@ -35,13 +40,14 @@ class Captures(CLP):
 			logger(list): device logging messages list
 			cumulative (bool, optional): True/False/both. Defaults to False.
 			parsed_output(bool): Need to parse output and generate excel or not.
+			append_capture(bool): Appends commands output to an existing capture file, instead of creating a new.
 		"""    		
 		# self.logger_list = logger_list
 		super().__init__(conn, parsed_output)    # , visual_progress, logger_list)
 		self.op = ''
 		self.cumulative = cumulative
 		self.cumulative_filename = None
-		self.del_old_file = True
+		self.del_old_file = not append_capture
 
 
 	def grp_cmd_capture(self, cmds):

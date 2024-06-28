@@ -28,6 +28,9 @@ from nettoolkit.j2config.forms.input_data import *
 #
 from nettoolkit.compare_it.forms.compare_configs import *
 #
+from nettoolkit.configure.forms.config_by_excel import *
+from nettoolkit.configure.forms.cred import *
+#
 # ---------------------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------------------
@@ -67,5 +70,20 @@ PYVIG_FRAMES = {
 	'2.Visio Gen': pv_input_visio_frame(),
 	'3.Customize pyVig': pv_custom_data_frame(),
 }
+CONFIGURE_FRAMES ={
+	'1.Cred': exec_cred1_frame(),
+	'2.Configure': exec_config_by_excel_frame(),
+}
 
 # ---------------------------------------------------------------------------------------
+FRAMES = {}
+FRAMES.update(MINITOOLS_FRAMES)
+FRAMES.update(IPSCANNER_FRAMES)
+FRAMES.update(CAPTUREIT_FRAMES)
+FRAMES.update(FACTSFINDER_FRAMES)
+FRAMES.update(J2CONFIG_FRAMES)
+FRAMES.update(PYVIG_FRAMES)
+FRAMES.update(CONFIGURE_FRAMES)
+# ---------------------------------------------------------------------------------------
+
+__all__ = [FRAMES]

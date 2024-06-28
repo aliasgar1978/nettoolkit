@@ -15,13 +15,15 @@ from .tab_event_funcs import btn_minitools_exec
 class GuiTemplate():
 	'''Minitools UserForm asking user inputs.	'''
 
-	header = 'GuiTemplate: v0.2.1'
+	header = 'GuiTemplate: v0.3.0'
 
 	# Object Initializer
 	def __init__(self):
+		self.var_dict = {}
 		self.tabs_dic = {}
 		self.event_catchers = {}
 		self.event_updaters = set()
+		self.event_item_updaters = set()
 		self.tab_updaters = set()
 		self.retractables = set()
 		self.standard_button_pallete_buttons()
@@ -53,7 +55,9 @@ class GuiTemplate():
 				pass
 			if event in self.event_catchers:
 				# ---------------------------------------------
-				if event in self.event_updaters:
+				if event in self.event_item_updaters:
+					success = self.event_catchers[event](self, i, event)
+				elif event in self.event_updaters:
 					success = self.event_catchers[event](self, i)	
 				elif event in self.tab_updaters:
 					success = self.event_catchers[event](self)	

@@ -29,6 +29,8 @@ class Execute_Device():
 		CustomClass(class): Custom class definition to provide additinal custom variable commands
 		fg(bool): facts generation
 		mandatory_cmds_retries(int): number of retries for missing mandatory commands captures
+		append_capture(bool): append capture to existing file instead of creating new.
+		missing_captures_only(bool): capture only missing command outputs from existing output
 	"""    	
 
 	def __init__(self, 
@@ -42,6 +44,8 @@ class Execute_Device():
 		CustomClass,
 		fg,
 		mandatory_cmds_retries,
+		append_capture,
+		missing_captures_only,
 		):
 		"""initialize execution
 		"""
@@ -57,6 +61,8 @@ class Execute_Device():
 		self.CustomClass = CustomClass
 		self.fg = fg
 		self.mandatory_cmds_retries = mandatory_cmds_retries
+		self.append_capture = append_capture
+		self.missing_captures_only = missing_captures_only
 		self.delay_factor, self.dev = None, None
 		self.cmd_exec_logs = []
 		self.failed_reason = ''
@@ -163,6 +169,12 @@ class Execute_Device():
 			c.output_path = self.output_path
 			c.dev_type = self.dev.dtype
 
+			# -- get the missing commands list if it is to do only missing captures
+			if self.missing_captures_only:
+				missed_cmds = self.get_missing_commands(c, set(self.cmds[self.dev.dtype]))
+				self.cmds[self.dev.dtype] = missed_cmds
+				print("Missed Cmds = ", missed_cmds)
+
 			cc = self.command_capture(c)
 			cc.grp_cmd_capture(self.cmds)
 			if self.cmds: self.add_cmd_to_all_cmd_dict(self.cmds)
@@ -247,6 +259,7 @@ class Execute_Device():
 			conn=c, 
 			cumulative=self.cumulative,
 			parsed_output=self.parsed_output,
+			append_capture=self.append_capture,
 			)
 		return cc
 
@@ -274,20 +287,7 @@ class Execute_Device():
 			set: missed mandatory commands
 		"""		
 		necessary_cmds = ff.get_necessary_cmds(self.dev.dtype)
-		try:
-			file = c.output_path+"/"+c.hn+".log"
-			with open(file, 'r') as f:
-				log_lines = f.readlines()
-		except:
-			print(f'Cumulative capture file is required for Facts-Finder File not found {c.output_path+"/"+c.hn+".log"}')
-			return []
-		captured_cmds = set()
-		for log_line in log_lines:
-			if log_line[1:].startswith(cmd_line_pfx):
-				captured_cmd = ff.get_absolute_command(self.dev.dtype, log_line.split(cmd_line_pfx)[-1])
-				captured_cmds.add(captured_cmd)
-		missed_cmds = necessary_cmds.difference(captured_cmds)
-		return missed_cmds
+		return self.get_missing_commands(c, necessary_cmds)
 
 	def check_facts_finder_requirements(self, c):
 		"""checks and returns missed mandatory capture commands
@@ -318,3 +318,30 @@ class Execute_Device():
 			missed_cmds = self.is_any_ff_cmds_missed(c)
 		if missed_cmds:	
 			print(f"{c.hn} - Error capture all mandatory commands, try do manually..")
+
+	def get_missing_commands(self, c, cmds):
+		"""checks and returns missed capture commands
+
+		Args:
+			c (conn): connection object
+			cmds (list): list of commands to check
+
+		Returns:
+			set: missed mandatory commands
+		"""		
+		try:
+			file = c.output_path+"/"+c.hn+".log"
+			with open(file, 'r') as f:
+				log_lines = f.readlines()
+		except:
+			print(f'Cumulative capture file is required for Facts-Finder File not found {c.output_path+"/"+c.hn+".log"}')
+			return []
+		captured_cmds = set()
+		for log_line in log_lines:
+			if log_line[1:].startswith(cmd_line_pfx):
+				captured_cmd = ff.get_absolute_command(self.dev.dtype, log_line.split(cmd_line_pfx)[-1])
+				captured_cmds.add(captured_cmd)
+		missed_cmds = cmds.difference(captured_cmds)
+		return missed_cmds
+
+

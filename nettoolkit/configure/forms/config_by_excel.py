@@ -5,7 +5,6 @@ from nettoolkit.configure import ConfigureByExcel
 from pprint import pprint
 
 def config_by_excel_exec(obj, i):
-	# pprint(i)
 
 	auth = {'un': i['cred_un'] ,'pw': i['cred_pw'], 'en': i['cred_en']}
 	files = obj.var_dict['lb_config_excel_files_sequenced'] 

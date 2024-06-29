@@ -11,11 +11,12 @@ from nettoolkit.nettoolkit_common import printmsg, STR, LST, Multi_Execution
 from nettoolkit.nettoolkit_db import read_xl_all_sheet
 
 from nettoolkit.detect import DeviceType
-from pprint import pprint
+
 # -----------------------------------------------------------------------------
 
 class ConfigEnvironmentals(Multi_Execution):
-
+	"""Configuration Object environmental properties. Inherits Multi_Execution
+	"""
 	def __init__(self, auth, log_folder, config_log, exec_log, exec_display):
 		self.auth = auth
 		self.log_folder = log_folder
@@ -33,12 +34,15 @@ class ConfigEnvironmentals(Multi_Execution):
 # -----------------------------------------------------------------------------
 
 class Config_common():
+	"""Common Methods and properties for Configuration classes
+	"""    	
 
 	def get_device_type(self, ip, auth):
-		"""detect device type (cisco, juniper)
+		"""detecting device type (cisco, juniper)
 
 		Args:
 			ip (str): device ip
+			auth (dict): authentication dicationary with 'un', 'pw'. 'en' keys.
 
 		Returns:
 			str: device type if detected, else None
@@ -55,6 +59,12 @@ class Config_common():
 			return None
 
 	def write_config_log(self, host, log):
+		"""send out the configuration log to a log file 
+
+		Args:
+			host (str): host/device name
+			log (str/multiline): log to be write to
+		"""    		
 		if self.config_log and self.log_folder:
 			self.write_exec_log(host, f"writing configuration application log @ {self.log_folder}/{host}-config-apply.log", ends="\t")
 			with open(f"{self.log_folder}/{host}-config-apply.log", 'a') as f:
@@ -62,6 +72,13 @@ class Config_common():
 			self.write_exec_log(host, f"...done")
 
 	def write_exec_log(self, host, s, ends='\n'):
+		"""writes execution log (internal)
+
+		Args:
+			host (str): host/device name
+			s (str/multiline): execution log content
+			ends (str, optional): End string. Defaults to '\n'.
+		"""    		
 		if self.exec_display: print(s)
 		if self.exec_log and self.log_folder:
 			with open(f"{self.log_folder}/{host}-exec.log", 'a') as f:
@@ -69,6 +86,14 @@ class Config_common():
 
 
 	def send_configuration(self, conf_list):
+		"""sends provided list of configuration to self device connection
+
+		Args:
+			conf_list (list): configuration change list
+
+		Returns:
+			bool: success/fail
+		"""    		
 		self.write_exec_log(self.conn.host, f"applying config to {self.device_type} // {self.conn.host} // {self.ip}", ends="\t")
 		try:
 			self.op_return = self.conn.send_config_set(conf_list)
@@ -79,6 +104,11 @@ class Config_common():
 			return False
 
 	def get_connection(self):
+		"""retrive a new connection
+
+		Returns:
+			conn: connection object
+		"""    		
 		conn = ConnectHandler(**self.dev_var)
 		try:
 			conn = ConnectHandler(**self.dev_var)
@@ -90,12 +120,16 @@ class Config_common():
 			return None
 
 	def terminate_connection(self):
+		"""terminate active connection
+		"""    		
 		try:
 			self.conn.disconnect()
 		except:
 			pass
 
 	def set_hostname(self):
+		"""retrive hostname from current connection
+		"""    		
 		try:
 			self.dev_var['host'] = STR.hostname(self.conn).lower()
 		except:
@@ -109,6 +143,19 @@ class Config_common():
 
 
 class Configure(Config_common):
+	"""Configure class to do configuration on a Cisco IOS or Juniper Junos device
+	Inherits Config_common
+
+	Args:
+		ip (str): device ip address or FQDN
+		auth (dict): authentication dicationary with 'un', 'pw'. 'en' keys.
+		conf_list (list, optional): configuration change list. Defaults to None. Either
+		conf_file (str, optional): configuration change file. Defaults to None. Or
+		log_folder (str, optional): folder where logs to be stored. Defaults to None.
+		config_log (bool, optional): generate configuration log. Defaults to True.
+		exec_log (bool, optional): generate execution log. Defaults to True.
+		exec_display (bool, optional): on screen display execution log. Defaults to True.
+	"""    	
 
 	def __init__(self, ip, auth, 
 		conf_list=None, 
@@ -144,6 +191,8 @@ class Configure(Config_common):
 				self.conf_list = conf_list
 
 	def apply(self):
+		"""apply the configuration to active connection
+		"""    		
 		if not self.conf_list:
 			self.write_exec_log(self.conn.host, f"No configurations to apply for {self.ip} // configuration=[{self.conf_list}]")
 		if isinstance(self.conf_list, str):
@@ -165,6 +214,11 @@ class Configure(Config_common):
 	## -------------- Juniper ------------------
 
 	def juniper_push(self):
+		"""method defining configuration push for Juniper devices 
+
+		Returns:
+			bool/None: False if unable to connect, None after connection terminate
+		"""    		
 		if self.conf_list[-1] != 'commit check': 
 			self.conf_list.append("commit check")
 		#
@@ -192,6 +246,14 @@ class Configure(Config_common):
 
 
 	def juniper_verify_push_op(self, op):
+		"""verifications on juniper configuration push output
+
+		Args:
+			op (multiline str): configuaration log output
+
+		Returns:
+			bool: success or syntex error
+		"""    		
 		check = False
 		self.write_exec_log(self.conn.host, f"checking applied configuration for {self.device_type} // {self.conn.host} // {self.ip}", ends="\t" )
 		for line in op.splitlines():
@@ -205,6 +267,11 @@ class Configure(Config_common):
 		return check
 
 	def juniper_verify_commit_op(self, op):
+		"""verification of commit
+
+		Args:
+			op (multiline str): configuaration log output
+		"""    		
 		self.write_exec_log(self.conn.host, f"verifying configuration commit to {self.device_type} // {self.conn.host} // {self.ip}", ends="\t")
 		check = 0
 		for line in op.splitlines():
@@ -219,6 +286,11 @@ class Configure(Config_common):
 			self.write_exec_log(self.conn.host, f"...Failed\nGot\n{op}")
 
 	def juniper_commit(self):
+		"""commiting the pushed juniper configurations.
+
+		Returns:
+			bool: success or fail
+		"""    		
 		self.write_exec_log(self.conn.host, f"commiting configurations to {self.device_type} // {self.conn.host} // {self.ip}", ends="\t")
 		try:
 			commit_return = self.conn.commit()
@@ -231,6 +303,8 @@ class Configure(Config_common):
 	## -------------- Cisco ------------------
 
 	def cisco_enable(self):
+		"""method to enable device mode
+		"""    		
 		if any( [
 			self.device_type == 'cisco_ios'
 			] ):
@@ -243,6 +317,11 @@ class Configure(Config_common):
 					continue
 
 	def cisco_push(self):
+		"""method defining configuration push for Cisco devices 
+
+		Returns:
+			bool/None: False if unable to connect, None after connection terminate
+		"""    		
 		self.conn = self.get_connection()
 		if not self.connectionsuccess: return False
 		self.set_hostname()
@@ -267,6 +346,14 @@ class Configure(Config_common):
 
 
 	def cisco_verify_push_op(self, op):
+		"""verifications on cisco configuration push output
+
+		Args:
+			op (multiline str): configuaration log output
+
+		Returns:
+			bool: success or syntex error
+		"""    		
 		error = False
 		self.write_exec_log(self.conn.host, f"checking applied configuration for {self.device_type} // {self.conn.host} // {self.ip}", ends="\t" )
 		for line in op.splitlines():
@@ -282,6 +369,11 @@ class Configure(Config_common):
 
 	# save config
 	def cisco_commit(self):
+		"""write mem on cisco device
+
+		Returns:
+			bool: success or fail
+		"""    		
 		self.write_exec_log(self.conn.host, f"saving configurations for {self.device_type} // {self.conn.host} // {self.ip}", ends="\t")
 		try:
 			_return = self.conn.save_config()
@@ -294,6 +386,21 @@ class Configure(Config_common):
 # ----------------------------------------------------------------------------------------------------
 
 class GroupsConfigure(Multi_Execution):
+	"""Configure class to do configuration on a multiple group of devices at a time.
+	Inherits Multi_Execution
+
+	Args:
+		auth (dict): authentication dicationary with 'un', 'pw'. 'en' keys.
+		devices_config_dict (dict, optional): {device:[list of config], } . Defaults to {}.
+		config_by_order (bool, optional): if True follows execution in provided order_list entries. Defaults to True.
+		order_list (list, optional): order list in which execution to be done. Defaults to [].
+		dev_apply_at_dict (dict, optional): time to apply config at (under implementation). Defaults to {}.
+		log_folder (str, optional): folder where logs to be stored. Defaults to None.
+		config_log (bool, optional): generate configuration log. Defaults to True.
+		exec_log (bool, optional): generate execution log. Defaults to True.
+		exec_display (bool, optional): on screen display execution log. Defaults to True.
+		configure (bool, optional): configure or it is for test only. Defaults to False.
+	"""    	
 
 	def __init__(self, auth,
 		devices_config_dict={},
@@ -335,6 +442,8 @@ class GroupsConfigure(Multi_Execution):
 	@printmsg(pre='INFO: \tconfiguring in order by order_list...',
 			 post='INFO: \t\tconfiguration by order_list, done...' )
 	def configure_by_orderlist(self):
+		"""configure devices as per sequence provided in order_list
+		"""    		
 		for i, order in enumerate(self.order_list):
 			if isinstance(order, (list, set, tuple)):
 				self.items = order
@@ -343,6 +452,11 @@ class GroupsConfigure(Multi_Execution):
 				self.execute(order)
 
 	def execute(self, ip):
+		"""executor
+
+		Args:
+			ip (str): device ip or FQDN
+		"""    		
 		conf_list = self.devices_config_dict[ip]['cmds_list']
 		print(f"\t\t\tStarting Configuration on: {ip}")
 		if self.configure:
@@ -417,10 +531,18 @@ class GroupsConfigure(Multi_Execution):
 			print(f"INFO: updated order_list={self.order_list}")
 
 	def remove_empty_config_lines(self):
+		"""sanitizer: removes empty lines from configuration
+		"""    		
 		for ip, value in self.devices_config_dict.items():
 			value['cmds_list'] = LST.remove_empty_members(value['cmds_list'])
 
 	def remove_order_list_item(self, item, lst):
+		"""sanitizer: Remove device from configuration sequence where no configuration changes provided.
+
+		Args:
+			item (str): device ip or FQDN
+			lst (list): configuration change list
+		"""    		
 		for _ in lst:
 			if isinstance(_, str):
 				if _ == item:
@@ -435,15 +557,32 @@ class GroupsConfigure(Multi_Execution):
 # ----------------------------------------------------------------------------------------------------
 
 class ConfigureByExcel(ConfigEnvironmentals):
+	"""class to do configuration based on configuration changes provided in excel.
+	All listed devices in a single Excel tab will be executed at once (simultaneously).
+	Multiple Excel tabs/files can be provided to execute those in sequence. 
+
+	Inherits ConfigEnvironmentals
+
+	Args:
+		auth (dict): authentication dicationary with 'un', 'pw'. 'en' keys.
+		files (list, optional): list of excel files, will be executed in provided sequence. Defaults to [].
+		tab_sort_order (list, optional): Excel tabs execution order. Defaults to []. ( options: privide in list manually, `ascending`, `reversed`)
+		log_folder (str, optional): folder where logs to be stored. Defaults to None.
+		config_log (bool, optional): generate configuration log. Defaults to True.
+		exec_log (bool, optional): generate execution log. Defaults to True.
+		exec_display (bool, optional): on screen display execution log. Defaults to True.
+		configure (bool, optional): configure or it is for test only. Defaults to False.
+		sleep_time_between_group (int, optional): sleep time between execution of two groups of executions. Defaults to 0.
+	"""    	
 
 	def __init__(self, auth,
-		files=[],                         ## list - list of file names
-		tab_sort_order=[],                ## 'reversed/descending','ascending', [list of list of tab names] 
+		files=[],
+		tab_sort_order=[],
 		log_folder=None,
 		config_log=True,
 		exec_log=True,
 		exec_display=True,
-		configure=False,               ### False during test...
+		configure=False,
 		sleep_time_between_group=0,
 		):
 		super().__init__(auth, log_folder, config_log, exec_log, exec_display)
@@ -516,6 +655,8 @@ class ConfigureByExcel(ConfigEnvironmentals):
 	@printmsg(pre='INFO: \tConfiguration of devices, Started...',
 			 post='INFO: \t\tConfiguration of devices, Ended...' )
 	def run(self):
+		"""starts configuration of devices
+		"""
 		for i, cg in enumerate(self.cmds_groups):
 			GC = GroupsConfigure(self.auth,
 				devices_config_dict = cg, 

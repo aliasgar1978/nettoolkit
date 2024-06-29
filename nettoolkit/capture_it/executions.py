@@ -265,6 +265,7 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		self.path = path
 		#
 		self.ips = []
+		self.host_vs_ips = {}
 		if not isinstance(cmds, dict):
 			raise Exception("Commands are to be in proper dict format")
 		#
@@ -295,6 +296,7 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		if ED.dev:
 			self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
 			self.device_type_all[ED.hostname] =  ED.dev.dtype
+			self.host_vs_ips[ED.hostname] = ip
 		else:
 			self.failed_devices[ip] = ED.failed_reason
 		self.ips.append(ip)

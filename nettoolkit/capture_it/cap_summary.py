@@ -1,7 +1,7 @@
 # --------------------------------------------
 # IMPORTS
 # --------------------------------------------
-
+import pandas as pd
 from collections import OrderedDict
 
 # -----------------------------------------------------------------------------
@@ -18,13 +18,13 @@ class LogSummary():
 
 	Args:
 		c (conn): connection object
-		print (bool, optional): display result summary on screen. Defaults to False.
+		on_screen_display (bool, optional): display result summary on screen. Defaults to False.
 		write_to (str, optional): filename, writes result summary to file. Defaults to None(i.e. off).
 	"""	
 
 	def __init__(self, c, 
 		split_cisco_juniper=True,
-		print=False, 
+		on_screen_display=False, 
 		write_to=None, 
 		):
 		"""class instance initializer
@@ -39,6 +39,7 @@ class LogSummary():
 		self.set_cmd_listd_dict(c)
 		self.device_type_all = c.device_type_all
 		self.ips = c.ips
+		self.host_vs_ips = c.host_vs_ips
 		#
 		self.trim_juniper_no_more()
 		self.hosts = self.cmd_exec_logs_all.keys()
@@ -46,7 +47,7 @@ class LogSummary():
 		self.add_trailing_space_to_result()
 		if split_cisco_juniper: self.split_device_type_wise()
 		self.s = self.concate_row_col_data()
-		if print is True: self.print()
+		if on_screen_display is True: self.print()
 		if write_to: self.write(write_to, wa='w')
 
 	def set_cmd_listd_dict(self, c):
@@ -187,7 +188,7 @@ class LogSummary():
 		Returns:
 			str: ip address for given hostname
 		"""		
-		return self.ips[list(d.keys()).index(hostname)]
+		return self.host_vs_ips[hostname]
 
 	def add_trailing_space_to_result(self):
 		"""adds trailing spaces to results to make all same length. stores them in new trailing_results_dict dictionary 

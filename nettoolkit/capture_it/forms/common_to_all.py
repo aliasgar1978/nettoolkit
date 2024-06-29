@@ -64,7 +64,7 @@ def cit_common_exec(obj, i):
 	# # ----- Execution Log Summary -----
 	ls_dict = {}
 	if append_to: ls_dict['append_to'] = append_to
-	if log_print: ls_dict['print'] = log_print
+	if log_print: ls_dict['on_screen_display'] = log_print
 	LogSummary(c, **ls_dict)
 
 	# # ----- Finish -----

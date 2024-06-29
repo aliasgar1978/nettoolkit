@@ -65,3 +65,32 @@ sort_dataframe_on_subnet()
         >>> df = pd.DataFrame({"Col_A":['colA Values', ..], "Subnet":['subnets values', ..],  "Col_C":['colC Values', ..],    })
         >>> sorted_df = sort_dataframe_on_subnet(df, col="Subnet")
 
+
+
+read_xl_all_sheet()
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * Read all Excel tabs and return it in dictionary format. 
+    * keys will be tab names and values will be tab in DataFrame format
+
+    .. code-block:: python
+
+        >>> file = "c:/users/user/downloads/test.xlsx"
+        >>> dfd = read_xl_all_sheet(file)
+        >>> print(dfd.keys())
+            dict_keys(['var', 'bgp', 'vrf', 'ospf', 'static', 'prefix_list', 'vlan', 'tunnel', 'loopback', 'physical', 'block'])
+        >>> for k, v in dfd.items():
+                print(type(v))
+
+            <class 'pandas.core.frame.DataFrame'>
+            <class 'pandas.core.frame.DataFrame'>
+            <class 'pandas.core.frame.DataFrame'>
+            <class 'pandas.core.frame.DataFrame'>
+            <class 'pandas.core.frame.DataFrame'>
+            <class 'pandas.core.frame.DataFrame'>
+            <class 'pandas.core.frame.DataFrame'>
+            <class 'pandas.core.frame.DataFrame'>
+            <class 'pandas.core.frame.DataFrame'>
+            <class 'pandas.core.frame.DataFrame'>
+            <class 'pandas.core.frame.DataFrame'>
+

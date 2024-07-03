@@ -38,7 +38,7 @@ PYVIG_RETRACTABLES = {
 	'py_stencil_folder', 'py_default_stencil', 'py_output_folder', 'py_op_file', 'pv_input_data_files', 'pv_cm_file', 
 }
 CONFIGURE_RETRACTABLES = {
-	'config_excel_files',
+	'config_excel_files', 'lb_config_excel_files', 'lb_config_excel_files_sequenced',
 	'configuration_log_folder', 'cred_en1', 'cred_un1', 'cred_pw1', 
 }
 

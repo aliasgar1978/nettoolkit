@@ -180,7 +180,7 @@ class Execute_Device():
 			if self.cmds: self.add_cmd_to_all_cmd_dict(self.cmds)
 
 			# -- for facts generation -- presence of mandary commands, and capture if not --
-			if self.fg:
+			if self.fg or self.mandatory_cmds_retries:
 				missed_cmds = self.check_facts_finder_requirements(c)
 				self.retry_missed_cmds(c, cc, missed_cmds)
 				self.add_cmds_to_self(missed_cmds)

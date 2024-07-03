@@ -118,12 +118,28 @@ class GuiTemplate():
 		for element, update_values in kwargs.items():
 			self.w.Element(element).Update(**update_values)
 
+	def event_update_list_element(self, **kwargs):
+		"""update a list element based on provided kwargs
+		"""    		
+		for element, update_values in kwargs.items():
+			self.w.Element(element).update(update_values)
+
 	def clear_fields(self):
 		"""clear field values to null
 		"""		
 		for field in self.cleanup_fields:
-			d = {field:{'value':''}}
-			self.event_update_element(**d)
+			try:
+				d = {field:{'value':''}}
+				self.event_update_element(**d)
+			except:
+				pass
+			try:
+				d = {field: []}
+				self.event_update_list_element(**d)
+			except:
+				pass
+		self.var_dict = {}
+
 
 # # ---------------------------------------------------------------------------------------
 

@@ -657,7 +657,9 @@ class ConfigureByExcel(ConfigEnvironmentals):
 	def run(self):
 		"""starts configuration of devices
 		"""
+		tso_list = LST.flatten(self.tab_sort_order)
 		for i, cg in enumerate(self.cmds_groups):
+			if not self.get_concurrance(i, cg, tso_list): continue
 			GC = GroupsConfigure(self.auth,
 				devices_config_dict = cg, 
 				configure=self.configure,
@@ -667,4 +669,10 @@ class ConfigureByExcel(ConfigEnvironmentals):
 			if self.sleep_time_between_group:
 				sleep(self.sleep_time_between_group)
 
+	@staticmethod
+	def get_concurrance(i, cg, tso_list):
+		user_concern = input(f"Configuration on group of devices GROUP{i+1}: [{tso_list[i]}] : ({set(cg.keys())}) ready to process. Want to continue [y/n]")
+		if user_concern.lower() == 'y':  return True
+		print(f"  Configuration on group of devices GROUP{i+1}: [{tso_list[i]}] : Not confirmed, Aborted !!!")
+		return False
 

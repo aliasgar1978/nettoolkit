@@ -1,10 +1,10 @@
 NT Capture-it - Normal
 =================================================
 
-.. note::
+.. warning::
 
-    * for networking version >= 0.1.0, integrated.
-    * for nettoolkig version < 0.1.0, install capture-it as separate project
+    * for latest networkit version, i.e. >= 0.1.0, its integrated.
+    * for older nettoolkt versions, i.e. < 0.1.0, install capture-it as separate project, and refer older documentation.
 
 
 #. **Execution Steps**

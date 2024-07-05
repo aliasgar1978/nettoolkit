@@ -2,9 +2,7 @@
 Customize
 ============================================
 
-SO YOU DECIDED TO CUSTOMIZE. HURREY !!!
-
-FOLLOW ALONG.
+SO YOU DECIDED TO CUSTOMIZE. HURREY !!! LETS DO IT !!!
 
 -----
 
@@ -12,8 +10,8 @@ After Previous First Steps, We can now add custom *classes & modules* as filters
 
 Refer below on how to fork them in.
 
-* module import should declare pure methods only. and should be imported as full module 
-* Classes should be imported explicitely from diverse modules.
+* Functions import should be done via full module(s) import.
+* Classes can be imported from diverse modules as individual entity.
 
 
 .. code-block:: python
@@ -50,8 +48,7 @@ Refer below on how to fork them in.
 
 .. note:: Congratulations!!!
 
-    #. Now you can access custom declared classes/methods from within jinja template as filters. 
-    #. And you already override device `var` database using custom regional_file database in previous step.
+    #. Now you can access **custom declared classes/methods** from **within jinja template** as **filters**. 
 
 
     It is soleley users responsiblity for providing appropriate filters as **custom_classes** and **custom_modules**, as well as deploying those appropriately in `jinja templates`.

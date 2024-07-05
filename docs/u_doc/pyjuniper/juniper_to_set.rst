@@ -35,7 +35,7 @@ Explanation (to-set)
 		
 	* **to_file** argument (True/False) in the ``convert_to_set`` method will enable or disable writing out output to external file.
 	* return from ``convert_to_set()`` method will also be set command output in list format.
-	* any error in input file may result the conversion to halt. In this case, get hint on console window; on the line number; where it stops and gt error from input_file.
+	* any error in input file could result the conversion to halt. In this case, see hint on console window; (the line number) where it stops and resolve error from input_file before proceed.
 
 
 

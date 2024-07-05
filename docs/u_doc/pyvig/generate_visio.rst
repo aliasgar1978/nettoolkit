@@ -2,7 +2,7 @@
 Generate Visio
 ==============
 
-Supported for nettoolkit version >= 0.1.0
+Available for nettoolkit version >= 0.1.0
 
 -----
 
@@ -52,7 +52,7 @@ Lets start by defining a few more required static inputs. Modify it as needed.
         'wireless block': 'wireless block', 
         'core': 'core', 
         'private boarder blocks': 'private boarder blocks', 
-        # ... add many more as needed ... #
+        # ... add more as needed ... #
     }, 
   }
 

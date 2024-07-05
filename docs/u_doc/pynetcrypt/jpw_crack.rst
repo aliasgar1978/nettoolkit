@@ -3,7 +3,7 @@ Juniper $9 passwords Encryption/Decryption
 ============================================
 
 Activities that can be done are:
-	* Encrypt/Decrypt plain-text password string v/s Juniper $9$ encrypted string 
+	* Encrypt/Decrypt plain-text password string for Juniper $9$ encrypted string 
 	* Decrypt all $9$ passwords from juniper configuration. (creates a new file)
 	* Mask all $9$ passwords from juniper configuration. (creates a new file)
 

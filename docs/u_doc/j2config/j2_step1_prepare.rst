@@ -46,15 +46,18 @@ Prepare Config Building Instance
     
     **Excel Data File**
 
-    * It is advisable to generate the facts using  **facts_finder** package. So manual editing will be minimal. Otherwise a fresh manually prepared database will work either.
-    * There must be a ``var`` tab in excel file. with **var** as jinja variable and **default** as replacement value of the jinja variable.
-        * multiple values for a single variable can be added in a same cell by separating either by ``comma`` or ``enter``
-    * There must be atleast one tab with tabular column consisting interfaces details.
-      * multiple type interface details can be in separate sheet as well. sheet name can be arbitrary any thing.
-      * There can be a ``vrf`` tab consisting of instances details of device.
-      * There can be a ``bgp`` tab consisting of bgp and its properties of device.
+    * It is advisable to generate the facts using  ``nettoolkit.facts_finder`` package. So manual editing will be minimal. Alternatively a fresh manually prepared database will work either.
 
-    * **regional_file** can be identical to ``var`` tab of data file, with two ``columns`` as **var** and **default**.
+    **Requirements:**
+    * There must be a ``var`` tab in excel file. with **var** as jinja variable and **default** as replacement value of the jinja variable.
+    * multiple values for a single variable can be added in a same cell by separating either by ``comma`` or ``enter``
+    * There must be atleast one tab with tabular column consisting interfaces details.
+    * multiple type interface details can be in separate sheet as well. sheet name can be arbitrary any thing.
+    * example1: There can be a ``vrf`` tab consisting of instances details of device.
+    * example2: There can be a ``bgp`` tab consisting of bgp and its properties of device.
+    * Check nettoolkit.facts_finder generated clean.xlsx file for samples.
+    * **regional_file** should be identical to ``var`` tab of data file, with two ``columns`` as **var** and **default**.
+    * Remember, custom **regional_file** database will override variables in device **var** tab. 
 
 
 
@@ -63,4 +66,4 @@ Make a Note of above Instance variable ``PrCfg``. We are going to use it in next
 -----
 
 
-Continue Next page to customize jinja filters, skip the step otherwise.
+Continue Next page to ``customize jinja filters``, skip the step otherwise.

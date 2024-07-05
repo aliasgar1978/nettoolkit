@@ -20,9 +20,11 @@ Ping to multiple ip addresses from given subnets and get the report in Excel fil
     **inputs**
 
     * pfxs (list): list of prefixes
-    * till (int, optional): how many ips to select. (Default: 5)
-    * concurrent_connections (int, optional): number of max sockets to open parallel for ping check. (default: 1000)
+    * till (int, optional): how many ips to select. (Default: None. i.e. All)
+    * concurrent_connections (int, optional): number of max sockets to open parallel for ping check. (default: 500)
     * create_tabs (bool, optional): whether to create individual tabs for each subnet or not (default: False)
+
+    
     * output_file (str): path/name of excel file where ping responces to be stored.
 
 

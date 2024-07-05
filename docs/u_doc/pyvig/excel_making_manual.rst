@@ -6,11 +6,11 @@ Excel database Preparation - Manual
 * Requirement is to have an Excel database in appropriate format.
 * Two tabs as per given below names are mandatory.
 
-  #. ``Devices`` It defines all images/icons related to be placed on the visio page.
-  #. ``Cablings`` It defines all cabling/connectivity related on placed images/icons.
+  #. ``Devices`` tab defines all images/icons, its position indexes, and icon informations; which are to be placed on the visio page(s).
+  #. ``Cablings`` tab defines all cabling/connectivity related informations for above devices.
 
 
-There is a Sample Excel given at end of this page. Download and modify it as your requirement.
+There is a simple sample Excel given at end of this page. Download and modify it as your requirement.
 
 Read Below to understand it.
 
@@ -20,15 +20,15 @@ Read Below to understand it.
 -----------------------------------
 
 
-     #. ``hostname`` Define hostname / identity of device. *( No Exception and column name modification not allowed )*
-     #. ``x-axis`` Define horizontal position of device. *( column name can be changed by defining var argument `x` in input)*
-     #. ``y-axis`` Define vertical position of device. *( column name can be changed by defining var argument `y` in input)*
+     #. ``hostname`` hostname or identity of device. *( No Exception and column name modification not allowed )*
+     #. ``x-axis`` horizontal position of device. *( column name can be changed by defining var argument `x` in input)*
+     #. ``y-axis`` vertical position of device. *( column name can be changed by defining var argument `y` in input)*
 
 **Cablings Tab - Mandatory Columns**
 -------------------------------------
 
-     #. ``a_device`` Define identity of a-end device for connectivity. *(column name can be changed by defining var argument `dev_a` in input)*
-     #. ``b_device`` Define identity of b-end device for connectivity. *(column name can be changed by defining var argument `dev_b` in input)*
+     #. ``a_device`` a-end device hostname for connectivity. *(column name can be changed by defining var argument `dev_a` in input)*
+     #. ``b_device`` b-end device hostname for connectivity. *(column name can be changed by defining var argument `dev_b` in input)*
 
 -----
 
@@ -37,32 +37,32 @@ Read Below to understand it.
 **Devices Tab - Optional Columns**
 -----------------------------------
 
-     #. ``stencil`` Define stencil file of individual device *( column name modification not allowed )*
-     #. ``item`` Define stencil name/number from stencil *( column name modification not allowed )*
-     #. ``iconHeight`` Define resizing of icon vertically *( column name modification not allowed )*
-     #. ``iconWidth`` Define resizing of icon horizontaly *( column name modification not allowed )*
-     #. There can be **n-number of columns** for additional device details, with any column-names
+     #. ``stencil`` stencil file for individual device icon *( column name modification not allowed )*
+     #. ``item`` stencil name or number id from stencil *( column name modification not allowed )*
+     #. ``iconHeight`` resizing of icon vertically *( column name modification not allowed )*
+     #. ``iconWidth`` resizing of icon horizontaly *( column name modification not allowed )*
+     #. There can be **N number of columns** for additional device information ( column-names choose as per your desire )
 
         * **Example**: *(device_model, serial_number, ip_address, rack_details, . . . and many more ).*
-        * As many of these columns information can be added to device information, by defining them to var argument list ``cols_to_merge``.
-        * Arrange these in list as desired sequence in output.
+        * Add those into device information using ``cols_to_merge`` argument list.
+        * Re-arrange those in list as desired in output.
 
 
 **Cablings Tab - Optional Columns**
 -------------------------------------
 
-     #. ``aport`` Define port number for a-end device. Will appear on middle. *( column name modification not allowed )*
-     #. ``connector_type`` Define connector type. (default: *straight*, other options: *angled, curved*). *( column name modification not allowed )*
-     #. ``color`` Define connector color. (default: *blue*). *( column name modification not allowed )*
-     #. ``weight`` Define connector weigth/thickness. (default: *3*). *( column name modification not allowed )*
-     #. ``pattern`` Define connector line pattern. (default: *1*). *( column name modification not allowed )*
-     #. ``include`` Define to display only selected cable connectivities.
+     #. ``aport`` port number for a-end device. It will appear at middle. *( column name modification not allowed )*
+     #. ``connector_type`` line connector type. (default: *straight*, other options: *angled, curved*). *( column name modification not allowed )*
+     #. ``color`` line connector color. (default: *blue*). *( column name modification not allowed )*
+     #. ``weight`` line connector weigth/thickness. (default: *3*). *( column name modification not allowed )*
+     #. ``pattern`` line connector pattern. (default: *1*). *( column name modification not allowed )*
+     #. ``include`` displays only selected.
 
         * Non blank values will be selected and appeared in output.
-        * This will get override by other sheet filters if defined.
+        * It will get override by other sheet filters if defined.
         * Use this quick feature, if want to to have just one filter applied on data 
         * A single Page drawing will appear
-        * use **filter_on_include_col** input var argument for providing this additional information  
+        * It uses **filter_on_include_col** argument to enable. 
 
 
            .. code-block:: python
@@ -70,13 +70,13 @@ Read Below to understand it.
                  filter_on_include_col=True
 
 
-     #. There can be **many other filter columns**  with any arbitrary names as per choice.
+     #. There can be many other filter columns  with any arbitrary names as per choice.
 
-        * *column name* with each matching *row values* will be considered as a filter, so multiple filters can be defined in a single column. ( see column: *draw_type* in given example data )
-        * each filtered data will create its own page in visio drawing.
-        * Multipls columns with multiple matching row values can be combined to generate more granular drawings.
+        * *Column name* with each matching *row values* will be considered as a filter, so multiple filters can be defined in a single column. ( see column: *draw_type* in given example data )
+        * Each filtered data will create its own page in visio drawing.
+        * Multiple columns with multiple matching row values can be combined together to generate more granular drawings.
         * Output will be multipage output.
-        * use **sheet_filters** input var argument in a form of dictionary for providing this additional information  
+        * It Uses **sheet_filters** argument in a form of dictionary for providing information  
 
            .. code-block:: python
 
@@ -91,7 +91,7 @@ Read Below to understand it.
 -----
 
 
-* By default, any device with no connectivity on `Cablings` tab, will be excluded.
+* Default, any device with no connectivity on `Cablings` tab, will be excluded.
 * Change this behaviour by setting False to input var argument ``filter_on_cable``.
 
 -----

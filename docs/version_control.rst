@@ -24,7 +24,7 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
      - Updates
 
    * - 1.6.3
-     - Jun 30, 2024[TBR]
+     - Jul 5, 2024
      - * capture-it: added keys (**missing_captures_only**, **append_capture**).
        * configure: module updated with various new parameters
        * compare-it: added (CompareConfig) function

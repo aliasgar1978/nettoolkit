@@ -2,7 +2,7 @@
 Generate
 ============================================
 
-We are all set!
+We are all set!  Lets start configuration generation Now !!! 
 
 -----
 
@@ -19,7 +19,7 @@ We are all set!
 
     * Make a note that output generates based on jinja template and template variables.		
     * Make sure to cross-check the generated facts before using it.
-    * Alter either database / jinja to get desired result.
+    * You may need to alter either database or jinja templates to get desired result.
 
 
 **Best of Luck.**

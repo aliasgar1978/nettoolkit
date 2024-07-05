@@ -4,11 +4,14 @@ pyVig - Cable Matrix Database Prepration User Guidelines!
 
 **INFORMATION COLLECTION**
 
-* First step to generate the visio drawing is to collect informations in an Excel database and make it ready in the format pyVig can read it.
-* There are two ways Excel databse can be prepared.
+* First step to generate the visio drawing/design is to collect informations in Excel
+* Second is to make it ready in the format pyVig can read it.
 
-  1. Prepare it manually: For details of Excel database requirements see : ``Excel database Preparation Guidelines`` Section.
-  2. Prepare it Automatically: with help of pyVig native modules which takes advantage of facts-finders clean files and draft it for you. Make adjustments to it as necessary
+
+There are two ways Excel databse can be prepared.
+
+  1. Manual: For details of Excel field requirements see : ``Excel database Preparation Guidelines`` Section.
+  2. Auto: with help of pyVig native modules which takes advantage of facts-finders clean files and draft it for you. Make adjustments to it as necessary
 
 
 .. toctree::

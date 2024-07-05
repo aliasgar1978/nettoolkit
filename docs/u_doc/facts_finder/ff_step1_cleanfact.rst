@@ -95,7 +95,7 @@ Use here given process to generate the clean excel facts file from show commands
 
 .. admonition:: Notice
 
-    Make a note that output differs between version to version on devices, and thus it is obvious that parsing may not work every where, as expected incase if format differs from expectation. 
+    Make a note that output differs between version to version on devices, and thus it is obvious that parsing may not work 100% accurate every where as expected, if format differs from expected output. 
 
     Make sure to cross-check the generated facts before using it.
 

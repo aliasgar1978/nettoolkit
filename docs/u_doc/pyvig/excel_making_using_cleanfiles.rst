@@ -3,7 +3,7 @@ Excel Cable Matrix Preparation - Auto Generate for Visio Preparation
 =====================================================================
 
 
-Supported for nettoolkit version >= 1.5.0
+Available for nettoolkit version >= 1.5.0
 
 
 Add Custom Functions
@@ -11,7 +11,7 @@ Add Custom Functions
 
 
 * As a First step to prepare the Excel database, there are a few pre-requisite custom inputs requires as below.
-* All custom function definitions will be your own native as per your requirement.
+* All custom functions/definitions are to be your owned code.
 
 -----
 
@@ -83,9 +83,7 @@ Import these functions.
 
 -----
 
-A Lot of Custom Import happen So Far.
-
-Feel Bored, Enough.  !!!
+A Lot of Custom Import happened. Right ?
 
 Lets start now working on visio project
 

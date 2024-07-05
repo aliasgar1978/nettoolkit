@@ -11,7 +11,6 @@ Functions of addressing will be available to be used than after.
 	>>> from nettoolkit.addressing import *
 
 
-* There are few addressing functions - which can be used after creating IPv4 or IPv6 Object. These are described in following two pages.
 * There are few addressing functions - which can be used without creating IPv4 or IPv6 Object. These are  desscribed as below.
 
 

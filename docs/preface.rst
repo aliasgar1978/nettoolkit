@@ -27,7 +27,7 @@ nettoolkit is an open source python project for networking geeks.
 
 	By download and using the Nettoolkit and its child packages, you agree these terms and conditions. 
 
-	Here I declare that, this package never try to retrive or recover any of your local information.
+	Here I declare that, this package never try to retrive or recover any of your local or personal information.
 	I took utmost care to make the code bug free. However as no code can be accurate. Kindly report bugs to me on **aholo2000@gmail.com**. 
 
 

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.nettoolkit_common.common &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.nettoolkit_common.common</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.nettoolkit_common.common</h1><div class="highlight"><pre>
+<span></span><span class="c1"># &quot;&quot;&quot;Common Definitions used across project&quot;&quot;&quot;</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<span class="c1">### IDENTIFER OF COMMAND LINE ### &gt;</span>
+<span class="n">CMD_LINE_START_WITH</span> <span class="o">=</span> <span class="s2">&quot;output for command: &quot;</span>
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="remove_domain">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.remove_domain">[docs]</a>
+<span class="k">def</span> <span class="nf">remove_domain</span><span class="p">(</span><span class="n">hn</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Removes domain suffix from provided hostname string</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		hn (str): fully qualified dns hostname</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: hostname left by removing domain suffix</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">return</span> <span class="n">hn</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="read_file">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.read_file">[docs]</a>
+<span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;read the provided text file and retuns output in list format</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		file (str): text file name</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		list: output converted to list (separated by lines)</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+		<span class="n">file_lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+	<span class="k">return</span> <span class="n">file_lines</span></div>
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="get_op">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.get_op">[docs]</a>
+<span class="k">def</span> <span class="nf">get_op</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">cmd</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;filter the command output from given captured file.  </span>
+<span class="sd">	Note: output should be taken from capture_it utility or it should be in the format</span>
+<span class="sd">	derived by it.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		file (str): capture file</span>
+<span class="sd">		cmd (str): show command for which output to capture</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		list: filtered command output in list format</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="n">file_lines</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+	<span class="n">toggle</span><span class="p">,</span> <span class="n">op_lst</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">file_lines</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">CMD_LINE_START_WITH</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+			<span class="n">toggle</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
+			<span class="k">continue</span>
+		<span class="k">if</span> <span class="n">toggle</span><span class="p">:</span>
+			<span class="n">op_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+	<span class="k">return</span> <span class="n">op_lst</span></div>
+
+
+<div class="viewcode-block" id="get_ops">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.get_ops">[docs]</a>
+<span class="k">def</span> <span class="nf">get_ops</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">cmd_startswith</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;filter the command outputs from given captured file.  </span>
+<span class="sd">	Note: output should be taken from capture_it utility or it should be in the format</span>
+<span class="sd">	derived by it.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		file (str): capture file</span>
+<span class="sd">		cmd_startswith (str): show command start string</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		dict: filtered command output in dict format</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="n">file_lines</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+	<span class="n">toggle</span><span class="p">,</span> <span class="n">op_lst</span><span class="p">,</span> <span class="n">op_dict</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="p">[],</span> <span class="p">{}</span>
+	<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">file_lines</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">toggle</span> <span class="ow">and</span> <span class="n">l</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">CMD_LINE_START_WITH</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+			<span class="n">op_dict</span><span class="p">[</span><span class="n">cmd</span><span class="p">]</span> <span class="o">=</span> <span class="n">op_lst</span>
+			<span class="n">op_lst</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="n">toggle</span><span class="o">=</span><span class="kc">False</span>
+		<span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">CMD_LINE_START_WITH</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+			<span class="n">toggle</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">cmd_startswith</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
+			<span class="n">cmd</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">cmd_startswith</span><span class="p">):]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+			<span class="k">continue</span>
+		<span class="k">if</span> <span class="n">toggle</span><span class="p">:</span>
+			<span class="n">op_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+	<span class="k">return</span> <span class="n">op_dict</span></div>
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="blank_line">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.blank_line">[docs]</a>
+<span class="k">def</span> <span class="nf">blank_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span> 
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;checks if provided line is blank line or not.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		line (str): input line</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		bool: is line blank or not</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">return</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="get_device_manufacturar">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.get_device_manufacturar">[docs]</a>
+<span class="k">def</span> <span class="nf">get_device_manufacturar</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;finds out manufacturer (cisco/juniper) from given capture file.</span>
+<span class="sd">	in case if not found, it will return as Unidentified.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		file (str): input capture file</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: Either one from - Cisco, Juniper, Unidentified</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="n">file_lines</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">file_lines</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;!&quot;</span><span class="p">):</span> <span class="k">return</span> <span class="s2">&quot;Cisco&quot;</span>
+		<span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span> <span class="k">return</span> <span class="s2">&quot;Juniper&quot;</span>
+	<span class="k">return</span> <span class="s2">&quot;Unidentified&quot;</span></div>
+
+
+<div class="viewcode-block" id="verifid_output">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.verifid_output">[docs]</a>
+<span class="k">def</span> <span class="nf">verifid_output</span><span class="p">(</span><span class="n">cmd_op</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;vefifies if command output is in valid state.  Multiline string are splits with</span>
+<span class="sd">	CR. and retuns as list. if input is a list, it will be returned as is.</span>
+<span class="sd">	any other input will throw error.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		cmd_op (list, str): Either list or Multiline string of output</span>
+
+<span class="sd">	Raises:</span>
+<span class="sd">		TypeError: Raise error if input is other than string or list.</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		list: output in list format</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cmd_op</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+		<span class="n">cmd_op</span> <span class="o">=</span> <span class="n">cmd_op</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cmd_op</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+		<span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Invalid Command Output Received.</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="sa">f</span><span class="s2">&quot;Expected either multiline-string or list, received </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">cmd_op</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">cmd_op</span></div>
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="get_string_part">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.get_string_part">[docs]</a>
+<span class="k">def</span> <span class="nf">get_string_part</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;get the sub-string out of provided long string(line)</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		line (str): string line</span>
+<span class="sd">		begin (int): sub-str start point</span>
+<span class="sd">		end (int): sub-str end point</span>
+
+<span class="sd">	Raises:</span>
+<span class="sd">		TypeError: Raise error if input is invalid or sub-string falls outside</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: sub-string</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="k">try</span><span class="p">:</span> <span class="k">return</span> <span class="n">line</span><span class="p">[</span><span class="n">begin</span><span class="p">:</span> <span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+	<span class="k">except</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unrecognized Input&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_string_trailing">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.get_string_trailing">[docs]</a>
+<span class="k">def</span> <span class="nf">get_string_trailing</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">begin_at</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;get the training part of sub-string starting from provided index</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		line (str): string line</span>
+<span class="sd">		begin_at (int): sub-str start point</span>
+
+<span class="sd">	Raises:</span>
+<span class="sd">		TypeError: Raise error if input is invalid or sub-string falls outside</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: sub-string</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="k">try</span><span class="p">:</span> <span class="k">return</span> <span class="n">line</span><span class="p">[</span><span class="n">begin_at</span><span class="p">:]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+	<span class="k">except</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unrecognized Input&quot;</span><span class="p">)</span></div>
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="standardize_mac">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.standardize_mac">[docs]</a>
+<span class="k">def</span> <span class="nf">standardize_mac</span><span class="p">(</span><span class="n">mac</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;removes . or : from mac address and make it a standard</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		mac (str): mac address</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: standard format of mac address</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="k">return</span> <span class="n">mac</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="mac_2digit_separated">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.mac_2digit_separated">[docs]</a>
+<span class="k">def</span> <span class="nf">mac_2digit_separated</span><span class="p">(</span><span class="n">mac</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;converts input mac to 2 digit separated mac format, separator=`:`</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		mac (str): mac address</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: 2 digit separated format of mac address</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="n">mac</span> <span class="o">=</span> <span class="n">standardize_mac</span><span class="p">(</span><span class="n">mac</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="n">s</span> <span class="o">=</span> <span class="n">mac</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+		<span class="k">else</span><span class="p">:</span> <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">mac</span><span class="p">[</span><span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">:(</span><span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+	<span class="k">return</span> <span class="n">s</span></div>
+
+
+<div class="viewcode-block" id="mac_4digit_separated">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.mac_4digit_separated">[docs]</a>
+<span class="k">def</span> <span class="nf">mac_4digit_separated</span><span class="p">(</span><span class="n">mac</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;converts input mac to 4 digit separated mac format, separator=`.`</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		mac (str): mac address</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: 4 digit separated format of mac address</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="n">mac</span> <span class="o">=</span> <span class="n">standardize_mac</span><span class="p">(</span><span class="n">mac</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>   <span class="n">s</span>  <span class="o">=</span>       <span class="n">mac</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+		<span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">mac</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
+		<span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">mac</span><span class="p">[</span><span class="mi">8</span><span class="p">:]</span>
+	<span class="k">return</span> <span class="n">s</span></div>
+
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="k">try</span><span class="p">:</span>
+	<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">MutableMapping</span>
+<span class="k">except</span><span class="p">:</span>
+	<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">MutableMapping</span>
+
+<div class="viewcode-block" id="flatten">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.flatten">[docs]</a>
+<span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">parent_key</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;flattens the dictionary</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		d (dict): input can be multi-nested dictionary.</span>
+<span class="sd">		parent_key (str, optional): key from previous dictionary to be prefixed with current keys. Defaults to &#39;&#39;.</span>
+<span class="sd">		sep (str, optional): keys separator. Defaults to &#39;_&#39;.</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		dict, list: dictionary of lists if input is dictinoary,  list with input dictionary if input is anything else</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="n">new_key</span> <span class="o">=</span> <span class="n">parent_key</span> <span class="o">+</span> <span class="n">sep</span> <span class="o">+</span> <span class="n">k</span> <span class="k">if</span> <span class="n">parent_key</span> <span class="k">else</span> <span class="n">k</span>
+			<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">MutableMapping</span><span class="p">):</span>
+				<span class="n">items</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">flatten</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">new_key</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">new_key</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+		<span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="p">[</span><span class="n">d</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="dataframe_generate">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.dataframe_generate">[docs]</a>
+<span class="k">def</span> <span class="nf">dataframe_generate</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;convert dicationary to dataframe. multi-level dictionary will be converted flattened first </span>
+<span class="sd">	inorder to convert to DataFrame.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		d (dict): input can be multi-nested dictionary.</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		DataFrame: pandas DataFrame</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="n">new_d</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+		<span class="n">new_d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">flatten</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">new_d</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></div>
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<span class="c1"># ------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="printmsg">
+<a class="viewcode-back" href="../../../docs/t_doc/nettoolkit/common.html#nettoolkit.nettoolkit_common.common.printmsg">[docs]</a>
+<span class="k">def</span> <span class="nf">printmsg</span><span class="p">(</span><span class="n">pre</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pre_ends</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">outer</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+		<span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+			<span class="k">if</span> <span class="n">pre</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">pre</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">pre_ends</span><span class="p">)</span>
+			<span class="n">fo</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">post</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">fo</span>
+		<span class="k">return</span> <span class="n">inner</span>
+	<span class="k">return</span> <span class="n">outer</span></div>
+
+
+<span class="c1"># ------------------------------------------------------------------------</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

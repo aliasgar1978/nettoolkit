@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.pyJuniper.hierarchy &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.pyJuniper.hierarchy</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.pyJuniper.hierarchy</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># IMPORTS</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">from</span> <span class="nn">.hierarchy_rules</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.nettoolkit_common.gpl</span> <span class="kn">import</span> <span class="n">STR</span><span class="p">,</span> <span class="n">IO</span>
+
+<span class="c1"># # -- Enablebelow - only if Max Recursion depth reach.</span>
+<span class="c1"># import sys</span>
+<span class="c1"># sys.setrecursionlimit(10**5)</span>
+
+
+<div class="viewcode-block" id="mysplit">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.mysplit">[docs]</a>
+<span class="k">def</span> <span class="nf">mysplit</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	split line by (default space), also retain the strings like descriptions as it is.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		line (str): string line</span>
+<span class="sd">		by (character, optional): Split by option. Defaults to &quot; &quot;.</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		list: split line and return list</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">spl</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">by</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">description_strings</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">spl</span><span class="p">:</span>
+			<span class="n">s1</span> <span class="o">=</span> <span class="n">spl</span><span class="p">[:</span><span class="n">spl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+			<span class="n">s2</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spl</span><span class="p">[</span><span class="n">spl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
+			<span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">s1</span>
+	<span class="k">return</span> <span class="n">spl</span></div>
+
+
+
+<div class="viewcode-block" id="li_li_words">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.li_li_words">[docs]</a>
+<span class="k">def</span> <span class="nf">li_li_words</span><span class="p">(</span><span class="n">in_str</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	converts multiline string in to list of list of words.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		in_str (str): Multiline string</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		list: list of list of words.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">return</span> <span class="p">[[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">mysplit</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">4</span><span class="p">:])]</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">in_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span></div>
+
+
+
+<div class="viewcode-block" id="section_dict">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.section_dict">[docs]</a>
+<span class="k">def</span> <span class="nf">section_dict</span><span class="p">(</span><span class="n">in_list</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">full_review</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	create section dectionary from given input list for the selected word.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		in_list (list, str): Input list or string</span>
+<span class="sd">		word (str): selected word for which list to be search up on and generate dictionary</span>
+<span class="sd">		full_review (bool, optional): go thru full list if set to true, else only check first match only. Defaults to False.</span>
+
+<span class="sd">	Raises:</span>
+<span class="sd">		NotImplementedError: Unmatched input type for input.</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		dict: dictionary with key equal input word and value as list of words from matched suffixes.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">section_config_dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+	<span class="n">section_config_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_list</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+		<span class="n">in_list</span> <span class="o">=</span> <span class="n">li_li_words</span><span class="p">(</span><span class="n">in_list</span><span class="p">)</span>
+	<span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_list</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span> 
+		<span class="k">pass</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">raise</span> <span class="ne">NotImplementedError</span>
+	<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">in_list</span><span class="p">:</span>
+		<span class="n">section_config_list</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="n">add_to</span> <span class="o">=</span> <span class="kc">False</span>
+		<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+			<span class="n">wordCheck</span> <span class="o">=</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span>
+			<span class="k">if</span> <span class="n">wordCheck</span> <span class="ow">and</span> <span class="n">w</span> <span class="o">==</span> <span class="n">word</span><span class="p">:</span> 
+				<span class="n">add_to</span> <span class="o">=</span> <span class="kc">True</span>
+				<span class="k">continue</span>
+			<span class="k">elif</span> <span class="n">wordCheck</span> <span class="ow">and</span> <span class="n">w</span> <span class="o">!=</span> <span class="n">word</span><span class="p">:</span>
+				<span class="k">if</span> <span class="ow">not</span> <span class="n">full_review</span><span class="p">:</span> <span class="k">break</span>
+			<span class="k">if</span> <span class="n">add_to</span><span class="p">:</span>
+				<span class="n">section_config_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">add_to</span><span class="p">:</span>
+			<span class="n">section_config_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">section_config_list</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">full_review</span><span class="p">:</span> <span class="k">break</span>
+	<span class="k">return</span> <span class="n">section_config_dict</span></div>
+
+
+
+<div class="viewcode-block" id="zero_items">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.zero_items">[docs]</a>
+<span class="k">def</span> <span class="nf">zero_items</span><span class="p">(</span><span class="n">in_list</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Return all Zero (0) indexed Items from list of lists</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		in_list (list): input list of lists</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		list: all 0-index items from list of lists</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">_zi</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">item_zero</span> <span class="ow">in</span> <span class="n">in_list</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">item_zero</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_zi</span><span class="p">:</span> <span class="n">_zi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item_zero</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+	<span class="k">return</span> <span class="n">_zi</span></div>
+
+
+
+<div class="viewcode-block" id="related_list">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.related_list">[docs]</a>
+<span class="k">def</span> <span class="nf">related_list</span><span class="p">(</span><span class="n">in_list</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	filter input list for the given word in index-0 position</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		in_list (list): input list of list</span>
+<span class="sd">		word (str): word to be check in index-0 position.</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		list: filtered output list </span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">section_config_list</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">in_list</span><span class="p">:</span>
+		<span class="n">add_to</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">word</span>
+		<span class="k">if</span> <span class="n">add_to</span><span class="p">:</span> <span class="n">section_config_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">section_config_list</span></div>
+
+
+
+<div class="viewcode-block" id="recursive_item_lookup">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.recursive_item_lookup">[docs]</a>
+<span class="k">def</span> <span class="nf">recursive_item_lookup</span><span class="p">(</span><span class="n">lili_words</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	create and yields dictionary/list from provided list of list of words.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		lili_words (list): input list of list of words</span>
+
+<span class="sd">	Yields:</span>
+<span class="sd">		dict: yields dictionary item/value pairs</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">for</span> <span class="n">ezi</span> <span class="ow">in</span> <span class="n">zero_items</span><span class="p">(</span><span class="n">lili_words</span><span class="p">):</span>
+		<span class="n">nv</span> <span class="o">=</span> <span class="n">related_list</span><span class="p">(</span><span class="n">lili_words</span><span class="p">,</span> <span class="n">ezi</span><span class="p">)</span>
+		<span class="n">ns_dic</span> <span class="o">=</span> <span class="n">section_dict</span><span class="p">(</span><span class="n">nv</span><span class="p">,</span> <span class="n">ezi</span><span class="p">)</span>
+		<span class="k">yield</span> <span class="n">ns_dic</span></div>
+
+
+
+<div class="viewcode-block" id="excluded">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.excluded">[docs]</a>
+<span class="k">def</span> <span class="nf">excluded</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">members</span><span class="p">,</span> <span class="n">member_key</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Checks for matching key from provided dictionary (dic) in to members dictionary&#39;s member_key,</span>
+<span class="sd">	returns True if found any.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		dic ([type]): input dictionary for which keys to be searched in to members dictinary members</span>
+<span class="sd">		members ([type]): members dicationary to be looked in to.</span>
+<span class="sd">		member_key (str): member key to be looked in to members dictionary</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		bool: True if any excluded member found, None Else</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">if</span> <span class="n">member_key</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+			<span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">members</span><span class="p">[</span><span class="n">member_key</span><span class="p">]:</span>
+				<span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="included">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.included">[docs]</a>
+<span class="k">def</span> <span class="nf">included</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">members</span><span class="p">,</span> <span class="n">member_key</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Checks for matching key from provided dictionary (dic) in to members dictionary&#39;s member_key,</span>
+<span class="sd">	returns True if found or member_key not found in members dict.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		dic ([type]): input dictionary for which keys to be searched in to members dictinary members</span>
+<span class="sd">		members ([type]): members dicationary to be looked in to.</span>
+<span class="sd">		member_key (str): member key to be looked in to members dictionary</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		bool: True if any excluded member found or member_key not in members, False Else</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">if</span> <span class="n">member_key</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+			<span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">members</span><span class="p">[</span><span class="n">member_key</span><span class="p">]:</span>
+				<span class="k">return</span> <span class="kc">True</span>
+		<span class="k">return</span> <span class="kc">False</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="Section">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Section">[docs]</a>
+<span class="k">class</span> <span class="nc">Section</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Configuration Section Creator&quot;&quot;&quot;</span>
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_list</span><span class="p">,</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Section Object Initializer</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			in_list (list): list of list</span>
+<span class="sd">			ordered (bool, optional): Section Dictionary to be ordered or unordered. Defaults to False.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">lst</span> <span class="o">=</span> <span class="n">in_list</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dic</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">ordered</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dic</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ordered</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Section.add">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Section.add">[docs]</a>
+	<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ordered</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;add the key value to self.dic</span>
+<span class="sd">		go thru recursive lookup for dictionary tree</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			ordered (bool): dictionary to be ordered or not</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="k">for</span> <span class="n">dic</span> <span class="ow">in</span> <span class="n">recursive_item_lookup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lst</span><span class="p">):</span>
+				<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">):</span>
+					<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+						<span class="n">s</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ordered</span><span class="o">=</span><span class="n">ordered</span><span class="p">)</span>
+						<span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">dic</span>
+
+		<span class="k">except</span><span class="p">:</span> <span class="k">pass</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Convert">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert">[docs]</a>
+<span class="k">class</span> <span class="nc">Convert</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Converts Dicationary to Hierarchical config string</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		dic (dict): dictionary</span>
+<span class="sd">		tabs (int): front tabs</span>
+<span class="sd">		is_tailed (bool, optional): tailed config. Defaults to True.</span>
+<span class="sd">		is_grouped (bool, optional): grouped config. Defaults to False.</span>
+<span class="sd">		is_distributed (bool, optional): distributed config. Defaults to False.</span>
+<span class="sd">		is_straight (bool, optional): straight config. Defaults to False.</span>
+<span class="sd">		is_straight_anyway (bool, optional): straight anyway config. Defaults to False.</span>
+<span class="sd">		parent_prefix (str, optional): parent prefix. Defaults to &#39;&#39;.</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+		<span class="n">dic</span><span class="p">,</span> 
+		<span class="n">tabs</span><span class="p">,</span> 
+		<span class="n">is_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+		<span class="n">is_grouped</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+		<span class="n">is_distributed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+		<span class="n">is_straight</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+		<span class="n">is_straight_anyway</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+		<span class="n">parent_prefix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+		<span class="n">test</span><span class="o">=</span><span class="kc">False</span>
+		<span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Initializer</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">dic</span> <span class="o">=</span> <span class="n">dic</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">tabs</span> <span class="o">=</span> <span class="n">tabs</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">is_tailed</span> <span class="o">=</span> <span class="n">is_tailed</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">is_grouped</span> <span class="o">=</span> <span class="n">is_grouped</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">is_distributed</span> <span class="o">=</span> <span class="n">is_distributed</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">is_straight</span> <span class="o">=</span> <span class="n">is_straight</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">is_straight_anyway</span> <span class="o">=</span> <span class="n">is_straight_anyway</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">parent_prefix</span> <span class="o">=</span> <span class="n">parent_prefix</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">test</span> <span class="o">=</span> <span class="n">test</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">tab</span> <span class="o">=</span> <span class="s1">&#39;    &#39;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">front_tabs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">convert</span>
+
+	<span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">front_tabs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_front_tabs</span>
+
+	<span class="nd">@front_tabs</span><span class="o">.</span><span class="n">setter</span>
+	<span class="k">def</span> <span class="nf">front_tabs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tabs</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">_front_tabs</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tab</span><span class="o">*</span><span class="n">tabs</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<div class="viewcode-block" id="Convert.add_to_str">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.add_to_str">[docs]</a>
+	<span class="k">def</span> <span class="nf">add_to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">+=</span> <span class="n">s</span></div>
+
+
+<div class="viewcode-block" id="Convert.update_front_tabs">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.update_front_tabs">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_front_tabs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update front tab value with add of n</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			n (int): adds n to tabs</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">tabs</span> <span class="o">+=</span> <span class="n">n</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">front_tabs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span></div>
+
+
+<div class="viewcode-block" id="Convert.update_prefix">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.update_prefix">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update prefix value to k</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			k (str): key to be added</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent_prefix</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">front_tabs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent_prefix</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">k</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">front_tabs</span> <span class="o">+</span> <span class="n">k</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_tailed</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_straight</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent_prefix</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">k</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_distributed</span><span class="p">:</span>
+			<span class="n">pfx_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+			<span class="k">if</span> <span class="n">pfx_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">k</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">front_tabs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent_prefix</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">k</span></div>
+
+
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		start Converting dictionary to config string.</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			None: None</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+		<span class="k">for</span> <span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dic</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">dic_key</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">update_prefix</span><span class="p">(</span><span class="n">dic_key</span><span class="p">)</span>
+			<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">)):</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">update_front_tabs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">update_prefix</span><span class="p">(</span><span class="n">dic_key</span><span class="p">)</span>
+
+				<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logic_terminators</span><span class="p">(</span><span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+					<span class="k">pass</span>
+				<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">logic_groups</span><span class="p">(</span><span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+					<span class="k">pass</span>
+
+				<span class="bp">self</span><span class="o">.</span><span class="n">update_front_tabs</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">closure</span>
+
+	<span class="c1"># - LOGICS -----------------------------------------------------</span>
+
+<div class="viewcode-block" id="Convert.exception">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.exception">[docs]</a>
+	<span class="k">def</span> <span class="nf">exception</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Exceptional identifiex configurations - Add more as found any</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			dic_key (str): key to be found in set line</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">dic_key</span> <span class="o">==</span> <span class="s1">&#39;policy-options&#39;</span><span class="p">:</span>
+				<span class="c1"># candidates_not_expand_in_anycase.clear()</span>
+				<span class="n">candidates_not_expand_if_single</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+				<span class="n">candidates_not_expand_if_single</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;from&#39;</span><span class="p">)</span>
+				<span class="n">candidates_not_expand_if_single</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;then&#39;</span><span class="p">)</span>
+				<span class="n">candidates_not_expand_if_single</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;community&#39;</span><span class="p">)</span>
+			<span class="k">elif</span> <span class="n">dic_key</span> <span class="o">==</span><span class="s1">&#39;firewall&#39;</span><span class="p">:</span>
+				<span class="c1"># candidates_not_expand_in_anycase.clear()</span>
+				<span class="n">candidates_not_expand_if_single</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+				<span class="n">candidates_not_expand_if_single</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;then&#39;</span><span class="p">)</span>
+			<span class="k">elif</span> <span class="n">dic_key</span> <span class="o">==</span><span class="s1">&#39;class-of-service&#39;</span><span class="p">:</span>
+				<span class="c1"># candidates_not_expand_in_anycase.clear()</span>
+				<span class="n">candidates_not_expand_if_single</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+				<span class="n">candidates_not_expand_if_single</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">)</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">candidates_not_expand_if_single</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+				<span class="c1"># candidates_not_expand_in_anycase.clear()</span>
+
+<div class="viewcode-block" id="Convert.logic_terminators">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.logic_terminators">[docs]</a>
+	<span class="k">def</span> <span class="nf">logic_terminators</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;line terminators selector logic</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			dic_key (str): string key to be pass on to selector logic</span>
+<span class="sd">			dic_value (dic): dictionary for the key to be pass on to selector logic</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			bool: Returns True if any terminator logic matches found else None</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+
+		<span class="c1"># if self.test : print(dic_key)</span>
+		<span class="c1"># if self.is_straight: print(dic_key)</span>
+
+		<span class="c1"># ex: destination-port [ &lt;&quot;telnet tacacs ldap 636&quot;&gt; ];</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_grouped</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">clubbed_candidate_terminator_lines</span><span class="p">(</span><span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">True</span>
+
+		<span class="c1"># ex: &lt;&quot;community add blue;\n community add yellow;\n ....&quot;&gt;</span>
+		<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_distributed</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">distributed_candidate_terminator_lines</span><span class="p">(</span><span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">True</span>
+
+		<span class="c1"># Terminators</span>
+		<span class="k">elif</span> <span class="ow">not</span> <span class="n">dic_value</span> <span class="p">:</span>
+			<span class="c1"># ex: &lt;&quot;ip-protocol tcp;&quot;&gt;</span>
+			<span class="c1"># ex: &lt;&quot;0.0.0.0/0;&quot;&gt;</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">terminator_line</span>
+			<span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Convert.logic_groups">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.logic_groups">[docs]</a>
+	<span class="k">def</span> <span class="nf">logic_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;section group selector logic</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			dic_key (str): string key to be pass on to selector logic</span>
+<span class="sd">			dic_value (dic): dictionary for the key to be pass on to selector logic</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+
+
+		<span class="c1"># if self.test : print(dic_key)</span>
+		<span class="c1"># if self.is_straight: print(dic_key)</span>
+		<span class="k">if</span> <span class="n">dic_key</span> <span class="o">==</span> <span class="s2">&quot;community&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">test</span> <span class="o">=</span> <span class="kc">True</span>
+		<span class="k">if</span> <span class="kc">False</span><span class="p">:</span> <span class="k">pass</span>
+
+		<span class="k">elif</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dic_value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> 
+			<span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">is_straight</span>
+				<span class="ow">or</span> <span class="n">dic_key</span> <span class="ow">in</span> <span class="n">candidates_not_expand_if_single</span><span class="p">)</span>
+			<span class="p">):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">grp_candidate_straight</span><span class="p">(</span><span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">)</span>
+
+		<span class="c1"># elif (self.is_straight_anyway</span>
+		<span class="c1"># 	or dic_key in candidates_not_expand_in_anycase</span>
+		<span class="c1"># 	):</span>
+		<span class="c1"># 	self.grp_candidate_straight_anyway(dic_key, dic_value)</span>
+
+		<span class="c1"># ex: &lt;&quot;destination-port&quot;&gt; [ telnet tacacs ldap 636 ];</span>
+		<span class="k">elif</span> <span class="n">dic_key</span> <span class="ow">in</span> <span class="n">candidates_can_club_members</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">grp_candidates_clubbed</span><span class="p">(</span><span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">)</span>
+
+		<span class="c1"># ex: &lt;&quot;community add blue;\n community add yellow;\n ....&quot;&gt;</span>
+		<span class="k">elif</span> <span class="p">(</span><span class="n">dic_key</span> <span class="ow">in</span> <span class="n">candidates_distributed_to_multi_lines</span>
+			<span class="ow">and</span> <span class="ow">not</span> <span class="n">excluded</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="n">candidates_distributed_to_multi_lines_exclude</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">)</span>
+			<span class="ow">and</span> <span class="n">included</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="n">candidates_distributed_to_multi_lines_include</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">)</span>
+			<span class="p">):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">grp_candidates_distributed</span><span class="p">(</span><span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">)</span>
+
+		<span class="c1"># ex: &lt;&quot;term&quot;&gt; al_att_forward_class2_protocol_seq_100 {</span>
+		<span class="k">elif</span> <span class="p">(</span><span class="n">dic_key</span> <span class="ow">in</span> <span class="n">candidates_require_suffix</span>
+			<span class="ow">and</span> <span class="ow">not</span> <span class="n">excluded</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="n">candidates_require_suffix_exclude_members</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">)</span>
+			<span class="ow">and</span> <span class="n">included</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="n">candidates_require_suffix_include_members</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">)</span>
+			<span class="p">):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">grp_has_suffix_candidate</span><span class="p">(</span><span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">)</span>
+
+		<span class="c1"># ex: term &lt;&quot;al_att_forward_class2_protocol_seq_100&quot;&gt; {</span>
+		<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_tailed</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">grp_suffixes</span><span class="p">(</span><span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">)</span>
+
+		<span class="c1"># ex: &lt;&quot;ip-source-address&quot;&gt; {</span>
+		<span class="k">else</span><span class="p">:</span> 
+			<span class="bp">self</span><span class="o">.</span><span class="n">grp_nested</span><span class="p">(</span><span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">)</span></div>
+
+
+
+	<span class="c1"># - CLOSURES -----------------------------------------------------</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">closure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Append Section closure to string &quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_tailed</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_grouped</span><span class="p">:</span>
+			<span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">front_tabs</span> <span class="o">+</span> <span class="s2">&quot;}</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">add_to_str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+		
+
+	<span class="c1"># - TERMINATORS -----------------------------------------------------</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">terminator_line</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;;</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_to_str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Convert.clubbed_candidate_terminator_lines">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.clubbed_candidate_terminator_lines">[docs]</a>
+	<span class="k">def</span> <span class="nf">clubbed_candidate_terminator_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Clubbed candidates terminator words getting added to string</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			dic_key (str): key/string to be added to config</span>
+<span class="sd">			dic_value (dict): sub-section config (if any)</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="c1"># if self.test : print(dic_key)</span>
+		<span class="n">sObj</span> <span class="o">=</span> <span class="n">Convert</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">,</span> <span class="n">is_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_grouped</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+		<span class="n">s</span> <span class="o">=</span> <span class="n">dic_key</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sObj</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_to_str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Convert.distributed_candidate_terminator_lines">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.distributed_candidate_terminator_lines">[docs]</a>
+	<span class="k">def</span> <span class="nf">distributed_candidate_terminator_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Distributed terminator candidate words getting added to string</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			dic_key (str): key/string to be added to config</span>
+<span class="sd">			dic_value (dict): sub-section config (if any)</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="c1"># if self.test : print(dic_key)</span>
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">dic_value</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="s2">&quot;;</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">add_to_str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+
+
+
+	<span class="c1"># - GROUPS -----------------------------------------------------</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Args:</span>
+<span class="sd">		dic_key (str): key/string to be added to config</span>
+<span class="sd">		dic_value (dict): sub-section config (if any)</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		None: None</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Convert.grp_candidate_straight">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.grp_candidate_straight">[docs]</a>
+	<span class="k">def</span> <span class="nf">grp_candidate_straight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;group config, which has straight candidate</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			dic_key (str): key/string to be added to config</span>
+<span class="sd">			dic_value (dict): sub-section config (if any)</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="c1"># if self.test : print(self.is_straight, dic_key)</span>
+		<span class="n">sObj</span> <span class="o">=</span> <span class="n">Convert</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">,</span> <span class="n">is_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_straight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">is_straight</span><span class="p">)</span>
+		<span class="c1"># if self.test: print(&quot;&gt;&quot;, self.prefix, sObj.s)</span>
+		<span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sObj</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_to_str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+
+
+	<span class="c1"># def grp_candidate_straight_anyway(self, dic_key, dic_value):</span>
+	<span class="c1"># 	s = dic_key</span>
+	<span class="c1"># 	for k, v in dic_value.items():</span>
+	<span class="c1"># 		# print(k)</span>
+	<span class="c1"># 		sObj = Convert(v, self.tabs, is_tailed=True, is_straight_anyway=self.is_straight_anyway, test=self.test)</span>
+	<span class="c1"># 		s += &quot;X&quot; + k + &quot;\n&quot;</span>
+	<span class="c1"># 	self.add_to_str(self.prefix + s)</span>
+
+		
+<div class="viewcode-block" id="Convert.grp_has_suffix_candidate">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.grp_has_suffix_candidate">[docs]</a>
+	<span class="k">def</span> <span class="nf">grp_has_suffix_candidate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;group config, which has suffix candidate.</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			dic_key (str): key/string to be added to config</span>
+<span class="sd">			dic_value (dict): sub-section config (if any)</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="c1"># if self.test : print(self.is_straight, dic_key)</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dic_value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="n">sObj</span> <span class="o">=</span> <span class="n">Convert</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">,</span> <span class="n">is_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parent_prefix</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span>
+			<span class="n">s</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">sObj</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">sObj</span> <span class="o">=</span> <span class="n">Convert</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">,</span> <span class="n">is_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+			<span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sObj</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_to_str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Convert.grp_suffixes">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.grp_suffixes">[docs]</a>
+	<span class="k">def</span> <span class="nf">grp_suffixes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;group config</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			dic_key (str): key/string to be added to config</span>
+<span class="sd">			dic_value (dict): sub-section config (if any)</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="c1"># if self.test : print(dic_key)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">update_front_tabs</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+		<span class="n">sObj</span> <span class="o">=</span> <span class="n">Convert</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">,</span> <span class="n">is_tailed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+		<span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; {</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sObj</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_to_str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">update_front_tabs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Convert.grp_candidates_clubbed">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.grp_candidates_clubbed">[docs]</a>
+	<span class="k">def</span> <span class="nf">grp_candidates_clubbed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;clubbed group config</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			dic_key (str): key/string to be added to config</span>
+<span class="sd">			dic_value (dict): sub-section config (if any)</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="c1"># if self.test : print(dic_key)</span>
+		<span class="n">sObj</span> <span class="o">=</span> <span class="n">Convert</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">,</span> <span class="n">is_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_grouped</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">dic_value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">dic_value</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; [&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sObj</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;];</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sObj</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;;</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_to_str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Convert.grp_candidates_distributed">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.grp_candidates_distributed">[docs]</a>
+	<span class="k">def</span> <span class="nf">grp_candidates_distributed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Distributed group config</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			dic_key (str): key/string to be added to config</span>
+<span class="sd">			dic_value (dict): sub-section config (if any)</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="c1"># if self.test : print(dic_key)</span>
+		<span class="n">pp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent_prefix</span> <span class="o">+</span> <span class="n">dic_key</span>
+		<span class="n">sObj</span> <span class="o">=</span> <span class="n">Convert</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">is_tailed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_distributed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parent_prefix</span><span class="o">=</span><span class="n">pp</span><span class="p">)</span>
+		<span class="n">s</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">sObj</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_to_str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+
+
+	<span class="c1"># DEFAUT AT END</span>
+<div class="viewcode-block" id="Convert.grp_nested">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Convert.grp_nested">[docs]</a>
+	<span class="k">def</span> <span class="nf">grp_nested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic_key</span><span class="p">,</span> <span class="n">dic_value</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;nested group config</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			dic_key (str): key/string to be added to config</span>
+<span class="sd">			dic_value (dict): sub-section config (if any)</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="c1"># ELSE AFTER ALL grp matches</span>
+		<span class="c1"># if self.test : print(dic_key)</span>
+		<span class="n">sObj</span> <span class="o">=</span> <span class="n">Convert</span><span class="p">(</span><span class="n">dic_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">,</span> <span class="n">is_tailed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+		<span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot; {</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sObj</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_to_str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Hierarchy">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Hierarchy">[docs]</a>
+<span class="k">class</span> <span class="nc">Hierarchy</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Hierarchical config conversion</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		input_file (str): input set config file</span>
+<span class="sd">		output_file (str): output file</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>	
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Object initializer</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">input_file</span> <span class="o">=</span> <span class="n">input_file</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">output_file</span> <span class="o">=</span> <span class="n">output_file</span>
+
+<div class="viewcode-block" id="Hierarchy.convert">
+<a class="viewcode-back" href="../../../docs/t_doc/pyjuniper/hierarchy.html#nettoolkit.pyJuniper.hierarchy.Hierarchy.convert">[docs]</a>
+	<span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;convert input file</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen_section_dict</span><span class="p">(</span> <span class="n">IO</span><span class="o">.</span><span class="n">file_to_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file</span><span class="p">)</span> <span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_conv_dict_to_hierarchy</span><span class="p">(</span><span class="n">section</span><span class="p">)</span></div>
+
+
+	<span class="k">def</span> <span class="nf">_gen_section_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_file_lst</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">Section</span><span class="p">(</span><span class="n">li_li_words</span><span class="p">(</span><span class="n">input_file_lst</span><span class="p">),</span> 
+					<span class="n">ordered</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_conv_dict_to_hierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Convert</span><span class="p">(</span><span class="n">section</span><span class="o">.</span><span class="n">dic</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">is_tailed</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span></div>
+
+
+
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+	<span class="k">pass</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

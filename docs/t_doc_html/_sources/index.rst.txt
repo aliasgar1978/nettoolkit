@@ -1,0 +1,26 @@
+
+
+
+.. toctree::
+   :maxdepth: 4
+   :caption: API Documentation:
+   :numbered:
+
+   Addressing <docs/t_doc/addressing/tech_doc>
+   capture-it <docs/t_doc/capture_it/tech_doc>
+   compare-it <docs/t_doc/compare_it/tech_doc> 
+   configure <docs/t_doc/configure/tech_doc> 
+   facts-finder <docs/t_doc/facts_finder/tech_doc>
+   j2config <docs/t_doc/j2config/tech_doc>
+   nettoolkit <docs/t_doc/nettoolkit/tech_doc>
+   pyjuniper <docs/t_doc/pyjuniper/tech_doc>
+   pynetcrypt <docs/t_doc/pynetcrypt/tech_doc>
+   pyvig <docs/t_doc/pyvig/tech_doc>
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

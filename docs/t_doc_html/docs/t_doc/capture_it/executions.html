@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.9. executions modules &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="3. compare-it API documentation!" href="../compare_it/tech_doc.html" />
+    <link rel="prev" title="2.8. execution of a device module" href="exec_device.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_doc.html">2. capture-it</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cap_summary.html">2.1. cap_summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="captures.html">2.2. captures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clp.html">2.3. clp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command.html">2.4. command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common.html">2.5. common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conn.html">2.6. conn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="detection.html">2.7. detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec_device.html">2.8. exec_device</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.9. executions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.capture_it.executions.Execute_By_Individual_Commands"><code class="docutils literal notranslate"><span class="pre">Execute_By_Individual_Commands</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.capture_it.executions.Execute_By_Individual_Commands.execute"><code class="docutils literal notranslate"><span class="pre">Execute_By_Individual_Commands.execute()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.capture_it.executions.Execute_By_Login"><code class="docutils literal notranslate"><span class="pre">Execute_By_Login</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.capture_it.executions.Execute_By_Login.execute"><code class="docutils literal notranslate"><span class="pre">Execute_By_Login.execute()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.capture_it.executions.Execute_Common"><code class="docutils literal notranslate"><span class="pre">Execute_Common</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.capture_it.executions.Execute_Common.dependent_cmds"><code class="docutils literal notranslate"><span class="pre">Execute_Common.dependent_cmds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.capture_it.executions.Execute_Common.generate_facts"><code class="docutils literal notranslate"><span class="pre">Execute_Common.generate_facts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.capture_it.executions.Execute_Common.is_valid"><code class="docutils literal notranslate"><span class="pre">Execute_Common.is_valid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.capture_it.executions.Execute_Common.show_failures"><code class="docutils literal notranslate"><span class="pre">Execute_Common.show_failures</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tech_doc.html"><span class="section-number">2. </span>capture-it API documentation!</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2.9. </span>executions modules</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/t_doc/capture_it/executions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nettoolkit.capture_it.executions">
+<span id="executions-modules"></span><h1><span class="section-number">2.9. </span>executions modules<a class="headerlink" href="#module-nettoolkit.capture_it.executions" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.capture_it.executions.Execute_By_Individual_Commands">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.capture_it.executions.</span></span><span class="sig-name descname"><span class="pre">Execute_By_Individual_Commands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dev_cmd_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/capture_it/executions.html#Execute_By_Individual_Commands"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.capture_it.executions.Execute_By_Individual_Commands" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../nettoolkit/gpl.html#nettoolkit.nettoolkit_common.gpl.Multi_Execution" title="nettoolkit.nettoolkit_common.gpl.Multi_Execution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Multi_Execution</span></code></a>, <a class="reference internal" href="#nettoolkit.capture_it.executions.Execute_Common" title="nettoolkit.capture_it.executions.Execute_Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">Execute_Common</span></code></a></p>
+<p>Execute the device capture by logging in to device and running individual commands on to it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>auth</strong> (<em>dict</em>) – authentication parameters ( un, pw, en)</p></li>
+<li><p><strong>dev_cmd_dict</strong> – dictionary of list {device_ip:[commands list,]}</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – path where output(s), logs(s) should be stored.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Properties:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and ‘both’ will do both.</p></li>
+<li><p>forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)</p></li>
+<li><p>parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)</p></li>
+<li><p>max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.</p></li>
+<li><p>CustomClass (class): Custom class definitition to execute additional custom commands</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – raise exception if any issue with authentication or connections.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.capture_it.executions.Execute_By_Individual_Commands.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/capture_it/executions.html#Execute_By_Individual_Commands.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.capture_it.executions.Execute_By_Individual_Commands.execute" title="Link to this definition"></a></dt>
+<dd><p>execution function for a single device. hn == ip address in this case.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ip</strong> (<em>str</em>) – ip address of a reachable device</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.capture_it.executions.Execute_By_Login">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.capture_it.executions.</span></span><span class="sig-name descname"><span class="pre">Execute_By_Login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/capture_it/executions.html#Execute_By_Login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.capture_it.executions.Execute_By_Login" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../nettoolkit/gpl.html#nettoolkit.nettoolkit_common.gpl.Multi_Execution" title="nettoolkit.nettoolkit_common.gpl.Multi_Execution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Multi_Execution</span></code></a>, <a class="reference internal" href="#nettoolkit.capture_it.executions.Execute_Common" title="nettoolkit.capture_it.executions.Execute_Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">Execute_Common</span></code></a></p>
+<p>Execute the device capture by logging in to device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ip_list</strong> (<em>set</em><em>, </em><em>list</em><em>, </em><em>tuple</em>) – set of ip addresses to be logging for capture</p></li>
+<li><p><strong>auth</strong> (<em>dict</em>) – authentication parameters ( un, pw, en)</p></li>
+<li><p><strong>cmds</strong> (<em>set</em><em>, </em><em>list</em><em>, </em><em>tuple</em>) – set of commands to be captured</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – path where output(s), logs(s) should be stored.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Properties:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and ‘both’ will do both.</p></li>
+<li><p>forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)</p></li>
+<li><p>parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)</p></li>
+<li><p>max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.</p></li>
+<li><p>CustomClass (class): Custom class definitition to execute additional custom commands</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – raise exception if any issue with authentication or connections.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.capture_it.executions.Execute_By_Login.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/capture_it/executions.html#Execute_By_Login.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.capture_it.executions.Execute_By_Login.execute" title="Link to this definition"></a></dt>
+<dd><p>execution function for a single device. hn == ip address in this case.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ip</strong> (<em>str</em>) – ip address of a reachable device</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.capture_it.executions.Execute_Common">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.capture_it.executions.</span></span><span class="sig-name descname"><span class="pre">Execute_Common</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/capture_it/executions.html#Execute_Common"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.capture_it.executions.Execute_Common" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>common methods/variables declaration in a Execute Common class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>auth</strong> (<em>dict</em>) – authentication parameters</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – raise exception if any issue with authentication or connections.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.capture_it.executions.Execute_Common.dependent_cmds">
+<span class="sig-name descname"><span class="pre">dependent_cmds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_dynamic_cmd_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/capture_it/executions.html#Execute_Common.dependent_cmds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.capture_it.executions.Execute_Common.dependent_cmds" title="Link to this definition"></a></dt>
+<dd><p>Provide dependent commands via a class definition.  A new variable set of commands can be passed
+here using defined custom_dynamic_cmd_class class.  Defined class must have an abstract property called <cite>cmds</cite>.
+which should return a new set/list of commands to be executed.  A good example of usage of it is -
+derive the bgp neighbor ip addresses from show ip bgp summary output, and then create new set of commands to see
+advertised route for those neighbor ip addresses.  In this way no need to create a separate set of show commands for multiple
+devices, custom class will take care of generating additional show commands to see advertized routes based on neighbors
+appear on bgp summary output. ( ofcouse, show ip bgp summary should be there in original show capture )</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>custom_dynamic_cmd_class</strong> (<em>_type_</em>) – _description_</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Exception</strong> – invalid input <cite>custom_dynamic_cmd_class</cite> for wront types</p></li>
+<li><p><strong>Exception</strong> – mandatory property missing <cite>cmds</cite> for missing property in provided class</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.capture_it.executions.Execute_Common.generate_facts">
+<span class="sig-name descname"><span class="pre">generate_facts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CustomDeviceFactsClass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">foreign_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/capture_it/executions.html#Execute_Common.generate_facts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.capture_it.executions.Execute_Common.generate_facts" title="Link to this definition"></a></dt>
+<dd><p>generate excel facts -clean.xlsx file using facts finder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>CustomDeviceFactsClass</strong> (<em>class</em><em>, </em><em>optional</em>) – class definition for the modification of excel facts with custom properties. Defaults to None.</p></li>
+<li><p><strong>foreign_keys</strong> (<em>dict</em><em>, </em><em>optional</em>) – custom keys(aka: custom columns) here in order to accept them and display in appropriate order. Defaults to {}.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – Invalid type: foreign_keys if recieved in format other than dict.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.capture_it.executions.Execute_Common.is_valid">
+<span class="sig-name descname"><span class="pre">is_valid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/capture_it/executions.html#Execute_Common.is_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.capture_it.executions.Execute_Common.is_valid" title="Link to this definition"></a></dt>
+<dd><p>Validation function to check if provided ip is valid IPv4 or IPv6 address</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ip</strong> (<em>str</em>) – ipv4 or ipv6 address</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True/False based on validation success/fail</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.capture_it.executions.Execute_Common.show_failures">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">show_failures</span></span><a class="headerlink" href="#nettoolkit.capture_it.executions.Execute_Common.show_failures" title="Link to this definition"></a></dt>
+<dd><p>Displays failure summary</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="exec_device.html" class="btn btn-neutral float-left" title="2.8. execution of a device module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../compare_it/tech_doc.html" class="btn btn-neutral float-right" title="3. compare-it API documentation!" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

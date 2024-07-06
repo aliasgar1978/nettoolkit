@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.7. cisco parser - arp &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="5.20. juniper parser - arp" href="parsers_juniper.html" />
+    <link rel="prev" title="5.4. generator common functions" href="generators_common.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_doc.html">5. facts-finder</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="facts_gen.html">5.1. facts_gen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_cisco.html">5.2. generators_cisco</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_juniper.html">5.3. generators_juniper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html">5.4. generator common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html#module-nettoolkit.facts_finder.generators.cisco.common">5.5. cisco generator common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html#module-nettoolkit.facts_finder.generators.juniper.common">5.6. juniper generator common functions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.7. cisco parser - arp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_arp_table.get_arp_table"><code class="docutils literal notranslate"><span class="pre">get_arp_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp">5.8. cisco parser - bgp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.AddressFamily"><code class="docutils literal notranslate"><span class="pre">AddressFamily</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.AddressFamily.bgp_read"><code class="docutils literal notranslate"><span class="pre">AddressFamily.bgp_read()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP"><code class="docutils literal notranslate"><span class="pre">BGP</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP.bgp_read"><code class="docutils literal notranslate"><span class="pre">BGP.bgp_read()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa"><code class="docutils literal notranslate"><span class="pre">BGP_Papa</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa.bgp_nbr_attributes"><code class="docutils literal notranslate"><span class="pre">BGP_Papa.bgp_nbr_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa.get_nbr_attributes"><code class="docutils literal notranslate"><span class="pre">BGP_Papa.get_nbr_attributes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.get_bgp_af_running"><code class="docutils literal notranslate"><span class="pre">get_bgp_af_running()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.get_bgp_running"><code class="docutils literal notranslate"><span class="pre">get_bgp_running()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.merge_vrftype_name_inkey"><code class="docutils literal notranslate"><span class="pre">merge_vrftype_name_inkey()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_cdp">5.9. cisco parser - cdp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_cdp.get_cdp_neighbour"><code class="docutils literal notranslate"><span class="pre">get_cdp_neighbour()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_description">5.10. cisco parser - if description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_int_description.get_interface_description"><code class="docutils literal notranslate"><span class="pre">get_interface_description()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_status">5.11. cisco parser - if status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_int_status.get_interface_status"><code class="docutils literal notranslate"><span class="pre">get_interface_status()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_lldp">5.12. cisco parser - lldp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_lldp.get_lldp_neighbour"><code class="docutils literal notranslate"><span class="pre">get_lldp_neighbour()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_mac_table">5.13. cisco parser - mac</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_mac_table.get_mac_address_table"><code class="docutils literal notranslate"><span class="pre">get_mac_address_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf">5.14. cisco parser - ospf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF"><code class="docutils literal notranslate"><span class="pre">OSPF</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.active_interfaces"><code class="docutils literal notranslate"><span class="pre">OSPF.active_interfaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_active_interfaces"><code class="docutils literal notranslate"><span class="pre">OSPF.get_active_interfaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_networks"><code class="docutils literal notranslate"><span class="pre">OSPF.get_networks()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_router_id"><code class="docutils literal notranslate"><span class="pre">OSPF.get_router_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_summaries"><code class="docutils literal notranslate"><span class="pre">OSPF.get_summaries()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.networks"><code class="docutils literal notranslate"><span class="pre">OSPF.networks()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.ospf_read"><code class="docutils literal notranslate"><span class="pre">OSPF.ospf_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.router_id"><code class="docutils literal notranslate"><span class="pre">OSPF.router_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.summaries"><code class="docutils literal notranslate"><span class="pre">OSPF.summaries()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.get_ospf_running"><code class="docutils literal notranslate"><span class="pre">get_ospf_running()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces">5.15. cisco parser - interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_channel_group"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_int_channel_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_mode_details"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_int_mode_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_ospf_auth"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_int_ospf_auth()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_udld"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_int_udld()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_vlan_details"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_int_vlan_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_vrf"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_int_vrf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_description"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_interface_description()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_state"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_interface_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_v4_helpers"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_interface_v4_helpers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_v6_helpers"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_interface_v6_helpers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_ip_details"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_ip_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_ipv6_details"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_ipv6_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_channel_group"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_channel_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_description"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_description()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_ips"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_ips()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_mode"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_mode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_ospf_auth"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_ospf_auth()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_read"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_state"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_udld"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_udld()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_v4_helpers"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_v4_helpers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_v6_helpers"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_v6_helpers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_v6_ips"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_v6_ips()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_vlans"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_vlans()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_vrf"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_vrf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.get_interfaces_running"><code class="docutils literal notranslate"><span class="pre">get_interfaces_running()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes">5.16. cisco parser - routes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes"><code class="docutils literal notranslate"><span class="pre">RunningRoutes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes.get_route_dict"><code class="docutils literal notranslate"><span class="pre">RunningRoutes.get_route_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes.route_read"><code class="docutils literal notranslate"><span class="pre">RunningRoutes.route_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes.routes_dict"><code class="docutils literal notranslate"><span class="pre">RunningRoutes.routes_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_administrative_dist"><code class="docutils literal notranslate"><span class="pre">get_administrative_dist()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_multi_idx_item"><code class="docutils literal notranslate"><span class="pre">get_multi_idx_item()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_pfx_nh_idxdist"><code class="docutils literal notranslate"><span class="pre">get_pfx_nh_idxdist()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_singel_idx_item"><code class="docutils literal notranslate"><span class="pre">get_singel_idx_item()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_system_running_routes"><code class="docutils literal notranslate"><span class="pre">get_system_running_routes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.index_of"><code class="docutils literal notranslate"><span class="pre">index_of()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system">5.17. cisco parser - sys_info</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem"><code class="docutils literal notranslate"><span class="pre">RunningSystem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_bgp_as_number"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_bgp_as_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_ca_certificate"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_ca_certificate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_exec_banner"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_exec_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_hostname"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_hostname()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_name_server"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_name_server()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_ntp_server"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_ntp_server()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_syslog_server"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_syslog_server()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_tacacs_server"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_tacacs_server()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.get_system_running"><code class="docutils literal notranslate"><span class="pre">get_system_running()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs">5.18. cisco parser - vrf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs"><code class="docutils literal notranslate"><span class="pre">RunningVRFs</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_af"><code class="docutils literal notranslate"><span class="pre">RunningVRFs.get_vrf_af()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_description"><code class="docutils literal notranslate"><span class="pre">RunningVRFs.get_vrf_description()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_rd"><code class="docutils literal notranslate"><span class="pre">RunningVRFs.get_vrf_rd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_rt"><code class="docutils literal notranslate"><span class="pre">RunningVRFs.get_vrf_rt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_af"><code class="docutils literal notranslate"><span class="pre">RunningVRFs.vrf_af()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_description"><code class="docutils literal notranslate"><span class="pre">RunningVRFs.vrf_description()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_rd"><code class="docutils literal notranslate"><span class="pre">RunningVRFs.vrf_rd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_read"><code class="docutils literal notranslate"><span class="pre">RunningVRFs.vrf_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_rt"><code class="docutils literal notranslate"><span class="pre">RunningVRFs.vrf_rt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.get_vrfs_running"><code class="docutils literal notranslate"><span class="pre">get_vrfs_running()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_version">5.19. cisco parser - version</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_version.get_version"><code class="docutils literal notranslate"><span class="pre">get_version()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html">5.20. juniper parser - arp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware">5.21. juniper parser - hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_int_description">5.22. juniper parser - if description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_lldp">5.23. juniper parser - lldp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp">5.24. juniper parser - bgp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces">5.25. juniper parser - interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf">5.26. juniper parser - ospf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes">5.27. juniper parser - routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances">5.28. juniper parser - bgp instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system">5.29. juniper parser - system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running">5.30. juniper parser - configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_version">5.31. juniper parser - version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html">5.32. Cisco Modifier - table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.cisco_var">5.33. Cisco Modifier - var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.cisco_vrfs">5.34. Cisco Modifier - vrf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.merger">5.35. Cisco - merger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.commands.cmd_dict">5.36. Cisco - commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html">5.37. Juniper Modifier - table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.juniper_var">5.38. Juniper Modifier - var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.merger">5.39. Juniper Modifier - merger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.commands.cmd_dict">5.40. Juniper Modifier - commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_common.html">5.41. modifiers_common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html">5.42. mergers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rearrange.html">5.43. rearrange</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tech_doc.html"><span class="section-number">5. </span>Facts-Finder API documentation!</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5.7. </span>cisco parser - arp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/t_doc/facts_finder/parsers_cisco.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_arp_table">
+<span id="cisco-parser-arp"></span><h1><span class="section-number">5.7. </span>cisco parser - arp<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_arp_table" title="Link to this heading"></a></h1>
+<p>cisco show arp table command output parser</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_arp_table.get_arp_table">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_arp_table.</span></span><span class="sig-name descname"><span class="pre">get_arp_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_arp_table.html#get_arp_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_arp_table.get_arp_table" title="Link to this definition"></a></dt>
+<dd><p>parser - show ip arp command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>port/interface</p></li>
+<li><p>ip address</p></li>
+<li><p>mac address</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp">
+<span id="cisco-parser-bgp"></span><h1><span class="section-number">5.8. </span>cisco parser - bgp<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp" title="Link to this heading"></a></h1>
+<p>cisco running-config parser for bgp section output</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.AddressFamily">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.</span></span><span class="sig-name descname"><span class="pre">AddressFamily</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_bgp.html#AddressFamily"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.AddressFamily" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa" title="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa"><code class="xref py py-class docutils literal notranslate"><span class="pre">BGP_Papa</span></code></a></p>
+<p>object for address-family BGP running config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.AddressFamily.bgp_read">
+<span class="sig-name descname"><span class="pre">bgp_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_bgp.html#AddressFamily.bgp_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.AddressFamily.bgp_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various bgp af level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on bgp af config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.</span></span><span class="sig-name descname"><span class="pre">BGP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_bgp.html#BGP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa" title="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa"><code class="xref py py-class docutils literal notranslate"><span class="pre">BGP_Papa</span></code></a></p>
+<p>object for native BGP running config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP.bgp_read">
+<span class="sig-name descname"><span class="pre">bgp_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_bgp.html#BGP.bgp_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP.bgp_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various bgp native level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on bgp native config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.</span></span><span class="sig-name descname"><span class="pre">BGP_Papa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_bgp.html#BGP_Papa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>parent object for BGP level running config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa.bgp_nbr_attributes">
+<span class="sig-name descname"><span class="pre">bgp_nbr_attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_bgp.html#BGP_Papa.bgp_nbr_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa.bgp_nbr_attributes" title="Link to this definition"></a></dt>
+<dd><p>update the bgp neighbor attribute details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa.get_nbr_attributes">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_nbr_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_bgp.html#BGP_Papa.get_nbr_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.BGP_Papa.get_nbr_attributes" title="Link to this definition"></a></dt>
+<dd><p>parser function to update bgp neighbor attribute details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a bgp neighbour info</p></li>
+<li><p><strong>line</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.get_bgp_af_running">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.</span></span><span class="sig-name descname"><span class="pre">get_bgp_af_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_bgp.html#get_bgp_af_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.get_bgp_af_running" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various bgp address-family parameters.
+uses AddressFamily in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.get_bgp_running">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.</span></span><span class="sig-name descname"><span class="pre">get_bgp_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_bgp.html#get_bgp_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.get_bgp_running" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various bgp native parameters.
+uses BGP in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.merge_vrftype_name_inkey">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.</span></span><span class="sig-name descname"><span class="pre">merge_vrftype_name_inkey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_bgp.html#merge_vrftype_name_inkey"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp.merge_vrftype_name_inkey" title="Link to this definition"></a></dt>
+<dd><p>update vrf and vrf_type in dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> (<em>dict</em>) – dictionary with neighbours attributes</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated dict with bgp_vrf and address-family attributes</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_cdp">
+<span id="cisco-parser-cdp"></span><h1><span class="section-number">5.9. </span>cisco parser - cdp<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_cdp" title="Link to this heading"></a></h1>
+<p>cisco show cdp neighbour command output parser</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_cdp.get_cdp_neighbour">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_cdp.</span></span><span class="sig-name descname"><span class="pre">get_cdp_neighbour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dsr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_cdp.html#get_cdp_neighbour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_cdp.get_cdp_neighbour" title="Link to this definition"></a></dt>
+<dd><p>parser - show cdp neigh command output // Deprycated and removed // use lldp neighbor instead.</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>port/interface</p></li>
+<li><p>neighbor interface</p></li>
+<li><p>neighbor plateform</p></li>
+<li><p>neighbor hostname</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p></li>
+<li><p><strong>dsr</strong> (<em>bool</em><em>, </em><em>optional</em>) – DOMAIN SUFFIX REMOVAL. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_description">
+<span id="cisco-parser-if-description"></span><h1><span class="section-number">5.10. </span>cisco parser - if description<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_description" title="Link to this heading"></a></h1>
+<p>cisco show interface description command output parser</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_int_description.get_interface_description">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_int_description.</span></span><span class="sig-name descname"><span class="pre">get_interface_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_int_description.html#get_interface_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_int_description.get_interface_description" title="Link to this definition"></a></dt>
+<dd><p>parser - show int descript command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>port/interface</p></li>
+<li><p>description</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_status">
+<span id="cisco-parser-if-status"></span><h1><span class="section-number">5.11. </span>cisco parser - if status<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_status" title="Link to this heading"></a></h1>
+<p>cisco show interface status command output parser</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_int_status.get_interface_status">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_int_status.</span></span><span class="sig-name descname"><span class="pre">get_interface_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_int_status.html#get_interface_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_int_status.get_interface_status" title="Link to this definition"></a></dt>
+<dd><p>parser - show int status command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>port/interface</p></li>
+<li><p>port_type</p></li>
+<li><p>duplex</p></li>
+<li><p>speed</p></li>
+<li><p>port_status</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_lldp">
+<span id="cisco-parser-lldp"></span><h1><span class="section-number">5.12. </span>cisco parser - lldp<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_lldp" title="Link to this heading"></a></h1>
+<p>cisco show lldp neighbour command output parser</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_lldp.get_lldp_neighbour">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_lldp.</span></span><span class="sig-name descname"><span class="pre">get_lldp_neighbour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dsr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_lldp.html#get_lldp_neighbour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_lldp.get_lldp_neighbour" title="Link to this definition"></a></dt>
+<dd><p>parser - show lldp neigh command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>port/interface</p></li>
+<li><p>neighbor interface</p></li>
+<li><p>neighbor hostname</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p></li>
+<li><p><strong>dsr</strong> (<em>bool</em><em>, </em><em>optional</em>) – DOMAIN SUFFIX REMOVAL. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_mac_table">
+<span id="cisco-parser-mac"></span><h1><span class="section-number">5.13. </span>cisco parser - mac<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_mac_table" title="Link to this heading"></a></h1>
+<p>cisco show mac address-table command output parser</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_mac_table.get_mac_address_table">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_mac_table.</span></span><span class="sig-name descname"><span class="pre">get_mac_address_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_mac_table.html#get_mac_address_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_mac_table.get_mac_address_table" title="Link to this definition"></a></dt>
+<dd><p>parser - show mac address-table command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>port/interface</p></li>
+<li><p>neighbor mac</p></li>
+<li><p>neighbor mac2</p></li>
+<li><p>neighbor mac4</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf">
+<span id="cisco-parser-ospf"></span><h1><span class="section-number">5.14. </span>cisco parser - ospf<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf" title="Link to this heading"></a></h1>
+<p>cisco show running-config parser for ospf section output</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.</span></span><span class="sig-name descname"><span class="pre">OSPF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_ospf.html#OSPF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>parent object for OSPF running config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.active_interfaces">
+<span class="sig-name descname"><span class="pre">active_interfaces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_ospf.html#OSPF.active_interfaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.active_interfaces" title="Link to this definition"></a></dt>
+<dd><p>update the active interfaces</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_active_interfaces">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_active_interfaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf_op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_ospf.html#OSPF.get_active_interfaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_active_interfaces" title="Link to this definition"></a></dt>
+<dd><p>parser function to get active interfaces</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vrf_op_dict</strong> (<em>dict</em>) – dictionary with a vrf info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_networks">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_networks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf_op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_ospf.html#OSPF.get_networks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_networks" title="Link to this definition"></a></dt>
+<dd><p>parser function to get networks</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vrf_op_dict</strong> (<em>dict</em>) – dictionary with a vrf info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_router_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_router_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf_op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_ospf.html#OSPF.get_router_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_router_id" title="Link to this definition"></a></dt>
+<dd><p>parser function to get router-id details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vrf_op_dict</strong> (<em>dict</em>) – dictionary with a vrf info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_summaries">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_summaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf_op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_ospf.html#OSPF.get_summaries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.get_summaries" title="Link to this definition"></a></dt>
+<dd><p>parser function to get ospf area range summaries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vrf_op_dict</strong> (<em>dict</em>) – dictionary with a vrf info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.networks">
+<span class="sig-name descname"><span class="pre">networks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_ospf.html#OSPF.networks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.networks" title="Link to this definition"></a></dt>
+<dd><p>update the networks</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.ospf_read">
+<span class="sig-name descname"><span class="pre">ospf_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_ospf.html#OSPF.ospf_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.ospf_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various ospf level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on ospf config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.router_id">
+<span class="sig-name descname"><span class="pre">router_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_ospf.html#OSPF.router_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.router_id" title="Link to this definition"></a></dt>
+<dd><p>update the router-id details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.summaries">
+<span class="sig-name descname"><span class="pre">summaries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_ospf.html#OSPF.summaries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.OSPF.summaries" title="Link to this definition"></a></dt>
+<dd><p>update the ospf area range summaries</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.get_ospf_running">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.</span></span><span class="sig-name descname"><span class="pre">get_ospf_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_ospf.html#get_ospf_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf.get_ospf_running" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various ospf parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with ospf fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces">
+<span id="cisco-parser-interfaces"></span><h1><span class="section-number">5.15. </span>cisco parser - interfaces<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces" title="Link to this heading"></a></h1>
+<p>cisco show running-config parser for interface section outputs</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.</span></span><span class="sig-name descname"><span class="pre">RunningInterfaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>object for interface level running config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_channel_group">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_int_channel_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_int_channel_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_channel_group" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface port channel details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_mode_details">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_int_mode_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_int_mode_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_mode_details" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface mode details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_ospf_auth">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_int_ospf_auth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_int_ospf_auth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_ospf_auth" title="Link to this definition"></a></dt>
+<dd><p>parser function to update ospf authentication details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_udld">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_int_udld</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_int_udld"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_udld" title="Link to this definition"></a></dt>
+<dd><p>parser function to update udld parameter details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_vlan_details">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_int_vlan_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_int_vlan_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_vlan_details" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface vlan details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_vrf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_int_vrf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_int_vrf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_int_vrf" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface vrf details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_description">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_interface_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_interface_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_description" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface description details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_state">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_interface_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_interface_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_state" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface state details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_v4_helpers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_interface_v4_helpers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_interface_v4_helpers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_v4_helpers" title="Link to this definition"></a></dt>
+<dd><p>parser function to update ipv4 helpers details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_v6_helpers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_interface_v6_helpers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_interface_v6_helpers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_interface_v6_helpers" title="Link to this definition"></a></dt>
+<dd><p>parser function to update ipv6 helpers details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_ip_details">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_ip_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_ip_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_ip_details" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface ipv4 ip address details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_ipv6_details">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_ipv6_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.get_ipv6_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.get_ipv6_details" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface ipv6 ip address details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_channel_group">
+<span class="sig-name descname"><span class="pre">interface_channel_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_channel_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_channel_group" title="Link to this definition"></a></dt>
+<dd><p>update the interface port channel details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_description">
+<span class="sig-name descname"><span class="pre">interface_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_description" title="Link to this definition"></a></dt>
+<dd><p>update the interface description details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_ips">
+<span class="sig-name descname"><span class="pre">interface_ips</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_ips"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_ips" title="Link to this definition"></a></dt>
+<dd><p>update the interface ipv4 ip address details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_mode">
+<span class="sig-name descname"><span class="pre">interface_mode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_mode" title="Link to this definition"></a></dt>
+<dd><p>update the interface mode details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_ospf_auth">
+<span class="sig-name descname"><span class="pre">interface_ospf_auth</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_ospf_auth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_ospf_auth" title="Link to this definition"></a></dt>
+<dd><p>update the interface ospf authentication details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_read">
+<span class="sig-name descname"><span class="pre">interface_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various interface level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on interface config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_state">
+<span class="sig-name descname"><span class="pre">interface_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_state" title="Link to this definition"></a></dt>
+<dd><p>update the interface status (up/down/disabled) details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_udld">
+<span class="sig-name descname"><span class="pre">interface_udld</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_udld"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_udld" title="Link to this definition"></a></dt>
+<dd><p>update the interface udld parameter details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_v4_helpers">
+<span class="sig-name descname"><span class="pre">interface_v4_helpers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_v4_helpers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_v4_helpers" title="Link to this definition"></a></dt>
+<dd><p>update the interface ipv4 helpers details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_v6_helpers">
+<span class="sig-name descname"><span class="pre">interface_v6_helpers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_v6_helpers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_v6_helpers" title="Link to this definition"></a></dt>
+<dd><p>update the interface ipv6 helpers details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_v6_ips">
+<span class="sig-name descname"><span class="pre">interface_v6_ips</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_v6_ips"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_v6_ips" title="Link to this definition"></a></dt>
+<dd><p>update the interface ipv6 ip address details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_vlans">
+<span class="sig-name descname"><span class="pre">interface_vlans</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_vlans"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_vlans" title="Link to this definition"></a></dt>
+<dd><p>update the interface vlan details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_vrf">
+<span class="sig-name descname"><span class="pre">interface_vrf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_vrf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.RunningInterfaces.interface_vrf" title="Link to this definition"></a></dt>
+<dd><p>update the interface vrf details</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.get_interfaces_running">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.</span></span><span class="sig-name descname"><span class="pre">get_interfaces_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_interfaces.html#get_interfaces_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces.get_interfaces_running" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various inteface parameters.
+uses RunningInterfaces in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes">
+<span id="cisco-parser-routes"></span><h1><span class="section-number">5.16. </span>cisco parser - routes<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes" title="Link to this heading"></a></h1>
+<p>cisco running-config - ip routes output parser</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.</span></span><span class="sig-name descname"><span class="pre">RunningRoutes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_routes.html#RunningRoutes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>object for running config routes parser</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes.get_route_dict">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_route_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_routes.html#RunningRoutes.get_route_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes.get_route_dict" title="Link to this definition"></a></dt>
+<dd><p>parser function to update route details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>dict</em>) – blank dictionary to update a route info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes.route_read">
+<span class="sig-name descname"><span class="pre">route_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_routes.html#RunningRoutes.route_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes.route_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various routes level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on ip routes config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes.routes_dict">
+<span class="sig-name descname"><span class="pre">routes_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_routes.html#RunningRoutes.routes_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.RunningRoutes.routes_dict" title="Link to this definition"></a></dt>
+<dd><p>update the route details</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_administrative_dist">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.</span></span><span class="sig-name descname"><span class="pre">get_administrative_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next_hop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx_distance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_routes.html#get_administrative_dist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_administrative_dist" title="Link to this definition"></a></dt>
+<dd><p>get administrative distance value from ip route command list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spl</strong> (<em>list</em>) – ip route command splitted</p></li>
+<li><p><strong>next_hop</strong> (<em>str</em>) – next hop value</p></li>
+<li><p><strong>idx_distance</strong> (<em>int</em>) – index distance</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value of administrative distance configured or ``</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_multi_idx_item">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.</span></span><span class="sig-name descname"><span class="pre">get_multi_idx_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lst</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_routes.html#get_multi_idx_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_multi_idx_item" title="Link to this definition"></a></dt>
+<dd><p>get multi indexex item from list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>str</em>) – item</p></li>
+<li><p><strong>lst</strong> (<em>list</em>) – list of items</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>index till end of list</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_pfx_nh_idxdist">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.</span></span><span class="sig-name descname"><span class="pre">get_pfx_nh_idxdist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx_distance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_routes.html#get_pfx_nh_idxdist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_pfx_nh_idxdist" title="Link to this definition"></a></dt>
+<dd><p>get tuple of prefix, nexthop, indexdistance for give ip route split line</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>version</strong> (<em>int</em>) – ip route version</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – list of splitted ip route command</p></li>
+<li><p><strong>idx_distance</strong> (<em>int</em>) – index distance</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_singel_idx_item">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.</span></span><span class="sig-name descname"><span class="pre">get_singel_idx_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lst</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_routes.html#get_singel_idx_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_singel_idx_item" title="Link to this definition"></a></dt>
+<dd><p>gives next item if found item from list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>str</em>) – item</p></li>
+<li><p><strong>lst</strong> (<em>list</em>) – list of items</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Next index item found in list</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_system_running_routes">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.</span></span><span class="sig-name descname"><span class="pre">get_system_running_routes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_routes.html#get_system_running_routes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.get_system_running_routes" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various ip route parameters.
+uses RunningRoutes in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.index_of">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.</span></span><span class="sig-name descname"><span class="pre">index_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lst</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_routes.html#index_of"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes.index_of" title="Link to this definition"></a></dt>
+<dd><p>index of an item from list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>str</em>) – item</p></li>
+<li><p><strong>lst</strong> (<em>list</em>) – list of items</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>index of found item else ``</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system">
+<span id="cisco-parser-sys-info"></span><h1><span class="section-number">5.17. </span>cisco parser - sys_info<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system" title="Link to this heading"></a></h1>
+<p>cisco show running-config parser for system outputs</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.</span></span><span class="sig-name descname"><span class="pre">RunningSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_system.html#RunningSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>object for running config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_bgp_as_number">
+<span class="sig-name descname"><span class="pre">system_bgp_as_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_system.html#RunningSystem.system_bgp_as_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_bgp_as_number" title="Link to this definition"></a></dt>
+<dd><p>get the device bgp as number</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_ca_certificate">
+<span class="sig-name descname"><span class="pre">system_ca_certificate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_system.html#RunningSystem.system_ca_certificate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_ca_certificate" title="Link to this definition"></a></dt>
+<dd><p>get the device certificate hex values for cisco 9k &amp; supported series switches.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_exec_banner">
+<span class="sig-name descname"><span class="pre">system_exec_banner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_system.html#RunningSystem.system_exec_banner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_exec_banner" title="Link to this definition"></a></dt>
+<dd><p>get exec banner first line</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_hostname">
+<span class="sig-name descname"><span class="pre">system_hostname</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_system.html#RunningSystem.system_hostname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_hostname" title="Link to this definition"></a></dt>
+<dd><p>get hostname of device</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_name_server">
+<span class="sig-name descname"><span class="pre">system_name_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_system.html#RunningSystem.system_name_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_name_server" title="Link to this definition"></a></dt>
+<dd><p>get list of dns name server ips from configurations</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_ntp_server">
+<span class="sig-name descname"><span class="pre">system_ntp_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_system.html#RunningSystem.system_ntp_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_ntp_server" title="Link to this definition"></a></dt>
+<dd><p>get list of ntp server ips from configurations</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_syslog_server">
+<span class="sig-name descname"><span class="pre">system_syslog_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_system.html#RunningSystem.system_syslog_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_syslog_server" title="Link to this definition"></a></dt>
+<dd><p>get list of syslog server ips from configurations</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_tacacs_server">
+<span class="sig-name descname"><span class="pre">system_tacacs_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_system.html#RunningSystem.system_tacacs_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.RunningSystem.system_tacacs_server" title="Link to this definition"></a></dt>
+<dd><p>get list of tacacs server ips from aaa configurations</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.get_system_running">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.</span></span><span class="sig-name descname"><span class="pre">get_system_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_system.html#get_system_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system.get_system_running" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various system parameters.
+uses RunningSystem in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs">
+<span id="cisco-parser-vrf"></span><h1><span class="section-number">5.18. </span>cisco parser - vrf<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs" title="Link to this heading"></a></h1>
+<p>cisco show running-config command parser for vrf level outputs</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.</span></span><span class="sig-name descname"><span class="pre">RunningVRFs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_vrfs.html#RunningVRFs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>object for VRF level running config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_af">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_vrf_af</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_vrfs.html#RunningVRFs.get_vrf_af"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_af" title="Link to this definition"></a></dt>
+<dd><p>parser function to update vrf address-family details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a vrf info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_description">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_vrf_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_vrfs.html#RunningVRFs.get_vrf_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_description" title="Link to this definition"></a></dt>
+<dd><p>parser function to update vrf description details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a vrf info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_rd">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_vrf_rd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_vrfs.html#RunningVRFs.get_vrf_rd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_rd" title="Link to this definition"></a></dt>
+<dd><p>parser function to update vrf rd details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a vrf info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_rt">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_vrf_rt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_vrfs.html#RunningVRFs.get_vrf_rt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.get_vrf_rt" title="Link to this definition"></a></dt>
+<dd><p>parser function to update vrf rt details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a vrf info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_af">
+<span class="sig-name descname"><span class="pre">vrf_af</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_vrfs.html#RunningVRFs.vrf_af"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_af" title="Link to this definition"></a></dt>
+<dd><p>update the vrf address-family details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_description">
+<span class="sig-name descname"><span class="pre">vrf_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_vrfs.html#RunningVRFs.vrf_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_description" title="Link to this definition"></a></dt>
+<dd><p>update the vrf description details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_rd">
+<span class="sig-name descname"><span class="pre">vrf_rd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_vrfs.html#RunningVRFs.vrf_rd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_rd" title="Link to this definition"></a></dt>
+<dd><p>update the vrf rd details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_read">
+<span class="sig-name descname"><span class="pre">vrf_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_vrfs.html#RunningVRFs.vrf_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various VRF level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on VRF config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_rt">
+<span class="sig-name descname"><span class="pre">vrf_rt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_vrfs.html#RunningVRFs.vrf_rt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.RunningVRFs.vrf_rt" title="Link to this definition"></a></dt>
+<dd><p>update the vrf rt details</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.get_vrfs_running">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.</span></span><span class="sig-name descname"><span class="pre">get_vrfs_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_running_vrfs.html#get_vrfs_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs.get_vrfs_running" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various vrf parameters.
+uses RunningVRFs in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.cisco._cmd_parse_version">
+<span id="cisco-parser-version"></span><h1><span class="section-number">5.19. </span>cisco parser - version<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_version" title="Link to this heading"></a></h1>
+<p>cisco show version command output parser</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.cisco._cmd_parse_version.get_version">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.cisco._cmd_parse_version.</span></span><span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/cisco/_cmd_parse_version.html#get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.cisco._cmd_parse_version.get_version" title="Link to this definition"></a></dt>
+<dd><p>parser - show version command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>software</p></li>
+<li><p>bootfile</p></li>
+<li><p>serial</p></li>
+<li><p>model</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generators_common.html" class="btn btn-neutral float-left" title="5.4. generator common functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="parsers_juniper.html" class="btn btn-neutral float-right" title="5.20. juniper parser - arp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

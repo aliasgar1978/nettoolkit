@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.4. nettoolkit common functions &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="7.5. Form Class Functions" href="forms.html" />
+    <link rel="prev" title="7.3. database" href="db.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_doc.html">7. nettoolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gpl.html">7.1. GPL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convertdict.html">7.2. Convert Dictionary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db.html">7.3. Database</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.4. Common Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.blank_line"><code class="docutils literal notranslate"><span class="pre">blank_line()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.dataframe_generate"><code class="docutils literal notranslate"><span class="pre">dataframe_generate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.flatten"><code class="docutils literal notranslate"><span class="pre">flatten()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.get_device_manufacturar"><code class="docutils literal notranslate"><span class="pre">get_device_manufacturar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.get_op"><code class="docutils literal notranslate"><span class="pre">get_op()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.get_ops"><code class="docutils literal notranslate"><span class="pre">get_ops()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.get_string_part"><code class="docutils literal notranslate"><span class="pre">get_string_part()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.get_string_trailing"><code class="docutils literal notranslate"><span class="pre">get_string_trailing()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.mac_2digit_separated"><code class="docutils literal notranslate"><span class="pre">mac_2digit_separated()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.mac_4digit_separated"><code class="docutils literal notranslate"><span class="pre">mac_4digit_separated()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.printmsg"><code class="docutils literal notranslate"><span class="pre">printmsg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.read_file"><code class="docutils literal notranslate"><span class="pre">read_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.remove_domain"><code class="docutils literal notranslate"><span class="pre">remove_domain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.standardize_mac"><code class="docutils literal notranslate"><span class="pre">standardize_mac()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_common.common.verifid_output"><code class="docutils literal notranslate"><span class="pre">verifid_output()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="forms.html">7.5. Forms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tech_doc.html"><span class="section-number">7. </span>Nettoolkit API documentation!</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.4. </span>nettoolkit common functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/t_doc/nettoolkit/common.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nettoolkit.nettoolkit_common.common">
+<span id="nettoolkit-common-functions"></span><h1><span class="section-number">7.4. </span>nettoolkit common functions<a class="headerlink" href="#module-nettoolkit.nettoolkit_common.common" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.blank_line">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">blank_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#blank_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.blank_line" title="Link to this definition"></a></dt>
+<dd><p>checks if provided line is blank line or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>line</strong> (<em>str</em>) – input line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>is line blank or not</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.dataframe_generate">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">dataframe_generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#dataframe_generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.dataframe_generate" title="Link to this definition"></a></dt>
+<dd><p>convert dicationary to dataframe. multi-level dictionary will be converted flattened first
+inorder to convert to DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>d</strong> (<em>dict</em>) – input can be multi-nested dictionary.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.flatten">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.flatten" title="Link to this definition"></a></dt>
+<dd><p>flattens the dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>dict</em>) – input can be multi-nested dictionary.</p></li>
+<li><p><strong>parent_key</strong> (<em>str</em><em>, </em><em>optional</em>) – key from previous dictionary to be prefixed with current keys. Defaults to ‘’.</p></li>
+<li><p><strong>sep</strong> (<em>str</em><em>, </em><em>optional</em>) – keys separator. Defaults to ‘_’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary of lists if input is dictinoary,  list with input dictionary if input is anything else</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict, list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.get_device_manufacturar">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">get_device_manufacturar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#get_device_manufacturar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.get_device_manufacturar" title="Link to this definition"></a></dt>
+<dd><p>finds out manufacturer (cisco/juniper) from given capture file.
+in case if not found, it will return as Unidentified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – input capture file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Either one from - Cisco, Juniper, Unidentified</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.get_op">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">get_op</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#get_op"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.get_op" title="Link to this definition"></a></dt>
+<dd><p>filter the command output from given captured file.
+Note: output should be taken from capture_it utility or it should be in the format
+derived by it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – capture file</p></li>
+<li><p><strong>cmd</strong> (<em>str</em>) – show command for which output to capture</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>filtered command output in list format</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.get_ops">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">get_ops</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_startswith</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#get_ops"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.get_ops" title="Link to this definition"></a></dt>
+<dd><p>filter the command outputs from given captured file.
+Note: output should be taken from capture_it utility or it should be in the format
+derived by it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – capture file</p></li>
+<li><p><strong>cmd_startswith</strong> (<em>str</em>) – show command start string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>filtered command output in dict format</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.get_string_part">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">get_string_part</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">begin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#get_string_part"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.get_string_part" title="Link to this definition"></a></dt>
+<dd><p>get the sub-string out of provided long string(line)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<em>str</em>) – string line</p></li>
+<li><p><strong>begin</strong> (<em>int</em>) – sub-str start point</p></li>
+<li><p><strong>end</strong> (<em>int</em>) – sub-str end point</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – Raise error if input is invalid or sub-string falls outside</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sub-string</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.get_string_trailing">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">get_string_trailing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">begin_at</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#get_string_trailing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.get_string_trailing" title="Link to this definition"></a></dt>
+<dd><p>get the training part of sub-string starting from provided index</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<em>str</em>) – string line</p></li>
+<li><p><strong>begin_at</strong> (<em>int</em>) – sub-str start point</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – Raise error if input is invalid or sub-string falls outside</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sub-string</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.mac_2digit_separated">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">mac_2digit_separated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mac</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#mac_2digit_separated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.mac_2digit_separated" title="Link to this definition"></a></dt>
+<dd><p>converts input mac to 2 digit separated mac format, separator=`:`</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mac</strong> (<em>str</em>) – mac address</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2 digit separated format of mac address</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.mac_4digit_separated">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">mac_4digit_separated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mac</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#mac_4digit_separated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.mac_4digit_separated" title="Link to this definition"></a></dt>
+<dd><p>converts input mac to 4 digit separated mac format, separator=`.`</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mac</strong> (<em>str</em>) – mac address</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>4 digit separated format of mac address</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.printmsg">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">printmsg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_ends</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\n'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#printmsg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.printmsg" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.read_file">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#read_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.read_file" title="Link to this definition"></a></dt>
+<dd><p>read the provided text file and retuns output in list format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – text file name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output converted to list (separated by lines)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.remove_domain">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">remove_domain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#remove_domain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.remove_domain" title="Link to this definition"></a></dt>
+<dd><p>Removes domain suffix from provided hostname string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>hn</strong> (<em>str</em>) – fully qualified dns hostname</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>hostname left by removing domain suffix</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.standardize_mac">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">standardize_mac</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mac</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#standardize_mac"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.standardize_mac" title="Link to this definition"></a></dt>
+<dd><p>removes . or : from mac address and make it a standard</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mac</strong> (<em>str</em>) – mac address</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>standard format of mac address</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_common.common.verifid_output">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_common.common.</span></span><span class="sig-name descname"><span class="pre">verifid_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_common/common.html#verifid_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_common.common.verifid_output" title="Link to this definition"></a></dt>
+<dd><p>vefifies if command output is in valid state.  Multiline string are splits with
+CR. and retuns as list. if input is a list, it will be returned as is.
+any other input will throw error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – Either list or Multiline string of output</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – Raise error if input is other than string or list.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>output in list format</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="db.html" class="btn btn-neutral float-left" title="7.3. database" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="forms.html" class="btn btn-neutral float-right" title="7.5. Form Class Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

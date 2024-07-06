@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.addressing.forms.prefixes_oper &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.addressing.forms.prefixes_oper</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.addressing.forms.prefixes_oper</h1><div class="highlight"><pre>
+<span></span>
+<span class="c1"># ---------------------------------------------------------------------------------------</span>
+<span class="kn">import</span> <span class="nn">PySimpleGUI</span> <span class="k">as</span> <span class="nn">sg</span>
+
+<span class="kn">from</span> <span class="nn">nettoolkit.nettoolkit.forms.formitems</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.addressing.addressing</span> <span class="kn">import</span> <span class="n">get_summaries</span><span class="p">,</span> <span class="n">addressing</span><span class="p">,</span> <span class="n">isSubset</span>
+
+<span class="c1"># ---------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="prefixes_oper_summary_exec">
+<a class="viewcode-back" href="../../../../docs/t_doc/nettoolkit/forms.html#nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_summary_exec">[docs]</a>
+<span class="k">def</span> <span class="nf">prefixes_oper_summary_exec</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;executor function</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		obj (object): frame object </span>
+<span class="sd">		i (itemobject): item object of frame</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		bool: wheter executor success or not.</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">try</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;pfxs_summary_input&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+			<span class="n">obj</span><span class="o">.</span><span class="n">event_update_element</span><span class="p">(</span><span class="n">pfxs_summary_result</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s2">&quot;calculating...&quot;</span><span class="p">})</span>
+			<span class="n">_summaries</span> <span class="o">=</span> <span class="n">get_summaries</span><span class="p">(</span><span class="o">*</span><span class="n">get_list</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;pfxs_summary_input&#39;</span><span class="p">]))</span>
+			<span class="n">obj</span><span class="o">.</span><span class="n">event_update_element</span><span class="p">(</span><span class="n">pfxs_summary_result</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">_summaries</span><span class="p">])})</span>	
+			<span class="k">return</span> <span class="kc">True</span>
+	<span class="k">except</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="prefixes_oper_issubset_exec">
+<a class="viewcode-back" href="../../../../docs/t_doc/nettoolkit/forms.html#nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_issubset_exec">[docs]</a>
+<span class="k">def</span> <span class="nf">prefixes_oper_issubset_exec</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;executor function</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		obj (object): frame object </span>
+<span class="sd">		i (itemobject): item object of frame</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		bool: wheter executor success or not.</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">try</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;pfxs_subnet&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;pfxs_supernet&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+			<span class="n">obj</span><span class="o">.</span><span class="n">event_update_element</span><span class="p">(</span><span class="n">pfxs_issubset_result</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s2">&quot;checking...&quot;</span><span class="p">})</span>
+			<span class="n">result</span> <span class="o">=</span> <span class="n">isSubset</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;pfxs_subnet&#39;</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;pfxs_supernet&#39;</span><span class="p">])</span>
+			<span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+				<span class="n">obj</span><span class="o">.</span><span class="n">event_update_element</span><span class="p">(</span><span class="n">pfxs_issubset_result</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;Yes&#39;</span><span class="p">,</span> <span class="s1">&#39;text_color&#39;</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span> <span class="p">})</span>	
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">obj</span><span class="o">.</span><span class="n">event_update_element</span><span class="p">(</span><span class="n">pfxs_issubset_result</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;text_color&#39;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span> <span class="p">})</span>	
+			<span class="k">return</span> <span class="kc">True</span>
+	<span class="k">except</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="prefixes_oper_pieces_exec">
+<a class="viewcode-back" href="../../../../docs/t_doc/nettoolkit/forms.html#nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_pieces_exec">[docs]</a>
+<span class="k">def</span> <span class="nf">prefixes_oper_pieces_exec</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;executor function</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		obj (object): frame object </span>
+<span class="sd">		i (itemobject): item object of frame</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		bool: wheter executor success or not.</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">try</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;pfxs_subnet1&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;pfxs_pieces&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+			<span class="n">obj</span><span class="o">.</span><span class="n">event_update_element</span><span class="p">(</span><span class="n">pfxs_pieces_result</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s2">&quot;checking...&quot;</span><span class="p">})</span>
+			<span class="n">ipobj</span> <span class="o">=</span> <span class="n">addressing</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;pfxs_subnet1&#39;</span><span class="p">])</span>
+			<span class="n">result</span> <span class="o">=</span> <span class="n">ipobj</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;pfxs_pieces&#39;</span><span class="p">])</span>
+			<span class="n">obj</span><span class="o">.</span><span class="n">event_update_element</span><span class="p">(</span><span class="n">pfxs_pieces_result</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">result</span><span class="p">])})</span>	
+			<span class="k">return</span> <span class="kc">True</span>
+	<span class="k">except</span><span class="p">:</span>
+		<span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="summarize_prefixes_frame">
+<a class="viewcode-back" href="../../../../docs/t_doc/nettoolkit/forms.html#nettoolkit.addressing.forms.prefixes_oper.summarize_prefixes_frame">[docs]</a>
+<span class="k">def</span> <span class="nf">summarize_prefixes_frame</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;tab display - Prefix Operations</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		sg.Frame: Frame with filter selection components</span>
+<span class="sd">	&quot;&quot;&quot;</span>    		
+	<span class="k">return</span> <span class="n">sg</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+					<span class="n">relief</span><span class="o">=</span><span class="n">sg</span><span class="o">.</span><span class="n">RELIEF_SUNKEN</span><span class="p">,</span> 
+					<span class="n">layout</span><span class="o">=</span><span class="p">[</span>
+
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;Summarize Prefixes&#39;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s1">&#39;Bold&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span> <span class="p">],</span>
+		<span class="n">under_line</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span>
+
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;List of Prefixes&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;yellow&quot;</span><span class="p">),</span> <span class="p">],</span>
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Multiline</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;pfxs_summary_input&#39;</span><span class="p">,</span> <span class="n">autoscroll</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">14</span><span class="p">),</span> <span class="n">disabled</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+		<span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;}}&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;light yellow&quot;</span><span class="p">),</span>
+		<span class="n">sg</span><span class="o">.</span><span class="n">Multiline</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;pfxs_summary_result&#39;</span><span class="p">,</span> <span class="n">autoscroll</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">14</span><span class="p">),</span> <span class="n">disabled</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="p">],</span>
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="s2">&quot;Summarize&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>  <span class="n">change_submits</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;go_pfxs_summary&#39;</span><span class="p">)],</span>
+
+		<span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="issubset_check_prefix_frame">
+<a class="viewcode-back" href="../../../../docs/t_doc/nettoolkit/forms.html#nettoolkit.addressing.forms.prefixes_oper.issubset_check_prefix_frame">[docs]</a>
+<span class="k">def</span> <span class="nf">issubset_check_prefix_frame</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;tab display - Prefix Operations</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		sg.Frame: Frame with filter selection components</span>
+<span class="sd">	&quot;&quot;&quot;</span>    		
+	<span class="k">return</span> <span class="n">sg</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+					<span class="n">relief</span><span class="o">=</span><span class="n">sg</span><span class="o">.</span><span class="n">RELIEF_SUNKEN</span><span class="p">,</span> 
+					<span class="n">layout</span><span class="o">=</span><span class="p">[</span>
+
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;Verify: is Subnet part of Supernet ?&#39;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s1">&#39;Bold&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span> <span class="p">],</span>
+		<span class="n">under_line</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span>
+
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;   Subnet:&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;yellow&quot;</span><span class="p">),</span> 
+		<span class="n">sg</span><span class="o">.</span><span class="n">InputText</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;pfxs_subnet&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">1</span><span class="p">)),],</span> 
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;Supernet:&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;yellow&quot;</span><span class="p">),</span> 
+		<span class="n">sg</span><span class="o">.</span><span class="n">InputText</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;pfxs_supernet&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">1</span><span class="p">)),],</span> 
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="s2">&quot;Check&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">change_submits</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;go_pfxs_issubset&#39;</span><span class="p">)],</span>
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;    Result:&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">),</span>
+		<span class="n">sg</span><span class="o">.</span><span class="n">InputText</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;pfxs_issubset_result&#39;</span> <span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>  <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)],</span> 
+		<span class="n">under_line</span><span class="p">(</span><span class="mi">38</span><span class="p">),</span>
+
+		<span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="devide_prefixes_frame">
+<a class="viewcode-back" href="../../../../docs/t_doc/nettoolkit/forms.html#nettoolkit.addressing.forms.prefixes_oper.devide_prefixes_frame">[docs]</a>
+<span class="k">def</span> <span class="nf">devide_prefixes_frame</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;tab display - Prefix Operations</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		sg.Frame: Frame with filter selection components</span>
+<span class="sd">	&quot;&quot;&quot;</span>    		
+	<span class="k">return</span> <span class="n">sg</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+					<span class="n">relief</span><span class="o">=</span><span class="n">sg</span><span class="o">.</span><span class="n">RELIEF_SUNKEN</span><span class="p">,</span> 
+					<span class="n">layout</span><span class="o">=</span><span class="p">[</span>
+
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;Break Prefix&#39;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s1">&#39;Bold&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span> <span class="p">],</span>
+		<span class="n">under_line</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span>
+
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;Break Your Subnet (equal pieces)&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">),</span> <span class="p">],</span>
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;Subnet:&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;yellow&quot;</span><span class="p">),</span> 
+		<span class="n">sg</span><span class="o">.</span><span class="n">InputText</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;pfxs_subnet1&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span>
+		<span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;/n:&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;yellow&quot;</span><span class="p">),</span> <span class="n">sg</span><span class="o">.</span><span class="n">InputCombo</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">256</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;pfxs_pieces&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)),],</span>
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="s2">&quot;Break&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">change_submits</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;go_pfxs_break&#39;</span><span class="p">)],</span>
+		<span class="p">[</span><span class="n">sg</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;Result:&#39;</span><span class="p">,</span> <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;light yellow&quot;</span><span class="p">),</span>
+		<span class="n">sg</span><span class="o">.</span><span class="n">Multiline</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;pfxs_pieces_result&#39;</span><span class="p">,</span> <span class="n">autoscroll</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">),</span> <span class="n">disabled</span><span class="o">=</span><span class="kc">True</span><span class="p">),],</span> 
+		<span class="n">under_line</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span>
+
+		<span class="p">])</span></div>
+
+
+
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------------------</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

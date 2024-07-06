@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;juniper interface from config command output parser &quot;&quot;&quot;</span>
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">from</span> <span class="nn">nettoolkit.facts_finder.generators.commons</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">._cmd_parse_running</span> <span class="kn">import</span> <span class="n">Running</span>
+
+
+<span class="n">merge_dict</span> <span class="o">=</span> <span class="n">DIC</span><span class="o">.</span><span class="n">merge_dict</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="RunningInterfaces">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces">[docs]</a>
+<span class="k">class</span> <span class="nc">RunningInterfaces</span><span class="p">(</span><span class="n">Running</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;object for interface level config parser</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		cmd_op (list, str): config output, either list or multiline string</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd_op</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;initialize the object by providing the  config output</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		    		
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">cmd_op</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+
+<div class="viewcode-block" id="RunningInterfaces.interface_read">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_read">[docs]</a>
+	<span class="k">def</span> <span class="nf">interface_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;directive function to get the various interface level output</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			func (method): method to be executed on interface config line</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			dict: parsed output dictionary</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="n">ports_dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_cmd_op</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">blank_line</span><span class="p">(</span><span class="n">l</span><span class="p">):</span> <span class="k">continue</span>
+			<span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span> <span class="k">continue</span>
+			<span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;set interfaces interface-range&quot;</span><span class="p">):</span> <span class="k">continue</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">l</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;set interfaces&quot;</span><span class="p">):</span> <span class="k">continue</span>
+			<span class="n">spl</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+			<span class="n">int_type</span> <span class="o">=</span> <span class="kc">None</span>
+			<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">JUNIPER_IFS_IDENTIFIERS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+				<span class="k">if</span> <span class="n">spl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+					<span class="n">int_type</span> <span class="o">=</span> <span class="n">k</span>
+					<span class="k">break</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">int_type</span><span class="p">:</span> 
+				<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;UndefinedInterface(Type)-</span><span class="si">{</span><span class="n">spl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+				<span class="k">continue</span>
+			<span class="n">p</span> <span class="o">=</span> <span class="n">_juniper_port</span><span class="p">(</span><span class="n">int_type</span><span class="p">,</span> <span class="n">spl</span><span class="p">)</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="p">:</span> <span class="k">continue</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">ports_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">):</span> <span class="n">ports_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+			<span class="n">port_dict</span> <span class="o">=</span> <span class="n">ports_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+			<span class="n">func</span><span class="p">(</span><span class="n">port_dict</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">spl</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">ports_dict</span></div>
+
+
+
+<div class="viewcode-block" id="RunningInterfaces.routing_instance_read">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.routing_instance_read">[docs]</a>
+	<span class="k">def</span> <span class="nf">routing_instance_read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;directive function to set the various routing instance level output from interface.</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="n">foundavrf</span> <span class="o">=</span> <span class="kc">False</span>
+		<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_cmd_op</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">blank_line</span><span class="p">(</span><span class="n">l</span><span class="p">):</span> <span class="k">continue</span>
+			<span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span> <span class="k">continue</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">l</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;set routing-instances &quot;</span><span class="p">):</span> <span class="k">continue</span>
+			<span class="n">spl</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="c1"># print(l)</span>
+				<span class="k">if</span> <span class="n">spl</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;interface&#39;</span><span class="p">:</span>
+					<span class="c1"># print(l)</span>
+					<span class="n">vrf</span> <span class="o">=</span> <span class="n">spl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+					<span class="n">intf</span> <span class="o">=</span> <span class="n">spl</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+					<span class="c1"># print(vrf, intf)</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">[</span><span class="n">intf</span><span class="p">][</span><span class="s1">&#39;intvrf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vrf</span>
+					<span class="n">foundavrf</span> <span class="o">=</span> <span class="kc">True</span>
+			<span class="k">except</span><span class="p">:</span>
+				<span class="k">continue</span>
+
+		<span class="k">for</span> <span class="n">intf</span><span class="p">,</span> <span class="n">intf_vals</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="n">intf_vals</span><span class="p">[</span><span class="s1">&#39;intvrf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+			<span class="k">break</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.ospf_auth_para_read">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.ospf_auth_para_read">[docs]</a>
+	<span class="k">def</span> <span class="nf">ospf_auth_para_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;directive function to get the various protocol ospf level output</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			func (method): method to be executed on ospf config lines</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			dict: parsed output dictionary</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="n">ports_dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">set_cmd_op</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">blank_line</span><span class="p">(</span><span class="n">l</span><span class="p">):</span> <span class="k">continue</span>
+			<span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span> <span class="k">continue</span>
+			<span class="n">spl</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+			<span class="n">ospf_idx</span> <span class="o">=</span> <span class="n">_is_ospf_auth_line</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">spl</span><span class="p">)</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">ospf_idx</span><span class="p">:</span> <span class="k">continue</span>
+			<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">spl</span><span class="p">)</span><span class="o">&gt;</span><span class="n">ospf_idx</span><span class="o">+</span><span class="mi">6</span> <span class="ow">and</span> <span class="n">spl</span><span class="p">[</span><span class="n">ospf_idx</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;interface&#39;</span><span class="p">:</span>
+				<span class="n">p</span> <span class="o">=</span> <span class="n">spl</span><span class="p">[</span><span class="n">ospf_idx</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+				<span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="p">:</span> <span class="k">continue</span>
+				<span class="k">if</span> <span class="ow">not</span> <span class="n">ports_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">):</span> <span class="n">ports_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+				<span class="n">port_dict</span> <span class="o">=</span> <span class="n">ports_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+				<span class="c1">#</span>
+				<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">port_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;filter&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]):</span>
+					<span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_juniper_int_type</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+				<span class="c1">#</span>
+				<span class="n">func</span><span class="p">(</span><span class="n">port_dict</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">spl</span><span class="p">,</span> <span class="n">ospf_idx</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">ports_dict</span></div>
+
+
+
+
+	<span class="c1">## --------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="RunningInterfaces.interface_ips">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_ips">[docs]</a>
+	<span class="k">def</span> <span class="nf">interface_ips</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update the interface ipv4 ip address details</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ip_details</span>
+		<span class="n">merge_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_read</span><span class="p">(</span><span class="n">func</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.get_ip_details">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ip_details">[docs]</a>
+	<span class="nd">@staticmethod</span>
+	<span class="k">def</span> <span class="nf">get_ip_details</span><span class="p">(</span><span class="n">port_dict</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">spl</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;parser function to update interface ipv4 ip address details</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			port_dict (dict): dictionary with a port info</span>
+<span class="sd">			l (str): string line to parse</span>
+<span class="sd">			spl (list): splitted line to parse</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			None: None</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="n">subnet</span> <span class="o">=</span> <span class="n">_get_v4_subnet</span><span class="p">(</span><span class="n">spl</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">subnet</span><span class="p">:</span> <span class="k">return</span>		
+		<span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;subnet&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subnet</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.interface_v6_ips">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_v6_ips">[docs]</a>
+	<span class="k">def</span> <span class="nf">interface_v6_ips</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update the interface ipv6 ip address details</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ipv6_details</span>
+		<span class="n">merge_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_read</span><span class="p">(</span><span class="n">func</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.get_ipv6_details">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ipv6_details">[docs]</a>
+	<span class="nd">@staticmethod</span>
+	<span class="k">def</span> <span class="nf">get_ipv6_details</span><span class="p">(</span><span class="n">port_dict</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">spl</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;parser function to update interface ipv6 ip address details</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			port_dict (dict): dictionary with a port info</span>
+<span class="sd">			l (str): string line to parse</span>
+<span class="sd">			spl (list): splitted line to parse</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			None: None</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="n">address</span> <span class="o">=</span> <span class="n">_get_v6_address</span><span class="p">(</span><span class="n">spl</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">address</span><span class="p">:</span> <span class="k">return</span>
+		<span class="n">link_local</span> <span class="o">=</span> <span class="n">_is_link_local</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">link_local</span> <span class="p">:</span>
+			<span class="k">return</span> <span class="kc">None</span>
+		<span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;v6subnet&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_v6_subnet</span><span class="p">(</span><span class="n">address</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="RunningInterfaces.interface_vlans">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_vlans">[docs]</a>
+	<span class="k">def</span> <span class="nf">interface_vlans</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update the interface vlan details</span>
+<span class="sd">		&quot;&quot;&quot;</span>   
+		<span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_int_vlan_details</span>
+		<span class="n">merge_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_read</span><span class="p">(</span><span class="n">func</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.get_int_vlan_details">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_vlan_details">[docs]</a>
+	<span class="k">def</span> <span class="nf">get_int_vlan_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port_dict</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">spl</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;parser function to update interface vlan details</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			port_dict (dict): dictionary with a port info</span>
+<span class="sd">			l (str): string line to parse</span>
+<span class="sd">			spl (list): splitted line to parse</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			None: None</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">vlans</span> <span class="o">=</span> <span class="n">get_vlans_juniper</span><span class="p">(</span><span class="n">spl</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">)</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">vlans</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+		<span class="c1"># key = &#39;access_vlan&#39;</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;interface_mode&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="s1">&#39;interface_mode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;trunk&#39;</span><span class="p">:</span>
+			<span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;vlan_members&#39;</span>
+		<span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;interface_mode&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="s1">&#39;interface_mode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;access&#39;</span><span class="p">:</span>
+			<span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;access_vlan&#39;</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">return</span> <span class="kc">None</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">port_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span> 			
+			<span class="n">port_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vlans</span><span class="p">))</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">port_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="s2">&quot;,&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">vlans</span><span class="p">))</span>
+		<span class="k">for</span> <span class="n">vlan</span> <span class="ow">in</span> <span class="n">vlans</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">vlan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voice_vlans</span><span class="p">:</span>
+				<span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;voice_vlan&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vlan</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.interface_mode">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_mode">[docs]</a>
+	<span class="k">def</span> <span class="nf">interface_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update the interface port mode trunk/access details</span>
+<span class="sd">		&quot;&quot;&quot;</span>   
+		<span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_interface_mode</span>
+		<span class="n">merge_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_read</span><span class="p">(</span><span class="n">func</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.get_interface_mode">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_interface_mode">[docs]</a>
+	<span class="nd">@staticmethod</span>
+	<span class="k">def</span> <span class="nf">get_interface_mode</span><span class="p">(</span><span class="n">port_dict</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">spl</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;parser function to update interface port mode trunk/access details</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			port_dict (dict): dictionary with a port info</span>
+<span class="sd">			l (str): string line to parse</span>
+<span class="sd">			spl (list): splitted line to parse</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			None: None</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;interface-mode&#39;</span> <span class="ow">in</span> <span class="n">spl</span> <span class="ow">or</span> <span class="s1">&#39;port-mode&#39;</span> <span class="ow">in</span> <span class="n">spl</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">mode</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">port_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;interface_mode&#39;</span><span class="p">):</span> <span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;interface_mode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spl</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="RunningInterfaces.interface_description">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_description">[docs]</a>
+	<span class="k">def</span> <span class="nf">interface_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update the interface description details</span>
+<span class="sd">		&quot;&quot;&quot;</span>   
+		<span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_int_description</span>
+		<span class="n">merge_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_read</span><span class="p">(</span><span class="n">func</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.get_int_description">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_description">[docs]</a>
+	<span class="nd">@staticmethod</span>
+	<span class="k">def</span> <span class="nf">get_int_description</span><span class="p">(</span><span class="n">port_dict</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">spl</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;parser function to update interface description details</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			port_dict (dict): dictionary with a port info</span>
+<span class="sd">			l (str): string line to parse</span>
+<span class="sd">			spl (list): splitted line to parse</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			None: None</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;set interfaces &quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;description&quot;</span> <span class="ow">in</span> <span class="n">spl</span><span class="p">:</span>
+			<span class="n">desc_idx</span> <span class="o">=</span> <span class="n">spl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
+			<span class="n">description</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spl</span><span class="p">[</span><span class="n">desc_idx</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
+		<span class="k">if</span> <span class="n">description</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">port_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">):</span>
+			<span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">description</span>
+		<span class="k">return</span> <span class="n">port_dict</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.int_filter">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_filter">[docs]</a>
+	<span class="k">def</span> <span class="nf">int_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update the interface type details</span>
+<span class="sd">		&quot;&quot;&quot;</span>   
+		<span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_int_filter</span>
+		<span class="n">merge_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_read</span><span class="p">(</span><span class="n">func</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.get_int_filter">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_filter">[docs]</a>
+	<span class="k">def</span> <span class="nf">get_int_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port_dict</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">spl</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;parser function to update interface type details</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			port_dict (dict): dictionary with a port info</span>
+<span class="sd">			l (str): string line to parse</span>
+<span class="sd">			spl (list): splitted line to parse</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			None: None</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">int_type</span> <span class="o">=</span> <span class="n">get_juniper_int_type</span><span class="p">(</span><span class="n">spl</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+		<span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.interface_channel_grp">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_channel_grp">[docs]</a>
+	<span class="k">def</span> <span class="nf">interface_channel_grp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update the interface port channel details</span>
+<span class="sd">		&quot;&quot;&quot;</span>   
+		<span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_interface_channel_grp</span>
+		<span class="n">merge_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_read</span><span class="p">(</span><span class="n">func</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.get_interface_channel_grp">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_interface_channel_grp">[docs]</a>
+	<span class="nd">@staticmethod</span>
+	<span class="k">def</span> <span class="nf">get_interface_channel_grp</span><span class="p">(</span><span class="n">port_dict</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">spl</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;parser function to update interface port channel details</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			port_dict (dict): dictionary with a port info</span>
+<span class="sd">			l (str): string line to parse</span>
+<span class="sd">			spl (list): splitted line to parse</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			None: None</span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="n">grp</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="k">if</span> <span class="n">spl</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;802.3ad&quot;</span><span class="p">:</span>
+			<span class="n">grp</span> <span class="o">=</span> <span class="n">spl</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">:]</span>
+			<span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;channel_grp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">grp</span>
+			<span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;channel_group_interface&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spl</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">port_dict</span></div>
+
+
+
+	<span class="c1"># # Add more interface related methods as needed.</span>
+
+
+	<span class="c1">## --------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="RunningInterfaces.int_dot_zero_merge_to_parent1">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_dot_zero_merge_to_parent1">[docs]</a>
+	<span class="k">def</span> <span class="nf">int_dot_zero_merge_to_parent1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot; merges the value of two keys for `parent` and `parent unit 0` configs</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">parents</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.0&quot;</span><span class="p">):</span> <span class="k">continue</span>
+			<span class="n">parent</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">parent</span><span class="p">):</span>
+				<span class="n">parents</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">parents</span><span class="p">:</span>
+			<span class="k">del</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">[</span><span class="n">p</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.int_to_int_number">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_to_int_number">[docs]</a>
+	<span class="k">def</span> <span class="nf">int_to_int_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39; creates an arbirary unique number for each interface on interface types </span>
+<span class="sd">		&#39;&#39;&#39;</span>
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;physical&#39;</span><span class="p">:</span>
+				<span class="n">v</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_physical_port_number</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+				<span class="n">v</span><span class="p">[</span><span class="s1">&#39;logical_int_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_logical_port_number</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+				<span class="k">continue</span>
+			<span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;aggregated&#39;</span><span class="p">:</span>
+				<span class="k">try</span><span class="p">:</span>
+					<span class="n">v</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+					<span class="n">v</span><span class="p">[</span><span class="s1">&#39;logical_int_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_logical_port_number</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="mi">2</span><span class="p">:]))</span>
+				<span class="k">except</span><span class="p">:</span> <span class="k">pass</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="n">int_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+				<span class="n">v</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_num</span>
+				<span class="k">continue</span>
+			<span class="k">except</span><span class="p">:</span>
+				<span class="k">pass</span>
+			<span class="n">kspl</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;lo&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.0&quot;</span><span class="p">):</span>
+				<span class="k">try</span><span class="p">:</span>
+					<span class="n">v</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kspl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+					<span class="n">v</span><span class="p">[</span><span class="s1">&#39;logical_int_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_logical_port_number</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+					<span class="k">if</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;lo&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">k</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.0&quot;</span><span class="p">):</span>
+						<span class="n">v</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;vlan&#39;</span>
+				<span class="k">except</span><span class="p">:</span> <span class="k">pass</span></div>
+
+
+	<span class="c1"># # Add more interface related methods as needed.</span>
+
+	<span class="c1"># ----------------------------------------------------------------------------------</span>
+	<span class="c1"># ospf auth methods</span>
+	<span class="c1"># ----------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="RunningInterfaces.ospf_authentication_details">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.ospf_authentication_details">[docs]</a>
+	<span class="k">def</span> <span class="nf">ospf_authentication_details</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update the interface ospf authentication details</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ospf_authentication_details</span>
+		<span class="n">merge_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ospf_auth_para_read</span><span class="p">(</span><span class="n">func</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="RunningInterfaces.get_ospf_authentication_details">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ospf_authentication_details">[docs]</a>
+	<span class="nd">@staticmethod</span>
+	<span class="k">def</span> <span class="nf">get_ospf_authentication_details</span><span class="p">(</span><span class="n">port_dict</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">spl</span><span class="p">,</span> <span class="n">ospf_idx</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;parser function to update interface ospf authentication details</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			port_dict (dict): dictionary with a port info</span>
+<span class="sd">			l (str): string line to parse</span>
+<span class="sd">			spl (list): splitted line to parse</span>
+<span class="sd">			ospf_idx(int): index value from where ospf information starting on set commands list</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			None: None</span>
+<span class="sd">		&quot;&quot;&quot;</span> 
+		<span class="k">if</span> <span class="n">spl</span><span class="p">[</span><span class="n">ospf_idx</span><span class="o">+</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;interface-type&#39;</span><span class="p">:</span>
+			<span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;ospf_auth_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spl</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+		<span class="k">if</span> <span class="n">spl</span><span class="p">[</span><span class="n">ospf_idx</span><span class="o">+</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;authentication&#39;</span><span class="p">:</span>
+			<span class="n">pw</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spl</span><span class="p">[</span><span class="n">ospf_idx</span><span class="o">+</span><span class="mi">6</span><span class="p">:])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;##&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+			<span class="k">if</span> <span class="n">pw</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">:</span> <span class="n">pw</span> <span class="o">=</span> <span class="n">pw</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+			<span class="k">if</span> <span class="n">pw</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">:</span> <span class="n">pw</span> <span class="o">=</span> <span class="n">pw</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="n">pw</span> <span class="o">=</span> <span class="n">juniper_decrypt</span><span class="p">(</span><span class="n">pw</span><span class="p">)</span>
+			<span class="k">except</span><span class="p">:</span> <span class="k">pass</span>
+			<span class="n">port_dict</span><span class="p">[</span><span class="s1">&#39;ospf_auth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pw</span>
+		<span class="k">return</span> <span class="n">port_dict</span></div>
+</div>
+
+
+
+	<span class="c1"># # Add more interface related methods as needed.</span>
+
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="get_physical_port_number">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_physical_port_number">[docs]</a>
+<span class="k">def</span> <span class="nf">get_physical_port_number</span><span class="p">(</span><span class="n">port</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot; physical interface - interface number calculator.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		port (str): string lateral for various types of juniper interface/port</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		int: a number assign to port value (sequencial)</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">spl_port_sc</span> <span class="o">=</span> <span class="n">port</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+	<span class="n">port</span> <span class="o">=</span> <span class="n">spl_port_sc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="n">spl_port_dot</span> <span class="o">=</span> <span class="n">port</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+	<span class="n">port</span> <span class="o">=</span> <span class="n">spl_port_dot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="c1">#</span>
+	<span class="n">port_lst</span> <span class="o">=</span> <span class="n">port</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+	<span class="n">port_id</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">port_lst</span><span class="p">)):</span>
+		<span class="n">multiplier</span> <span class="o">=</span> <span class="mi">100</span><span class="o">**</span><span class="n">i</span>
+		<span class="n">nm</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">multiplier</span>
+		<span class="n">port_id</span> <span class="o">+=</span> <span class="n">nm</span>
+	<span class="k">return</span> <span class="n">port_id</span></div>
+
+
+<div class="viewcode-block" id="get_logical_port_number">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_logical_port_number">[docs]</a>
+<span class="k">def</span> <span class="nf">get_logical_port_number</span><span class="p">(</span><span class="n">port</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot; physical interface - logical interface number calculator.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		port (str): string lateral for various types of juniper interface/port</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		int: a logical port number assign to port value (sequencial)</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">spl_port_sc</span> <span class="o">=</span> <span class="n">port</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+	<span class="n">port</span> <span class="o">=</span> <span class="n">spl_port_sc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="n">spl_port_dot</span> <span class="o">=</span> <span class="n">port</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+	<span class="n">port</span> <span class="o">=</span> <span class="n">spl_port_dot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="c1">#</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">spl_port_sc</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">spl_port_sc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">spl_port_dot</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">spl_port_dot</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+	<span class="k">return</span> <span class="s1">&#39;&#39;</span></div>
+
+
+<div class="viewcode-block" id="get_interfaces_running">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_interfaces_running">[docs]</a>
+<span class="k">def</span> <span class="nf">get_interfaces_running</span><span class="p">(</span><span class="n">cmd_op</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;defines set of methods executions. to get various inteface parameters.</span>
+<span class="sd">	uses RunningInterfaces in order to get all.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		cmd_op (list, str): running config output, either list of multiline string</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		dict: output dictionary with parsed with system fields</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="n">R</span>  <span class="o">=</span> <span class="n">RunningInterfaces</span><span class="p">(</span><span class="n">cmd_op</span><span class="p">)</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">voice_vlans</span> <span class="o">=</span> <span class="n">set_of_voice_vlans</span><span class="p">(</span><span class="n">R</span><span class="o">.</span><span class="n">set_cmd_op</span><span class="p">)</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">interface_ips</span><span class="p">()</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">interface_v6_ips</span><span class="p">()</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">interface_mode</span><span class="p">()</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">interface_vlans</span><span class="p">()</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">interface_description</span><span class="p">()</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">interface_channel_grp</span><span class="p">()</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">int_filter</span><span class="p">()</span>
+
+
+	<span class="c1"># # update more interface related methods as needed.</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">int_to_int_number</span><span class="p">()</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">routing_instance_read</span><span class="p">()</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">ospf_authentication_details</span><span class="p">()</span>
+	<span class="n">R</span><span class="o">.</span><span class="n">int_dot_zero_merge_to_parent1</span><span class="p">()</span>       <span class="c1">## added in place of above</span>
+
+
+	<span class="k">if</span> <span class="ow">not</span> <span class="n">R</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">:</span>
+		<span class="n">R</span><span class="o">.</span><span class="n">interface_dict</span><span class="p">[</span><span class="s1">&#39;dummy_int&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+	<span class="k">return</span> <span class="n">R</span><span class="o">.</span><span class="n">interface_dict</span></div>
+
+
+
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">_juniper_port</span><span class="p">(</span><span class="n">int_type</span><span class="p">,</span> <span class="n">spl</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;get port/interface number based on interface type for split line</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		int_type (str): interface type ## deprycated, unused</span>
+<span class="sd">		spl (list): splitted set command line list</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: port number for given unit</span>
+<span class="sd">	&quot;&quot;&quot;</span>	   	
+	<span class="k">if</span> <span class="s1">&#39;unit&#39;</span> <span class="ow">in</span> <span class="n">spl</span><span class="p">:</span>
+		<span class="n">i</span> <span class="o">=</span> <span class="n">spl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">spl</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">spl</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">spl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">_get_v4_subnet</span><span class="p">(</span><span class="n">spl</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;get ipv4 subnet/mask detail from provided splitted set command line list, or string line.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		spl (list): splitted set command line list</span>
+<span class="sd">		line (str): string set command line</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: subnet if found or None</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">if</span> <span class="ow">not</span> <span class="n">_is_v4_addressline</span><span class="p">(</span><span class="n">line</span><span class="p">):</span> <span class="k">return</span> <span class="kc">None</span>
+	<span class="k">return</span> <span class="n">get_subnet</span><span class="p">(</span><span class="n">spl</span><span class="p">[</span><span class="n">spl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;address&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">_is_v4_addressline</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>	
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;check is there any ipv4 address configured in provided string line.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		line (str): string set command line</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		bool: True if found else None</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;family inet&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+	<span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;address&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+	<span class="k">return</span> <span class="kc">True</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+
+<span class="k">def</span> <span class="nf">_get_v6_address</span><span class="p">(</span><span class="n">spl</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;get ipv6 address (with Mask) from provided splitted set command line list, or string line.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		spl (list): splitted set command line list</span>
+<span class="sd">		line (str): string set command line</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: ipv6 address if found else None</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="n">v6ip</span> <span class="o">=</span> <span class="n">_is_v6_addressline</span><span class="p">(</span><span class="n">spl</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+	<span class="k">if</span> <span class="ow">not</span> <span class="n">v6ip</span> <span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+	<span class="k">return</span> <span class="n">v6ip</span>
+
+<span class="k">def</span> <span class="nf">_is_v6_addressline</span><span class="p">(</span><span class="n">spl</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;check if any ipv6 address configured in provided string line.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		line (str): string set command line</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		bool,str: ipv6 address if found else None</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;family inet6&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">spl</span><span class="p">[</span><span class="n">spl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;inet6&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+	<span class="k">except</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+	<span class="k">return</span> <span class="n">spl</span><span class="p">[</span><span class="n">spl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;inet6&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">_is_link_local</span><span class="p">(</span><span class="n">v6_ip</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;checks if provided ipv6 ip is link local address or not</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		v6_ip (str): ipv6 address string</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		bool: True if it is link local address else False</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">return</span> <span class="n">v6_ip</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;fe80:&quot;</span><span class="p">)</span>
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="c1"># // ospf auth</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">_is_ospf_auth_line</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">spl</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot; checks if provided line/splitted line is an ospf authentication line or not (provide either argument)</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		line (str, optional): set command line. Defaults to None.</span>
+<span class="sd">		spl (list, optional): splitted set command line. Defaults to None.</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		int: index value where `ospf` starts if line contains `protocol ospf` else None</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">if</span> <span class="ow">not</span> <span class="n">spl</span><span class="p">:</span>
+		<span class="n">spl</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+	<span class="k">if</span> <span class="s1">&#39;ospf&#39;</span> <span class="ow">in</span> <span class="n">spl</span> <span class="ow">and</span> <span class="s1">&#39;protocols&#39;</span> <span class="ow">in</span> <span class="n">spl</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">spl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;protocols&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">spl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;ospf&#39;</span><span class="p">):</span>
+			<span class="k">return</span> <span class="n">spl</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;ospf&#39;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="kc">None</span>
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="c1"># // voice vlans</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="set_of_voice_vlans">
+<a class="viewcode-back" href="../../../../../docs/t_doc/facts_finder/parsers_juniper.html#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.set_of_voice_vlans">[docs]</a>
+<span class="k">def</span> <span class="nf">set_of_voice_vlans</span><span class="p">(</span><span class="n">set_cmd_op</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;get the set of voice vlans configured in provided set commands configuration.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		set_cmd_op (list): set command output</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		set: set of voice vlans found in output</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="n">voice_vlans</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+	<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">set_cmd_op</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">blank_line</span><span class="p">(</span><span class="n">l</span><span class="p">):</span> <span class="k">continue</span>
+		<span class="k">if</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span> <span class="k">continue</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;set switch-options voip &quot;</span><span class="p">):</span> <span class="k">continue</span>
+		<span class="n">spl</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">spl</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;vlan&#39;</span><span class="p">:</span>
+			<span class="n">voice_vlans</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">spl</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+	<span class="k">return</span> <span class="n">voice_vlans</span></div>
+
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

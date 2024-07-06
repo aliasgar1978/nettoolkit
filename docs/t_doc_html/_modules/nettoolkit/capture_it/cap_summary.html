@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.capture_it.cap_summary &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.capture_it.cap_summary</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.capture_it.cap_summary</h1><div class="highlight"><pre>
+<span></span><span class="c1"># --------------------------------------------</span>
+<span class="c1"># IMPORTS</span>
+<span class="c1"># --------------------------------------------</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># STATIC VAR</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="n">BANNER</span> <span class="o">=</span> <span class="s1">&#39;&gt; ~~~ RAW COMMANDS CAPTURE SUMMARY (aholo2000@gmail.com) ~~~ &lt;&#39;</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># LogSummary Class</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="LogSummary">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary">[docs]</a>
+<span class="k">class</span> <span class="nc">LogSummary</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;class generating summary report for the commands log/raw capture</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		c (conn): connection object</span>
+<span class="sd">		on_screen_display (bool, optional): display result summary on screen. Defaults to False.</span>
+<span class="sd">		write_to (str, optional): filename, writes result summary to file. Defaults to None(i.e. off).</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> 
+		<span class="n">split_cisco_juniper</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+		<span class="n">on_screen_display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+		<span class="n">write_to</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+		<span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;class instance initializer</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			c (conn): connection object</span>
+<span class="sd">			print (bool, optional): display result summary on screen. Defaults to False.</span>
+<span class="sd">			write_to (str, optional): filename, writes result summary to file. Defaults to None(i.e. off).</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cmd_exec_logs_all</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">cmd_exec_logs_all</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">set_cmd_listd_dict</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">device_type_all</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">device_type_all</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">ips</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">ips</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">host_vs_ips</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">host_vs_ips</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">trim_juniper_no_more</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_exec_logs_all</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_trailing_space_to_row_items</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_trailing_space_to_result</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">split_cisco_juniper</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">split_device_type_wise</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">concate_row_col_data</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">on_screen_display</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">write_to</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">write_to</span><span class="p">,</span> <span class="n">wa</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LogSummary.set_cmd_listd_dict">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.set_cmd_listd_dict">[docs]</a>
+	<span class="k">def</span> <span class="nf">set_cmd_listd_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;set command list dictionary for all commands executed for a given connection</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			c (conn): connection object</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">cmd_list_dict</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">all_cmds</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">cmd_list_dict</span> <span class="o">=</span> <span class="p">{</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">cmds</span><span class="p">)))</span> <span class="k">for</span> <span class="n">dt</span><span class="p">,</span> <span class="n">cmds</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">all_cmds</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">}</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="k">pass</span></div>
+
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;report summary</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			str: Multiline report summary</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">banner</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;! </span><span class="si">{</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">BANNER</span><span class="p">)</span><span class="si">}</span><span class="s1"> !</span><span class="se">\n</span><span class="s1">  </span><span class="si">{</span><span class="n">BANNER</span><span class="si">}</span><span class="s1">  </span><span class="se">\n</span><span class="s1">! </span><span class="si">{</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">BANNER</span><span class="p">)</span><span class="si">}</span><span class="s1"> !</span><span class="se">\n</span><span class="s1">&#39;</span>
+		<span class="k">return</span> <span class="n">banner</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">s</span>
+
+<div class="viewcode-block" id="LogSummary.print">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.print">[docs]</a>
+	<span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;prints report summary on screen</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LogSummary.write">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.write">[docs]</a>
+	<span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">wa</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;writes result summary to file</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			file (str): filename to write to output result summary</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">try</span><span class="p">:</span>
+			<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">wa</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+				<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+				<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Info:</span><span class="se">\t</span><span class="s1">commands capture log write to </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1">.. done&#39;</span><span class="p">)</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Info:</span><span class="se">\t</span><span class="s1">commands capture log write to </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1">.. failed&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LogSummary.trim_juniper_no_more">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.trim_juniper_no_more">[docs]</a>
+	<span class="k">def</span> <span class="nf">trim_juniper_no_more</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;trip juniper commands by removing no-more word</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">host</span><span class="p">,</span> <span class="n">cmd_exec_logs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_exec_logs_all</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cmd_exec_logs</span><span class="p">):</span>
+				<span class="n">item</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;| no-more &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LogSummary.get_raw_log">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.get_raw_log">[docs]</a>
+	<span class="k">def</span> <span class="nf">get_raw_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_cmd_exec_log</span><span class="p">,</span> <span class="n">cmd</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;get raw log of given command from provided host command execution log list.</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			host_cmd_exec_log (list): command execution log list of a host</span>
+<span class="sd">			cmd (str): command for which raw log requires to be returned</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			str: returns `success` if raw log was successful else `failed`.  returns `undefined` if undetected or else.</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">host_cmd_exec_log</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cmd</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+					<span class="k">return</span> <span class="s2">&quot;success&quot;</span>
+				<span class="k">elif</span>  <span class="n">item</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+					<span class="k">return</span> <span class="s2">&quot;failed&quot;</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="k">return</span> <span class="s2">&quot;undefined&quot;</span>
+		<span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="LogSummary.get_raw_logs">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.get_raw_logs">[docs]</a>
+	<span class="k">def</span> <span class="nf">get_raw_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hostname</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;get all commands raw logs for given device(hostname)</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			hostname (str): hostname for which raw logs to be retuned</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			list: list of raw log entries</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">host_cmd_exec_log</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_exec_logs_all</span><span class="p">[</span><span class="n">hostname</span><span class="p">]</span>
+		<span class="n">logs</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="n">cmd_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_list_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">device_type_all</span><span class="p">[</span><span class="n">hostname</span><span class="p">]]</span>
+		<span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmd_list</span><span class="p">:</span>
+			<span class="n">logs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_raw_log</span><span class="p">(</span><span class="n">host_cmd_exec_log</span><span class="p">,</span> <span class="n">cmd</span><span class="p">))</span>
+		<span class="k">return</span> <span class="n">logs</span></div>
+
+
+
+<div class="viewcode-block" id="LogSummary.get_all_raw_logs">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.get_all_raw_logs">[docs]</a>
+	<span class="k">def</span> <span class="nf">get_all_raw_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;get raw logs for all devices</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			dict: dictionary of {device_hostname: raw_log_entries}</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">logs</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hosts</span><span class="p">:</span>
+			<span class="n">logs</span><span class="p">[</span><span class="n">host</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_raw_logs</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">logs</span></div>
+
+
+<div class="viewcode-block" id="LogSummary.get_max_cmd_length">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.get_max_cmd_length">[docs]</a>
+	<span class="k">def</span> <span class="nf">get_max_cmd_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd_list</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;returns maximum command length from provided cmd_list</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			cmd_list (list): list of commands</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			int: length of maximum length command</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">max_len</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmd_list</span><span class="p">:</span>
+			<span class="n">cmd_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">cmd_len</span> <span class="o">&gt;</span> <span class="n">max_len</span><span class="p">:</span>
+				<span class="n">max_len</span> <span class="o">=</span> <span class="n">cmd_len</span>
+		<span class="k">if</span> <span class="n">max_len</span><span class="o">&lt;=</span><span class="mi">11</span><span class="p">:</span> <span class="n">max_len</span><span class="o">=</span><span class="mi">11</span>
+		<span class="k">return</span> <span class="n">max_len</span></div>
+
+
+<div class="viewcode-block" id="LogSummary.add_trailing_space_to_row_items">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.add_trailing_space_to_row_items">[docs]</a>
+	<span class="k">def</span> <span class="nf">add_trailing_space_to_row_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;adds trailing spaces to commands to make all same length. stores them in new trailing_cmd_dict dictionary</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">trailing_cmd_dict</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="k">for</span> <span class="n">dev_type</span><span class="p">,</span> <span class="n">cmd_list</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_list_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="n">max_len</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_max_cmd_length</span><span class="p">(</span><span class="n">cmd_list</span><span class="p">)</span>
+			<span class="n">doubleline</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;+ </span><span class="si">{</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="n">max_len</span><span class="si">}</span><span class="s1"> +&#39;</span>
+			<span class="n">trailing_cmd_list</span> <span class="o">=</span> <span class="p">[</span> <span class="n">doubleline</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;| hosts     &gt;</span><span class="si">{</span><span class="s2">&quot; &quot;</span><span class="o">*</span><span class="p">(</span><span class="n">max_len</span><span class="o">-</span><span class="mi">11</span><span class="p">)</span><span class="si">}</span><span class="s1"> |&#39;</span><span class="p">,</span> <span class="p">]</span>
+			<span class="n">trailing_cmd_list</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;| commands V</span><span class="si">{</span><span class="s2">&quot; &quot;</span><span class="o">*</span><span class="p">(</span><span class="n">max_len</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s1"> |&#39;</span><span class="p">,</span> <span class="n">doubleline</span><span class="p">])</span>
+			<span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmd_list</span><span class="p">:</span>
+				<span class="n">cmd_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+				<span class="n">spaces</span> <span class="o">=</span> <span class="n">max_len</span> <span class="o">-</span> <span class="n">cmd_len</span>
+				<span class="n">trailing_cmd_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;| </span><span class="si">{</span><span class="n">cmd</span><span class="si">}{</span><span class="s2">&quot; &quot;</span><span class="o">*</span><span class="n">spaces</span><span class="si">}</span><span class="s1"> |&#39;</span><span class="p">)</span>
+			<span class="n">trailing_cmd_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">doubleline</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">trailing_cmd_dict</span><span class="p">[</span><span class="n">dev_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">trailing_cmd_list</span></div>
+
+
+<div class="viewcode-block" id="LogSummary.get_ip">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.get_ip">[docs]</a>
+	<span class="k">def</span> <span class="nf">get_ip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;returns ip address of asked hostname from provided dictionary d </span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			hostname (str): hostname of device</span>
+<span class="sd">			d (dict): dictionary of all raw logs</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			str: ip address for given hostname</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">host_vs_ips</span><span class="p">[</span><span class="n">hostname</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="LogSummary.add_trailing_space_to_result">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.add_trailing_space_to_result">[docs]</a>
+	<span class="k">def</span> <span class="nf">add_trailing_space_to_result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;adds trailing spaces to results to make all same length. stores them in new trailing_results_dict dictionary </span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_all_raw_logs</span><span class="p">()</span>
+		<span class="n">max_len_static</span> <span class="o">=</span> <span class="mi">9</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">trailing_results_dict</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="k">for</span> <span class="n">hn</span><span class="p">,</span> <span class="n">cmd_results</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="n">ip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ip</span><span class="p">(</span><span class="n">hn</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+			<span class="n">max_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hn</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hn</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_len_static</span> <span class="k">else</span> <span class="n">max_len_static</span>
+			<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_len</span><span class="p">:</span> <span class="n">max_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span> 
+			<span class="n">doubleline</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="n">max_len</span><span class="si">}</span><span class="s1"> +&#39;</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">trailing_results_dict</span><span class="p">[</span><span class="n">hn</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">doubleline</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">hn</span><span class="si">}{</span><span class="s2">&quot; &quot;</span><span class="o">*</span><span class="p">(</span><span class="n">max_len</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">hn</span><span class="p">))</span><span class="si">}</span><span class="s1"> |&#39;</span><span class="p">]</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">trailing_results_dict</span><span class="p">[</span><span class="n">hn</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">ip</span><span class="si">}{</span><span class="s2">&quot; &quot;</span><span class="o">*</span><span class="p">(</span><span class="n">max_len</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">ip</span><span class="p">))</span><span class="si">}</span><span class="s1"> |&#39;</span><span class="p">,</span> <span class="n">doubleline</span><span class="p">])</span>
+			<span class="k">for</span> <span class="n">cmd_reulst</span> <span class="ow">in</span> <span class="n">cmd_results</span><span class="p">:</span>
+				<span class="n">spaces</span> <span class="o">=</span> <span class="n">max_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd_reulst</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">trailing_results_dict</span><span class="p">[</span><span class="n">hn</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">cmd_reulst</span><span class="si">}{</span><span class="s2">&quot; &quot;</span><span class="o">*</span><span class="n">spaces</span><span class="si">}</span><span class="s1"> |&#39;</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">trailing_results_dict</span><span class="p">[</span><span class="n">hn</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">doubleline</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="LogSummary.concate_row_col_data">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.concate_row_col_data">[docs]</a>
+	<span class="k">def</span> <span class="nf">concate_row_col_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;concatenates comands and hosts data to generate string summary </span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			str: summary report in text format</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">fs</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="k">for</span> <span class="n">dev_type</span><span class="p">,</span> <span class="n">devices</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev_type_hn_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+			<span class="n">s</span> <span class="o">+=</span> <span class="n">dev_type</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="n">tclist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trailing_cmd_dict</span><span class="p">[</span><span class="n">dev_type</span><span class="p">]</span>
+			<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tclist</span><span class="p">):</span>
+				<span class="n">s</span> <span class="o">+=</span> <span class="n">cmd</span>
+				<span class="k">for</span> <span class="n">hn</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">:</span>
+					<span class="n">thlist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trailing_results_dict</span><span class="p">[</span><span class="n">hn</span><span class="p">]</span>
+					<span class="n">s</span> <span class="o">+=</span> <span class="n">thlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+				<span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="n">fs</span> <span class="o">+=</span> <span class="n">s</span>
+		<span class="k">return</span> <span class="n">fs</span></div>
+
+
+<div class="viewcode-block" id="LogSummary.split_device_type_wise">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.LogSummary.split_device_type_wise">[docs]</a>
+	<span class="k">def</span> <span class="nf">split_device_type_wise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;distribute hosts as per device type i.e. cisco_ios, juniper_junos etc.. and stores them in a new dictionary dev_type_hn_dict dictionary.</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			dict: device type wise dictionary {device_type: [hosts,]}</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">dev_type_hn_dict</span> <span class="o">=</span> <span class="p">{}</span>		
+		<span class="k">for</span> <span class="n">hn</span><span class="p">,</span> <span class="n">dev_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">device_type_all</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">dev_type_hn_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dev_type</span><span class="p">):</span>
+				<span class="n">dev_type_hn_dict</span><span class="p">[</span><span class="n">dev_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+			<span class="n">dev_type_hn_dict</span><span class="p">[</span><span class="n">dev_type</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hn</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">dev_type_hn_dict</span> <span class="o">=</span> <span class="n">dev_type_hn_dict</span>
+		<span class="k">return</span> <span class="n">dev_type_hn_dict</span></div>
+</div>
+
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+
+
+<div class="viewcode-block" id="SummaryDisplay">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.SummaryDisplay">[docs]</a>
+<span class="k">class</span> <span class="nc">SummaryDisplay</span><span class="p">():</span>
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SummaryDisplay.show">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.SummaryDisplay.show">[docs]</a>
+	<span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sortrows</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sortcols</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">transpose</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">T</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">rows</span><span class="p">:</span> <span class="n">rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">set_col_display_options</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+		<span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="SummaryDisplay.set_col_display_options">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/cap_summary.html#nettoolkit.capture_it.cap_summary.SummaryDisplay.set_col_display_options">[docs]</a>
+	<span class="k">def</span> <span class="nf">set_col_display_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">n</span> <span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">n</span> <span class="o">=</span> <span class="kc">None</span>
+		<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+		<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;max_colwidth&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span></div>
+</div>
+
+
+
+	<span class="c1"># def other_set_options(self):</span>
+	<span class="c1"># 	pd.set_option(&#39;display.max_columns&#39;, None)</span>
+	<span class="c1"># 	pd.set_option(&#39;max_columns&#39;, None)</span>
+	<span class="c1"># 	pd.set_option(&quot;max_rows&quot;, None)</span>
+	<span class="c1"># 	pd.set_option(&quot;max_colwidth&quot;, None)</span>
+
+
+<span class="c1"># # ==========================================================================================</span>
+<span class="c1"># from pprint import pprint</span>
+<span class="c1"># import pandas as pd</span>
+
+<span class="c1"># d = {</span>
+<span class="c1"># 	&#39;hosta&#39;: {&#39;cmd-a&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># 	&#39;hostb&#39;: {&#39;cmd-b&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># 	&#39;hostc&#39;: {&#39;cmd-a&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># 	&#39;hostd&#39;: {&#39;cmd-a&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># 	&#39;hoste&#39;: {&#39;cmd-b&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># 	&#39;hostg&#39;: {&#39;cmd-a&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># 	&#39;hostj&#39;: {&#39;cmd-d&#39;: &#39;abfadf jklhad fdf&#39;, &#39;cmd-a&#39;: &#39;abfadf jklhad fdf&#39;,},</span>
+<span class="c1"># 	&#39;hostf&#39;: {&#39;cmd-a&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># 	&#39;hosth&#39;: {&#39;cmd-c&#39;: &#39;abfadf jklhad fdf&#39;, &#39;cmd-a&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># 	&#39;hostk&#39;: {&#39;cmd-a&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># 	&#39;hosti&#39;: {&#39;cmd-a&#39;: &#39;abfadf jklhad fdf&#39;, &#39;cmd-c&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># 	&#39;hostl&#39;: {&#39;cmd-a&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># 	&#39;hostm&#39;: {&#39;cmd-a&#39;: &#39;abfadf jklhad fdf&#39;},</span>
+<span class="c1"># }</span>
+
+<span class="c1"># df = pd.DataFrame(d)</span>
+
+
+<span class="c1"># SD = SummaryDisplay(d)</span>
+<span class="c1"># SD.show(</span>
+<span class="c1"># 	# rows=5,</span>
+<span class="c1"># 	# cols=0, </span>
+<span class="c1"># 	# transpose=True, </span>
+<span class="c1"># 	sortrows=0, </span>
+<span class="c1"># 	sortcols=0,</span>
+<span class="c1"># )</span>
+
+<span class="c1"># # ==========================================================================================</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

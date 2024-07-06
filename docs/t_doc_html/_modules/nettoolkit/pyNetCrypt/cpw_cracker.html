@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.pyNetCrypt.cpw_cracker &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.pyNetCrypt.cpw_cracker</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.pyNetCrypt.cpw_cracker</h1><div class="highlight"><pre>
+<span></span><span class="c1"># &quot;&quot;&quot;</span>
+<span class="c1"># Cisco type-7 password breaker. open-source from web.</span>
+<span class="c1"># &quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">xlat</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x64</span><span class="p">,</span> <span class="mh">0x73</span><span class="p">,</span> <span class="mh">0x66</span><span class="p">,</span> <span class="mh">0x64</span><span class="p">,</span> <span class="mh">0x3b</span><span class="p">,</span> <span class="mh">0x6b</span><span class="p">,</span> <span class="mh">0x66</span><span class="p">,</span> <span class="mh">0x6f</span><span class="p">,</span> <span class="mh">0x41</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x69</span><span class="p">,</span> <span class="mh">0x79</span><span class="p">,</span> <span class="mh">0x65</span><span class="p">,</span> <span class="mh">0x77</span><span class="p">,</span> <span class="mh">0x72</span><span class="p">,</span> <span class="mh">0x6b</span><span class="p">,</span> <span class="mh">0x6c</span><span class="p">,</span> <span class="mh">0x64</span>
+<span class="p">,</span> <span class="mh">0x4a</span><span class="p">,</span> <span class="mh">0x4b</span><span class="p">,</span> <span class="mh">0x44</span><span class="p">,</span> <span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x53</span><span class="p">,</span> <span class="mh">0x55</span><span class="p">,</span> <span class="mh">0x42</span><span class="p">,</span> <span class="mh">0x73</span><span class="p">,</span> <span class="mh">0x67</span><span class="p">,</span> <span class="mh">0x76</span><span class="p">,</span> <span class="mh">0x63</span><span class="p">,</span> <span class="mh">0x61</span><span class="p">,</span> <span class="mh">0x36</span><span class="p">,</span> <span class="mh">0x39</span><span class="p">,</span> <span class="mh">0x38</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span> <span class="mh">0x34</span><span class="p">,</span> <span class="mh">0x6e</span><span class="p">,</span> <span class="mh">0x63</span><span class="p">,</span>
+<span class="mh">0x78</span><span class="p">,</span> <span class="mh">0x76</span><span class="p">,</span> <span class="mh">0x39</span><span class="p">,</span> <span class="mh">0x38</span><span class="p">,</span> <span class="mh">0x37</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span> <span class="mh">0x32</span><span class="p">,</span> <span class="mh">0x35</span><span class="p">,</span> <span class="mh">0x34</span><span class="p">,</span> <span class="mh">0x6b</span><span class="p">,</span> <span class="mh">0x3b</span><span class="p">,</span> <span class="mh">0x66</span><span class="p">,</span> <span class="mh">0x67</span><span class="p">,</span> <span class="mh">0x38</span><span class="p">,</span> <span class="mh">0x37</span><span class="p">]</span>
+
+			
+<div class="viewcode-block" id="decrypt_type7">
+<a class="viewcode-back" href="../../../docs/t_doc/pynetcrypt/pw_cracker.html#nettoolkit.pyNetCrypt.cpw_cracker.decrypt_type7">[docs]</a>
+<span class="k">def</span> <span class="nf">decrypt_type7</span><span class="p">(</span><span class="n">ep</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Cisco type-7 password decryptor</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">dp</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+	<span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;(^[0-9A-Fa-f]</span><span class="si">{2}</span><span class="s1">)([0-9A-Fa-f]+)&#39;</span><span class="p">)</span>
+	<span class="n">result</span> <span class="o">=</span> <span class="n">regex</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">ep</span><span class="p">)</span>
+	<span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span> <span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+		<span class="n">magic</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">+</span> <span class="n">e</span><span class="p">[</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">s</span> <span class="o">&lt;=</span> <span class="mi">50</span><span class="p">:</span>
+			<span class="n">newchar</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%c</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">magic</span> <span class="o">^</span> <span class="n">xlat</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+			<span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">51</span><span class="p">:</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="n">dp</span> <span class="o">+=</span> <span class="n">newchar</span>
+	<span class="k">return</span> <span class="n">dp</span></div>
+
+
+<div class="viewcode-block" id="encrypt_type7">
+<a class="viewcode-back" href="../../../docs/t_doc/pynetcrypt/pw_cracker.html#nettoolkit.pyNetCrypt.cpw_cracker.encrypt_type7">[docs]</a>
+<span class="k">def</span> <span class="nf">encrypt_type7</span><span class="p">(</span><span class="n">pt</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Cisco type-7 password encryptor</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">salt</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">15</span><span class="p">);</span>
+	<span class="n">ep</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%02x</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">salt</span>
+	<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pt</span><span class="p">)):</span>
+		<span class="n">ep</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%02x</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">pt</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">^</span> <span class="n">xlat</span><span class="p">[</span><span class="n">salt</span><span class="p">])</span>
+		<span class="n">salt</span> <span class="o">+=</span> <span class="mi">1</span>
+		<span class="k">if</span> <span class="n">salt</span> <span class="o">==</span> <span class="mi">51</span><span class="p">:</span> <span class="n">salt</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">return</span> <span class="n">ep</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_update_pw_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+	<span class="c1"># updates line if password string found, encrypt or mask it and return updated line	</span>
+	<span class="n">regex7</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;( 7 )([0-9A-Fa-f]+)($)&#39;</span><span class="p">)</span>
+	<span class="n">regex9</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;secret 9 &#39;</span><span class="p">)</span>
+	<span class="n">result7</span> <span class="o">=</span> <span class="n">regex7</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+	<span class="n">result9</span> <span class="o">=</span> <span class="n">regex9</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">mask</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">result7</span><span class="p">:</span> <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">result7</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))]</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="s2">&quot;XXXXXXXX</span><span class="se">\n</span><span class="s2">&quot;</span>
+		<span class="k">if</span> <span class="n">result9</span><span class="p">:</span> 
+			<span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">result9</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))]</span> <span class="o">+</span> <span class="s2">&quot;secret 9 XXXXXXXX</span><span class="se">\n</span><span class="s2">&quot;</span>
+	<span class="k">elif</span> <span class="n">result7</span><span class="p">:</span>
+		<span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">result7</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))]</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">decrypt_type7</span><span class="p">(</span><span class="n">result7</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+	<span class="k">return</span> <span class="n">line</span>
+
+
+<span class="k">def</span> <span class="nf">_file_passwords_update</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">pw_masking</span><span class="p">):</span>
+	<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+		<span class="n">lst</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+	<span class="n">ulist</span> <span class="o">=</span> <span class="p">(</span><span class="n">_update_pw_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">pw_masking</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">)</span>
+	<span class="n">cfg</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ulist</span><span class="p">)</span>
+	<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+		<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+
+<div class="viewcode-block" id="decrypt_file_passwords">
+<a class="viewcode-back" href="../../../docs/t_doc/pynetcrypt/pw_cracker.html#nettoolkit.pyNetCrypt.cpw_cracker.decrypt_file_passwords">[docs]</a>
+<span class="k">def</span> <span class="nf">decrypt_file_passwords</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Decrypts all type 7 passwords found in input file, and create a new updated output file</span>
+<span class="sd">	with plain text passwords</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		input_file (str): cisco configuration file name</span>
+<span class="sd">		output_file (str): output file name</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">_file_passwords_update</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="mask_file_passwords">
+<a class="viewcode-back" href="../../../docs/t_doc/pynetcrypt/pw_cracker.html#nettoolkit.pyNetCrypt.cpw_cracker.mask_file_passwords">[docs]</a>
+<span class="k">def</span> <span class="nf">mask_file_passwords</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Masks all type 7 and type 9 passwords found in cisco configuration input file,</span>
+<span class="sd">	and creates a new updated output file with plain masked passwords</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		input_file (str): cisco configuration file name</span>
+<span class="sd">		output_file (str): output file name</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">_file_passwords_update</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+	<span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

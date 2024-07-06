@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8.3. hierarchy &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="8.4. hierarchy_rules" href="hierarchy_rules.html" />
+    <link rel="prev" title="8.2. jset" href="jset.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_doc.html">8. pyjuniper</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="juniper.html">8.1. Juniper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jset.html">8.2. jset</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8.3. hierarchy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert"><code class="docutils literal notranslate"><span class="pre">Convert</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.add_to_str"><code class="docutils literal notranslate"><span class="pre">Convert.add_to_str()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.closure"><code class="docutils literal notranslate"><span class="pre">Convert.closure</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.clubbed_candidate_terminator_lines"><code class="docutils literal notranslate"><span class="pre">Convert.clubbed_candidate_terminator_lines()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.convert"><code class="docutils literal notranslate"><span class="pre">Convert.convert</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.distributed_candidate_terminator_lines"><code class="docutils literal notranslate"><span class="pre">Convert.distributed_candidate_terminator_lines()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.exception"><code class="docutils literal notranslate"><span class="pre">Convert.exception()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.front_tabs"><code class="docutils literal notranslate"><span class="pre">Convert.front_tabs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_candidate_straight"><code class="docutils literal notranslate"><span class="pre">Convert.grp_candidate_straight()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_candidates_clubbed"><code class="docutils literal notranslate"><span class="pre">Convert.grp_candidates_clubbed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_candidates_distributed"><code class="docutils literal notranslate"><span class="pre">Convert.grp_candidates_distributed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_has_suffix_candidate"><code class="docutils literal notranslate"><span class="pre">Convert.grp_has_suffix_candidate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_nested"><code class="docutils literal notranslate"><span class="pre">Convert.grp_nested()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_suffixes"><code class="docutils literal notranslate"><span class="pre">Convert.grp_suffixes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.logic_groups"><code class="docutils literal notranslate"><span class="pre">Convert.logic_groups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.logic_terminators"><code class="docutils literal notranslate"><span class="pre">Convert.logic_terminators()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.terminator_line"><code class="docutils literal notranslate"><span class="pre">Convert.terminator_line</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.update_front_tabs"><code class="docutils literal notranslate"><span class="pre">Convert.update_front_tabs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Convert.update_prefix"><code class="docutils literal notranslate"><span class="pre">Convert.update_prefix()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Hierarchy"><code class="docutils literal notranslate"><span class="pre">Hierarchy</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Hierarchy.convert"><code class="docutils literal notranslate"><span class="pre">Hierarchy.convert()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Section"><code class="docutils literal notranslate"><span class="pre">Section</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.Section.add"><code class="docutils literal notranslate"><span class="pre">Section.add()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.excluded"><code class="docutils literal notranslate"><span class="pre">excluded()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.included"><code class="docutils literal notranslate"><span class="pre">included()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.li_li_words"><code class="docutils literal notranslate"><span class="pre">li_li_words()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.mysplit"><code class="docutils literal notranslate"><span class="pre">mysplit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.recursive_item_lookup"><code class="docutils literal notranslate"><span class="pre">recursive_item_lookup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.related_list"><code class="docutils literal notranslate"><span class="pre">related_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.section_dict"><code class="docutils literal notranslate"><span class="pre">section_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyJuniper.hierarchy.zero_items"><code class="docutils literal notranslate"><span class="pre">zero_items()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hierarchy_rules.html">8.4. hierarchy_rules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tech_doc.html"><span class="section-number">8. </span>pyJuniper API documentation!</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8.3. </span>hierarchy</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/t_doc/pyjuniper/hierarchy.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nettoolkit.pyJuniper.hierarchy">
+<span id="hierarchy"></span><h1><span class="section-number">8.3. </span>hierarchy<a class="headerlink" href="#module-nettoolkit.pyJuniper.hierarchy" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.hierarchy.</span></span><span class="sig-name descname"><span class="pre">Convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tabs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_tailed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_grouped</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_distributed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_straight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_straight_anyway</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Converts Dicationary to Hierarchical config string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>dict</em>) – dictionary</p></li>
+<li><p><strong>tabs</strong> (<em>int</em>) – front tabs</p></li>
+<li><p><strong>is_tailed</strong> (<em>bool</em><em>, </em><em>optional</em>) – tailed config. Defaults to True.</p></li>
+<li><p><strong>is_grouped</strong> (<em>bool</em><em>, </em><em>optional</em>) – grouped config. Defaults to False.</p></li>
+<li><p><strong>is_distributed</strong> (<em>bool</em><em>, </em><em>optional</em>) – distributed config. Defaults to False.</p></li>
+<li><p><strong>is_straight</strong> (<em>bool</em><em>, </em><em>optional</em>) – straight config. Defaults to False.</p></li>
+<li><p><strong>is_straight_anyway</strong> (<em>bool</em><em>, </em><em>optional</em>) – straight anyway config. Defaults to False.</p></li>
+<li><p><strong>parent_prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – parent prefix. Defaults to ‘’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.add_to_str">
+<span class="sig-name descname"><span class="pre">add_to_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.add_to_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.add_to_str" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.closure">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">closure</span></span><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.closure" title="Link to this definition"></a></dt>
+<dd><p>Append Section closure to string</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.clubbed_candidate_terminator_lines">
+<span class="sig-name descname"><span class="pre">clubbed_candidate_terminator_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.clubbed_candidate_terminator_lines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.clubbed_candidate_terminator_lines" title="Link to this definition"></a></dt>
+<dd><p>Clubbed candidates terminator words getting added to string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic_key</strong> (<em>str</em>) – key/string to be added to config</p></li>
+<li><p><strong>dic_value</strong> (<em>dict</em>) – sub-section config (if any)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.convert">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convert</span></span><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.convert" title="Link to this definition"></a></dt>
+<dd><p>start Converting dictionary to config string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.distributed_candidate_terminator_lines">
+<span class="sig-name descname"><span class="pre">distributed_candidate_terminator_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.distributed_candidate_terminator_lines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.distributed_candidate_terminator_lines" title="Link to this definition"></a></dt>
+<dd><p>Distributed terminator candidate words getting added to string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic_key</strong> (<em>str</em>) – key/string to be added to config</p></li>
+<li><p><strong>dic_value</strong> (<em>dict</em>) – sub-section config (if any)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.exception">
+<span class="sig-name descname"><span class="pre">exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.exception"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.exception" title="Link to this definition"></a></dt>
+<dd><p>Exceptional identifiex configurations - Add more as found any</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dic_key</strong> (<em>str</em>) – key to be found in set line</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.front_tabs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">front_tabs</span></span><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.front_tabs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.grp_candidate_straight">
+<span class="sig-name descname"><span class="pre">grp_candidate_straight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.grp_candidate_straight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_candidate_straight" title="Link to this definition"></a></dt>
+<dd><p>group config, which has straight candidate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic_key</strong> (<em>str</em>) – key/string to be added to config</p></li>
+<li><p><strong>dic_value</strong> (<em>dict</em>) – sub-section config (if any)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.grp_candidates_clubbed">
+<span class="sig-name descname"><span class="pre">grp_candidates_clubbed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.grp_candidates_clubbed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_candidates_clubbed" title="Link to this definition"></a></dt>
+<dd><p>clubbed group config</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic_key</strong> (<em>str</em>) – key/string to be added to config</p></li>
+<li><p><strong>dic_value</strong> (<em>dict</em>) – sub-section config (if any)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.grp_candidates_distributed">
+<span class="sig-name descname"><span class="pre">grp_candidates_distributed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.grp_candidates_distributed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_candidates_distributed" title="Link to this definition"></a></dt>
+<dd><p>Distributed group config</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic_key</strong> (<em>str</em>) – key/string to be added to config</p></li>
+<li><p><strong>dic_value</strong> (<em>dict</em>) – sub-section config (if any)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.grp_has_suffix_candidate">
+<span class="sig-name descname"><span class="pre">grp_has_suffix_candidate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.grp_has_suffix_candidate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_has_suffix_candidate" title="Link to this definition"></a></dt>
+<dd><p>group config, which has suffix candidate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic_key</strong> (<em>str</em>) – key/string to be added to config</p></li>
+<li><p><strong>dic_value</strong> (<em>dict</em>) – sub-section config (if any)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.grp_nested">
+<span class="sig-name descname"><span class="pre">grp_nested</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.grp_nested"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_nested" title="Link to this definition"></a></dt>
+<dd><p>nested group config</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic_key</strong> (<em>str</em>) – key/string to be added to config</p></li>
+<li><p><strong>dic_value</strong> (<em>dict</em>) – sub-section config (if any)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.grp_suffixes">
+<span class="sig-name descname"><span class="pre">grp_suffixes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.grp_suffixes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.grp_suffixes" title="Link to this definition"></a></dt>
+<dd><p>group config</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic_key</strong> (<em>str</em>) – key/string to be added to config</p></li>
+<li><p><strong>dic_value</strong> (<em>dict</em>) – sub-section config (if any)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.logic_groups">
+<span class="sig-name descname"><span class="pre">logic_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.logic_groups"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.logic_groups" title="Link to this definition"></a></dt>
+<dd><p>section group selector logic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic_key</strong> (<em>str</em>) – string key to be pass on to selector logic</p></li>
+<li><p><strong>dic_value</strong> (<em>dic</em>) – dictionary for the key to be pass on to selector logic</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.logic_terminators">
+<span class="sig-name descname"><span class="pre">logic_terminators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.logic_terminators"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.logic_terminators" title="Link to this definition"></a></dt>
+<dd><p>line terminators selector logic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic_key</strong> (<em>str</em>) – string key to be pass on to selector logic</p></li>
+<li><p><strong>dic_value</strong> (<em>dic</em>) – dictionary for the key to be pass on to selector logic</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns True if any terminator logic matches found else None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.terminator_line">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">terminator_line</span></span><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.terminator_line" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.update_front_tabs">
+<span class="sig-name descname"><span class="pre">update_front_tabs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.update_front_tabs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.update_front_tabs" title="Link to this definition"></a></dt>
+<dd><p>update front tab value with add of n</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – adds n to tabs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Convert.update_prefix">
+<span class="sig-name descname"><span class="pre">update_prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Convert.update_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Convert.update_prefix" title="Link to this definition"></a></dt>
+<dd><p>update prefix value to k</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>k</strong> (<em>str</em>) – key to be added</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Hierarchy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.hierarchy.</span></span><span class="sig-name descname"><span class="pre">Hierarchy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Hierarchy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Hierarchy" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Hierarchical config conversion</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> (<em>str</em>) – input set config file</p></li>
+<li><p><strong>output_file</strong> (<em>str</em>) – output file</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Hierarchy.convert">
+<span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Hierarchy.convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Hierarchy.convert" title="Link to this definition"></a></dt>
+<dd><p>convert input file</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Section">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.hierarchy.</span></span><span class="sig-name descname"><span class="pre">Section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Section" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Configuration Section Creator</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.Section.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ordered</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#Section.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.Section.add" title="Link to this definition"></a></dt>
+<dd><p>add the key value to self.dic
+go thru recursive lookup for dictionary tree</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ordered</strong> (<em>bool</em>) – dictionary to be ordered or not</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.excluded">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.hierarchy.</span></span><span class="sig-name descname"><span class="pre">excluded</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">members</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">member_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#excluded"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.excluded" title="Link to this definition"></a></dt>
+<dd><p>Checks for matching key from provided dictionary (dic) in to members dictionary’s member_key,
+returns True if found any.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>[</em><em>type</em><em>]</em>) – input dictionary for which keys to be searched in to members dictinary members</p></li>
+<li><p><strong>members</strong> (<em>[</em><em>type</em><em>]</em>) – members dicationary to be looked in to.</p></li>
+<li><p><strong>member_key</strong> (<em>str</em>) – member key to be looked in to members dictionary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if any excluded member found, None Else</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.included">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.hierarchy.</span></span><span class="sig-name descname"><span class="pre">included</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">members</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">member_key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#included"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.included" title="Link to this definition"></a></dt>
+<dd><p>Checks for matching key from provided dictionary (dic) in to members dictionary’s member_key,
+returns True if found or member_key not found in members dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>[</em><em>type</em><em>]</em>) – input dictionary for which keys to be searched in to members dictinary members</p></li>
+<li><p><strong>members</strong> (<em>[</em><em>type</em><em>]</em>) – members dicationary to be looked in to.</p></li>
+<li><p><strong>member_key</strong> (<em>str</em>) – member key to be looked in to members dictionary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if any excluded member found or member_key not in members, False Else</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.li_li_words">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.hierarchy.</span></span><span class="sig-name descname"><span class="pre">li_li_words</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#li_li_words"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.li_li_words" title="Link to this definition"></a></dt>
+<dd><p>converts multiline string in to list of list of words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>in_str</strong> (<em>str</em>) – Multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of list of words.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.mysplit">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.hierarchy.</span></span><span class="sig-name descname"><span class="pre">mysplit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#mysplit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.mysplit" title="Link to this definition"></a></dt>
+<dd><p>split line by (default space), also retain the strings like descriptions as it is.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<em>str</em>) – string line</p></li>
+<li><p><strong>by</strong> (<em>character</em><em>, </em><em>optional</em>) – Split by option. Defaults to ” “.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>split line and return list</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.recursive_item_lookup">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.hierarchy.</span></span><span class="sig-name descname"><span class="pre">recursive_item_lookup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lili_words</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#recursive_item_lookup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.recursive_item_lookup" title="Link to this definition"></a></dt>
+<dd><p>create and yields dictionary/list from provided list of list of words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lili_words</strong> (<em>list</em>) – input list of list of words</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>dict</em> – yields dictionary item/value pairs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.related_list">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.hierarchy.</span></span><span class="sig-name descname"><span class="pre">related_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#related_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.related_list" title="Link to this definition"></a></dt>
+<dd><p>filter input list for the given word in index-0 position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_list</strong> (<em>list</em>) – input list of list</p></li>
+<li><p><strong>word</strong> (<em>str</em>) – word to be check in index-0 position.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>filtered output list</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.section_dict">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.hierarchy.</span></span><span class="sig-name descname"><span class="pre">section_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_review</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#section_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.section_dict" title="Link to this definition"></a></dt>
+<dd><p>create section dectionary from given input list for the selected word.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_list</strong> (<em>list</em><em>, </em><em>str</em>) – Input list or string</p></li>
+<li><p><strong>word</strong> (<em>str</em>) – selected word for which list to be search up on and generate dictionary</p></li>
+<li><p><strong>full_review</strong> (<em>bool</em><em>, </em><em>optional</em>) – go thru full list if set to true, else only check first match only. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – Unmatched input type for input.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dictionary with key equal input word and value as list of words from matched suffixes.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.hierarchy.zero_items">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.hierarchy.</span></span><span class="sig-name descname"><span class="pre">zero_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/hierarchy.html#zero_items"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.hierarchy.zero_items" title="Link to this definition"></a></dt>
+<dd><p>Return all Zero (0) indexed Items from list of lists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>in_list</strong> (<em>list</em>) – input list of lists</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>all 0-index items from list of lists</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="jset.html" class="btn btn-neutral float-left" title="8.2. jset" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hierarchy_rules.html" class="btn btn-neutral float-right" title="8.4. hierarchy_rules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

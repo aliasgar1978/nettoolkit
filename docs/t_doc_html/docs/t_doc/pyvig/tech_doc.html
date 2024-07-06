@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10. pyVig API documentation! &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="9.1. cisco passwords" href="../pynetcrypt/pw_cracker.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. pyvig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.pyVig.cablings">10.1. pyVig - cablings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.cablings.ADevCablings"><code class="docutils literal notranslate"><span class="pre">ADevCablings</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.cablings.ADevCablings.add_to_cablings"><code class="docutils literal notranslate"><span class="pre">ADevCablings.add_to_cablings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.cablings.ADevCablings.cabling_dataframe"><code class="docutils literal notranslate"><span class="pre">ADevCablings.cabling_dataframe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.cablings.ADevCablings.update_attrib"><code class="docutils literal notranslate"><span class="pre">ADevCablings.update_attrib()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.pyVig.common">10.2. pyVig - common functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.common.get_filename"><code class="docutils literal notranslate"><span class="pre">get_filename()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.pyVig.database">10.3. pyVig - database functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.database.CableMatrixData"><code class="docutils literal notranslate"><span class="pre">CableMatrixData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.CableMatrixData.calc_slop"><code class="docutils literal notranslate"><span class="pre">CableMatrixData.calc_slop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.CableMatrixData.filter"><code class="docutils literal notranslate"><span class="pre">CableMatrixData.filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.CableMatrixData.filter_eligible_cables_only"><code class="docutils literal notranslate"><span class="pre">CableMatrixData.filter_eligible_cables_only()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.CableMatrixData.optional_columns"><code class="docutils literal notranslate"><span class="pre">CableMatrixData.optional_columns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.CableMatrixData.sheet_name"><code class="docutils literal notranslate"><span class="pre">CableMatrixData.sheet_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.database.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.Data.add_attribute"><code class="docutils literal notranslate"><span class="pre">Data.add_attribute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.Data.add_kwargs_attributes"><code class="docutils literal notranslate"><span class="pre">Data.add_kwargs_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.Data.add_optional_columnnames_attributes"><code class="docutils literal notranslate"><span class="pre">Data.add_optional_columnnames_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.Data.read"><code class="docutils literal notranslate"><span class="pre">Data.read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.Data.verify_mandatory_declared_cols_availabilty"><code class="docutils literal notranslate"><span class="pre">Data.verify_mandatory_declared_cols_availabilty()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData"><code class="docutils literal notranslate"><span class="pre">DeviceData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData.add_description"><code class="docutils literal notranslate"><span class="pre">DeviceData.add_description()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData.add_format_columnnames_attributes"><code class="docutils literal notranslate"><span class="pre">DeviceData.add_format_columnnames_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData.default_stencil"><code class="docutils literal notranslate"><span class="pre">DeviceData.default_stencil</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData.format_columns"><code class="docutils literal notranslate"><span class="pre">DeviceData.format_columns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData.optional_columns"><code class="docutils literal notranslate"><span class="pre">DeviceData.optional_columns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData.sheet_name"><code class="docutils literal notranslate"><span class="pre">DeviceData.sheet_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData.x"><code class="docutils literal notranslate"><span class="pre">DeviceData.x</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData.y"><code class="docutils literal notranslate"><span class="pre">DeviceData.y</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.database.merged_df_on_hostname"><code class="docutils literal notranslate"><span class="pre">merged_df_on_hostname()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.pyVig.devices">10.4. pyVig - devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.devices.AdevDevices"><code class="docutils literal notranslate"><span class="pre">AdevDevices</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.devices.AdevDevices.add_to_devices"><code class="docutils literal notranslate"><span class="pre">AdevDevices.add_to_devices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.devices.AdevDevices.add_vlan_info"><code class="docutils literal notranslate"><span class="pre">AdevDevices.add_vlan_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.devices.AdevDevices.get_self_device_df"><code class="docutils literal notranslate"><span class="pre">AdevDevices.get_self_device_df()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.devices.device_df_drop_empty_duplicates"><code class="docutils literal notranslate"><span class="pre">device_df_drop_empty_duplicates()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.devices.update_var_df_details_to_table_df"><code class="docutils literal notranslate"><span class="pre">update_var_df_details_to_table_df()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.pyVig.entities">10.5. pyVig - entities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.entities.Connectors"><code class="docutils literal notranslate"><span class="pre">Connectors</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.entities.Connectors.execute"><code class="docutils literal notranslate"><span class="pre">Connectors.execute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.entities.Connectors.get_optional_columns_value"><code class="docutils literal notranslate"><span class="pre">Connectors.get_optional_columns_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.entities.ItemObjects"><code class="docutils literal notranslate"><span class="pre">ItemObjects</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.entities.ItemObjects.bottom_most"><code class="docutils literal notranslate"><span class="pre">ItemObjects.bottom_most</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.entities.ItemObjects.execute"><code class="docutils literal notranslate"><span class="pre">ItemObjects.execute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.entities.ItemObjects.left_most"><code class="docutils literal notranslate"><span class="pre">ItemObjects.left_most</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.entities.ItemObjects.page_height"><code class="docutils literal notranslate"><span class="pre">ItemObjects.page_height</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.entities.ItemObjects.page_width"><code class="docutils literal notranslate"><span class="pre">ItemObjects.page_width</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.entities.ItemObjects.right_most"><code class="docutils literal notranslate"><span class="pre">ItemObjects.right_most</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.entities.ItemObjects.top_most"><code class="docutils literal notranslate"><span class="pre">ItemObjects.top_most</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.entities.get_col_value"><code class="docutils literal notranslate"><span class="pre">get_col_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.pyVig.general">10.6. pyVig - general functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.drop_empty"><code class="docutils literal notranslate"><span class="pre">drop_empty()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.get_dev_hostname"><code class="docutils literal notranslate"><span class="pre">get_dev_hostname()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.get_dev_model"><code class="docutils literal notranslate"><span class="pre">get_dev_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.get_dev_serial"><code class="docutils literal notranslate"><span class="pre">get_dev_serial()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.get_item_first"><code class="docutils literal notranslate"><span class="pre">get_item_first()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.get_patterns"><code class="docutils literal notranslate"><span class="pre">get_patterns()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.get_physical_if_relevants"><code class="docutils literal notranslate"><span class="pre">get_physical_if_relevants()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.get_physical_if_up"><code class="docutils literal notranslate"><span class="pre">get_physical_if_up()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.get_vlan_if_relevants"><code class="docutils literal notranslate"><span class="pre">get_vlan_if_relevants()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.get_vlan_if_up"><code class="docutils literal notranslate"><span class="pre">get_vlan_if_up()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.get_vlans_info"><code class="docutils literal notranslate"><span class="pre">get_vlans_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.series_item_0_value"><code class="docutils literal notranslate"><span class="pre">series_item_0_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.update_merged_df_series"><code class="docutils literal notranslate"><span class="pre">update_merged_df_series()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.update_pattern"><code class="docutils literal notranslate"><span class="pre">update_pattern()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.general.update_vlans_info"><code class="docutils literal notranslate"><span class="pre">update_vlans_info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.pyVig.maths">10.7. pyVig - mathamatics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY"><code class="docutils literal notranslate"><span class="pre">CalculateXY</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.calc"><code class="docutils literal notranslate"><span class="pre">CalculateXY.calc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.calc_xs"><code class="docutils literal notranslate"><span class="pre">CalculateXY.calc_xs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.calc_ys"><code class="docutils literal notranslate"><span class="pre">CalculateXY.calc_ys()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.count_of_ho"><code class="docutils literal notranslate"><span class="pre">CalculateXY.count_of_ho()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.get_x"><code class="docutils literal notranslate"><span class="pre">CalculateXY.get_x()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.get_y"><code class="docutils literal notranslate"><span class="pre">CalculateXY.get_y()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.inverse_y"><code class="docutils literal notranslate"><span class="pre">CalculateXY.inverse_y()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.merge_xy_filter_dfs_with_dev_df"><code class="docutils literal notranslate"><span class="pre">CalculateXY.merge_xy_filter_dfs_with_dev_df()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.sort"><code class="docutils literal notranslate"><span class="pre">CalculateXY.sort()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.update_xs"><code class="docutils literal notranslate"><span class="pre">CalculateXY.update_xs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.update_xy_for_sheet_filter_dict"><code class="docutils literal notranslate"><span class="pre">CalculateXY.update_xy_for_sheet_filter_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXY.update_ys"><code class="docutils literal notranslate"><span class="pre">CalculateXY.update_ys()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXYNative"><code class="docutils literal notranslate"><span class="pre">CalculateXYNative</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXYNative.add"><code class="docutils literal notranslate"><span class="pre">CalculateXYNative.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXYNative.add_x_y_to_df"><code class="docutils literal notranslate"><span class="pre">CalculateXYNative.add_x_y_to_df()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXYNative.calc"><code class="docutils literal notranslate"><span class="pre">CalculateXYNative.calc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXYNative.count_of_devices"><code class="docutils literal notranslate"><span class="pre">CalculateXYNative.count_of_devices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXYNative.dev_connectors_dict"><code class="docutils literal notranslate"><span class="pre">CalculateXYNative.dev_connectors_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXYNative.device_add"><code class="docutils literal notranslate"><span class="pre">CalculateXYNative.device_add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXYNative.get_nbr_devices"><code class="docutils literal notranslate"><span class="pre">CalculateXYNative.get_nbr_devices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXYNative.get_xy"><code class="docutils literal notranslate"><span class="pre">CalculateXYNative.get_xy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.maths.CalculateXYNative.iterate"><code class="docutils literal notranslate"><span class="pre">CalculateXYNative.iterate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.maths.df_with_slops_and_angles"><code class="docutils literal notranslate"><span class="pre">df_with_slops_and_angles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.maths.slop_to_angled_connector"><code class="docutils literal notranslate"><span class="pre">slop_to_angled_connector()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.maths.slop_to_straight_connector"><code class="docutils literal notranslate"><span class="pre">slop_to_straight_connector()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.pyVig.oper">10.8. pyVig - operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.oper.CableMatrix"><code class="docutils literal notranslate"><span class="pre">CableMatrix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen"><code class="docutils literal notranslate"><span class="pre">DFGen</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.add_b_device_media_types"><code class="docutils literal notranslate"><span class="pre">DFGen.add_b_device_media_types()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.add_cable_connector_details"><code class="docutils literal notranslate"><span class="pre">DFGen.add_cable_connector_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.add_model_n_serial_number_to_cabling"><code class="docutils literal notranslate"><span class="pre">DFGen.add_model_n_serial_number_to_cabling()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.arrange_cablings"><code class="docutils literal notranslate"><span class="pre">DFGen.arrange_cablings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.blank_dfs"><code class="docutils literal notranslate"><span class="pre">DFGen.blank_dfs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.calculate_cordinates"><code class="docutils literal notranslate"><span class="pre">DFGen.calculate_cordinates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.custom_attributes"><code class="docutils literal notranslate"><span class="pre">DFGen.custom_attributes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.custom_functions"><code class="docutils literal notranslate"><span class="pre">DFGen.custom_functions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.custom_var_functions"><code class="docutils literal notranslate"><span class="pre">DFGen.custom_var_functions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.map_color"><code class="docutils literal notranslate"><span class="pre">DFGen.map_color()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.merge_cable_type"><code class="docutils literal notranslate"><span class="pre">DFGen.merge_cable_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.remove_duplicate_cabling_entries"><code class="docutils literal notranslate"><span class="pre">DFGen.remove_duplicate_cabling_entries()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.remove_duplicate_cablings"><code class="docutils literal notranslate"><span class="pre">DFGen.remove_duplicate_cablings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.remove_subintf_from_ports"><code class="docutils literal notranslate"><span class="pre">DFGen.remove_subintf_from_ports()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.remove_undefined_cabling_entries"><code class="docutils literal notranslate"><span class="pre">DFGen.remove_undefined_cabling_entries()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.run"><code class="docutils literal notranslate"><span class="pre">DFGen.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.standardize_intf_on_ports"><code class="docutils literal notranslate"><span class="pre">DFGen.standardize_intf_on_ports()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.update"><code class="docutils literal notranslate"><span class="pre">DFGen.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.update_cable_connector"><code class="docutils literal notranslate"><span class="pre">DFGen.update_cable_connector()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.update_cabling_df"><code class="docutils literal notranslate"><span class="pre">DFGen.update_cabling_df()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.update_color"><code class="docutils literal notranslate"><span class="pre">DFGen.update_color()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.update_devices_df"><code class="docutils literal notranslate"><span class="pre">DFGen.update_devices_df()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen.update_weight"><code class="docutils literal notranslate"><span class="pre">DFGen.update_weight()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.oper.DF_ConverT"><code class="docutils literal notranslate"><span class="pre">DF_ConverT</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DF_ConverT.convert"><code class="docutils literal notranslate"><span class="pre">DF_ConverT.convert()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DF_ConverT.get_self_details"><code class="docutils literal notranslate"><span class="pre">DF_ConverT.get_self_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DF_ConverT.update_cablings"><code class="docutils literal notranslate"><span class="pre">DF_ConverT.update_cablings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DF_ConverT.update_device_self_detils"><code class="docutils literal notranslate"><span class="pre">DF_ConverT.update_device_self_detils()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DF_ConverT.update_devices"><code class="docutils literal notranslate"><span class="pre">DF_ConverT.update_devices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DF_ConverT.update_devices_df_pattern_n_custom_func"><code class="docutils literal notranslate"><span class="pre">DF_ConverT.update_devices_df_pattern_n_custom_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyVig.oper.DF_ConverT.update_devices_for"><code class="docutils literal notranslate"><span class="pre">DF_ConverT.update_devices_for()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.oper.get_color"><code class="docutils literal notranslate"><span class="pre">get_color()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.oper.get_model_number"><code class="docutils literal notranslate"><span class="pre">get_model_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.oper.get_serial_number"><code class="docutils literal notranslate"><span class="pre">get_serial_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.oper.merge_port_for_duplicates"><code class="docutils literal notranslate"><span class="pre">merge_port_for_duplicates()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.oper.remove_duplicates"><code class="docutils literal notranslate"><span class="pre">remove_duplicates()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.oper.update_b_media_type"><code class="docutils literal notranslate"><span class="pre">update_b_media_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.oper.update_color"><code class="docutils literal notranslate"><span class="pre">update_color()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.oper.update_weight"><code class="docutils literal notranslate"><span class="pre">update_weight()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.pyVig.pyVig">10.9. pyVig - pyVig</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.pyVig.cabling_data_operations"><code class="docutils literal notranslate"><span class="pre">cabling_data_operations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.pyVig.device_data_operations"><code class="docutils literal notranslate"><span class="pre">device_data_operations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.pyVig.pyVig"><code class="docutils literal notranslate"><span class="pre">pyVig()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.pyVig.repeat_for_filter"><code class="docutils literal notranslate"><span class="pre">repeat_for_filter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.pyVig.visio_operations"><code class="docutils literal notranslate"><span class="pre">visio_operations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.pyVig.visio_page_operation"><code class="docutils literal notranslate"><span class="pre">visio_page_operation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.pyVig.static">10.10. pyVig - statics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.pyVig.stencils">10.11. pyVig - stencils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.pyVig.stencils.get_list_of_stencils"><code class="docutils literal notranslate"><span class="pre">get_list_of_stencils()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">10. </span>pyVig API documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/t_doc/pyvig/tech_doc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyvig-api-documentation">
+<h1><span class="section-number">10. </span>pyVig API documentation!<a class="headerlink" href="#pyvig-api-documentation" title="Link to this heading"></a></h1>
+<section id="module-nettoolkit.pyVig.cablings">
+<span id="pyvig-cablings"></span><h2><span class="section-number">10.1. </span>pyVig - cablings<a class="headerlink" href="#module-nettoolkit.pyVig.cablings" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.cablings.ADevCablings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.cablings.</span></span><span class="sig-name descname"><span class="pre">ADevCablings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self_device</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/cablings.html#ADevCablings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.cablings.ADevCablings" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A single Device Cabling details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>self_device</strong> (<em>str</em>) – device hostname (self)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.cablings.ADevCablings.add_to_cablings">
+<span class="sig-name descname"><span class="pre">add_to_cablings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/cablings.html#ADevCablings.add_to_cablings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.cablings.ADevCablings.add_to_cablings" title="Link to this definition"></a></dt>
+<dd><p>add provided keyword arguments to cablings (dictionary)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.cablings.ADevCablings.cabling_dataframe">
+<span class="sig-name descname"><span class="pre">cabling_dataframe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/cablings.html#ADevCablings.cabling_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.cablings.ADevCablings.cabling_dataframe" title="Link to this definition"></a></dt>
+<dd><p>generate the dataframe for the cablings details captured in cablings dictionary of self.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Pandas DataFrame object</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.cablings.ADevCablings.update_attrib">
+<span class="sig-name descname"><span class="pre">update_attrib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/cablings.html#ADevCablings.update_attrib"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.cablings.ADevCablings.update_attrib" title="Link to this definition"></a></dt>
+<dd><p>update object attributes</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyVig.common">
+<span id="pyvig-common-functions"></span><h2><span class="section-number">10.2. </span>pyVig - common functions<a class="headerlink" href="#module-nettoolkit.pyVig.common" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.common.get_filename">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.common.</span></span><span class="sig-name descname"><span class="pre">get_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">absolute_pathfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/common.html#get_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.common.get_filename" title="Link to this definition"></a></dt>
+<dd><p>This function takes in the absolute path of a file and returns the filename.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>absolute_pathfile</strong> (<em>str</em>) – The absolute path of the file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>filename</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyVig.database">
+<span id="pyvig-database-functions"></span><h2><span class="section-number">10.3. </span>pyVig - database functions<a class="headerlink" href="#module-nettoolkit.pyVig.database" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.CableMatrixData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.database.</span></span><span class="sig-name descname"><span class="pre">CableMatrixData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#CableMatrixData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.CableMatrixData" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.pyVig.database.Data" title="nettoolkit.pyVig.database.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a></p>
+<p>Cabling Data Object Building</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.CableMatrixData.calc_slop">
+<span class="sig-name descname"><span class="pre">calc_slop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DD</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#CableMatrixData.calc_slop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.CableMatrixData.calc_slop" title="Link to this definition"></a></dt>
+<dd><p>calculate the slop and angle of the two end points and add it in respective column
+in dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>DD</strong> (<a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData" title="nettoolkit.pyVig.database.DeviceData"><em>DeviceData</em></a>) – DeviceData object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.CableMatrixData.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#CableMatrixData.filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.CableMatrixData.filter" title="Link to this definition"></a></dt>
+<dd><p>filter the dataframe for given column:value
+multiple kwargs act as ‘and’ operation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.CableMatrixData.filter_eligible_cables_only">
+<span class="sig-name descname"><span class="pre">filter_eligible_cables_only</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#CableMatrixData.filter_eligible_cables_only"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.CableMatrixData.filter_eligible_cables_only" title="Link to this definition"></a></dt>
+<dd><p>optional filter: filters DataFrame for the column <cite>include</cite> with values as <cite>y</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.CableMatrixData.optional_columns">
+<span class="sig-name descname"><span class="pre">optional_columns</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'aport':</span> <span class="pre">'',</span> <span class="pre">'color':</span> <span class="pre">'blue',</span> <span class="pre">'connector_type':</span> <span class="pre">'straight',</span> <span class="pre">'pattern':</span> <span class="pre">1,</span> <span class="pre">'weight':</span> <span class="pre">1}</span></em><a class="headerlink" href="#nettoolkit.pyVig.database.CableMatrixData.optional_columns" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.CableMatrixData.sheet_name">
+<span class="sig-name descname"><span class="pre">sheet_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Cablings'</span></em><a class="headerlink" href="#nettoolkit.pyVig.database.CableMatrixData.sheet_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.Data">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.database.</span></span><span class="sig-name descname"><span class="pre">Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.Data" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parent class defining device and connectors.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.Data.add_attribute">
+<span class="sig-name descname"><span class="pre">add_attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#Data.add_attribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.Data.add_attribute" title="Link to this definition"></a></dt>
+<dd><p>adds an attribute to object instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attr_name</strong> (<em>str</em>) – attribute name</p></li>
+<li><p><strong>attr_value</strong> (<em>str</em>) – attribute value</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.Data.add_kwargs_attributes">
+<span class="sig-name descname"><span class="pre">add_kwargs_attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#Data.add_kwargs_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.Data.add_kwargs_attributes" title="Link to this definition"></a></dt>
+<dd><p>adds all keyword arguments as object attributes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.Data.add_optional_columnnames_attributes">
+<span class="sig-name descname"><span class="pre">add_optional_columnnames_attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#Data.add_optional_columnnames_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.Data.add_optional_columnnames_attributes" title="Link to this definition"></a></dt>
+<dd><p>adds default optional columns as object attributes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.Data.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sheet_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#Data.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.Data.read" title="Link to this definition"></a></dt>
+<dd><p>read data from given excel sheet and set dataframe for the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sheet_name</strong> (<em>str</em>) – Excel sheet name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.Data.verify_mandatory_declared_cols_availabilty">
+<span class="sig-name descname"><span class="pre">verify_mandatory_declared_cols_availabilty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">declared</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#Data.verify_mandatory_declared_cols_availabilty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.Data.verify_mandatory_declared_cols_availabilty" title="Link to this definition"></a></dt>
+<dd><p>verifies if mandatory and declared columns (cols_to_merge) are available in provided database.
+Raise error if unavailable any.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>declared</strong> (<em>list</em><em>, </em><em>optional</em>) – list of extra declared columns (if any). Defaults to [].</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.DeviceData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.database.</span></span><span class="sig-name descname"><span class="pre">DeviceData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#DeviceData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.DeviceData" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.pyVig.database.Data" title="nettoolkit.pyVig.database.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a></p>
+<p>Devices Data Object Building</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.DeviceData.add_description">
+<span class="sig-name descname"><span class="pre">add_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns_to_merge</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#DeviceData.add_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.DeviceData.add_description" title="Link to this definition"></a></dt>
+<dd><p>add a description column to dataframe, which will be output of merged data of provided columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>columns_to_merge</strong> (<em>iterable</em>) – provide list/set/tuple of column names to be merged in a single</p></li>
+<li><p><strong>column.</strong> (<em>description</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Raises error if Mandtory hostname column is missing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.DeviceData.add_format_columnnames_attributes">
+<span class="sig-name descname"><span class="pre">add_format_columnnames_attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#DeviceData.add_format_columnnames_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.DeviceData.add_format_columnnames_attributes" title="Link to this definition"></a></dt>
+<dd><p>add default format columns {iconWidth, iconHeight} as object attributes</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.DeviceData.default_stencil">
+<span class="sig-name descname"><span class="pre">default_stencil</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#nettoolkit.pyVig.database.DeviceData.default_stencil" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.DeviceData.format_columns">
+<span class="sig-name descname"><span class="pre">format_columns</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'iconHeight':</span> <span class="pre">1,</span> <span class="pre">'iconWidth':</span> <span class="pre">2.5}</span></em><a class="headerlink" href="#nettoolkit.pyVig.database.DeviceData.format_columns" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.DeviceData.optional_columns">
+<span class="sig-name descname"><span class="pre">optional_columns</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'item':</span> <span class="pre">None,</span> <span class="pre">'stencil':</span> <span class="pre">None}</span></em><a class="headerlink" href="#nettoolkit.pyVig.database.DeviceData.optional_columns" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.DeviceData.sheet_name">
+<span class="sig-name descname"><span class="pre">sheet_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Devices'</span></em><a class="headerlink" href="#nettoolkit.pyVig.database.DeviceData.sheet_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.DeviceData.x">
+<span class="sig-name descname"><span class="pre">x</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'x-axis'</span></em><a class="headerlink" href="#nettoolkit.pyVig.database.DeviceData.x" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.DeviceData.y">
+<span class="sig-name descname"><span class="pre">y</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'y-axis'</span></em><a class="headerlink" href="#nettoolkit.pyVig.database.DeviceData.y" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.database.merged_df_on_hostname">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.database.</span></span><span class="sig-name descname"><span class="pre">merged_df_on_hostname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">devices_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cablemtx_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hostname_col_hdr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sortby</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/database.html#merged_df_on_hostname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.database.merged_df_on_hostname" title="Link to this definition"></a></dt>
+<dd><p>merge two dataframes by matching hostname column</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devices_df</strong> (<em>DataFrame</em>) – Devices details dataframe</p></li>
+<li><p><strong>cablemtx_df</strong> (<em>DataFrame</em>) – Cabling details dataframe</p></li>
+<li><p><strong>hostname_col_hdr</strong> (<em>str</em>) – column name of hostname from cabling dataframe to be merge with</p></li>
+<li><p><strong>sortby</strong> (<em>str</em>) – adhoc column name on which data to be sorted</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Raise Exception if hostname column missing.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>merged DataFrame</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyVig.devices">
+<span id="pyvig-devices"></span><h2><span class="section-number">10.4. </span>pyVig - devices<a class="headerlink" href="#module-nettoolkit.pyVig.devices" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.devices.AdevDevices">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.devices.</span></span><span class="sig-name descname"><span class="pre">AdevDevices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stencil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_func_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/devices.html#AdevDevices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.devices.AdevDevices" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A single Device details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stencil</strong> (<em>str</em>) – name of default stencil file</p></li>
+<li><p><strong>var_func_dict</strong> (<em>dict</em>) – dictionary of <cite>var</cite> attributes of device</p></li>
+<li><p><strong>var_df</strong> (<em>DataFrame</em>) – DataFrame of <cite>var</cite> tab from the -clean excel file generated.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.devices.AdevDevices.add_to_devices">
+<span class="sig-name descname"><span class="pre">add_to_devices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">what</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/devices.html#AdevDevices.add_to_devices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.devices.AdevDevices.add_to_devices" title="Link to this definition"></a></dt>
+<dd><p>add the key word arguments to dictionary refered by <cite>what</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>what</strong> (<em>dict</em>) – device(s) dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.devices.AdevDevices.add_vlan_info">
+<span class="sig-name descname"><span class="pre">add_vlan_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vlan_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/devices.html#AdevDevices.add_vlan_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.devices.AdevDevices.add_vlan_info" title="Link to this definition"></a></dt>
+<dd><p>add identified vlan-vrf-subnet information for the devices using vlan DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vlan_df</strong> (<em>DataFrame</em>) – pandas DataFrame object of <cite>vlan</cite> tab from -clean excel file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated pandas DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.devices.AdevDevices.get_self_device_df">
+<span class="sig-name descname"><span class="pre">get_self_device_df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/devices.html#AdevDevices.get_self_device_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.devices.AdevDevices.get_self_device_df" title="Link to this definition"></a></dt>
+<dd><p>generate the pandas DataFrame object with single row detail for the self device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas DataFrame with single row detail of the self device.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.devices.device_df_drop_empty_duplicates">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.devices.</span></span><span class="sig-name descname"><span class="pre">device_df_drop_empty_duplicates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">devices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/devices.html#device_df_drop_empty_duplicates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.devices.device_df_drop_empty_duplicates" title="Link to this definition"></a></dt>
+<dd><p>generate pandas DataFrame from provides <cite>devices</cite> dictionary of lists.</p>
+<ul class="simple">
+<li><p>Removes empty entries from hostname column,</p></li>
+<li><p>Convert case to lowercases,</p></li>
+<li><p>Removes duplicate entries (if any)</p></li>
+<li><p>Returns generated DataFrame.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>devices</strong> (<em>dict</em>) – dictionary of list (compatible to convert to DataFrame)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.devices.update_var_df_details_to_table_df">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.devices.</span></span><span class="sig-name descname"><span class="pre">update_var_df_details_to_table_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">merged_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DCT_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_func_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/devices.html#update_var_df_details_to_table_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.devices.update_var_df_details_to_table_df" title="Link to this definition"></a></dt>
+<dd><p>updates custom details from <cite>var</cite> tab to <cite>devices</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>merged_df</strong> (<em>DataFrame</em>) – pandas DataFrame</p></li>
+<li><p><strong>DCT_dict</strong> (<em>dict</em>) – dictionary of <cite>DF_ConverT</cite> objects</p></li>
+<li><p><strong>var_func_dict</strong> (<em>dict</em>) – dictionary of custom var functions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyVig.entities">
+<span id="pyvig-entities"></span><h2><span class="section-number">10.5. </span>pyVig - entities<a class="headerlink" href="#module-nettoolkit.pyVig.entities" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.Connectors">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.entities.</span></span><span class="sig-name descname"><span class="pre">Connectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cable_matrix_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">devices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/entities.html#Connectors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.entities.Connectors" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../nettoolkit/gpl.html#nettoolkit.nettoolkit_common.gpl.Multi_Execution" title="nettoolkit.nettoolkit_common.gpl.Multi_Execution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Multi_Execution</span></code></a></p>
+<p>Execution of Cabling/Connector objects on visio</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cable_matrix_data</strong> (<a class="reference internal" href="#nettoolkit.pyVig.cablings.ADevCablings" title="nettoolkit.pyVig.cablings.ADevCablings"><em>ADevCablings</em></a>) – cablnig object</p></li>
+<li><p><strong>devices</strong> (<a class="reference internal" href="#nettoolkit.pyVig.devices.AdevDevices" title="nettoolkit.pyVig.devices.AdevDevices"><em>AdevDevices</em></a>) – devices object</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.Connectors.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connector</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/entities.html#Connectors.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.entities.Connectors.execute" title="Link to this definition"></a></dt>
+<dd><p>Executor
+Paralllel processing disabled currently due to visio not support</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>connector</strong> (<em>dict</em>) – a single row details of cabling data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.Connectors.get_optional_columns_value">
+<span class="sig-name descname"><span class="pre">get_optional_columns_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connector</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/entities.html#Connectors.get_optional_columns_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.entities.Connectors.get_optional_columns_value" title="Link to this definition"></a></dt>
+<dd><p>get the value of all optional columns for given row</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>connector</strong> (<em>dict</em>) – a single row information from a DataFrame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary with found values else default</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.ItemObjects">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.entities.</span></span><span class="sig-name descname"><span class="pre">ItemObjects</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visObj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">devices_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filterOnCables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/entities.html#ItemObjects"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.entities.ItemObjects" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../nettoolkit/gpl.html#nettoolkit.nettoolkit_common.gpl.Multi_Execution" title="nettoolkit.nettoolkit_common.gpl.Multi_Execution"><code class="xref py py-class docutils literal notranslate"><span class="pre">Multi_Execution</span></code></a></p>
+<p>Execution of Devices/Item objects on visio</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>visObj</strong> (<em>visObj</em>) – visio object</p></li>
+<li><p><strong>devices_data</strong> (<a class="reference internal" href="#nettoolkit.pyVig.devices.AdevDevices" title="nettoolkit.pyVig.devices.AdevDevices"><em>AdevDevices</em></a>) – Device object</p></li>
+<li><p><strong>connectors</strong> (<a class="reference internal" href="#nettoolkit.pyVig.cablings.ADevCablings" title="nettoolkit.pyVig.cablings.ADevCablings"><em>ADevCablings</em></a>) – Cabling object</p></li>
+<li><p><strong>filterOnCables</strong> (<em>bool</em><em>, </em><em>optional</em>) – multi tab filters. Defaults to True.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.ItemObjects.bottom_most">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bottom_most</span></span><a class="headerlink" href="#nettoolkit.pyVig.entities.ItemObjects.bottom_most" title="Link to this definition"></a></dt>
+<dd><p>bottom most used co-ordinate on visio</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>minimum of used y-axis</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.ItemObjects.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/entities.html#ItemObjects.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.entities.ItemObjects.execute" title="Link to this definition"></a></dt>
+<dd><p>Executor
+Paralllel processing disabled currently due to visio not support</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dev</strong> (<em>dict</em>) – a single row details of device data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.ItemObjects.left_most">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">left_most</span></span><a class="headerlink" href="#nettoolkit.pyVig.entities.ItemObjects.left_most" title="Link to this definition"></a></dt>
+<dd><p>left most used co-ordinate on visio</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>minimum of used x-axis</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.ItemObjects.page_height">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">page_height</span></span><a class="headerlink" href="#nettoolkit.pyVig.entities.ItemObjects.page_height" title="Link to this definition"></a></dt>
+<dd><p>total height occupied by drawing  on visio page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>page height</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.ItemObjects.page_width">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">page_width</span></span><a class="headerlink" href="#nettoolkit.pyVig.entities.ItemObjects.page_width" title="Link to this definition"></a></dt>
+<dd><p>total width occupied by drawing  on visio page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>page width</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.ItemObjects.right_most">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">right_most</span></span><a class="headerlink" href="#nettoolkit.pyVig.entities.ItemObjects.right_most" title="Link to this definition"></a></dt>
+<dd><p>right most used co-ordinate on visio</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>maximum of used x-axis</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.ItemObjects.top_most">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">top_most</span></span><a class="headerlink" href="#nettoolkit.pyVig.entities.ItemObjects.top_most" title="Link to this definition"></a></dt>
+<dd><p>top most used co-ordinate on visio</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>maximum of used y-axis</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.entities.get_col_value">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.entities.</span></span><span class="sig-name descname"><span class="pre">get_col_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isMerged</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/entities.html#get_col_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.entities.get_col_value" title="Link to this definition"></a></dt>
+<dd><p>get the value of provided column from given row details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>row_info</strong> (<em>dict</em>) – a single row information from a DataFrame</p></li>
+<li><p><strong>column</strong> (<em>str</em>) – column name</p></li>
+<li><p><strong>isMerged</strong> (<em>bool</em><em>, </em><em>optional</em>) – is it a merged column or native. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cell information from row</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyVig.general">
+<span id="pyvig-general-functions"></span><h2><span class="section-number">10.6. </span>pyVig - general functions<a class="headerlink" href="#module-nettoolkit.pyVig.general" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.drop_empty">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">drop_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#drop_empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.drop_empty" title="Link to this definition"></a></dt>
+<dd><p>remove emptry rows found for given column</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – pandas DataFrame</p></li>
+<li><p><strong>column</strong> (<em>str</em>) – column name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>data filtered DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.get_dev_hostname">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">get_dev_hostname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_df_ser_hostname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_df_series_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hostname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#get_dev_hostname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.get_dev_hostname" title="Link to this definition"></a></dt>
+<dd><p>either get device hostname from var tab or update full series with device hostname</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_df</strong> (<em>DataFrame</em><em>, </em><em>optional</em>) – var DataFrame. Defaults to None.</p></li>
+<li><p><strong>update</strong> (<em>bool</em><em>, </em><em>optional</em>) – updating full series or not. Defaults to False.</p></li>
+<li><p><strong>merged_df_ser_hostname</strong> (<em>series</em><em>, </em><em>optional</em>) – hostnames series. Defaults to None.</p></li>
+<li><p><strong>merged_df_series_key</strong> (<em>key</em><em>, </em><em>optional</em>) – series key name. Defaults to None.</p></li>
+<li><p><strong>key</strong> (<em>str</em><em>, </em><em>optional</em>) – series key. Defaults to None.</p></li>
+<li><p><strong>value</strong> (<em>value</em><em>, </em><em>optional</em>) – result value. Defaults to None.</p></li>
+<li><p><strong>hostname</strong> (<em>str</em><em>, </em><em>optional</em>) – hostname to match with. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>return device hostname based on update</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.get_dev_model">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">get_dev_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_df_ser_hostname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_df_series_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hostname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#get_dev_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.get_dev_model" title="Link to this definition"></a></dt>
+<dd><p>either get device model from var tab or update full series with device model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_df</strong> (<em>DataFrame</em><em>, </em><em>optional</em>) – var DataFrame. Defaults to None.</p></li>
+<li><p><strong>update</strong> (<em>bool</em><em>, </em><em>optional</em>) – updating full series or not. Defaults to False.</p></li>
+<li><p><strong>merged_df_ser_hostname</strong> (<em>series</em><em>, </em><em>optional</em>) – hostnames series. Defaults to None.</p></li>
+<li><p><strong>merged_df_series_key</strong> (<em>key</em><em>, </em><em>optional</em>) – series key name. Defaults to None.</p></li>
+<li><p><strong>key</strong> (<em>str</em><em>, </em><em>optional</em>) – series key. Defaults to None.</p></li>
+<li><p><strong>value</strong> (<em>value</em><em>, </em><em>optional</em>) – result value. Defaults to None.</p></li>
+<li><p><strong>hostname</strong> (<em>str</em><em>, </em><em>optional</em>) – hostname to match with. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>return device model based on update</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.get_dev_serial">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">get_dev_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_df_ser_hostname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_df_series_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hostname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#get_dev_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.get_dev_serial" title="Link to this definition"></a></dt>
+<dd><p>either get serial number from var tab or update full series with serial numbers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_df</strong> (<em>DataFrame</em><em>, </em><em>optional</em>) – var DataFrame. Defaults to None.</p></li>
+<li><p><strong>update</strong> (<em>bool</em><em>, </em><em>optional</em>) – updating full series or not. Defaults to False.</p></li>
+<li><p><strong>merged_df_ser_hostname</strong> (<em>series</em><em>, </em><em>optional</em>) – hostnames series. Defaults to None.</p></li>
+<li><p><strong>merged_df_series_key</strong> (<em>key</em><em>, </em><em>optional</em>) – series key name. Defaults to None.</p></li>
+<li><p><strong>key</strong> (<em>str</em><em>, </em><em>optional</em>) – series key. Defaults to None.</p></li>
+<li><p><strong>value</strong> (<em>value</em><em>, </em><em>optional</em>) – result value. Defaults to None.</p></li>
+<li><p><strong>hostname</strong> (<em>str</em><em>, </em><em>optional</em>) – hostname to match with. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>return serial number based on update</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.get_item_first">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">get_item_first</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#get_item_first"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.get_item_first" title="Link to this definition"></a></dt>
+<dd><p>get first index item</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>series</em>) – pandas series</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>first item from provided Pandas Series</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.get_patterns">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">get_patterns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_pattern_style_separation_on</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_pattern_style_shift_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#get_patterns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.get_patterns" title="Link to this definition"></a></dt>
+<dd><p>get the line pattern numbers for the unique line styles require based on <cite>line_pattern_style_separation_on</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – pandas DataFrame</p></li>
+<li><p><strong>line_pattern_style_separation_on</strong> (<em>str</em>) – DataFrame Column name on which line patters to be separated</p></li>
+<li><p><strong>line_pattern_style_shift_no</strong> (<em>int</em>) – line pattern skip step number.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary of unique line pattern identifies with its shift number.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.get_physical_if_relevants">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">get_physical_if_relevants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relevant_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['interface',</span> <span class="pre">'nbr_dev_type',</span> <span class="pre">'int_filter',</span> <span class="pre">'nbr_hostname',</span> <span class="pre">'nbr_interface',</span> <span class="pre">'vlan_members',</span> <span class="pre">'media_type']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#get_physical_if_relevants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.get_physical_if_relevants" title="Link to this definition"></a></dt>
+<dd><p>filters the DataFrame columns for relevant columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – pandas DataFrame</p></li>
+<li><p><strong>relevant_cols</strong> (<em>list</em><em>, </em><em>optional</em>) – list of relevant columns. Defaults to [‘interface’, ‘nbr_dev_type’, ‘int_filter’, ‘nbr_hostname’,   ‘nbr_interface’, ‘vlan_members’,].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>udpated DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.get_physical_if_up">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">get_physical_if_up</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#get_physical_if_up"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.get_physical_if_up" title="Link to this definition"></a></dt>
+<dd><p>filter the DataFrame rows for active/enabled physical interfaces</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>DataFrame</em>) – pandas DataFrame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>udpated DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.get_vlan_if_relevants">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">get_vlan_if_relevants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relevant_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['int_number',</span> <span class="pre">'interface',</span> <span class="pre">'intvrf',</span> <span class="pre">'subnet']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#get_vlan_if_relevants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.get_vlan_if_relevants" title="Link to this definition"></a></dt>
+<dd><p>filters the DataFrame columns for relevant columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – pandas DataFrame</p></li>
+<li><p><strong>relevant_cols</strong> (<em>list</em><em>, </em><em>optional</em>) – list of relevant columns. Defaults to [‘int_number’, ‘interface’, ‘intvrf’, ‘subnet’ ].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>udpated DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.get_vlan_if_up">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">get_vlan_if_up</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#get_vlan_if_up"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.get_vlan_if_up" title="Link to this definition"></a></dt>
+<dd><p>filter the DataFrame rows for active/enabled vlan/irb interfaces</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>DataFrame</em>) – pandas DataFrame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>udpated DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.get_vlans_info">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">get_vlans_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vlan_members</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vlan_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#get_vlans_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.get_vlans_info" title="Link to this definition"></a></dt>
+<dd><p>get the vlan-vrf-subnet information string for provided vlan number(s) from vlan DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vlan_members</strong> (<em>str</em><em>, </em><em>int</em>) – a single vlan number or vlan numbers separated by comma</p></li>
+<li><p><strong>vlan_df</strong> (<em>DataFrame</em>) – DataFrame from <cite>vlan</cite> tab of -clean excel file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>concatenated string of vlan-vrf-subnet information.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.series_item_0_value">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">series_item_0_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#series_item_0_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.series_item_0_value" title="Link to this definition"></a></dt>
+<dd><p>returns the first item value of a series</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>series</em>) – pandas series object</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>value from series</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.update_merged_df_series">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">update_merged_df_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">merged_df_ser_hostname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merged_df_series_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#update_merged_df_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.update_merged_df_series" title="Link to this definition"></a></dt>
+<dd><p>update merged dataframe series</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>merged_df_ser_hostname</strong> (<em>series</em>) – hostname series</p></li>
+<li><p><strong>merged_df_series_key</strong> (<em>series</em>) – key series</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – key value</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – value</p></li>
+<li><p><strong>hostname</strong> (<em>str</em>) – hostname to match with</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>matched result</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.update_pattern">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">update_pattern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patterns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_pattern_style_separation_on</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#update_pattern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.update_pattern" title="Link to this definition"></a></dt>
+<dd><p>update the line pattern column for the unique line styles require based on column <cite>line_pattern_style_separation_on</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – pandas DataFrame</p></li>
+<li><p><strong>patterns</strong> (<em>dict</em>) – dictionary of unique line pattern identifies with its shift number</p></li>
+<li><p><strong>line_pattern_style_separation_on</strong> (<em>str</em>) – DataFrame Column name on which line patters to be separated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.general.update_vlans_info">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.general.</span></span><span class="sig-name descname"><span class="pre">update_vlans_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">int_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vlan_df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/general.html#update_vlans_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.general.update_vlans_info" title="Link to this definition"></a></dt>
+<dd><p>add <cite>vlan_info</cite> [column] to interface DataFrame using help of vlan DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>int_df</strong> (<em>DataFrame</em>) – interface DataFrame</p></li>
+<li><p><strong>vlan_df</strong> (<em>DataFrame</em>) – DataFrame from <cite>vlan</cite> tab of -clean excel file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated interface DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyVig.maths">
+<span id="pyvig-mathamatics"></span><h2><span class="section-number">10.7. </span>pyVig - mathamatics<a class="headerlink" href="#module-nettoolkit.pyVig.maths" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.maths.</span></span><span class="sig-name descname"><span class="pre">CalculateXY</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_x_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_y_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cbl_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_filter_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Co-ordinate calculator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dev_df</strong> (<em>DataFrame</em>) – Device DataFrame</p></li>
+<li><p><strong>default_x_spacing</strong> (<em>int</em><em>, </em><em>float</em>) – horizontal spacing between two devices</p></li>
+<li><p><strong>default_y_spacing</strong> (<em>int</em><em>, </em><em>float</em>) – vertical spacing between two devices</p></li>
+<li><p><strong>cbl_df</strong> (<em>DataFrame</em>) – Cabling DataFrame</p></li>
+<li><p><strong>sheet_filter_dict</strong> (<em>dict</em>) – sheet filters for multi tab drawing</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.calc">
+<span class="sig-name descname"><span class="pre">calc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.calc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.calc" title="Link to this definition"></a></dt>
+<dd><p>calculation sequences</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.calc_xs">
+<span class="sig-name descname"><span class="pre">calc_xs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ho_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.calc_xs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.calc_xs" title="Link to this definition"></a></dt>
+<dd><p>calculate x-axis refereances with respect to high order dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ho_dict</strong> (<em>dict</em>) – high order devices dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>high order dictionary with x-axis reference values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.calc_ys">
+<span class="sig-name descname"><span class="pre">calc_ys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ho_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.calc_ys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.calc_ys" title="Link to this definition"></a></dt>
+<dd><p>calculate y-axis refereances with respect to high order dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ho_dict</strong> (<em>dict</em>) – high order devices dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>high order dictionary with y-axis reference values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.count_of_ho">
+<span class="sig-name descname"><span class="pre">count_of_ho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.count_of_ho"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.count_of_ho" title="Link to this definition"></a></dt>
+<dd><p>counts hierarchical_order items for given dataframe and stores it in local dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>DataFrame</em>) – Device Dataframe with <cite>hierarchical_order</cite> column</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.get_x">
+<span class="sig-name descname"><span class="pre">get_x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ho</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.get_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.get_x" title="Link to this definition"></a></dt>
+<dd><p>get the x axis value for a device from given hierarchical order number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ho</strong> (<em>int</em>) – hierarchical order number</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>x axis value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int, float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.get_y">
+<span class="sig-name descname"><span class="pre">get_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ho</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.get_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.get_y" title="Link to this definition"></a></dt>
+<dd><p>get the y axis value for the given hierarchical_order</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ho</strong> (<em>int</em>) – hierarchical order number</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>y axis value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int, float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.inverse_y">
+<span class="sig-name descname"><span class="pre">inverse_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.inverse_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.inverse_y" title="Link to this definition"></a></dt>
+<dd><p>inverses the y axis values (turn upside down)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>y</strong> (<em>dict</em>) – dictionary with y axis placement values based on hierarchical_order</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>inversed dictionary with y axis placement values based on reversed hierarchical_order</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.merge_xy_filter_dfs_with_dev_df">
+<span class="sig-name descname"><span class="pre">merge_xy_filter_dfs_with_dev_df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.merge_xy_filter_dfs_with_dev_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.merge_xy_filter_dfs_with_dev_df" title="Link to this definition"></a></dt>
+<dd><p>merge sheet filter x,y column information with main device dataframe</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.sort">
+<span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.sort" title="Link to this definition"></a></dt>
+<dd><p>sort the Device DataFrame based on [‘hierarchical_order’, ‘hostname’]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.update_xs">
+<span class="sig-name descname"><span class="pre">update_xs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ho_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.update_xs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.update_xs" title="Link to this definition"></a></dt>
+<dd><p>update  <cite>x-axis</cite> column to given <cite>df</cite> Device DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – Device DataFrame</p></li>
+<li><p><strong>x_axis</strong> (<em>str</em>) – column name for x_axis</p></li>
+<li><p><strong>ho_dict</strong> (<em>dict</em>) – high order devices dictionary</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.update_xy_for_sheet_filter_dict">
+<span class="sig-name descname"><span class="pre">update_xy_for_sheet_filter_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.update_xy_for_sheet_filter_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.update_xy_for_sheet_filter_dict" title="Link to this definition"></a></dt>
+<dd><p>create and calculate x-axis, y-axis columns, values for each filtered tab database</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXY.update_ys">
+<span class="sig-name descname"><span class="pre">update_ys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_axis</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ho_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXY.update_ys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXY.update_ys" title="Link to this definition"></a></dt>
+<dd><p>update  <cite>y-axis</cite> column to given <cite>df</cite> Device DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – Device DataFrame</p></li>
+<li><p><strong>y_axis</strong> (<em>str</em>) – column name for y_axis</p></li>
+<li><p><strong>ho_dict</strong> (<em>dict</em>) – high order devices dictionary</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXYNative">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.maths.</span></span><span class="sig-name descname"><span class="pre">CalculateXYNative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ddf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cdf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sfd</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXYNative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXYNative" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Calculate co-ordinate default Native way</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ddf</strong> (<em>DataFrame</em>) – Devices DataFrame</p></li>
+<li><p><strong>cdf</strong> (<em>DataFrame</em>) – Cabling DataFrame</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXYNative.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXYNative.add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXYNative.add" title="Link to this definition"></a></dt>
+<dd><p>add an item to provided co-ordinates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>str</em>) – device hostname</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – x-coordinate</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – y-coordinate</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXYNative.add_x_y_to_df">
+<span class="sig-name descname"><span class="pre">add_x_y_to_df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXYNative.add_x_y_to_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXYNative.add_x_y_to_df" title="Link to this definition"></a></dt>
+<dd><p>add x,y axis columns to devices data frame.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXYNative.calc">
+<span class="sig-name descname"><span class="pre">calc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXYNative.calc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXYNative.calc" title="Link to this definition"></a></dt>
+<dd><p>start calculator</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXYNative.count_of_devices">
+<span class="sig-name descname"><span class="pre">count_of_devices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXYNative.count_of_devices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXYNative.count_of_devices" title="Link to this definition"></a></dt>
+<dd><p>identify devices from cable matrix and provide its occurances number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dev</strong> (<em>str</em>) – Device hostname to match with</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>number of occurances</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXYNative.dev_connectors_dict">
+<span class="sig-name descname"><span class="pre">dev_connectors_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXYNative.dev_connectors_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXYNative.dev_connectors_dict" title="Link to this definition"></a></dt>
+<dd><p>set device connectors dictionary and its inverse dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXYNative.device_add">
+<span class="sig-name descname"><span class="pre">device_add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXYNative.device_add"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXYNative.device_add" title="Link to this definition"></a></dt>
+<dd><p>check if device and its childs is added or not and add its co-ordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device</strong> (<em>str</em>) – hostname of device</p></li>
+<li><p><strong>root</strong> (<em>bool</em>) – is it root path or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>No return</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXYNative.get_nbr_devices">
+<span class="sig-name descname"><span class="pre">get_nbr_devices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXYNative.get_nbr_devices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXYNative.get_nbr_devices" title="Link to this definition"></a></dt>
+<dd><p>get set of neighbor devices for provided host/device</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>device</strong> (<em>str</em>) – device hostname</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>set of devices</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXYNative.get_xy">
+<span class="sig-name descname"><span class="pre">get_xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXYNative.get_xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXYNative.get_xy" title="Link to this definition"></a></dt>
+<dd><p>retrive (x,y) co-ordinate for provided device. (i=0 for x, i=1 for y)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dev</strong> (<em>str</em>) – device hostname</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – index number from tuple for x, y</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>respective co-ordinate</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.CalculateXYNative.iterate">
+<span class="sig-name descname"><span class="pre">iterate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#CalculateXYNative.iterate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.CalculateXYNative.iterate" title="Link to this definition"></a></dt>
+<dd><p>iterate thru all devices and add its co-ordinates</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.df_with_slops_and_angles">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.maths.</span></span><span class="sig-name descname"><span class="pre">df_with_slops_and_angles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y1_col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y2_col</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#df_with_slops_and_angles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.df_with_slops_and_angles" title="Link to this definition"></a></dt>
+<dd><p>add the dataframe with slop and angle for the given co-ordinates on plane.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – Input DataFrame</p></li>
+<li><p><strong>x1_col</strong> (<em>str</em>) – column name for point 1 - x axis</p></li>
+<li><p><strong>x2_col</strong> (<em>str</em>) – column name for point 2 - x axis</p></li>
+<li><p><strong>y1_col</strong> (<em>str</em>) – column name for point 1 - y axis</p></li>
+<li><p><strong>y2_col</strong> (<em>str</em>) – column name for point 2 - y axis</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated Output DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.slop_to_angled_connector">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.maths.</span></span><span class="sig-name descname"><span class="pre">slop_to_angled_connector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#slop_to_angled_connector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.slop_to_angled_connector" title="Link to this definition"></a></dt>
+<dd><p>calculate angle from given slop(m) of an angled line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>m</strong> (<em>float</em>) – slop of an angled line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>degree/slop of line</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.maths.slop_to_straight_connector">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.maths.</span></span><span class="sig-name descname"><span class="pre">slop_to_straight_connector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/maths.html#slop_to_straight_connector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.maths.slop_to_straight_connector" title="Link to this definition"></a></dt>
+<dd><p>calculate angle from given slop(m) of a straight line.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>m</strong> (<em>float</em>) – slop of a straight line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>degree/slop of line</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyVig.oper">
+<span id="pyvig-operations"></span><h2><span class="section-number">10.8. </span>pyVig - operations<a class="headerlink" href="#module-nettoolkit.pyVig.oper" title="Link to this heading"></a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.CableMatrix">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.oper.</span></span><span class="sig-name descname"><span class="pre">CableMatrix</span></span><a class="headerlink" href="#nettoolkit.pyVig.oper.CableMatrix" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#nettoolkit.pyVig.oper.DFGen" title="nettoolkit.pyVig.oper.DFGen"><code class="xref py py-class docutils literal notranslate"><span class="pre">DFGen</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.oper.</span></span><span class="sig-name descname"><span class="pre">DFGen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>DataFrame generator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>files</strong> (<em>list</em>) – list of input excel -clean files</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.add_b_device_media_types">
+<span class="sig-name descname"><span class="pre">add_b_device_media_types</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.add_b_device_media_types"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.add_b_device_media_types" title="Link to this definition"></a></dt>
+<dd><p>add b-device media types to database</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.add_cable_connector_details">
+<span class="sig-name descname"><span class="pre">add_cable_connector_details</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.add_cable_connector_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.add_cable_connector_details" title="Link to this definition"></a></dt>
+<dd><p>add cable and connector details to database (such as: media_type, cable_type, connector_types, mediaspeed, cable-type )</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.add_model_n_serial_number_to_cabling">
+<span class="sig-name descname"><span class="pre">add_model_n_serial_number_to_cabling</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.add_model_n_serial_number_to_cabling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.add_model_n_serial_number_to_cabling" title="Link to this definition"></a></dt>
+<dd><p>cabling tab - add device model and serial numbers</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.arrange_cablings">
+<span class="sig-name descname"><span class="pre">arrange_cablings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keep_all_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.arrange_cablings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.arrange_cablings" title="Link to this definition"></a></dt>
+<dd><p>arrange cabling tab in to appropriate order given in CABLING COLUMNS</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.blank_dfs">
+<span class="sig-name descname"><span class="pre">blank_dfs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.blank_dfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.blank_dfs" title="Link to this definition"></a></dt>
+<dd><p>creates devices/cabling blank DataFrames</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.calculate_cordinates">
+<span class="sig-name descname"><span class="pre">calculate_cordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sheet_filter_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.calculate_cordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.calculate_cordinates" title="Link to this definition"></a></dt>
+<dd><p>calculate the x,y coordinate values for each devices and keep Devices, Cablings DataFrame Dictionary ready.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sheet_filter_dict</strong> (<em>dict</em>) – sheet filter dictionary for mutitab executions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.custom_attributes">
+<span class="sig-name descname"><span class="pre">custom_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.custom_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.custom_attributes" title="Link to this definition"></a></dt>
+<dd><p>add/update custom attributes for object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.custom_functions">
+<span class="sig-name descname"><span class="pre">custom_functions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.custom_functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.custom_functions" title="Link to this definition"></a></dt>
+<dd><p>add/update custom functions for object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.custom_var_functions">
+<span class="sig-name descname"><span class="pre">custom_var_functions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.custom_var_functions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.custom_var_functions" title="Link to this definition"></a></dt>
+<dd><p>add/update custom <cite>var</cite> tab functions for object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.map_color">
+<span class="sig-name descname"><span class="pre">map_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.map_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.map_color" title="Link to this definition"></a></dt>
+<dd><p>add, edit  line color map</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.merge_cable_type">
+<span class="sig-name descname"><span class="pre">merge_cable_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.merge_cable_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.merge_cable_type" title="Link to this definition"></a></dt>
+<dd><p>checks a side and b side connectors, media speed and returns desired cable type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>DataFrame</em>) – Pandas DataFrame (cabling)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>cable type (ex: lc to lc 10g Multimode OM3 Cable)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.remove_duplicate_cabling_entries">
+<span class="sig-name descname"><span class="pre">remove_duplicate_cabling_entries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.remove_duplicate_cabling_entries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.remove_duplicate_cabling_entries" title="Link to this definition"></a></dt>
+<dd><p>removes duplicate cabling entries between a-b devices / deprycated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.remove_duplicate_cablings">
+<span class="sig-name descname"><span class="pre">remove_duplicate_cablings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.remove_duplicate_cablings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.remove_duplicate_cablings" title="Link to this definition"></a></dt>
+<dd><p>removes redundant cabling entries between two devices with same port identified</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.remove_subintf_from_ports">
+<span class="sig-name descname"><span class="pre">remove_subintf_from_ports</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.remove_subintf_from_ports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.remove_subintf_from_ports" title="Link to this definition"></a></dt>
+<dd><p>removes subninterface value/string from ports</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.remove_undefined_cabling_entries">
+<span class="sig-name descname"><span class="pre">remove_undefined_cabling_entries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.remove_undefined_cabling_entries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.remove_undefined_cabling_entries" title="Link to this definition"></a></dt>
+<dd><p>removes undefined cabling entries where device doesn’t exist in devices tab / deprycated</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.run" title="Link to this definition"></a></dt>
+<dd><p>iterate over all files for generating devices/cabling DataFrame details.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.standardize_intf_on_ports">
+<span class="sig-name descname"><span class="pre">standardize_intf_on_ports</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.standardize_intf_on_ports"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.standardize_intf_on_ports" title="Link to this definition"></a></dt>
+<dd><p>standardize all interfaces</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">funcs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.update" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.update_cable_connector">
+<span class="sig-name descname"><span class="pre">update_cable_connector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cm_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">what</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mt_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.update_cable_connector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.update_cable_connector" title="Link to this definition"></a></dt>
+<dd><p>common definition to update attributes: cable_type, connector_types, mediaspeed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cm_df</strong> (<em>DataFrame</em>) – Pandas DataFrame (cabling)</p></li>
+<li><p><strong>what</strong> (<em>str</em>) – attribute name to be updated</p></li>
+<li><p><strong>mt_col</strong> (<em>str</em><em>, </em><em>optional</em>) – mediatype column name. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>found atribute value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.update_cabling_df">
+<span class="sig-name descname"><span class="pre">update_cabling_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DCT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.update_cabling_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.update_cabling_df" title="Link to this definition"></a></dt>
+<dd><p>update Cabling DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DCT</strong> (<a class="reference internal" href="#nettoolkit.pyVig.oper.DF_ConverT" title="nettoolkit.pyVig.oper.DF_ConverT"><em>DF_ConverT</em></a>) – DataFrame Convertor object</p></li>
+<li><p><strong>file</strong> (<em>str</em>) – a single database. -clean excel file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.update_color">
+<span class="sig-name descname"><span class="pre">update_color</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.update_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.update_color" title="Link to this definition"></a></dt>
+<dd><p>define color of connector</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.update_devices_df">
+<span class="sig-name descname"><span class="pre">update_devices_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">DCT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.update_devices_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.update_devices_df" title="Link to this definition"></a></dt>
+<dd><p>update Devices DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>DCT</strong> (<a class="reference internal" href="#nettoolkit.pyVig.oper.DF_ConverT" title="nettoolkit.pyVig.oper.DF_ConverT"><em>DF_ConverT</em></a>) – DataFrame Convertor object</p></li>
+<li><p><strong>file</strong> (<em>str</em>) – a single database. -clean excel file. ( not in use )</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DFGen.update_weight">
+<span class="sig-name descname"><span class="pre">update_weight</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DFGen.update_weight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DFGen.update_weight" title="Link to this definition"></a></dt>
+<dd><p>define thickness of connector</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DF_ConverT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.oper.</span></span><span class="sig-name descname"><span class="pre">DF_ConverT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_stencil</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_pattern_style_separation_on</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_pattern_style_shift_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DF_ConverT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DF_ConverT" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Data Frame Converter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – a single database. -clean excel file.</p></li>
+<li><p><strong>default_stencil</strong> (<em>str</em>) – default visio stencil file.</p></li>
+<li><p><strong>line_pattern_style_separation_on</strong> (<em>str</em>) – column name on which line pattern separation should be decided on</p></li>
+<li><p><strong>line_pattern_style_shift_no</strong> (<em>int</em>) – line pattern change/shift number/steps</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DF_ConverT.convert">
+<span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DF_ConverT.convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DF_ConverT.convert" title="Link to this definition"></a></dt>
+<dd><p>create physical DataFrame, update with patterns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func_dict</strong> (<em>dict</em>) – custom functions dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DF_ConverT.get_self_details">
+<span class="sig-name descname"><span class="pre">get_self_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_func_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DF_ConverT.get_self_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DF_ConverT.get_self_details" title="Link to this definition"></a></dt>
+<dd><p>update the value from var tab of var function dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>var_func_dict</strong> (<em>dict</em>) – custom var functions dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DF_ConverT.update_cablings">
+<span class="sig-name descname"><span class="pre">update_cablings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">default_dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DF_ConverT.update_cablings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DF_ConverT.update_cablings" title="Link to this definition"></a></dt>
+<dd><p>creates Cabling object and its DataFrame, adds cabling details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas DataFrame</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DF_ConverT.update_device_self_detils">
+<span class="sig-name descname"><span class="pre">update_device_self_detils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DF_ConverT.update_device_self_detils"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DF_ConverT.update_device_self_detils" title="Link to this definition"></a></dt>
+<dd><p>create a pandas DataFrame object for the self object using <cite>var</cite> tab and custom functions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func_dict</strong> (<em>dict</em>) – custom var functions</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas DataFrame for self device</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DF_ConverT.update_devices">
+<span class="sig-name descname"><span class="pre">update_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DF_ConverT.update_devices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DF_ConverT.update_devices" title="Link to this definition"></a></dt>
+<dd><p>creates Devices object, and its DataFrame, adds vlan informations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>updated pandas DataFrame for interface connected devices</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DF_ConverT.update_devices_df_pattern_n_custom_func">
+<span class="sig-name descname"><span class="pre">update_devices_df_pattern_n_custom_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DF_ConverT.update_devices_df_pattern_n_custom_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DF_ConverT.update_devices_df_pattern_n_custom_func" title="Link to this definition"></a></dt>
+<dd><p>updates Devices DataFrame patterns as per custom functions provided in func_dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – pandas DataFrame for devices</p></li>
+<li><p><strong>func_dict</strong> (<em>dict</em>) – custom functions dictionary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.DF_ConverT.update_devices_for">
+<span class="sig-name descname"><span class="pre">update_devices_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#DF_ConverT.update_devices_for"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.DF_ConverT.update_devices_for" title="Link to this definition"></a></dt>
+<dd><p>update DataFrame for the provided dictionary (dic) objects, and removes empty and duplicate hostname value rows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – variable DataFrame</p></li>
+<li><p><strong>dic</strong> (<em>dict</em>) – variable dictionary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated DataFrame</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.get_color">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.oper.</span></span><span class="sig-name descname"><span class="pre">get_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#get_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.get_color" title="Link to this definition"></a></dt>
+<dd><p>get color of a connector</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – Pandas DataFrame (cabling)</p></li>
+<li><p><strong>colors</strong> (<em>dict</em>) – fibertype v/s color dictionary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>color for given found cable (Default: black)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.get_model_number">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.oper.</span></span><span class="sig-name descname"><span class="pre">get_model_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">devices_merged_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#get_model_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.get_model_number" title="Link to this definition"></a></dt>
+<dd><p>get model number for match device</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – Cable Matrix DataFrame</p></li>
+<li><p><strong>devices_merged_df</strong> (<em>DataFrame</em>) – Devices DetaFrame</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – device hostname</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>model number of device</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.get_serial_number">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.oper.</span></span><span class="sig-name descname"><span class="pre">get_serial_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">devices_merged_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#get_serial_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.get_serial_number" title="Link to this definition"></a></dt>
+<dd><p>get serial number for match device</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – Cable Matrix DataFrame</p></li>
+<li><p><strong>devices_merged_df</strong> (<em>DataFrame</em>) – Devices DetaFrame</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – device hostname</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>serial number of device</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.merge_port_for_duplicates">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.oper.</span></span><span class="sig-name descname"><span class="pre">merge_port_for_duplicates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#merge_port_for_duplicates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.merge_port_for_duplicates" title="Link to this definition"></a></dt>
+<dd><p>merge multiple cabling for a-b devices</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.remove_duplicates">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.oper.</span></span><span class="sig-name descname"><span class="pre">remove_duplicates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#remove_duplicates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.remove_duplicates" title="Link to this definition"></a></dt>
+<dd><p>removes duplicate cabling entries between a-b devices</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.update_b_media_type">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.oper.</span></span><span class="sig-name descname"><span class="pre">update_b_media_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cable_df_b_device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cable_df_bport</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DCT</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#update_b_media_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.update_b_media_type" title="Link to this definition"></a></dt>
+<dd><p>update media type for b-end device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cable_df_b_device</strong> (<em>str</em>) – hostname of b-end device</p></li>
+<li><p><strong>cable_df_bport</strong> (<em>str</em>) – connected b-end device port</p></li>
+<li><p><strong>DCT</strong> (<a class="reference internal" href="#nettoolkit.pyVig.oper.DF_ConverT" title="nettoolkit.pyVig.oper.DF_ConverT"><em>DF_ConverT</em></a>) – DataFrame Convertor object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>media type information detected for b-end device/port (Default: “”)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.update_color">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.oper.</span></span><span class="sig-name descname"><span class="pre">update_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#update_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.update_color" title="Link to this definition"></a></dt>
+<dd><p>update line color for all connectors, based on the found cable type.  Available options are
+# ( white, black, red, green, skyblue, blue, yellow, gray, lightgray, darkgray, orange )</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>DataFrame</em>) – Pandas DataFrame (cabling)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.oper.update_weight">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.oper.</span></span><span class="sig-name descname"><span class="pre">update_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/oper.html#update_weight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.oper.update_weight" title="Link to this definition"></a></dt>
+<dd><p>update line thickness for all connectors, where found multiple connectivities between two devices</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – Pandas DataFrame (cabling)</p></li>
+<li><p><strong>base_weight</strong> (<em>int</em><em>, </em><em>optional</em>) – base weight. Defaults to 1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyVig.pyVig">
+<span id="pyvig-pyvig"></span><h2><span class="section-number">10.9. </span>pyVig - pyVig<a class="headerlink" href="#module-nettoolkit.pyVig.pyVig" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.pyVig.cabling_data_operations">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.pyVig.</span></span><span class="sig-name descname"><span class="pre">cabling_data_operations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/pyVig.html#cabling_data_operations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.pyVig.cabling_data_operations" title="Link to this definition"></a></dt>
+<dd><p>create and return cabling data object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dic</strong> (<a href="#id1"><span class="problematic" id="id2">**</span></a>dic) – keyword arguments</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cablings data object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nettoolkit.pyVig.database.CableMatrixData" title="nettoolkit.pyVig.database.CableMatrixData">CableMatrixData</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.pyVig.device_data_operations">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.pyVig.</span></span><span class="sig-name descname"><span class="pre">device_data_operations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/pyVig.html#device_data_operations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.pyVig.device_data_operations" title="Link to this definition"></a></dt>
+<dd><p>creates and returns devices data object after merging columns of the list provided for <cite>cols_to_merge</cite> key</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dic</strong> (<a href="#id3"><span class="problematic" id="id4">**</span></a>kwarg) – keyword arguments.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Devices data object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData" title="nettoolkit.pyVig.database.DeviceData">DeviceData</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.pyVig.pyVig">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.pyVig.</span></span><span class="sig-name descname"><span class="pre">pyVig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/pyVig.html#pyVig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.pyVig.pyVig" title="Link to this definition"></a></dt>
+<dd><p>main function starting the python based cli - visio generation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**dic</strong> (<em>dict</em>) – inputs dictionary ( valid and mandatory keys = stencil_folder, data_file ) (valid but optional keys = default_stencil, cols_to_merge, is_sheet_filter, sheet_filters … and many more from DEFAULT_DIC )</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.pyVig.repeat_for_filter">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.pyVig.</span></span><span class="sig-name descname"><span class="pre">repeat_for_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">devices_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cable_matrix_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filt_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filt_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/pyVig.html#repeat_for_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.pyVig.repeat_for_filter" title="Link to this definition"></a></dt>
+<dd><p>starts visio page operation for the given filter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>VisioObject</em>) – Visio Object</p></li>
+<li><p><strong>devices_data</strong> (<a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData" title="nettoolkit.pyVig.database.DeviceData"><em>DeviceData</em></a>) – Devices data object</p></li>
+<li><p><strong>cable_matrix_data</strong> (<a class="reference internal" href="#nettoolkit.pyVig.database.CableMatrixData" title="nettoolkit.pyVig.database.CableMatrixData"><em>CableMatrixData</em></a>) – Cablings data object</p></li>
+<li><p><strong>filt_key</strong> (<em>str</em>) – filter key</p></li>
+<li><p><strong>filt_value</strong> (<em>str</em><em>, </em><em>tuple</em><em>, </em><em>list</em><em>, </em><em>set</em>) – filter value(s)</p></li>
+<li><p><strong>page_key</strong> (<em>str</em>) – page key (suffix for filter values in case if multiple filt_values)</p></li>
+<li><p><strong>dic</strong> (<a href="#id5"><span class="problematic" id="id6">**</span></a>dic) – keyword arguments</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.pyVig.visio_operations">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.pyVig.</span></span><span class="sig-name descname"><span class="pre">visio_operations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">devices_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cable_matrix_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stencils</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/pyVig.html#visio_operations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.pyVig.visio_operations" title="Link to this definition"></a></dt>
+<dd><p>create a VisioObject</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devices_data</strong> (<a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData" title="nettoolkit.pyVig.database.DeviceData"><em>DeviceData</em></a>) – Devices data object</p></li>
+<li><p><strong>cable_matrix_data</strong> (<a class="reference internal" href="#nettoolkit.pyVig.database.CableMatrixData" title="nettoolkit.pyVig.database.CableMatrixData"><em>CableMatrixData</em></a>) – Cablings data object</p></li>
+<li><p><strong>stencils</strong> (<em>list</em>) – list of visio stencils</p></li>
+<li><p><strong>dic</strong> (<a href="#id7"><span class="problematic" id="id8">**</span></a>dic) – keyword arguments</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.pyVig.visio_page_operation">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.pyVig.</span></span><span class="sig-name descname"><span class="pre">visio_page_operation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">devices_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cable_matrix_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/pyVig.html#visio_page_operation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.pyVig.visio_page_operation" title="Link to this definition"></a></dt>
+<dd><p>operate on visio page</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>VisioObject</em>) – Visio Object</p></li>
+<li><p><strong>devices_data</strong> (<a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData" title="nettoolkit.pyVig.database.DeviceData"><em>DeviceData</em></a>) – Devices data object</p></li>
+<li><p><strong>cable_matrix_data</strong> (<a class="reference internal" href="#nettoolkit.pyVig.database.CableMatrixData" title="nettoolkit.pyVig.database.CableMatrixData"><em>CableMatrixData</em></a>) – Cablings data object</p></li>
+<li><p><strong>flt</strong> (<em>dict</em>) – filters {key: value} pairs</p></li>
+<li><p><strong>page_key</strong> (<em>str</em><em>, </em><em>optional</em>) – page key (suffix for filter values in case if multiple filt_values). Defaults to None.</p></li>
+<li><p><strong>dic</strong> (<a href="#id9"><span class="problematic" id="id10">**</span></a>dic) – keyword arguments</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyVig.static">
+<span id="pyvig-statics"></span><h2><span class="section-number">10.10. </span>pyVig - statics<a class="headerlink" href="#module-nettoolkit.pyVig.static" title="Link to this heading"></a></h2>
+</section>
+<section id="module-nettoolkit.pyVig.stencils">
+<span id="pyvig-stencils"></span><h2><span class="section-number">10.11. </span>pyVig - stencils<a class="headerlink" href="#module-nettoolkit.pyVig.stencils" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyVig.stencils.get_list_of_stencils">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyVig.stencils.</span></span><span class="sig-name descname"><span class="pre">get_list_of_stencils</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">devices_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyVig/stencils.html#get_list_of_stencils"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyVig.stencils.get_list_of_stencils" title="Link to this definition"></a></dt>
+<dd><p>finds the required stencil files in given folder and return those filenames in a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>folder</strong> (<em>str</em>) – path of folder where stencils stored</p></li>
+<li><p><strong>devices_data</strong> (<a class="reference internal" href="#nettoolkit.pyVig.database.DeviceData" title="nettoolkit.pyVig.database.DeviceData"><em>DeviceData</em></a>) – Device Data object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Raise Exception if any stencil is missing</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of file names</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../pynetcrypt/pw_cracker.html" class="btn btn-neutral float-left" title="9.1. cisco passwords" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

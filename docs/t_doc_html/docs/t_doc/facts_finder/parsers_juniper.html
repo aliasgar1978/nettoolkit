@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.20. juniper parser - arp &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="5.32. Cisco Modifier - table" href="modifiers_cisco.html" />
+    <link rel="prev" title="5.7. cisco parser - arp" href="parsers_cisco.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_doc.html">5. facts-finder</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="facts_gen.html">5.1. facts_gen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_cisco.html">5.2. generators_cisco</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_juniper.html">5.3. generators_juniper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html">5.4. generator common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html#module-nettoolkit.facts_finder.generators.cisco.common">5.5. cisco generator common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html#module-nettoolkit.facts_finder.generators.juniper.common">5.6. juniper generator common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html">5.7. cisco parser - arp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp">5.8. cisco parser - bgp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_cdp">5.9. cisco parser - cdp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_description">5.10. cisco parser - if description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_status">5.11. cisco parser - if status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_lldp">5.12. cisco parser - lldp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_mac_table">5.13. cisco parser - mac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf">5.14. cisco parser - ospf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces">5.15. cisco parser - interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes">5.16. cisco parser - routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system">5.17. cisco parser - sys_info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs">5.18. cisco parser - vrf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_version">5.19. cisco parser - version</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.20. juniper parser - arp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_arp_table.get_arp_table"><code class="docutils literal notranslate"><span class="pre">get_arp_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware">5.21. juniper parser - hardware</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.JuniperChassisHardware"><code class="docutils literal notranslate"><span class="pre">JuniperChassisHardware</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.JuniperChassisHardware.get_sfp"><code class="docutils literal notranslate"><span class="pre">JuniperChassisHardware.get_sfp()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.get_chassis_hardware"><code class="docutils literal notranslate"><span class="pre">get_chassis_hardware()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.get_chassis_serial"><code class="docutils literal notranslate"><span class="pre">get_chassis_serial()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_int_description">5.22. juniper parser - if description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_int_description.get_int_description"><code class="docutils literal notranslate"><span class="pre">get_int_description()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_lldp">5.23. juniper parser - lldp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_lldp.get_lldp_neighbour"><code class="docutils literal notranslate"><span class="pre">get_lldp_neighbour()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp">5.24. juniper parser - bgp</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP"><code class="docutils literal notranslate"><span class="pre">RunningIntanceBGP</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.bgp_grp_info"><code class="docutils literal notranslate"><span class="pre">RunningIntanceBGP.bgp_grp_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.bgp_nbr_info"><code class="docutils literal notranslate"><span class="pre">RunningIntanceBGP.bgp_nbr_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.get_bgp_grp_info"><code class="docutils literal notranslate"><span class="pre">RunningIntanceBGP.get_bgp_grp_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.get_bgp_nbr_info"><code class="docutils literal notranslate"><span class="pre">RunningIntanceBGP.get_bgp_nbr_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.instance_bgp_nbr_read"><code class="docutils literal notranslate"><span class="pre">RunningIntanceBGP.instance_bgp_nbr_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.instance_read"><code class="docutils literal notranslate"><span class="pre">RunningIntanceBGP.instance_read()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.get_instances_bgps"><code class="docutils literal notranslate"><span class="pre">get_instances_bgps()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces">5.25. juniper parser - interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_description"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_int_description()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_filter"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_int_filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_vlan_details"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_int_vlan_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_interface_channel_grp"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_interface_channel_grp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_interface_mode"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_interface_mode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ip_details"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_ip_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ipv6_details"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_ipv6_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ospf_authentication_details"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.get_ospf_authentication_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_dot_zero_merge_to_parent1"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.int_dot_zero_merge_to_parent1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_filter"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.int_filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_to_int_number"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.int_to_int_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_channel_grp"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_channel_grp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_description"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_description()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_ips"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_ips()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_mode"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_mode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_read"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_v6_ips"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_v6_ips()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_vlans"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.interface_vlans()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.ospf_auth_para_read"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.ospf_auth_para_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.ospf_authentication_details"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.ospf_authentication_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.routing_instance_read"><code class="docutils literal notranslate"><span class="pre">RunningInterfaces.routing_instance_read()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_interfaces_running"><code class="docutils literal notranslate"><span class="pre">get_interfaces_running()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_logical_port_number"><code class="docutils literal notranslate"><span class="pre">get_logical_port_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_physical_port_number"><code class="docutils literal notranslate"><span class="pre">get_physical_port_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.set_of_voice_vlans"><code class="docutils literal notranslate"><span class="pre">set_of_voice_vlans()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf">5.26. juniper parser - ospf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF"><code class="docutils literal notranslate"><span class="pre">RunningOSPF</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_interface_type"><code class="docutils literal notranslate"><span class="pre">RunningOSPF.get_interface_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_ospf_authentication"><code class="docutils literal notranslate"><span class="pre">RunningOSPF.get_ospf_authentication()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_passive_interfaces"><code class="docutils literal notranslate"><span class="pre">RunningOSPF.get_passive_interfaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_summaries"><code class="docutils literal notranslate"><span class="pre">RunningOSPF.get_summaries()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.interface_type"><code class="docutils literal notranslate"><span class="pre">RunningOSPF.interface_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.ospf_authentication"><code class="docutils literal notranslate"><span class="pre">RunningOSPF.ospf_authentication()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.ospf_read"><code class="docutils literal notranslate"><span class="pre">RunningOSPF.ospf_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.passive_interfaces"><code class="docutils literal notranslate"><span class="pre">RunningOSPF.passive_interfaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.summaries"><code class="docutils literal notranslate"><span class="pre">RunningOSPF.summaries()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.get_instances_ospfs"><code class="docutils literal notranslate"><span class="pre">get_instances_ospfs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes">5.27. juniper parser - routes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes"><code class="docutils literal notranslate"><span class="pre">RunningRoutes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.get_route_dict"><code class="docutils literal notranslate"><span class="pre">RunningRoutes.get_route_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.route_read"><code class="docutils literal notranslate"><span class="pre">RunningRoutes.route_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.routes_dict"><code class="docutils literal notranslate"><span class="pre">RunningRoutes.routes_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.v6routes_dict"><code class="docutils literal notranslate"><span class="pre">RunningRoutes.v6routes_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.get_system_running_routes"><code class="docutils literal notranslate"><span class="pre">get_system_running_routes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances">5.28. juniper parser - bgp instances</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances"><code class="docutils literal notranslate"><span class="pre">RunningIntances</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.get_vrf_description"><code class="docutils literal notranslate"><span class="pre">RunningIntances.get_vrf_description()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.get_vrf_route_target"><code class="docutils literal notranslate"><span class="pre">RunningIntances.get_vrf_route_target()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.instance_read"><code class="docutils literal notranslate"><span class="pre">RunningIntances.instance_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.vrf_description"><code class="docutils literal notranslate"><span class="pre">RunningIntances.vrf_description()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.vrf_route_target"><code class="docutils literal notranslate"><span class="pre">RunningIntances.vrf_route_target()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.get_instances_running"><code class="docutils literal notranslate"><span class="pre">get_instances_running()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system">5.29. juniper parser - system</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem"><code class="docutils literal notranslate"><span class="pre">RunningSystem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.club_list_items"><code class="docutils literal notranslate"><span class="pre">RunningSystem.club_list_items()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.convert_sets_to_strs"><code class="docutils literal notranslate"><span class="pre">RunningSystem.convert_sets_to_strs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_banner"><code class="docutils literal notranslate"><span class="pre">RunningSystem.get_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_gtac_servers"><code class="docutils literal notranslate"><span class="pre">RunningSystem.get_gtac_servers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_hostname"><code class="docutils literal notranslate"><span class="pre">RunningSystem.get_hostname()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_mgmt_ip"><code class="docutils literal notranslate"><span class="pre">RunningSystem.get_mgmt_ip()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_nameservers"><code class="docutils literal notranslate"><span class="pre">RunningSystem.get_nameservers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_ntp_servers"><code class="docutils literal notranslate"><span class="pre">RunningSystem.get_ntp_servers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_syslog_servers"><code class="docutils literal notranslate"><span class="pre">RunningSystem.get_syslog_servers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_system_as_number"><code class="docutils literal notranslate"><span class="pre">RunningSystem.get_system_as_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_as_number"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_as_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_banner"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_gtac_servers"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_gtac_servers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_hostname"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_hostname()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_mgmt_ip"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_mgmt_ip()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_nameservers"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_nameservers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_ntp_servers"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_ntp_servers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_read"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_syslog_servers"><code class="docutils literal notranslate"><span class="pre">RunningSystem.system_syslog_servers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.get_running_system"><code class="docutils literal notranslate"><span class="pre">get_running_system()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running">5.30. juniper parser - configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running"><code class="docutils literal notranslate"><span class="pre">Running</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_version">5.31. juniper parser - version</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_version.get_version"><code class="docutils literal notranslate"><span class="pre">get_version()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html">5.32. Cisco Modifier - table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.cisco_var">5.33. Cisco Modifier - var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.cisco_vrfs">5.34. Cisco Modifier - vrf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.merger">5.35. Cisco - merger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.commands.cmd_dict">5.36. Cisco - commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html">5.37. Juniper Modifier - table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.juniper_var">5.38. Juniper Modifier - var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.merger">5.39. Juniper Modifier - merger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.commands.cmd_dict">5.40. Juniper Modifier - commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_common.html">5.41. modifiers_common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html">5.42. mergers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rearrange.html">5.43. rearrange</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tech_doc.html"><span class="section-number">5. </span>Facts-Finder API documentation!</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5.20. </span>juniper parser - arp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/t_doc/facts_finder/parsers_juniper.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_arp_table">
+<span id="juniper-parser-arp"></span><h1><span class="section-number">5.20. </span>juniper parser - arp<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_arp_table" title="Link to this heading"></a></h1>
+<p>juniper arp table command output parser</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_arp_table.get_arp_table">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_arp_table.</span></span><span class="sig-name descname"><span class="pre">get_arp_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_arp_table.html#get_arp_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_arp_table.get_arp_table" title="Link to this definition"></a></dt>
+<dd><p>parser - show arp command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>port/interface</p></li>
+<li><p>ip</p></li>
+<li><p>mac, mac2, mac4</p></li>
+<li><p>dns</p></li>
+<li><p>vlan</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware">
+<span id="juniper-parser-hardware"></span><h1><span class="section-number">5.21. </span>juniper parser - hardware<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware" title="Link to this heading"></a></h1>
+<p>juniper show chassis hardware command output parser</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.JuniperChassisHardware">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.</span></span><span class="sig-name descname"><span class="pre">JuniperChassisHardware</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_chassis_hardware.html#JuniperChassisHardware"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.JuniperChassisHardware" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>read the show chassis hardware output from juniper and returns port type(sfp)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>output</strong> (<em>list</em>) – show chassis hardware output in list</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.JuniperChassisHardware.get_sfp">
+<span class="sig-name descname"><span class="pre">get_sfp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_chassis_hardware.html#JuniperChassisHardware.get_sfp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.JuniperChassisHardware.get_sfp" title="Link to this definition"></a></dt>
+<dd><p>get the SFP details for given port</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>str</em>) – port number only (port type to be excluded)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SFP type</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.get_chassis_hardware">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.</span></span><span class="sig-name descname"><span class="pre">get_chassis_hardware</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_chassis_hardware.html#get_chassis_hardware"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.get_chassis_hardware" title="Link to this definition"></a></dt>
+<dd><p>parser - show chassis hardware command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>port/interface</p></li>
+<li><p>port_type</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.get_chassis_serial">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.</span></span><span class="sig-name descname"><span class="pre">get_chassis_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_chassis_hardware.html#get_chassis_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware.get_chassis_serial" title="Link to this definition"></a></dt>
+<dd><p>parser - show chassis hardware command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>device chassis serial number</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_int_description">
+<span id="juniper-parser-if-description"></span><h1><span class="section-number">5.22. </span>juniper parser - if description<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_int_description" title="Link to this heading"></a></h1>
+<p>juniper interface description command output parser</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_int_description.get_int_description">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_int_description.</span></span><span class="sig-name descname"><span class="pre">get_int_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_int_description.html#get_int_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_int_description.get_int_description" title="Link to this definition"></a></dt>
+<dd><p>parser - show interfaces description command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>port/interface</p></li>
+<li><p>description</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_lldp">
+<span id="juniper-parser-lldp"></span><h1><span class="section-number">5.23. </span>juniper parser - lldp<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_lldp" title="Link to this heading"></a></h1>
+<p>juniper lldp neighbour command output parser</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_lldp.get_lldp_neighbour">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_lldp.</span></span><span class="sig-name descname"><span class="pre">get_lldp_neighbour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dsr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_lldp.html#get_lldp_neighbour"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_lldp.get_lldp_neighbour" title="Link to this definition"></a></dt>
+<dd><p>parser - show lldp neighbor command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>port/interface</p></li>
+<li><p>neighbor hostname</p></li>
+<li><p>neighbor interface</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p></li>
+<li><p><strong>dsr</strong> (<em>bool</em><em>, </em><em>optional</em>) – DOMAIN SUFFIX REMOVAL. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp">
+<span id="juniper-parser-bgp"></span><h1><span class="section-number">5.24. </span>juniper parser - bgp<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp" title="Link to this heading"></a></h1>
+<p>juniper bgp protocol routing instances parsing from set config</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.</span></span><span class="sig-name descname"><span class="pre">RunningIntanceBGP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_bgp.html#RunningIntanceBGP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running" title="nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running"><code class="xref py py-class docutils literal notranslate"><span class="pre">Running</span></code></a></p>
+<p>object for instance level config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – config output, either list of multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.bgp_grp_info">
+<span class="sig-name descname"><span class="pre">bgp_grp_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_bgp.html#RunningIntanceBGP.bgp_grp_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.bgp_grp_info" title="Link to this definition"></a></dt>
+<dd><p>update the bgp group detail - description, peer group, peer ip, auth-key, vrf, peer as</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.bgp_nbr_info">
+<span class="sig-name descname"><span class="pre">bgp_nbr_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_bgp.html#RunningIntanceBGP.bgp_nbr_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.bgp_nbr_info" title="Link to this definition"></a></dt>
+<dd><p>update the bgp neighbor detail - description, peer group, peer ip, auth-key, vrf, peer as</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.get_bgp_grp_info">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_bgp_grp_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proto_idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_bgp.html#RunningIntanceBGP.get_bgp_grp_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.get_bgp_grp_info" title="Link to this definition"></a></dt>
+<dd><p>parser function to update bgp group detail - description, peer group, peer ip, auth-key, vrf, peer as</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+<li><p><strong>proto_idx</strong> (<em>int</em>) – index value from where protocol bgp starts in provided list</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.get_bgp_nbr_info">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_bgp_nbr_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proto_idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_bgp.html#RunningIntanceBGP.get_bgp_nbr_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.get_bgp_nbr_info" title="Link to this definition"></a></dt>
+<dd><p>parser function to update bgp neighbor detail - description, peer group, peer ip, auth-key, vrf, peer as</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+<li><p><strong>proto_idx</strong> (<em>int</em>) – index value from where protocol bgp starts in provided list</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.instance_bgp_nbr_read">
+<span class="sig-name descname"><span class="pre">instance_bgp_nbr_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_bgp.html#RunningIntanceBGP.instance_bgp_nbr_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.instance_bgp_nbr_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various instance level output for bgp neighbours only</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on interface config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.instance_read">
+<span class="sig-name descname"><span class="pre">instance_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_bgp.html#RunningIntanceBGP.instance_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.RunningIntanceBGP.instance_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various instance level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on interface config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.get_instances_bgps">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.</span></span><span class="sig-name descname"><span class="pre">get_instances_bgps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_bgp.html#get_instances_bgps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp.get_instances_bgps" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various instance parameters.
+uses RunningIntanceBGP in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces">
+<span id="juniper-parser-interfaces"></span><h1><span class="section-number">5.25. </span>juniper parser - interfaces<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces" title="Link to this heading"></a></h1>
+<p>juniper interface from config command output parser</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.</span></span><span class="sig-name descname"><span class="pre">RunningInterfaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running" title="nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running"><code class="xref py py-class docutils literal notranslate"><span class="pre">Running</span></code></a></p>
+<p>object for interface level config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – config output, either list or multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_description">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_int_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.get_int_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_description" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface description details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_filter">
+<span class="sig-name descname"><span class="pre">get_int_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.get_int_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_filter" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface type details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_vlan_details">
+<span class="sig-name descname"><span class="pre">get_int_vlan_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.get_int_vlan_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_int_vlan_details" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface vlan details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_interface_channel_grp">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_interface_channel_grp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.get_interface_channel_grp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_interface_channel_grp" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface port channel details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_interface_mode">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_interface_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.get_interface_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_interface_mode" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface port mode trunk/access details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ip_details">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_ip_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.get_ip_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ip_details" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface ipv4 ip address details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ipv6_details">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_ipv6_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.get_ipv6_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ipv6_details" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface ipv6 ip address details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ospf_authentication_details">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_ospf_authentication_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ospf_idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.get_ospf_authentication_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.get_ospf_authentication_details" title="Link to this definition"></a></dt>
+<dd><p>parser function to update interface ospf authentication details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+<li><p><strong>ospf_idx</strong> (<em>int</em>) – index value from where ospf information starting on set commands list</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_dot_zero_merge_to_parent1">
+<span class="sig-name descname"><span class="pre">int_dot_zero_merge_to_parent1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.int_dot_zero_merge_to_parent1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_dot_zero_merge_to_parent1" title="Link to this definition"></a></dt>
+<dd><p>merges the value of two keys for <cite>parent</cite> and <cite>parent unit 0</cite> configs</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_filter">
+<span class="sig-name descname"><span class="pre">int_filter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.int_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_filter" title="Link to this definition"></a></dt>
+<dd><p>update the interface type details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_to_int_number">
+<span class="sig-name descname"><span class="pre">int_to_int_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.int_to_int_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.int_to_int_number" title="Link to this definition"></a></dt>
+<dd><p>creates an arbirary unique number for each interface on interface types</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_channel_grp">
+<span class="sig-name descname"><span class="pre">interface_channel_grp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_channel_grp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_channel_grp" title="Link to this definition"></a></dt>
+<dd><p>update the interface port channel details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_description">
+<span class="sig-name descname"><span class="pre">interface_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_description" title="Link to this definition"></a></dt>
+<dd><p>update the interface description details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_ips">
+<span class="sig-name descname"><span class="pre">interface_ips</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_ips"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_ips" title="Link to this definition"></a></dt>
+<dd><p>update the interface ipv4 ip address details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_mode">
+<span class="sig-name descname"><span class="pre">interface_mode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_mode" title="Link to this definition"></a></dt>
+<dd><p>update the interface port mode trunk/access details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_read">
+<span class="sig-name descname"><span class="pre">interface_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various interface level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on interface config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_v6_ips">
+<span class="sig-name descname"><span class="pre">interface_v6_ips</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_v6_ips"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_v6_ips" title="Link to this definition"></a></dt>
+<dd><p>update the interface ipv6 ip address details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_vlans">
+<span class="sig-name descname"><span class="pre">interface_vlans</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.interface_vlans"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.interface_vlans" title="Link to this definition"></a></dt>
+<dd><p>update the interface vlan details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.ospf_auth_para_read">
+<span class="sig-name descname"><span class="pre">ospf_auth_para_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.ospf_auth_para_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.ospf_auth_para_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various protocol ospf level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on ospf config lines</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.ospf_authentication_details">
+<span class="sig-name descname"><span class="pre">ospf_authentication_details</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.ospf_authentication_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.ospf_authentication_details" title="Link to this definition"></a></dt>
+<dd><p>update the interface ospf authentication details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.routing_instance_read">
+<span class="sig-name descname"><span class="pre">routing_instance_read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#RunningInterfaces.routing_instance_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.RunningInterfaces.routing_instance_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to set the various routing instance level output from interface.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_interfaces_running">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.</span></span><span class="sig-name descname"><span class="pre">get_interfaces_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#get_interfaces_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_interfaces_running" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various inteface parameters.
+uses RunningInterfaces in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_logical_port_number">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.</span></span><span class="sig-name descname"><span class="pre">get_logical_port_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#get_logical_port_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_logical_port_number" title="Link to this definition"></a></dt>
+<dd><p>physical interface - logical interface number calculator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>str</em>) – string lateral for various types of juniper interface/port</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a logical port number assign to port value (sequencial)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_physical_port_number">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.</span></span><span class="sig-name descname"><span class="pre">get_physical_port_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#get_physical_port_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.get_physical_port_number" title="Link to this definition"></a></dt>
+<dd><p>physical interface - interface number calculator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>port</strong> (<em>str</em>) – string lateral for various types of juniper interface/port</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a number assign to port value (sequencial)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.set_of_voice_vlans">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.</span></span><span class="sig-name descname"><span class="pre">set_of_voice_vlans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_interfaces.html#set_of_voice_vlans"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces.set_of_voice_vlans" title="Link to this definition"></a></dt>
+<dd><p>get the set of voice vlans configured in provided set commands configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>set_cmd_op</strong> (<em>list</em>) – set command output</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>set of voice vlans found in output</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf">
+<span id="juniper-parser-ospf"></span><h1><span class="section-number">5.26. </span>juniper parser - ospf<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf" title="Link to this heading"></a></h1>
+<p>juniper ospf parsing from set config</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.</span></span><span class="sig-name descname"><span class="pre">RunningOSPF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_ospf.html#RunningOSPF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running" title="nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running"><code class="xref py py-class docutils literal notranslate"><span class="pre">Running</span></code></a></p>
+<p>object for ospf level config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – config output, either list or multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_interface_type">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_interface_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf_op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_ospf.html#RunningOSPF.get_interface_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_interface_type" title="Link to this definition"></a></dt>
+<dd><p>parser function to get ospf interface type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_ospf_authentication">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_ospf_authentication</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf_op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_ospf.html#RunningOSPF.get_ospf_authentication"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_ospf_authentication" title="Link to this definition"></a></dt>
+<dd><p>parser function to get ospf authentication parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_passive_interfaces">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_passive_interfaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf_op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_ospf.html#RunningOSPF.get_passive_interfaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_passive_interfaces" title="Link to this definition"></a></dt>
+<dd><p>parser function to get passive interfaces</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_summaries">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_summaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf_op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_ospf.html#RunningOSPF.get_summaries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.get_summaries" title="Link to this definition"></a></dt>
+<dd><p>parser function to get ospf area range summaries</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.interface_type">
+<span class="sig-name descname"><span class="pre">interface_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_ospf.html#RunningOSPF.interface_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.interface_type" title="Link to this definition"></a></dt>
+<dd><p>update the ospf interface type</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.ospf_authentication">
+<span class="sig-name descname"><span class="pre">ospf_authentication</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_ospf.html#RunningOSPF.ospf_authentication"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.ospf_authentication" title="Link to this definition"></a></dt>
+<dd><p>update the ospf authentication parameters</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.ospf_read">
+<span class="sig-name descname"><span class="pre">ospf_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_ospf.html#RunningOSPF.ospf_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.ospf_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various instance level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on interface config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.passive_interfaces">
+<span class="sig-name descname"><span class="pre">passive_interfaces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_ospf.html#RunningOSPF.passive_interfaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.passive_interfaces" title="Link to this definition"></a></dt>
+<dd><p>update the passive interfaces</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.summaries">
+<span class="sig-name descname"><span class="pre">summaries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_ospf.html#RunningOSPF.summaries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.RunningOSPF.summaries" title="Link to this definition"></a></dt>
+<dd><p>update the ospf area range summaries</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.get_instances_ospfs">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.</span></span><span class="sig-name descname"><span class="pre">get_instances_ospfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_ospf.html#get_instances_ospfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf.get_instances_ospfs" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various instance of ospf parameters.
+uses RunningOSPF in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes">
+<span id="juniper-parser-routes"></span><h1><span class="section-number">5.27. </span>juniper parser - routes<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes" title="Link to this heading"></a></h1>
+<p>juniper routes parsing from set config</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.</span></span><span class="sig-name descname"><span class="pre">RunningRoutes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routes.html#RunningRoutes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running" title="nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running"><code class="xref py py-class docutils literal notranslate"><span class="pre">Running</span></code></a></p>
+<p>object for routes level config parser</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.get_route_dict">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_route_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vrf_spl_sect</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">route_spl_sect</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routes.html#RunningRoutes.get_route_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.get_route_dict" title="Link to this definition"></a></dt>
+<dd><p>parser function to update route details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>dict</em>) – blank dictionary to update a route info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.route_read">
+<span class="sig-name descname"><span class="pre">route_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routes.html#RunningRoutes.route_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.route_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various static routes level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on set commands</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.routes_dict">
+<span class="sig-name descname"><span class="pre">routes_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routes.html#RunningRoutes.routes_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.routes_dict" title="Link to this definition"></a></dt>
+<dd><p>update the route details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.v6routes_dict">
+<span class="sig-name descname"><span class="pre">v6routes_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routes.html#RunningRoutes.v6routes_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.RunningRoutes.v6routes_dict" title="Link to this definition"></a></dt>
+<dd><p>update the route details</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.get_system_running_routes">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.</span></span><span class="sig-name descname"><span class="pre">get_system_running_routes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routes.html#get_system_running_routes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes.get_system_running_routes" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various instance of route parameters.
+uses RunningRoutes in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances">
+<span id="juniper-parser-bgp-instances"></span><h1><span class="section-number">5.28. </span>juniper parser - bgp instances<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances" title="Link to this heading"></a></h1>
+<p>juniper routing instances parsing from set config</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.</span></span><span class="sig-name descname"><span class="pre">RunningIntances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routing_instances.html#RunningIntances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running" title="nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running"><code class="xref py py-class docutils literal notranslate"><span class="pre">Running</span></code></a></p>
+<p>object for instance level config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – config output, either list of multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.get_vrf_description">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_vrf_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routing_instances.html#RunningIntances.get_vrf_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.get_vrf_description" title="Link to this definition"></a></dt>
+<dd><p>parser function to update vrf description details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.get_vrf_route_target">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_vrf_route_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routing_instances.html#RunningIntances.get_vrf_route_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.get_vrf_route_target" title="Link to this definition"></a></dt>
+<dd><p>parser function to update vrf route target details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.instance_read">
+<span class="sig-name descname"><span class="pre">instance_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routing_instances.html#RunningIntances.instance_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.instance_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various instance level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on interface config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.vrf_description">
+<span class="sig-name descname"><span class="pre">vrf_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routing_instances.html#RunningIntances.vrf_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.vrf_description" title="Link to this definition"></a></dt>
+<dd><p>update the vrf description</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.vrf_route_target">
+<span class="sig-name descname"><span class="pre">vrf_route_target</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routing_instances.html#RunningIntances.vrf_route_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.RunningIntances.vrf_route_target" title="Link to this definition"></a></dt>
+<dd><p>update the vrf route target</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.get_instances_running">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.</span></span><span class="sig-name descname"><span class="pre">get_instances_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_routing_instances.html#get_instances_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances.get_instances_running" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various instance parameters.
+uses RunningIntances in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system">
+<span id="juniper-parser-system"></span><h1><span class="section-number">5.29. </span>juniper parser - system<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system" title="Link to this heading"></a></h1>
+<p>juniper system config parser from set config</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.</span></span><span class="sig-name descname"><span class="pre">RunningSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running" title="nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running"><code class="xref py py-class docutils literal notranslate"><span class="pre">Running</span></code></a></p>
+<p>object for system level config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – config output, either list of multiline string</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.club_list_items">
+<span class="sig-name descname"><span class="pre">club_list_items</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.club_list_items"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.club_list_items" title="Link to this definition"></a></dt>
+<dd><p>concatenate items with carriage return character for the provided key in system_dict dictionary.
+general implementation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – key for which items to be concatenate.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.convert_sets_to_strs">
+<span class="sig-name descname"><span class="pre">convert_sets_to_strs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.convert_sets_to_strs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.convert_sets_to_strs" title="Link to this definition"></a></dt>
+<dd><p>convert set to string, general implementation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_banner">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_banner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.get_banner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_banner" title="Link to this definition"></a></dt>
+<dd><p>parser function to update system banner details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_gtac_servers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_gtac_servers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.get_gtac_servers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_gtac_servers" title="Link to this definition"></a></dt>
+<dd><p>parser function to update system gtac servers details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_hostname">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_hostname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.get_hostname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_hostname" title="Link to this definition"></a></dt>
+<dd><p>parser function to update system hostname details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_mgmt_ip">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_mgmt_ip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.get_mgmt_ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_mgmt_ip" title="Link to this definition"></a></dt>
+<dd><p>parser function to update system management ip details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_nameservers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_nameservers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.get_nameservers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_nameservers" title="Link to this definition"></a></dt>
+<dd><p>parser function to update system name servers details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_ntp_servers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_ntp_servers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.get_ntp_servers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_ntp_servers" title="Link to this definition"></a></dt>
+<dd><p>parser function to update system ntp servers details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_syslog_servers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_syslog_servers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.get_syslog_servers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_syslog_servers" title="Link to this definition"></a></dt>
+<dd><p>parser function to update system syslog servers details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_system_as_number">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_system_as_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.get_system_as_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.get_system_as_number" title="Link to this definition"></a></dt>
+<dd><p>parser function to update system as details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_dict</strong> (<em>dict</em>) – dictionary with a port info</p></li>
+<li><p><strong>l</strong> (<em>str</em>) – string line to parse</p></li>
+<li><p><strong>spl</strong> (<em>list</em>) – splitted line to parse</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_as_number">
+<span class="sig-name descname"><span class="pre">system_as_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.system_as_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_as_number" title="Link to this definition"></a></dt>
+<dd><p>update the system as details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_banner">
+<span class="sig-name descname"><span class="pre">system_banner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.system_banner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_banner" title="Link to this definition"></a></dt>
+<dd><p>update the system banner details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_gtac_servers">
+<span class="sig-name descname"><span class="pre">system_gtac_servers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.system_gtac_servers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_gtac_servers" title="Link to this definition"></a></dt>
+<dd><p>update the system gtac server details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_hostname">
+<span class="sig-name descname"><span class="pre">system_hostname</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.system_hostname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_hostname" title="Link to this definition"></a></dt>
+<dd><p>update the system hostname details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_mgmt_ip">
+<span class="sig-name descname"><span class="pre">system_mgmt_ip</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.system_mgmt_ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_mgmt_ip" title="Link to this definition"></a></dt>
+<dd><p>update the system management ip details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_nameservers">
+<span class="sig-name descname"><span class="pre">system_nameservers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.system_nameservers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_nameservers" title="Link to this definition"></a></dt>
+<dd><p>update the system name server details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_ntp_servers">
+<span class="sig-name descname"><span class="pre">system_ntp_servers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.system_ntp_servers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_ntp_servers" title="Link to this definition"></a></dt>
+<dd><p>update the system ntp server details</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_read">
+<span class="sig-name descname"><span class="pre">system_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.system_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_read" title="Link to this definition"></a></dt>
+<dd><p>directive function to get the various system level output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>method</em>) – method to be executed on system config line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>parsed output dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_syslog_servers">
+<span class="sig-name descname"><span class="pre">system_syslog_servers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#RunningSystem.system_syslog_servers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.RunningSystem.system_syslog_servers" title="Link to this definition"></a></dt>
+<dd><p>update the system syslog server details</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.get_running_system">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.</span></span><span class="sig-name descname"><span class="pre">get_running_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running_system.html#get_running_system"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system.get_running_system" title="Link to this definition"></a></dt>
+<dd><p>defines set of methods executions. to get various system parameters.
+uses RunningSystem in order to get all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – running config output, either list of multiline string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed with system fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running">
+<span id="juniper-parser-configuration"></span><h1><span class="section-number">5.30. </span>juniper parser - configuration<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running" title="Link to this heading"></a></h1>
+<p>juniper set config initiator - parent</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_running.</span></span><span class="sig-name descname"><span class="pre">Running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_running.html#Running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_running.Running" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>parent object for config parser</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – config output, either list of multiline string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.generators.juniper._cmd_parse_version">
+<span id="juniper-parser-version"></span><h1><span class="section-number">5.31. </span>juniper parser - version<a class="headerlink" href="#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_version" title="Link to this heading"></a></h1>
+<p>juniper show version command output parser</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.generators.juniper._cmd_parse_version.get_version">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.generators.juniper._cmd_parse_version.</span></span><span class="sig-name descname"><span class="pre">get_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd_op</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/generators/juniper/_cmd_parse_version.html#get_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.generators.juniper._cmd_parse_version.get_version" title="Link to this definition"></a></dt>
+<dd><p>parser - show version command output</p>
+<dl class="simple">
+<dt>Parsed Fields:</dt><dd><ul class="simple">
+<li><p>version</p></li>
+<li><p>model</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd_op</strong> (<em>list</em><em>, </em><em>str</em>) – command output in list/multiline string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output dictionary with parsed fields</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="parsers_cisco.html" class="btn btn-neutral float-left" title="5.7. cisco parser - arp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modifiers_cisco.html" class="btn btn-neutral float-right" title="5.32. Cisco Modifier - table" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

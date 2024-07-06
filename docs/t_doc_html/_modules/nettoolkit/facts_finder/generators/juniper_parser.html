@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.facts_finder.generators.juniper_parser &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.facts_finder.generators.juniper_parser</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.facts_finder.generators.juniper_parser</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Juniper devices (Switch/Router) configuration parser directive. </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.nettoolkit_common</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">.juniper</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.device</span> <span class="kn">import</span> <span class="n">DevicePapa</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<span class="n">CMD_LINE_START_WITH</span> <span class="o">=</span> <span class="s2">&quot;output for command: &quot;</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="c1"># // Juniper //</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="c1"># COMMANDS LIST DICTIONARY, DEFINE **kwargs as dictionary in command value     #</span>
+<span class="c1"># ``juniper_cmds_list``</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="n">juniper_cmds_list</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([</span>
+	<span class="p">(</span><span class="s1">&#39;show interfaces descriptions&#39;</span><span class="p">,</span> <span class="p">{}),</span>
+	<span class="p">(</span><span class="s1">&#39;show lldp neighbors&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;dsr&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span>		<span class="c1"># dsr = domain-suffix removal, default=True</span>
+	<span class="p">(</span><span class="s1">&#39;show configuration&#39;</span><span class="p">,</span> <span class="p">{}),</span>
+	<span class="p">(</span><span class="s1">&#39;show version&#39;</span><span class="p">,</span> <span class="p">{}),</span>
+	<span class="p">(</span><span class="s1">&#39;show chassis hardware&#39;</span><span class="p">,</span> <span class="p">{}),</span>
+	<span class="c1"># (&#39;show arp&#39;, {}),</span>
+
+
+	<span class="c1">## ADD More as grow ##</span>
+<span class="p">])</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="c1"># COMMAND OUTPUT HIERARCHY LEVEL</span>
+<span class="c1"># ``juniper_cmds_op_hierachy_level``</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="n">juniper_cmds_op_hierachy_level</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([</span>
+	<span class="p">(</span><span class="s1">&#39;show interfaces descriptions&#39;</span><span class="p">,</span> <span class="s1">&#39;Interfaces&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;show lldp neighbors&#39;</span><span class="p">,</span> <span class="s1">&#39;Interfaces&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;show configuration&#39;</span><span class="p">,</span> <span class="p">(</span>
+			<span class="s1">&#39;Interfaces&#39;</span><span class="p">,</span> 
+			<span class="s1">&#39;var&#39;</span><span class="p">,</span> 
+			<span class="s1">&#39;vrf&#39;</span><span class="p">,</span> 
+			<span class="s1">&#39;bgp&#39;</span><span class="p">,</span> 
+			<span class="s1">&#39;ospf&#39;</span><span class="p">,</span> 
+			<span class="s1">&#39;static&#39;</span><span class="p">,</span> 
+			<span class="s1">&#39;prefix_list&#39;</span> 
+		<span class="p">)</span>
+	<span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;show version&#39;</span><span class="p">,</span> <span class="s1">&#39;var&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;show chassis hardware&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;Interfaces&#39;</span><span class="p">,</span> <span class="s1">&#39;var&#39;</span><span class="p">)),</span>
+	<span class="c1"># &#39;show arp&#39;: &#39;arp&#39;,</span>
+
+
+	<span class="c1">## ADD More as grow ##</span>
+<span class="p">])</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="c1"># Dict of Juniper commands, %trunked commands mapped with parser func.</span>
+<span class="c1"># ``juniper_commands_parser_map``</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<span class="n">juniper_commands_parser_map</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([</span>
+
+    <span class="c1"># ---- ADD PARSER FUNCTIONS IN BELOW FORMAT ONLY ----</span>
+    <span class="c1"># &#39;juniper show command&#39; : function_name,                               ## if single hierarchy details from output</span>
+    <span class="c1"># &#39;juniper show command&#39; : (function_name1, function_name2, ... ),      ## if multiple hierarchies details from output</span>
+    <span class="c1"># ---------------------------------------------------</span>
+
+	<span class="p">(</span><span class="s1">&#39;show interfaces descriptions&#39;</span><span class="p">,</span> <span class="n">get_int_description</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;show lldp neighbors&#39;</span><span class="p">,</span> <span class="n">get_lldp_neighbour</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;show configuration&#39;</span><span class="p">,</span> <span class="p">(</span>
+			<span class="n">get_interfaces_running</span><span class="p">,</span> 
+			<span class="n">get_running_system</span><span class="p">,</span> 
+			<span class="n">get_instances_running</span><span class="p">,</span> 
+			<span class="n">get_instances_bgps</span><span class="p">,</span> 
+			<span class="n">get_instances_ospfs</span><span class="p">,</span> 
+			<span class="n">get_system_running_routes</span><span class="p">,</span> 
+			<span class="n">get_system_running_prefix_lists</span>
+		<span class="p">)</span>
+	<span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;show version&#39;</span><span class="p">,</span> <span class="n">get_version</span><span class="p">),</span>
+	<span class="p">(</span><span class="s1">&#39;show chassis hardware&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">get_chassis_hardware</span><span class="p">,</span> <span class="n">get_chassis_serial</span><span class="p">)),</span>
+	<span class="c1"># &#39;show interfaces terse&#39;: None,</span>
+	<span class="c1"># &#39;show arp&#39;: get_arp_table,</span>
+	<span class="c1"># &#39;show bgp summary&#39;: None,</span>
+    
+    <span class="c1"># ... ADD MORE AS NECESSARY ... </span>
+<span class="p">])</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="absolute_command">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/generators_juniper.html#nettoolkit.facts_finder.generators.juniper_parser.absolute_command">[docs]</a>
+<span class="k">def</span> <span class="nf">absolute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">cmd_parser_map</span><span class="p">,</span> <span class="n">op_filter</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;returns absolute truked command if any filter applied</span>
+<span class="sd">	if founds an entry in juniper_commands_parser_map keys.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		cmd (str): executed/ captured command ( can be trunked or full )</span>
+<span class="sd">		cmd_parser_map (dict, set): containing juniper standard trunked command</span>
+<span class="sd">		op_filter (bool, optional): to be remove any additional filter from command or not. Defaults to False.</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: juniper command - trunked</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="k">if</span> <span class="n">op_filter</span><span class="p">:</span>
+		<span class="n">abs_cmd</span> <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">abs_cmd</span> <span class="o">=</span> <span class="n">cmd</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;| no-more&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+	<span class="k">for</span> <span class="n">c_cmd</span> <span class="ow">in</span> <span class="n">cmd_parser_map</span><span class="p">:</span>
+		<span class="n">word_match</span> <span class="o">=</span> <span class="n">abs_cmd</span> <span class="o">==</span> <span class="n">c_cmd</span>
+		<span class="k">if</span> <span class="n">word_match</span><span class="p">:</span> <span class="k">break</span>
+	<span class="k">if</span> <span class="n">word_match</span><span class="p">:</span>  <span class="k">return</span> <span class="n">abs_cmd</span>
+	<span class="k">return</span> <span class="n">cmd</span></div>
+
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="Juniper">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/generators_juniper.html#nettoolkit.facts_finder.generators.juniper_parser.Juniper">[docs]</a>
+<span class="k">class</span> <span class="nc">Juniper</span><span class="p">(</span><span class="n">DevicePapa</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;class defining juniper parser directives.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		file (str): capture file</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Initialize the object by providing the capture file</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Juniper.parse">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/generators_juniper.html#nettoolkit.facts_finder.generators.juniper_parser.Juniper.parse">[docs]</a>
+	<span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;start command output parsing from provided capture.</span>
+<span class="sd">		provide any additional arg, kwargs for dynamic filtering purpose.</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			cmd (str): juniper command for which output to be parsed</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			dict: dictionary with the details captured from the output</span>
+<span class="sd">		&quot;&quot;&quot;</span> 
+		<span class="n">abs_cmd</span> <span class="o">=</span> <span class="n">absolute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">juniper_commands_parser_map</span><span class="p">)</span>
+		<span class="n">parse_func</span> <span class="o">=</span> <span class="n">juniper_commands_parser_map</span><span class="p">[</span><span class="n">abs_cmd</span><span class="p">]</span>
+		<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parse_func</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+			<span class="n">parsed_op</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">run_parser</span><span class="p">(</span><span class="n">pf</span><span class="p">,</span> <span class="n">abs_cmd</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">)</span> <span class="k">for</span> <span class="n">pf</span> <span class="ow">in</span> <span class="n">parse_func</span><span class="p">]</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">parsed_op</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_parser</span><span class="p">(</span><span class="n">parse_func</span><span class="p">,</span> <span class="n">abs_cmd</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">parsed_op</span></div>
+
+
+<div class="viewcode-block" id="Juniper.run_parser">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/generators_juniper.html#nettoolkit.facts_finder.generators.juniper_parser.Juniper.run_parser">[docs]</a>
+	<span class="k">def</span> <span class="nf">run_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parse_func</span><span class="p">,</span> <span class="n">abs_cmd</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;derives the command output list for the provided trunked command.</span>
+<span class="sd">		and runs provided parser function on to it to get the necessary details.</span>
+<span class="sd">		provide any additional arg, kwargs for dynamic filtering purpose.</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			parse_func (func): function</span>
+<span class="sd">			abs_cmd (str): juniper trunked command for which output to be parsed</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			dict: dictionary with the details captured from the output</span>
+<span class="sd">		&quot;&quot;&quot;</span>   
+		<span class="n">op_list</span> <span class="o">=</span> <span class="n">get_op</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="n">abs_cmd</span><span class="p">)</span>		
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">parse_func</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+		<span class="n">po</span> <span class="o">=</span> <span class="n">parse_func</span><span class="p">(</span><span class="n">op_list</span><span class="p">,</span> <span class="o">*</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarg</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">po</span></div>
+
+
+<div class="viewcode-block" id="Juniper.verify">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/generators_juniper.html#nettoolkit.facts_finder.generators.juniper_parser.Juniper.verify">[docs]</a>
+	<span class="k">def</span> <span class="nf">verify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;verifications of existance of mandatory commands in output captures</span>
+
+<span class="sd">		Raises:</span>
+<span class="sd">			Exception: Raises if a mandatory command is missing in output  </span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">mandatory_cmds</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">juniper_commands_parser_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+		<span class="n">found_cmds</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+		<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+			<span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="n">CMD_LINE_START_WITH</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">):</span>
+				<span class="n">cmd</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">CMD_LINE_START_WITH</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+				<span class="n">abs_cmd</span> <span class="o">=</span> <span class="n">absolute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">juniper_commands_parser_map</span><span class="p">)</span>
+				<span class="n">found_cmds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">abs_cmd</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+		<span class="n">missing_op_cmds</span> <span class="o">=</span> <span class="n">mandatory_cmds</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">found_cmds</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">missing_op_cmds</span><span class="p">:</span>
+			<span class="k">for</span> <span class="n">moc</span> <span class="ow">in</span> <span class="n">missing_op_cmds</span><span class="p">:</span>
+				<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Missing capture for command: </span><span class="si">{</span><span class="n">moc</span><span class="si">}</span><span class="s1">, in file </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+			<span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Cannot Continue due to missing mandatory capture(s)&#39;</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="c1"># ------------------------------------------------------------------------------</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

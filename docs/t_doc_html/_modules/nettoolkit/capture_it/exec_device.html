@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.capture_it.exec_device &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.capture_it.exec_device</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.capture_it.exec_device</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Imports</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.nettoolkit_common</span> <span class="kn">import</span> <span class="n">STR</span><span class="p">,</span> <span class="n">IP</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">import</span> <span class="nn">nettoolkit.facts_finder</span> <span class="k">as</span> <span class="nn">ff</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.detect</span> <span class="kn">import</span> <span class="n">DeviceType</span>
+<span class="kn">from</span> <span class="nn">.conn</span> <span class="kn">import</span> <span class="n">conn</span>
+<span class="kn">from</span> <span class="nn">.captures</span> <span class="kn">import</span> <span class="n">Captures</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">cmd_line_pfx</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Execution of Show Commands on a single device. </span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Execute_Device">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/exec_device.html#nettoolkit.capture_it.exec_device.Execute_Device">[docs]</a>
+<span class="k">class</span> <span class="nc">Execute_Device</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Execute a device capture</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		ip (str): device ip</span>
+<span class="sd">		auth (dict): authentication parameters</span>
+<span class="sd">		cmds (list, set, tuple): set of commands to be executed.</span>
+<span class="sd">		path (str): path where output to be stored</span>
+<span class="sd">		cumulative (bool, optional): True,False,both. Defaults to False.</span>
+<span class="sd">		forced_login (bool): True will try login even if device ping fails.</span>
+<span class="sd">		parsed_output (bool): parse output and generate Excel or not.</span>
+<span class="sd">		CustomClass(class): Custom class definition to provide additinal custom variable commands</span>
+<span class="sd">		fg(bool): facts generation</span>
+<span class="sd">		mandatory_cmds_retries(int): number of retries for missing mandatory commands captures</span>
+<span class="sd">		append_capture(bool): append capture to existing file instead of creating new.</span>
+<span class="sd">		missing_captures_only(bool): capture only missing command outputs from existing output</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+		<span class="n">ip</span><span class="p">,</span> 
+		<span class="n">auth</span><span class="p">,</span> 
+		<span class="n">cmds</span><span class="p">,</span> 
+		<span class="n">path</span><span class="p">,</span> 
+		<span class="n">cumulative</span><span class="p">,</span> 
+		<span class="n">forced_login</span><span class="p">,</span> 
+		<span class="n">parsed_output</span><span class="p">,</span>
+		<span class="n">CustomClass</span><span class="p">,</span>
+		<span class="n">fg</span><span class="p">,</span>
+		<span class="n">mandatory_cmds_retries</span><span class="p">,</span>
+		<span class="n">append_capture</span><span class="p">,</span>
+		<span class="n">missing_captures_only</span><span class="p">,</span>
+		<span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;initialize execution</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">log_key</span> <span class="o">=</span> <span class="n">ip</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">auth</span> <span class="o">=</span> <span class="n">auth</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cmds</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">cmds</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">all_cmds</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cisco_ios&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(),</span> <span class="s1">&#39;juniper_junos&#39;</span><span class="p">:</span><span class="nb">set</span><span class="p">(),}</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">output_path</span> <span class="o">=</span> <span class="n">path</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span> <span class="o">=</span> <span class="n">cumulative</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cumulative_filename</span> <span class="o">=</span> <span class="kc">None</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">forced_login</span> <span class="o">=</span> <span class="n">forced_login</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">parsed_output</span> <span class="o">=</span> <span class="n">parsed_output</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">CustomClass</span> <span class="o">=</span> <span class="n">CustomClass</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">fg</span> <span class="o">=</span> <span class="n">fg</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">mandatory_cmds_retries</span> <span class="o">=</span> <span class="n">mandatory_cmds_retries</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">append_capture</span> <span class="o">=</span> <span class="n">append_capture</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">missing_captures_only</span> <span class="o">=</span> <span class="n">missing_captures_only</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">delay_factor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cmd_exec_logs</span> <span class="o">=</span> <span class="p">[]</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">failed_reason</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="c1">#</span>
+		<span class="n">ip</span> <span class="o">=</span> <span class="n">ip</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">ip</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">failed_reason</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Missing device ip: [</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2">]&quot;</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">failed_reason</span><span class="si">}</span><span class="s2"> - skipping it&quot;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">None</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">pinging</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_ping</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_start_execution</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_check_ping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;check device reachability</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			ip (str): device ip</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			int: delay factor if device reachable,  else False</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="k">try</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2"> - Checking ping response&quot;</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">delay_factor</span> <span class="o">=</span> <span class="n">IP</span><span class="o">.</span><span class="n">ping_average</span> <span class="p">(</span><span class="n">ip</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span> <span class="o">+</span> <span class="mi">3</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2"> - Delay Factor=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">delay_factor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay_factor</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2"> - Ping was unsuccessful&quot;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">False</span>
+
+	<span class="k">def</span> <span class="nf">_start_execution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">forced_login</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinging</span><span class="p">):</span> <span class="k">return</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">pinging</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2"> - Trying for Forced login&quot;</span><span class="p">)</span>
+		<span class="n">dtype_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_device_type</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">dtype_result</span><span class="p">:</span> <span class="k">return</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="s1">&#39;cisco_ios&#39;</span><span class="p">:</span> <span class="k">return</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2"> - sleeping progress for 65 seconds due to known cisco ios bug&quot;</span><span class="p">)</span>					
+			<span class="n">sleep</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">_get_device_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;detect device type (cisco, juniper)</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			ip (str): device ip</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			str: device type if detected, else None</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="k">try</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">dev</span> <span class="o">=</span> <span class="n">DeviceType</span><span class="p">(</span><span class="n">dev_ip</span><span class="o">=</span><span class="n">ip</span><span class="p">,</span> 
+				<span class="n">un</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">[</span><span class="s1">&#39;un&#39;</span><span class="p">],</span> 
+				<span class="n">pw</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">[</span><span class="s1">&#39;pw&#39;</span><span class="p">],</span>
+			<span class="p">)</span>
+			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span>
+		<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>			
+			<span class="bp">self</span><span class="o">.</span><span class="n">failed_reason</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2">] - Device Type Detection Failed with Exception </span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;- &#39;</span><span class="o">*</span><span class="mi">40</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">failed_reason</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;- &#39;</span><span class="o">*</span><span class="mi">40</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kc">None</span>
+
+	<span class="k">def</span> <span class="nf">_is_not_connected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;check if connection is successful</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			c (conn): connection object</span>
+<span class="sd">			ip(str): ip address of connection</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			conn: connection object if successful, otherwise None</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">connected</span> <span class="o">=</span> <span class="kc">True</span>
+		<span class="k">if</span> <span class="n">STR</span><span class="o">.</span><span class="n">found</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="s2">&quot;FAILURE&quot;</span><span class="p">):</span> <span class="n">connected</span> <span class="o">=</span> <span class="kc">None</span>
+		<span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">hn</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">c</span><span class="o">.</span><span class="n">hn</span> <span class="o">==</span> <span class="s1">&#39;dummy&#39;</span><span class="p">:</span> <span class="n">connected</span> <span class="o">=</span> <span class="kc">None</span>
+		<span class="k">return</span> <span class="ow">not</span> <span class="n">connected</span>
+
+	<span class="k">def</span> <span class="nf">_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;login to given device(ip) using authentication parameters from uservar (u).</span>
+<span class="sd">		if success start command captuers</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			ip (str): device ip</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s2"> - Initializing&quot;</span><span class="p">)</span>
+
+		<span class="k">with</span> <span class="n">conn</span><span class="p">(</span>	<span class="n">ip</span><span class="o">=</span><span class="n">ip</span><span class="p">,</span> 
+					<span class="n">un</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">[</span><span class="s1">&#39;un&#39;</span><span class="p">],</span> 
+					<span class="n">pw</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">[</span><span class="s1">&#39;pw&#39;</span><span class="p">],</span> 
+					<span class="n">en</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">[</span><span class="s1">&#39;en&#39;</span><span class="p">],</span> 
+					<span class="n">delay_factor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">delay_factor</span><span class="p">,</span>
+					<span class="n">devtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+			<span class="p">)</span> <span class="k">as</span> <span class="n">c</span><span class="p">:</span>
+			<span class="c1"># ------------------------------------------------------------------</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_not_connected</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">failed_reason</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">failed_reason</span> <span class="ow">or</span> <span class="s2">&quot;Connection Failure&quot;</span>
+				<span class="k">return</span> <span class="kc">None</span>
+			<span class="c1"># ------------------------------------------------------------------</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">hostname</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">hn</span>
+			<span class="n">c</span><span class="o">.</span><span class="n">output_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_path</span>
+			<span class="n">c</span><span class="o">.</span><span class="n">dev_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span>
+
+			<span class="c1"># -- get the missing commands list if it is to do only missing captures</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">missing_captures_only</span><span class="p">:</span>
+				<span class="n">missed_cmds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_missing_commands</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">]))</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">]</span> <span class="o">=</span> <span class="n">missed_cmds</span>
+				<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Missed Cmds = &quot;</span><span class="p">,</span> <span class="n">missed_cmds</span><span class="p">)</span>
+
+			<span class="n">cc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_capture</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+			<span class="n">cc</span><span class="o">.</span><span class="n">grp_cmd_capture</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">)</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_cmd_to_all_cmd_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">)</span>
+
+			<span class="c1"># -- for facts generation -- presence of mandary commands, and capture if not --</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fg</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">mandatory_cmds_retries</span><span class="p">:</span>
+				<span class="n">missed_cmds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_facts_finder_requirements</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">retry_missed_cmds</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">missed_cmds</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">add_cmds_to_self</span><span class="p">(</span><span class="n">missed_cmds</span><span class="p">)</span>
+				<span class="k">if</span> <span class="n">missed_cmds</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_cmd_to_all_cmd_dict</span><span class="p">(</span><span class="n">missed_cmds</span><span class="p">)</span>
+
+			<span class="c1"># -- custom commands -- only log entries, no parser --</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CustomClass</span><span class="p">:</span>
+				<span class="n">CC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CustomClass</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">output_path</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">c</span><span class="o">.</span><span class="n">hn</span><span class="o">+</span><span class="s2">&quot;.log&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+				<span class="n">cc</span><span class="o">.</span><span class="n">grp_cmd_capture</span><span class="p">(</span><span class="n">CC</span><span class="o">.</span><span class="n">cmds</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">add_cmds_to_self</span><span class="p">(</span><span class="n">CC</span><span class="o">.</span><span class="n">cmds</span><span class="p">)</span>
+				<span class="k">if</span> <span class="n">CC</span><span class="o">.</span><span class="n">cmds</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_cmd_to_all_cmd_dict</span><span class="p">(</span><span class="n">CC</span><span class="o">.</span><span class="n">cmds</span><span class="p">)</span>
+
+
+			<span class="c1"># -- add command execution logs dataframe --</span>
+			<span class="n">cc</span><span class="o">.</span><span class="n">add_exec_logs</span><span class="p">()</span>
+
+			<span class="c1"># -- write facts to excel --</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cumulative_filename</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cumulative_filename</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">cumulative_filename</span> 
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parsed_output</span><span class="p">:</span> 
+				<span class="bp">self</span><span class="o">.</span><span class="n">xl_file</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">write_facts</span><span class="p">()</span>
+
+			<span class="c1"># -- add command execution logs</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">cmd_exec_logs</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">cmd_exec_logs</span>
+
+<div class="viewcode-block" id="Execute_Device.add_cmd_to_all_cmd_dict">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/exec_device.html#nettoolkit.capture_it.exec_device.Execute_Device.add_cmd_to_all_cmd_dict">[docs]</a>
+	<span class="k">def</span> <span class="nf">add_cmd_to_all_cmd_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmds</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;add command to all cmd dictionary</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			cmds (str, list, tuple, set, dict): commands in any format</span>
+<span class="sd">		&quot;&quot;&quot;</span>    	
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_cmds</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">all_cmds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+		<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cmds</span><span class="p">,</span> <span class="p">(</span><span class="nb">set</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">all_cmds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_cmds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">]</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">cmds</span><span class="p">))</span>
+		<span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cmds</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">dt</span><span class="p">,</span> <span class="n">_cmds</span> <span class="ow">in</span> <span class="n">cmds</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+				<span class="k">if</span> <span class="n">dt</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">:</span> <span class="k">continue</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">add_cmd_to_all_cmd_dict</span><span class="p">(</span><span class="n">_cmds</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cmds</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">all_cmds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cmds</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Execute_Device.add_cmds_to_self">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/exec_device.html#nettoolkit.capture_it.exec_device.Execute_Device.add_cmds_to_self">[docs]</a>
+	<span class="k">def</span> <span class="nf">add_cmds_to_self</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmds</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;add additional commands to cmds list</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			cmds (list): list of additinal or missed mandatory cmds to be captured </span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmds</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">cmd</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">:</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">,</span> <span class="nb">set</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmds</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">cmd</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">:</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmds</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">cmd</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">:</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">cmds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">)</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+		<span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="n">cmds</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">cmd</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">]:</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Non standard command input </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cmds</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Execute_Device.command_capture">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/exec_device.html#nettoolkit.capture_it.exec_device.Execute_Device.command_capture">[docs]</a>
+	<span class="k">def</span> <span class="nf">command_capture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;start command captures on connection object</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			c (conn): connection object</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">hn</span><span class="si">}</span><span class="s2"> - Starting Capture&quot;</span><span class="p">)</span>
+
+		<span class="n">cc</span> <span class="o">=</span> <span class="n">Captures</span><span class="p">(</span>
+			<span class="n">conn</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> 
+			<span class="n">cumulative</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span><span class="p">,</span>
+			<span class="n">parsed_output</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parsed_output</span><span class="p">,</span>
+			<span class="n">append_capture</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">append_capture</span><span class="p">,</span>
+			<span class="p">)</span>
+		<span class="k">return</span> <span class="n">cc</span></div>
+
+
+
+
+<div class="viewcode-block" id="Execute_Device.missed_commands_capture">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/exec_device.html#nettoolkit.capture_it.exec_device.Execute_Device.missed_commands_capture">[docs]</a>
+	<span class="k">def</span> <span class="nf">missed_commands_capture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">missed_cmds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span> 
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;recaptures missed commands</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			c (conn): connection object</span>
+<span class="sd">			cc(Captures): Capture / Command line processing object</span>
+<span class="sd">			missed_cmds (set): list/set of commands for which output to be recapture</span>
+<span class="sd">			x (int, optional): iteration value</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">hn</span><span class="si">}</span><span class="s2"> - Retrying missed_cmds(</span><span class="si">{</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">missed_cmds</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+		<span class="n">cc</span><span class="o">.</span><span class="n">grp_cmd_capture</span><span class="p">(</span><span class="n">missed_cmds</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Execute_Device.is_any_ff_cmds_missed">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/exec_device.html#nettoolkit.capture_it.exec_device.Execute_Device.is_any_ff_cmds_missed">[docs]</a>
+	<span class="k">def</span> <span class="nf">is_any_ff_cmds_missed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;checks and returns missed mandatory capture commands</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			c (conn): connection object</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			set: missed mandatory commands</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">necessary_cmds</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">get_necessary_cmds</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_missing_commands</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">necessary_cmds</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Execute_Device.check_facts_finder_requirements">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/exec_device.html#nettoolkit.capture_it.exec_device.Execute_Device.check_facts_finder_requirements">[docs]</a>
+	<span class="k">def</span> <span class="nf">check_facts_finder_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;checks and returns missed mandatory capture commands</span>
+<span class="sd">		clone to is_any_ff_cmds_missed</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			c (conn): connection object</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			set: missed mandatory commands</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_any_ff_cmds_missed</span><span class="p">(</span><span class="n">c</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Execute_Device.retry_missed_cmds">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/exec_device.html#nettoolkit.capture_it.exec_device.Execute_Device.retry_missed_cmds">[docs]</a>
+	<span class="k">def</span> <span class="nf">retry_missed_cmds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">missed_cmds</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;retry missed commands captures</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			c (conn): connection object instance</span>
+<span class="sd">			cc(Captures): Capture / Command line processing object</span>
+<span class="sd">			missed_cmds (set): missed commands</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			None: No retuns</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mandatory_cmds_retries</span><span class="p">):</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">missed_cmds</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">missed_commands_capture</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">missed_cmds</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+			<span class="n">missed_cmds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_any_ff_cmds_missed</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">missed_cmds</span><span class="p">:</span>	
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">hn</span><span class="si">}</span><span class="s2"> - Error capture all mandatory commands, try do manually..&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Execute_Device.get_missing_commands">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/exec_device.html#nettoolkit.capture_it.exec_device.Execute_Device.get_missing_commands">[docs]</a>
+	<span class="k">def</span> <span class="nf">get_missing_commands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">cmds</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;checks and returns missed capture commands</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			c (conn): connection object</span>
+<span class="sd">			cmds (list): list of commands to check</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			set: missed mandatory commands</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">try</span><span class="p">:</span>
+			<span class="n">file</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">output_path</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">c</span><span class="o">.</span><span class="n">hn</span><span class="o">+</span><span class="s2">&quot;.log&quot;</span>
+			<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+				<span class="n">log_lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Cumulative capture file is required for Facts-Finder File not found </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">output_path</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">c</span><span class="o">.</span><span class="n">hn</span><span class="o">+</span><span class="s2">&quot;.log&quot;</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="p">[]</span>
+		<span class="n">captured_cmds</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">log_line</span> <span class="ow">in</span> <span class="n">log_lines</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">log_line</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">cmd_line_pfx</span><span class="p">):</span>
+				<span class="n">captured_cmd</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">get_absolute_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">log_line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">cmd_line_pfx</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+				<span class="n">captured_cmds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">captured_cmd</span><span class="p">)</span>
+		<span class="n">missed_cmds</span> <span class="o">=</span> <span class="n">cmds</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">captured_cmds</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">missed_cmds</span></div>
+</div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

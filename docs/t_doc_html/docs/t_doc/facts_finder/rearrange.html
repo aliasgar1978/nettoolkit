@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.43. Rearrange &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="6. Configuration Generation API documentation!" href="../j2config/tech_doc.html" />
+    <link rel="prev" title="5.42. Merger Definitions" href="mergers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_doc.html">5. facts-finder</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="facts_gen.html">5.1. facts_gen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_cisco.html">5.2. generators_cisco</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_juniper.html">5.3. generators_juniper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html">5.4. generator common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html#module-nettoolkit.facts_finder.generators.cisco.common">5.5. cisco generator common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html#module-nettoolkit.facts_finder.generators.juniper.common">5.6. juniper generator common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html">5.7. cisco parser - arp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp">5.8. cisco parser - bgp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_cdp">5.9. cisco parser - cdp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_description">5.10. cisco parser - if description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_status">5.11. cisco parser - if status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_lldp">5.12. cisco parser - lldp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_mac_table">5.13. cisco parser - mac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf">5.14. cisco parser - ospf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces">5.15. cisco parser - interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes">5.16. cisco parser - routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system">5.17. cisco parser - sys_info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs">5.18. cisco parser - vrf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_version">5.19. cisco parser - version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html">5.20. juniper parser - arp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware">5.21. juniper parser - hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_int_description">5.22. juniper parser - if description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_lldp">5.23. juniper parser - lldp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp">5.24. juniper parser - bgp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces">5.25. juniper parser - interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf">5.26. juniper parser - ospf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes">5.27. juniper parser - routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances">5.28. juniper parser - bgp instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system">5.29. juniper parser - system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running">5.30. juniper parser - configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_version">5.31. juniper parser - version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html">5.32. Cisco Modifier - table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.cisco_var">5.33. Cisco Modifier - var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.cisco_vrfs">5.34. Cisco Modifier - vrf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.merger">5.35. Cisco - merger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_cisco.html#module-nettoolkit.facts_finder.modifiers.cisco.commands.cmd_dict">5.36. Cisco - commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html">5.37. Juniper Modifier - table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.juniper_var">5.38. Juniper Modifier - var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.merger">5.39. Juniper Modifier - merger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.commands.cmd_dict">5.40. Juniper Modifier - commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_common.html">5.41. modifiers_common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html">5.42. mergers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.43. rearrange</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-nettoolkit.facts_finder.rearrange">5.43.1. table columns</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.rearrange.rearrange_tables"><code class="docutils literal notranslate"><span class="pre">rearrange_tables()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tech_doc.html"><span class="section-number">5. </span>Facts-Finder API documentation!</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5.43. </span>Rearrange</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/t_doc/facts_finder/rearrange.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rearrange">
+<h1><span class="section-number">5.43. </span>Rearrange<a class="headerlink" href="#rearrange" title="Link to this heading"></a></h1>
+<section id="module-nettoolkit.facts_finder.rearrange">
+<span id="table-columns"></span><h2><span class="section-number">5.43.1. </span>table columns<a class="headerlink" href="#module-nettoolkit.facts_finder.rearrange" title="Link to this heading"></a></h2>
+<p>rearrange the columns in appropriate orders</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.rearrange.rearrange_tables">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.rearrange.</span></span><span class="sig-name descname"><span class="pre">rearrange_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clean_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">foreign_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/rearrange.html#rearrange_tables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.rearrange.rearrange_tables" title="Link to this definition"></a></dt>
+<dd><p>rearrange Excel file columns as per interface properties grouping defined globally
+provide foreign_keys dictionary with list of columns to be extended.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clean_file</strong> (<em>str</em>) – ouptut clean file name</p></li>
+<li><p><strong>foreign_keys</strong> (<em>dict</em><em>, </em><em>optional</em>) – custom columns (if any). Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mergers.html" class="btn btn-neutral float-left" title="5.42. Merger Definitions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../j2config/tech_doc.html" class="btn btn-neutral float-right" title="6. Configuration Generation API documentation!" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

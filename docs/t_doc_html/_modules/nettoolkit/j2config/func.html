@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.j2config.func &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.j2config.func</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.j2config.func</h1><div class="highlight"><pre>
+<span></span>
+<span class="c1"># import fields</span>
+<span class="kn">from</span> <span class="nn">.cmn.common_fn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.addressing</span> <span class="kn">import</span> <span class="n">IPv4</span>
+
+<span class="c1"># -----------------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Common">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Common">[docs]</a>
+<span class="k">class</span> <span class="nc">Common</span><span class="p">():</span>
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">filter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+	<span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">:</span> 
+				<span class="k">yield</span> <span class="n">data</span></div>
+
+
+<span class="c1"># -----------------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Vrf">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Vrf">[docs]</a>
+<span class="k">class</span> <span class="nc">Vrf</span><span class="p">(</span><span class="n">Common</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;device vrf/instances</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		table (dict): dataframe dictionary</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		Vrf: Instance of VRF</span>
+
+<span class="sd">	Yields:</span>
+<span class="sd">		Vrf: Instance of VRF</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+
+<div class="viewcode-block" id="Vrf.vrf_not_none">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Vrf.vrf_not_none">[docs]</a>
+	<span class="k">def</span> <span class="nf">vrf_not_none</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;condition: `vrf is not None` </span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: data from Row that matches condition</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+				<span class="k">yield</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="Vrf.sorted">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Vrf.sorted">[docs]</a>
+	<span class="k">def</span> <span class="nf">sorted</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;list of available vrfs sorted by `vrf` field.</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			list: sorted vrfs</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">sorted_vrf</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span> <span class="n">_</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">]</span>  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vrf_not_none</span><span class="p">()</span> <span class="p">])</span>
+		<span class="k">return</span>  <span class="bp">self</span><span class="o">.</span><span class="n">sorted_vrf</span></div>
+
+
+<div class="viewcode-block" id="Vrf.sorted_vpnids">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Vrf.sorted_vpnids">[docs]</a>
+	<span class="k">def</span> <span class="nf">sorted_vpnids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;list of available vpnids sorted.</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			list: sorted vpnids</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">sorted_vpnids</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span> <span class="nb">int</span><span class="p">(</span><span class="n">_</span><span class="p">[</span><span class="s1">&#39;vrf_vpnid&#39;</span><span class="p">])</span>  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vrf_not_none</span><span class="p">()</span> <span class="k">if</span> <span class="n">_</span><span class="p">[</span><span class="s1">&#39;vrf_vpnid&#39;</span><span class="p">]</span> <span class="p">])</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorted_vpnids</span></div>
+
+
+<div class="viewcode-block" id="Vrf.sorted_vrf_data">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Vrf.sorted_vrf_data">[docs]</a>
+	<span class="k">def</span> <span class="nf">sorted_vrf_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;vrf data generator, sorted by vrf names</span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: data for all vrf rows except vrf is none, sorted by vrf names</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">vrf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorted_vrf</span><span class="p">:</span>
+			<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vrf_not_none</span><span class="p">():</span>
+				<span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">vrf</span><span class="p">:</span> 
+					<span class="k">yield</span> <span class="n">data</span>
+					<span class="k">break</span></div>
+
+
+<div class="viewcode-block" id="Vrf.sorted_vrf_data_by_vpnid">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Vrf.sorted_vrf_data_by_vpnid">[docs]</a>
+	<span class="k">def</span> <span class="nf">sorted_vrf_data_by_vpnid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;vrf data generator, sorted by vpnids</span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: data for all vrf rows except vrf is none, sorted by vpnids</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">vpnid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorted_vpnids</span><span class="p">:</span>
+			<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vrf_not_none</span><span class="p">():</span>
+				<span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vrf_vpnid&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;vrf_vpnid&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">vpnid</span><span class="p">:</span> 
+					<span class="k">yield</span> <span class="n">data</span>
+					<span class="k">break</span></div>
+
+
+<div class="viewcode-block" id="Vrf.vrf_get">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Vrf.vrf_get">[docs]</a>
+	<span class="k">def</span> <span class="nf">vrf_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vrf</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;get a particular vrf data</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			vrf (str): vrf name</span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: data for matching vrf row </span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vrf_not_none</span><span class="p">():</span>
+			<span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">vrf</span><span class="p">:</span> 
+				<span class="k">yield</span> <span class="n">data</span></div>
+</div>
+
+
+<span class="c1"># -----------------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Vlan">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Vlan">[docs]</a>
+<span class="k">class</span> <span class="nc">Vlan</span><span class="p">(</span><span class="n">Common</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;device Vlan/instances</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		table (dict): dataframe dictionary</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		Vlan: Instance of Vlan</span>
+
+<span class="sd">	Yields:</span>
+<span class="sd">		Vlan: Instance of Vlan</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+
+	<span class="k">def</span> <span class="nf">__vlans_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">stop</span><span class="p">:</span>
+				<span class="k">yield</span> <span class="n">data</span>
+
+	<span class="k">def</span> <span class="nf">_sorted_vl_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span>
+		<span class="n">vlans</span> <span class="o">=</span> <span class="p">[</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span> <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">stop</span> <span class="p">]</span>
+		<span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">vlans</span><span class="p">)</span>	
+
+<div class="viewcode-block" id="Vlan.vlans_sorted_range">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Vlan.vlans_sorted_range">[docs]</a>
+	<span class="k">def</span> <span class="nf">vlans_sorted_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;yields data slice(s) for the vlans matching for the provided range</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			start (int): starting vlan number</span>
+<span class="sd">			stop (int): ends vlan number</span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: of matching vlan numbers</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">vlan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sorted_vl_range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">):</span>
+			<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">stop</span><span class="p">:</span>
+					<span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">vlan</span><span class="p">:</span>
+						<span class="k">yield</span> <span class="n">data</span>
+						<span class="k">break</span></div>
+
+
+<div class="viewcode-block" id="Vlan.vlan">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Vlan.vlan">[docs]</a>
+	<span class="k">def</span> <span class="nf">vlan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;returns data slice for the matching vlan number</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			n (int): vlan number</span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: of matching vlan number</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+				<span class="k">yield</span> <span class="n">data</span>
+				<span class="k">break</span></div>
+
+
+<div class="viewcode-block" id="Vlan.of_instance">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Vlan.of_instance">[docs]</a>
+	<span class="k">def</span> <span class="nf">of_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vrf</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;yields data slice(s) for the vrf matching with `intvrf` column</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			vrf (str): vrf name</span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: of matching vrf with `intvrf`</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">data</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;intvrf&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">vrf</span><span class="p">:</span> <span class="k">yield</span> <span class="n">data</span></div>
+</div>
+
+
+<span class="c1"># -----------------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Bgp">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Bgp">[docs]</a>
+<span class="k">class</span> <span class="nc">Bgp</span><span class="p">(</span><span class="n">Common</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;device Bgp/instances</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		table (dict): dataframe dictionary</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		Bgp: Instance of Bgp</span>
+
+<span class="sd">	Yields:</span>
+<span class="sd">		Bgp: Instance of Bgp</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+
+<div class="viewcode-block" id="Bgp.vrf_not_none">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Bgp.vrf_not_none">[docs]</a>
+	<span class="k">def</span> <span class="nf">vrf_not_none</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;yields data slice(s) for the bgp information where `bgp_vrf` is not none</span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: of matching bgp details</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;bgp_vrf&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+				<span class="k">yield</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="Bgp.bgp_peers">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Bgp.bgp_peers">[docs]</a>
+	<span class="k">def</span> <span class="nf">bgp_peers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vrf</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;yields data slice(s) for the bgp information where `bgp_vrf` matches with provided vrf name</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			vrf (str): vrf name</span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: of matching bgp details</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;bgp_vrf&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">vrf</span><span class="p">:</span>
+				<span class="k">yield</span> <span class="n">data</span></div>
+</div>
+
+
+<span class="c1"># -----------------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Physical">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Physical">[docs]</a>
+<span class="k">class</span> <span class="nc">Physical</span><span class="p">(</span><span class="n">Common</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;device Physical/instances</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		table (dict): dataframe dictionary</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		Physical: Instance of Physical</span>
+
+<span class="sd">	Yields:</span>
+<span class="sd">		Physical: Instance of Physical</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+
+<div class="viewcode-block" id="Physical.sorted">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Physical.sorted">[docs]</a>
+	<span class="k">def</span> <span class="nf">sorted</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;provides list of sorted interface numbers</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			list: of interface numbers sorted</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">return</span>  <span class="nb">sorted</span><span class="p">([</span> <span class="nb">int</span><span class="p">(</span><span class="n">_</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">])</span>  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span> <span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Physical.uplinks">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Physical.uplinks">[docs]</a>
+	<span class="k">def</span> <span class="nf">uplinks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;yields data slice(s) for the physical interface information,</span>
+<span class="sd">		where `int_filter` information starts with uplink.</span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: of matching physical interfaces details</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;int_filter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;uplink&#39;</span><span class="p">):</span>
+				<span class="k">yield</span> <span class="n">data</span>		</div>
+
+
+<div class="viewcode-block" id="Physical.sorted_interfaces">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Physical.sorted_interfaces">[docs]</a>
+	<span class="k">def</span> <span class="nf">sorted_interfaces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;yields data slice(s) for the sorted physical interfaces informations</span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: sorted physical interfaces</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">intf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorted</span><span class="p">():</span>
+			<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+				<span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">intf</span><span class="p">:</span>
+					<span class="k">yield</span> <span class="n">data</span>
+					<span class="k">break</span></div>
+
+
+<div class="viewcode-block" id="Physical.interface">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Physical.interface">[docs]</a>
+	<span class="k">def</span> <span class="nf">interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;yields data slice(s) for the sorted physical interfaces informations</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			n (int): interface number</span>
+
+<span class="sd">		Yields:</span>
+<span class="sd">			data_slice: of matched interface</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;int_number&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+				<span class="k">yield</span> <span class="n">data</span>
+				<span class="k">break</span></div>
+
+
+	<span class="c1"># @staticmethod     # removed since older python not support</span>
+<div class="viewcode-block" id="Physical.interface_type">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Physical.interface_type">[docs]</a>
+	<span class="k">def</span> <span class="nf">interface_type</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">intf_type</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;condition: is provided dataslice is of given interface type</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			data (data_slice): Pandas DataFrame slice</span>
+<span class="sd">			intf_type (str): interface type to be verify</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			bool: result of condition</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;int_filter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">intf_type</span><span class="p">)</span></div>
+
+
+	<span class="c1"># @staticmethod     # removed since older python not support</span>
+<div class="viewcode-block" id="Physical.interface_type_ends">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Physical.interface_type_ends">[docs]</a>
+	<span class="k">def</span> <span class="nf">interface_type_ends</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;condition: is provided dataslice ends with given argument `x`</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			data (data_slice):  Pandas DataFrame slice</span>
+<span class="sd">			x (str): interface type ending identifier to be verify with</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			bool: result of condition</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;int_filter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+</div>
+
+
+<span class="c1"># -----------------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Aggregated">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Aggregated">[docs]</a>
+<span class="k">class</span> <span class="nc">Aggregated</span><span class="p">(</span><span class="n">Common</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;device Aggregated/instances</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		table (dict): dataframe dictionary</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		Aggregated: Instance of Aggregated</span>
+
+<span class="sd">	Yields:</span>
+<span class="sd">		Aggregated: Instance of Aggregated</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">pass</span></div>
+
+
+<span class="c1"># -----------------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Loopback">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Loopback">[docs]</a>
+<span class="k">class</span> <span class="nc">Loopback</span><span class="p">(</span><span class="n">Common</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;device Loopback/instances</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		table (dict): dataframe dictionary</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		Loopback: Instance of Loopback</span>
+
+<span class="sd">	Yields:</span>
+<span class="sd">		Loopback: Instance of Loopback</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">pass</span></div>
+
+
+<span class="c1"># -----------------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Static">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Static">[docs]</a>
+<span class="k">class</span> <span class="nc">Static</span><span class="p">(</span><span class="n">Common</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;device static</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		table (dict): dataframe dictionary</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		Static: Instance of Static</span>
+
+<span class="sd">	Yields:</span>
+<span class="sd">		Static: Instance of Static</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+
+<div class="viewcode-block" id="Static.version">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Static.version">[docs]</a>
+	<span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ver</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">ver</span><span class="p">:</span>
+				<span class="k">yield</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="Static.has_nexthop">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Static.has_nexthop">[docs]</a>
+	<span class="k">def</span> <span class="nf">has_nexthop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;next_hop&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+				<span class="k">yield</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="Static.default_route">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Static.default_route">[docs]</a>
+	<span class="k">def</span> <span class="nf">default_route</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default_route</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="p">(</span>
+				   <span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;prefix&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0.0.0.0/0&quot;</span> <span class="ow">or</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;prefix&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;::/0&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">default_route</span><span class="p">)</span>
+				<span class="ow">or</span>  <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;prefix&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;0.0.0.0/0&quot;</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;prefix&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;::/0&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">default_route</span><span class="p">)</span>
+				<span class="p">):</span>
+				<span class="k">yield</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="Static.vrf">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Static.vrf">[docs]</a>
+	<span class="k">def</span> <span class="nf">vrf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vrf</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="p">((</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">vrf</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;pfx_vrf&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">vrf</span><span class="p">)</span>
+				<span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">vrf</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;pfx_vrf&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">vrf</span><span class="p">)</span>
+				<span class="p">):</span>
+				<span class="k">yield</span> <span class="n">data</span></div>
+</div>
+
+
+<span class="c1"># -----------------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="Ospf">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Ospf">[docs]</a>
+<span class="k">class</span> <span class="nc">Ospf</span><span class="p">(</span><span class="n">Common</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;device Ospf</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		table (dict): dataframe dictionary</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		Ospf: Instance of Ospf</span>
+
+<span class="sd">	Yields:</span>
+<span class="sd">		Ospf: Instance of Ospf</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+<div class="viewcode-block" id="Ospf.vrf">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Ospf.vrf">[docs]</a>
+	<span class="k">def</span> <span class="nf">vrf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vrf</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="p">((</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">vrf</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ospf_vrf&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">vrf</span><span class="p">)</span>
+				<span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">vrf</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ospf_vrf&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">vrf</span><span class="p">)</span>
+				<span class="p">):</span>
+				<span class="k">yield</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="Ospf.area_summary_tupples">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.Ospf.area_summary_tupples">[docs]</a>
+	<span class="k">def</span> <span class="nf">area_summary_tupples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+			<span class="k">for</span> <span class="n">pfx</span><span class="p">,</span> <span class="n">area</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">str_to_list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;summary_prefixes&#39;</span><span class="p">]),</span> <span class="n">str_to_list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;summary_areas&#39;</span><span class="p">])):</span>
+				<span class="k">yield</span> <span class="n">area</span><span class="p">,</span> <span class="n">pfx</span></div>
+</div>
+
+
+
+<span class="c1"># -----------------------------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="sort">
+<a class="viewcode-back" href="../../../docs/t_doc/j2config/func.html#nettoolkit.j2config.func.sort">[docs]</a>
+<span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;exectes sorted method on provided object</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		obj (dynamic): Any object object instance declaring sorted method</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		dynamic: sorted method output from object.</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">sorted</span><span class="p">()</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

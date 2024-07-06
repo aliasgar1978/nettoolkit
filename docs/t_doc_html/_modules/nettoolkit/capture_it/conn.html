@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.capture_it.conn &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.capture_it.conn</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.capture_it.conn</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Imports</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">netmiko</span> <span class="kn">import</span> <span class="n">ConnectHandler</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.nettoolkit_common</span> <span class="kn">import</span> <span class="n">STR</span><span class="p">,</span> <span class="n">LOG</span>
+
+<span class="kn">from</span> <span class="nn">nettoolkit.detect</span> <span class="kn">import</span> <span class="n">DeviceType</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+<span class="n">BAD_CONNECTION_MSG</span> <span class="o">=</span> <span class="s1">&#39;: BAD CONNECTION DETECTED, TEARED DOWN&#39;</span>
+<span class="n">cisco_banner</span> <span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">! ---------------------------------------------------------------------------- !</span>
+<span class="s2">! This output is generated using Nettoolkit utility.</span>
+<span class="s2">! Script written by : Aliasgar Hozaifa Lokhandwala (aholo2000@gmail.com)</span>
+<span class="s2">! Write an email if any errors found.</span>
+<span class="s2">! ---------------------------------------------------------------------------- !</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">juniper_banner</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"># ---------------------------------------------------------------------------- #</span>
+<span class="s2"># This output is generated using Nettoolkit utility.</span>
+<span class="s2"># Script written by : Aliasgar Hozaifa Lokhandwala (aholo2000@gmail.com)</span>
+<span class="s2"># Write an email if any errors found.</span>
+<span class="s2"># ---------------------------------------------------------------------------- #</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># connection Object (2nd Connection)</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="conn">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/conn.html#nettoolkit.capture_it.conn.conn">[docs]</a>
+<span class="k">class</span> <span class="nc">conn</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Initiate an active connection.  </span>
+<span class="sd">	use it with context manager to execute necessary commands on to it.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		ip (str): ip address of device to establish ssh connection with</span>
+<span class="sd">		un (str): username to login to device</span>
+<span class="sd">		pw (str): user password to login to device</span>
+<span class="sd">		en (str): enable password (For cisco)</span>
+<span class="sd">		delay_factor (int): connection stability factor</span>
+<span class="sd">		devtype (str, optional): device type from DeviceType class. Defaults to &#39;&#39;.</span>
+<span class="sd">		hostname (str, optional): hostname of device ( if known ). Defaults to &#39;&#39;.</span>
+
+<span class="sd">	Properties:</span>
+<span class="sd">		hn (str): hostname</span>
+<span class="sd">		devvar (dict) : {&#39;ip&#39;:ip, &#39;host&#39;:hostname}</span>
+<span class="sd">		devtype (str) : device type (&#39;cisco_ios&#39;, &#39;arista_eos&#39;, &#39;juniper_junos&#39;)</span>
+<span class="sd">	&quot;&quot;&quot;</span>    	
+	<span class="c1"># Connection Initializer</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+		<span class="n">ip</span><span class="p">,</span> 
+		<span class="n">un</span><span class="p">,</span> 
+		<span class="n">pw</span><span class="p">,</span> 
+		<span class="n">en</span><span class="p">,</span> 
+		<span class="n">delay_factor</span><span class="p">,</span> 
+		<span class="n">devtype</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+		<span class="n">hostname</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+		<span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">conn_time_stamp</span> <span class="o">=</span> <span class="n">LOG</span><span class="o">.</span><span class="n">time_stamp</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_devtype</span> <span class="o">=</span> <span class="n">devtype</span> 						<span class="c1"># eg. cisco_ios</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ip&#39;</span><span class="p">:</span> <span class="n">ip</span><span class="p">,</span> <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">hostname</span> <span class="p">}</span>	<span class="c1"># device variables</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">__set_local_var</span><span class="p">(</span><span class="n">un</span><span class="p">,</span> <span class="n">pw</span><span class="p">,</span> <span class="n">en</span><span class="p">)</span>				<span class="c1"># setting </span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">banner</span> <span class="o">=</span> <span class="n">juniper_banner</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">devtype</span> <span class="o">==</span> <span class="s1">&#39;juniper_junos&#39;</span> <span class="k">else</span> <span class="n">cisco_banner</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">delay_factor</span> <span class="o">=</span> <span class="n">delay_factor</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">clsString</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Device Connection: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">devtype</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s2">&quot;host&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">__connect</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">devvar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span>
+
+	<span class="c1"># context load</span>
+	<span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">connectionsuccess</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">__set_hostname</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">clsString</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Device Connection: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">devtype</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s2">&quot;ip&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s2">&quot;host&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - conn - entered - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">clsString</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - conn - entery - failed&quot;</span><span class="p">)</span>
+		<span class="k">return</span> <span class="bp">self</span>      <span class="c1"># ip connection object</span>
+
+	<span class="c1"># cotext end</span>
+	<span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">tb</span><span class="p">):</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> : INFO : conn - terminate - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">clsString</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - conn - terminate - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">clsString</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">__terminate</span>
+		<span class="k">if</span> <span class="n">exc_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">traceback</span><span class="o">.</span><span class="n">print_exception</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">tb</span><span class="p">)</span>
+
+	<span class="c1"># representation of connection</span>
+	<span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clsString</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">clsStr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clsString</span>
+	<span class="nd">@clsStr</span><span class="o">.</span><span class="n">setter</span>
+	<span class="k">def</span> <span class="nf">clsStr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">clsString</span> <span class="o">=</span> <span class="n">s</span>
+
+	<span class="c1"># RETURN --- &gt; DEVICETYPE</span>
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">devtype</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;device type</span>
+<span class="sd">		* &#39;cisco&#39;: &#39;cisco_ios&#39;,</span>
+<span class="sd">		* &#39;arista&#39;: &#39;arista_eos&#39;,</span>
+<span class="sd">		* &#39;juniper&#39;: &#39;juniper_junos&#39;</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			str: device type</span>
+<span class="sd">		&quot;&quot;&quot;</span>    
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_devtype</span>
+
+	<span class="c1"># RETURN --- &gt; DEVICE HOSTNAME</span>
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">hn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;device hostname</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			str: device hostname</span>
+<span class="sd">		&quot;&quot;&quot;</span>    
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+	<span class="c1"># set connection var|properties</span>
+	<span class="k">def</span> <span class="nf">__set_local_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">un</span><span class="p">,</span> <span class="n">pw</span><span class="p">,</span> <span class="n">en</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&#39;&#39;&#39;Inherit User Variables&#39;&#39;&#39;</span>
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - conn - setting up auth parameters&quot;</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">un</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pw</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;secret&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">en</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_devtype</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_devtype</span> <span class="o">=</span> <span class="n">DeviceType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">],</span> 
+				<span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">],</span>
+				<span class="p">)</span><span class="o">.</span><span class="n">device_type</span> 
+		<span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;device_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_devtype</span>
+
+	<span class="c1"># establish connection</span>
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">__connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - conn - start ConnectHandler&quot;</span><span class="p">)</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">net_connect</span> <span class="o">=</span> <span class="n">ConnectHandler</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">)</span> 
+			<span class="bp">self</span><span class="o">.</span><span class="n">connectionsuccess</span> <span class="o">=</span> <span class="kc">True</span>			
+		<span class="k">except</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">connectionsuccess</span> <span class="o">=</span> <span class="kc">False</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">connectionsuccess</span><span class="p">:</span> <span class="k">return</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STR</span><span class="o">.</span><span class="n">hostname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net_connect</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_hn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span>
+		<span class="k">if</span> <span class="nb">any</span><span class="p">(</span> <span class="p">[</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;device_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;cisco_ios&#39;</span>
+			<span class="p">]</span> <span class="p">):</span>
+			<span class="k">for</span> <span class="n">tries</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+				<span class="k">try</span><span class="p">:</span>
+					<span class="bp">self</span><span class="o">.</span><span class="n">net_connect</span><span class="o">.</span><span class="n">enable</span><span class="p">(</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;enable&quot;</span><span class="p">)</span>
+					<span class="k">break</span>
+				<span class="k">except</span><span class="p">:</span>
+					<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - enable failed on attemp </span><span class="si">{</span><span class="n">tries</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+					<span class="k">continue</span>
+
+	<span class="c1"># set connection hostname property</span>
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">__set_hostname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_devvar</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">STR</span><span class="o">.</span><span class="n">hostname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net_connect</span><span class="p">)</span>
+
+	<span class="c1"># terminate/disconnect session</span>
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">__terminate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">net_connect</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="k">pass</span></div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.facts_finder.mergers.common &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.facts_finder.mergers.common</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.facts_finder.mergers.common</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># from nettoolkit import *</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.facts_finder.commons.common</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="c1"># ========================================================================================</span>
+
+<div class="viewcode-block" id="remove_duplicates">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.remove_duplicates">[docs]</a>
+<span class="k">def</span> <span class="nf">remove_duplicates</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">cols</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;removes the duplicated _x, _y columns for the given list of columns. Remove duplicate columns as given in additional keyword arguments cols </span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		df (DataFrame): Pandas DataFrame</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		DataFrame: updated DataFrame</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="n">duplicated_cols</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="o">+</span><span class="s2">&quot;_x&quot;</span><span class="p">:</span> <span class="n">col</span><span class="o">+</span><span class="s2">&quot;_y&quot;</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">}</span>
+	<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">duplicated_cols</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+		<span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">y</span><span class="p">]):</span>
+			<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">!=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">y</span><span class="p">])</span> 
+			<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="n">x</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+		<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="split_to_multiple_tabs">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.split_to_multiple_tabs">[docs]</a>
+<span class="k">def</span> <span class="nf">split_to_multiple_tabs</span><span class="p">(</span><span class="n">pdf</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;splits dataframe to multiple tabs group by `filter` column</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		pdf (DataFrame): Pandas DataFrame</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		DataFrame: updated DataFrame</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="n">set_of_filters</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">pdf</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">])</span>
+	<span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">set_of_filters</span><span class="p">:</span>
+		<span class="n">df</span> <span class="o">=</span> <span class="n">pdf</span><span class="p">[</span> <span class="n">pdf</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">f</span> <span class="p">]</span>
+		<span class="n">d</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>		
+	<span class="n">pdf</span> <span class="o">=</span> <span class="n">d</span>
+	<span class="k">return</span> <span class="n">pdf</span></div>
+
+
+
+
+<span class="c1"># ========================================================================================</span>
+
+<div class="viewcode-block" id="Merged">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.Merged">[docs]</a>
+<span class="k">class</span> <span class="nc">Merged</span><span class="p">:</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Common class defining general methods for mergers of generator and modifiers</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		fg (generator object): Facts generator object from generators</span>
+<span class="sd">		capture_tfsm_file (str): file name of configuration capture </span>
+<span class="sd">		use_cdp (bool): defines for cisco use cdp neighbors or not. Some cases where lldp is disabled using cdp to identify neighbors.</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fg</span><span class="p">,</span> <span class="n">capture_tfsm_file</span><span class="p">,</span> <span class="n">use_cdp</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;object initializer</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">Fg</span> <span class="o">=</span> <span class="n">fg</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">capture_tfsm_file</span> <span class="o">=</span> <span class="n">capture_tfsm_file</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">use_cdp</span> <span class="o">=</span> <span class="n">use_cdp</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">merged_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+	<span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">merged_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="k">yield</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span>
+
+	<span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">merged_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+
+	<span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">item</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">merged_dict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="Merged.merge_and_drop_empty_filter_rows">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.Merged.merge_and_drop_empty_filter_rows">[docs]</a>
+	<span class="k">def</span> <span class="nf">merge_and_drop_empty_filter_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fg_df</span><span class="p">,</span> <span class="n">fm_df</span><span class="p">,</span> <span class="n">merge_on</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;merges generator and modifier dataframes and drops empty rows for data where no filter value assigned.</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			fg_df (DataFrame): generator DataFrame</span>
+<span class="sd">			fm_df (DataFrame): modifier DataFrame</span>
+<span class="sd">			merge_on (str, list): column(s) on which merge to happen</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			DataFrame: merged DataFrame</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">if</span> <span class="n">merge_on</span> <span class="ow">in</span> <span class="n">fg_df</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">merge_on</span> <span class="ow">in</span> <span class="n">fm_df</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+			<span class="n">pdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span> <span class="n">fm_df</span><span class="p">,</span> <span class="n">fg_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="n">merge_on</span><span class="p">,],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>		<span class="c1">## merged dataframe</span>
+			<span class="k">return</span> <span class="n">pdf</span>
+		<span class="k">elif</span> <span class="n">merge_on</span> <span class="ow">in</span> <span class="n">fg_df</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">merge_on</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fm_df</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+			<span class="k">return</span> <span class="n">fg_df</span>
+		<span class="k">elif</span> <span class="n">merge_on</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fg_df</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">merge_on</span> <span class="ow">in</span> <span class="n">fm_df</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+			<span class="k">return</span> <span class="n">fm_df</span></div>
+
+		
+
+<div class="viewcode-block" id="Merged.merged_interfaces_dataframe">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.Merged.merged_interfaces_dataframe">[docs]</a>
+	<span class="k">def</span> <span class="nf">merged_interfaces_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;merges Interfaces generator and modifier dataframes and drops empty rows for data where no filter value assigned.</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">interface_types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_dict</span><span class="p">[</span><span class="s1">&#39;tables&#39;</span><span class="p">][</span><span class="s1">&#39;filter&#39;</span><span class="p">])</span>
+		<span class="k">for</span> <span class="n">int_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_types</span><span class="p">:</span>
+			<span class="n">fg_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fg</span><span class="p">[</span><span class="n">int_type</span><span class="p">]</span>
+			<span class="n">fm_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_dict</span><span class="p">[</span><span class="s1">&#39;tables&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_dict</span><span class="p">[</span><span class="s1">&#39;tables&#39;</span><span class="p">][</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">int_type</span><span class="p">]</span>
+			<span class="n">pdf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_and_drop_empty_filter_rows</span><span class="p">(</span><span class="n">fg_df</span><span class="p">,</span> <span class="n">fm_df</span><span class="p">,</span> <span class="s1">&#39;interface&#39;</span><span class="p">)</span>
+			<span class="bp">self</span><span class="p">[</span><span class="n">int_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">pdf</span></div>
+
+
+<div class="viewcode-block" id="Merged.merged_vrfs_dataframe">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.Merged.merged_vrfs_dataframe">[docs]</a>
+	<span class="k">def</span> <span class="nf">merged_vrfs_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;merges vrf generator and modifier dataframes and drops empty rows for data where no filter value assigned.</span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="n">fg_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fg</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>									<span class="c1">## facts-gen dataframe</span>
+		<span class="n">fm_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_dict</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">]</span>											<span class="c1">## facts-modifier dataframe</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">fg_vrf_df</span> <span class="o">=</span> <span class="n">fg_df</span>
+		<span class="n">pdf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_and_drop_empty_filter_rows</span><span class="p">(</span><span class="n">fg_df</span><span class="p">,</span> <span class="n">fm_df</span><span class="p">,</span> <span class="s1">&#39;vrf&#39;</span><span class="p">)</span>
+		<span class="n">pdf</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">pdf</span><span class="p">[</span><span class="n">pdf</span><span class="p">[</span><span class="s2">&quot;vrf&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Mgmt-vrf&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>	<span class="c1">## Remove row with management vrfs ( add more description for mgmt vrf )</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">vrf_df</span> <span class="o">=</span> <span class="n">pdf</span>
+		<span class="bp">self</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pdf</span></div>
+
+
+<div class="viewcode-block" id="Merged.merged_var_dataframe">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.Merged.merged_var_dataframe">[docs]</a>
+	<span class="k">def</span> <span class="nf">merged_var_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;merges system/var generator and modifier dataframes and drops empty rows for data where no filter value assigned.</span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="n">fg_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fg</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>									<span class="c1">## facts-gen dataframe</span>
+		<span class="n">fm_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdf_dict</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">]</span>											<span class="c1">## facts-modifier dataframe</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">fg_var_df</span> <span class="o">=</span> <span class="n">fg_df</span>
+		<span class="n">pdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span> <span class="n">fm_df</span><span class="p">,</span> <span class="n">fg_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">,],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>		<span class="c1">## merged dataframe	</span>
+		<span class="n">pdf</span> <span class="o">=</span> <span class="n">remove_duplicates</span><span class="p">(</span><span class="n">pdf</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">)</span>
+		<span class="n">pdf</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">var_df</span> <span class="o">=</span> <span class="n">pdf</span>
+		<span class="bp">self</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pdf</span></div>
+
+
+<div class="viewcode-block" id="Merged.bgp_dataframe">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.Merged.bgp_dataframe">[docs]</a>
+	<span class="k">def</span> <span class="nf">bgp_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;merges bgp generator and modifier dataframes and drops empty rows for data where no filter value assigned.</span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="n">fg_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fg</span><span class="p">[</span><span class="s1">&#39;bgp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">fg_bgp_df</span> <span class="o">=</span> <span class="n">fg_df</span>
+		<span class="n">fg_df</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;bgp&#39;</span>
+		<span class="bp">self</span><span class="p">[</span><span class="s1">&#39;bgp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fg_df</span></div>
+
+
+<div class="viewcode-block" id="Merged.ospf_dataframe">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.Merged.ospf_dataframe">[docs]</a>
+	<span class="k">def</span> <span class="nf">ospf_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;merges ospf generator and modifier dataframes and drops empty rows for data where no filter value assigned.</span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="n">fg_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fg</span><span class="p">[</span><span class="s1">&#39;ospf&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">fg_ospf_df</span> <span class="o">=</span> <span class="n">fg_df</span>
+		<span class="n">fg_df</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ospf&#39;</span>
+		<span class="bp">self</span><span class="p">[</span><span class="s1">&#39;ospf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fg_df</span></div>
+
+
+<div class="viewcode-block" id="Merged.static_dataframe">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.Merged.static_dataframe">[docs]</a>
+	<span class="k">def</span> <span class="nf">static_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;merges static generator and modifier dataframes and drops empty rows for data where no filter value assigned.</span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="n">fg_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Fg</span><span class="p">[</span><span class="s1">&#39;static&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">fg_ospf_df</span> <span class="o">=</span> <span class="n">fg_df</span>
+		<span class="n">fg_df</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;static&#39;</span>
+		<span class="bp">self</span><span class="p">[</span><span class="s1">&#39;static&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fg_df</span></div>
+
+
+<div class="viewcode-block" id="Merged.split_interface_dataframe">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.Merged.split_interface_dataframe">[docs]</a>
+	<span class="k">def</span> <span class="nf">split_interface_dataframe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;splits interface dataframe in to multiple tabs.</span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="Merged.generate_interface_numbers">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.Merged.generate_interface_numbers">[docs]</a>
+	<span class="k">def</span> <span class="nf">generate_interface_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;generates interface number for each interfaces </span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">int_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_types</span><span class="p">:</span>
+			<span class="n">generate_int_number</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">int_type</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Merged.add_filters">
+<a class="viewcode-back" href="../../../../docs/t_doc/facts_finder/mergers.html#nettoolkit.facts_finder.mergers.common.Merged.add_filters">[docs]</a>
+	<span class="k">def</span> <span class="nf">add_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;add filter column to each dataframe except &#39;var&#39;</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">sheet</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span>  <span class="bp">self</span><span class="p">:</span>
+			<span class="k">if</span> <span class="n">sheet</span> <span class="o">==</span> <span class="s1">&#39;var&#39;</span><span class="p">:</span> <span class="k">continue</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;filter&#39;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+				<span class="n">df</span><span class="p">[</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sheet</span></div>
+
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">hostname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;self device property (hostname) from var tab</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			str: hostname of device</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">try</span><span class="p">:</span>
+			<span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">var_df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">var_df</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;hostname&#39;</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

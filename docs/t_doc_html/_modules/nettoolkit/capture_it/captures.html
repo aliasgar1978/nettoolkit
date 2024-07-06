@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.capture_it.captures &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.capture_it.captures</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.capture_it.captures</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Imports</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.nettoolkit_db</span> <span class="kn">import</span> <span class="n">append_to_xl</span>
+	
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">juniper_add_no_more</span>
+<span class="kn">from</span> <span class="nn">.clp</span> <span class="kn">import</span> <span class="n">CLP</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<span class="c1"># Captures Class</span>
+<span class="c1"># -----------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="Captures">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/captures.html#nettoolkit.capture_it.captures.Captures">[docs]</a>
+<span class="k">class</span> <span class="nc">Captures</span><span class="p">(</span><span class="n">CLP</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Capture output </span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		dtype (str): device type</span>
+<span class="sd">		conn (conn): connection object</span>
+<span class="sd">		cmds (dict, set, list, tuple): set of commands or commands dictionary </span>
+<span class="sd">		cumulative (bool, optional): True/False/both. Defaults to False.</span>
+<span class="sd">		parsed_output(bool): Need to parse output and generate excel or not.</span>
+
+<span class="sd">	Inherits:</span>
+<span class="sd">		CLP (class): Command Line Processing class</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>    	
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+		<span class="n">conn</span><span class="p">,</span> 
+		<span class="n">cumulative</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+		<span class="n">parsed_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+		<span class="n">append_capture</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+		<span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;Initiate captures</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			conn (conn): connection object</span>
+<span class="sd">			path (str): path to store the captured output</span>
+<span class="sd">			visual_progress (int): scale 0 to 10. 0 being no output, 10 all.</span>
+<span class="sd">			logger(list): device logging messages list</span>
+<span class="sd">			cumulative (bool, optional): True/False/both. Defaults to False.</span>
+<span class="sd">			parsed_output(bool): Need to parse output and generate excel or not.</span>
+<span class="sd">			append_capture(bool): Appends commands output to an existing capture file, instead of creating a new.</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="c1"># self.logger_list = logger_list</span>
+		<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">parsed_output</span><span class="p">)</span>    <span class="c1"># , visual_progress, logger_list)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span> <span class="o">=</span> <span class="n">cumulative</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cumulative_filename</span> <span class="o">=</span> <span class="kc">None</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">del_old_file</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">append_capture</span>
+
+
+<div class="viewcode-block" id="Captures.grp_cmd_capture">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/captures.html#nettoolkit.capture_it.captures.Captures.grp_cmd_capture">[docs]</a>
+	<span class="k">def</span> <span class="nf">grp_cmd_capture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmds</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;grep the command captures for each commands	</span>
+<span class="sd">		Unauthorized command will halt execution.</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			cmds (set, list, tuple): set of commands</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			None: None</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="n">banner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">banner</span>
+		<span class="c1">#</span>
+		<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cmds</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+			<span class="n">commands</span> <span class="o">=</span> <span class="n">cmds</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">dev_type</span><span class="p">]</span> 
+		<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cmds</span><span class="p">,</span> <span class="p">(</span><span class="nb">set</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+			<span class="n">commands</span> <span class="o">=</span> <span class="n">cmds</span> 
+		<span class="c1">#</span>
+		<span class="k">for</span> <span class="n">cmd</span>  <span class="ow">in</span> <span class="n">commands</span><span class="p">:</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_config_authorization</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span> 
+				<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CRIT : UnAuthorizedCommandDetected-</span><span class="si">{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">-EXECUTIONHALTED&quot;</span><span class="p">)</span>
+				<span class="k">return</span> <span class="kc">None</span>
+
+			<span class="c1"># if juniper update no-more if unavailable.</span>
+			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">dev_type</span> <span class="o">==</span> <span class="s1">&#39;juniper_junos&#39;</span><span class="p">:</span> 
+				<span class="n">cmd</span> <span class="o">=</span> <span class="n">juniper_add_no_more</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+			<span class="c1">#</span>
+			<span class="n">cc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmd_capture</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cumulative</span><span class="p">,</span> <span class="n">banner</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">del_old_file</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">del_old_file</span> <span class="o">=</span> <span class="kc">False</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="n">output</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">output</span>
+			<span class="k">except</span><span class="p">:</span>
+				<span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;: ERROR: Error executing command </span><span class="si">{</span><span class="n">cmd</span><span class="si">}</span><span class="s2">&quot;</span>
+			<span class="n">cmd_line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hn</span> <span class="o">+</span> <span class="s2">&quot;&gt;&quot;</span> <span class="o">+</span> <span class="n">cmd</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">op</span> <span class="o">+=</span> <span class="n">cmd_line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">output</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+			<span class="n">banner</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Captures.add_exec_logs">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/captures.html#nettoolkit.capture_it.captures.Captures.add_exec_logs">[docs]</a>
+	<span class="k">def</span> <span class="nf">add_exec_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;adds commands execution `logs` tab to DataFrame</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="c1"># self.logger_list.append(msg)                                 ## Removed</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">parsed_cmd_df</span><span class="p">[</span><span class="s1">&#39;logs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmd_exec_logs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Captures.write_facts">
+<a class="viewcode-back" href="../../../docs/t_doc/capture_it/captures.html#nettoolkit.capture_it.captures.Captures.write_facts">[docs]</a>
+	<span class="k">def</span> <span class="nf">write_facts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;writes commands facts in to excel tab</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="n">xl_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">output_path</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">hn</span> <span class="o">+</span> <span class="s2">&quot;.xlsx&quot;</span>
+			<span class="n">append_to_xl</span><span class="p">(</span><span class="n">xl_file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parsed_cmd_df</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">hn</span><span class="si">}</span><span class="s2"> : INFO :writing facts to excel: </span><span class="si">{</span><span class="n">xl_file</span><span class="si">}</span><span class="s2">...Success!&quot;</span><span class="p">)</span>
+		<span class="k">except</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">hn</span><span class="si">}</span><span class="s2"> : ERROR: writing facts to excel: </span><span class="si">{</span><span class="n">xl_file</span><span class="si">}</span><span class="s2">...failed!&quot;</span><span class="p">)</span>
+
+		<span class="k">return</span> <span class="n">xl_file</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

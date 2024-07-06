@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.32. Cisco Modifier - table &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="5.37. Juniper Modifier - table" href="modifiers_juniper.html" />
+    <link rel="prev" title="5.20. juniper parser - arp" href="parsers_juniper.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_doc.html">5. facts-finder</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="facts_gen.html">5.1. facts_gen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_cisco.html">5.2. generators_cisco</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_juniper.html">5.3. generators_juniper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html">5.4. generator common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html#module-nettoolkit.facts_finder.generators.cisco.common">5.5. cisco generator common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generators_common.html#module-nettoolkit.facts_finder.generators.juniper.common">5.6. juniper generator common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html">5.7. cisco parser - arp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_bgp">5.8. cisco parser - bgp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_cdp">5.9. cisco parser - cdp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_description">5.10. cisco parser - if description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_int_status">5.11. cisco parser - if status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_lldp">5.12. cisco parser - lldp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_mac_table">5.13. cisco parser - mac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_ospf">5.14. cisco parser - ospf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_interfaces">5.15. cisco parser - interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_routes">5.16. cisco parser - routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_system">5.17. cisco parser - sys_info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_running_vrfs">5.18. cisco parser - vrf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_cisco.html#module-nettoolkit.facts_finder.generators.cisco._cmd_parse_version">5.19. cisco parser - version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html">5.20. juniper parser - arp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_chassis_hardware">5.21. juniper parser - hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_int_description">5.22. juniper parser - if description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_lldp">5.23. juniper parser - lldp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_bgp">5.24. juniper parser - bgp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_interfaces">5.25. juniper parser - interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_ospf">5.26. juniper parser - ospf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routes">5.27. juniper parser - routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_routing_instances">5.28. juniper parser - bgp instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running_system">5.29. juniper parser - system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_running">5.30. juniper parser - configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers_juniper.html#module-nettoolkit.facts_finder.generators.juniper._cmd_parse_version">5.31. juniper parser - version</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.32. Cisco Modifier - table</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco"><code class="docutils literal notranslate"><span class="pre">TableInterfaceCisco</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.merge_interface_data"><code class="docutils literal notranslate"><span class="pre">TableInterfaceCisco.merge_interface_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.po_to_interface"><code class="docutils literal notranslate"><span class="pre">TableInterfaceCisco.po_to_interface()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.remove_duplicates"><code class="docutils literal notranslate"><span class="pre">TableInterfaceCisco.remove_duplicates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.update_functional_cols"><code class="docutils literal notranslate"><span class="pre">TableInterfaceCisco.update_functional_cols()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.update_intf_vrf"><code class="docutils literal notranslate"><span class="pre">TableInterfaceCisco.update_intf_vrf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.update_neighbor_intf"><code class="docutils literal notranslate"><span class="pre">TableInterfaceCisco.update_neighbor_intf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.filter_col"><code class="docutils literal notranslate"><span class="pre">filter_col()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.h4block"><code class="docutils literal notranslate"><span class="pre">h4block()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.interface_mode"><code class="docutils literal notranslate"><span class="pre">interface_mode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.intvrf_update"><code class="docutils literal notranslate"><span class="pre">intvrf_update()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.nbr_hostname"><code class="docutils literal notranslate"><span class="pre">nbr_hostname()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.subnet"><code class="docutils literal notranslate"><span class="pre">subnet()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.vlan_members"><code class="docutils literal notranslate"><span class="pre">vlan_members()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.modifiers.cisco.cisco_var">5.33. Cisco Modifier - var</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_var.VarCisco"><code class="docutils literal notranslate"><span class="pre">VarCisco</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_var.VarCisco.update_ipv6_hext2_3"><code class="docutils literal notranslate"><span class="pre">VarCisco.update_ipv6_hext2_3()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.modifiers.cisco.cisco_vrfs">5.34. Cisco Modifier - vrf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_vrfs.TableVrfsCisco"><code class="docutils literal notranslate"><span class="pre">TableVrfsCisco</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.modifiers.cisco.merger">5.35. Cisco - merger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.merger.cisco_modifier"><code class="docutils literal notranslate"><span class="pre">cisco_modifier()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.facts_finder.modifiers.cisco.merger.get_cmd_list_cisco"><code class="docutils literal notranslate"><span class="pre">get_cmd_list_cisco()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-nettoolkit.facts_finder.modifiers.cisco.commands.cmd_dict">5.36. Cisco - commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html">5.37. Juniper Modifier - table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.juniper_var">5.38. Juniper Modifier - var</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.merger">5.39. Juniper Modifier - merger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_juniper.html#module-nettoolkit.facts_finder.modifiers.juniper.commands.cmd_dict">5.40. Juniper Modifier - commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifiers_common.html">5.41. modifiers_common</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mergers.html">5.42. mergers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rearrange.html">5.43. rearrange</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tech_doc.html"><span class="section-number">5. </span>Facts-Finder API documentation!</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5.32. </span>Cisco Modifier - table</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/t_doc/facts_finder/modifiers_cisco.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nettoolkit.facts_finder.modifiers.cisco.cisco_tables">
+<span id="cisco-modifier-table"></span><h1><span class="section-number">5.32. </span>Cisco Modifier - table<a class="headerlink" href="#module-nettoolkit.facts_finder.modifiers.cisco.cisco_tables" title="Link to this heading"></a></h1>
+<p>cisco tables modifiers</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.cisco_tables.</span></span><span class="sig-name descname"><span class="pre">TableInterfaceCisco</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capture</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_cdp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#TableInterfaceCisco"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="modifiers_common.html#nettoolkit.facts_finder.modifiers.commons.modifier_commons.DataFrameInit" title="nettoolkit.facts_finder.modifiers.commons.modifier_commons.DataFrameInit"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrameInit</span></code></a>, <a class="reference internal" href="modifiers_common.html#nettoolkit.facts_finder.modifiers.commons.modifier_commons.TableInterfaces" title="nettoolkit.facts_finder.modifiers.commons.modifier_commons.TableInterfaces"><code class="xref py py-class docutils literal notranslate"><span class="pre">TableInterfaces</span></code></a></p>
+<p>Cisco Database Tables Object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>capture</strong> (<em>str</em>) – configuration capture log file</p></li>
+<li><p><strong>cmd_lst</strong> (<em>list</em><em>, </em><em>optional</em>) – cisco capture command list. Defaults to None.</p></li>
+<li><p><strong>use_cdp</strong> (<em>bool</em><em>, </em><em>optional</em>) – use cdp neighbors (overrides lldp neighbor). Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Inherits:</dt><dd><p>DataFrameInit (cls): DataFrameInit
+TableInterfaces (cls): TableInterfaces</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.merge_interface_data">
+<span class="sig-name descname"><span class="pre">merge_interface_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#TableInterfaceCisco.merge_interface_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.merge_interface_data" title="Link to this definition"></a></dt>
+<dd><p>merges interface related data frames from the parsed excel sheet command output
+which was originated from capture_it along with ntctemplate.
+DataFrame: A single pandas dataframe clubbed with all interface related details.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.po_to_interface">
+<span class="sig-name descname"><span class="pre">po_to_interface</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#TableInterfaceCisco.po_to_interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.po_to_interface" title="Link to this definition"></a></dt>
+<dd><p>add port channel number to member interfaces</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.remove_duplicates">
+<span class="sig-name descname"><span class="pre">remove_duplicates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#TableInterfaceCisco.remove_duplicates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.remove_duplicates" title="Link to this definition"></a></dt>
+<dd><p>merges the duplicate columns _x, _y generated during dataframe merge, and removes extra column.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.update_functional_cols">
+<span class="sig-name descname"><span class="pre">update_functional_cols</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#TableInterfaceCisco.update_functional_cols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.update_functional_cols" title="Link to this definition"></a></dt>
+<dd><p>update functional columns values</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.update_intf_vrf">
+<span class="sig-name descname"><span class="pre">update_intf_vrf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#TableInterfaceCisco.update_intf_vrf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.update_intf_vrf" title="Link to this definition"></a></dt>
+<dd><p>update the interface vrf column (if any) by removing management vrfs</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.update_neighbor_intf">
+<span class="sig-name descname"><span class="pre">update_neighbor_intf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#TableInterfaceCisco.update_neighbor_intf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.TableInterfaceCisco.update_neighbor_intf" title="Link to this definition"></a></dt>
+<dd><p>standardize neighbor interface length</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.filter_col">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.cisco_tables.</span></span><span class="sig-name descname"><span class="pre">filter_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filtercol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#filter_col"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.filter_col" title="Link to this definition"></a></dt>
+<dd><p>check for the interface type column and maps it with well known interface type filters
+Growable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filtercol</strong> (<em>str</em>) – interface type filter column name (key)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>corresponding standard mapped value for interface type</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.h4block">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.cisco_tables.</span></span><span class="sig-name descname"><span class="pre">h4block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ipv6addr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#h4block"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.h4block" title="Link to this definition"></a></dt>
+<dd><p>check for the ipv6 string(s) and from the address returns either 4th or 7th block</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ipv6addr</strong> (<em>list</em><em>, </em><em>set</em><em>, </em><em>tuple</em>) – list of IPV6 address strings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>4th &gt; 7th octet &gt; Growable</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.interface_mode">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.cisco_tables.</span></span><span class="sig-name descname"><span class="pre">interface_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#interface_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.interface_mode" title="Link to this definition"></a></dt>
+<dd><p>check for the mode string if it is starting with trunk/access. returns appropriate mode accordingly</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mode</strong> (<em>str</em>) – interface mode type string (trunk, access)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>interface mode calculated</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.intvrf_update">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.cisco_tables.</span></span><span class="sig-name descname"><span class="pre">intvrf_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#intvrf_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.intvrf_update" title="Link to this definition"></a></dt>
+<dd><p>get the vrf name except management vrfs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vrf</strong> (<em>str</em>) – vrf name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>vrf name if not management vrf</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.nbr_hostname">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.cisco_tables.</span></span><span class="sig-name descname"><span class="pre">nbr_hostname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#nbr_hostname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.nbr_hostname" title="Link to this definition"></a></dt>
+<dd><p>neighbour hostname split by domain and return striped hostname</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>hn</strong> (<em>str</em>) – hostname string full dns</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>hostname trunkated</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.subnet">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.cisco_tables.</span></span><span class="sig-name descname"><span class="pre">subnet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#subnet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.subnet" title="Link to this definition"></a></dt>
+<dd><p>get the subnet/network ip detail for the interface ip address</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>addr</strong> (<em>str</em>) – ipv4 address/subnet string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>network address</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_tables.vlan_members">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.cisco_tables.</span></span><span class="sig-name descname"><span class="pre">vlan_members</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">members</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_tables.html#vlan_members"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_tables.vlan_members" title="Link to this definition"></a></dt>
+<dd><p>check for the given vlan members and returns vlan numbers separated by comma.  will return no string if default/all</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>members</strong> (<em>str</em>) – vlan members string</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated members string</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.modifiers.cisco.cisco_var">
+<span id="cisco-modifier-var"></span><h1><span class="section-number">5.33. </span>Cisco Modifier - var<a class="headerlink" href="#module-nettoolkit.facts_finder.modifiers.cisco.cisco_var" title="Link to this heading"></a></h1>
+<p>cisco var modifiers</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_var.VarCisco">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.cisco_var.</span></span><span class="sig-name descname"><span class="pre">VarCisco</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capture</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_var.html#VarCisco"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_var.VarCisco" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="modifiers_common.html#nettoolkit.facts_finder.modifiers.commons.modifier_commons.DataFrameInit" title="nettoolkit.facts_finder.modifiers.commons.modifier_commons.DataFrameInit"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrameInit</span></code></a>, <a class="reference internal" href="modifiers_common.html#nettoolkit.facts_finder.modifiers.commons.modifier_commons.Var" title="nettoolkit.facts_finder.modifiers.commons.modifier_commons.Var"><code class="xref py py-class docutils literal notranslate"><span class="pre">Var</span></code></a></p>
+<p>Cisco  Var  Databse</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>capture</strong> (<em>str</em>) – configuration capture file</p></li>
+<li><p><strong>cmd_lst</strong> (<em>list</em><em>, </em><em>optional</em>) – capture commands list . Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Inherits:</dt><dd><p>DataFrameInit (cls): DataFrameInit
+Var (cls): Var</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_var.VarCisco.update_ipv6_hext2_3">
+<span class="sig-name descname"><span class="pre">update_ipv6_hext2_3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_var.html#VarCisco.update_ipv6_hext2_3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_var.VarCisco.update_ipv6_hext2_3" title="Link to this definition"></a></dt>
+<dd><p>updates the hextate 2 and hextate 3 value from an ipv6 interface.
+first interface match will be considered.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.modifiers.cisco.cisco_vrfs">
+<span id="cisco-modifier-vrf"></span><h1><span class="section-number">5.34. </span>Cisco Modifier - vrf<a class="headerlink" href="#module-nettoolkit.facts_finder.modifiers.cisco.cisco_vrfs" title="Link to this heading"></a></h1>
+<p>cisco vrf table modifiers</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.cisco_vrfs.TableVrfsCisco">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.cisco_vrfs.</span></span><span class="sig-name descname"><span class="pre">TableVrfsCisco</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capture</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/cisco_vrfs.html#TableVrfsCisco"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.cisco_vrfs.TableVrfsCisco" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="modifiers_common.html#nettoolkit.facts_finder.modifiers.commons.modifier_commons.DataFrameInit" title="nettoolkit.facts_finder.modifiers.commons.modifier_commons.DataFrameInit"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrameInit</span></code></a>, <a class="reference internal" href="modifiers_common.html#nettoolkit.facts_finder.modifiers.commons.modifier_commons.TableVrfs" title="nettoolkit.facts_finder.modifiers.commons.modifier_commons.TableVrfs"><code class="xref py py-class docutils literal notranslate"><span class="pre">TableVrfs</span></code></a></p>
+<p>Cisco Database VRF Object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>capture</strong> (<em>str</em>) – configuration capture file</p></li>
+<li><p><strong>cmd_lst</strong> (<em>list</em><em>, </em><em>optional</em>) – capture commands list . Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.modifiers.cisco.merger">
+<span id="cisco-merger"></span><h1><span class="section-number">5.35. </span>Cisco - merger<a class="headerlink" href="#module-nettoolkit.facts_finder.modifiers.cisco.merger" title="Link to this heading"></a></h1>
+<p>merger in steps</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.merger.cisco_modifier">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.merger.</span></span><span class="sig-name descname"><span class="pre">cisco_modifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capture_tfsm_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_column_mapper_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">int_column_mapper_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_cdp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/merger.html#cisco_modifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.merger.cisco_modifier" title="Link to this definition"></a></dt>
+<dd><p>Club var/interface/vrf data from various commands parsed excel outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>capture_tfsm_file</strong> (<em>str</em>) – device capture file</p></li>
+<li><p><strong>cmd_lst</strong> (<em>_type_</em><em>, </em><em>optional</em>) – manually provide commands list, or it will take a few default commands ie. Defaults to None.</p></li>
+<li><p><strong>var_column_mapper_file</strong> (<em>str</em><em>, </em><em>optional</em>) – var column mapper file. Defaults to None.</p></li>
+<li><p><strong>int_column_mapper_file</strong> (<em>str</em><em>, </em><em>optional</em>) – interfaces column mapper file. Defaults to None.</p></li>
+<li><p><strong>use_cdp</strong> (<em>bool</em><em>, </em><em>optional</em>) – inspect cdp neighbors or not. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary of pandas dataframes</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.facts_finder.modifiers.cisco.merger.get_cmd_list_cisco">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.facts_finder.modifiers.cisco.merger.</span></span><span class="sig-name descname"><span class="pre">get_cmd_list_cisco</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_column_mapper_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">int_column_mapper_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/facts_finder/modifiers/cisco/merger.html#get_cmd_list_cisco"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.facts_finder.modifiers.cisco.merger.get_cmd_list_cisco" title="Link to this definition"></a></dt>
+<dd><p>create commands list for each tab (var/interface/vrf) from the column mapper</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_column_mapper_file</strong> (<em>str</em><em>, </em><em>optional</em>) – var column mapper file. Defaults to None.</p></li>
+<li><p><strong>int_column_mapper_file</strong> (<em>str</em><em>, </em><em>optional</em>) – interfaces column mapper file. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary of commands list</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.facts_finder.modifiers.cisco.commands.cmd_dict">
+<span id="cisco-commands"></span><h1><span class="section-number">5.36. </span>Cisco - commands<a class="headerlink" href="#module-nettoolkit.facts_finder.modifiers.cisco.commands.cmd_dict" title="Link to this heading"></a></h1>
+<p># =========================================================================
+#  THIS FILE CONTAINS THE COLUMN MAPPINGS FROM THE FILE WHICH GOT GENERATED
+#  FROM CAPTURE_IT USING TEXTFSM AND
+#  RELATIVE REQUIRED FIELD VALUES.
+# =========================================================================</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="parsers_juniper.html" class="btn btn-neutral float-left" title="5.20. juniper parser - arp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modifiers_juniper.html" class="btn btn-neutral float-right" title="5.37. Juniper Modifier - table" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

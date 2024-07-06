@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6.4. Common Function/Class filters for Jinja tables Processing &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="6.5. General python-jinja Functions" href="general.html" />
+    <link rel="prev" title="6.3. Data Collection in jinja" href="data_collect.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_doc.html">6. j2config</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="j2.html">6.1. jinja operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common_fn.html">6.2. common functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_collect.html">6.3. data collections</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.4. filters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.j2config.func.Aggregated"><code class="docutils literal notranslate"><span class="pre">Aggregated</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.j2config.func.Bgp"><code class="docutils literal notranslate"><span class="pre">Bgp</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Bgp.bgp_peers"><code class="docutils literal notranslate"><span class="pre">Bgp.bgp_peers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Bgp.vrf_not_none"><code class="docutils literal notranslate"><span class="pre">Bgp.vrf_not_none()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.j2config.func.Common"><code class="docutils literal notranslate"><span class="pre">Common</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.j2config.func.Loopback"><code class="docutils literal notranslate"><span class="pre">Loopback</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.j2config.func.Ospf"><code class="docutils literal notranslate"><span class="pre">Ospf</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Ospf.area_summary_tupples"><code class="docutils literal notranslate"><span class="pre">Ospf.area_summary_tupples()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Ospf.vrf"><code class="docutils literal notranslate"><span class="pre">Ospf.vrf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.j2config.func.Physical"><code class="docutils literal notranslate"><span class="pre">Physical</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Physical.interface"><code class="docutils literal notranslate"><span class="pre">Physical.interface()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Physical.interface_type"><code class="docutils literal notranslate"><span class="pre">Physical.interface_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Physical.interface_type_ends"><code class="docutils literal notranslate"><span class="pre">Physical.interface_type_ends()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Physical.sorted"><code class="docutils literal notranslate"><span class="pre">Physical.sorted()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Physical.sorted_interfaces"><code class="docutils literal notranslate"><span class="pre">Physical.sorted_interfaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Physical.uplinks"><code class="docutils literal notranslate"><span class="pre">Physical.uplinks()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.j2config.func.Static"><code class="docutils literal notranslate"><span class="pre">Static</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Static.default_route"><code class="docutils literal notranslate"><span class="pre">Static.default_route()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Static.has_nexthop"><code class="docutils literal notranslate"><span class="pre">Static.has_nexthop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Static.version"><code class="docutils literal notranslate"><span class="pre">Static.version()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Static.vrf"><code class="docutils literal notranslate"><span class="pre">Static.vrf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.j2config.func.Vlan"><code class="docutils literal notranslate"><span class="pre">Vlan</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Vlan.of_instance"><code class="docutils literal notranslate"><span class="pre">Vlan.of_instance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Vlan.vlan"><code class="docutils literal notranslate"><span class="pre">Vlan.vlan()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Vlan.vlans_sorted_range"><code class="docutils literal notranslate"><span class="pre">Vlan.vlans_sorted_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.j2config.func.Vrf"><code class="docutils literal notranslate"><span class="pre">Vrf</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Vrf.sorted"><code class="docutils literal notranslate"><span class="pre">Vrf.sorted()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Vrf.sorted_vpnids"><code class="docutils literal notranslate"><span class="pre">Vrf.sorted_vpnids()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Vrf.sorted_vrf_data"><code class="docutils literal notranslate"><span class="pre">Vrf.sorted_vrf_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Vrf.sorted_vrf_data_by_vpnid"><code class="docutils literal notranslate"><span class="pre">Vrf.sorted_vrf_data_by_vpnid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Vrf.vrf_get"><code class="docutils literal notranslate"><span class="pre">Vrf.vrf_get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.j2config.func.Vrf.vrf_not_none"><code class="docutils literal notranslate"><span class="pre">Vrf.vrf_not_none()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.j2config.func.sort"><code class="docutils literal notranslate"><span class="pre">sort()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="general.html">6.5. general python functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="read_conditions.html">6.6. conditions capturing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tech_doc.html"><span class="section-number">6. </span>Configuration Generation API documentation!</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6.4. </span>Common Function/Class filters for Jinja tables Processing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/t_doc/j2config/func.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nettoolkit.j2config.func">
+<span id="common-function-class-filters-for-jinja-tables-processing"></span><h1><span class="section-number">6.4. </span>Common Function/Class filters for Jinja tables Processing<a class="headerlink" href="#module-nettoolkit.j2config.func" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Aggregated">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.j2config.func.</span></span><span class="sig-name descname"><span class="pre">Aggregated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Aggregated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Aggregated" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.j2config.func.Common" title="nettoolkit.j2config.func.Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">Common</span></code></a></p>
+<p>device Aggregated/instances</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>table</strong> (<em>dict</em>) – dataframe dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of Aggregated</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nettoolkit.j2config.func.Aggregated" title="nettoolkit.j2config.func.Aggregated">Aggregated</a></p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Aggregated</em> – Instance of Aggregated</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Bgp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.j2config.func.</span></span><span class="sig-name descname"><span class="pre">Bgp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Bgp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Bgp" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.j2config.func.Common" title="nettoolkit.j2config.func.Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">Common</span></code></a></p>
+<p>device Bgp/instances</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>table</strong> (<em>dict</em>) – dataframe dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of Bgp</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nettoolkit.j2config.func.Bgp" title="nettoolkit.j2config.func.Bgp">Bgp</a></p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Bgp</em> – Instance of Bgp</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Bgp.bgp_peers">
+<span class="sig-name descname"><span class="pre">bgp_peers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Bgp.bgp_peers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Bgp.bgp_peers" title="Link to this definition"></a></dt>
+<dd><p>yields data slice(s) for the bgp information where <cite>bgp_vrf</cite> matches with provided vrf name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vrf</strong> (<em>str</em>) – vrf name</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>data_slice</em> – of matching bgp details</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Bgp.vrf_not_none">
+<span class="sig-name descname"><span class="pre">vrf_not_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Bgp.vrf_not_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Bgp.vrf_not_none" title="Link to this definition"></a></dt>
+<dd><p>yields data slice(s) for the bgp information where <cite>bgp_vrf</cite> is not none</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>data_slice</em> – of matching bgp details</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Common">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.j2config.func.</span></span><span class="sig-name descname"><span class="pre">Common</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Common"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Common" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Loopback">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.j2config.func.</span></span><span class="sig-name descname"><span class="pre">Loopback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Loopback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Loopback" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.j2config.func.Common" title="nettoolkit.j2config.func.Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">Common</span></code></a></p>
+<p>device Loopback/instances</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>table</strong> (<em>dict</em>) – dataframe dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of Loopback</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nettoolkit.j2config.func.Loopback" title="nettoolkit.j2config.func.Loopback">Loopback</a></p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Loopback</em> – Instance of Loopback</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Ospf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.j2config.func.</span></span><span class="sig-name descname"><span class="pre">Ospf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Ospf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Ospf" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.j2config.func.Common" title="nettoolkit.j2config.func.Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">Common</span></code></a></p>
+<p>device Ospf</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>table</strong> (<em>dict</em>) – dataframe dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of Ospf</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nettoolkit.j2config.func.Ospf" title="nettoolkit.j2config.func.Ospf">Ospf</a></p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Ospf</em> – Instance of Ospf</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Ospf.area_summary_tupples">
+<span class="sig-name descname"><span class="pre">area_summary_tupples</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Ospf.area_summary_tupples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Ospf.area_summary_tupples" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Ospf.vrf">
+<span class="sig-name descname"><span class="pre">vrf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Ospf.vrf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Ospf.vrf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Physical">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.j2config.func.</span></span><span class="sig-name descname"><span class="pre">Physical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Physical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Physical" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.j2config.func.Common" title="nettoolkit.j2config.func.Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">Common</span></code></a></p>
+<p>device Physical/instances</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>table</strong> (<em>dict</em>) – dataframe dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of Physical</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nettoolkit.j2config.func.Physical" title="nettoolkit.j2config.func.Physical">Physical</a></p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Physical</em> – Instance of Physical</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Physical.interface">
+<span class="sig-name descname"><span class="pre">interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Physical.interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Physical.interface" title="Link to this definition"></a></dt>
+<dd><p>yields data slice(s) for the sorted physical interfaces informations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – interface number</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>data_slice</em> – of matched interface</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Physical.interface_type">
+<span class="sig-name descname"><span class="pre">interface_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">intf_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Physical.interface_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Physical.interface_type" title="Link to this definition"></a></dt>
+<dd><p>condition: is provided dataslice is of given interface type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>data_slice</em>) – Pandas DataFrame slice</p></li>
+<li><p><strong>intf_type</strong> (<em>str</em>) – interface type to be verify</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>result of condition</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Physical.interface_type_ends">
+<span class="sig-name descname"><span class="pre">interface_type_ends</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Physical.interface_type_ends"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Physical.interface_type_ends" title="Link to this definition"></a></dt>
+<dd><p>condition: is provided dataslice ends with given argument <cite>x</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>data_slice</em>) – Pandas DataFrame slice</p></li>
+<li><p><strong>x</strong> (<em>str</em>) – interface type ending identifier to be verify with</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>result of condition</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Physical.sorted">
+<span class="sig-name descname"><span class="pre">sorted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Physical.sorted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Physical.sorted" title="Link to this definition"></a></dt>
+<dd><p>provides list of sorted interface numbers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>of interface numbers sorted</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Physical.sorted_interfaces">
+<span class="sig-name descname"><span class="pre">sorted_interfaces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Physical.sorted_interfaces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Physical.sorted_interfaces" title="Link to this definition"></a></dt>
+<dd><p>yields data slice(s) for the sorted physical interfaces informations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>data_slice</em> – sorted physical interfaces</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Physical.uplinks">
+<span class="sig-name descname"><span class="pre">uplinks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Physical.uplinks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Physical.uplinks" title="Link to this definition"></a></dt>
+<dd><p>yields data slice(s) for the physical interface information,
+where <cite>int_filter</cite> information starts with uplink.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>data_slice</em> – of matching physical interfaces details</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Static">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.j2config.func.</span></span><span class="sig-name descname"><span class="pre">Static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Static"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Static" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.j2config.func.Common" title="nettoolkit.j2config.func.Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">Common</span></code></a></p>
+<p>device static</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>table</strong> (<em>dict</em>) – dataframe dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of Static</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nettoolkit.j2config.func.Static" title="nettoolkit.j2config.func.Static">Static</a></p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Static</em> – Instance of Static</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Static.default_route">
+<span class="sig-name descname"><span class="pre">default_route</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">default_route</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Static.default_route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Static.default_route" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Static.has_nexthop">
+<span class="sig-name descname"><span class="pre">has_nexthop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Static.has_nexthop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Static.has_nexthop" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Static.version">
+<span class="sig-name descname"><span class="pre">version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ver</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Static.version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Static.version" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Static.vrf">
+<span class="sig-name descname"><span class="pre">vrf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Static.vrf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Static.vrf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Vlan">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.j2config.func.</span></span><span class="sig-name descname"><span class="pre">Vlan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Vlan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Vlan" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.j2config.func.Common" title="nettoolkit.j2config.func.Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">Common</span></code></a></p>
+<p>device Vlan/instances</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>table</strong> (<em>dict</em>) – dataframe dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of Vlan</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nettoolkit.j2config.func.Vlan" title="nettoolkit.j2config.func.Vlan">Vlan</a></p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Vlan</em> – Instance of Vlan</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Vlan.of_instance">
+<span class="sig-name descname"><span class="pre">of_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Vlan.of_instance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Vlan.of_instance" title="Link to this definition"></a></dt>
+<dd><p>yields data slice(s) for the vrf matching with <cite>intvrf</cite> column</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vrf</strong> (<em>str</em>) – vrf name</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>data_slice</em> – of matching vrf with <cite>intvrf</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Vlan.vlan">
+<span class="sig-name descname"><span class="pre">vlan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Vlan.vlan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Vlan.vlan" title="Link to this definition"></a></dt>
+<dd><p>returns data slice for the matching vlan number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – vlan number</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>data_slice</em> – of matching vlan number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Vlan.vlans_sorted_range">
+<span class="sig-name descname"><span class="pre">vlans_sorted_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Vlan.vlans_sorted_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Vlan.vlans_sorted_range" title="Link to this definition"></a></dt>
+<dd><p>yields data slice(s) for the vlans matching for the provided range</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>int</em>) – starting vlan number</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – ends vlan number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>data_slice</em> – of matching vlan numbers</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Vrf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.j2config.func.</span></span><span class="sig-name descname"><span class="pre">Vrf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Vrf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Vrf" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#nettoolkit.j2config.func.Common" title="nettoolkit.j2config.func.Common"><code class="xref py py-class docutils literal notranslate"><span class="pre">Common</span></code></a></p>
+<p>device vrf/instances</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>table</strong> (<em>dict</em>) – dataframe dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Instance of VRF</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#nettoolkit.j2config.func.Vrf" title="nettoolkit.j2config.func.Vrf">Vrf</a></p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Vrf</em> – Instance of VRF</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Vrf.sorted">
+<span class="sig-name descname"><span class="pre">sorted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Vrf.sorted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Vrf.sorted" title="Link to this definition"></a></dt>
+<dd><p>list of available vrfs sorted by <cite>vrf</cite> field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sorted vrfs</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Vrf.sorted_vpnids">
+<span class="sig-name descname"><span class="pre">sorted_vpnids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Vrf.sorted_vpnids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Vrf.sorted_vpnids" title="Link to this definition"></a></dt>
+<dd><p>list of available vpnids sorted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sorted vpnids</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Vrf.sorted_vrf_data">
+<span class="sig-name descname"><span class="pre">sorted_vrf_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Vrf.sorted_vrf_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Vrf.sorted_vrf_data" title="Link to this definition"></a></dt>
+<dd><p>vrf data generator, sorted by vrf names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>data_slice</em> – data for all vrf rows except vrf is none, sorted by vrf names</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Vrf.sorted_vrf_data_by_vpnid">
+<span class="sig-name descname"><span class="pre">sorted_vrf_data_by_vpnid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Vrf.sorted_vrf_data_by_vpnid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Vrf.sorted_vrf_data_by_vpnid" title="Link to this definition"></a></dt>
+<dd><p>vrf data generator, sorted by vpnids</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>data_slice</em> – data for all vrf rows except vrf is none, sorted by vpnids</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Vrf.vrf_get">
+<span class="sig-name descname"><span class="pre">vrf_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vrf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Vrf.vrf_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Vrf.vrf_get" title="Link to this definition"></a></dt>
+<dd><p>get a particular vrf data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vrf</strong> (<em>str</em>) – vrf name</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>data_slice</em> – data for matching vrf row</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.Vrf.vrf_not_none">
+<span class="sig-name descname"><span class="pre">vrf_not_none</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#Vrf.vrf_not_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.Vrf.vrf_not_none" title="Link to this definition"></a></dt>
+<dd><p>condition: <cite>vrf is not None</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>data_slice</em> – data from Row that matches condition</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.j2config.func.sort">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.j2config.func.</span></span><span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/j2config/func.html#sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.j2config.func.sort" title="Link to this definition"></a></dt>
+<dd><p>exectes sorted method on provided object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>obj</strong> (<em>dynamic</em>) – Any object object instance declaring sorted method</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sorted method output from object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dynamic</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="data_collect.html" class="btn btn-neutral float-left" title="6.3. Data Collection in jinja" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="general.html" class="btn btn-neutral float-right" title="6.5. General python-jinja Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

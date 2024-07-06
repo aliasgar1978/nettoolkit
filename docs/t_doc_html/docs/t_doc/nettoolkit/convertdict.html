@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.2. convertdict &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="7.3. database" href="db.html" />
+    <link rel="prev" title="7.1. gpl" href="gpl.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_doc.html">7. nettoolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gpl.html">7.1. GPL</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.2. Convert Dictionary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict"><code class="docutils literal notranslate"><span class="pre">ConvDict</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.convert_table_dic"><code class="docutils literal notranslate"><span class="pre">ConvDict.convert_table_dic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.convert_var_dic"><code class="docutils literal notranslate"><span class="pre">ConvDict.convert_var_dic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.expand_dfdic_to_dict"><code class="docutils literal notranslate"><span class="pre">ConvDict.expand_dfdic_to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.expand_to_dict"><code class="docutils literal notranslate"><span class="pre">ConvDict.expand_to_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.set_index_keys_parents"><code class="docutils literal notranslate"><span class="pre">ConvDict.set_index_keys_parents()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.set_var_table_keys"><code class="docutils literal notranslate"><span class="pre">ConvDict.set_var_table_keys()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.to_dataframe"><code class="docutils literal notranslate"><span class="pre">ConvDict.to_dataframe()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.appendkey"><code class="docutils literal notranslate"><span class="pre">appendkey()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.expand_table_dict"><code class="docutils literal notranslate"><span class="pre">expand_table_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.expand_var_dict"><code class="docutils literal notranslate"><span class="pre">expand_var_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.recursive_dic"><code class="docutils literal notranslate"><span class="pre">recursive_dic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.standup_dic"><code class="docutils literal notranslate"><span class="pre">standup_dic()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.update_nested_key"><code class="docutils literal notranslate"><span class="pre">update_nested_key()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nettoolkit.nettoolkit_db.convertdict.varsheet"><code class="docutils literal notranslate"><span class="pre">varsheet()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="db.html">7.3. Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common.html">7.4. Common Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="forms.html">7.5. Forms</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tech_doc.html"><span class="section-number">7. </span>Nettoolkit API documentation!</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.2. </span>convertdict</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/t_doc/nettoolkit/convertdict.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-nettoolkit.nettoolkit_db.convertdict">
+<span id="convertdict"></span><h1><span class="section-number">7.2. </span>convertdict<a class="headerlink" href="#module-nettoolkit.nettoolkit_db.convertdict" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.ConvDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_db.convertdict.</span></span><span class="sig-name descname"><span class="pre">ConvDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#ConvDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>convert dictionary to and from between nested and serialzed format</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.ConvDict.convert_table_dic">
+<span class="sig-name descname"><span class="pre">convert_table_dic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#ConvDict.convert_table_dic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.convert_table_dic" title="Link to this definition"></a></dt>
+<dd><p>convert the nested table dictionary to serialized format, returns serialized dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>updated table dictionary</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.ConvDict.convert_var_dic">
+<span class="sig-name descname"><span class="pre">convert_var_dic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#ConvDict.convert_var_dic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.convert_var_dic" title="Link to this definition"></a></dt>
+<dd><p>convert the var key:value pair to a dictionary of list of FIND/REPLACE pairs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>updated var dictionary</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.ConvDict.expand_dfdic_to_dict">
+<span class="sig-name descname"><span class="pre">expand_dfdic_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sheetname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#ConvDict.expand_dfdic_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.expand_dfdic_to_dict" title="Link to this definition"></a></dt>
+<dd><p>expand the provided dictionary to nested dictionary and return it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sheetname</strong> (<em>str</em>) – sheet name</p></li>
+<li><p><strong>dic</strong> (<em>dict</em>) – dataframe dictionary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary of converted dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.ConvDict.expand_to_dict">
+<span class="sig-name descname"><span class="pre">expand_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_table</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#ConvDict.expand_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.expand_to_dict" title="Link to this definition"></a></dt>
+<dd><p>expand the provided dataframes of var/table to nested dictionary and return it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df_var</strong> (<em>DataFrame</em>) – var (find/replace) pairs dictionary</p></li>
+<li><p><strong>df_table</strong> (<em>DataFrame</em>) – tabular data dictionary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary of converted data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.ConvDict.set_index_keys_parents">
+<span class="sig-name descname"><span class="pre">set_index_keys_parents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ikp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'ifaggregates',</span> <span class="pre">'ifloopbacks',</span> <span class="pre">'ifphysicals',</span> <span class="pre">'ifvlans',</span> <span class="pre">'instances'}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#ConvDict.set_index_keys_parents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.set_index_keys_parents" title="Link to this definition"></a></dt>
+<dd><p>set the parents of index keys</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ikp</strong> (<em>set</em><em>, </em><em>optional</em>) – Parent Index keys. Defaults to INDEX_KEY_PARENTS.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.ConvDict.set_var_table_keys">
+<span class="sig-name descname"><span class="pre">set_var_table_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'var'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'table'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#ConvDict.set_var_table_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.set_var_table_keys" title="Link to this definition"></a></dt>
+<dd><p>standup variable of tab name, static variables:var , tabular data:table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var</strong> (<em>str</em><em>, </em><em>optional</em>) – static find/replace kind data variable referance. Defaults to ‘var’.</p></li>
+<li><p><strong>table</strong> (<em>str</em><em>, </em><em>optional</em>) – tabular data variable referance. Defaults to ‘table’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.ConvDict.to_dataframe">
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sheetname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#ConvDict.to_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.ConvDict.to_dataframe" title="Link to this definition"></a></dt>
+<dd><p>convert the given sheetname dictionary to necessary serialized format and convert and
+return to pandas dataframe object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sheetname</strong> (<em>str</em>) – Sheet Name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dataframe</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.appendkey">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_db.convertdict.</span></span><span class="sig-name descname"><span class="pre">appendkey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#appendkey"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.appendkey" title="Link to this definition"></a></dt>
+<dd><p>add the prefix to keys of dictionary and return updated dictionary.
+conjuction will be “_”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>dict</em>) – dictionary</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – prefix to add on key while removing nesting. Defaults to “”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.expand_table_dict">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_db.convertdict.</span></span><span class="sig-name descname"><span class="pre">expand_table_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#expand_table_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.expand_table_dict" title="Link to this definition"></a></dt>
+<dd><p>rollback of recursive_dic(), revert the key:value nested pairs to its original position.
+returns nested dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dic</strong> (<em>dict</em>) – dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.expand_var_dict">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_db.convertdict.</span></span><span class="sig-name descname"><span class="pre">expand_var_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#expand_var_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.expand_var_dict" title="Link to this definition"></a></dt>
+<dd><p>rollback of varsheet(), revert the values to its original dictionary format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dic</strong> (<em>dict</em>) – dictionary</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.recursive_dic">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_db.convertdict.</span></span><span class="sig-name descname"><span class="pre">recursive_dic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prevkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#recursive_dic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.recursive_dic" title="Link to this definition"></a></dt>
+<dd><p>recursive lookup in provided dictionary and serialize it to convert it to
+pandas data frame which can be later used to convert to excel.
+returns updated dictionary with key:[list of values]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>dict</em>) – nested dictionary</p></li>
+<li><p><strong>prevkey</strong> (<em>str</em><em>, </em><em>optional</em>) – previous key to add as prefix. Defaults to ‘’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.standup_dic">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_db.convertdict.</span></span><span class="sig-name descname"><span class="pre">standup_dic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ikp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#standup_dic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.standup_dic" title="Link to this definition"></a></dt>
+<dd><p>create and return a dictionary with basic basic keys/header
+OBSOLETE NOW.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>dict</em>) – dictionary</p></li>
+<li><p><strong>ikp</strong> (<em>_type_</em>) – basic mandatory interface id/types/value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary with mandatory items</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.update_nested_key">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_db.convertdict.</span></span><span class="sig-name descname"><span class="pre">update_nested_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vitem</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#update_nested_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.update_nested_key" title="Link to this definition"></a></dt>
+<dd><p>add the nested keys in dictionary if missing, update value for trailing key,
+and returns updated dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>dict</em>) – dictionary</p></li>
+<li><p><strong>keys</strong> (<em>str</em>) – keys</p></li>
+<li><p><strong>vitem</strong> (<em>str</em><em>,</em><em>iterator</em><em>,</em><em>dict</em>) – any nested items</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>updated dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit_db.convertdict.varsheet">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit_db.convertdict.</span></span><span class="sig-name descname"><span class="pre">varsheet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit_db/convertdict.html#varsheet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit_db.convertdict.varsheet" title="Link to this definition"></a></dt>
+<dd><p>convert and return captured var dictionary to FIND/REPLACE pairs of dict
+to generate the DataFrame.
+constraint: var-sheet has column names “FIND” &amp; “REPLACE”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dic</strong> (<em>dict</em>) – dictionary with find/replace pairs as key/value pair</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary which is friendly to convert to DataFrame and ultimately to Excel</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gpl.html" class="btn btn-neutral float-left" title="7.1. gpl" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="db.html" class="btn btn-neutral float-right" title="7.3. database" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

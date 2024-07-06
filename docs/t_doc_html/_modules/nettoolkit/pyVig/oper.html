@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nettoolkit.pyVig.oper &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/nettoolkit/tech_doc.html">7. nettoolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/t_doc/pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">nettoolkit.pyVig.oper</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for nettoolkit.pyVig.oper</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span><span class="p">,</span> <span class="n">copy</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.nettoolkit_db</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.nettoolkit_common</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">nettoolkit.nettoolkit.forms.formitems</span> <span class="kn">import</span> <span class="n">get_cable_n_connectors</span><span class="p">,</span> <span class="n">add_cable_n_connectors</span><span class="p">,</span> <span class="n">CONNECTOR_TYPES_FILE</span>
+<span class="kn">from</span> <span class="nn">.devices</span> <span class="kn">import</span> <span class="n">AdevDevices</span><span class="p">,</span> <span class="n">device_df_drop_empty_duplicates</span><span class="p">,</span> <span class="n">update_var_df_details_to_table_df</span>
+<span class="kn">from</span> <span class="nn">.cablings</span> <span class="kn">import</span> <span class="n">ADevCablings</span>
+<span class="kn">from</span> <span class="nn">.maths</span> <span class="kn">import</span> <span class="n">CalculateXY</span><span class="p">,</span> <span class="n">CalculateXYNative</span>
+<span class="kn">from</span> <span class="nn">.general</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;mode.chained_assignment&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+
+<span class="c1"># ------------------------------------------------------------------------- </span>
+<span class="n">CABLING_COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a_device&#39;</span><span class="p">,</span> <span class="s1">&#39;a_dev_model&#39;</span><span class="p">,</span> <span class="s1">&#39;a_dev_serial&#39;</span><span class="p">,</span> <span class="s1">&#39;aport&#39;</span><span class="p">,</span> <span class="s1">&#39;a_media_type&#39;</span><span class="p">,</span> <span class="s1">&#39;a_connector_type&#39;</span><span class="p">,</span> 
+	<span class="s1">&#39;b_device&#39;</span><span class="p">,</span> <span class="s1">&#39;b_dev_model&#39;</span><span class="p">,</span> <span class="s1">&#39;b_dev_serial&#39;</span><span class="p">,</span> <span class="s1">&#39;bport&#39;</span><span class="p">,</span>  <span class="s1">&#39;b_media_type&#39;</span><span class="p">,</span> <span class="s1">&#39;b_connector_type&#39;</span><span class="p">,</span> 
+	<span class="s1">&#39;cable_type&#39;</span><span class="p">,</span> <span class="s1">&#39;speed&#39;</span><span class="p">,</span> <span class="s1">&#39;cable&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">VISIO_DRAWING_COLUMNS</span><span class="o">=</span> <span class="p">[</span>
+	<span class="s1">&#39;connector_type&#39;</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="s1">&#39;pattern&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="c1"># --------------------------------------------- </span>
+<span class="c1"># Data Frame Generator</span>
+<span class="c1"># --------------------------------------------- </span>
+<div class="viewcode-block" id="DFGen">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen">[docs]</a>
+<span class="k">class</span> <span class="nc">DFGen</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;DataFrame generator</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		files (list): list of input excel -clean files </span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;initializer of DF Generator</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">files</span> <span class="o">=</span> <span class="n">files</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">default_stencil</span> <span class="o">=</span> <span class="kc">None</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">default_x_spacing</span> <span class="o">=</span> <span class="mf">3.5</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">default_y_spacing</span> <span class="o">=</span> <span class="mi">2</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">line_pattern_style_separation_on</span> <span class="o">=</span> <span class="kc">None</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">line_pattern_style_shift_no</span> <span class="o">=</span> <span class="mi">2</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">DEFAULT_LINE_WT</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">func_dict</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">var_func_dict</span> <span class="o">=</span> <span class="p">{</span>
+			<span class="s1">&#39;hostname&#39;</span><span class="p">:</span> <span class="n">get_dev_hostname</span><span class="p">,</span>
+			<span class="s1">&#39;device_model&#39;</span><span class="p">:</span> <span class="n">get_dev_model</span><span class="p">,</span>
+			<span class="s1">&#39;serial_number&#39;</span><span class="p">:</span> <span class="n">get_dev_serial</span><span class="p">,</span>
+		<span class="p">}</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">pattern</span> <span class="o">=</span> <span class="mi">1</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">blank_dfs</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">color_map</span> <span class="o">=</span> <span class="p">{</span>
+			<span class="s1">&#39;aoc&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;copper&#39;</span><span class="p">:</span> <span class="s1">&#39;darkgray&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;fiber om3 mm&#39;</span><span class="p">:</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;fiber om4 mm&#39;</span><span class="p">:</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;fiber mm&#39;</span><span class="p">:</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span>
+			<span class="s1">&#39;fiber sm&#39;</span><span class="p">:</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
+			<span class="c1">#</span>
+			<span class="c1"># ... add more as and when need ... #</span>
+			<span class="c1"># --- adding new color will require respective edit in visio.py ---</span>
+		<span class="p">}</span>
+
+
+<div class="viewcode-block" id="DFGen.blank_dfs">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.blank_dfs">[docs]</a>
+	<span class="k">def</span> <span class="nf">blank_dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;creates devices/cabling blank DataFrames</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;hostname&#39;</span><span class="p">:[]})</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a_device&#39;</span><span class="p">:[]})</span></div>
+
+
+<div class="viewcode-block" id="DFGen.custom_attributes">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.custom_attributes">[docs]</a>
+	<span class="k">def</span> <span class="nf">custom_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;add/update custom attributes for object</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="k">if</span> <span class="n">v</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></div>
+
+
+<div class="viewcode-block" id="DFGen.custom_functions">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.custom_functions">[docs]</a>
+	<span class="k">def</span> <span class="nf">custom_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;add/update custom functions for object</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">func_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></div>
+
+
+<div class="viewcode-block" id="DFGen.custom_var_functions">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.custom_var_functions">[docs]</a>
+	<span class="k">def</span> <span class="nf">custom_var_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;add/update custom `var` tab functions for object</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">var_func_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></div>
+
+
+	<span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<div class="viewcode-block" id="DFGen.run">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.run">[docs]</a>
+	<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;iterate over all files for generating devices/cabling DataFrame details.</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">DCT</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">files</span><span class="p">:</span>
+			<span class="n">DCT</span> <span class="o">=</span> <span class="n">DF_ConverT</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_stencil</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_pattern_style_separation_on</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_pattern_style_shift_no</span><span class="p">)</span>
+			<span class="n">DCT</span><span class="o">.</span><span class="n">get_self_details</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_func_dict</span><span class="p">)</span>
+			<span class="n">DCT</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func_dict</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">update_devices_df</span><span class="p">(</span><span class="n">DCT</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">update_cabling_df</span><span class="p">(</span><span class="n">DCT</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">DCT</span><span class="p">[</span><span class="n">DCT</span><span class="o">.</span><span class="n">hostname</span><span class="p">]</span> <span class="o">=</span> <span class="n">DCT</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span> <span class="o">=</span> <span class="n">device_df_drop_empty_duplicates</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span> <span class="o">=</span> <span class="n">update_var_df_details_to_table_df</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">DCT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var_func_dict</span><span class="p">)</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_b_device_media_types</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_cable_connector_details</span><span class="p">()</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">remove_subintf_from_ports</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">standardize_intf_on_ports</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">remove_duplicate_cablings</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">add_model_n_serial_number_to_cabling</span><span class="p">()</span>
+		<span class="c1">#</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">update_weight</span><span class="p">()</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_color</span><span class="p">()</span>
+		<span class="c1"># ---------------------------------------- #</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">df_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Devices&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span><span class="p">,</span> <span class="s1">&#39;Cablings&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span> <span class="p">}</span></div>
+
+		<span class="c1">#</span>
+
+<div class="viewcode-block" id="DFGen.map_color">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.map_color">[docs]</a>
+	<span class="k">def</span> <span class="nf">map_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;add, edit  line color map</span>
+<span class="sd">		&quot;&quot;&quot;</span>    		
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">color_map</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></div>
+
+
+<div class="viewcode-block" id="DFGen.arrange_cablings">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.arrange_cablings">[docs]</a>
+	<span class="k">def</span> <span class="nf">arrange_cablings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_all_cols</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;arrange cabling tab in to appropriate order given in CABLING COLUMNS</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">cabeling_columns</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Cablings&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+		<span class="n">extra_cols</span> <span class="o">=</span> <span class="n">cabeling_columns</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">CABLING_COLUMNS</span><span class="p">))</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">VISIO_DRAWING_COLUMNS</span><span class="p">))</span>
+		<span class="n">arranged_cols</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">CABLING_COLUMNS</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">keep_all_cols</span><span class="p">:</span>
+			<span class="n">arranged_cols</span> <span class="o">+=</span> <span class="n">VISIO_DRAWING_COLUMNS</span>
+			<span class="n">arranged_cols</span> <span class="o">+=</span> <span class="n">extra_cols</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Cablings&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_dict</span><span class="p">[</span><span class="s1">&#39;Cablings&#39;</span><span class="p">][</span><span class="n">arranged_cols</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="DFGen.update">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.update">[docs]</a>
+	<span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">funcs</span><span class="p">):</span>
+		<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">:</span>
+			<span class="n">f</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df_dict</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DFGen.update_devices_df">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.update_devices_df">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_devices_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">DCT</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update Devices DataFrame</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			DCT (DF_ConverT): DataFrame Convertor object</span>
+<span class="sd">			file (str): a single database. -clean excel file. ( not in use )</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">ddf</span> <span class="o">=</span> <span class="n">DCT</span><span class="o">.</span><span class="n">update_devices</span><span class="p">()</span>
+		<span class="c1">#</span>
+		<span class="n">ddf_dev</span> <span class="o">=</span> <span class="n">DCT</span><span class="o">.</span><span class="n">update_device_self_detils</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func_dict</span><span class="p">)</span>
+		<span class="n">ddf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">ddf</span><span class="p">,</span> <span class="n">ddf_dev</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span><span class="p">,</span> <span class="n">ddf</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DFGen.update_cabling_df">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.update_cabling_df">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_cabling_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">DCT</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update Cabling DataFrame</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			DCT (DF_ConverT): DataFrame Convertor object</span>
+<span class="sd">			file (str): a single database. -clean excel file.</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">cdf</span> <span class="o">=</span> <span class="n">DCT</span><span class="o">.</span><span class="n">update_cablings</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">,</span> <span class="n">cdf</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DFGen.calculate_cordinates">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.calculate_cordinates">[docs]</a>
+	<span class="k">def</span> <span class="nf">calculate_cordinates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sheet_filter_dict</span><span class="o">=</span><span class="p">{}):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;calculate the x,y coordinate values for each devices and keep Devices, Cablings DataFrame Dictionary ready.</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			sheet_filter_dict (dict): sheet filter dictionary for mutitab executions.</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span> <span class="k">return</span>
+
+		<span class="k">if</span> <span class="s1">&#39;hierarchical_order&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_dict</span><span class="p">:</span>
+			<span class="n">CXY</span> <span class="o">=</span> <span class="n">CalculateXY</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_x_spacing</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_y_spacing</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">,</span> <span class="n">sheet_filter_dict</span><span class="p">)</span>
+			<span class="n">CXY</span><span class="o">.</span><span class="n">calc</span><span class="p">()</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">CXY</span> <span class="o">=</span> <span class="n">CalculateXYNative</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">,</span> <span class="n">sheet_filter_dict</span><span class="p">)</span>
+			<span class="n">CXY</span><span class="o">.</span><span class="n">calc</span><span class="p">()</span>
+
+		<span class="bp">self</span><span class="o">.</span><span class="n">df_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Devices&#39;</span><span class="p">:</span> <span class="n">CXY</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;Cablings&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span> <span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="DFGen.remove_duplicate_cablings">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.remove_duplicate_cablings">[docs]</a>
+	<span class="k">def</span> <span class="nf">remove_duplicate_cablings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;removes redundant cabling entries between two devices with same port identified</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s2">&quot;a_dev_duplicate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">b_device</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s2">&quot;aport_duplicate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">bport</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s2">&quot;b_dev_duplicate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">a_device</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s2">&quot;bport_duplicate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">aport</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span> <span class="o">=</span> <span class="n">remove_duplicates</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+			<span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a_dev_duplicate&quot;</span><span class="p">,</span> <span class="s2">&quot;aport_duplicate&quot;</span><span class="p">,</span> <span class="s2">&quot;b_dev_duplicate&quot;</span><span class="p">,</span> <span class="s2">&quot;bport_duplicate&quot;</span><span class="p">]</span>
+		<span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span> <span class="o">=</span> <span class="n">merge_port_for_duplicates</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">)</span>		</div>
+
+
+<div class="viewcode-block" id="DFGen.remove_duplicate_cabling_entries">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.remove_duplicate_cabling_entries">[docs]</a>
+	<span class="k">def</span> <span class="nf">remove_duplicate_cabling_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;removes duplicate cabling entries between a-b devices / deprycated.</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">a_to_b</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="n">copy_full_df</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">copy_full_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">a_to_b</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">a_device</span><span class="p">):</span>
+				<span class="n">a_to_b</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">a_device</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;remotedev&#39;</span><span class="p">:[]}</span>
+			<span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">b_device</span> <span class="ow">in</span> <span class="n">a_to_b</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">data</span><span class="o">.</span><span class="n">a_device</span> <span class="ow">in</span> <span class="n">a_to_b</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">b_device</span><span class="p">][</span><span class="s1">&#39;remotedev&#39;</span><span class="p">]:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+				<span class="k">continue</span>
+			<span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">a_device</span> <span class="ow">in</span> <span class="n">a_to_b</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">data</span><span class="o">.</span><span class="n">b_device</span> <span class="ow">in</span> <span class="n">a_to_b</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">a_device</span><span class="p">][</span><span class="s1">&#39;remotedev&#39;</span><span class="p">]:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+				<span class="k">continue</span>
+			<span class="n">a_to_b</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">a_device</span><span class="p">][</span><span class="s1">&#39;remotedev&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">b_device</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DFGen.remove_undefined_cabling_entries">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.remove_undefined_cabling_entries">[docs]</a>
+	<span class="k">def</span> <span class="nf">remove_undefined_cabling_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;removes undefined cabling entries where device doesn&#39;t exist in devices tab / deprycated</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">dev_hosts</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span><span class="o">.</span><span class="n">hostname</span><span class="p">)</span> 
+		<span class="n">copy_full_df</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">copy_full_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">a_device</span> <span class="ow">in</span> <span class="n">dev_hosts</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">b_device</span> <span class="ow">in</span> <span class="n">dev_hosts</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+				<span class="k">continue</span></div>
+
+
+<div class="viewcode-block" id="DFGen.add_b_device_media_types">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.add_b_device_media_types">[docs]</a>
+	<span class="k">def</span> <span class="nf">add_b_device_media_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;add b-device media types to database</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;b_media_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> 
+				<span class="n">update_b_media_type</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">b_device</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">bport</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">DCT</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DFGen.add_cable_connector_details">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.add_cable_connector_details">[docs]</a>
+	<span class="k">def</span> <span class="nf">add_cable_connector_details</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>		
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;add cable and connector details to database (such as: media_type, cable_type, connector_types, mediaspeed, cable-type )</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;media_type&#39;</span><span class="p">:[],</span> <span class="s1">&#39;cable_type&#39;</span><span class="p">:</span> <span class="p">[],</span><span class="s1">&#39;_connector_type&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;speed&#39;</span><span class="p">:[]}</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;cable_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_cable_connector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;cable_type&#39;</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;a_connector_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_cable_connector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;_connector_type&#39;</span><span class="p">,</span> <span class="s1">&#39;a_media_type&#39;</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;b_connector_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_cable_connector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;_connector_type&#39;</span><span class="p">,</span> <span class="s1">&#39;b_media_type&#39;</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_cable_connector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;speed&#39;</span><span class="p">,),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;cable&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_cable_type</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+		<span class="n">add_cable_n_connectors</span><span class="p">(</span><span class="n">CONNECTOR_TYPES_FILE</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="DFGen.merge_cable_type">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.merge_cable_type">[docs]</a>
+	<span class="k">def</span> <span class="nf">merge_cable_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;checks a side and b side connectors, media speed and returns desired cable type</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			df (DataFrame): Pandas DataFrame (cabling)</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			str: cable type (ex: lc to lc 10g Multimode OM3 Cable)</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">ac</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">a_connector_type</span> <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">a_connector_type</span> <span class="k">else</span> <span class="s2">&quot;??&quot;</span>
+		<span class="n">bc</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">b_connector_type</span> <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">b_connector_type</span> <span class="k">else</span> <span class="s2">&quot;??&quot;</span>
+		<span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ac</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">bc</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">speed</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">cable_type</span><span class="si">}</span><span class="s2">&quot;</span>
+		<span class="k">return</span> <span class="n">s</span></div>
+
+
+<div class="viewcode-block" id="DFGen.update_cable_connector">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.update_cable_connector">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_cable_connector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cm_df</span><span class="p">,</span> <span class="n">what</span><span class="p">,</span> <span class="n">mt_col</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;common definition to update attributes: cable_type, connector_types, mediaspeed</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			cm_df (DataFrame): Pandas DataFrame (cabling)</span>
+<span class="sd">			what (str): attribute name to be updated</span>
+<span class="sd">			mt_col (str, optional): mediatype column name. Defaults to None.</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			str: found atribute value</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">if</span> <span class="n">mt_col</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">media_type</span> <span class="o">=</span> <span class="n">cm_df</span><span class="o">.</span><span class="n">a_media_type</span> <span class="k">if</span> <span class="n">cm_df</span><span class="o">.</span><span class="n">a_media_type</span> <span class="k">else</span> <span class="n">cm_df</span><span class="o">.</span><span class="n">b_media_type</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">media_type</span> <span class="o">=</span> <span class="n">cm_df</span><span class="p">[</span><span class="n">mt_col</span><span class="p">]</span>
+
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">media_type</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+		<span class="k">if</span> <span class="n">media_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span><span class="p">[</span><span class="s1">&#39;media_type&#39;</span><span class="p">]:</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span><span class="p">[</span><span class="n">what</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span><span class="p">[</span><span class="s1">&#39;media_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">media_type</span><span class="p">)]:</span>
+					<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span><span class="p">[</span><span class="n">what</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span><span class="p">[</span><span class="s1">&#39;media_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">media_type</span><span class="p">)]</span>
+			<span class="k">except</span><span class="p">:</span>
+				<span class="k">pass</span>
+		<span class="c1">#</span>
+		<span class="n">c</span> <span class="o">=</span> <span class="n">get_cable_n_connectors</span><span class="p">(</span><span class="n">CONNECTOR_TYPES_FILE</span><span class="p">,</span> <span class="n">what</span><span class="p">,</span> <span class="n">media_type</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">c</span><span class="p">:</span> <span class="k">return</span> <span class="n">c</span>
+		<span class="c1">#</span>
+		<span class="n">c</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Provide [</span><span class="si">{</span><span class="n">what</span><span class="si">}</span><span class="s2">] - New SFP identified: [</span><span class="si">{</span><span class="n">media_type</span><span class="si">}</span><span class="s2">]:&quot;</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">c</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_update_additional_sfp_cts</span><span class="p">(</span><span class="n">media_type</span><span class="p">,</span> <span class="n">what</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">c</span>
+		<span class="c1">#</span>
+		<span class="k">return</span> <span class="s1">&#39;&#39;</span></div>
+
+
+	<span class="c1"># support to above</span>
+	<span class="k">def</span> <span class="nf">_update_additional_sfp_cts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">media_type</span><span class="p">,</span> <span class="n">what</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">media_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span><span class="p">[</span><span class="s1">&#39;media_type&#39;</span><span class="p">]:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span><span class="p">[</span><span class="s1">&#39;media_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">media_type</span><span class="p">)</span>
+			<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;cable_type&#39;</span><span class="p">,</span> <span class="s1">&#39;_connector_type&#39;</span><span class="p">,</span> <span class="s1">&#39;speed&#39;</span><span class="p">}:</span> 
+				<span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span><span class="p">[</span><span class="n">_</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span><span class="p">[</span><span class="n">what</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">additional_sfp_cts</span><span class="p">[</span><span class="s1">&#39;media_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">media_type</span><span class="p">)]</span> <span class="o">=</span> <span class="n">c</span>
+
+<div class="viewcode-block" id="DFGen.update_weight">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.update_weight">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;define thickness of connector</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">update_weight</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DFGen.update_color">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.update_color">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_color</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;define color of connector</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">update_color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_map</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DFGen.remove_subintf_from_ports">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.remove_subintf_from_ports">[docs]</a>
+	<span class="k">def</span> <span class="nf">remove_subintf_from_ports</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;removes subninterface value/string from ports</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;aport&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;aport&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;bport&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;bport&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="DFGen.standardize_intf_on_ports">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.standardize_intf_on_ports">[docs]</a>
+	<span class="k">def</span> <span class="nf">standardize_intf_on_ports</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;standardize all interfaces</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;aport&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;aport&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">STR</span><span class="o">.</span><span class="n">intf_standardize_or_null</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">intf_type</span><span class="o">=</span><span class="s1">&#39;PHYSICAL&#39;</span><span class="p">))</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;bport&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;bport&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">STR</span><span class="o">.</span><span class="n">intf_standardize_or_null</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">intf_type</span><span class="o">=</span><span class="s1">&#39;PHYSICAL&#39;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="DFGen.add_model_n_serial_number_to_cabling">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DFGen.add_model_n_serial_number_to_cabling">[docs]</a>
+	<span class="k">def</span> <span class="nf">add_model_n_serial_number_to_cabling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;cabling tab - add device model and serial numbers</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;a_dev_model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_model_number</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span><span class="p">,</span> <span class="s1">&#39;a_device&#39;</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;b_dev_model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_model_number</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span><span class="p">,</span> <span class="s1">&#39;b_device&#39;</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;a_dev_serial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_serial_number</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span><span class="p">,</span> <span class="s1">&#39;a_device&#39;</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="p">[</span><span class="s1">&#39;b_dev_serial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cabling_merged_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_serial_number</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">devices_merged_df</span><span class="p">,</span> <span class="s1">&#39;b_device&#39;</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+</div>
+
+
+<span class="n">CableMatrix</span> <span class="o">=</span> <span class="n">DFGen</span>
+
+<span class="c1"># --------------------------------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="get_serial_number">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.get_serial_number">[docs]</a>
+<span class="k">def</span> <span class="nf">get_serial_number</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">devices_merged_df</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;get serial number for match device</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		df (DataFrame): Cable Matrix DataFrame</span>
+<span class="sd">		devices_merged_df (DataFrame): Devices DetaFrame</span>
+<span class="sd">		device (str): device hostname</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: serial number of device</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="n">mini_dev_df</span> <span class="o">=</span> <span class="n">devices_merged_df</span><span class="p">[(</span><span class="n">devices_merged_df</span><span class="o">.</span><span class="n">hostname</span> <span class="o">==</span> <span class="n">df</span><span class="p">[</span><span class="n">device</span><span class="p">])]</span>
+	<span class="k">if</span> <span class="n">mini_dev_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+	<span class="n">idx</span> <span class="o">=</span> <span class="n">mini_dev_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="k">return</span> <span class="n">mini_dev_df</span><span class="p">[</span><span class="s1">&#39;serial_number&#39;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_model_number">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.get_model_number">[docs]</a>
+<span class="k">def</span> <span class="nf">get_model_number</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">devices_merged_df</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;get model number for match device</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		df (DataFrame): Cable Matrix DataFrame</span>
+<span class="sd">		devices_merged_df (DataFrame): Devices DetaFrame</span>
+<span class="sd">		device (str): device hostname</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: model number of device</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="n">mini_dev_df</span> <span class="o">=</span> <span class="n">devices_merged_df</span><span class="p">[(</span><span class="n">devices_merged_df</span><span class="o">.</span><span class="n">hostname</span> <span class="o">==</span> <span class="n">df</span><span class="p">[</span><span class="n">device</span><span class="p">])]</span>
+	<span class="k">if</span> <span class="n">mini_dev_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+	<span class="n">idx</span> <span class="o">=</span> <span class="n">mini_dev_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="k">return</span> <span class="n">mini_dev_df</span><span class="p">[</span><span class="s1">&#39;device_model&#39;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="update_weight">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.update_weight">[docs]</a>
+<span class="k">def</span> <span class="nf">update_weight</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">base_weight</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;update line thickness for all connectors, where found multiple connectivities between two devices</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		df (DataFrame): Pandas DataFrame (cabling)</span>
+<span class="sd">		base_weight (int, optional): base weight. Defaults to 1.</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+		<span class="n">minidf</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">a_device</span> <span class="o">==</span> <span class="n">v</span><span class="o">.</span><span class="n">a_device</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">b_device</span> <span class="o">==</span> <span class="n">v</span><span class="o">.</span><span class="n">b_device</span><span class="p">)</span> <span class="p">]</span>
+		<span class="n">minidf_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">minidf</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">minidf_len</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="k">continue</span>
+		<span class="k">elif</span> <span class="n">minidf_len</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+			<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> <span class="p">((</span><span class="n">df</span><span class="o">.</span><span class="n">a_device</span> <span class="o">==</span> <span class="n">v</span><span class="o">.</span><span class="n">a_device</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">b_device</span> <span class="o">==</span> <span class="n">v</span><span class="o">.</span><span class="n">b_device</span><span class="p">)),</span> <span class="s1">&#39;weight&#39;</span> <span class="p">]</span> <span class="o">=</span> <span class="n">minidf_len</span> <span class="o">*</span> <span class="n">base_weight</span></div>
+
+
+<div class="viewcode-block" id="update_color">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.update_color">[docs]</a>
+<span class="k">def</span> <span class="nf">update_color</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;update line color for all connectors, based on the found cable type.  Available options are </span>
+<span class="sd">	# ( white, black, red, green, skyblue, blue, yellow, gray, lightgray, darkgray, orange )</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		df (DataFrame): Pandas DataFrame (cabling)</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">df</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">get_color</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">colors</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_color">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.get_color">[docs]</a>
+<span class="k">def</span> <span class="nf">get_color</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;get color of a connector</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		df (DataFrame): Pandas DataFrame (cabling)</span>
+<span class="sd">		colors (dict): fibertype v/s color dictionary</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: color for given found cable (Default: black)</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">cable_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">colors</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cable_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+	<span class="k">return</span> <span class="s1">&#39;black&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="update_b_media_type">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.update_b_media_type">[docs]</a>
+<span class="k">def</span> <span class="nf">update_b_media_type</span><span class="p">(</span><span class="n">cable_df_b_device</span><span class="p">,</span> <span class="n">cable_df_bport</span><span class="p">,</span> <span class="n">DCT</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;update media type for b-end device.</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		cable_df_b_device (str): hostname of b-end device </span>
+<span class="sd">		cable_df_bport (str): connected b-end device port</span>
+<span class="sd">		DCT (DF_ConverT): DataFrame Convertor object</span>
+
+<span class="sd">	Returns:</span>
+<span class="sd">		str: media type information detected for b-end device/port (Default: &quot;&quot;)</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="k">if</span> <span class="n">cable_df_b_device</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DCT</span><span class="p">:</span> 
+		<span class="k">return</span> <span class="s2">&quot;&quot;</span>
+	<span class="n">remote_ph_df</span> <span class="o">=</span> <span class="n">DCT</span><span class="p">[</span><span class="n">cable_df_b_device</span><span class="p">]</span><span class="o">.</span><span class="n">full_df</span><span class="p">[</span><span class="s1">&#39;physical&#39;</span><span class="p">]</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">filtered_df</span> <span class="o">=</span> <span class="n">remote_ph_df</span><span class="p">[</span><span class="n">remote_ph_df</span><span class="p">[</span><span class="s1">&#39;interface&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">STR</span><span class="o">.</span><span class="n">if_standardize</span><span class="p">(</span><span class="n">cable_df_bport</span><span class="p">)]</span>
+	<span class="k">except</span><span class="p">:</span>
+		<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR getting b-device info for port </span><span class="si">{</span><span class="n">cable_df_b_device</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">cable_df_bport</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+		<span class="k">return</span> <span class="s2">&quot;&quot;</span>
+	<span class="k">if</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span> 
+		<span class="k">return</span> <span class="s2">&quot;&quot;</span>
+	<span class="k">if</span> <span class="s1">&#39;media_type&#39;</span> <span class="ow">not</span> <span class="ow">in</span>  <span class="n">filtered_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+	<span class="k">if</span> <span class="ow">not</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)[</span><span class="s1">&#39;media_type&#39;</span><span class="p">][</span><span class="n">filtered_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]]:</span> <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+	<span class="k">return</span> <span class="n">filtered_df</span><span class="p">[</span><span class="s1">&#39;media_type&#39;</span><span class="p">][</span><span class="n">filtered_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span></div>
+
+
+
+<div class="viewcode-block" id="remove_duplicates">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.remove_duplicates">[docs]</a>
+<span class="k">def</span> <span class="nf">remove_duplicates</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;removes duplicate cabling entries between a-b devices</span>
+<span class="sd">	&quot;&quot;&quot;</span>		
+	<span class="c1">#</span>
+	<span class="n">df2</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+		<span class="n">bdev</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">b_device</span>
+		<span class="n">bport</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">bport</span>
+		<span class="n">adev</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">a_device</span>
+		<span class="n">aport</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">aport</span>
+		<span class="n">minidf</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">a_dev_duplicate</span> <span class="o">==</span> <span class="n">adev</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">aport_duplicate</span> <span class="o">==</span> <span class="n">aport</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">b_dev_duplicate</span> <span class="o">==</span> <span class="n">bdev</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bport_duplicate</span> <span class="o">==</span> <span class="n">bport</span><span class="p">)]</span>
+		<span class="k">if</span> <span class="n">minidf</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+			<span class="k">continue</span>
+		<span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">minidf</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+		<span class="k">break</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">df2</span><span class="p">):</span> 
+		<span class="k">return</span> <span class="n">df2</span>
+	<span class="k">return</span> <span class="n">remove_duplicates</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="merge_port_for_duplicates">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.merge_port_for_duplicates">[docs]</a>
+<span class="k">def</span> <span class="nf">merge_port_for_duplicates</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;merge multiple cabling for a-b devices</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="n">df2</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+	<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span>  <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+		<span class="n">mdf</span> <span class="o">=</span> <span class="n">df</span><span class="p">[((</span><span class="n">df</span><span class="o">.</span><span class="n">a_device</span> <span class="o">==</span> <span class="n">r</span><span class="o">.</span><span class="n">a_device</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">b_device</span> <span class="o">==</span> <span class="n">r</span><span class="o">.</span><span class="n">b_device</span><span class="p">))]</span>
+		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mdf</span><span class="o">.</span><span class="n">a_device</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> 
+			<span class="k">continue</span>
+		<span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mdf</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+			<span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+				<span class="n">idx</span> <span class="o">=</span> <span class="n">j</span>
+				<span class="n">prv_aport</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">aport</span>
+				<span class="n">prv_bport</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">bport</span>
+				<span class="k">continue</span>
+			<span class="n">prv_aport</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">m</span><span class="o">.</span><span class="n">aport</span>
+			<span class="n">prv_bport</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">m</span><span class="o">.</span><span class="n">bport</span>
+			<span class="n">df2</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;aport&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prv_aport</span>
+			<span class="n">df2</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;bport&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prv_aport</span>
+			<span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+		<span class="k">break</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">df2</span><span class="p">):</span> 
+		<span class="k">return</span> <span class="n">df2</span>
+	<span class="k">return</span> <span class="n">merge_port_for_duplicates</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># --------------------------------------------- </span>
+<span class="c1"># Data Frame Converter</span>
+<span class="c1"># --------------------------------------------- </span>
+<div class="viewcode-block" id="DF_ConverT">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DF_ConverT">[docs]</a>
+<span class="k">class</span> <span class="nc">DF_ConverT</span><span class="p">():</span>
+<span class="w">	</span><span class="sd">&quot;&quot;&quot;Data Frame Converter</span>
+
+<span class="sd">	Args:</span>
+<span class="sd">		file (str): a single database. -clean excel file.</span>
+<span class="sd">		default_stencil (str): default visio stencil file.</span>
+<span class="sd">		line_pattern_style_separation_on (str): column name on which line pattern separation should be decided on</span>
+<span class="sd">		line_pattern_style_shift_no (int): line pattern change/shift number/steps</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> 
+		<span class="n">default_stencil</span><span class="p">,</span> 
+		<span class="n">line_pattern_style_separation_on</span><span class="p">,</span> 
+		<span class="n">line_pattern_style_shift_no</span><span class="p">,</span>
+		<span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;object initializer</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="n">file</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">full_df</span> <span class="o">=</span> <span class="n">read_xl</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+		<span class="n">file</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">self_device</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-clean&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">stencils</span> <span class="o">=</span> <span class="n">default_stencil</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">line_pattern_style_separation_on</span> <span class="o">=</span> <span class="n">line_pattern_style_separation_on</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">line_pattern_style_shift_no</span> <span class="o">=</span> <span class="n">line_pattern_style_shift_no</span>
+
+
+<div class="viewcode-block" id="DF_ConverT.get_self_details">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DF_ConverT.get_self_details">[docs]</a>
+	<span class="k">def</span> <span class="nf">get_self_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_func_dict</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update the value from var tab of var function dictionary</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			var_func_dict (dict): custom var functions dictionary</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">var_func_dict</span> <span class="o">=</span> <span class="n">var_func_dict</span>
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span>  <span class="n">f</span> <span class="ow">in</span> <span class="n">var_func_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="n">v</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_df</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">])</span>
+			<span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span> <span class="o">=</span> <span class="s1">&#39;N/A&#39;</span>
+			<span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></div>
+
+
+<div class="viewcode-block" id="DF_ConverT.convert">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DF_ConverT.convert">[docs]</a>
+	<span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_dict</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;create physical DataFrame, update with patterns  </span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			func_dict (dict): custom functions dictionary</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="c1"># vlan</span>
+		<span class="n">vlan_df</span> <span class="o">=</span> <span class="n">get_vlan_if_up</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_df</span><span class="p">[</span><span class="s1">&#39;vlan&#39;</span><span class="p">])</span>
+		<span class="n">vlan_df</span> <span class="o">=</span> <span class="n">get_vlan_if_relevants</span><span class="p">(</span><span class="n">vlan_df</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">vlan_df</span> <span class="o">=</span> <span class="n">vlan_df</span>
+
+		<span class="c1"># physical</span>
+		<span class="n">df</span> <span class="o">=</span> <span class="n">get_physical_if_up</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_df</span><span class="p">[</span><span class="s1">&#39;physical&#39;</span><span class="p">])</span>
+		<span class="n">df</span> <span class="o">=</span> <span class="n">get_physical_if_relevants</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+		<span class="c1">#</span>
+		<span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_devices_df_pattern_n_custom_func</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">func_dict</span><span class="p">)</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">u_ph_df</span> <span class="o">=</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="DF_ConverT.update_devices_df_pattern_n_custom_func">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DF_ConverT.update_devices_df_pattern_n_custom_func">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_devices_df_pattern_n_custom_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">func_dict</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;updates Devices DataFrame patterns as per custom functions provided in func_dict</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			df (DataFrame): pandas DataFrame for devices</span>
+<span class="sd">			func_dict (dict): custom functions dictionary</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			DataFrame: updated DataFrame</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">func_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+			<span class="n">df</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">patterns</span> <span class="o">=</span> <span class="n">get_patterns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_pattern_style_separation_on</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_pattern_style_shift_no</span><span class="p">)</span>
+		<span class="n">df</span> <span class="o">=</span> <span class="n">update_pattern</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">patterns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_pattern_style_separation_on</span><span class="p">)</span>
+		<span class="c1">#</span>
+		<span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="DF_ConverT.update_cablings">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DF_ConverT.update_cablings">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_cablings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">default_dic</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;creates Cabling object and its DataFrame, adds cabling details</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			DataFrame: pandas DataFrame</span>
+<span class="sd">		&quot;&quot;&quot;</span>	
+		<span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">=</span> <span class="n">ADevCablings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">self_device</span><span class="p">,</span> <span class="o">**</span><span class="n">default_dic</span><span class="p">)</span>
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_ph_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+			<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+			<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+				<span class="n">kwargs</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">C</span><span class="o">.</span><span class="n">add_to_cablings</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+		<span class="c1">#</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">C</span><span class="o">.</span><span class="n">cabling_dataframe</span><span class="p">()</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span><span class="o">.</span><span class="n">merged_df</span></div>
+
+
+<div class="viewcode-block" id="DF_ConverT.update_devices">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DF_ConverT.update_devices">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_devices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;creates Devices object, and its DataFrame, adds vlan informations.</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			DataFrame: updated pandas DataFrame for interface connected devices</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="n">AdevDevices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stencils</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">var_func_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_df</span><span class="p">[</span><span class="s1">&#39;var&#39;</span><span class="p">])</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="o">.</span><span class="n">int_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_devices_for</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">u_ph_df</span><span class="p">,</span> <span class="n">dic</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="o">.</span><span class="n">devices</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="o">.</span><span class="n">add_vlan_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vlan_df</span><span class="p">)</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="o">.</span><span class="n">merged_df</span></div>
+
+
+<div class="viewcode-block" id="DF_ConverT.update_device_self_detils">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DF_ConverT.update_device_self_detils">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_device_self_detils</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_dict</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;create a pandas DataFrame object for the self object using `var` tab and custom functions</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			func_dict (dict): custom var functions</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			DataFrame: pandas DataFrame for self device</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="n">self_device_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="o">.</span><span class="n">get_self_device_df</span><span class="p">()</span>
+		<span class="n">self_dev_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_devices_for</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">self_device_df</span><span class="p">,</span> <span class="n">dic</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="o">.</span><span class="n">self_device</span><span class="p">)</span>
+		<span class="n">self_dev_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_devices_df_pattern_n_custom_func</span><span class="p">(</span><span class="n">self_dev_df</span><span class="p">,</span> <span class="n">func_dict</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">self_dev_df</span></div>
+
+
+<div class="viewcode-block" id="DF_ConverT.update_devices_for">
+<a class="viewcode-back" href="../../../docs/t_doc/pyvig/tech_doc.html#nettoolkit.pyVig.oper.DF_ConverT.update_devices_for">[docs]</a>
+	<span class="k">def</span> <span class="nf">update_devices_for</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">dic</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;update DataFrame for the provided dictionary (dic) objects, and removes empty and duplicate hostname value rows.</span>
+
+<span class="sd">		Args:</span>
+<span class="sd">			df (DataFrame): variable DataFrame</span>
+<span class="sd">			dic (dict): variable dictionary</span>
+
+<span class="sd">		Returns:</span>
+<span class="sd">			DataFame: updated DataFrame</span>
+<span class="sd">		&quot;&quot;&quot;</span>		
+		<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+			<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+			<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+				<span class="n">kwargs</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="o">.</span><span class="n">add_to_devices</span><span class="p">(</span><span class="n">what</span><span class="o">=</span><span class="n">dic</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+		<span class="n">u_df</span> <span class="o">=</span> <span class="n">device_df_drop_empty_duplicates</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">u_df</span></div>
+</div>
+
+
+
+
+<span class="c1"># --------------------------------------------- </span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

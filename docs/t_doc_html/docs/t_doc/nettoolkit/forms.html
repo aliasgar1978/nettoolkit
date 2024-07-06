@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.5. Form Class Functions &mdash; nettoolkit 1.6.3 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=452006c5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="8. pyJuniper API documentation!" href="../pyjuniper/tech_doc.html" />
+    <link rel="prev" title="7.4. nettoolkit common functions" href="common.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            nettoolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../addressing/tech_doc.html">1. Addressing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../capture_it/tech_doc.html">2. capture-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compare_it/tech_doc.html">3. compare-it</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure/tech_doc.html">4. configure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../facts_finder/tech_doc.html">5. facts-finder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../j2config/tech_doc.html">6. j2config</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tech_doc.html">7. nettoolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="gpl.html">7.1. GPL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convertdict.html">7.2. Convert Dictionary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db.html">7.3. Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common.html">7.4. Common Functions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.5. Forms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-nettoolkit.nettoolkit.forms.formitems">7.5.1. Form items</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.add_cable_n_connectors"><code class="docutils literal notranslate"><span class="pre">add_cable_n_connectors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.banner"><code class="docutils literal notranslate"><span class="pre">banner()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.blank_line"><code class="docutils literal notranslate"><span class="pre">blank_line()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.button_cancel"><code class="docutils literal notranslate"><span class="pre">button_cancel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.button_ok"><code class="docutils literal notranslate"><span class="pre">button_ok()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.button_pallete"><code class="docutils literal notranslate"><span class="pre">button_pallete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.get_cable_n_connectors"><code class="docutils literal notranslate"><span class="pre">get_cable_n_connectors()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.get_cache"><code class="docutils literal notranslate"><span class="pre">get_cache()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.get_list"><code class="docutils literal notranslate"><span class="pre">get_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.item_line"><code class="docutils literal notranslate"><span class="pre">item_line()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.tabs"><code class="docutils literal notranslate"><span class="pre">tabs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.tabs_display"><code class="docutils literal notranslate"><span class="pre">tabs_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.under_line"><code class="docutils literal notranslate"><span class="pre">under_line()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.nettoolkit.forms.formitems.update_cache"><code class="docutils literal notranslate"><span class="pre">update_cache()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-nettoolkit.addressing.forms.compare_scanner_outputs">7.5.2. Compare scanner outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.compare_scanner_outputs.compare_scanner_outputs_exec"><code class="docutils literal notranslate"><span class="pre">compare_scanner_outputs_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.compare_scanner_outputs.compare_scanner_outputs_frame"><code class="docutils literal notranslate"><span class="pre">compare_scanner_outputs_frame()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-nettoolkit.addressing.forms.create_batch">7.5.3. Create batch</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.create_batch.create_batch_exec"><code class="docutils literal notranslate"><span class="pre">create_batch_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.create_batch.create_batch_frame"><code class="docutils literal notranslate"><span class="pre">create_batch_frame()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-nettoolkit.addressing.forms.prefixes_oper">7.5.4. Prefixes operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.prefixes_oper.devide_prefixes_frame"><code class="docutils literal notranslate"><span class="pre">devide_prefixes_frame()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.prefixes_oper.issubset_check_prefix_frame"><code class="docutils literal notranslate"><span class="pre">issubset_check_prefix_frame()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_issubset_exec"><code class="docutils literal notranslate"><span class="pre">prefixes_oper_issubset_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_pieces_exec"><code class="docutils literal notranslate"><span class="pre">prefixes_oper_pieces_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_summary_exec"><code class="docutils literal notranslate"><span class="pre">prefixes_oper_summary_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.prefixes_oper.summarize_prefixes_frame"><code class="docutils literal notranslate"><span class="pre">summarize_prefixes_frame()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-nettoolkit.addressing.forms.subnet_scanner">7.5.5. Subnet scanner</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.subnet_scanner.count_ips"><code class="docutils literal notranslate"><span class="pre">count_ips()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.subnet_scanner.subnet_scanner_exec"><code class="docutils literal notranslate"><span class="pre">subnet_scanner_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.addressing.forms.subnet_scanner.subnet_scanner_frame"><code class="docutils literal notranslate"><span class="pre">subnet_scanner_frame()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-nettoolkit.pyJuniper.forms.juniper_oper">7.5.6. Juniper operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.juniper_oper.juniper_oper_frame"><code class="docutils literal notranslate"><span class="pre">juniper_oper_frame()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.juniper_oper.juniper_oper_remove_remarks_exec"><code class="docutils literal notranslate"><span class="pre">juniper_oper_remove_remarks_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.juniper_oper.juniper_oper_to_jset_exec"><code class="docutils literal notranslate"><span class="pre">juniper_oper_to_jset_exec()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-nettoolkit.pyJuniper.forms.md5_calculator">7.5.7. MD5 calculator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.md5_calculator.md5_calculator_exec"><code class="docutils literal notranslate"><span class="pre">md5_calculator_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.md5_calculator.md5_calculator_frame"><code class="docutils literal notranslate"><span class="pre">md5_calculator_frame()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-nettoolkit.pyJuniper.forms.pw_enc_dec">7.5.8. Password Encryption Decryption</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.go_cisco_pw_decrypt_exec"><code class="docutils literal notranslate"><span class="pre">go_cisco_pw_decrypt_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.go_cisco_pw_mask_exec"><code class="docutils literal notranslate"><span class="pre">go_cisco_pw_mask_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.go_juniper_pw_decrypt_exec"><code class="docutils literal notranslate"><span class="pre">go_juniper_pw_decrypt_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.go_juniper_pw_mask_exec"><code class="docutils literal notranslate"><span class="pre">go_juniper_pw_mask_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.pw_dec_cisco_exec"><code class="docutils literal notranslate"><span class="pre">pw_dec_cisco_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.pw_dec_juniper_exec"><code class="docutils literal notranslate"><span class="pre">pw_dec_juniper_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.pw_enc_cisco_exec"><code class="docutils literal notranslate"><span class="pre">pw_enc_cisco_exec()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.pw_enc_decr_frame"><code class="docutils literal notranslate"><span class="pre">pw_enc_decr_frame()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.pw_enc_juniper_exec"><code class="docutils literal notranslate"><span class="pre">pw_enc_juniper_exec()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyjuniper/tech_doc.html">8. pyjuniper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pynetcrypt/tech_doc.html">9. pynetcrypt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyvig/tech_doc.html">10. pyvig</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">nettoolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tech_doc.html"><span class="section-number">7. </span>Nettoolkit API documentation!</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.5. </span>Form Class Functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/t_doc/nettoolkit/forms.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="form-class-functions">
+<h1><span class="section-number">7.5. </span>Form Class Functions<a class="headerlink" href="#form-class-functions" title="Link to this heading"></a></h1>
+<section id="module-nettoolkit.nettoolkit.forms.formitems">
+<span id="form-items"></span><h2><span class="section-number">7.5.1. </span>Form items<a class="headerlink" href="#module-nettoolkit.nettoolkit.forms.formitems" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.add_cable_n_connectors">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">add_cable_n_connectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#add_cable_n_connectors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.add_cable_n_connectors" title="Link to this definition"></a></dt>
+<dd><p>add item/value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>str</em>) – cached cable and connector excel file name with full path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.banner">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">banner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#banner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.banner" title="Link to this definition"></a></dt>
+<dd><p>Banner / Texts with bold center aligned fonts</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>version</strong> (<em>str</em>) – version of code</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list with banner text</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.blank_line">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">blank_line</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#blank_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.blank_line" title="Link to this definition"></a></dt>
+<dd><p>to insert a blank row</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>blank row</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.button_cancel">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">button_cancel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#button_cancel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.button_cancel" title="Link to this definition"></a></dt>
+<dd><p>Insert a Cancel button of regular size. provide additional formating as kwargs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Text instead of Cancel to display (if need)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cancel button</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sg.Cancel</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.button_ok">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">button_ok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#button_ok"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.button_ok" title="Link to this definition"></a></dt>
+<dd><p>Insert an OK button of regular size. provide additional formating as kwargs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – Text instead of OK to display (if need)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>OK button</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sg.OK</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.button_pallete">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">button_pallete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#button_pallete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.button_pallete" title="Link to this definition"></a></dt>
+<dd><p>button pallete containing standard OK  and Cancel buttons</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list with sg.Frame containing buttons</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.get_cable_n_connectors">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">get_cable_n_connectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#get_cable_n_connectors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.get_cable_n_connectors" title="Link to this definition"></a></dt>
+<dd><p>retrive the value for provided item for given column</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – cached cable and connector file name with full path</p></li>
+<li><p><strong>column</strong> (<em>str</em>) – column name (attribute)</p></li>
+<li><p><strong>item</strong> (<em>str</em>) – row item (connector type)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>matched item value from cached file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.get_cache">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">get_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#get_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.get_cache" title="Link to this definition"></a></dt>
+<dd><p>retrive the value for provided key(item) from cache file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cache_file</strong> (<em>str</em>) – cache file name with full path</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – name of item</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>matched item value from cache file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.get_list">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">get_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_items</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#get_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.get_list" title="Link to this definition"></a></dt>
+<dd><p>create list from given raw items splits by enter and comma</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>raw_items</strong> (<em>str</em>) – multiline raw items</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of items</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.item_line">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">item_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#item_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.item_line" title="Link to this definition"></a></dt>
+<dd><p>to draw a line with provided character or repeat a character for n-number of time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>str</em>) – character</p></li>
+<li><p><strong>length</strong> (<em>int</em>) – to repeat the character</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list with repeated item Text</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.tabs">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">tabs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#tabs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.tabs" title="Link to this definition"></a></dt>
+<dd><p>create tab groups for provided kwargs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tab groups</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sg.TabGroup</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.tabs_display">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">tabs_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">tabs_dic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#tabs_display"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.tabs_display" title="Link to this definition"></a></dt>
+<dd><p>define tabs display</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of tabs</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.under_line">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">under_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#under_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.under_line" title="Link to this definition"></a></dt>
+<dd><p>To draw a line</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>length</strong> (<em>int</em>) – character length of line</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>underline row</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.nettoolkit.forms.formitems.update_cache">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.nettoolkit.forms.formitems.</span></span><span class="sig-name descname"><span class="pre">update_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_file</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/nettoolkit/forms/formitems.html#update_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.nettoolkit.forms.formitems.update_cache" title="Link to this definition"></a></dt>
+<dd><p>add/update cache item/value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cache_file</strong> (<em>str</em>) – cache file name with full path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.addressing.forms.compare_scanner_outputs">
+<span id="compare-scanner-outputs"></span><h2><span class="section-number">7.5.2. </span>Compare scanner outputs<a class="headerlink" href="#module-nettoolkit.addressing.forms.compare_scanner_outputs" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.compare_scanner_outputs.compare_scanner_outputs_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.compare_scanner_outputs.</span></span><span class="sig-name descname"><span class="pre">compare_scanner_outputs_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/compare_scanner_outputs.html#compare_scanner_outputs_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.compare_scanner_outputs.compare_scanner_outputs_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.compare_scanner_outputs.compare_scanner_outputs_frame">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.compare_scanner_outputs.</span></span><span class="sig-name descname"><span class="pre">compare_scanner_outputs_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/compare_scanner_outputs.html#compare_scanner_outputs_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.compare_scanner_outputs.compare_scanner_outputs_frame" title="Link to this definition"></a></dt>
+<dd><p>tab display - Compares output of scanner and result</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Frame with filter selection components</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sg.Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.addressing.forms.create_batch">
+<span id="create-batch"></span><h2><span class="section-number">7.5.3. </span>Create batch<a class="headerlink" href="#module-nettoolkit.addressing.forms.create_batch" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.create_batch.create_batch_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.create_batch.</span></span><span class="sig-name descname"><span class="pre">create_batch_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/create_batch.html#create_batch_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.create_batch.create_batch_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.create_batch.create_batch_frame">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.create_batch.</span></span><span class="sig-name descname"><span class="pre">create_batch_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/create_batch.html#create_batch_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.create_batch.create_batch_frame" title="Link to this definition"></a></dt>
+<dd><p>tab display - create batch file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Frame with filter selection components</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sg.Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.addressing.forms.prefixes_oper">
+<span id="prefixes-operations"></span><h2><span class="section-number">7.5.4. </span>Prefixes operations<a class="headerlink" href="#module-nettoolkit.addressing.forms.prefixes_oper" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.prefixes_oper.devide_prefixes_frame">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.prefixes_oper.</span></span><span class="sig-name descname"><span class="pre">devide_prefixes_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/prefixes_oper.html#devide_prefixes_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.prefixes_oper.devide_prefixes_frame" title="Link to this definition"></a></dt>
+<dd><p>tab display - Prefix Operations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Frame with filter selection components</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sg.Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.prefixes_oper.issubset_check_prefix_frame">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.prefixes_oper.</span></span><span class="sig-name descname"><span class="pre">issubset_check_prefix_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/prefixes_oper.html#issubset_check_prefix_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.prefixes_oper.issubset_check_prefix_frame" title="Link to this definition"></a></dt>
+<dd><p>tab display - Prefix Operations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Frame with filter selection components</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sg.Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_issubset_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.prefixes_oper.</span></span><span class="sig-name descname"><span class="pre">prefixes_oper_issubset_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/prefixes_oper.html#prefixes_oper_issubset_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_issubset_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – frame object</p></li>
+<li><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_pieces_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.prefixes_oper.</span></span><span class="sig-name descname"><span class="pre">prefixes_oper_pieces_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/prefixes_oper.html#prefixes_oper_pieces_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_pieces_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – frame object</p></li>
+<li><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_summary_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.prefixes_oper.</span></span><span class="sig-name descname"><span class="pre">prefixes_oper_summary_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/prefixes_oper.html#prefixes_oper_summary_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.prefixes_oper.prefixes_oper_summary_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – frame object</p></li>
+<li><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.prefixes_oper.summarize_prefixes_frame">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.prefixes_oper.</span></span><span class="sig-name descname"><span class="pre">summarize_prefixes_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/prefixes_oper.html#summarize_prefixes_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.prefixes_oper.summarize_prefixes_frame" title="Link to this definition"></a></dt>
+<dd><p>tab display - Prefix Operations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Frame with filter selection components</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sg.Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.addressing.forms.subnet_scanner">
+<span id="subnet-scanner"></span><h2><span class="section-number">7.5.5. </span>Subnet scanner<a class="headerlink" href="#module-nettoolkit.addressing.forms.subnet_scanner" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.subnet_scanner.count_ips">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.subnet_scanner.</span></span><span class="sig-name descname"><span class="pre">count_ips</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pfxs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">till</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/subnet_scanner.html#count_ips"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.subnet_scanner.count_ips" title="Link to this definition"></a></dt>
+<dd><p>counts ips for given subnets / prefixes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pfxs</strong> (<em>list</em>) – list of prefixes</p></li>
+<li><p><strong>till</strong> (<em>integer</em>) – number till count</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>number of total ips in given prefixes</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.subnet_scanner.subnet_scanner_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.subnet_scanner.</span></span><span class="sig-name descname"><span class="pre">subnet_scanner_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/subnet_scanner.html#subnet_scanner_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.subnet_scanner.subnet_scanner_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.addressing.forms.subnet_scanner.subnet_scanner_frame">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.addressing.forms.subnet_scanner.</span></span><span class="sig-name descname"><span class="pre">subnet_scanner_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/addressing/forms/subnet_scanner.html#subnet_scanner_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.addressing.forms.subnet_scanner.subnet_scanner_frame" title="Link to this definition"></a></dt>
+<dd><p>tab display - subnet scanner</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Frame with filter selection components</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sg.Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyJuniper.forms.juniper_oper">
+<span id="juniper-operations"></span><h2><span class="section-number">7.5.6. </span>Juniper operations<a class="headerlink" href="#module-nettoolkit.pyJuniper.forms.juniper_oper" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.juniper_oper.juniper_oper_frame">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.juniper_oper.</span></span><span class="sig-name descname"><span class="pre">juniper_oper_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/juniper_oper.html#juniper_oper_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.juniper_oper.juniper_oper_frame" title="Link to this definition"></a></dt>
+<dd><p>tab display - Juniper Operations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Frame with filter selection components</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sg.Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.juniper_oper.juniper_oper_remove_remarks_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.juniper_oper.</span></span><span class="sig-name descname"><span class="pre">juniper_oper_remove_remarks_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/juniper_oper.html#juniper_oper_remove_remarks_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.juniper_oper.juniper_oper_remove_remarks_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.juniper_oper.juniper_oper_to_jset_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.juniper_oper.</span></span><span class="sig-name descname"><span class="pre">juniper_oper_to_jset_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/juniper_oper.html#juniper_oper_to_jset_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.juniper_oper.juniper_oper_to_jset_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyJuniper.forms.md5_calculator">
+<span id="md5-calculator"></span><h2><span class="section-number">7.5.7. </span>MD5 calculator<a class="headerlink" href="#module-nettoolkit.pyJuniper.forms.md5_calculator" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.md5_calculator.md5_calculator_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.md5_calculator.</span></span><span class="sig-name descname"><span class="pre">md5_calculator_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/md5_calculator.html#md5_calculator_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.md5_calculator.md5_calculator_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – frame object</p></li>
+<li><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.md5_calculator.md5_calculator_frame">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.md5_calculator.</span></span><span class="sig-name descname"><span class="pre">md5_calculator_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/md5_calculator.html#md5_calculator_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.md5_calculator.md5_calculator_frame" title="Link to this definition"></a></dt>
+<dd><p>tab display - MD5 Calculator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Frame with filter selection components</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sg.Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-nettoolkit.pyJuniper.forms.pw_enc_dec">
+<span id="password-encryption-decryption"></span><h2><span class="section-number">7.5.8. </span>Password Encryption Decryption<a class="headerlink" href="#module-nettoolkit.pyJuniper.forms.pw_enc_dec" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.pw_enc_dec.go_cisco_pw_decrypt_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.pw_enc_dec.</span></span><span class="sig-name descname"><span class="pre">go_cisco_pw_decrypt_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/pw_enc_dec.html#go_cisco_pw_decrypt_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.go_cisco_pw_decrypt_exec" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.pw_enc_dec.go_cisco_pw_mask_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.pw_enc_dec.</span></span><span class="sig-name descname"><span class="pre">go_cisco_pw_mask_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/pw_enc_dec.html#go_cisco_pw_mask_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.go_cisco_pw_mask_exec" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.pw_enc_dec.go_juniper_pw_decrypt_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.pw_enc_dec.</span></span><span class="sig-name descname"><span class="pre">go_juniper_pw_decrypt_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/pw_enc_dec.html#go_juniper_pw_decrypt_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.go_juniper_pw_decrypt_exec" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.pw_enc_dec.go_juniper_pw_mask_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.pw_enc_dec.</span></span><span class="sig-name descname"><span class="pre">go_juniper_pw_mask_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/pw_enc_dec.html#go_juniper_pw_mask_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.go_juniper_pw_mask_exec" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.pw_enc_dec.pw_dec_cisco_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.pw_enc_dec.</span></span><span class="sig-name descname"><span class="pre">pw_dec_cisco_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/pw_enc_dec.html#pw_dec_cisco_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.pw_dec_cisco_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – frame object</p></li>
+<li><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.pw_enc_dec.pw_dec_juniper_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.pw_enc_dec.</span></span><span class="sig-name descname"><span class="pre">pw_dec_juniper_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/pw_enc_dec.html#pw_dec_juniper_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.pw_dec_juniper_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – frame object</p></li>
+<li><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.pw_enc_dec.pw_enc_cisco_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.pw_enc_dec.</span></span><span class="sig-name descname"><span class="pre">pw_enc_cisco_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/pw_enc_dec.html#pw_enc_cisco_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.pw_enc_cisco_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – frame object</p></li>
+<li><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.pw_enc_dec.pw_enc_decr_frame">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.pw_enc_dec.</span></span><span class="sig-name descname"><span class="pre">pw_enc_decr_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/pw_enc_dec.html#pw_enc_decr_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.pw_enc_decr_frame" title="Link to this definition"></a></dt>
+<dd><p>tab display - Password Encryptor Decryptor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Frame with filter selection components</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sg.Frame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="nettoolkit.pyJuniper.forms.pw_enc_dec.pw_enc_juniper_exec">
+<span class="sig-prename descclassname"><span class="pre">nettoolkit.pyJuniper.forms.pw_enc_dec.</span></span><span class="sig-name descname"><span class="pre">pw_enc_juniper_exec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/nettoolkit/pyJuniper/forms/pw_enc_dec.html#pw_enc_juniper_exec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nettoolkit.pyJuniper.forms.pw_enc_dec.pw_enc_juniper_exec" title="Link to this definition"></a></dt>
+<dd><p>executor function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>object</em>) – frame object</p></li>
+<li><p><strong>i</strong> (<em>itemobject</em>) – item object of frame</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wheter executor success or not.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="common.html" class="btn btn-neutral float-left" title="7.4. nettoolkit common functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../pyjuniper/tech_doc.html" class="btn btn-neutral float-right" title="8. pyJuniper API documentation!" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, ALIASGAR [ALI].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

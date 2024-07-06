@@ -17,7 +17,7 @@ nettoolkit is an open source python project for networking geeks.
 
 *DECLARATION*
 
-.. caution::
+.. attention::
 
 	This package is prepared by me ``ALIASGAR [ALI]`` as individual, in my free time with help of my Khuda ``AL-KHAALIQ`` using existing open source python packages.  
 	There is no other company or persons contribution, help or involvement ascociated here.

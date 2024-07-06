@@ -30,6 +30,7 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
        * compare-it: added (CompareConfig) function
        * nettoolkit_db: addded (read_xl_all_sheet) function
        * Forms: restructured & added configure fuction
+       * A few bug fixes.
    * - 1.6.2
      - May 25, 2024
      - * addressing: added get octet method and devide prefix function.

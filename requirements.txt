@@ -6,7 +6,6 @@ future
 Jinja2
 MarkupSafe
 netmiko
-nettoolkit
 ntc_templates
 numpy
 openpyxl

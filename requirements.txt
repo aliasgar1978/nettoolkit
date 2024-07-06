@@ -27,4 +27,3 @@ six
 textfsm
 tzdata
 xlrd
-lumache

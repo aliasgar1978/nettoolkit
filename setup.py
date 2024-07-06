@@ -21,7 +21,7 @@ setuptools.setup(
     python_requires='>=3.7',
     install_requires=['pandas', 'openpyxl', 'PySimpleGUI', 'numpy',
         'xlrd', 'jinja2', 'paramiko', 'netmiko', 'ntc-templates',
-        # 'pywin32', 
+        # 'pywin32',                    ## remove while building readthedocs, Enable while pypi upload
     ],
     package_data={
         'nettoolkit.nettoolkit.forms':  ['cable_n_connectors.xlsx', ],

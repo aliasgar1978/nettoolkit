@@ -9,3 +9,4 @@ paramiko
 PySimpleGUI
 textfsm
 xlrd
+nettoolkit

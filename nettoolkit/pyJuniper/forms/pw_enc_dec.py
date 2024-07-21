@@ -1,6 +1,9 @@
 
 # ---------------------------------------------------------------------------------------
-import PySimpleGUI as sg
+try:
+	import PySimpleGUI as sg
+except:
+	pass
 from nettoolkit.pyNetCrypt import decrypt_type7, encrypt_type7, decrypt_file_passwords, mask_file_passwords
 from nettoolkit.pyNetCrypt import juniper_decrypt, juniper_encrypt, decrypt_doller9_file_passwords, mask_doller9_file_passwords
 

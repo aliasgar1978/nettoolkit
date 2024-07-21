@@ -1,6 +1,9 @@
-import PySimpleGUI as sg
+try:
+	import PySimpleGUI as sg
+except:
+	pass
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.capture_it import capture, quick_display, LogSummary
+from nettoolkit.capture_it import quick_display
 
 
 def btn_quick_show_exec(i):

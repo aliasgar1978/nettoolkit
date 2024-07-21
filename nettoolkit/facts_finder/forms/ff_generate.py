@@ -1,6 +1,9 @@
 
 # ---------------------------------------------------------------------------------------
-import PySimpleGUI as sg
+try:
+	import PySimpleGUI as sg
+except:
+	pass
 import nettoolkit.facts_finder as ff
 
 from nettoolkit.nettoolkit.forms.formitems import *

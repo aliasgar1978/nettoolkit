@@ -1,6 +1,9 @@
 
 # ---------------------------------------------------------------------------------------
-import PySimpleGUI as sg
+try:
+	import PySimpleGUI as sg
+except:
+	pass
 
 import nettoolkit as nt
 #

@@ -1,7 +1,6 @@
 """Juniper table modifiers
 """
 
-# from nettoolkit import *
 import pandas as pd
 
 from nettoolkit.facts_finder.modifiers.commons import *

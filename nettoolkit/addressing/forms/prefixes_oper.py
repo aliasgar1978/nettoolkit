@@ -1,6 +1,9 @@
 
 # ---------------------------------------------------------------------------------------
-import PySimpleGUI as sg
+try:
+	import PySimpleGUI as sg
+except:
+	pass
 
 from nettoolkit.nettoolkit.forms.formitems import *
 from nettoolkit.addressing.addressing import get_summaries, addressing, isSubset

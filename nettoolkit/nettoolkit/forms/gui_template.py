@@ -1,6 +1,9 @@
 
 # ---------------------------------------------------------------------------------------
-import PySimpleGUI as sg
+try:
+	import PySimpleGUI as sg
+except:
+	pass
 from abc import abstractclassmethod, abstractproperty
 
 from .formitems import *

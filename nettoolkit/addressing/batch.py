@@ -3,7 +3,10 @@
 # """
 
 from .addressing import addressing
-import PySimpleGUI as sg
+try:
+	import PySimpleGUI as sg
+except:
+	pass
 
 # -----------------------------------------------------------------------------
 # Class to initiate UserForm

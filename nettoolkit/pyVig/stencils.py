@@ -1,6 +1,9 @@
 
 import os
-from PySimpleGUI import Popup
+try:
+	from PySimpleGUI import Popup
+except:
+	pass
 
 
 # -----------------------------------------------------------------------------------

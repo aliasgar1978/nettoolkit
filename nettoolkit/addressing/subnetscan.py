@@ -1,7 +1,10 @@
 
 # -----------------------------------------------------------------------------
 import pandas as pd
-import PySimpleGUI as sg
+try:
+	import PySimpleGUI as sg
+except:
+	pass
 from nettoolkit.nettoolkit_common.gpl import Multi_Execution, IP, nslookup
 from nettoolkit.nettoolkit_db.database import write_to_xl, read_xl, get_merged_DataFrame_of_file
 

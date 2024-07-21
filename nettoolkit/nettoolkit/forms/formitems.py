@@ -1,6 +1,9 @@
 
 # ---------------------------------------------------------------------------------------
-import PySimpleGUI as sg
+try:
+	import PySimpleGUI as sg
+except:
+	pass
 import pandas as pd
 from pathlib import *
 import nettoolkit.nettoolkit.forms as frm

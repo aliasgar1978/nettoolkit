@@ -1,9 +1,12 @@
 
-from collections import OrderedDict
-from functools import total_ordering
-import pandas as pd
+try:
+	from collections import OrderedDict
+	from functools import total_ordering
+	import pandas as pd
 
-from nettoolkit.nettoolkit_common.gpl import STR, LST, IO
+	from nettoolkit.nettoolkit_common.gpl import STR, LST, IO
+except:
+	pass
 
 # from errors import incorrectinput
 incorrectinput = 'INCORRECT SUBNET OR SUBNET MASK DETECTED NULL RETURNED'

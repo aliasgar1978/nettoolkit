@@ -81,6 +81,15 @@ cisco parser - interfaces
 	:show-inheritance:
 
 
+cisco parser - prefix lists
+-----------------------------------------------------------------------------
+
+.. automodule:: nettoolkit.facts_finder.generators.cisco._cmd_parse_running_prefix_list
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+
 cisco parser - routes
 -----------------------------------------------------------------------------
 

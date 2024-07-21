@@ -1,19 +1,16 @@
 
-
-diff module
+pyVig - cablings
 -------------------------------------------------------------------------------
 
-.. automodule:: nettoolkit.compare_it.diff
+.. automodule:: nettoolkit.pyVig.cablings
 	:members:
 	:undoc-members:
 	:show-inheritance:
 
-
-
-compare_config module
+pyVig - mathamatics
 -------------------------------------------------------------------------------
 
-.. automodule:: nettoolkit.compare_it.compare_config
+.. automodule:: nettoolkit.pyVig.maths
 	:members:
 	:undoc-members:
 	:show-inheritance:

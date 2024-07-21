@@ -15,6 +15,7 @@ build:
       # - python -m pip install sphinx-press-theme
       # - python -m pip install sphinx-book-theme
       - python -m pip install sphinx_rtd_theme
+      - python -m pip install pywin32
       - python -m pip install nettoolkit==1.6.3
       
 # Build documentation in the docs/ directory with Sphinx

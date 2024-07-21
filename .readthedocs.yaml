@@ -33,6 +33,3 @@ python:
 
 formats:
   - pdf
-
-mkdocs:
-  configuration: mkdocs.yml

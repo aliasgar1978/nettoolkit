@@ -23,6 +23,9 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
      - Date   
      - Updates
 
+   * - 1.6.4
+     - Jul 21, 2024
+     - * removed pywin32 dependancy from setup.py, should be done separately.
    * - 1.6.3
      - Jul 5, 2024
      - * capture-it: added keys (**missing_captures_only**, **append_capture**).

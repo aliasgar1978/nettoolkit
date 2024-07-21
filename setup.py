@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nettoolkit",
-    version="1.6.3",
+    version="1.6.4",
     author="ALIASGAR - ALI",
     author_email="aholo2000@gmail.com",
     description="Tool Set for Networking Geeks",
@@ -18,10 +18,10 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.10',
     install_requires=['pandas', 'openpyxl', 'PySimpleGUI', 'numpy',
         'xlrd', 'jinja2', 'paramiko', 'netmiko', 'ntc-templates',
-        # 'pywin32',                    ## remove while building readthedocs, Enable while pypi upload
+        # 'pywin32',                    ## Windows specific library, need to do manually...
     ],
     package_data={
         'nettoolkit.nettoolkit.forms':  ['cable_n_connectors.xlsx', ],

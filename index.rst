@@ -38,7 +38,6 @@
    :caption: API Documentation:
    :numbered:
 
-   API Documentation Link <apilink>
    Addressing <docs/t_doc/addressing/tech_doc>
    capture-it <docs/t_doc/capture_it/tech_doc>
    compare-it <docs/t_doc/compare_it/tech_doc> 

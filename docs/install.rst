@@ -18,7 +18,7 @@ Requirements
    :align: right
 
 
-Installation
+Installations
 ==================
 
 Install the nettoolkit package using pip::
@@ -27,7 +27,15 @@ Install the nettoolkit package using pip::
 	
 There are many other ways to install packages such as conda install or manual wheel file download and install.
 You can do it as per your prefered choice of installation.
-	
+
+
+
+Install windows os library for python::
+
+    pip install --upgrade pywin32
+
+This is mandatory for MS-visio drawing generation. And it will work only on windows platforms.
+
 
 ---------------------------
 

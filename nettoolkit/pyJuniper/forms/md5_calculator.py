@@ -1,9 +1,5 @@
 
 # ---------------------------------------------------------------------------------------
-try:
-	import PySimpleGUI as sg
-except:
-	pass
 from nettoolkit.pyNetCrypt import get_md5
 
 from nettoolkit.nettoolkit.forms.formitems import *

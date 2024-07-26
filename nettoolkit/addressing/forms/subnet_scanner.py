@@ -1,9 +1,5 @@
 
 # ---------------------------------------------------------------------------------------
-try:
-	import PySimpleGUI as sg
-except:
-	pass
 from nettoolkit.nettoolkit_common.gpl import STR, LOG
 
 from nettoolkit.addressing import addressing

@@ -1,9 +1,5 @@
 
 # ---------------------------------------------------------------------------------------
-try:
-	import PySimpleGUI as sg
-except:
-	pass
 from nettoolkit.pyVig import pyVig, DFGen
 import nettoolkit.nettoolkit_db  as nt
 import importlib

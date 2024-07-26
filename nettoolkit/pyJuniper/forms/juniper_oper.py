@@ -1,10 +1,6 @@
 
 
 # ---------------------------------------------------------------------------------------
-try:
-	import PySimpleGUI as sg
-except:
-	pass
 from pathlib import *
 from nettoolkit.pyJuniper.juniper import Juniper
 

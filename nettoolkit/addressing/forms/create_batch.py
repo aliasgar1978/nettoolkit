@@ -1,10 +1,5 @@
 
 # ---------------------------------------------------------------------------------------
-try:
-	import PySimpleGUI as sg
-except:
-	pass
-
 from nettoolkit.nettoolkit.forms.formitems import *
 from nettoolkit.addressing.batch import create_batch_file
 

@@ -1,9 +1,5 @@
 
 # ---------------------------------------------------------------------------------------
-try:
-	import PySimpleGUI as sg
-except:
-	pass
 from nettoolkit.compare_it import *
 
 from nettoolkit.nettoolkit.forms.formitems import *

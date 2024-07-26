@@ -29,12 +29,18 @@ There are many other ways to install packages such as conda install or manual wh
 You can do it as per your prefered choice of installation.
 
 
+Install pysimplegui library for python::
+
+    pip install --upgrade pysimplegui
+
 
 Install windows os library for python::
 
     pip install --upgrade pywin32
 
 This is mandatory for MS-visio drawing generation. And it will work only on windows platforms.
+
+
 
 
 ---------------------------

@@ -23,9 +23,15 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
      - Date   
      - Updates
 
+   * - 1.6.6
+     - Jul 26, 2024
+     - capture-it: code enhancements and a few bug fixes.
+   * - 1.6.5
+     - Jul 21, 2024
+     - removed pysimpleGUI from setup.py, due to readthedocs incompatibility. it should be installed separately.
    * - 1.6.4
      - Jul 21, 2024
-     - * removed pywin32 dependancy from setup.py, should be done separately.
+     - removed pywin32 dependancy from setup.py, should be done separately.
    * - 1.6.3
      - Jul 5, 2024
      - * capture-it: added keys (**missing_captures_only**, **append_capture**).
@@ -41,7 +47,7 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
        * configure: New draft/beta module added.
    * - 1.6.1
      - Mar 22, 2024
-     - * capture-it: rewamp code, separate out device detection module. Removed a few extra overhead logging feature. Added failure devices listing.
+     - capture-it: rewamp code, separate out device detection module. Removed a few extra overhead logging feature. Added failure devices listing.
    * - 1.5.8
      - Mar 08, 2024
      - * pyNetCrypt: bug fix in cpwcracker. File p/w encryption/decryption added in Forms
@@ -51,7 +57,7 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
        * addressing: Allocate ( added **iterate_base_ip** argument, in order to change or not to change after each allocation )
    * - 1.5.7
      - Jan 15, 2024
-     - * pyVig: manually line color map add/edit functionality added.
+     - pyVig: manually line color map add/edit functionality added.
    * - 1.5.6
      - Jan 15, 2024
      - Version Upload failed.
@@ -63,7 +69,7 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
        * pyVig: custom mandatory functions, dependancy removed.
    * - 1.5.4
      - Jan 10, 2024
-     - * capture-it: **individual capture** device specific commands capture functionality added, and a few minor flow changes.
+     - capture-it: **individual capture** device specific commands capture functionality added, and a few minor flow changes.
    * - 1.5.3
      - Jan 9, 2024
      - * nettoolkit database: Dataframe **sort** functionality based **on subnets** column added.

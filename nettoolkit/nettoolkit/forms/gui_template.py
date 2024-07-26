@@ -18,7 +18,7 @@ from .tab_event_funcs import btn_minitools_exec
 class GuiTemplate():
 	'''Minitools UserForm asking user inputs.	'''
 
-	header = 'GuiTemplate: v0.3.0'
+	header = 'GuiTemplate: v0.3.1'
 
 	# Object Initializer
 	def __init__(self):

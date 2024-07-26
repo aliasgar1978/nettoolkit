@@ -36,5 +36,6 @@ def exec_options_frame():
 		[sg.Checkbox('display console summary on console', key='print', default=True, text_color='black')],
 		under_line(80),
 		[sg.Checkbox('append captures to existing file', key='cb_cit_append', default=False, text_color='black')],
+		[sg.Checkbox('capture only missing outputs in existing capture', key='cb_cit_missing_only', default=False, text_color='black')],
 
 		])

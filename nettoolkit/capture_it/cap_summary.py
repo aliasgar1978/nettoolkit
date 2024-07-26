@@ -38,7 +38,6 @@ class LogSummary():
 		self.cmd_exec_logs_all = c.cmd_exec_logs_all
 		self.set_cmd_listd_dict(c)
 		self.device_type_all = c.device_type_all
-		self.ips = c.ips
 		self.host_vs_ips = c.host_vs_ips
 		#
 		self.trim_juniper_no_more()

@@ -25,6 +25,7 @@ class CleanFacts:
 		capture_log_file (str): configuration capture log file name
 		capture_parsed_file (str): configuration parsed excel file name
 		convert_to_cit(bool, optional): convert normal capture log file to capture_it output format (useful if capture was taken manually). Defaults to False.
+		remove_cit_bkp(bool, optional): remove duplicated log file (capture_it output format). Defaults to True.
 		skip_txtfsm(bool, optional): skip evaluation of capture excel file (textfsm parsed file), and use native facts-finder parsers. Defaults to False.
 		new_suffix (str, optional): file suffix. Defaults to '-clean'.
 		use_cdp (bool, optional): use cdp neighbor (overrides lldp neighbor) . Defaults to False.
@@ -36,6 +37,7 @@ class CleanFacts:
 		capture_log_file, 
 		capture_parsed_file,
 		convert_to_cit=False,
+		remove_cit_bkp=True,
 		skip_txtfsm=False,
 		new_suffix='-clean',
 		use_cdp=False,
@@ -46,6 +48,7 @@ class CleanFacts:
 		self.capture_log_file = capture_log_file
 		self.capture_parsed_file = capture_parsed_file
 		self.convert_to_cit = convert_to_cit
+		self.remove_cit_bkp = remove_cit_bkp
 		self.skip_txtfsm = skip_txtfsm
 		self.new_suffix = new_suffix
 		self.use_cdp = use_cdp
@@ -74,6 +77,7 @@ class CleanFacts:
 			if self.debug:
 				write_to_xl(self._fg_data_file, self.Mc.fg_merged_dict, overwrite=True)
 				write_to_xl(self._fm_data_file, self.Mc.pdf_dict, overwrite=True)
+		self.remove_bkp_log()
 
 	def get_facts_gen(self):
 		"""gets Facts from generators 
@@ -141,6 +145,19 @@ class CleanFacts:
 		"""device type string either(cisco/juniper)
 		"""
 		return self.Fg.dev_type		
+
+	def remove_bkp_log(self):
+		"""removes the backup file created during normal caprure read
+		"""    		
+		if self.remove_cit_bkp and self.convert_to_cit:
+			try:
+				os.remove(f'{self.capture_log_file[:-4]}-bkp.log')
+				# os.rename(f'{self.capture_log_file[:-4]}-bkp.log', self.capture_log_file)
+			except:
+				if not self.Fg.dev_type == 'juniper':
+					print(f"Error Removing duplicate file")
+
+
 
 # ========================================================================================
 

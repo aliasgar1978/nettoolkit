@@ -229,6 +229,41 @@ class Execute_Common():
 		pprint(self.failed_devices)
 		print(f"\n! {'='*72} !\n")
 
+	def _execute(self, ip, cmds):
+		"""execution function for a single device. hn == ip address in this case.
+
+		Args:
+			ip (str): ip address of a reachable device
+		"""
+		self.append_capture = self.append_capture or self.missing_captures_only
+		# - capture instance -
+		ED = Execute_Device(ip, 
+			auth=self.auth, 
+			cmds=cmds, 
+			output_path=self.path, 
+			cumulative=self.cumulative,
+			forced_login=self.forced_login, 
+			parsed_output=self.parsed_output,
+			CustomClass=self.CustomClass,
+			fg=self.fg,
+			mandatory_cmds_retries=self.mandatory_cmds_retries,
+			append_capture=self.append_capture,
+			missing_captures_only=self.missing_captures_only,
+		)
+		###
+		self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
+		self.device_type_all[ED.hostname] =  ED.dev.dtype
+		self.host_vs_ips[ED.hostname] = ip
+		#
+
+		# - update all cmds
+		self._update_all_cmds(ED)
+
+		# - facts generations -
+		if self.fg: 
+			self._ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
+
+
 
 
 # -----------------------------------------------------------------------------------------------
@@ -264,7 +299,6 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		self.all_cmds = {}
 		self.path = path
 		#
-		self.ips = []
 		self.host_vs_ips = {}
 		if not isinstance(cmds, dict):
 			raise Exception("Commands are to be in proper dict format")
@@ -277,36 +311,7 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		Args:
 			ip (str): ip address of a reachable device
 		"""
-		# - capture instance -
-		ED = Execute_Device(ip, 
-			auth=self.auth, 
-			cmds=self.cmds, 
-			path=self.path, 
-			cumulative=self.cumulative,
-			forced_login=self.forced_login, 
-			parsed_output=self.parsed_output,
-			CustomClass=self.CustomClass,
-			fg=self.fg,
-			mandatory_cmds_retries=self.mandatory_cmds_retries,
-			append_capture=self.append_capture,
-			missing_captures_only=self.missing_captures_only,
-		)
-
-		##
-		if ED.dev:
-			self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
-			self.device_type_all[ED.hostname] =  ED.dev.dtype
-			self.host_vs_ips[ED.hostname] = ip
-		else:
-			self.failed_devices[ip] = ED.failed_reason
-		self.ips.append(ip)
-
-		# - update all cmds
-		self._update_all_cmds(ED)
-
-		# - facts generations -
-		if self.fg and ED.dev: 
-			self._ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
+		self._execute(ip, self.cmds)
 
 
 
@@ -347,9 +352,9 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 		self._add_devices(dev_cmd_dict)
 		self._set_individual_device_cmds_dict(dev_cmd_dict)
 		#
-		self.ips = []
 		self.cmds = {}
 		self.all_cmds = {}
+		self.host_vs_ips ={}
 		#
 		super().__init__(self.devices)
 
@@ -438,33 +443,7 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 		Args:
 			ip (str): ip address of a reachable device
 		"""
-		cmds = sorted(self.dev_cmd_dict[ip])
-		# - capture instance -
-		ED = Execute_Device(ip, 
-			auth=self.auth, 
-			cmds=cmds, 
-			path=self.path, 
-			cumulative=self.cumulative,
-			forced_login=self.forced_login, 
-			parsed_output=self.parsed_output,
-			CustomClass=self.CustomClass,
-			fg=self.fg,
-			mandatory_cmds_retries=self.mandatory_cmds_retries,
-			append_capture=self.append_capture,
-			missing_captures_only=self.missing_captures_only,
-		)
-		###
-		self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
-		self.device_type_all[ED.hostname] =  ED.dev.dtype
-		self.ips.append(ip)
-		#
-
-		# - update all cmds
-		self._update_all_cmds(ED)
-
-		# - facts generations -
-		if self.fg: 
-			self._ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
+		self._execute(ip, sorted(self.dev_cmd_dict[ip]))
 
 
 

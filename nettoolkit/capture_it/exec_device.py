@@ -3,6 +3,7 @@
 # -----------------------------------------------------------------------------
 from time import sleep
 from nettoolkit.nettoolkit_common import STR, IP
+from dataclasses import dataclass
 
 from copy import deepcopy
 import nettoolkit.facts_finder as ff
@@ -14,15 +15,15 @@ from .common import cmd_line_pfx
 # -----------------------------------------------------------------------------
 # Execution of Show Commands on a single device. 
 # -----------------------------------------------------------------------------
-
+@dataclass(init=True, repr=False, eq=False)
 class Execute_Device():
 	"""Execute a device capture
 
 	Args:
-		ip (str): device ip
+		log_key (str): device ip
 		auth (dict): authentication parameters
 		cmds (list, set, tuple): set of commands to be executed.
-		path (str): path where output to be stored
+		output_path (str): path where output to be stored
 		cumulative (bool, optional): True,False,both. Defaults to False.
 		forced_login (bool): True will try login even if device ping fails.
 		parsed_output (bool): parse output and generate Excel or not.
@@ -32,37 +33,23 @@ class Execute_Device():
 		append_capture(bool): append capture to existing file instead of creating new.
 		missing_captures_only(bool): capture only missing command outputs from existing output
 	"""    	
+	log_key               : str
+	auth                  : dict
+	cmds                  : list
+	output_path           : str
+	cumulative            : bool 
+	forced_login          : bool
+	parsed_output         : bool
+	CustomClass           : 'typing.Any'
+	fg                    : bool
+	mandatory_cmds_retries: int
+	append_capture        : bool
+	missing_captures_only : bool
 
-	def __init__(self, 
-		ip, 
-		auth, 
-		cmds, 
-		path, 
-		cumulative, 
-		forced_login, 
-		parsed_output,
-		CustomClass,
-		fg,
-		mandatory_cmds_retries,
-		append_capture,
-		missing_captures_only,
-		):
-		"""initialize execution
-		"""
-		self.log_key = ip
-		self.auth = auth
-		self.cmds = deepcopy(cmds)
+	def __post_init__(self):
+		ip = self.log_key
 		self.all_cmds = {'cisco_ios': set(), 'juniper_junos':set(),}
-		self.output_path = path
-		self.cumulative = cumulative
 		self.cumulative_filename = None
-		self.forced_login = forced_login
-		self.parsed_output = parsed_output
-		self.CustomClass = CustomClass
-		self.fg = fg
-		self.mandatory_cmds_retries = mandatory_cmds_retries
-		self.append_capture = append_capture
-		self.missing_captures_only = missing_captures_only
 		self.delay_factor, self.dev = None, None
 		self.cmd_exec_logs = []
 		self.failed_reason = ''
@@ -171,9 +158,16 @@ class Execute_Device():
 
 			# -- get the missing commands list if it is to do only missing captures
 			if self.missing_captures_only:
-				missed_cmds = self.get_missing_commands(c, set(self.cmds[self.dev.dtype]))
-				self.cmds[self.dev.dtype] = missed_cmds
-				print("Missed Cmds = ", missed_cmds)
+				if isinstance(self.cmds, dict):
+					missed_cmds = self.get_missing_commands(c, set(self.cmds[self.dev.dtype]))
+					self.cmds[self.dev.dtype] = missed_cmds
+				elif isinstance(self.cmds, (list, set, tuple)):
+					missed_cmds = self.get_missing_commands(c, set(self.cmds))
+					self.cmds = missed_cmds
+				if missed_cmds:
+					print(f"{c.hn} : INFO: Missed Cmds = ", missed_cmds)
+				else:
+					print(f"{c.hn} : INFO: No missing Command found in existing capture..")
 
 			cc = self.command_capture(c)
 			cc.grp_cmd_capture(self.cmds)
@@ -253,7 +247,7 @@ class Execute_Device():
 		Args:
 			c (conn): connection object
 		"""
-		print(f"{c.hn} - Starting Capture")
+		print(f"{c.hn} : INFO : Starting Capture in `{'append' if self.append_capture else 'add'}` mode")
 
 		cc = Captures(
 			conn=c, 
@@ -340,8 +334,8 @@ class Execute_Device():
 		for log_line in log_lines:
 			if log_line[1:].startswith(cmd_line_pfx):
 				captured_cmd = ff.get_absolute_command(self.dev.dtype, log_line.split(cmd_line_pfx)[-1])
-				captured_cmds.add(captured_cmd)
+				captured_cmds.add(captured_cmd.strip())
 		missed_cmds = cmds.difference(captured_cmds)
-		return missed_cmds
+		return list(missed_cmds)
 
 

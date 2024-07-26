@@ -310,6 +310,8 @@ class Configure(Config_common):
 			] ):
 			for tries in range(3):
 				try:
+					if self.net_connect.check_enable_mode():
+						break
 					self.net_connect.enable(cmd="enable")
 					break
 				except:

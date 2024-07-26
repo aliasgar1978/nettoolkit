@@ -28,6 +28,7 @@ PHYSICAL_IFS.update({
 		'HundredGigE':2,
 		'AppGigabitEthernet': 2,
 		'mgmt': 4,
+		'Async': 5,
 })
 PHYSICAL_IFS['TwoGigabitEthernet'] = 3     # Do not alter sequence of these two.
 PHYSICAL_IFS['TwentyFiveGigE'] = 3  # ....

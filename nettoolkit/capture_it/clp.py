@@ -49,7 +49,7 @@ class CLP():
 			bool: True/False
 		"""    		
 		if not self._configure and 'config' == cmd.lstrip()[:6].lower():
-			print(f"{self.hn} : CRIT : error entering config mode, Mode disabled, Exiting")
+			self.conn._device_conn_log(display=True, msg=f"{self.hn} : CRIT : error entering config mode, Mode disabled, Exiting")
 			return False
 		return True
 
@@ -76,7 +76,7 @@ class CLP():
 			cmdObj = COMMAND(conn=self.conn, cmd=cmd, parsed_output=False, 
 				del_old_file=del_old_file)
 		except:
-			print(f"{self.hn} : ERROR: error executing command {cmd}")
+			self.conn._device_conn_log(display=True, msg=f"{self.hn} : ERROR: error executing command {cmd}")
 			self.cmd_exec_logs[-1]['raw'] = False
 			return None
 		try:
@@ -86,7 +86,7 @@ class CLP():
 			if cumulative: self.cumulative_filename = cmdObj.cumulative_filename
 			return cmdObj
 		except:
-			print(f"{self.hn} : ERROR: error writing output of command {cmd}  <<<<<< !!!!!!",)
+			self.conn._device_conn_log(display=True, msg=f"{self.hn} : ERROR: error writing output of command {cmd}  <<<<<< !!!!!!",)
 			self.cmd_exec_logs[-1]['raw'] = False
 			return False
 
@@ -95,14 +95,15 @@ class CLP():
 		try:
 			cmdObj_parsed = COMMAND(conn=self.conn, cmd=cmd, parsed_output=True)
 		except:
-			print(f"{self.hn} : ERROR: error parsing command - {cmd}")
+			self.conn._device_conn_log(display=True, msg=f"{self.hn} : ERROR: error parsing command - {cmd}")
 			self.cmd_exec_logs[-1]['parsed'] = False
 			return None
 		try:
 			self.parsed_cmd_df[cmd] = pd.DataFrame(cmdObj_parsed.output)
 			self.cmd_exec_logs[-1]['parsed'] = True
 		except:
-			print(f"{self.hn} : INFO : Ntc-template parser unavailable for the output of command {cmd}, "
+			self.conn._device_conn_log(display=True, 
+					msg=f"{self.hn} : INFO : Ntc-template parser unavailable for the output of command {cmd}, "
 								f"data facts will not be available for this command")
 			self.cmd_exec_logs[-1]['parsed'] = False
 			return False

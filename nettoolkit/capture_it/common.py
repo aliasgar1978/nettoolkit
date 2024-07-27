@@ -26,3 +26,16 @@ def juniper_add_no_more(cmd):
 		spl.append( " no-more ")
 	ucmd = "|".join(spl)
 	return ucmd
+
+
+def exec_log(msg, to_file, display=False):
+	"""print and write execution log to a file.
+
+	Args:
+		msg (str): log message
+		to_file (str): filename with full path to where message to be added
+		display (bool, optional): display message on screen or not. Defaults to False.
+	"""    	
+	if display: print(msg)
+	with open(to_file, 'a') as f:
+		f.write(msg+"\n")

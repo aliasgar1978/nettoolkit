@@ -50,39 +50,40 @@ class conn(object):
 	# Connection Initializer
 	def __init__(self, 
 		ip, 
-		un, 
-		pw, 
-		en, 
-		delay_factor, 
-		devtype='', 
 		hostname='', 
+		device=None,
 		):
+		self.tmp_device_conn_log = ''
 		self.conn_time_stamp = LOG.time_stamp()
-		self._devtype = devtype 						# eg. cisco_ios
+		self._devtype = device.dev.dtype    			# eg. cisco_ios
 		self._devvar = {'ip': ip, 'host': hostname }	# device variables
-		self.__set_local_var(un, pw, en)				# setting 
+		self.device = device
+		self.__set_local_var(device.auth['un'], device.auth['pw'], device.auth['en'])	    # setting 
 		self.banner = juniper_banner if self.devtype == 'juniper_junos' else cisco_banner
-		self.delay_factor = delay_factor
+		self.delay_factor = device.delay_factor
 		self.clsString = f'Device Connection: {self.devtype}/{self._devvar["ip"]}/{self._devvar["host"]}'
 		self.__connect
 		self.devvar = self._devvar
+
+	def _device_conn_log(self, display, msg):
+		self.device._device_exec_log(display, msg)
 
 	# context load
 	def __enter__(self):
 		if self.connectionsuccess:
 			self.__set_hostname
 			self.clsString = f'Device Connection: {self.devtype}/{self._devvar["ip"]}/{self._devvar["host"]}'
-			print(f"{self._devvar['ip']} - conn - entered - {self.clsString}")
+			self._device_conn_log(display=True, msg=f"{self._devvar['ip']} - conn - entered - {self.clsString}")
 		else:
-			print(f"{self._devvar['ip']} - conn - entery - failed")
+			self._device_conn_log(display=True, msg=f"{self._devvar['ip']} - conn - entery - failed")
 		return self      # ip connection object
 
 	# cotext end
 	def __exit__(self, exc_type, exc_value, tb):
 		try:
-			print(f"{self._devvar['host']} : INFO : conn - terminate - {self.clsString}")
+			self._device_conn_log(display=True, msg=f"{self._devvar['host']} : INFO : conn - terminate - {self.clsString}")
 		except:
-			print(f"{self._devvar['ip']} - conn - terminate - {self.clsString}")
+			self._device_conn_log(display=True, msg=f"{self._devvar['ip']} - conn - terminate - {self.clsString}")
 		self.__terminate
 		if exc_type is not None:
 			traceback.print_exception(exc_type, exc_value, tb)
@@ -124,7 +125,7 @@ class conn(object):
 	# set connection var|properties
 	def __set_local_var(self, un, pw, en):
 		'''Inherit User Variables'''
-		print(f"{self._devvar['ip']} - conn - setting up auth parameters")
+		self._device_conn_log(display=True, msg=f"{self._devvar['ip']} - conn - setting up auth parameters")
 		self._devvar['username'] = un
 		self._devvar['password'] = pw
 		self._devvar['secret'] = en
@@ -137,7 +138,7 @@ class conn(object):
 	# establish connection
 	@property
 	def __connect(self):
-		print(f"{self._devvar['ip']} - conn - start ConnectHandler")
+		self._device_conn_log(display=True, msg=f"{self._devvar['ip']} - conn - start ConnectHandler")
 		try:
 			self.net_connect = ConnectHandler(**self._devvar) 
 			self.connectionsuccess = True			
@@ -157,7 +158,7 @@ class conn(object):
 					self.net_connect.enable(cmd="enable")
 					break
 				except:
-					print(f"{self._devvar['host']} - enable failed on attemp {tries}")
+					self._device_conn_log(display=True, msg=f"{self._devvar['host']} - enable failed on attemp {tries}")
 					continue
 
 	# set connection hostname property

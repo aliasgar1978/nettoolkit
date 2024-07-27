@@ -1,6 +1,7 @@
 
 # ------------------------------------------------------------------------------
 from nettoolkit.nettoolkit_common.gpl import STR, IO
+import os
 from .hierarchy import Hierarchy 
 from .jset import JSet
 # ------------------------------------------------------------------------------
@@ -94,10 +95,13 @@ def convert_to_set_from_captures(conf_file, output_file=None):
 		if line.startswith("# output for command: "): 
 			break
 		conflist+=line
-	with open(conf_file[:-4]+".tmp", 'w') as f:
+	_tmp_config = conf_file[:-4]+".tmp"
+	with open(_tmp_config, 'w') as f:
 		f.write(conflist)
-	J = Juniper(conf_file[:-4]+".tmp", output_file)
-	return J.convert_to_set(output_file)
+	J = Juniper(_tmp_config, output_file)
+	set_list = J.convert_to_set(output_file)
+	os.remove(_tmp_config)
+	return set_list
 
 # ------------------------------------------------------------------------------
 if __name__ == '__main__':

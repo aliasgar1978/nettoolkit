@@ -9,17 +9,20 @@ import nettoolkit.facts_finder as ff
 from collections import OrderedDict
 
 from .exec_device import Execute_Device
+from .common import exec_log
 
 # -----------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------------------------
 # COMMON methods and variables defining class
 # -----------------------------------------------------------------------------------------------
-class Execute_Common():
+class Execute_Common():    	
 	"""common methods/variables declaration in a Execute Common class
 
 	Args:
 		auth (dict): authentication parameters
+		capture_path (str): path to where captures to be stored
+		exec_log_path (str): path to where device execution logs to be stored.
 
 
 	Raises:
@@ -27,8 +30,9 @@ class Execute_Common():
 	"""	
 
 	# set authentication and default parameters
-	def __init__(self, auth):
+	def __init__(self, auth, capture_path, exec_log_path):
 		self._add_auth_para(auth)
+		self._add_path(capture_path=capture_path, exec_log_path=exec_log_path)
 		self._set_defaults()
 
 	# verify data, start capture, write logs
@@ -54,6 +58,23 @@ class Execute_Common():
 		if not auth.get('en') or auth['en'] == '':
 			auth['en'] = auth['pw']
 		self.auth = auth
+
+	def _add_path(self, capture_path, exec_log_path):
+		"""add path parameters to self instance
+		
+		Args:
+			path (dict): path parameters
+
+		Returns:
+			None
+		"""
+		if not isinstance(capture_path, str):
+			raise Exception(f"capture path parameter needs to be passed as string, got {type(capture_path)}")
+		if exec_log_path and not isinstance(exec_log_path, str):
+			raise Exception(f"log path parameter needs to be passed as string, got {type(capture_path)}")
+		self.capture_path = capture_path 
+		self.exec_log_path = exec_log_path if exec_log_path else capture_path
+			
 
 	def _set_defaults(self):
 		"""setting the default value for optional user input parameters
@@ -240,7 +261,7 @@ class Execute_Common():
 		ED = Execute_Device(ip, 
 			auth=self.auth, 
 			cmds=cmds, 
-			output_path=self.path, 
+			output_path=self.capture_path, 
 			cumulative=self.cumulative,
 			forced_login=self.forced_login, 
 			parsed_output=self.parsed_output,
@@ -263,6 +284,10 @@ class Execute_Common():
 		if self.fg: 
 			self._ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
 
+		# - write exec log -
+		ts = LOG.time_stamp().replace(":", "-")
+		exec_log_file = f'{self.exec_log_path}/{ED.hostname}-exec-{ts}.log'
+		exec_log(msg=ED.tmp_device_exec_log, to_file=exec_log_file)
 
 
 
@@ -292,12 +317,23 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 
 	"""    	
 
-	def __init__(self, ip_list, auth, cmds, path="."):
-		Execute_Common.__init__(self, auth)
+	def __init__(self, 
+		ip_list, 
+		auth, 
+		cmds, 
+		capture_path=None, 
+		exec_log_path=".",
+		path=".",                      ##  Backward compatible, till next major release
+		):
+		if capture_path is None:                                  ##  Backward compatible, till next major release
+			Execute_Common.__init__(self, auth, path, exec_log_path)   ##  Backward compatible, till next major release
+		else:
+			Execute_Common.__init__(self, auth, capture_path, exec_log_path)
+		#
 		self.devices = STR.to_set(ip_list) if isinstance(ip_list, str) else set(ip_list)
 		self.cmds = cmds
 		self.all_cmds = {}
-		self.path = path
+		self.capture_path = capture_path
 		#
 		self.host_vs_ips = {}
 		if not isinstance(cmds, dict):
@@ -340,14 +376,22 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 
 	"""    	
 
-	def __init__(self, auth, dev_cmd_dict, path='.'):
+	def __init__(self, 
+		auth, 
+		dev_cmd_dict, 
+		capture_path=None, 
+		exec_log_path=".",
+		path=".",                      ##  Backward compatible, till next major release
+		):
 		"""Initiatlize the connections for the provided iplist, authenticate with provided auth parameters, 
 		and execute given commands.
 		"""
 		#
-		Execute_Common.__init__(self, auth)
+		if capture_path is None:                                  ##  Backward compatible, till next major release
+			Execute_Common.__init__(self, auth, path, exec_log_path)   ##  Backward compatible, till next major release
+		else:
+			Execute_Common.__init__(self, auth, capture_path, exec_log_path)
 		#
-		self.path = path
 		self._verify_dev_cmd_dict(dev_cmd_dict)
 		self._add_devices(dev_cmd_dict)
 		self._set_individual_device_cmds_dict(dev_cmd_dict)

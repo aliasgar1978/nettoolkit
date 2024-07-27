@@ -69,7 +69,7 @@ class Captures(CLP):
 		#
 		for cmd  in commands:
 			if not self.check_config_authorization(cmd): 
-				print(f"CRIT : UnAuthorizedCommandDetected-{cmd}-EXECUTIONHALTED")
+				self.conn._device_conn_log(display=True, msg=f"CRIT : UnAuthorizedCommandDetected-{cmd}-EXECUTIONHALTED")
 				return None
 
 			# if juniper update no-more if unavailable.
@@ -99,9 +99,9 @@ class Captures(CLP):
 		try:
 			xl_file = self.conn.output_path + "/" + self.conn.hn + ".xlsx"
 			append_to_xl(xl_file, self.parsed_cmd_df, overwrite=True)
-			print(f"{self.hn} : INFO :writing facts to excel: {xl_file}...Success!")
+			self.conn._device_conn_log(display=True, msg=f"{self.hn} : INFO :writing facts to excel: {xl_file}...Success!")
 		except:
-			print(f"{self.hn} : ERROR: writing facts to excel: {xl_file}...failed!")
+			self.conn._device_conn_log(display=True, msg=f"{self.hn} : ERROR: writing facts to excel: {xl_file}...failed!")
 
 		return xl_file
 

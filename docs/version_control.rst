@@ -23,13 +23,16 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
      - Date   
      - Updates
 
+   * - 1.6.7
+     - Jul XX, 2024 TBD
+     - * capture-it: code enhancements added log functionality.
    * - 1.6.6
      - Jul 26, 2024
      - * capture-it: code enhancements and a few bug fixes.
        * facts-finder: ``remove_cit_bkp`` key added.
    * - 1.6.5
      - Jul 21, 2024
-     - removed pysimpleGUI from setup.py, due to readthedocs incompatibility. it should be installed separately.
+     - explicitly skip load pysimpleGUI module, due to readthedocs incompatibility. it will give further code execution errors if not loaded properly.
    * - 1.6.4
      - Jul 21, 2024
      - removed pywin32 dependancy from setup.py, should be done separately.

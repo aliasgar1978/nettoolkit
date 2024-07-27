@@ -4,6 +4,7 @@
 from time import sleep
 from nettoolkit.nettoolkit_common import STR, IP
 from dataclasses import dataclass
+import typing
 
 from copy import deepcopy
 import nettoolkit.facts_finder as ff

@@ -25,7 +25,7 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
 
    * - 1.6.7
      - Jul XX, 2024 TBD
-     - * capture-it: code enhancements added log functionality.
+     - * capture-it: code enhancements added log functionality, Bug fix on custom command capture.
    * - 1.6.6
      - Jul 26, 2024
      - * capture-it: code enhancements and a few bug fixes.

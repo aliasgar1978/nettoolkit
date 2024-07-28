@@ -16,7 +16,7 @@ from .common import exec_log
 # -----------------------------------------------------------------------------------------------
 # COMMON methods and variables defining class
 # -----------------------------------------------------------------------------------------------
-class Execute_Common():    	
+class Execute_Common():
 	"""common methods/variables declaration in a Execute Common class
 
 	Args:
@@ -229,17 +229,6 @@ class Execute_Common():
 		# ------------------------------------------------------------------------
 
 
-	def _update_all_cmds(self, ED):
-		"""update executed commands for all commands dictionary 
-
-		Args:
-			ED (Execute_Device): Device Execution object instance
-		"""	
-		if not ED.dev: return
-		dt = ED.dev.dtype
-		if not self.all_cmds.get(dt):
-			self.all_cmds[dt] = []
-		self.all_cmds[dt].extend(list(ED.all_cmds[dt]))
 
 	@property
 	def show_failures(self):
@@ -272,23 +261,58 @@ class Execute_Common():
 			missing_captures_only=self.missing_captures_only,
 		)
 		###
-		self.cmd_exec_logs_all[ED.hostname] = ED.cmd_exec_logs
-		self.device_type_all[ED.hostname] =  ED.dev.dtype
-		self.host_vs_ips[ED.hostname] = ip
-		#
+		self.update_other_properties(executed_device=ED, ip=ip)
+		self.update_all_cmds(executed_device=ED)
+		self.generate_clean_facts_file(executed_device=ED)
+		self.write_exec_log(executed_device=ED)
 
-		# - update all cmds
-		self._update_all_cmds(ED)
+	def update_other_properties(self, executed_device, ip):
+		"""update other properties of the current object 
 
-		# - facts generations -
-		if self.fg: 
-			self._ff_sequence(ED, self.CustomDeviceFactsClass, self.foreign_keys)
+		Args:
+			executed_device (Execute_Device): Device Execution object instance
+			ip (str): device ip address or FQDN
+		"""	
+		if executed_device.dev:
+			self.cmd_exec_logs_all[executed_device.hostname] = executed_device.cmd_exec_logs
+			self.device_type_all[executed_device.hostname] =  executed_device.dev.dtype
+			self.host_vs_ips[executed_device.hostname] = ip
+		else:
+			self.failed_devices[ip] = executed_device.failed_reason
 
-		# - write exec log -
+	# - update all cmds
+	def update_all_cmds(self, executed_device):
+		"""update executed commands for all commands dictionary 
+
+		Args:
+			executed_device (Execute_Device): Device Execution object instance
+		"""	
+		if not executed_device.dev: return
+		dt = executed_device.dev.dtype
+		if not self.all_cmds.get(dt):
+			self.all_cmds[dt] = []
+		self.all_cmds[dt].extend(list(executed_device.all_cmds[dt]))
+
+	# - facts generations -
+	def generate_clean_facts_file(self, executed_device):
+		"""generate facts-generator clean file  
+
+		Args:
+			executed_device (Execute_Device): Device Execution object instance
+		"""	
+		if self.fg and executed_device.dev: 
+			self._ff_sequence(executed_device, self.CustomDeviceFactsClass, self.foreign_keys)
+
+	# - write exec log -
+	def write_exec_log(self, executed_device):
+		"""write/display execution log file for the devices  
+
+		Args:
+			executed_device (Execute_Device): Device Execution object instance
+		"""	
 		ts = LOG.time_stamp().replace(":", "-")
-		exec_log_file = f'{self.exec_log_path}/{ED.hostname}-exec-{ts}.log'
-		exec_log(msg=ED.tmp_device_exec_log, to_file=exec_log_file)
-
+		exec_log_file = f'{self.exec_log_path}/{executed_device.hostname}-exec-{ts}.log'
+		exec_log(msg=executed_device.tmp_device_exec_log, to_file=exec_log_file)
 
 
 # -----------------------------------------------------------------------------------------------
@@ -347,7 +371,7 @@ class Execute_By_Login(Multi_Execution, Execute_Common):
 		Args:
 			ip (str): ip address of a reachable device
 		"""
-		self._execute(ip, self.cmds)
+		self._execute(ip, deepcopy(self.cmds))
 
 
 

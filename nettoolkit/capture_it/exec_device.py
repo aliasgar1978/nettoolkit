@@ -148,64 +148,88 @@ class Execute_Device():
 		self._device_exec_log(display=True, msg=f"{ip} - Initializing")
 
 		with conn(ip=ip, device=self) as c:
+			if self.verify_connection(c, ip) == None: return None
+			self.update_obj_properties(c)
+			self.update_cmds_for_missing_captures_only(c)
+			cc = self.run_cmds(c)
+			self.run_facts_generation_required_commands(c, cc)
+			self.run_custom_commands(c, cc)
+			self.add_exec_logs(cc)
+			self.write_facts_to_excel(cc)
+			self.add_cmd_exec_logs(cc)
 
-			self.c = c
-			# ------------------------------------------------------------------
-			if self._is_not_connected(c, ip):
-				self.failed_reason = self.failed_reason or "Connection Failure"
-				return None
-			# ------------------------------------------------------------------
-			self.hostname = c.hn
-			c.output_path = self.output_path
-			c.dev_type = self.dev.dtype
+	def verify_connection(self, c, ip):
+		if self._is_not_connected(c, ip):
+			self.failed_reason = self.failed_reason or "Connection Failure"
+			return None
+		return True
 
-			# -- get the missing commands list if it is to do only missing captures
-			if self.missing_captures_only:
-				if isinstance(self.cmds, dict):
-					missed_cmds = self.get_missing_commands(c, set(self.cmds[self.dev.dtype]))
-					if missed_cmds is not None: 
-						self.cmds[self.dev.dtype] = missed_cmds
-				elif isinstance(self.cmds, (list, set, tuple)):
-					missed_cmds = self.get_missing_commands(c, set(self.cmds))
-					self.cmds = missed_cmds
-				if missed_cmds:
-					self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Missed Cmds =  {missed_cmds}")
-				elif missed_cmds is None:
-					self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Cumulative file missing, new file will be generated.")
-				else:
-					self._device_exec_log(display=True, msg=f"{c.hn} : INFO : No missing Command found in existing capture..")
+	def update_obj_properties(self, c):
+		self.c = c
+		self.hostname = c.hn
+		c.output_path = self.output_path
+		c.dev_type = self.dev.dtype
 
-			cc = self.command_capture(c)
-			cc.grp_cmd_capture(self.cmds)
-			if self.cmds: self.add_cmd_to_all_cmd_dict(self.cmds)
+	# -- get the missing commands list if it is to do only missing captures
+	def update_cmds_for_missing_captures_only(self, c):
+		if not self.missing_captures_only: return
+		#
+		if isinstance(self.cmds, dict):
+			missed_cmds = self.get_missing_commands(c, set(self.cmds[self.dev.dtype]))
+			if missed_cmds is not None: 
+				self.cmds[self.dev.dtype] = missed_cmds
+		elif isinstance(self.cmds, (list, set, tuple)):
+			missed_cmds = self.get_missing_commands(c, set(self.cmds))
+			self.cmds = missed_cmds
+		if missed_cmds:
+			self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Missed Cmds =  {missed_cmds}")
+		elif missed_cmds is None:
+			self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Cumulative file missing, new file will be generated.")
+		else:
+			self._device_exec_log(display=True, msg=f"{c.hn} : INFO : No missing Command found in existing capture..")
 
-			# -- for facts generation -- presence of mandary commands, and capture if not --
-			if self.fg or self.mandatory_cmds_retries:
-				self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Starting with Mandatory commands capture (if any missing).")
-				missed_cmds = self.check_facts_finder_requirements(c)
-				self.retry_missed_cmds(c, cc, missed_cmds)
-				self.add_cmds_to_self(missed_cmds)
-				if missed_cmds: self.add_cmd_to_all_cmd_dict(missed_cmds)
+	def run_cmds(self, c):
+		cc = self.command_capture(c)
+		cc.grp_cmd_capture(self.cmds)
+		if self.cmds: 
+			self.add_cmd_to_all_cmd_dict(self.cmds)
+		return cc
 
-			# -- custom commands -- only log entries, no parser --
-			if self.CustomClass:
-				self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Starting with custom commands capture.")
-				CC = self.CustomClass(c.output_path+"/"+c.hn+".log", self.dev.dtype)
-				cc.grp_cmd_capture(CC.cmds)
-				self.add_cmds_to_self(CC.cmds)
-				if CC.cmds: self.add_cmd_to_all_cmd_dict(CC.cmds)
+	# -- for facts generation -- presence of mandary commands, and capture if not --
+	def run_facts_generation_required_commands(self, c, cc):
+		if not (self.fg or self.mandatory_cmds_retries): return
+		#
+		self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Starting with Mandatory commands capture (if any missing).")
+		missed_cmds = self.check_facts_finder_requirements(c)
+		self.retry_missed_cmds(c, cc, missed_cmds)
+		self.add_cmds_to_self(missed_cmds)
+		if missed_cmds: 
+			self.add_cmd_to_all_cmd_dict(missed_cmds)
 
+	# -- custom commands -- only log entries, no parser --
+	def run_custom_commands(self, c, cc):
+		if not self.CustomClass: return
+		#
+		self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Starting with custom commands capture.")
+		CC = self.CustomClass(c.output_path+"/"+c.hn+".log", self.dev.dtype)
+		cc.grp_cmd_capture(CC.cmds)
+		self.add_cmds_to_self(CC.cmds)
+		if CC.cmds: 
+			self.add_cmd_to_all_cmd_dict(CC.cmds)
 
-			# -- add command execution logs dataframe --
-			cc.add_exec_logs()
+	# -- add command execution logs dataframe --
+	def add_exec_logs(self, cc):
+		cc.add_exec_logs()
 
-			# -- write facts to excel --
-			if not self.cumulative_filename: self.cumulative_filename = cc.cumulative_filename 
-			if self.parsed_output: 
-				self.xl_file = cc.write_facts()
+	# -- write facts to excel --
+	def write_facts_to_excel(self, cc):
+		if not self.cumulative_filename: self.cumulative_filename = cc.cumulative_filename 
+		if self.parsed_output: 
+			self.xl_file = cc.write_facts()
 
-			# -- add command execution logs
-			self.cmd_exec_logs = cc.cmd_exec_logs
+	# -- add execution logs
+	def add_cmd_exec_logs(self, cc):
+		self.cmd_exec_logs = cc.cmd_exec_logs
 
 	def add_cmd_to_all_cmd_dict(self, cmds):
 		"""add command to all cmd dictionary

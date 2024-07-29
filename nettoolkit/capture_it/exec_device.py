@@ -174,13 +174,15 @@ class Execute_Device():
 	def update_cmds_for_missing_captures_only(self, c):
 		if not self.missing_captures_only: return
 		#
+		missed_cmds = []
 		if isinstance(self.cmds, dict):
 			missed_cmds = self.get_missing_commands(c, set(self.cmds[self.dev.dtype]))
 			if missed_cmds is not None: 
 				self.cmds[self.dev.dtype] = missed_cmds
 		elif isinstance(self.cmds, (list, set, tuple)):
 			missed_cmds = self.get_missing_commands(c, set(self.cmds))
-			self.cmds = missed_cmds
+			if missed_cmds is not None: 
+				self.cmds = missed_cmds
 		if missed_cmds:
 			self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Missed Cmds =  {missed_cmds}")
 		elif missed_cmds is None:

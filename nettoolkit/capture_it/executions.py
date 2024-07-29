@@ -85,7 +85,7 @@ class Execute_Common():
 		self.CustomClass = None
 		self.fg = False
 		self.max_connections = 100
-		self.mandatory_cmds_retries = 3
+		self.mandatory_cmds_retries = 0
 		self.missing_captures_only = False
 		self.append_capture = False or self.missing_captures_only
 		#
@@ -311,8 +311,12 @@ class Execute_Common():
 			executed_device (Execute_Device): Device Execution object instance
 		"""	
 		ts = LOG.time_stamp().replace(":", "-")
-		exec_log_file = f'{self.exec_log_path}/{executed_device.hostname}-exec-{ts}.log'
-		exec_log(msg=executed_device.tmp_device_exec_log, to_file=exec_log_file)
+		try:
+			exec_log_file = f'{self.exec_log_path}/{executed_device.hostname}-exec-{ts}.log'
+			exec_log(msg=executed_device.tmp_device_exec_log, to_file=exec_log_file)
+		except:
+			print(f"{executed_device.log_key} - Fatal - Unable to write execution log. Below is summary of execution\n(\n")
+			print(executed_device.tmp_device_exec_log, "\n)")
 
 
 # -----------------------------------------------------------------------------------------------

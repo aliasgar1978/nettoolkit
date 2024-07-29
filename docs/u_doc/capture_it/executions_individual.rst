@@ -54,7 +54,7 @@ Nt Capture-it - Individual
         # --------------------------------------------
         #    Define Capture
         # --------------------------------------------
-        c = capture_individual(
+        captures = capture_individual(
             auth=auth,             ## Authentication parameters (dict)
             dev_cmd_dict=devices,  ## Dictionary of devices of list of commands ( see above sample )
             capture_path=capture_path,     # output capture path (str)
@@ -64,26 +64,26 @@ Nt Capture-it - Individual
         # -------------------------------------------------------------------------
         #    Additional [optional] key settings ( Remove if do not want to change )
         # -------------------------------------------------------------------------
-        c.cumulative = 'both'    # default: True ( options: True, False, 'both')
-        c.forced_login = False   # default: True ( options: True, False )
-        c.parsed_output = True   # default: False ( options: True, False )
-        c.max_connections = 1    # default: 100 ( Options: any number input ) ( define max concurrent connections, 1 for sequencial )
-        c.mandatory_cmds_retries = 1     # default: 3
-        c.append_capture = True  # default: False ( Options: True, False )
-        c.missing_captures_only = True # default: False ( Options: True, False )
-        c.log_type = 'common'    # default: None ( Options: 'common', individual', 'both', None )
-        c.common_log_file = 'common-debug.log' # default: None ( provide filename if log_type is common )
+        captures.cumulative = 'both'    # default: True ( options: True, False, 'both')
+        captures.forced_login = False   # default: True ( options: True, False )
+        captures.parsed_output = True   # default: False ( options: True, False )
+        captures.max_connections = 1    # default: 100 ( Options: any number input ) ( define max concurrent connections, 1 for sequencial )
+        captures.append_capture = True  # default: False ( Options: True, False )
+        captures.missing_captures_only = True # default: False ( Options: True, False )
+        captures.log_type = 'common'    # default: None ( Options: 'common', individual', 'both', None )
+        captures.common_log_file = 'common-debug.log' # default: None ( provide filename if log_type is common )
 
         # -----------------------------------------------------------------------------
         #    Additional [optional] run dynamic custom commands ( Remove if not needed )
         # -----------------------------------------------------------------------------
-        c.dependent_cmds(custom_dynamic_cmd_class=BgpAdv)  # where BgpAdv is custom class imported above
+        captures.dependent_cmds(custom_dynamic_cmd_class=BgpAdv)  # where BgpAdv is custom class imported above
 
         # -------------------------------------------------------------------------------
         #    Additional [optional] to generate Facts file ( Remove if not needed )
         #    provide CustomDeviceFactsClass, foreign_keys if want to customize Facts file
         # --------------------------------------------------------------------------------
-        c.generate_facts(
+        captures.mandatory_cmds_retries = 2     # default: 0
+        captures.generate_facts(
             CustomDeviceFactsClass=CustomDeviceFacts,  # optional (provide if need, custom class imported above )
             foreign_keys=FOREIGN_KEYS,                 # optional (provide if need, custom variable imported above )
         )
@@ -91,17 +91,17 @@ Nt Capture-it - Individual
         # -----------------------------------------------------------------------------
         #    Start Capture
         # -----------------------------------------------------------------------------
-        c()
+        captures()
 
         # -----------------------------------------------------------------------------
         #    Display failures
         # -----------------------------------------------------------------------------
-        c.show_failures
+        captures.show_failures
 
         # -----------------------------------------------------------------------------
         #    Log-Summary ( Modify/Enable keys as requires )
         # -----------------------------------------------------------------------------
-        LogSummary(c, 
+        LogSummary(captures, 
             on_screen_display=True,                        ## display on screen. (default: False)
             write_to=f'{exec_log_folder}/cmds_log_summary.log', 
             # append_to=f'{exec_log_folder}/cmds_log_summary.log', 
@@ -125,7 +125,7 @@ Nt Capture-it - Individual
     * ``forced_login``  (Options: True, False) (Default: False)  Forced login to device even if device ping doesn't succeded.
     * ``parsed_output``  (Options: True, False) (Default: False) Parse the command output and generates device database in excel file.  Each command output try to generate a pased detail tab.
     * ``max_connections``  (numeric) (Default: 100), change the number of simultaneous device connections as per link connection and your pc cpu processng performance.
-    * ``mandatory_cmds_retries`` (numeric) (Default: 3), retry count for facts-finder require dcommands change the number to update behaviour
+    * ``mandatory_cmds_retries`` (numeric) (Default: 0), retry count for facts-finder require dcommands change the number to update behaviour
     * ``append_capture``  (Options: True, False) (Default: False)  
     * ``missing_captures_only``  (Options: True, False) (Default: False)  Instead of capturing all output again, capture only missing outputs from previous capture files.  Useful if there were any missed captures and need to recapture. Kindly Note: Enabling this key will enable **append_capture** as well automatically.
 

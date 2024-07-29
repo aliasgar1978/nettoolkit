@@ -47,7 +47,9 @@ Nt Capture-it - Individual
         # --------------------------------------------
         #    Output: provide output path
         # --------------------------------------------
-        op_path = './captures/'
+        capture_path = './captures/'
+        exec_log_path = './exec_logs/'
+
 
         # --------------------------------------------
         #    Define Capture
@@ -55,7 +57,8 @@ Nt Capture-it - Individual
         c = capture_individual(
             auth=auth,             ## Authentication parameters (dict)
             dev_cmd_dict=devices,  ## Dictionary of devices of list of commands ( see above sample )
-            path=op_path,          ## output path - to store the outputs. (optional, default =".")
+            capture_path=capture_path,     # output capture path (str)
+            exec_log_path=exec_log_path,   # execution logs output path (str)
         )
 
         # -------------------------------------------------------------------------
@@ -64,11 +67,12 @@ Nt Capture-it - Individual
         c.cumulative = 'both'    # default: True ( options: True, False, 'both')
         c.forced_login = False   # default: True ( options: True, False )
         c.parsed_output = True   # default: False ( options: True, False )
-        c.visual_progress = 9    # default: 3 ( Option range: 0 - 10 ) 
         c.max_connections = 1    # default: 100 ( Options: any number input ) ( define max concurrent connections, 1 for sequencial )
+        c.mandatory_cmds_retries = 1     # default: 3
+        c.append_capture = True  # default: False ( Options: True, False )
+        c.missing_captures_only = True # default: False ( Options: True, False )
         c.log_type = 'common'    # default: None ( Options: 'common', individual', 'both', None )
         c.common_log_file = 'common-debug.log' # default: None ( provide filename if log_type is common )
-        c.retry_mandatory_cmds_retries = 1     # default: 3
 
         # -----------------------------------------------------------------------------
         #    Additional [optional] run dynamic custom commands ( Remove if not needed )
@@ -98,8 +102,9 @@ Nt Capture-it - Individual
         #    Log-Summary ( Modify/Enable keys as requires )
         # -----------------------------------------------------------------------------
         LogSummary(c, 
-            print=True,                        ## display on screen. (default: False)
-            # write_to='cmds_log_summary.log', ## create a fresh log summary file (default: None)
+            on_screen_display=True,                        ## display on screen. (default: False)
+            write_to=f'{exec_log_folder}/cmds_log_summary.log', 
+            # append_to=f'{exec_log_folder}/cmds_log_summary.log', 
         )
 
         # -----------------------------------------------------------------------------
@@ -114,19 +119,22 @@ Nt Capture-it - Individual
 
     * ``dev_cmd_dict``  dictionary of devices of list of commands
     * ``auth``  authentication Parameters
-    * ``path``  output path ( use "." for storing in same relative folder )
+    * ``capture_path``  output path for commands captures ( use "." for storing in same relative folder )
+    * ``exec_log_path`` output path for execution logs ( use "." for storing in smae relative folder )
     * ``cumulative``  (Options: True, False, 'Both', None) defines how to store each command output. True=Save all output in a single file. False=Save all command output in individual file. 'Both'=will generate both kinds of output. None=will not save text log outout to any file, but display it on screen
     * ``forced_login``  (Options: True, False) (Default: False)  Forced login to device even if device ping doesn't succeded.
     * ``parsed_output``  (Options: True, False) (Default: False) Parse the command output and generates device database in excel file.  Each command output try to generate a pased detail tab.
     * ``max_connections``  (numeric) (Default: 100), change the number of simultaneous device connections as per link connection and your pc cpu processng performance.
+    * ``mandatory_cmds_retries`` (numeric) (Default: 3), retry count for facts-finder require dcommands change the number to update behaviour
     * ``append_capture``  (Options: True, False) (Default: False)  
     * ``missing_captures_only``  (Options: True, False) (Default: False)  Instead of capturing all output again, capture only missing outputs from previous capture files.  Useful if there were any missed captures and need to recapture. Kindly Note: Enabling this key will enable **append_capture** as well automatically.
 
     **Parameters for LogSummary**
 
     * ``c`` (capture_individual): capture_individual object instance
-    * ``print`` (bool): displays result summary on screen. Defaults to False.
+    * ``on_screen_display`` (bool): displays result summary on screen. Defaults to False.
     * ``write_to`` (str): filename, writes result summary to file. Defaults to None (i.e. no file write out).
+    * ``append_to`` (str): filename, appends result summary to file. Default to None (i.e. no file to append).
 
 
 .. note::

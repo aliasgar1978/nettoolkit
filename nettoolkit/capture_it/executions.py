@@ -675,7 +675,7 @@ class Execute_By_Excel(Execute_Common):
 		capture_instance.cumulative             = self.cumulative
 		capture_instance.forced_login           = self.forced_login
 		capture_instance.parsed_output          = self.parsed_output
-		capture_instance.append_capture         = self.append_capture
+		capture_instance.append_capture         = True
 		capture_instance.missing_captures_only  = self.missing_captures_only
 		capture_instance.max_connections        = self.max_connections
 		capture_instance.CustomClass            = self.CustomClass

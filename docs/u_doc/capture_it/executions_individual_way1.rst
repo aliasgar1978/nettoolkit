@@ -4,8 +4,9 @@ Nt Capture-it - Individual - option 1
 
 .. warning::
 
-    * for latest networkit version, i.e. >= 0.1.0, its integrated.
-    * for older nettoolkt versions, i.e. < 0.1.0, install capture-it as separate project, and refer older documentation.
+    ``capture-it`` version 1.7.0 has changed the implementation of capture-it slightly.  
+    Kindly refer to following documentation pages to understand and co-relate changes.
+    Your previous execution codes may fail, and requires to be modified slightly in order to support version 1.7.0 onward.
 
 
 #. **Execution Steps**
@@ -15,7 +16,7 @@ Nt Capture-it - Individual - option 1
         # --------------------------------------------
         # IMPORTS
         # --------------------------------------------
-        from nettoolkit.capture_it import capture_individual, LogSummary
+        from nettoolkit.capture_it import capture_individual
 
         # --------------------------------------------
         #    INPUT: Credentials
@@ -94,17 +95,12 @@ Nt Capture-it - Individual - option 1
         captures()
 
         # -----------------------------------------------------------------------------
-        #    Display failures
-        # -----------------------------------------------------------------------------
-        captures.show_failures
-
-        # -----------------------------------------------------------------------------
         #    Log-Summary ( Modify/Enable keys as requires )
         # -----------------------------------------------------------------------------
-        LogSummary(captures, 
+        captures.log_summary(
             on_screen_display=True,                        ## display on screen. (default: False)
-            write_to=f'{exec_log_folder}/cmds_log_summary.log', 
-            # append_to=f'{exec_log_folder}/cmds_log_summary.log', 
+            to_file=txt_log_file,                     # summary to text file
+            excel_report_file=xl_log_file,            # summary to excel file
         )
 
         # -----------------------------------------------------------------------------
@@ -128,13 +124,10 @@ Nt Capture-it - Individual - option 1
     * ``mandatory_cmds_retries`` (numeric) (Default: 0), retry count for facts-finder require dcommands change the number to update behaviour
     * ``append_capture``  (Options: True, False) (Default: False)  
     * ``missing_captures_only``  (Options: True, False) (Default: False)  Instead of capturing all output again, capture only missing outputs from previous capture files.  Useful if there were any missed captures and need to recapture. Kindly Note: Enabling this key will enable **append_capture** as well automatically.
-
-    **Parameters for LogSummary**
-
-    * ``c`` (capture_individual): capture_individual object instance
     * ``on_screen_display`` (bool): displays result summary on screen. Defaults to False.
-    * ``write_to`` (str): filename, writes result summary to file. Defaults to None (i.e. no file write out).
-    * ``append_to`` (str): filename, appends result summary to file. Default to None (i.e. no file to append).
+    * ``to_file`` (str): text filename, writes summary result summary to text file. Defaults to None 
+    * ``excel_report_file`` (str): excel filename, writes summary result summary to excel file. Default to None 
+
 
 
 .. note::

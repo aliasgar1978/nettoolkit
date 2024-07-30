@@ -24,8 +24,13 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
      - Updates
 
    * - 1.6.7
-     - Jul XX, 2024 TBD
-     - * capture-it: code enhancements added log functionality, Bug fix on custom command capture.
+     - Jul 31, 2024
+     - * capture-it: 1. code enhancements added log functionality, Bug fix on custom command capture.
+       * 2. failed devices list added in report
+       * 3. capture_by_excel - added for capturing outputs from standard excel 
+       * 4. log_summary method added and incorporated to caputres
+       * 5. Excel log summary feature added 
+       * 6. output_path argument change to capture_path
    * - 1.6.6
      - Jul 26, 2024
      - * capture-it: code enhancements and a few bug fixes.

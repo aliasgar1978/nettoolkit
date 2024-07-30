@@ -21,10 +21,10 @@ class Execute_Device():
 	"""Execute a device capture
 
 	Args:
-		log_key (str): device ip
+		ip (str): device ip
 		auth (dict): authentication parameters
 		cmds (list, set, tuple): set of commands to be executed.
-		output_path (str): path where output to be stored
+		capture_path (str): path where output to be stored
 		cumulative (bool, optional): True,False,both. Defaults to False.
 		forced_login (bool): True will try login even if device ping fails.
 		parsed_output (bool): parse output and generate Excel or not.
@@ -34,10 +34,10 @@ class Execute_Device():
 		append_capture(bool): append capture to existing file instead of creating new.
 		missing_captures_only(bool): capture only missing command outputs from existing output
 	"""    	
-	log_key               : str
+	ip                    : str
 	auth                  : dict
 	cmds                  : list
-	output_path           : str
+	capture_path          : str
 	cumulative            : bool 
 	forced_login          : bool
 	parsed_output         : bool
@@ -48,7 +48,6 @@ class Execute_Device():
 	missing_captures_only : bool
 
 	def __post_init__(self):
-		ip = self.log_key
 		self.all_cmds = {'cisco_ios': set(), 'juniper_junos':set(),}
 		self.cumulative_filename = None
 		self.delay_factor, self.dev = None, None
@@ -56,14 +55,14 @@ class Execute_Device():
 		self.failed_reason = ''
 		self.tmp_device_exec_log = ''
 		#
-		ip = ip.strip()
-		if not ip:
-			self.failed_reason = f"Missing device ip: [{ip}]"
+		self.ip = self.ip.strip()
+		if not self.ip:
+			self.failed_reason = f"Missing device ip: [{self.ip}]"
 			self._device_exec_log(display=True, msg=f"{self.failed_reason} - skipping it")
 			return None
 		#
-		self.pinging = self._check_ping(ip)
-		self._start_execution(ip)
+		self.pinging = self._check_ping(self.ip)
+		self._start_execution(self.ip)
 
 	def _device_exec_log(self, display, msg):
 		if display: print(msg)
@@ -167,7 +166,7 @@ class Execute_Device():
 	def update_obj_properties(self, c):
 		self.c = c
 		self.hostname = c.hn
-		c.output_path = self.output_path
+		c.capture_path = self.capture_path
 		c.dev_type = self.dev.dtype
 
 	# -- get the missing commands list if it is to do only missing captures
@@ -213,7 +212,7 @@ class Execute_Device():
 		if not self.CustomClass: return
 		#
 		self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Starting with custom commands capture.")
-		CC = self.CustomClass(c.output_path+"/"+c.hn+".log", self.dev.dtype)
+		CC = self.CustomClass(c.capture_path+"/"+c.hn+".log", self.dev.dtype)
 		cc.grp_cmd_capture(CC.cmds)
 		self.add_cmds_to_self(CC.cmds)
 		if CC.cmds: 
@@ -358,11 +357,11 @@ class Execute_Device():
 			set: missed mandatory commands
 		"""		
 		try:
-			file = c.output_path+"/"+c.hn+".log"
+			file = c.capture_path+"/"+c.hn+".log"
 			with open(file, 'r') as f:
 				log_lines = f.readlines()
 		except:
-			self._device_exec_log(display=True, msg=f'{c.hn} : INFO: File not found {c.output_path+"/"+c.hn+".log"}: Cumulative capture file required ')
+			self._device_exec_log(display=True, msg=f'{c.hn} : INFO: File not found {c.capture_path+"/"+c.hn+".log"}: Cumulative capture file required ')
 			return None
 		captured_cmds = set()
 		for log_line in log_lines:

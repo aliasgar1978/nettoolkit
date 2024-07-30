@@ -102,7 +102,7 @@ class COMMAND():
 		Returns:
 			str: filename where output got stored
 		"""    		
-		fname = STR.get_logfile_name(self.conn.output_path, hn=self.conn.hn, cmd=self.cmd, ts=self.conn.conn_time_stamp)
+		fname = STR.get_logfile_name(self.conn.capture_path, hn=self.conn.hn, cmd=self.cmd, ts=self.conn.conn_time_stamp)
 
 		IO.to_file(filename=fname, matter=output)
 		return fname
@@ -120,7 +120,7 @@ class COMMAND():
 		banner = self.banner if self.banner else ""
 		rem = "#" if self.conn.devtype == 'juniper_junos' else "!"
 		cmd_header = f"\n{rem}{'='*80}\n{rem}{cmd_line_pfx}{self.cmd}\n{rem}{'='*80}\n\n"
-		fname = STR.get_logfile_name(self.conn.output_path, hn=self.conn.hn, cmd="", ts="")
+		fname = STR.get_logfile_name(self.conn.capture_path, hn=self.conn.hn, cmd="", ts="")
 
 		if self.del_old_file: delete_file_ifexist(fname)
 

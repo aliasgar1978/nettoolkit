@@ -2,14 +2,17 @@
 import os
 from copy import deepcopy
 from nettoolkit.nettoolkit_common import *
+from nettoolkit.nettoolkit_db import read_xl_all_sheet
 from nettoolkit.addressing import *
 from pprint import pprint
+from pathlib import Path
 
 import nettoolkit.facts_finder as ff
 from collections import OrderedDict
 
 from .exec_device import Execute_Device
 from .common import exec_log
+from .cap_summary import LogSummary, ExcelReport
 
 # -----------------------------------------------------------------------------
 
@@ -68,10 +71,23 @@ class Execute_Common():
 		Returns:
 			None
 		"""
+		## Validations
 		if not isinstance(capture_path, str):
 			raise Exception(f"capture path parameter needs to be passed as string, got {type(capture_path)}")
 		if exec_log_path and not isinstance(exec_log_path, str):
 			raise Exception(f"log path parameter needs to be passed as string, got {type(capture_path)}")
+		cp, elp = Path(capture_path), Path(exec_log_path)
+		if not (cp.exists() and cp.is_dir()):
+			try:
+				os.makedirs(str(cp))
+			except:
+				raise Exception(f"Provided capture path is invalid, please check input. `{capture_path}`")
+		if not (elp.exists() and elp.is_dir()):
+			try:
+				os.makedirs(str(elp))
+			except:
+				raise Exception(f"Provided capture path is invalid, please check input. `{capture_path}`")
+		#
 		self.capture_path = capture_path 
 		self.exec_log_path = exec_log_path if exec_log_path else capture_path
 			
@@ -83,6 +99,8 @@ class Execute_Common():
 		self.forced_login = True
 		self.parsed_output = False
 		self.CustomClass = None
+		self.CustomDeviceFactsClass = None
+		self.foreign_keys = {}
 		self.fg = False
 		self.max_connections = 100
 		self.mandatory_cmds_retries = 0
@@ -228,12 +246,42 @@ class Execute_Common():
 		print(f"{hn}{info_banner}Facts-Generation Tasks Finished !!! {hn} !!")
 		# ------------------------------------------------------------------------
 
+	def log_summary(self, *, onscreen, to_file=None, excel_report_file=None):
+		"""_summary_
+
+		Args:
+			onscreen (bool): _description_
+			to_file (str, optional): text file name to store summary report. Defaults to None.
+			excel_report_file (str, optional): excel file name to store summary report. Defaults to None.
+		"""    		
+		self.show_failures
+		LogSummary(self, 
+			on_screen_display=onscreen, 
+			write_to=to_file, 
+		)
+
+		### Excel Log
+		if excel_report_file:
+			ER = ExcelReport(
+				self.all_cmds,
+				self.cmd_exec_logs_all,
+				self.host_vs_ips,
+				self.device_type_all,
+			)
+			ER(transpose_report=True)
+			ER.write_to(excel_report_file)
 
 
 	@property
 	def show_failures(self):
 		"""Displays failure summary
 		"""    		
+		if not self.failed_devices: return
+		banner = f"\n! {'='*20} [ FAILED DEVICES LIST ] {'='*20} !\n"
+		print(banner)
+		pprint(tuple(self.failed_devices.keys()))
+		print(f"\n! {'='*72} !\n")
+		#
 		banner = f"\n! {'='*20} [ FAILED DEVICES AND REASONS ] {'='*20} !\n"
 		print(banner)
 		pprint(self.failed_devices)
@@ -247,19 +295,21 @@ class Execute_Common():
 		"""
 		self.append_capture = self.append_capture or self.missing_captures_only
 		# - capture instance -
-		ED = Execute_Device(ip, 
-			auth=self.auth, 
-			cmds=cmds, 
-			output_path=self.capture_path, 
-			cumulative=self.cumulative,
-			forced_login=self.forced_login, 
-			parsed_output=self.parsed_output,
-			CustomClass=self.CustomClass,
-			fg=self.fg,
-			mandatory_cmds_retries=self.mandatory_cmds_retries,
-			append_capture=self.append_capture,
-			missing_captures_only=self.missing_captures_only,
-		)
+		dev_exec_kwargs = {
+			'ip': ip,
+			'auth': self.auth, 
+			'cmds': cmds, 
+			'capture_path': self.capture_path, 
+			'cumulative': self.cumulative,
+			'forced_login': self.forced_login, 
+			'parsed_output': self.parsed_output,
+			'CustomClass': self.CustomClass,
+			'fg': self.fg,
+			'mandatory_cmds_retries': self.mandatory_cmds_retries,
+			'append_capture': self.append_capture,
+			'missing_captures_only': self.missing_captures_only,		
+		} 
+		ED = Execute_Device(**dev_exec_kwargs)
 		###
 		self.update_other_properties(executed_device=ED, ip=ip)
 		self.update_all_cmds(executed_device=ED)
@@ -315,7 +365,7 @@ class Execute_Common():
 			exec_log_file = f'{self.exec_log_path}/{executed_device.hostname}-exec-{ts}.log'
 			exec_log(msg=executed_device.tmp_device_exec_log, to_file=exec_log_file)
 		except:
-			print(f"{executed_device.log_key} - Fatal - Unable to write execution log. Below is summary of execution\n(\n")
+			print(f"{executed_device.ip} - Fatal - Unable to write execution log. Below is summary of execution\n(\n")
 			print(executed_device.tmp_device_exec_log, "\n)")
 
 
@@ -519,5 +569,167 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 
 
 
+
+# -----------------------------------------------------------------------------------------------
+
+
+# -----------------------------------------------------------------------------------------------
+# Execute class - capture_it - for provided Excel sheet
+# -----------------------------------------------------------------------------------------------
+class Execute_By_Excel(Execute_Common):
+	"""Execute the device capture by logging in to device and running individual commands on to it.
+	use Excel file in specific format only.
+
+	Args:
+		auth (dict): authentication parameters ( un, pw, en)
+		input_file (str): input excel file (use provided template)
+		capture_path (str): path where captured output(s), logs(s) to be stored.
+		exec_log_path (str): path where execution logs output(s), to be stored.
+
+	Properties:
+
+		* cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and 'both' will do both.
+		* forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)
+		* parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)
+		* max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.
+		* CustomClass (class): Custom class definitition to execute additional custom commands
+
+	Raises:
+		Exception: raise exception if any issue with authentication or connections.
+
+	"""    	
+
+	def __init__(self, 
+		auth, 
+		input_file, 
+		capture_path=".", 
+		exec_log_path=".",
+		):
+		"""Initiatlize the connections for the provided iplist, authenticate with provided auth parameters, 
+		and execute given commands.
+		"""
+		#
+		Execute_Common.__init__(self, auth, capture_path, exec_log_path)
+		self.input_file = input_file
+		#
+		self.get_devices_commands_dicts()
+
+	def __call__(self):
+		self._verifications()
+		self.execute()
+
+	# format -> {device: {devicetype: [cmds]}}
+	def get_devices_commands_dicts(self):
+		"""generate standard format dictionary from excel tabs
+		"""    		
+		cmd_cols = ('cisco_ios', 'juniper_junos')
+		df_dict = read_xl_all_sheet(self.input_file)
+		self.all_cmds = {}
+		self.host_vs_ips = {}
+		self.cmd_exec_logs_all1 = {}
+		self.device_type_all1 = {}
+		self.devices_command_dicts = {}
+		for sht, df in df_dict.items():
+			ip_list = list(df['ips'][df['ips'] != ''])
+			cmds = {cmd_col: list(df[cmd_col][df[cmd_col] != '']) for cmd_col in cmd_cols}
+			self.devices_command_dicts[sht] = { 'ip_list': ip_list, 'cmds': cmds, }
+
+	def execute(self):
+		"""execute all devices excel tab wise
+		"""    		
+		for sht, dev_cmd_dict in self.devices_command_dicts.items():
+			self.execute_a_tab(sht, dev_cmd_dict)
+		self.device_type_all=self.device_type_all1
+		self.cmd_exec_logs_all=self.cmd_exec_logs_all1
+		print(f"\n! {'='*20} [ ALL CAPTURES COMPLETED ] {'='*20} !")		
+		print(f"! {'='*20} [  FINAL REPORT FOLLOWS  ] {'='*20} !\n")		
+
+	def execute_a_tab(self, sht, dev_cmd_dict):
+		"""execute a single excel tab devices
+
+		Args:
+			sht (str): excel tab/sheet
+			dev_cmd_dict (dict): device commands dictionary
+		"""    		
+		capture_instance = Execute_By_Login(
+			ip_list=dev_cmd_dict['ip_list'], 
+			auth=self.auth, 
+			cmds=dev_cmd_dict['cmds'], 
+			capture_path=self.capture_path, 
+			exec_log_path=self.exec_log_path
+		)
+		self.instance_properties_update(capture_instance)
+		self.instance_custom_class(capture_instance)
+		self.instance_fact_finder(capture_instance)
+		capture_instance()
+		capture_instance.log_summary(onscreen=True, to_file=False)
+		self.update_self_log_properties(capture_instance)
+		print(f"Capture Task(s) for sheet `{sht}`Complete..")
+
+	def instance_properties_update(self, capture_instance):
+		"""load instance properties from parent properties
+
+		Args:
+			capture_instance (Execute_By_Login): instance of Execute_By_Login
+		"""    		
+		capture_instance.cumulative             = self.cumulative
+		capture_instance.forced_login           = self.forced_login
+		capture_instance.parsed_output          = self.parsed_output
+		capture_instance.append_capture         = self.append_capture
+		capture_instance.missing_captures_only  = self.missing_captures_only
+		capture_instance.max_connections        = self.max_connections
+		capture_instance.CustomClass            = self.CustomClass
+		capture_instance.CustomDeviceFactsClass = self.CustomDeviceFactsClass
+		capture_instance.foreign_keys           = deepcopy(self.foreign_keys)
+		capture_instance.fg                     = self.fg
+		capture_instance.mandatory_cmds_retries = self.mandatory_cmds_retries
+		capture_instance.cmd_exec_logs_all      = deepcopy(self.cmd_exec_logs_all)
+		capture_instance.device_type_all        = deepcopy(self.device_type_all)
+		capture_instance.failed_devices         = deepcopy(self.failed_devices)
+
+	def update_self_log_properties(self, capture_instance):
+		"""update parent (self) class instance log properties from capture instance
+
+		Args:
+			capture_instance (Execute_By_Login): instance of Execute_By_Login
+		"""    		
+		self.update_all_cmds(capture_instance)
+		self.host_vs_ips.update(capture_instance.host_vs_ips)
+		self.device_type_all1.update(capture_instance.device_type_all)
+		self.cmd_exec_logs_all1.update(capture_instance.cmd_exec_logs_all)
+
+	def instance_custom_class(self, capture_instance):
+		"""add custom class to capture instance
+
+		Args:
+			capture_instance (Execute_By_Login): instance of Execute_By_Login
+		"""    		
+		if not self.CustomClass: return
+		capture_instance.dependent_cmds(custom_dynamic_cmd_class=self.CustomClass)
+
+	def instance_fact_finder(self, capture_instance):
+		"""add facts finder class to capture instance
+
+		Args:
+			capture_instance (Execute_By_Login): instance of Execute_By_Login
+		"""    		
+		if not self.CustomDeviceFactsClass: return
+		capture_instance.mandatory_cmds_retries = self.mandatory_cmds_retries
+		capture_instance.generate_facts(
+			CustomDeviceFactsClass=self.CustomDeviceFacts, 
+			foreign_keys=self.FOREIGN_KEYS
+		)
+
+	def update_all_cmds(self, capture_instance):
+		"""update parent all cmds property using capture instance 
+
+		Args:
+			capture_instance (Execute_By_Login): instance of Execute_By_Login
+		"""    		
+		if not self.all_cmds:
+			self.all_cmds = capture_instance.all_cmds
+			return
+		for k, v in self.all_cmds.items():
+			self.all_cmds[k] = sorted(list(set(v).union(capture_instance.all_cmds[k])))
 
 # -----------------------------------------------------------------------------------------------

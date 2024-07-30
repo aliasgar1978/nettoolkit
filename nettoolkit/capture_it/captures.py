@@ -97,7 +97,7 @@ class Captures(CLP):
 		"""writes commands facts in to excel tab
 		"""
 		try:
-			xl_file = self.conn.output_path + "/" + self.conn.hn + ".xlsx"
+			xl_file = self.conn.capture_path + "/" + self.conn.hn + ".xlsx"
 			append_to_xl(xl_file, self.parsed_cmd_df, overwrite=True)
 			self.conn._device_conn_log(display=True, msg=f"{self.hn} : INFO :writing facts to excel: {xl_file}...Success!")
 		except:

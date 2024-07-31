@@ -48,7 +48,7 @@ class Execute_Device():
 	missing_captures_only : bool
 
 	def __post_init__(self):
-		self.all_cmds = {'cisco_ios': set(), 'juniper_junos':set(),}
+		self.all_cmds = {'cisco_ios': set(), 'juniper_junos':set(), 'arista_eos': set()}
 		self.cumulative_filename = None
 		self.delay_factor, self.dev = None, None
 		self.cmd_exec_logs = []

@@ -342,6 +342,7 @@ class ExcelReport():
 		"""    		
 		for dt, new_d in self.new_cmd_exec_log.items():
 			for device, ip in self.host_vs_ips.items():
+				if self.device_type_all[device] != dt: continue
 				device_cmds = set(self.all_cmds[dt])
 				dev_cmd_exist = set()
 				for cmd in device_cmds:

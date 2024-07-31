@@ -246,14 +246,15 @@ class Execute_Common():
 		print(f"{hn}{info_banner}Facts-Generation Tasks Finished !!! {hn} !!")
 		# ------------------------------------------------------------------------
 
-	def log_summary(self, *, onscreen, to_file=None, excel_report_file=None):
-		"""_summary_
+	def log_summary(self, *, onscreen, to_file=None, excel_report_file=None, transpose_excel_report=False):
+		"""display and write log summary to output file(s)
 
 		Args:
-			onscreen (bool): _description_
+			onscreen (bool): Display report on screen
 			to_file (str, optional): text file name to store summary report. Defaults to None.
 			excel_report_file (str, optional): excel file name to store summary report. Defaults to None.
-		"""    		
+			transpose_excel_report (bool, optional): Transpose the excel report Defaults to False
+		"""
 		self.show_failures
 		LogSummary(self, 
 			on_screen_display=onscreen, 
@@ -268,7 +269,7 @@ class Execute_Common():
 				self.host_vs_ips,
 				self.device_type_all,
 			)
-			ER(transpose_report=True)
+			ER(transpose_report=transpose_excel_report)
 			ER.write_to(excel_report_file)
 
 
@@ -622,7 +623,7 @@ class Execute_By_Excel(Execute_Common):
 	def get_devices_commands_dicts(self):
 		"""generate standard format dictionary from excel tabs
 		"""    		
-		cmd_cols = ('cisco_ios', 'juniper_junos')
+		cmd_cols = ('cisco_ios', 'juniper_junos', 'arista_eos')
 		df_dict = read_xl_all_sheet(self.input_file)
 		self.all_cmds = {}
 		self.host_vs_ips = {}
@@ -716,8 +717,8 @@ class Execute_By_Excel(Execute_Common):
 		if not self.CustomDeviceFactsClass: return
 		capture_instance.mandatory_cmds_retries = self.mandatory_cmds_retries
 		capture_instance.generate_facts(
-			CustomDeviceFactsClass=self.CustomDeviceFacts, 
-			foreign_keys=self.FOREIGN_KEYS
+			CustomDeviceFactsClass=self.CustomDeviceFactsClass, 
+			foreign_keys=self.foreign_keys
 		)
 
 	def update_all_cmds(self, capture_instance):
@@ -730,6 +731,7 @@ class Execute_By_Excel(Execute_Common):
 			self.all_cmds = capture_instance.all_cmds
 			return
 		for k, v in self.all_cmds.items():
-			self.all_cmds[k] = sorted(list(set(v).union(capture_instance.all_cmds[k])))
+			if capture_instance.all_cmds.get(k):
+				self.all_cmds[k] = sorted(list(set(v).union(capture_instance.all_cmds[k])))
 
 # -----------------------------------------------------------------------------------------------

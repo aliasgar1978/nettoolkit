@@ -4,7 +4,7 @@ Nt Capture-it - Individual - option 2
 
 .. note::
 
-    This feature made available from nettoolkit version 1.6.7 onwards.
+    This feature made available from nettoolkit version 1.7.0 onwards.
 
 
 #. **Execution Steps**

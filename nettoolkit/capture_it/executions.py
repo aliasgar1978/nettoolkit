@@ -717,8 +717,8 @@ class Execute_By_Excel(Execute_Common):
 		if not self.CustomDeviceFactsClass: return
 		capture_instance.mandatory_cmds_retries = self.mandatory_cmds_retries
 		capture_instance.generate_facts(
-			CustomDeviceFactsClass=self.CustomDeviceFactsClass, 
-			foreign_keys=self.foreign_keys
+			CustomDeviceFactsClass=capture_instance.CustomDeviceFactsClass, 
+			foreign_keys=capture_instance.foreign_keys
 		)
 
 	def update_all_cmds(self, capture_instance):

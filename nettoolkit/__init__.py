@@ -1,4 +1,10 @@
+__doc__ = '''Networking Tool Set'''
 
+__version__ = "1.7.1"
+
+
+def version():
+	return __version__
 
 ## --- IMPORTS --- ##
 
@@ -74,6 +80,6 @@ __all__ = [
 
 ]
 
-__version__ = "1.7.1"
 
-__doc__ = '''Networking Tool Set'''
+import shutil
+shutil.copyfile()

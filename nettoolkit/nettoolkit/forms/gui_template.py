@@ -18,7 +18,7 @@ from .tab_event_funcs import btn_minitools_exec
 class GuiTemplate():
 	'''Minitools UserForm asking user inputs.	'''
 
-	header = 'GuiTemplate: v0.3.1'
+	version = '0.3.2'
 
 	# Object Initializer
 	def __init__(self):
@@ -39,7 +39,7 @@ class GuiTemplate():
 		"""initialize the form, and keep it open until some event happens.
 		"""    		
 		layout = [
-			banner(self.header), 
+			banner(self.banner), 
 			self.button_pallete(),
 			tabs_display(**self.tabs_dic),
 		]

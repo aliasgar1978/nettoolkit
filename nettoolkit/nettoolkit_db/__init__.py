@@ -11,12 +11,6 @@ __all__ = [
 ]
 
 
-__version__ = "1.7.1"
-
 
 from .convertdict import ConvDict
 from .database import write_to_xl, append_to_xl, read_xl, get_merged_DataFrame_of_file, sort_dataframe_on_subnet, read_xl_all_sheet
-
-
-def version():
-	return __version__

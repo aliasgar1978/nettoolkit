@@ -28,7 +28,8 @@ class Nettoolkit(GuiTemplate):
 
 	# Object Initializer
 	def __init__(self):
-		self.header = f'Nettoolkit: {nt.version()} - {super().header}'
+		self.banner = f'Nettoolkit: v{nt.__version__} - GuiTemplate: v{super().version}'
+		self.header = f'{nt.__doc__}'
 		super().__init__()
 		self.initialize_variables()
 		self.set_button_pallete()

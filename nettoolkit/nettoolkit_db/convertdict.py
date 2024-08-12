@@ -151,6 +151,14 @@ def update_nested_key(dic, keys, vitem):
 
 
 def yaml_to_dict(file):
+	"""reads yaml file and return data as dict format
+
+	Args:
+		file (str): yaml file
+
+	Returns:
+		dict: dictionary formatted data
+	"""    	
 	with open(file, 'r') as f:
 		return yaml.safe_load(f)
 

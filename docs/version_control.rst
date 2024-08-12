@@ -23,6 +23,11 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
      - Date   
      - Updates
 
+   * - 1.7.1
+     - Aug 15, 2024
+     - * ``facts-finder`` each individual parser return changed from normal dict to op_dict. (respective changes to parent codes)
+       * ``NGui`` - New class added to dynamically create custom GUI Frames. Nettoolkit GUI modified to be child of it.
+       * ``nettoolkit_db.yaml_to_dict`` : new function added.
    * - 1.7.0
      - Jul 31, 2024
      -  ``capture-it`` version 1.7.0 has changed the implementation of capture-it slightly to incorporate new features.  

@@ -94,3 +94,15 @@ read_xl_all_sheet()
             <class 'pandas.core.frame.DataFrame'>
             <class 'pandas.core.frame.DataFrame'>
 
+yaml_to_dict()
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * Reads yaml database, converts and return content in dictionary format
+
+    .. code-block:: python
+
+        >>> file = "c:/users/user/downloads/test.yaml"
+        >>> d = yaml_to_dict(file)
+        >>> print(d)
+
+        *data from test.yaml will appear here as dictionary format.*

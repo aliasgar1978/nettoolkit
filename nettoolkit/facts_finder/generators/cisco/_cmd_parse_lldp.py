@@ -58,5 +58,5 @@ def get_lldp_neighbour(cmd_op, *args, dsr=True):
 		# if not (nbr_d.get('filter') and nbr_d['filter']):
 		# 	nbr['filter'] = get_cisco_int_type(local_if)
 
-	return nbr_d
+	return {'op_dict': nbr_d }
 # ------------------------------------------------------------------------------

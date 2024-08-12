@@ -50,5 +50,5 @@ def get_interface_description(cmd_op, *args):
 		if not (int_desc_dict.get('filter') and int_desc_dict['filter']):
 			port['filter'] = get_cisco_int_type(p)
 
-	return int_desc_dict
+	return {'op_dict': int_desc_dict }
 # ------------------------------------------------------------------------------

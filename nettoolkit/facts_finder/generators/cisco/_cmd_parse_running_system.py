@@ -181,7 +181,7 @@ def get_system_running(cmd_op, *args):
 	if not R.system_dict:
 		R.system_dict['dummy_col'] = ""
 
-	return R.system_dict
+	return {'op_dict': R.system_dict }
 
 # ------------------------------------------------------------------------------
 

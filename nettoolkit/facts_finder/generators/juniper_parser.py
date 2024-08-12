@@ -5,10 +5,9 @@ from collections import OrderedDict
 from nettoolkit.nettoolkit_common import *
 
 from .juniper import *
-from .device import DevicePapa
+from .device import DevicePapa, CMD_LINE_START_WITH
 # ------------------------------------------------------------------------------
 
-CMD_LINE_START_WITH = "output for command: "
 # ------------------------------------------------------------------------------
 # // Juniper //
 # ------------------------------------------------------------------------------
@@ -112,6 +111,7 @@ class Juniper(DevicePapa):
 	Args:
 		file (str): capture file
 	"""    	
+	dev_type = 'juniper_junos'
 	
 	def __init__(self, file):
 		"""Initialize the object by providing the capture file
@@ -149,9 +149,9 @@ class Juniper(DevicePapa):
 			dict: dictionary with the details captured from the output
 		"""   
 		op_list = get_op(self.file, abs_cmd)		
-		if not parse_func: return None
-		po = parse_func(op_list, *arg, **kwarg)
-		return po
+		parsed_output = self._run_parser(parse_func, op_list, *arg, **kwarg)
+		po_for_xl = parsed_output['op_dict']
+		return po_for_xl
 
 	def verify(self):
 		"""verifications of existance of mandatory commands in output captures

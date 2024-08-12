@@ -2,6 +2,7 @@
 # # Dictionary converter for extremely nested dictionary to and from to excel data tabular format
 # """
 import pandas as pd
+import yaml
 
 # ----------------------------------------------------------------------------
 INDEX_KEY_PARENTS = {'instances', 'ifphysicals', 'ifvlans', 'ifloopbacks', 'ifaggregates' } 
@@ -148,6 +149,12 @@ def update_nested_key(dic, keys, vitem):
 	nd[key] = vitem
 	return dic
 
+
+def yaml_to_dict(file):
+	with open(file, 'r') as f:
+		return yaml.safe_load(f)
+
+
 # ----------------------------------------------------------------------------
 # Class to convert dictionary 
 # ----------------------------------------------------------------------------
@@ -255,6 +262,9 @@ class ConvDict():
 			return expand_var_dict(dic)
 		if sheetname == self.table:
 			return expand_table_dict(dic)
+
+
+
 
 # ----------------------------------------------------------------------------
 if __name__ == '__main__':

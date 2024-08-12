@@ -114,7 +114,7 @@ def get_system_running_prefix_lists(cmd_op, *args):
 	if not R.pl_dict:
 		R.pl_dict['dummy_pl'] = ""
 
-	return R.pl_dict
+	return {'op_dict': R.pl_dict}
 
 
 

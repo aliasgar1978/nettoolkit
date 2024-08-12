@@ -65,5 +65,6 @@ def get_cdp_neighbour(cmd_op, *args, dsr=True):
 		nbr['nbr_interface'] = remote_if
 		nbr['nbr_plateform'] = remote_plateform
 		remote_hn, remote_if, remote_plateform = "", "", ""
-	return nbr_d
+
+	return {'op_dict': nbr_d }
 # ------------------------------------------------------------------------------

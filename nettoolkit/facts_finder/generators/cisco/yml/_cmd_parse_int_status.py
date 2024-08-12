@@ -4,10 +4,10 @@
 # ------------------------------------------------------------------------------
 
 from nettoolkit.facts_finder.generators.commons import *
-from .common import *
+# from .common import *
 # ------------------------------------------------------------------------------
 
-def get_interface_status(cmd_op, *args):
+def get_interface_status_yml(cmd_op, *args):
 	"""parser - show int status command output
 
 	Parsed Fields:

@@ -32,7 +32,8 @@ def get_chassis_hardware(cmd_op, *args):
 		if not sfp: continue
 		op_dict[p] = {}
 		op_dict[p]["media_type"] = sfp
-	return op_dict
+
+	return {'op_dict': op_dict}
 
 
 def get_chassis_serial(cmd_op, *args):
@@ -53,7 +54,9 @@ def get_chassis_serial(cmd_op, *args):
 	for l in cmd_op:
 		if not l.startswith('Chassis'): continue
 		spl = l.split()
-		return {'serial': spl[-2]}
+		op_dict.update({'serial': spl[-2]})
+
+	return {'op_dict': op_dict}
 
 
 class JuniperChassisHardware():

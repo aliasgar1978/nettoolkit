@@ -5,10 +5,9 @@ from collections import OrderedDict
 from nettoolkit.nettoolkit_common import *
 
 from .cisco import *
-from .device import DevicePapa
+from .device import DevicePapa, CMD_LINE_START_WITH
 # ------------------------------------------------------------------------------
 
-CMD_LINE_START_WITH = "output for command: "
 LEN_CMD_LINE = len(CMD_LINE_START_WITH)
 
 # ------------------------------------------------------------------------------
@@ -74,6 +73,26 @@ cisco_commands_parser_map = OrderedDict([
 			)),
 	('show version', get_version),
 ])
+# cisco_yaml_parser_map = OrderedDict([
+# 	('show lldp neighbors', get_lldp_neighbour_yml),
+# 	('show cdp neighbors', get_cdp_neighbour_yml),
+# 	('show interfaces status', get_interface_status_yml),
+# 	('show interfaces description', get_interface_description_yml),
+# 	# 'show mac address-table': get_mac_address_table,
+# 	# 'show ip arp': get_arp_table,
+# 	('show running-config', (
+# 			get_system_running_yml, 
+# 			get_bgp_running_yml, 
+# 			get_interfaces_running_yml, 
+# 			get_vrfs_running_yml,
+# 			get_ospf_running_yml,
+# 			get_system_running_routes_yml,
+# 			get_system_running_prefix_lists_yml,
+# 			)),
+# 	('show version', get_version_yml),
+# ])
+
+
 # ------------------------------------------------------------------------------
 
 def absolute_command(cmd, cmd_parser_map):
@@ -149,6 +168,7 @@ class Cisco(DevicePapa):
 	Args:
 		file (str): capture file
 	"""    	
+	dev_type = 'cisco_ios'
 	
 	def __init__(self, file):
 		"""Initialize the object by providing the capture file
@@ -186,9 +206,10 @@ class Cisco(DevicePapa):
 			dict: dictionary with the details captured from the output
 		"""   
 		op_list = get_op_cisco(self.file, abs_cmd, cisco_commands_parser_map)
-		if not parse_func: return None		
-		po = parse_func(op_list,*arg, **kwarg)
-		return po
+		parsed_output = self._run_parser(parse_func, op_list, *arg, **kwarg)
+		po_for_xl = parsed_output['op_dict']
+
+		return po_for_xl
 
 	def verify(self):
 		"""verification in capture for existance of cisco command in output

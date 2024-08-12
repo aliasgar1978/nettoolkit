@@ -177,5 +177,6 @@ def get_ospf_running(cmd_op, *args):
 	
 	if not R.op_dict:
 		R.op_dict['dummy_ospf'] = ""
-	return R.op_dict
+	
+	return {'op_dict': R.op_dict }
 

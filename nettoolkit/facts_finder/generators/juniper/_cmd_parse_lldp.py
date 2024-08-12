@@ -61,5 +61,5 @@ def get_lldp_neighbour(cmd_op, *args, dsr=True):
 			int_type = get_juniper_int_type(local_if)
 			nbr['filter'] = int_type.lower()
 		local_if, remote_hn, remote_if = "", "", ""
-	return nbr_d
+	return {'op_dict': nbr_d}
 # ------------------------------------------------------------------------------

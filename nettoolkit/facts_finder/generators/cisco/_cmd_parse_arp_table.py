@@ -40,7 +40,8 @@ def get_arp_table(cmd_op, *args):
 		port = op_dict[p]
 		if not port.get(_mac): port[_mac] = set()
 		port[_mac].add(ip)
-	return op_dict
+	return {'op_dict': op_dict }
+
 # ------------------------------------------------------------------------------
 # NOT WORKING AS EXPECTED
 # ------------------------------------------------------------------------------

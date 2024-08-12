@@ -30,7 +30,7 @@ ALL_TABS = ALL_TABS.union(CONFIGURE_FRAMES.keys())
 
 # ---------------------------------------------------------------------------------------
 
-def enable_disable(obj, tabs_to_enable, button=set()):
+def enable_disable(obj, tabs_to_enable, button, ALL_TABS, TAB_EVENT_UPDATERS):
 	"""enable/disable provided object frames
 
 	Args:

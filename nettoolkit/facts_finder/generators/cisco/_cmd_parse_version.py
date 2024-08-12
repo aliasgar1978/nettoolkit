@@ -43,5 +43,6 @@ def get_version(cmd_op, *args):
 	op_dict['serial'] = srno
 	op_dict['hardware'] = model
 	op_dict['model'] = model
-	return op_dict
+	
+	return {'op_dict': op_dict }
 # ------------------------------------------------------------------------------

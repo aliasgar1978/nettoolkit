@@ -140,7 +140,7 @@ def get_system_running_routes(cmd_op, *args):
 	if not R.route_dict:
 		R.route_dict['dummy_route'] = ""
 
-	return R.route_dict
+	return {'op_dict': R.route_dict}
 
 
 

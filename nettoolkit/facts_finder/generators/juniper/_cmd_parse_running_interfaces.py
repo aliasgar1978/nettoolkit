@@ -451,7 +451,7 @@ def get_interfaces_running(cmd_op, *args):
 
 	if not R.interface_dict:
 		R.interface_dict['dummy_int'] = ''
-	return R.interface_dict
+	return {'op_dict': R.interface_dict}
 
 
 

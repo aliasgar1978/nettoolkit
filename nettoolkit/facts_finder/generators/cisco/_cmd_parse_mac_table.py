@@ -41,7 +41,8 @@ def get_mac_address_table(cmd_op, *args):
 		nbr["mac"].add(standardize_mac(spl[1]))
 		nbr['mac2'].add(mac_2digit_separated(spl[1]))
 		nbr['mac4'].add(mac_4digit_separated(spl[1]))
-	return op_dict
+
+	return {'op_dict': op_dict }
 # ------------------------------------------------------------------------------
 # NOT WORKING AS EXPECTED
 # ------------------------------------------------------------------------------

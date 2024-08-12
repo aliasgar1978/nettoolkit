@@ -42,5 +42,5 @@ def get_int_description(cmd_op, *args):
 			int_type = get_juniper_int_type(p)
 			port['filter'] = int_type.lower()
 
-	return op_dict
+	return {'op_dict': op_dict}
 # ------------------------------------------------------------------------------

@@ -170,5 +170,6 @@ def get_vrfs_running(cmd_op, *args):
 
 	if not R.vrf_dict:
 		R.vrf_dict['dummy_vrf'] = ""
-	return R.vrf_dict
+	
+	return {'op_dict': R.vrf_dict }
 

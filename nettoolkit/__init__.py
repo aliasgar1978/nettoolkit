@@ -30,7 +30,7 @@ from .pyJuniper.juniper import Juniper, convert_to_set_from_captures
 from .pyJuniper.jset import JSet
 
 # ---------------- nettoolkit ---------------- #
-from .nettoolkit.gui import Nettoolkit
+from .nettoolkit.gui import Nettoolkit, NGui
 
 
 ## --- DECLARATIONS --- ##
@@ -70,7 +70,7 @@ __all__ = [
 	'JSet',
 
 	# ---------------- nettoolkit.gui ---------------- #
-	'Nettoolkit',
+	'Nettoolkit', 'NGui',
 
 ]
 

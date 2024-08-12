@@ -120,7 +120,7 @@ def get_instances_running(cmd_op, *args):
 	if not R.instance_dict:
 		R.instance_dict['dummy_instance'] = ''
 
-	return R.instance_dict
+	return {'op_dict': R.instance_dict}
 
 
 

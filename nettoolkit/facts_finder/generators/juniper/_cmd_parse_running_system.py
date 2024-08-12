@@ -304,7 +304,7 @@ def get_running_system(cmd_op, *args):
 
 	if not R.system_dict:
 		R.system_dict['dummy_system'] = ""
-	return R.system_dict
+	return {'op_dict': R.system_dict}
 
 
 

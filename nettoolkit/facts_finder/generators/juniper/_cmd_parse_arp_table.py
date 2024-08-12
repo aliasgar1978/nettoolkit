@@ -43,7 +43,8 @@ def get_arp_table(cmd_op, *args):
 			_add_arp(op_dict, vlan, _mac, ip, dns, vlan)
 		except: pass
 		## add/modify for ae interface as well to add arp if need.
-	return op_dict
+
+	return {'op_dict': op_dict}
 # ------------------------------------------------------------------------------
 def _add_arp(op_dict, p, _mac, ip, dns, vlan):
 	"""add the detais to output dictionary

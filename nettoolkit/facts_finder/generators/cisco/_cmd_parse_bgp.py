@@ -221,5 +221,6 @@ def get_bgp_running(cmd_op, *args):
 
 	if not R.op_dict:
 		R.op_dict['dummy_bgp'] = ""
-	return R.op_dict
+
+	return {'op_dict': R.op_dict }
 

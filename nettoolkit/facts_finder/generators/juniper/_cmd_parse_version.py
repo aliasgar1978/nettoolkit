@@ -31,5 +31,5 @@ def get_version(cmd_op, *args):
 
 	if not op_dict.get('version'): op_dict['version'] = version
 	if not op_dict.get('model'): op_dict['model'] = model
-	return op_dict
+	return {'op_dict': op_dict}
 # ------------------------------------------------------------------------------

@@ -7,7 +7,8 @@ Nettoolkit GUI User documentation!
    :caption: Contents:
 
 
-   Launch GUI Interface <nt_gui>
+   NGui Interface <n_gui>
+   Nettoolkit GUI <nt_gui>
    minitools <img_gallery_minitools>
    addressing <img_gallery_addressing>
    capture-it <img_gallery_capture_it>

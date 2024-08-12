@@ -295,25 +295,23 @@ Modify as you need to change the appearance and bind appropriate methods to run 
     
     **Parameters for NGui**
 
-    * ``header`` (string) Header for the window (default: None)
-    * ``banner`` (string) Banner to display in window (default: None)
-    * ``form_width`` (integer) Form width (default: 700)
-    * ``form_height`` (integer) Form Height (default: 1440)
-    * ``button_pallete_dic`` (dict) Dictionary which defines additonal buttons on button pallete ( Default: None )
-    * ``frames_dict``(dict) Dictionary which defines all individual frames, and its derived function which returns sg.Frame object ( Default: None)
-    * ``event_catchers`` (set) Set of event catcher element keys (default: None)
-    * ``event_updaters`` (set) Set of event updator element keys (default: None)
-    * ``retractables`` (set) Set of element keys which can be cleanup when pressing clean button.
+    * ``header`` **(string)** Header for the window (default: None)
+    * ``banner`` **(string)** Banner to display in window (default: None)
+    * ``form_width`` **(integer)** Form width (default: 700)
+    * ``form_height`` **(integer)** Form Height (default: 1440)
+    * ``button_pallete_dic`` **(dict)** Dictionary which defines additonal buttons on button pallete ( Default: None )
+    * ``frames_dict`` **(dict)** Dictionary which defines all individual frames, and its derived function which returns sg.Frame object ( Default: None).
+    * ``event_catchers`` **(set)** Set of event catcher element keys (default: None)
+    * ``event_updaters`` **(set)** Set of event updator element keys (default: None)
+    * ``retractables`` **(set)** Set of element keys which can be cleanup when pressing clean button.
 
 
 .. note::
     
     **Parameters for NGui**
 
-    * All these arguments are optionals to declare whilst creating the object instance. And can be later define 
-    by propery assignment ( ex: **NG.header = "Some header"** ).
-    * Although all of these are optionals to declare at beginning, some of the arguments are required ones to provide 
-    before calling the NGui class in order to work properly.. 
+    * All these arguments are optionals to declare whilst creating the object instance. And can be later define  by propery assignment ( ex: **NG.header = "Some header"** ).
+    * Although all of these are optionals to declare at beginning, some of the arguments are required ones to provide before calling the NGui class in order to work properly.. 
     * If you call NGui, without providing ``button_pallete_dic`` and without **initial frame group definition**. GUI will rendered with all frames with no buttons on button pallete.
     * Similarly if you call NGui, without providing ``frames_dict`` and without **initial frame group definition**, GUI will not render any frames instead it will only display buttons on button pallete.
     * Calling NGui without **initial frame group definition** leads to no filter on frames while loading new window.

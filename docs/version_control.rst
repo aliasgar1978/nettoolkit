@@ -7,9 +7,9 @@ Version Control
    :align: right
 
 
-Nettoolkit keeps updated and released on a regular basis. Here is version change detail.
+Nettoolkit keeps updated and released on a regular basis. 
 
-
+Here is version changes detail.
 
 
 
@@ -24,7 +24,7 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
      - Updates
 
    * - 1.7.1
-     - Aug 15, 2024
+     - Aug 12, 2024
      - * ``facts-finder`` each individual parser return changed from normal dict to op_dict. (respective changes to parent codes)
        * ``NGui`` - New class added to dynamically create custom GUI Frames. Nettoolkit GUI modified to be child of it.
        * ``nettoolkit_db.yaml_to_dict`` : new function added.
@@ -33,7 +33,9 @@ Nettoolkit keeps updated and released on a regular basis. Here is version change
      -  ``capture-it`` version 1.7.0 has changed the implementation of capture-it slightly to incorporate new features.  
         Kindly refer to following documentation pages to understand and co-relate changes.
         Your previous execution codes may fail, and requires to be modified slightly in order to support version 1.7.0 onward.
+
         Below are brief summary about changes.
+
           * **capture_by_excel** - added for capturing outputs from standard excel 
           * failed devices *list* added in report
           * **log_summary** method added and incorporated to caputres

@@ -30,30 +30,30 @@ ALL_TABS = ALL_TABS.union(CONFIGURE_FRAMES.keys())
 
 # ---------------------------------------------------------------------------------------
 
-def enable_disable(obj, tabs_to_enable, button, all_tabs, tab_event_updaters):
+def enable_disable(obj, * , group, group_frames, all_tabs, event_updaters):
 	"""enable/disable provided object frames
 
 	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-		tabs_to_enable (list): list of tabs to be enabled
-		button (str): button key, which is to enabled.
+		obj (NGui): NGui class instance object
+		group (str): button group key, which is to enabled.
+		group_frames (list): list of frames to be enabled
 		all_tabs (set): set of all frames keys
-		tab_event_updaters (set): set of Button pallet names button keys
+		event_updaters (set): set of Button pallet names button keys
 	"""	
-	tabs_to_disable = all_tabs.difference(tabs_to_enable)
-	buttons_to_rev = tab_event_updaters.difference(button)
+	tabs_to_disable = all_tabs.difference(group_frames)
+	buttons_to_rev = event_updaters.difference(group)
 	for tab in tabs_to_disable:
 		d = {tab: {'visible':False}}
 		obj.event_update_element(**d)	
-	for i, tab in enumerate(tabs_to_enable):
+	for i, tab in enumerate(group_frames):
 		e = {tab: {'visible':True}}
 		obj.event_update_element(**e)
 		if i ==0: obj.w[tab].select()
-	if button:
+	if group:
 		for tab in buttons_to_rev:
 			e = {tab: {'button_color': 'gray'}}
 			obj.event_update_element(**e)
-		e = {button: {'button_color': 'blue'}}
+		e = {group: {'button_color': 'blue'}}
 		obj.event_update_element(**e)
 
 
@@ -71,7 +71,7 @@ def btn_ipscanner_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	enable_disable(obj, IPSCANNER_FRAMES.keys(), button='btn_ipscanner', all_tabs=ALL_TABS, tab_event_updaters=TAB_EVENT_UPDATERS)
+	enable_disable(obj, group_frames=IPSCANNER_FRAMES.keys(), group='btn_ipscanner', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
 	return True
 
 def btn_minitools_exec(obj):
@@ -83,7 +83,7 @@ def btn_minitools_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	enable_disable(obj, MINITOOLS_FRAMES.keys(), button='btn_minitools', all_tabs=ALL_TABS, tab_event_updaters=TAB_EVENT_UPDATERS)
+	enable_disable(obj, group_frames=MINITOOLS_FRAMES.keys(), group='btn_minitools', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
 	return True
 
 def btn_captureit_exec(obj):
@@ -95,7 +95,7 @@ def btn_captureit_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	enable_disable(obj, CAPTUREIT_FRAMES.keys(), button='btn_captureit', all_tabs=ALL_TABS, tab_event_updaters=TAB_EVENT_UPDATERS)
+	enable_disable(obj, group_frames=CAPTUREIT_FRAMES.keys(), group='btn_captureit', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
 	return True
 
 def btn_factsfinder_exec(obj):
@@ -107,7 +107,7 @@ def btn_factsfinder_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	enable_disable(obj, FACTSFINDER_FRAMES.keys(), button='btn_factsfinder', all_tabs=ALL_TABS, tab_event_updaters=TAB_EVENT_UPDATERS)
+	enable_disable(obj, group_frames=FACTSFINDER_FRAMES.keys(), group='btn_factsfinder', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
 	return True
 
 def btn_j2config_exec(obj):
@@ -119,7 +119,7 @@ def btn_j2config_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	enable_disable(obj, J2CONFIG_FRAMES.keys(), button='btn_j2config', all_tabs=ALL_TABS, tab_event_updaters=TAB_EVENT_UPDATERS)
+	enable_disable(obj, group_frames=J2CONFIG_FRAMES.keys(), group='btn_j2config', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
 	return True
 
 def btn_pyvig_exec(obj):
@@ -131,7 +131,7 @@ def btn_pyvig_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	enable_disable(obj, PYVIG_FRAMES.keys(), button='btn_pyvig', all_tabs=ALL_TABS, tab_event_updaters=TAB_EVENT_UPDATERS)
+	enable_disable(obj, group_frames=PYVIG_FRAMES.keys(), group='btn_pyvig', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
 	return True
 
 def btn_configure_exec(obj):
@@ -143,7 +143,7 @@ def btn_configure_exec(obj):
 	Returns:
 		True: when succeded
 	"""	
-	enable_disable(obj, CONFIGURE_FRAMES.keys(), button='btn_configure', all_tabs=ALL_TABS, tab_event_updaters=TAB_EVENT_UPDATERS)
+	enable_disable(obj, group_frames=CONFIGURE_FRAMES.keys(), group='btn_configure', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
 	return True
 
 # ---------------------------------------------------------------------------------------

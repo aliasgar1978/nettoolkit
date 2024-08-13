@@ -9,3 +9,5 @@ paramiko
 PySimpleGUI
 textfsm
 xlrd
+pyyaml
+attrs

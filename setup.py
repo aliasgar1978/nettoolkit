@@ -1,11 +1,13 @@
 import setuptools
+from nettoolkit import version
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="nettoolkit",
-    version="1.7.1",
+    # version="1.7.2",
+    version=version(),
     author="ALIASGAR - ALI",
     author_email="aholo2000@gmail.com",
     description="Tool Set for Networking Geeks",

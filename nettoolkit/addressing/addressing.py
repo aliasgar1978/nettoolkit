@@ -631,23 +631,17 @@ class IP():
 		self.net = self.subnet.split("/")[0]
 	def __hash__(self):
 		try:
-			return bin2dec(binsubnet(self.NetworkIP()))
+			return int(self)*self.mask
 		except:
 			raise Exception(f"UnhashableInput: {self.subnet}")
 	def __str__(self): return self.subnet
+	def __int__(self): return self._net_ip
 	def __repr__(self): return self.subnet
-	def __len__(self): 
-		if self.version == 4: 
-			return bin2dec(binsubnet(self.broadcast_address())) - bin2dec(binsubnet(self.subnet_zero())) + 1
-		if self.version == 6:
-			raise Exception("Excessive Integer Value Assignment not possible. "
-				"Use IPv6.len() method to get the length of object"
-				)
-	def __gt__(self, ip): return bin2dec(binsubnet(self.NetworkIP())) - bin2dec(binsubnet(ip.broadcast_address())) > 0
-	def __lt__(self, ip): return bin2dec(binsubnet(self.NetworkIP())) - bin2dec(binsubnet(ip.broadcast_address())) < 0
+	def __len__(self):  return self._bc_ip - int(self) + 1
+	def __gt__(self, ip): return int(self) - ip._bc_ip > 0
+	def __lt__(self, ip): return self._bc_ip - int(ip) < 0
 	def __eq__(self, ip): 
-		return (bin2dec(binsubnet(self.NetworkIP())) - bin2dec(binsubnet(ip.NetworkIP())) == 0
-			and bin2dec(binsubnet(self.broadcast_address())) - bin2dec(binsubnet(ip.broadcast_address())) == 0)
+		return (int(self) == int(ip) and self._bc_ip == ip._bc_ip )
 	def __add__(self, n):
 		'''add n-ip's to given subnet and return udpated subnet'''
 		if isinstance(n, int):
@@ -674,7 +668,29 @@ class IP():
 			for x in self._subnetips(n.start, n.stop):
 				l.append(x)
 			return tuple(l)
-	def __contains__(self, pfx): isSubset(pfx, self)
+	def __contains__(self, pfx): return isSubset(pfx, self)
+
+	@property
+	def _net_ip(self): return bin2dec(binsubnet(self.NetworkIP()))
+	@property
+	def _bc_ip(self): return bin2dec(binsubnet(self.broadcast_address()))
+
+	@property
+	def hosts(self):
+		for _ in self:
+			yield _
+	@property
+	def host_count(self):
+		return len(self)
+	@property
+	def is_host(self):
+		return self.mask == self.bit_length
+	@property
+	def is_ip_interface(self):
+		return self.is_host or self.ip_number > 0
+	@property
+	def is_ip_network(self):
+		return self.ip_number == 0
 
 	# get n-number of subnets of given super-net
 	def _sub_subnets(self, n):
@@ -732,7 +748,7 @@ class IPv6(IP):
 		Returns:
 			int: count of ip in this subnet 
 		"""	
-		return bin2dec(binsubnet(self.broadcast_address())) - bin2dec(binsubnet(self.subnet_zero())) + 1
+		return len(self)
 
 	# ------------------------------------------------------------------------
 	# Private Methods

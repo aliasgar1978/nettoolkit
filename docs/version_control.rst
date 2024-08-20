@@ -23,6 +23,9 @@ Here is version changes detail.
      - Date   
      - Updates
 
+   * - 1.7.2
+     - Aug 24, 2024
+     - * ``TBD`` Docs to be updated, version to be release..
    * - 1.7.1
      - Aug 12, 2024
      - * ``facts-finder`` each individual parser return changed from normal dict to op_dict. (respective changes to parent codes)

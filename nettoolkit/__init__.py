@@ -75,8 +75,4 @@ __all__ = [
 ]
 
 __version__ = "1.7.2"
-def version():
-	return __version__
-
-
 __doc__ = '''Networking Tool Set'''

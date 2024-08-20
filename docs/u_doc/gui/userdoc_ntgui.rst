@@ -1,5 +1,5 @@
 
-Nettoolkits GUI User documentation!
+Nettoolkits GUI Summary
 ###############################################
 
 .. toctree::

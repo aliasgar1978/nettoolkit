@@ -8,8 +8,8 @@ NGui Explained
    :alt: facts-finder
    :align: right
 
-Follow Below steps in order to create your own GUI Frames in Python using Nettoolkit interface hooks.
-Backend Credit: ``PySimpleGUI``
+* Follow Below steps in order to create your own GUI Frames in Python using Nettoolkit interface hooks.
+* Backend Credit: ``PySimpleGUI``
 
 #. First thing first.  Lets define a Buttons and Frames (aka: Layout) of your GUI. For example below, we took two group of screens where group1 has two frames inside, while group2 has a single frame inside.
 

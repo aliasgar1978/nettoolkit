@@ -8,9 +8,10 @@ Nettoolkit GUI User documentation!
    :alt: facts-finder
    :align: right
 
-You can now use the NGui class to do GUI stuff for you. Just declare some variables and frames.
-Attach it to appropriate dictionary and boom!!!  Gui interface will be ready for you.
-Modify as you need to change the appearance and bind appropriate methods to run the tasks when an event is called. 
+You can now use the NGui class to do GUI stuff for you. 
+   * Declare some variables and frames. Attach those to appropriate structure and boom!!!  NGui interface will be ready for you.
+   * Modify as you need to change the appearance. 
+   * Bind appropriate methods to run the tasks when an event is called. 
 
 
 .. toctree::
@@ -19,5 +20,5 @@ Modify as you need to change the appearance and bind appropriate methods to run 
 
 
    NGui Interface <n_gui>
-   Nettoolkit GUI Interface <userdoc_ntgui>
+   Nettoolkits GUI <userdoc_ntgui>
 

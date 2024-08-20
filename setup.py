@@ -21,7 +21,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.10',
-    install_requires=['pandas', 'openpyxl', 'PySimpleGUI', 'numpy',
+    install_requires=['pandas', 'openpyxl', 'PySimpleGUI==4.60.5', 'numpy',
         'xlrd', 'jinja2', 'paramiko', 'netmiko', 'ntc-templates', 'pyyaml', 'attrs',
         # 'pywin32',                    ## Windows specific library, need to do manually...
     ],

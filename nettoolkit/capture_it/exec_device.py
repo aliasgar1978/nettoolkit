@@ -2,7 +2,7 @@
 # Imports
 # -----------------------------------------------------------------------------
 from time import sleep
-from nettoolkit.nettoolkit_common import STR, IP
+from nettoolkit.nettoolkit_common import STR, LST, IP
 from dataclasses import dataclass
 import typing
 
@@ -191,6 +191,7 @@ class Execute_Device():
 
 	def run_cmds(self, c):
 		cc = self.command_capture(c)
+		self.get_max_cmd_length(c, self.cmds)
 		cc.grp_cmd_capture(self.cmds)
 		if self.cmds: 
 			self.add_cmd_to_all_cmd_dict(self.cmds)
@@ -213,6 +214,7 @@ class Execute_Device():
 		#
 		self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Starting with custom commands capture.")
 		CC = self.CustomClass(c.capture_path+"/"+c.hn+".log", self.dev.dtype)
+		self.get_max_cmd_length(c, CC.cmds)
 		cc.grp_cmd_capture(CC.cmds)
 		self.add_cmds_to_self(CC.cmds)
 		if CC.cmds: 
@@ -247,7 +249,7 @@ class Execute_Device():
 				if dt != self.dev.dtype: continue
 				self.add_cmd_to_all_cmd_dict(_cmds)
 		elif isinstance(cmds, str):
-			self.all_cmds[self.dev.dtype].add(cmds)
+			self.add_cmd_to_all_cmd_dict([cmds,])
 
 	def add_cmds_to_self(self, cmds):
 		"""add additional commands to cmds list
@@ -273,6 +275,25 @@ class Execute_Device():
 					self.cmds[self.dev.dtype].append(cmd)
 		else:
 			self._device_exec_log(display=True, msg=f"{self.c.hn} : ERROR : Non standard command input {type(self.cmds)}\n{self.cmds}")
+
+	def get_max_cmd_length(self, c, cmds):
+		"""returns the length of longest command
+
+		Args:
+			c (conn): connection object
+			cmds (str,iterable): commands list
+		"""    		
+		if isinstance(cmds, (list, set, tuple)):
+			c.max_cmd_len = LST.longest_str_len(cmds)
+		elif isinstance(cmds, dict):
+			for dt, _cmds in cmds.items():
+				if dt != self.dev.dtype: continue
+				self.get_max_cmd_length(c, _cmds)
+		elif isinstance(cmds, str):
+			self.get_max_cmd_length(c, [cmds,])
+		else:
+			return
+
 
 	def command_capture(self, c):
 		"""start command captures on connection object
@@ -302,6 +323,7 @@ class Execute_Device():
 			x (int, optional): iteration value
 		"""		
 		self._device_exec_log(display=True, msg=f"{c.hn} - Retrying missed_cmds({x+1}): {missed_cmds}")
+		self.get_max_cmd_length(c, missed_cmds)
 		cc.grp_cmd_capture(missed_cmds)
 
 	def is_any_ff_cmds_missed(self, c):

@@ -54,10 +54,10 @@ class COMMAND():
 		if cumulative is True or (isinstance(cumulative, str) and cumulative.lower() == 'both'):
 			self.cumulative_filename = self.add_to_file(self.commandOP)    # add to file
 			self.fname = self.cumulative_filename
-			self.conn._device_conn_log(display=True, msg=f"{self.conn.hn} : INFO : {self.cmd} >> {self.fname}")
+			self.conn._device_conn_log(display=True, msg=f"{self.conn.hn.ljust(len(self.conn.hn)+2)} : INFO : {self.cmd.ljust(self.conn.max_cmd_len+2)} >> {self.fname}")
 		if cumulative is False or (isinstance(cumulative, str) and cumulative.lower() == 'both'):
 			self.fname = self.send_to_file(self.commandOP)    # save to file
-			self.conn._device_conn_log(display=True, msg=f"{self.conn.hn} : INFO : {self.cmd} >> {self.fname}")
+			self.conn._device_conn_log(display=True, msg=f"{self.conn.hn.ljust(len(self.conn.hn)+2)} : INFO : {self.cmd.ljust(self.conn.max_cmd_len+2)} >> {self.fname}")
 		if cumulative is None:
 			pass
 

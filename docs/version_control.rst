@@ -24,8 +24,10 @@ Here is version changes detail.
      - Updates
 
    * - 1.7.2
-     - Aug 24, 2024
+     - Aug 24, 2024 [TBR]
      - * ``addressing`` a few bug fixes and a few methods added to IP classes.
+       * ``gpl.LST`` added a new staticmethod ``longest_str_len``.  **nettoolkit_common.printmsg**, **nettoolkit_common.create_folders** added.
+       * ``capture-it`` execution output modified to display better 
    * - 1.7.1
      - Aug 12, 2024
      - * ``facts-finder`` each individual parser return changed from normal dict to op_dict. (respective changes to parent codes)

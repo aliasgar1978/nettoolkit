@@ -59,6 +59,7 @@ class conn(object):
 		self._devvar = {'ip': ip, 'host': hostname }	# device variables
 		self.device = device
 		self.__set_local_var(device.auth['un'], device.auth['pw'], device.auth['en'])	    # setting 
+		self.max_cmd_len = 10
 		self.banner = juniper_banner if self.devtype == 'juniper_junos' else cisco_banner
 		self.delay_factor = device.delay_factor
 		self.clsString = f'Device Connection: {self.devtype}/{self._devvar["ip"]}/{self._devvar["host"]}'

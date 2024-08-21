@@ -2,6 +2,7 @@
 # ------------------------------------------------------------------------------
 
 import pandas as pd
+import os
 # ------------------------------------------------------------------------------
 
 ### IDENTIFER OF COMMAND LINE ### >
@@ -254,14 +255,43 @@ def dataframe_generate(d):
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------
-def printmsg(pre=None, post=None, pre_ends="\n"):
+DEFAULT_MSG_LEN = 80
+def printmsg(pre=None, *, post=None, pre_ends="\n"):
 	def outer(func):
 		def inner(*args, **kwargs):
-			if pre: print(pre, end=pre_ends)
+			if pre: 
+				print(pre.ljust(DEFAULT_MSG_LEN), end=pre_ends)
+			#
 			fo = func(*args, **kwargs)
-			if post: print(post)
+			#
+			if post: 
+				print(post)
 			return fo
 		return inner
 	return outer
 
 # ------------------------------------------------------------------------
+
+def create_folders(folders, *, silent=True):
+	"""Creates Folders
+
+	Args:
+		folders (list,str): folder(s)
+		silent (bool, optional): Create without prompt. Defaults to True.
+
+	Returns:
+		bool: Success/Fail
+	"""    	
+	cf = 1
+	if isinstance(folders, str):
+		folders = [folders,]
+	for folder in folders:
+		if not os.path.exists(folder):
+			if not silent: print(f"Creating: {folder}", end="\t")
+			try:
+				os.makedirs(folder)
+				print("OK.")
+			except:
+				print("Failed.")
+				cf = 0
+	return bool(cf)

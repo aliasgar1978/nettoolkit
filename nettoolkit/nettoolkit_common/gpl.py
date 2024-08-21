@@ -133,36 +133,36 @@ class Container(ABC):
 				yield (key, value)
 
 ## TBD / NOT IMPLEMENTED YET ##
-class Numeric():
-	"""Support Numberic objects"""
-	def __add__(self): pass
-	def __sub__(self): pass
-	def __mul__(self): pass
-	def __truediv__(self): pass
-	def __floordiv__(self): pass
-	def __pow__(self): pass
-	def __lshift__(self): pass
-	def __rshift__(self): pass
-	def __and__(self): pass
-	def __xor__(self): pass
-	def __or__(self): pass
+# class Numeric():
+# 	"""Support Numberic objects"""
+# 	def __add__(self): pass
+# 	def __sub__(self): pass
+# 	def __mul__(self): pass
+# 	def __truediv__(self): pass
+# 	def __floordiv__(self): pass
+# 	def __pow__(self): pass
+# 	def __lshift__(self): pass
+# 	def __rshift__(self): pass
+# 	def __and__(self): pass
+# 	def __xor__(self): pass
+# 	def __or__(self): pass
 
-	def __iadd__(self): pass
-	def __isub__(self): pass
-	def __imul__(self): pass
-	def __itruediv__(self): pass
-	def __ifloordiv__(self): pass
-	def __ipow__(self): pass
-	def __ilshift__(self): pass
-	def __irshift__(self): pass
-	def __iand__(self): pass
-	def __ixor__(self): pass
-	def __ior__(self): pass
+# 	def __iadd__(self): pass
+# 	def __isub__(self): pass
+# 	def __imul__(self): pass
+# 	def __itruediv__(self): pass
+# 	def __ifloordiv__(self): pass
+# 	def __ipow__(self): pass
+# 	def __ilshift__(self): pass
+# 	def __irshift__(self): pass
+# 	def __iand__(self): pass
+# 	def __ixor__(self): pass
+# 	def __ior__(self): pass
 
-	def __neg__(self): pass
-	def __pos__(self): pass
-	def __abs__(self): pass
-	def __invert__(self): pass
+# 	def __neg__(self): pass
+# 	def __pos__(self): pass
+# 	def __abs__(self): pass
+# 	def __invert__(self): pass
 
 
 # -----------------------------------------------------------------------------
@@ -1260,6 +1260,21 @@ class LST():
 			elif isinstance(_, (set, tuple, list)):
 				l.extend( LST.flatten(_) )
 		return l
+
+	@staticmethod
+	def longest_str_len(lst):
+		"""returns length of longest string from provided lst , members shoudl be of string type
+
+		Args:
+			lst (list): list of strings
+
+		Returns:
+			int: length of maximum length command
+		"""		
+		if lst:
+			return max(len(str(_)) for _ in lst)
+		else:
+			return 0
 
 
 # -----------------------------------------------------------------------------

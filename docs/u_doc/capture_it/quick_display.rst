@@ -49,3 +49,42 @@ Execution Steps - Quick Show Output
 
 
 
+get_op()
+~~~~~~~~~~~
+
+    * reads the provided log file and retuns matching command output from file
+    * filters the command output from given captured file.
+    * logs to be captured using capture-it utility from nettoolkit.
+
+    .. code-block:: python
+
+        >>> from nettoolkit.nettoolkit_common import get_op
+        >>> get_op(file="capture.log", cmd='show cdp neighbor')
+        output of command.
+
+
+get_ops()
+~~~~~~~~~~~
+
+    * reads the provided log file and retuns matching commands outputs from file
+    * filters the commands outputs from given captured file.
+    * logs to be captured using capture-it utility from nettoolkit.
+
+    .. code-block:: python
+
+        >>> from nettoolkit.nettoolkit_common import get_ops
+        >>> get_ops(file="capture.log", cmd_startswith='show cdp neighbor')
+        output of commands.
+
+get_device_manufacturar()
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * finds out manufacturer (cisco/juniper) from given capture file.
+    * in case if not found, it will return as Unidentified.
+
+    .. code-block:: python
+
+        >>> from nettoolkit.nettoolkit_common import get_device_manufacturar
+        >>> get_device_manufacturar(file="capture.log")
+        "Cisco"
+

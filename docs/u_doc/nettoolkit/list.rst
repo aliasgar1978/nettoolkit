@@ -24,6 +24,7 @@ Such available functions are:
 	* list_of_devices()
 	* split()
 	* list_to_octet()
+	* longest_str_len()
 
 remove_empty_members()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -125,4 +126,15 @@ list_to_octet()
 		>>> LST.list_to_octet(lst)
 		'192.168.1.1'
 
+longest_str_len()
+~~~~~~~~~~~~~~~~~
+
+	* returns longest string length from provided list
+	* members should be of string type
+
+	.. code-block:: python
+
+		>>> lst = ["a", "ab", "abc", "abcd", "abcde", "abcdef"]
+		>>> LST.longest_str_len(lst)
+		6
 

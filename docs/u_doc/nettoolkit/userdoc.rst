@@ -11,7 +11,8 @@ Nettoolkit class extensions User documentation!
    :maxdepth: 4
    :caption: Contents:
 
-   String Operations <string>
-   List Operations <list>
-   Dict Operations <dict>
+   String Extensions <string>
+   List Extensions <list>
+   Dict Extensions <dict>
    Database Operations <db>
+   Uncategorized Functions <func>

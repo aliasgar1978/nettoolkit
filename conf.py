@@ -13,7 +13,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('.'))
-from nettoolkit import __version__ as ver
+# from nettoolkit import __version__ as ver
 
 # -- Project information -----------------------------------------------------
 
@@ -22,8 +22,8 @@ copyright = '2023, ALIASGAR [ALI]'
 author = 'ALIASGAR [ALI]'
 
 # The full version, including alpha/beta/rc tags
-# release = '1.7.2'
-release = ver
+release = '1.7.2'
+# release = ver
 
 # -- General configuration ---------------------------------------------------
 

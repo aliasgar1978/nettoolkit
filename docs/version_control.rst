@@ -23,8 +23,12 @@ Here is version changes detail.
      - Date   
      - Updates
 
+   * - 1.7.3
+     - MMM dd, 2024 [TBR]
+     - * [TBR]
+       * [TBR]
    * - 1.7.2
-     - Aug 24, 2024 [TBR]
+     - Aug 24, 2024
      - * ``addressing`` a few bug fixes and a few methods added to IP classes.
        * ``gpl.LST`` added a new staticmethod ``longest_str_len``.  **nettoolkit_common.printmsg**, **nettoolkit_common.create_folders** added.
        * ``capture-it`` execution output modified to display better 

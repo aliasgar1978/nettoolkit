@@ -16,6 +16,28 @@ previous_path = p.resolve().parents[0]
 CACHE_FILE = previous_path.joinpath('caches.xlsx')
 CONNECTOR_TYPES_FILE = previous_path.joinpath('cable_n_connectors.xlsx')
 
+
+# ------------------------------------------------------------------------
+def popupmsg(pre=None, *, post=None,):
+	"""Decorator to provide pre/post custom popup message to a function
+
+	Args:
+		pre (str, optional): Popup Message to display before function execution. Defaults to None.
+		post (str, optional): Popup Message to display after function execution. Defaults to None.
+	"""    	
+	def outer(func):
+		def inner(*args, **kwargs):
+			if pre: 
+				sg.Popup(pre)
+			#
+			fo = func(*args, **kwargs)
+			#
+			if post: 
+				sg.Popup(post)
+			return fo
+		return inner
+	return outer
+
 # ---------------------------------------------------------------------------------------
 
 def blank_line(): 

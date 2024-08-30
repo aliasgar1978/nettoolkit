@@ -319,3 +319,23 @@ NGui Explained
     * Similarly if you call NGui, without providing ``frames_dict`` and without **initial frame group definition**, GUI will not render any frames instead it will only display buttons on button pallete.
     * Calling NGui without **initial frame group definition** leads to no filter on frames while loading new window.
 
+------
+
+@Decorator popupmsg()
+~~~~~~~~~~~~~~~~~~~~~~~
+
+    * ``pre`` **(str, optional)**: Popup Message to display before function execution. Defaults to None.
+    * ``post`` **(str, optional)**: Popup Message to display after function execution. Defaults to None.
+
+    .. code-block:: python
+
+        from nettoolkit.nettoolkit.forms.formitems import popupmsg
+
+        @popupmsg(pre="Popup msg before bfunction run", 
+                 post="Popup msg after function run")
+        def foo():
+            pass
+
+
+
+

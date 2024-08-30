@@ -62,19 +62,20 @@ class GuiTemplate():
 				self.clear_fields()
 				pass
 			if event in self.event_catchers:
-				# ---------------------------------------------
-				if event in self.event_item_updaters:
-					success = self.event_catchers[event](self, i, event)
-				elif event in self.event_updaters:
-					success = self.event_catchers[event](self, i)	
-				elif event in self.tab_updaters:
-					success = self.event_catchers[event](self)	
-				else:
-					success = self.event_catchers[event](i)
-				# ---------------------------------------------
-				if not success:
-					print("Mandatory inputs missing or incorrect.\tPlease verify inputs.")
-				# ---------------------------------------------
+				try:
+					# ---------------------------------------------
+					if event in self.event_item_updaters:
+						self.event_catchers[event](self, i, event)
+					elif event in self.event_updaters:
+						self.event_catchers[event](self, i)	
+					elif event in self.tab_updaters:
+						self.event_catchers[event](self)	
+					else:
+						self.event_catchers[event](i)
+				except Exception as e:
+					# ---------------------------------------------
+					print(f"{e}\nMandatory inputs missing or incorrect.\tPlease verify inputs.")
+					# ---------------------------------------------
 
 			self.user_events(i, event)
 

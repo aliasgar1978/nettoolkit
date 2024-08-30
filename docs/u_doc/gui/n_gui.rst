@@ -322,7 +322,7 @@ NGui Explained
 ------
 
 @Decorator popupmsg()
-~~~~~~~~~~~~~~~~~~~~~~~
+============================================
 
     * ``pre`` **(str, optional)**: Popup Message to display before function execution. Defaults to None.
     * ``post`` **(str, optional)**: Popup Message to display after function execution. Defaults to None.

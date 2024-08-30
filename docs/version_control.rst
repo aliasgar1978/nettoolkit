@@ -25,7 +25,7 @@ Here is version changes detail.
 
    * - 1.7.3
      - MMM dd, 2024 [TBR]
-     - * [TBR]
+     - * gui-forms.**formitems.popupmsg** decorator added to provide pre/post popup
        * [TBR]
    * - 1.7.2
      - Aug 24, 2024

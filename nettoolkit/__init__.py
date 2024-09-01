@@ -75,4 +75,4 @@ __all__ = [
 ]
 
 __version__ = "1.7.3"
-__doc__ = '''Networking Tool Set'''
+__doc__ = '''Networking Tool Set - by: ALIASGAR [ALI] '''

@@ -19,7 +19,7 @@ from .formitems import *
 @dataclass(eq=False, repr=False)
 class GuiTemplate():
 	'''Minitools UserForm asking user inputs.	'''
-	version: str = field(init=False, default='0.4.0')
+	version: str = field(init=False, default='0.4.1')
 	header: str
 	banner: str
 	form_width: int
@@ -47,6 +47,7 @@ class GuiTemplate():
 			banner(self.banner), 
 			self.button_pallete(),
 			tabs_display(**self.tabs_dic),
+			footer(self.version, self.form_width),
 		]
 
 		self.w = sg.Window(self.header, layout, size=(self.form_width, self.form_height), finalize=True)#, icon='data/sak.ico')
@@ -74,7 +75,7 @@ class GuiTemplate():
 						self.event_catchers[event](i)
 				except Exception as e:
 					# ---------------------------------------------
-					print(f"{e}\nMandatory inputs missing or incorrect.\tPlease verify inputs.")
+					print(f"{e}\nEvent Error {event}, \nMandatory inputs missing or incorrect.\tPlease verify inputs.")
 					# ---------------------------------------------
 
 			self.user_events(i, event)

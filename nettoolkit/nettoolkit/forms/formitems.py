@@ -83,6 +83,18 @@ def banner(version):
 	return [sg.Text(version, font='arialBold', justification='center', size=(768,1))] 
 
 
+def footer(version, width):
+	"""Footer Credit text
+
+	Args:
+		version (str): gui template version
+		width (_type_): width of window
+
+	Returns:
+		list: list with footer text
+	"""    	
+	return [sg.Text(f"Prepared using Nettoolkit NGUI {version}", justification='right', size=(width, 1))]
+
 def tabs(**kwargs):
 	"""create tab groups for provided kwargs
 

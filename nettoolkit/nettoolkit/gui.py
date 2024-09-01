@@ -80,7 +80,7 @@ class Nettoolkit(NGui):
 
 	# Object Initializer
 	def __init__(self):
-		banner = f'Nettoolkit: v{nt.__version__} - GuiTemplate: v{super().version}'
+		banner = f'Nettoolkit: v{nt.__version__}'
 		header = f'{nt.__doc__}'
 		#
 		self.initialize_custom_variables()

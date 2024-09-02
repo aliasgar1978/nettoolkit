@@ -529,7 +529,7 @@ class Validation():
 			self.validated = func_map[self.version]()
 			if not self.validated: return None
 			self.ip_obj = object_map[self.version](self.subnet)
-			self.validated = expand(self.ip_obj + 0) == expand(self.ip_obj.NetworkIP(False))
+			self.validated = expand(self.ip_obj[0]) == expand(self.ip_obj.NetworkIP(False))
 
 			if not self.validated:  return None
 		else:
@@ -627,8 +627,9 @@ class IP():
 
 	def __init__(self, subnet):
 		self.subnet = subnet
-		self.mask = int(self.subnet.split("/")[1])
-		self.net = self.subnet.split("/")[0]
+		spl_subnet = self.subnet.split("/")
+		self.mask = int(spl_subnet[1]) if len(spl_subnet) > 1 else self.bit_length
+		self.net = spl_subnet[0] if len(spl_subnet) > 0 else None
 	def __hash__(self):
 		try:
 			return int(self)*self.mask

@@ -17,6 +17,16 @@ def read_xl_all_sheet(file):
 	dfd = {sheet: df.fillna("") for sheet, df in dfd.items()}
 	return dfd
 
+def read_an_xl_sheet(file):
+	"""reads Excel file and return pandas dataframe. default first sheet will be read.
+
+	Args:
+		file (str): input excel filename
+
+	Returns:
+		DataFrame: Pandas DF object (pandas DataFrame)
+	"""    	
+	return pd.read_excel(file).fillna('')
 
 def read_xl(file):
 	"""reads Excel file and return object XL_READ

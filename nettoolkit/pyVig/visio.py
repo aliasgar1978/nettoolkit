@@ -605,3 +605,44 @@ def device(visObj, x, y, **kwargs):
 
 
 # ------------------------------------------------------------------------------
+
+class ExcelObject():
+	"""Interact with Microsoft Excel files (MS Windows only) 
+
+	Args:
+		file (str): file name of excel file.
+	"""    		
+
+	def __init__(self, file):
+		win32c = win32com.client.constants
+		self.xl = win32com.client.gencache.EnsureDispatch('Excel.Application')
+		self.xl.Visible = True
+		self.open(file)
+
+	def open(self, file):
+		"""opens the provided file in MS-Excel (default, while initializing)
+
+		Args:
+			file (str): file name of excel file.
+		"""    		
+		self.wb = self.xl.Workbooks.Open(file)
+
+	@property
+	def workbook(self):
+		"""return workbook object of opened excel file.
+
+		Returns:
+			object: excel workbook object
+		"""    		
+		return self.wb
+
+	@property
+	def excel(self):
+		"""return excel object of opened excel file.
+
+		Returns:
+			object: excel object
+		"""    		
+		return self.xl
+
+

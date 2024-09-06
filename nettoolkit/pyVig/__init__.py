@@ -18,7 +18,7 @@ Stencils: [optional] folder from where project can find visio stencils.
 from .stencils import get_list_of_stencils
 from .database import DeviceData, CableMatrixData
 from .entities import ItemObjects, Connectors
-from .visio import VisioObject
+from .visio import VisioObject, ExcelObject
 
 from .oper import DFGen, CableMatrix
 from .devices import AdevDevices

@@ -26,7 +26,7 @@ Here is version changes detail.
    * - 1.7.3
      - MMM dd, 2024 [TBR]
      - * gui-forms.**formitems.popupmsg** decorator added to provide pre/post popup
-       * [TBR]
+       * nettoolkit**.nettoolkit_db.read_an_xl_sheet** added
    * - 1.7.2
      - Aug 24, 2024
      - * ``addressing`` a few bug fixes and a few methods added to IP classes.

@@ -24,7 +24,7 @@ Here is version changes detail.
      - Updates
 
    * - 1.7.3
-     - MMM dd, 2024 [TBR]
+     - Sep 06, 2024
      - * gui-forms.**formitems.popupmsg** decorator added to provide pre/post popup
        * **pyVig.ExcelObject** added to interface with MS-Excel in Windows
        * nettoolkit**.nettoolkit_db.read_an_xl_sheet** added

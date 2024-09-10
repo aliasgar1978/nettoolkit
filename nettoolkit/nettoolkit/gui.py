@@ -13,13 +13,23 @@ from .forms.formitems import *
 
 ### -- For Nettoolkit() class
 from .forms.tab_event_funcs import BUTTUN_PALLETE_NAMES, TAB_EVENT_UPDATERS
-from .forms.tab_event_funcs import btn_minitools_exec as initial_frames_load
+# from .forms.tab_event_funcs import btn_minitools_exec as initial_frames_load
+from .forms.tab_event_funcs import btn_minitools_exec
+from .forms.tab_event_funcs import btn_ipscanner_exec
+from .forms.tab_event_funcs import btn_captureit_exec
+from .forms.tab_event_funcs import btn_factsfinder_exec
+from .forms.tab_event_funcs import btn_configure_exec
+from .forms.tab_event_funcs import btn_j2config_exec
+from .forms.tab_event_funcs import btn_pyvig_exec
+
 from .forms.var_frames import FRAMES
 from .forms.var_event_funcs import EVENT_FUNCTIONS
 from .forms.var_event_updators import EVENT_UPDATORS
 from .forms.var_event_item_updators import EVENT_ITEM_UPDATORS
 from .forms.var_retractables import RETRACTABLES
 from nettoolkit.addressing.forms.subnet_scanner import count_ips
+
+
 # ---------------------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
@@ -78,6 +88,17 @@ class NGui(GuiTemplate):
 class Nettoolkit(NGui):
 	'''Minitools UserForm asking user inputs.	'''
 
+	frames_loaded = {
+		'minitools': btn_minitools_exec,
+		'addressing': btn_ipscanner_exec,
+		'captureit': btn_captureit_exec,
+		'factsgen': btn_factsfinder_exec,
+		'configure': btn_configure_exec,
+		'j2config': btn_j2config_exec,
+		'pyvig': btn_pyvig_exec,
+	}
+
+
 	# Object Initializer
 	def __init__(self):
 		banner = f'Nettoolkit: v{nt.__version__}'
@@ -94,11 +115,13 @@ class Nettoolkit(NGui):
 			retractables = RETRACTABLES,
 			button_pallete_dic = BUTTUN_PALLETE_NAMES,
 			form_width = 800,
-			# form_height = 700,
+			form_height = 720,
 		)	
 
-	def __call__(self):
-		self.NG(initial_frames_load)
+	def __call__(self, initial_frame=None):
+		initial_frame = self.frames_loaded.get(initial_frame)
+		if not initial_frame: initial_frame = self.frames_loaded['minitools']
+		self.NG(initial_frame)
 
 	def initialize_custom_variables(self):
 		"""Initialize all custom variables

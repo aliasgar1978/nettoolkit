@@ -35,7 +35,7 @@ class CleanFacts:
 
 	def __init__(self,
 		capture_log_file, 
-		capture_parsed_file,
+		capture_parsed_file=None,
 		convert_to_cit=False,
 		remove_cit_bkp=True,
 		skip_txtfsm=False,
@@ -152,10 +152,11 @@ class CleanFacts:
 		if self.remove_cit_bkp and self.convert_to_cit:
 			try:
 				os.remove(f'{self.capture_log_file[:-4]}-bkp.log')
-				# os.rename(f'{self.capture_log_file[:-4]}-bkp.log', self.capture_log_file)
-			except:
+			except FileNotFoundError:
+				pass
+			except Exception as e:
 				if not self.Fg.dev_type == 'juniper':
-					print(f"Error Removing duplicate file")
+					print(f"Error Removing duplicate file\n{e}")
 
 
 

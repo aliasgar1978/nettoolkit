@@ -23,6 +23,10 @@ Here is version changes detail.
      - Date   
      - Updates
 
+   * - 1.7.4
+     - Sep TBD, 2024
+     - * nettoolkit-gui - rewamped
+       * **facts-finder** bug fix for cisco trunk vlan add lines
    * - 1.7.3
      - Sep 06, 2024
      - * gui-forms.**formitems.popupmsg** decorator added to provide pre/post popup

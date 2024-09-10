@@ -180,7 +180,10 @@ class RunningInterfaces():
 		vlans = get_vlans_cisco(l.strip())
 		if not vlans: return None
 		for k, v in vlans.items():
-			if v: port_dict[k] = v
+			if v and port_dict.get(k): 
+				port_dict[k] += ","+str(v)
+			elif v and not port_dict.get(k): 
+				port_dict[k] = v
 
 
 	def interface_channel_group(self):

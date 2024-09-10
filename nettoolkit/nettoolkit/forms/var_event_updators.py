@@ -1,4 +1,9 @@
 
+from nettoolkit.capture_it.forms.execs import CAPTUREIT_EVENT_UPDATERS
+from nettoolkit.facts_finder.forms.execs import FACTSFINDER_EVENT_UPDATERS
+from nettoolkit.j2config.forms.execs import J2CONFIG_EVENT_UPDATERS
+from nettoolkit.pyVig.forms.execs import PYVIG_EVENT_UPDATERS
+
 
 # ---------------------------------------------------------------------------------------
 #   sets of event updator variables
@@ -12,23 +17,23 @@ MINITOOLS_EVENT_UPDATERS = {
 IPSCANNER_EVENT_UPDATERS = {
 	'go_pfxs_summary', 'go_pfxs_issubset', 'go_pfxs_break',
 }
-CAPTUREIT_EVENT_UPDATERS = {
-	'cit_common',
-	'device_ip_list_file', 'cisco_cmd_list_file', 'juniper_cmd_list_file',
-	'custom_cit_file', 'custom_dynamic_cmd_class_name',
-	'custom_ff_file_cit', 'custom_ff_class_name_cit', 'custom_fk_file_cit', 'custom_fk_name_cit',	
-}
+# CAPTUREIT_EVENT_UPDATERS = {
+# 	'cit_common',
+# 	'device_ip_list_file', 'cisco_cmd_list_file', 'juniper_cmd_list_file',
+# 	'custom_cit_file', 'custom_dynamic_cmd_class_name',
+# 	'custom_ff_file_cit', 'custom_ff_class_name_cit', 'custom_fk_file_cit', 'custom_fk_name_cit',	
+# }
 
-FACTSFINDER_EVENT_UPDATERS = {
-	'btn_ff_gen',
-	'custom_ff_file', 'custom_ff_class_name', 'custom_fk_file', 'custom_fk_name',	
-}
-J2CONFIG_EVENT_UPDATERS = {
-	'btn_j2_gen', 'j2_custom_reg', 
-}
-PYVIG_EVENT_UPDATERS = {
-	'pv_data_start', 'pv_start',
-}
+# FACTSFINDER_EVENT_UPDATERS = {
+# 	'btn_ff_gen',
+# 	'custom_ff_file', 'custom_ff_class_name', 'custom_fk_file', 'custom_fk_name',	
+# }
+# J2CONFIG_EVENT_UPDATERS = {
+# 	'btn_j2_gen', 'j2_custom_reg', 
+# }
+# PYVIG_EVENT_UPDATERS = {
+# 	'pv_data_start', 'pv_start',
+# }
 CONFIGURE_EVENT_UPDATERS = {
 	'config_excel_files', 'btn_config_by_excel',
 }

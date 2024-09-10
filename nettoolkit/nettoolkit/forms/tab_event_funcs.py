@@ -2,9 +2,15 @@
 # ---------------------------------------------------------------------------------------
 from collections import OrderedDict
 from .var_frames import (
-	MINITOOLS_FRAMES, IPSCANNER_FRAMES, CAPTUREIT_FRAMES, FACTSFINDER_FRAMES, J2CONFIG_FRAMES, PYVIG_FRAMES,
-	CONFIGURE_FRAMES
+	MINITOOLS_FRAMES, IPSCANNER_FRAMES,
+	CONFIGURE_FRAMES,
+	# CAPTUREIT_FRAMES, FACTSFINDER_FRAMES, J2CONFIG_FRAMES, PYVIG_FRAMES
 )
+from nettoolkit.capture_it.forms.frames import CAPTUREIT_FRAMES
+from nettoolkit.facts_finder.forms.frames import FACTSFINDER_FRAMES
+from nettoolkit.j2config.forms.frames import J2CONFIG_FRAMES
+from nettoolkit.pyVig.forms.frames import PYVIG_FRAMES
+
 # ---------------------------------------------------------------------------------------
 #   ADD ANY NEW SERVICE BUTTON HERE 
 # ---------------------------------------------------------------------------------------
@@ -12,10 +18,10 @@ BUTTUN_PALLETE_NAMES = OrderedDict()
 BUTTUN_PALLETE_NAMES["Minitools"] = 'btn_minitools'
 BUTTUN_PALLETE_NAMES["Addressing"] = 'btn_ipscanner'
 BUTTUN_PALLETE_NAMES["Capture-IT"] = 'btn_captureit'
-BUTTUN_PALLETE_NAMES["Facts Gen"] = 'btn_factsfinder'
+BUTTUN_PALLETE_NAMES["Facts"] = 'btn_factsfinder'
 BUTTUN_PALLETE_NAMES["Configure"] = 'btn_configure'	
 BUTTUN_PALLETE_NAMES["Config Gen"] = 'btn_j2config'
-BUTTUN_PALLETE_NAMES["Drawing Gen"] = 'btn_pyvig'
+BUTTUN_PALLETE_NAMES["Visio Gen"] = 'btn_pyvig'
 TAB_EVENT_UPDATERS = set(BUTTUN_PALLETE_NAMES.values())
 #
 # ---------------------------------------------------------------------------------------

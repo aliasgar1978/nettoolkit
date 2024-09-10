@@ -1,6 +1,8 @@
 # """Common Definitions used across project"""
 # ------------------------------------------------------------------------------
-
+import yaml
+from yaml import UnsafeLoader
+import subprocess as sp
 import pandas as pd
 import os
 # ------------------------------------------------------------------------------
@@ -33,6 +35,15 @@ def read_file(file):
 	with open(file, 'r') as f:
 		file_lines = f.readlines()
 	return file_lines
+
+def read_yaml_mode_us(file):
+	try:
+		with open(file, 'r') as f:
+		  return  yaml.load(f, Loader=UnsafeLoader)
+	except Exception as e:
+		raise Exception(f"Unable to Read the file, or invalid data \n{e}")
+
+
 # ------------------------------------------------------------------------------
 
 def get_op(file, cmd):
@@ -255,12 +266,14 @@ def dataframe_generate(d):
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------
-DEFAULT_MSG_LEN = 80
-def printmsg(pre=None, *, post=None, pre_ends="\n"):
+def printmsg(pre=None, *, post=None, pre_ends="\n", justify_pre=True, justification_len=80):
 	def outer(func):
 		def inner(*args, **kwargs):
 			if pre: 
-				print(pre.ljust(DEFAULT_MSG_LEN), end=pre_ends)
+				if justify_pre:
+					print(pre.ljust(justification_len), end=pre_ends)
+				else:
+					print(pre, end=pre_ends)
 			#
 			fo = func(*args, **kwargs)
 			#
@@ -295,3 +308,7 @@ def create_folders(folders, *, silent=True):
 				print("Failed.")
 				cf = 0
 	return bool(cf)
+
+
+def open_text_file(file):
+	sp.Popen(["notepad.exe", file])

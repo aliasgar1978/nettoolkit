@@ -63,7 +63,7 @@ class GuiTemplate():
 				self.clear_fields()
 				pass
 			if event in self.event_catchers:
-				try:
+				# try:
 					# ---------------------------------------------
 					if event in self.event_item_updaters:
 						self.event_catchers[event](self, i, event)
@@ -73,10 +73,10 @@ class GuiTemplate():
 						self.event_catchers[event](self)	
 					else:
 						self.event_catchers[event](i)
-				except Exception as e:
-					# ---------------------------------------------
-					print(f"{e}\nEvent Error {event}, \nMandatory inputs missing or incorrect.\tPlease verify inputs.")
-					# ---------------------------------------------
+				# except Exception as e:
+				# 	# ---------------------------------------------
+				# 	print(f"{e}\nEvent Error {event}, \nMandatory inputs missing or incorrect.\tPlease verify inputs.")
+				# 	# ---------------------------------------------
 
 			self.user_events(i, event)
 

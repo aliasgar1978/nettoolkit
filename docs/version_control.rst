@@ -24,7 +24,7 @@ Here is version changes detail.
      - Updates
 
    * - 1.7.4
-     - Sep TBD, 2024
+     - Sep 11, 2024
      - * nettoolkit-gui - rewamped and now it utilizes ``custom.yaml`` for custom project import/forks
        * **facts-finder** bug fix for cisco trunk vlan add lines
    * - 1.7.3

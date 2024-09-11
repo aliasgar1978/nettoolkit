@@ -13,12 +13,12 @@ def facts_finder_frame():
 					relief=sg.RELIEF_SUNKEN, 
 					layout=[
 
-		[sg.Text('Facts Generator', font='Bold', text_color="black") ],
+		[sg.Text('Facts Generator', font=('TimesNewRoman', 12), text_color="black") ],
 
-		[sg.Text('log files', text_color="yellow"), 
+		[sg.Text('log files', text_color="black"), 
 			sg.InputText('', key='ff_log_files'), sg.FilesBrowse(key='ff_log_files_btn') ],
 		under_line(80),
-		[sg.Text('Options', font='Bold', text_color="black") ],
+		[sg.Text('Options',  font=('TimesNewRoman', 12), text_color="black") ],
 
 		[sg.Checkbox('convert to capture_it ', key='ff_convert_to_cit', default=True, text_color='black')],
 		[sg.Checkbox('remove backup/tmp file', key='ff_remove_cit_bkp', default=True, text_color='black')],

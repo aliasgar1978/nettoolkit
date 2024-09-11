@@ -14,7 +14,7 @@ def capture_it_frame():
 					relief=sg.RELIEF_SUNKEN, 
 					layout=[
 
-		[sg.Text('Credentials', font=('bold'), text_color="black"),], 
+		[sg.Text('Credentials',  font=('TimesNewRoman', 12), text_color="black"),], 
 		[sg.Text("un:",     text_color="black"),sg.InputText(get_cache(CACHE_FILE, 'cit_cred_un'), key='cit_cred_un', size=(8,1), change_submits=True),
 		 sg.Text("pw:",     text_color="black"),sg.InputText("", key='cit_cred_pw', password_char='*', size=(20,1),),
 		 sg.Text("secret:", text_color="black"),sg.InputText("", key='cit_cred_en',  password_char='*', size=(20,1)), ],

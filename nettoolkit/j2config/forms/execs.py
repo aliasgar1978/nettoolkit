@@ -18,10 +18,10 @@ def add_path(file):
 
 
 def get_custom_classes(custom):
-	return {k: v for k, v in custom['custom_j2_classes'].items() }
+	return {k: v for k, v in custom['j2_class_filters'].items() }
 
 def get_custom_funcs(custom):
-	return { v for k, v in custom['custom_j2_funcs'].items() }
+	return { v for k, v in custom['j2_functions_filters'].items() }
 
 
 def j2config_start(i):
@@ -30,7 +30,7 @@ def j2config_start(i):
 		custom =  read_yaml_mode_us(i['j2_file_custom_yml']) 
 	#
 	regional_file = i['j2_file_regional'] if i['j2_file_regional'] else None
-	regional_class = custom['regional_class'] if i['j2_file_custom_yml'] else None
+	regional_class = custom['j2_regional']['regional_class'] if i['j2_file_custom_yml'] else None
 	#
 	PrCfg = PrepareConfig(
 		data_file=i['j2_file_data'],

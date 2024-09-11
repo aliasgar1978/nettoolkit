@@ -77,13 +77,13 @@ def capture_it_start(i):
 	#
 	if i['cit_opt_dependent'] and i['cit_file_custom_yml']:
 		try:
-			c.dependent_cmds(custom_dynamic_cmd_class=custom['custom_dynamic_cmd_class'])
+			c.dependent_cmds(custom_dynamic_cmd_class=custom['capture_it']['custom_dynamic_cmd_class'])
 		except:
 			print(f"Cutom Commands fetch fails")
 	#
 	if i['cit_opt_parsed_output'] and i['cit_file_custom_yml']:
 		try:
-			c.generate_facts(CustomDeviceFactsClass=custom['CustomDeviceFactsClass'], foreign_keys=custom['foreign_keys'])
+			c.generate_facts(CustomDeviceFactsClass=custom['facts_finder']['CustomDeviceFactsClass'], foreign_keys=custom['facts_finder']['foreign_keys'])
 		except:
 			print(f"Custom Parser functions fetcg fails")
 	#
@@ -121,5 +121,5 @@ CAPTUREIT_ITEM_UPDATERS = set()
 CAPTUREIT_RETRACTABLES = {
 	'cit_cred_un', 'cit_cred_en', 'cit_cred_pw',
 	'cit_path_captures', 'cit_path_summary', 'cit_path_logs',
-	'cit_file_cisco', 'cit_file_juniper', 'cit_file_custom_yml', 'cit_file_hosts',
+	'cit_file_cisco', 'cit_file_juniper', 'cit_file_hosts',
 }

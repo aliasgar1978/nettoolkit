@@ -1,33 +1,34 @@
 
 # ---------------------------------------------------------------------------------------
 from collections import OrderedDict
-from .var_frames import (
-	MINITOOLS_FRAMES, IPSCANNER_FRAMES,
-	CONFIGURE_FRAMES,
-	# CAPTUREIT_FRAMES, FACTSFINDER_FRAMES, J2CONFIG_FRAMES, PYVIG_FRAMES
-)
 from nettoolkit.capture_it.forms.frames import CAPTUREIT_FRAMES
 from nettoolkit.facts_finder.forms.frames import FACTSFINDER_FRAMES
 from nettoolkit.j2config.forms.frames import J2CONFIG_FRAMES
 from nettoolkit.pyVig.forms.frames import PYVIG_FRAMES
+from nettoolkit.configure.forms.frames import CONFIGURE_FRAMES
+from nettoolkit.addressing.forms.frames import ADDRESSING_FRAMES
+from nettoolkit.pyJuniper.forms.frames import JUNIPER_FRAMES
+from nettoolkit.pyNetCrypt.forms.frames import CRYPT_FRAMES
 
 # ---------------------------------------------------------------------------------------
 #   ADD ANY NEW SERVICE BUTTON HERE 
 # ---------------------------------------------------------------------------------------
 BUTTUN_PALLETE_NAMES = OrderedDict()
-BUTTUN_PALLETE_NAMES["Minitools"] = 'btn_minitools'
-BUTTUN_PALLETE_NAMES["Addressing"] = 'btn_ipscanner'
+BUTTUN_PALLETE_NAMES["Addressing"] = 'btn_addressing'
 BUTTUN_PALLETE_NAMES["Capture-IT"] = 'btn_captureit'
-BUTTUN_PALLETE_NAMES["Facts"] = 'btn_factsfinder'
 BUTTUN_PALLETE_NAMES["Configure"] = 'btn_configure'	
 BUTTUN_PALLETE_NAMES["Config Gen"] = 'btn_j2config'
+BUTTUN_PALLETE_NAMES["Crypt"] = 'btn_cryptology'
+BUTTUN_PALLETE_NAMES["Facts"] = 'btn_factsfinder'
+BUTTUN_PALLETE_NAMES["Juniper"] = 'btn_juniper'
 BUTTUN_PALLETE_NAMES["Visio Gen"] = 'btn_pyvig'
 TAB_EVENT_UPDATERS = set(BUTTUN_PALLETE_NAMES.values())
 #
 # ---------------------------------------------------------------------------------------
 ALL_TABS = set()
-ALL_TABS = ALL_TABS.union(IPSCANNER_FRAMES.keys())
-ALL_TABS = ALL_TABS.union(MINITOOLS_FRAMES.keys())
+ALL_TABS = ALL_TABS.union(ADDRESSING_FRAMES.keys())
+ALL_TABS = ALL_TABS.union(JUNIPER_FRAMES.keys())
+ALL_TABS = ALL_TABS.union(CRYPT_FRAMES.keys())
 ALL_TABS = ALL_TABS.union(CAPTUREIT_FRAMES.keys())
 ALL_TABS = ALL_TABS.union(FACTSFINDER_FRAMES.keys())
 ALL_TABS = ALL_TABS.union(J2CONFIG_FRAMES.keys())
@@ -68,89 +69,41 @@ def enable_disable(obj, * , group, group_frames, all_tabs, event_updaters):
 #  ADD / EDIT FRAMES UPDATE HERE
 #
 
-def btn_ipscanner_exec(obj):
-	"""executor function to switch and enable ipscanner tabs
+def btn_addressing_exec(obj):
+	enable_disable(obj, group_frames=ADDRESSING_FRAMES.keys(), group='btn_addressing', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
 
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
+def btn_juniper_exec(obj):
+	enable_disable(obj, group_frames=JUNIPER_FRAMES.keys(), group='btn_juniper', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
 
-	Returns:
-		True: when succeded
-	"""	
-	enable_disable(obj, group_frames=IPSCANNER_FRAMES.keys(), group='btn_ipscanner', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
-	return True
-
-def btn_minitools_exec(obj):
-	"""executor function to switch and enable minitools tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
-	enable_disable(obj, group_frames=MINITOOLS_FRAMES.keys(), group='btn_minitools', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
-	return True
+def btn_cryptology_exec(obj):
+	enable_disable(obj, group_frames=CRYPT_FRAMES.keys(), group='btn_cryptology', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
 
 def btn_captureit_exec(obj):
-	"""executor function to switch and enable captureit tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
 	enable_disable(obj, group_frames=CAPTUREIT_FRAMES.keys(), group='btn_captureit', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
-	return True
 
 def btn_factsfinder_exec(obj):
-	"""executor function to switch and enable factsfinder tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
 	enable_disable(obj, group_frames=FACTSFINDER_FRAMES.keys(), group='btn_factsfinder', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
-	return True
 
 def btn_j2config_exec(obj):
-	"""executor function to switch and enable j2config tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
 	enable_disable(obj, group_frames=J2CONFIG_FRAMES.keys(), group='btn_j2config', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
-	return True
 
 def btn_pyvig_exec(obj):
-	"""executor function to switch and enable pyvig tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
 	enable_disable(obj, group_frames=PYVIG_FRAMES.keys(), group='btn_pyvig', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
-	return True
 
 def btn_configure_exec(obj):
-	"""executor function to switch and enable configure tabs
-
-	Args:
-		obj (Nettoolkit): Nettoolkit class instance object
-
-	Returns:
-		True: when succeded
-	"""	
 	enable_disable(obj, group_frames=CONFIGURE_FRAMES.keys(), group='btn_configure', all_tabs=ALL_TABS, event_updaters=TAB_EVENT_UPDATERS)
-	return True
+
+
+BUTTON_PALLET_BTN_FUNCS = {
+	'btn_captureit': btn_captureit_exec,
+	'btn_factsfinder': btn_factsfinder_exec,
+	'btn_j2config': btn_j2config_exec,
+	'btn_pyvig': btn_pyvig_exec,
+	'btn_configure': btn_configure_exec,
+	'btn_addressing': btn_addressing_exec,
+	'btn_juniper': btn_juniper_exec,
+	'btn_cryptology': btn_cryptology_exec,
+}
 
 # ---------------------------------------------------------------------------------------
 

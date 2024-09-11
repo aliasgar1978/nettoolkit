@@ -121,6 +121,7 @@ def juniper_encrypt(plaintext, salt = None):
 def _update_pw_line(line, pw_masking):
     if line.rstrip().endswith("## SECRET-DATA"):
         spl = line.split('"')
+        if len(spl)<=1: return line
         pw = spl[1]
         #
         if pw.startswith("$9$"):

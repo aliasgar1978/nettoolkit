@@ -13,6 +13,9 @@ from nettoolkit.pyVig import pyVig, CableMatrix
 #### -- cache updates -- ####
 def update_cache_pyvig(i):
 	update_cache(CACHE_FILE, cit_file_custom_yml=i['pv_file_custom_yml'])
+	update_cache(CACHE_FILE, pv_folder_stencil=i['pv_folder_stencil'])
+	update_cache(CACHE_FILE, pv_file_default_stencil=i['pv_file_default_stencil'])
+	update_cache(CACHE_FILE, pv_folder_output=i['pv_folder_output'])
 
 def add_path(file):
 	sys.path.insert(len(sys.path), str(Path(file).resolve().parents[0]))
@@ -72,10 +75,16 @@ PYVIG_EVENT_FUNCS = {
 	'pv_btn_start_cm': pyvig_start_cm,
 	'pv_btn_start_visio': pyvig_start_visio,
 	'pv_file_custom_yml': update_cache_pyvig,
+	'pv_folder_stencil': update_cache_pyvig,
+	'pv_file_default_stencil': update_cache_pyvig,
+	'pv_folder_output': update_cache_pyvig,
 }
 PYVIG_EVENT_UPDATERS = set()
 PYVIG_ITEM_UPDATERS = set()
 
 PYVIG_RETRACTABLES = {
+	'pv_files_clean_data', 'pv_folder_stencil', 'pv_file_default_stencil', 
+
+
 }
 

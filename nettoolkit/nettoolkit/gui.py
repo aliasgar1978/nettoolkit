@@ -13,9 +13,10 @@ from .forms.formitems import *
 
 ### -- For Nettoolkit() class
 from .forms.tab_event_funcs import BUTTUN_PALLETE_NAMES, TAB_EVENT_UPDATERS
-# from .forms.tab_event_funcs import btn_minitools_exec as initial_frames_load
-from .forms.tab_event_funcs import btn_minitools_exec
-from .forms.tab_event_funcs import btn_ipscanner_exec
+
+from .forms.tab_event_funcs import btn_cryptology_exec
+from .forms.tab_event_funcs import btn_juniper_exec
+from .forms.tab_event_funcs import btn_addressing_exec
 from .forms.tab_event_funcs import btn_captureit_exec
 from .forms.tab_event_funcs import btn_factsfinder_exec
 from .forms.tab_event_funcs import btn_configure_exec
@@ -27,7 +28,7 @@ from .forms.var_event_funcs import EVENT_FUNCTIONS
 from .forms.var_event_updators import EVENT_UPDATORS
 from .forms.var_event_item_updators import EVENT_ITEM_UPDATORS
 from .forms.var_retractables import RETRACTABLES
-from nettoolkit.addressing.forms.subnet_scanner import count_ips
+
 
 
 # ---------------------------------------------------------------------------------------
@@ -89,13 +90,14 @@ class Nettoolkit(NGui):
 	'''Minitools UserForm asking user inputs.	'''
 
 	frames_loaded = {
-		'minitools': btn_minitools_exec,
-		'addressing': btn_ipscanner_exec,
-		'captureit': btn_captureit_exec,
-		'factsgen': btn_factsfinder_exec,
-		'configure': btn_configure_exec,
-		'j2config': btn_j2config_exec,
-		'pyvig': btn_pyvig_exec,
+		'crypt':      btn_cryptology_exec,
+		'juniper':    btn_juniper_exec,
+		'addressing': btn_addressing_exec,
+		'captureit':  btn_captureit_exec,
+		'factsgen':   btn_factsfinder_exec,
+		'configure':  btn_configure_exec,
+		'j2config':   btn_j2config_exec,
+		'pyvig':      btn_pyvig_exec,
 	}
 
 
@@ -106,21 +108,19 @@ class Nettoolkit(NGui):
 		#
 		self.initialize_custom_variables()
 		self.NG = NGui(
-			header = header,
-			banner = banner,
-			frames_dict = FRAMES,
-			event_catchers = EVENT_FUNCTIONS,
-			event_updaters = EVENT_UPDATORS,
+			header              = header,
+			banner              = banner,
+			frames_dict         = FRAMES,
+			event_catchers      = EVENT_FUNCTIONS,
+			event_updaters      = EVENT_UPDATORS,
 			event_item_updaters = EVENT_ITEM_UPDATORS,
-			retractables = RETRACTABLES,
-			button_pallete_dic = BUTTUN_PALLETE_NAMES,
-			form_width = 800,
-			form_height = 720,
+			retractables        = RETRACTABLES,
+			button_pallete_dic  = BUTTUN_PALLETE_NAMES,
+			form_width          = 820,
+			form_height         = 740,
 		)	
 
 	def __call__(self, initial_frame=None):
-		initial_frame = self.frames_loaded.get(initial_frame)
-		if not initial_frame: initial_frame = self.frames_loaded['minitools']
 		self.NG(initial_frame)
 
 	def initialize_custom_variables(self):
@@ -137,10 +137,7 @@ class Nettoolkit(NGui):
 			i (dict): dictionary of GUI fields variables
 			event (str): event
 		"""		
-		if event == 'file_md5_hash_check':
-			self.event_update_element(file_md5_hash_value={'value': ""})
-		if event == 'go_count_ips':
-			self.event_update_element(ss_ip_counts={'value': count_ips(i['pfxs'], i['till'])})
+		pass
 
 # ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ---------- 
 

@@ -15,7 +15,7 @@ def netcrypt_frame():
 
 		[sg.Text('File Password Masking/Decryption', font=('TimesNewRoman', 12), text_color="black") ],
 
-		[sg.Text('Configuration file:',  text_color="black"), 
+		[sg.Text('Input file:',  text_color="black"), 
 		 sg.InputText(key='netcrypt_file'), sg.FileBrowse()],
 		[sg.Text('\t'),
 		 sg.Button("Decrypt Passwords", size=(20,1),  change_submits=True, key='netcrypt_file_dec_btn_start', button_color="blue"),

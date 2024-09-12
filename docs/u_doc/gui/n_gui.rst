@@ -2,11 +2,17 @@
 NGui Explained
 ============================================
 
+You can now use the NGui class to do GUI stuff for you. 
+   * Declare some variables and frames. Attach those to appropriate structure and boom!!!  NGui interface will be ready for you.
+   * Modify as you need to change the appearance. 
+   * Bind appropriate methods to run the tasks when an event is called. 
+
 
 .. figure:: files/NGui.png
    :scale: 25%
-   :alt: facts-finder
+   :alt: Nettoolkit
    :align: right
+
 
 * Follow Below steps in order to create your own GUI Frames in Python using Nettoolkit interface hooks.
 * Backend Credit: ``PySimpleGUI``

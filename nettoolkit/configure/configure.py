@@ -77,8 +77,8 @@ class Config_common():
 		Args:
 			host (str): host/device name
 			s (str/multiline): execution log content
-			ends (str, optional): End string. Defaults to '\n'.
-		"""    		
+			ends (str, optional): End string. Defaults to `\n`.
+		"""
 		if self.exec_display: print(s)
 		if self.exec_log and self.log_folder:
 			with open(f"{self.log_folder}/{host}-exec.log", 'a') as f:

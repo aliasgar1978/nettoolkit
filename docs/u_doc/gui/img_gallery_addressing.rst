@@ -3,14 +3,18 @@ Image Gallery - addressing
 ###############################################
 
 
+Enjoy IP Addressing calculations at your finger tips. Below are a few minitools which helps doing such tasks.
 
-.. figure:: img/subnet_scanner.png
+
+#. IP-Scanner  & Compare Two scanner outputs.
+
+.. figure:: img/ipscan.png
    :scale: 25%
-   :alt: ip subnet scanner
+   :alt: ip subnets scanner
    :align: right
 
 +-----------------------------------------------------------------------------+
-| **IP Subnet Scanner**                                                       |
+| **IP Subnets Scanner**                                                      |
 +=============================================================================+
 |Use this for subnet(s) ip scan for bunch of subnets at at time               |
 |                                                                             |
@@ -21,13 +25,6 @@ Image Gallery - addressing
 |    checkbox: to create separate tab for each individual subnet or to club   |
 |  * **output:** Excel output file with ping results                          |
 +-----------------------------------------------------------------------------+
-
-----
-
-.. figure:: img/subnet_scan_compare.png
-   :scale: 25%
-   :alt: ip subnet scan result comparator
-   :align: left
 
 +-----------------------------------------------------------------------------+
 | **IP Subnet scan comparator**                                               |
@@ -40,10 +37,54 @@ Image Gallery - addressing
 |  * **output:** differences on screen/console                                |
 +-----------------------------------------------------------------------------+
 
-----
 
 
-.. figure:: img/create_ping_batch.png
+#. Prefix Operations.
+
+
+.. figure:: img/prefixes.png
+   :scale: 25%
+   :alt: create summaries
+   :align: left
+
++-----------------------------------------------------------------------------+
+| **Create Summaries**                                                        |
++=============================================================================+
+|Want to create summaries for the list of prefixes?                           |
+|This is perfect spot for you.                                                |
+|                                                                             |
+|  * **input:** List of prefixes to be summarized                             |
+|  * **output:** summaries of provided prefixes                               |
+|                                                                             |
++-----------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------+
+| **Break the prefix**                                                        |
++=============================================================================+
+|Want to split the subnet in to multiple pieces?                              |
+|This is what you are looking for.                                            |
+|                                                                             |
+|  * **input:** a Subnet/Supernet to be broken in to                          |
+|    /n: number of pieces to be broken subnet in to                           |
+|    - n will be considered to the power of 2                                 |
+|  * **output:** list of broken subnets                                       |
++-----------------------------------------------------------------------------+
+
++-----------------------------------------------------------------------------+
+| **isSubset**                                                                |
++=============================================================================+
+|This is to check, if a subnet is part of another subnet or not               |
+|Result will be boolean - Yes/No                                              |
+|                                                                             |
+|  * **input:** Two prefixes, (one subnet, one supernet)                      |
+|  * **output:** Yes/No                                                       |
+|                                                                             |
++-----------------------------------------------------------------------------+
+
+
+#. Ping Batch.
+
+.. figure:: img/makebatch.png
    :scale: 25%
    :alt: make batch file for ping ips
    :align: right
@@ -61,63 +102,5 @@ Image Gallery - addressing
 |    output folder: where resulted batch file is to be created                |
 |  * **input:** List of prefixes from which ips requires to be ping           |
 |  * **output:** result batch file(s)                                         |
-+-----------------------------------------------------------------------------+
-
-----
-
-
-.. figure:: img/create_summaries.png
-   :scale: 25%
-   :alt: create summaries
-   :align: left
-
-+-----------------------------------------------------------------------------+
-| **Create Summaries**                                                        |
-+=============================================================================+
-|Want to create summaries for the list of prefixes?                           |
-|This is perfect spot for you.                                                |
-|                                                                             |
-|  * **input:** List of prefixes to be summarized                             |
-|  * **output:** summaries of provided prefixes                               |
-|                                                                             |
-+-----------------------------------------------------------------------------+
-
-----
-
-
-.. figure:: img/break_prefix.png
-   :scale: 25%
-   :alt: break prefix
-   :align: right
-
-+-----------------------------------------------------------------------------+
-| **Break the prefix**                                                        |
-+=============================================================================+
-|Want to split the subnet in to multiple pieces?                              |
-|This is what you are looking for.                                            |
-|                                                                             |
-|  * **input:** a Subnet/Supernet to be broken in to                          |
-|    /n: number of pieces to be broken subnet in to                           |
-|    - n will be considered to the power of 2                                 |
-|  * **output:** list of broken subnets                                       |
-+-----------------------------------------------------------------------------+
-
-----
-
-
-.. figure:: img/isSubset.png
-   :scale: 25%
-   :alt: check is subset of
-   :align: left
-
-+-----------------------------------------------------------------------------+
-| **isSubset**                                                                |
-+=============================================================================+
-|This is to check, if a subnet is part of another subnet or not               |
-|Result will be boolean - Yes/No                                              |
-|                                                                             |
-|  * **input:** Two prefixes, (one subnet, one supernet)                      |
-|  * **output:** Yes/No                                                       |
-|                                                                             |
 +-----------------------------------------------------------------------------+
 

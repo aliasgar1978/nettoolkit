@@ -16,6 +16,15 @@
 
 .. toctree::
    :maxdepth: 4
+   :caption: Novice User Documentation:
+   :numbered:
+
+   Nettoolkits GUI <docs/u_doc/gui/userdoc_ntgui>
+   NGui Interface <docs/u_doc/gui/n_gui>
+
+
+.. toctree::
+   :maxdepth: 4
    :caption: User Documentation:
    :numbered:
 
@@ -26,7 +35,6 @@
    Configure <docs/u_doc/configure/userdoc> 
    Cable-Matrix-Gen <docs/u_doc/cable_matrix/cable_matrix>
    Facts-Finder <docs/u_doc/facts_finder/userdoc>
-   GUI Interface <docs/u_doc/gui/userdoc>
    Juniper <docs/u_doc/pyjuniper/userdoc>
    Nettoolkit Class Extension <docs/u_doc/nettoolkit/userdoc>
    Password Enc/Dec <docs/u_doc/pynetcrypt/userdoc>

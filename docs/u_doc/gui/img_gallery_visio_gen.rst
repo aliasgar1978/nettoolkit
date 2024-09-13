@@ -1,21 +1,21 @@
 
-Image Gallery - Visio Generator
-###############################################
+Visio Gen Tab
+-------------------------
 
 
-* A Utility which helps generating cabling matrix and than visio drawing based on provided devices facts files..
+* A Utility which helps **generating cabling matrix** and than **visio drawing** based on provided devices facts files..
 * Microsoft visio is required to be installed. ( tested on visio 2013, prior versions may or may not compatible )
-* Windows OS is required. since Unix/Linux/Mac OS cannot interact with win32com libraries.
+* *Windows OS* is required. since Unix/Linux/Mac OS cannot interact with win32com libraries.
 
 
 Here is a few Keys and requirements to understand.
 
-* Clean Data Files: Select all devices clean excel data files, required for a drawing.
-* stencil folder: Path where visio stencils are stored.
-* default stencil: default stencil name, to be chose, if no stencil name present in cable matrix excel.
-* output folder: Path where output cable matrix and visio will be stored.
-* custom package yaml file: Yaml file containing custom package and class listing. ( more details below )
-* sheet filters: dictionary of connection filters. A separate visio tab will be generated based on provided sheet filters.  sheet filters should be selected accordingly via custom code to add to cabling page.
+* ``Clean Data Files``: Select all devices clean excel data files, required for a drawing.
+* ``stencil folder``: Path where visio stencils are stored.
+* ``default stencil``: default stencil name, to be chose, if no stencil name present in cable matrix excel.
+* ``output folder``: Path where output cable matrix and visio will be stored.
+* ``custom package yaml file``: Yaml file containing custom package and class listing. ( more details below )
+* ``sheet filters``: dictionary of connection filters. A separate visio tab will be generated based on provided sheet filters.  sheet filters should be selected accordingly via custom code to add to cabling page.
 
 ----
 

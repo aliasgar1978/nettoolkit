@@ -1,20 +1,20 @@
 
-Image Gallery - configurations generator
-###############################################
+Config Gen Tab
+---------------------------
 
 aka: j2config
 
-* A Utility which helps generating configuration of any device using excel database and devie jinja template.
-* It can be used for *cisco, juniper, arista, switches, routers, firewalls* and arbitrarily *any device* which supports *cli* configuration..
+* A Utility which helps **generating configuration** of any device using excel database and devie jinja template.
+* It can be used for *cisco, juniper, arista, switches, routers, firewalls* and arbitrarily **any device** which supports *cli* configuration..
 
 
 Here is a few Keys and requirements to understand.
 
-* Template File: Jinja Template file for the device. 
-* Data File: Excel database with variable/value reference to it.
-* Output Folder: where configuration output to be stored.
-* Regional Database: An excel file containing some common variables data.
-* custom package yaml file: Yaml file containing custom package and class listing. ( more details below )
+* ``Template File``: Jinja Template file for the device. 
+* ``Data File``: Excel database with variable/value reference to it.
+* ``Output Folder``: where configuration output to be stored.
+* ``Regional Database``: An excel file containing some common variables data.
+* ``custom package yaml file``: Yaml file containing custom package and class listing. ( more details below )
 
 
 ----

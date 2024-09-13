@@ -1,6 +1,6 @@
 
-Image Gallery - Juniper
-###############################################
+Juniper Tab
+----------------------
 
 
 .. figure:: img/juniper.png

@@ -1,12 +1,10 @@
 
-Image Gallery - Crypt
-###############################################
+Crypt Tab
+------------------
 
 
 .. figure:: img/crypt.png
-   :scale: 25%
    :alt: password encryption decryption
-   :align: left
 
 +-----------------------------------------------------------------------------+
 | **Password Encryption/Decryption Utility**\                                 |

@@ -7,39 +7,51 @@ Nettoolkit offers flexibility to access its toolset in various ways..
 GUI is one of its way. 
 
    * Get most of Nettoolkit features accessible via GUI now.
-   * Custom class inheritance, is feasible via yaml file.
-   * Launch GUI with minimal codes.
+   * **Custom classes** inheritance, is feasible **via yaml** file.
+   * ``Launch GUI with minimal code``.
 
 
 GUI Launch
-============
+------------
 
 .. code-block:: python
 
-    from nettoolkit import Nettoolkit
-    N = Nettoolkit()
-    N(initial_frame='crypt')
-    del(N)
+    from nettoolkit import Nettoolkit     ## import GUI
+    N = Nettoolkit()                      ## Define GUI
+    N(initial_frame='crypt')              ## Call it with/without initial frame
 
 
 * Launch Nettoolkit with your desired page by providing initial_frame name in lower.
-* available options are = (addressing, captureit, configure, j2config, crypt, factsgen, juniper, pyvig )
-* Launching Nettoolkit without any initial_frame will load load all frames at once and focus on first frame.
+* *initial_frame* options
 
+   * addressing
+   * captureit
+   * configure
+   * j2config
+   * crypt
+   * factsgen
+   * juniper
+   * pyvig
+
+* Launching Nettoolkit without any of above initial_frame; will load all frames and focus on first.
+
+Continue enjoy your exploration with it.
 
 ----
+
+**Now lets get familiar with each in some more details...**
 
 .. toctree::
    :maxdepth: 4
    :caption: Contents:
 
 
-   Addressing <img_gallery_addressing>
-   Capture-IT <img_gallery_capture_it>
-   Configure <img_gallery_configure_it>
-   Config Gen <img_gallery_configs_gen>
-   Crypt <img_gallery_crypt>
-   Facts <img_gallery_facts_gen>
-   Juniper <img_gallery_juniper>
-   Visio Gen <img_gallery_visio_gen>
+   Addressing Tab <img_gallery_addressing>
+   Capture-IT Tab <img_gallery_capture_it>
+   Configure Tab <img_gallery_configure_it>
+   Config Gen Tab <img_gallery_configs_gen>
+   Crypt Tab <img_gallery_crypt>
+   Facts Tab <img_gallery_facts_gen>
+   Juniper Tab <img_gallery_juniper>
+   Visio Gen Tab <img_gallery_visio_gen>
 

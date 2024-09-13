@@ -1,17 +1,11 @@
 
-Image Gallery - addressing
-###############################################
-
+**GUI - addressing**
 
 Enjoy IP Addressing calculations at your finger tips. Below are a few minitools which helps doing such tasks.
 
 
-#. IP-Scanner  & Compare Two scanner outputs.
-
-.. figure:: img/ipscan.png
-   :scale: 25%
-   :alt: ip subnets scanner
-   :align: right
+IP Scanner Tab
+----------------
 
 +-----------------------------------------------------------------------------+
 | **IP Subnets Scanner**                                                      |
@@ -37,15 +31,16 @@ Enjoy IP Addressing calculations at your finger tips. Below are a few minitools 
 |  * **output:** differences on screen/console                                |
 +-----------------------------------------------------------------------------+
 
+.. figure:: img/ipscan.png
+   :alt: ip subnets scanner
 
 
-#. Prefix Operations.
 
 
-.. figure:: img/prefixes.png
-   :scale: 25%
-   :alt: create summaries
-   :align: left
+
+Prefix Operation Tab
+-----------------------
+
 
 +-----------------------------------------------------------------------------+
 | **Create Summaries**                                                        |
@@ -81,13 +76,13 @@ Enjoy IP Addressing calculations at your finger tips. Below are a few minitools 
 |                                                                             |
 +-----------------------------------------------------------------------------+
 
+.. figure:: img/prefixes.png
+   :alt: create summaries
 
-#. Ping Batch.
 
-.. figure:: img/makebatch.png
-   :scale: 25%
-   :alt: make batch file for ping ips
-   :align: right
+
+Ping Batch Tab
+--------------------
 
 +-----------------------------------------------------------------------------+
 | **Create Ping batch script file**                                           |
@@ -103,4 +98,7 @@ Enjoy IP Addressing calculations at your finger tips. Below are a few minitools 
 |  * **input:** List of prefixes from which ips requires to be ping           |
 |  * **output:** result batch file(s)                                         |
 +-----------------------------------------------------------------------------+
+
+.. figure:: img/makebatch.png
+   :alt: make batch file for ping ips
 

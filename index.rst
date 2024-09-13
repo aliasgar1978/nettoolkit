@@ -2,6 +2,8 @@
 
 .. figure:: docs/images/nettoolkit_logo.jpg
    :alt: Nettoolkit
+   :scale: 25%
+   :align: right
 
 
 .. toctree::
@@ -16,7 +18,7 @@
 
 .. toctree::
    :maxdepth: 4
-   :caption: Novice User Documentation:
+   :caption: Novice Users Documentation:
    :numbered:
 
    Nettoolkits GUI <docs/u_doc/gui/userdoc_ntgui>
@@ -25,7 +27,7 @@
 
 .. toctree::
    :maxdepth: 4
-   :caption: User Documentation:
+   :caption: Curious Users Documentation:
    :numbered:
 
    Addressing <docs/u_doc/addressing/userdoc>
@@ -43,7 +45,7 @@
 
 .. toctree::
    :maxdepth: 4
-   :caption: API Documentation:
+   :caption: Crazy Users API Documentation:
    :numbered:
 
    Addressing <docs/t_doc/addressing/tech_doc>

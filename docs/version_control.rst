@@ -11,10 +11,13 @@ Nettoolkit keeps updated and released on a regular basis.
 
 Here is version changes detail.
 
+----
 
+Version 1.x updates
+--------------------
 
 .. list-table:: Version 1.x updates
-   :widths: 10 15 200
+   :widths: 7 12 70
    :align: left
    :header-rows: 1
 
@@ -23,6 +26,12 @@ Here is version changes detail.
      - Date   
      - Updates
 
+   * - 1.7.5
+     - Sep 15, 2024
+     - * fixed nettoolkit initial frame load.
+       * fixed facts-finder execution termination sequence
+       * fixed - capture_it_by_excel execution to accept only provided device_types 
+       * gui - capture_it_by_excel added, added a few more fields in cache
    * - 1.7.4
      - Sep 11, 2024
      - * nettoolkit-gui - rewamped and now it utilizes ``custom.yaml`` for custom project import/forks
@@ -173,6 +182,10 @@ Here is version changes detail.
        * incorporated ( capture-it, facts-finder, j2config, pyVig, pyJUniper, pyNetCrypt ) pacakages in to single package.
        * GUI interface added for a few modules: ( minitools, addressing, capture-it, facts-finder )
        
+
+
+Version 0.x updates
+--------------------
 
 
 .. list-table:: Version 0.x updates

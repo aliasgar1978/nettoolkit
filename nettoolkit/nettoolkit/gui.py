@@ -121,7 +121,7 @@ class Nettoolkit(NGui):
 		)	
 
 	def __call__(self, initial_frame=None):
-		self.NG(initial_frame)
+		self.NG(self.frames_loaded[initial_frame])
 
 	def initialize_custom_variables(self):
 		"""Initialize all custom variables

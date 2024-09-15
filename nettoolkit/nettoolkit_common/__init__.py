@@ -12,7 +12,7 @@ __all__ = [
 	# common
 	"remove_domain", "read_file", "get_op", "get_ops", "blank_line", "get_device_manufacturar", "verifid_output", 
 	"get_string_part", "get_string_trailing", "standardize_mac", "mac_2digit_separated", "mac_4digit_separated", 
-	"flatten", "dataframe_generate", "printmsg", "create_folders", "read_yaml_mode_us", "open_text_file",
+	"flatten", "dataframe_generate", "printmsg", "create_folders", "read_yaml_mode_us", "open_text_file", "open_excel_file",
 
 ]
 
@@ -29,7 +29,7 @@ from .gpl import (Default, Container,
 from .common import (
 	remove_domain, read_file, get_op, get_ops, blank_line, get_device_manufacturar, verifid_output, 
 	get_string_part, get_string_trailing, standardize_mac, mac_2digit_separated, mac_4digit_separated,
-	flatten, dataframe_generate, printmsg, create_folders, read_yaml_mode_us, open_text_file
+	flatten, dataframe_generate, printmsg, create_folders, read_yaml_mode_us, open_text_file, open_excel_file
 	)
 
 

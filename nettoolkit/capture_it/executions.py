@@ -632,7 +632,7 @@ class Execute_By_Excel(Execute_Common):
 		self.devices_command_dicts = {}
 		for sht, df in df_dict.items():
 			ip_list = list(df['ips'][df['ips'] != ''])
-			cmds = {cmd_col: list(df[cmd_col][df[cmd_col] != '']) for cmd_col in cmd_cols}
+			cmds = {cmd_col: list(df[cmd_col][df[cmd_col] != '']) for cmd_col in cmd_cols if cmd_col in df.columns}
 			self.devices_command_dicts[sht] = { 'ip_list': ip_list, 'cmds': cmds, }
 
 	def execute(self):

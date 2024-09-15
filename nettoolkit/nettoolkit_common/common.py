@@ -311,4 +311,27 @@ def create_folders(folders, *, silent=True):
 
 
 def open_text_file(file):
+	"""Open Text file in Notepad.exe
+
+	Args:
+		file (str): file name
+	"""    	
 	sp.Popen(["notepad.exe", file])
+
+def open_excel_file(file):
+	"""Open Excel file in MS-Excel (excel.exe)
+
+	Args:
+		file (str): file
+
+	Raises:
+		Exception: Raise exception if unable to open excel.
+	"""    	
+	try:
+		sp.Popen(["C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE", file])
+	except:
+		try:
+			sp.Popen(["C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE", file])
+		except Exception as e:
+			raise Exception(f"Unable to Open file {file} in excel\n{e}")
+

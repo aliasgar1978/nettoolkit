@@ -6,6 +6,12 @@ import sys
 
 from nettoolkit.pyJuniper.juniper import Juniper
 
+# ======================================================================================
+
+#### -- cache updates -- ####
+def update_cache_juniper(i):
+	update_cache(CACHE_FILE, mini_juniper_folder_output=i['mini_juniper_folder_output'])	
+
 
 # ================================ [ Juniper ] ========================================
 
@@ -31,6 +37,7 @@ def mini_juniper_remove_remarks_start(i):
 JUNIPER_EVENT_FUNCS = {
 	'mini_juniper_to_set_btn_start': mini_juniper_to_set_start,
 	'mini_juniper_remove_remarks_btn_start': mini_juniper_remove_remarks_start,
+	'mini_juniper_folder_output': update_cache_juniper,
 }
 JUNIPER_EVENT_UPDATERS = set()
 JUNIPER_ITEM_UPDATERS = set()

@@ -44,15 +44,30 @@ def _update_pw_line(line, mask):
 	# updates line if password string found, encrypt or mask it and return updated line	
 	regex7 = re.compile('( 7 )([0-9A-Fa-f]+)($)')
 	regex9 = re.compile('secret 9 ')
+	regex5 = re.compile('secret 5 ')
 	result7 = regex7.search(line)
 	result9 = regex9.search(line)
+	result5 = regex9.search(line)
 	if mask:
-		if result7: line = line[:line.find(result7.group(0))] + " " + "XXXXXXXX\n"
+		if result7: 
+			line = line[:line.find(result7.group(0))] + " " + "XXXXXXXX\n"
 		if result9: 
 			line = line[:line.find(result9.group(0))] + "secret 9 XXXXXXXX\n"
+		if result5:
+			line = line[:line.find(result5.group(0))] + "secret 5 XXXXXXXX\n"
+		line = _update_normal_pw_line_for_masking(line)
 	elif result7:
 		line = line[:line.find(result7.group(0))] + " " + decrypt_type7(result7.group(2)) + "\n"
 	return line
+
+def _update_normal_pw_line_for_masking(line):
+	pw_Strings = (" secret ", " password ", " key ", " authentication-key ")
+	for pw_Str in pw_Strings:
+		if line.find(pw_Str) > -1:
+			line = line[:line.find(pw_Str)] + pw_Str + "XXXXXXXX\n"
+			break
+	return line
+
 
 
 def _file_passwords_update(input_file, output_file, pw_masking):

@@ -62,6 +62,66 @@ def capture_it_frame():
 		])
 
 
+
+def capture_it_by_xl_frame():
+	"""tab display - Credential inputs
+
+	Returns:
+		sg.Frame: Frame with filter selection components
+	"""    		
+	cumulative=('cumulative', 'non-cumulative', 'both')
+	return sg.Frame(title=None, 
+					relief=sg.RELIEF_SUNKEN, 
+					layout=[
+
+		[sg.Text('Credentials',  font=('TimesNewRoman', 12), text_color="black"),], 
+		[sg.Text("un:",     text_color="black"),sg.InputText(get_cache(CACHE_FILE, 'cit_cred_un'), key='cit_cred_un1', size=(8,1), change_submits=True),
+		 sg.Text("pw:",     text_color="black"),sg.InputText("", key='cit_cred_pw1', password_char='*', size=(20,1),),
+		 sg.Text("secret:", text_color="black"),sg.InputText("", key='cit_cred_en1',  password_char='*', size=(20,1)), ],
+		under_line(80),
+
+		[sg.Text('output folder:\t\t', text_color="black"), 
+		 sg.InputText(get_cache(CACHE_FILE, 'cit_path_captures'), key='cit_path_captures1', change_submits=True),  
+		 sg.FolderBrowse(button_color="orange"), ],
+		[sg.Text('execution log folder:\t', text_color="black"), 
+		 sg.InputText(get_cache(CACHE_FILE, 'cit_path_logs'), key='cit_path_logs1', change_submits=True), 
+		 sg.FolderBrowse(button_color="orange"), ],
+		[sg.Text('summary log folder:\t', text_color="black"), 
+		 sg.InputText(get_cache(CACHE_FILE, 'cit_path_summary'), key='cit_path_summary1', change_submits=True),  
+		 sg.FolderBrowse(button_color="orange"), ],
+
+		[sg.Text('Device-Commands Excel file:', text_color="black"), 
+	     sg.InputText(get_cache(CACHE_FILE, 'cit_by_xl_file_dev_cmd_xl_file'), size=(30,1),  key='cit_by_xl_file_dev_cmd_xl_file', change_submits=True,), 
+	     sg.FileBrowse(button_color="grey"), sg.Button("open file", change_submits=True, key='cit_by_xl_file_dev_cmd_xl_file_open', button_color="darkgrey"),],
+		blank_line(),
+		blank_line(),
+
+		[sg.Text('Custom Package Yaml file:\t', text_color="black"), 
+	     sg.InputText(get_cache(CACHE_FILE, 'cit_file_custom_yml'), key='cit_file_custom_yml1', change_submits=True,), 
+	     sg.FileBrowse(button_color="grey"), ],
+		under_line(80),
+
+		[sg.Checkbox('append an existing file\t\t',     key='cit_opt_append1',        default=False, text_color='black'),
+		 sg.Checkbox('capture only missing outputs',    key='cit_opt_missing1',       default=False, text_color='black')],
+		[sg.Checkbox('Run Custom Dependent Commands\t', key='cit_opt_dependent1',     default=True,  text_color='black'),
+		 sg.Checkbox('Excel parsed file',               key='cit_opt_parsed_output1', default=False, text_color='black')],
+		[sg.Checkbox('Transpose summary log\t\t',       key='cit_opt_summary_xpose1', default=False, text_color='black'),
+		 sg.Checkbox('Forced Login',                    key='cit_opt_forced_login1',  default=True,  text_color='black')],
+		[sg.Text('Output Mode:', text_color="black"), 
+		 sg.InputCombo(cumulative, default_value=cumulative[0], key='cit_opt_cumulative1', size=(15,1)),],
+		[sg.Text('Concurrent Connections (max)', text_color="black"), 
+		 sg.InputText(100,  key='cit_opt_max_connections1', size=(5,1) ), sg.Text('default:100 - Enter 1 for sequential process', text_color="white"), ],
+
+
+		[sg.Text('\t\t\t\t\t\t\t'),
+		 sg.Button("Capture-it using Excel", change_submits=True, key='cit_by_xl_btn_start', button_color="blue"),],
+
+		])
+
+
+
+
 CAPTUREIT_FRAMES = {
 	'Capture-It': capture_it_frame(),
+	'Capture-It using-Excel': capture_it_by_xl_frame(),
 }

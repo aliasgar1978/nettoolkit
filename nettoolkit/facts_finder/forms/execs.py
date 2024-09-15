@@ -45,7 +45,7 @@ def facts_finder_start(i):
 		except Exception as e:
 			print(f"Cleaning failed...,")
 			print(e)
-			return None
+			continue
 		#
 		try:
 			ADF = custom['CustomDeviceFactsClass'](cleaned_fact, aggregation=False)
@@ -55,7 +55,7 @@ def facts_finder_start(i):
 		except Exception as e:
 			print(f"Custom Data Modifications failed...,")
 			print(e)
-			return None
+			continue
 		#
 		try:
 			rearrange_tables(cleaned_fact.clean_file, foreign_keys=custom['foreign_keys'])
@@ -63,7 +63,7 @@ def facts_finder_start(i):
 		except Exception as e:
 			print(f"Column Rearrange failed...,")
 			print(e)
-			return None
+			continue
 		print(f"Tasks Completed !! {device} !!")
 
 

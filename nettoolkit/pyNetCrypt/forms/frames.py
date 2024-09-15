@@ -35,7 +35,7 @@ def netcrypt_frame():
 		 sg.Button("Juniper Encrypt", change_submits=True, key='netcrypt_juniper_enc_btn_start', button_color="blue"),
 		 sg.Button("Juniper Decrypt", change_submits=True, key='netcrypt_juniper_dec_btn_start', button_color="blue"),],
 		under_line(80),
-		[sg.Text('Result:',  text_color="black"), sg.InputText(key='netcrypt_output_pw', disabled=True), ],
+		[sg.Text('Result:', background_color='lightyellow', text_color="black"), sg.InputText(key='netcrypt_output_pw',  text_color="darkred",  disabled=True), ],
 		under_line(80),
 
 

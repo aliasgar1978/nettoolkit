@@ -12,6 +12,8 @@ from nettoolkit.j2config import PrepareConfig
 #### -- cache updates -- ####
 def update_cache_j2(i):
 	update_cache(CACHE_FILE, cit_file_custom_yml=i['j2_file_custom_yml'])
+	update_cache(CACHE_FILE, j2_file_regional=i['j2_file_regional'])	
+	update_cache(CACHE_FILE, j2_output_folder=i['j2_output_folder'])	
 
 def add_path(file):
 	sys.path.insert(len(sys.path), str(Path(file).resolve().parents[0]))
@@ -56,6 +58,8 @@ def j2config_start(i):
 J2CONFIG_EVENT_FUNCS = {
 	'j2_btn_start': j2config_start,
 	'j2_file_custom_yml': update_cache_j2,
+	'j2_output_folder': update_cache_j2,
+	'j2_file_regional': update_cache_j2,
 }
 J2CONFIG_EVENT_UPDATERS = set()
 J2CONFIG_ITEM_UPDATERS = set()

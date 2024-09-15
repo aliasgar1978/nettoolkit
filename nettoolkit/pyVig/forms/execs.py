@@ -29,7 +29,7 @@ def pyvig_start_cm(i):
 		add_path(i['pv_file_custom_yml'])
 		custom =  read_yaml_mode_us(i['pv_file_custom_yml'])['pyvig'] 
 	#
-	files = i['pv_files_clean_data'].split(";")
+	files = [file for file in i['pv_files_clean_data'].split(";") if file.endswith(".xlsx")]
 	default_stencil = get_filename(i['pv_file_default_stencil'])
 	opd = {'sheet_filters': {}}
 	CM = CableMatrix(files)

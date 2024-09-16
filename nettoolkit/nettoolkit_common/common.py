@@ -39,7 +39,7 @@ def read_file(file):
 def read_yaml_mode_us(file):
 	try:
 		with open(file, 'r') as f:
-		  return  yaml.load(f, Loader=UnsafeLoader)
+			return  yaml.load(f, Loader=UnsafeLoader)
 	except Exception as e:
 		raise Exception(f"Unable to Read the file, or invalid data \n{e}")
 

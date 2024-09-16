@@ -4,7 +4,7 @@ try:
 	import PySimpleGUI as sg
 except:
 	pass
-from abc import abstractclassmethod, abstractproperty
+from abc import abstractclassmethod, abstractproperty, abstractmethod
 from dataclasses import dataclass, field
 
 from .formitems import *
@@ -35,12 +35,12 @@ class GuiTemplate():
 	def __post_init__(self):
 		self.var_dict = {}
 
-	def __call__(self, initial_frames_load=None):
+	def __call__(self, initial_click):
 		self.standard_button_pallete_buttons()
 		self.set_button_pallete()
-		self.create_form(initial_frames_load)
+		self.create_form(initial_click)
 
-	def create_form(self, initial_frames_load):
+	def create_form(self, initial_click):
 		"""initialize the form, and keep it open until some event happens.
 		"""    	
 		layout = [
@@ -51,8 +51,8 @@ class GuiTemplate():
 		]
 
 		self.w = sg.Window(self.header, layout, size=(self.form_width, self.form_height), finalize=True)#, icon='data/sak.ico')
-		if initial_frames_load:
-			initial_frames_load(self)			
+		if initial_click:
+			pallet_btn_click(self, **self.buttonpallet_to_frames_map[initial_click])			
 		while True:
 			event, (i) = self.w.Read()
 
@@ -69,8 +69,10 @@ class GuiTemplate():
 						self.event_catchers[event](self, i, event)
 					elif event in self.event_updaters:
 						self.event_catchers[event](self, i)	
-					elif event in self.tab_updaters:
-						self.event_catchers[event](self)	
+					elif event in self.button_pallete_updaters:                 ## button_pallete_updaters
+						for k, v in self.buttonpallet_to_frames_map.items():
+							if v['button_name'] != event: continue
+							pallet_btn_click(self, **v)
 					else:
 						self.event_catchers[event](i)
 				except Exception as e:
@@ -84,6 +86,11 @@ class GuiTemplate():
 
 	@abstractclassmethod
 	def user_events(self, i, event):
+		pass
+
+	@property
+	@abstractmethod
+	def buttonpallet_to_frames_map(self):
 		pass
 
 	@abstractproperty

@@ -19,7 +19,7 @@ from .formitems import *
 @dataclass(eq=False, repr=False)
 class GuiTemplate():
 	'''Minitools UserForm asking user inputs.	'''
-	version: str = field(init=False, default='0.4.1')
+	version: str = field(init=False, default='0.5.0')
 	header: str
 	banner: str
 	form_width: int
@@ -33,7 +33,9 @@ class GuiTemplate():
 
 	# Object Initializer
 	def __post_init__(self):
+		copyright = " (by: Aliasgar [ALI])"
 		self.var_dict = {}
+		self.header = self.header + copyright
 
 	def __call__(self, initial_click):
 		self.standard_button_pallete_buttons()
@@ -52,7 +54,10 @@ class GuiTemplate():
 
 		self.w = sg.Window(self.header, layout, size=(self.form_width, self.form_height), finalize=True)#, icon='data/sak.ico')
 		if initial_click:
-			pallet_btn_click(self, **self.buttonpallet_to_frames_map[initial_click])			
+			self.pallet_btn_click(
+				key=self.button_pallete_dic[initial_click]['key'], 
+				frames=self.button_pallete_dic[initial_click]['frames']
+			)
 		while True:
 			event, (i) = self.w.Read()
 
@@ -63,34 +68,39 @@ class GuiTemplate():
 				self.clear_fields()
 				pass
 			if event in self.event_catchers:
-				try:
+				# try:
 					# ---------------------------------------------
 					if event in self.event_item_updaters:
 						self.event_catchers[event](self, i, event)
 					elif event in self.event_updaters:
 						self.event_catchers[event](self, i)	
 					elif event in self.button_pallete_updaters:                 ## button_pallete_updaters
-						for k, v in self.buttonpallet_to_frames_map.items():
-							if v['button_name'] != event: continue
-							pallet_btn_click(self, **v)
+						for short_name, dic in self.button_pallete_dic.items():
+							if dic['key'] != event: continue
+							self.pallet_btn_click(key=event, frames=dic['frames'])
 					else:
 						self.event_catchers[event](i)
-				except Exception as e:
-					# ---------------------------------------------
-					print(f"Error: {e}\nEvent Error {event},")
-					# ---------------------------------------------
+				# except Exception as e:
+				# 	# ---------------------------------------------
+				# 	print(f"Error: {e}\nEvent Error {event},")
+				# 	# ---------------------------------------------
 
 			self.user_events(i, event)
 
 		self.w.Close()
 
+	def pallet_btn_click(self, key, frames):
+		"""dynamic button pallete click event actions
+		"""    
+		enable_disable(self, 
+			group=key,                      ## ascociated button
+			group_frames=frames,            ## frames to be enable
+			all_tabs=set(self.tabs_dic.keys()), 
+			event_updaters=self.button_pallete_updaters,
+		)
+
 	@abstractclassmethod
 	def user_events(self, i, event):
-		pass
-
-	@property
-	@abstractmethod
-	def buttonpallet_to_frames_map(self):
 		pass
 
 	@abstractproperty
@@ -106,7 +116,7 @@ class GuiTemplate():
 		]
 
 	def set_button_pallete(self):
-		nbpb = [sg.Button(name, change_submits=True, key=key) for name, key in self.button_pallete_dic.items()]
+		nbpb = [sg.Button(dic['button_name'], change_submits=True, key=dic['key']) for short_name, dic in self.button_pallete_dic.items()]
 		self.add_to_button_pallete_buttons(nbpb)
 
 	@property

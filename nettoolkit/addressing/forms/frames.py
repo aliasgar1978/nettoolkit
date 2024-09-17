@@ -17,7 +17,7 @@ def ipscanner_frame():
 		[sg.Text('IP Subnet Scanner', font=('TimesNewRoman', 12), text_color="black") ],
 
 		[sg.Text('Output folder:',  text_color="yellow"),
-		 sg.InputText(get_cache(CACHE_FILE, 'addressing_ipscan_folder_output'), key='addressing_ipscan_folder_output'), sg.FolderBrowse(), ],
+		 sg.InputText(get_cache(CACHE_FILE, 'addressing_ipscan_folder_output'), key='addressing_ipscan_folder_output', change_submits=True), sg.FolderBrowse(), ],
 
 		[sg.Text("Prefixes", text_color="yellow")],
 		[sg.Multiline("", key='addressing_ipscan_pfxs', autoscroll=True, size=(30,7), disabled=False),
@@ -116,7 +116,7 @@ def make_batch_frame():
 		[sg.Text('Make Batch', font=('TimesNewRoman', 12), text_color="black") ],
 
 		[sg.Text('output folder:', text_color="black"), 
-		 sg.InputText('', key='batch_folder_output'), sg.FolderBrowse(),],
+		 sg.InputText(get_cache(CACHE_FILE, 'batch_folder_output'), key='batch_folder_output', change_submits=True), sg.FolderBrowse(),],
 		
 		[sg.Column([
 		  [sg.Text("Prefixes", text_color="black"),],

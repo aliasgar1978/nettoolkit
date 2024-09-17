@@ -30,7 +30,8 @@ from .pyJuniper.juniper import Juniper, convert_to_set_from_captures
 from .pyJuniper.jset import JSet
 
 # ---------------- nettoolkit ---------------- #
-from .nettoolkit.gui import Nettoolkit, NGui
+from .nettoolkit.gui import NGui
+from .nettoolkit.nt_gui import Nettoolkit
 
 
 ## --- DECLARATIONS --- ##
@@ -74,5 +75,5 @@ __all__ = [
 
 ]
 
-__version__ = "1.7.3"
-__doc__ = '''Networking Tool Set - by: ALIASGAR [ALI] '''
+__version__ = "1.7.5"
+__doc__ = '''Networking Tool Set '''

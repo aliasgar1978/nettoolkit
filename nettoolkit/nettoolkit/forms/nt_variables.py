@@ -3,7 +3,6 @@
 #   Imports
 # ---------------------------------------------------------------------------------------
 from collections import OrderedDict
-from .formitems import pallet_btn_click
 
 from nettoolkit.capture_it.forms.execs   import CAPTUREIT_EVENT_UPDATERS,   CAPTUREIT_ITEM_UPDATERS,   CAPTUREIT_RETRACTABLES,   CATPUREIT_EVENT_FUNCS
 from nettoolkit.facts_finder.forms.execs import FACTSFINDER_EVENT_UPDATERS, FACTSFINDER_ITEM_UPDATERS, FACTSFINDER_RETRACTABLES, FACTSFINDER_EVENT_FUNCS
@@ -82,15 +81,16 @@ FRAMES.update(CONFIGURE_FRAMES)
 # ---------------------------------------------------------------------------------------
 #   Button Pallete dict
 # ---------------------------------------------------------------------------------------
-BUTTUN_PALLETE_DICT = OrderedDict()
-BUTTUN_PALLETE_DICT["Addressing"] = 'btn_addressing'
-BUTTUN_PALLETE_DICT["Capture-IT"] = 'btn_captureit'
-BUTTUN_PALLETE_DICT["Configure"]  = 'btn_configure'	
-BUTTUN_PALLETE_DICT["Config Gen"] = 'btn_j2config'
-BUTTUN_PALLETE_DICT["Crypt"]      = 'btn_cryptology'
-BUTTUN_PALLETE_DICT["Facts"]      = 'btn_factsfinder'
-BUTTUN_PALLETE_DICT["Juniper"]    = 'btn_juniper'
-BUTTUN_PALLETE_DICT["Visio Gen"]  = 'btn_pyvig'
+BUTTUN_PALLETE_DICT = {
+	'addressing': {'key': 'btn_addressing', 'frames': ADDRESSING_FRAMES,  "button_name": "Addressing",},
+	'captureit':  {'key': 'btn_captureit',  'frames': CAPTUREIT_FRAMES,   "button_name": "Capture-IT",},
+	'configure':  {'key': 'btn_configure',  'frames': CONFIGURE_FRAMES,   "button_name": "Configure", },
+	'j2config':   {'key': 'btn_j2config',   'frames': J2CONFIG_FRAMES,    "button_name": "Config Gen",},
+	'crypt':      {'key': 'btn_cryptology', 'frames': CRYPT_FRAMES,       "button_name": "Crypt",     },
+	'factsgen':   {'key': 'btn_factsfinder','frames': FACTSFINDER_FRAMES, "button_name": "Facts",     },
+	'juniper':    {'key': 'btn_juniper' ,   'frames': JUNIPER_FRAMES,     "button_name": "Juniper",   },
+	'pyvig':      {'key': 'btn_pyvig',      'frames': PYVIG_FRAMES,       "button_name": "Visio Gen", },
+}
 
 # ---------------------------------------------------------------------------------------
 #   event functions dict
@@ -105,8 +105,6 @@ EVENT_FUNCTIONS.update(J2CONFIG_EVENT_FUNCS)
 EVENT_FUNCTIONS.update(PYVIG_EVENT_FUNCS)
 EVENT_FUNCTIONS.update(CONFIGURE_EVENT_FUNCS)
 
-BUTTUN_PALLETE_FUNCS = {v:pallet_btn_click for k, v in BUTTUN_PALLETE_DICT.items()}
-EVENT_FUNCTIONS.update(BUTTUN_PALLETE_FUNCS)
 # ---------------------------------------------------------------------------------------
 
 

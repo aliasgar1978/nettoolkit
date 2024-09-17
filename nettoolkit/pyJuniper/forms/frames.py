@@ -20,7 +20,7 @@ def juniper_frame():
 		 sg.InputText(key='mini_juniper_file_input'), sg.FileBrowse()],
 
 		[sg.Text('Output folder:\t',  text_color="black"), 
-		 sg.InputText(get_cache(CACHE_FILE, 'mini_juniper_folder_output'), key='mini_juniper_folder_output'), sg.FolderBrowse(), ],
+		 sg.InputText(get_cache(CACHE_FILE, 'mini_juniper_folder_output'), key='mini_juniper_folder_output', change_submits=True), sg.FolderBrowse(), ],
 		[sg.Text('\t\t\t\t\t\t\t'),
 		 sg.Button("  Convert to set   ", change_submits=True, key='mini_juniper_to_set_btn_start', button_color="blue"),],
 		[sg.Text('\t\t\t\t\t\t\t'),

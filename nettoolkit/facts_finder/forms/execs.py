@@ -55,7 +55,6 @@ def facts_finder_start(i):
 		except Exception as e:
 			print(f"Custom Data Modifications failed...,")
 			print(e)
-			continue
 		#
 		try:
 			rearrange_tables(cleaned_fact.clean_file, foreign_keys=custom['foreign_keys'])
@@ -63,7 +62,6 @@ def facts_finder_start(i):
 		except Exception as e:
 			print(f"Column Rearrange failed...,")
 			print(e)
-			continue
 		print(f"Tasks Completed !! {device} !!")
 
 

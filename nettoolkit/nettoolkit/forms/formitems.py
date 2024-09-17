@@ -294,19 +294,3 @@ def enable_disable(obj, * , group, group_frames, all_tabs, event_updaters):
 		e = {group: {'button_color': 'blue'}}
 		obj.event_update_element(**e)
 
-
-def pallet_btn_click(obj, *, frames, button_name):
-	"""dynamic button pallete click event actions
-
-	Args:
-		obj (NGui): NGui object
-		frames (dict): frames dictionary with `button_name` and `frames` keys.
-		button_name (str): button name/key, to be activated.
-	"""    
-	enable_disable(obj, 
-		group=button_name,                             ## ascociated button
-		group_frames=frames,            ## frames to be enable
-		all_tabs=set(obj.tabs_dic.keys()), 
-		event_updaters=set(obj.button_pallete_dic.values()),
-	)
-

@@ -14,6 +14,7 @@ from nettoolkit.addressing.batch import create_batch_file
 
 def update_cache_addressing(i): 
 	update_cache(CACHE_FILE, addressing_ipscan_folder_output=i['addressing_ipscan_folder_output'])
+	update_cache(CACHE_FILE, batch_folder_output=i['batch_folder_output'])
 
 # ================================ [ ip scanner ] ========================================
 
@@ -110,15 +111,14 @@ def batch_make_start(i):
 
 ADDRESSING_EVENT_FUNCS = {
 	'addressing_ipscan_btn_start': ipscanner_start,
+	'addressing_ipscan_compare_btn_start': compare_scanner_outputs_exec,
 	'addressing_ipscan_btn_count_ip': ipscanner_count_ips,
 	'addressing_ipscan_folder_output': update_cache_addressing,
-	'confit_cred_un': update_cache_addressing,
-	'confit_cred_un': update_cache_addressing,
 	'pfxs_oper_summary_btn_start': pfxs_oper_summary_start, 
 	'pfxs_oper_issubset_btn_start': pfxs_oper_issubset_start,
 	'pfxs_oper_break_btn_start': pfxs_oper_break_start,
 	'batch_make_btn_start': batch_make_start,
-	'addressing_ipscan_compare_btn_start': compare_scanner_outputs_exec,
+	'batch_folder_output': update_cache_addressing,
 }
 ADDRESSING_EVENT_UPDATERS = { 
 	'addressing_ipscan_btn_count_ip', 

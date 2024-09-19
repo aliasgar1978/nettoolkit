@@ -23,7 +23,7 @@ from .nettoolkit_db.database import write_to_xl, append_to_xl, read_xl, get_merg
 # ---------------- pyNetCrypt ---------------- #
 from .pyNetCrypt.cpw_cracker import decrypt_type7, encrypt_type7, decrypt_file_passwords, mask_file_passwords
 from .pyNetCrypt.jpw_cracker import juniper_decrypt, juniper_encrypt, decrypt_doller9_file_passwords, mask_doller9_file_passwords
-from .pyNetCrypt.generate import get_md5
+from .pyNetCrypt.generate import get_md5, str_hash
 
 # ---------------- pyJuniper ---------------- #
 from .pyJuniper.juniper import Juniper, convert_to_set_from_captures
@@ -62,7 +62,7 @@ __all__ = [
 	# jpw_cracker
 	'juniper_decrypt', 'juniper_encrypt', 'decrypt_doller9_file_passwords', 'mask_doller9_file_passwords',
 	# generate
-	'get_md5',
+	'get_md5', 'str_hash',
 
 	# ---------------- pyJuniper ---------------- #
 	# .juniper

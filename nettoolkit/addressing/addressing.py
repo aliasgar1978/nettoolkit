@@ -45,6 +45,44 @@ def expand(v6subnet, withMask=False):
 	# except:
 	# 	return False
 
+def shrink(v6subnet, withMask=True):
+	"""Shrinks the V6 subnet to its standard shortend length.
+
+	Args:
+		v6subnet (str): v6 subnet
+
+	Returns:
+		str: shrinked v6 subnet
+	"""	
+	if v6subnet.find("::") > -1: return v6subnet
+	if withMask: mask = v6subnet.split("/")[1]
+	s = v6subnet.split("/")[0].split(":")
+
+	zero_count, zero_counts, zerostart = 0 , {}, False
+	for i, h in enumerate(s):
+		zerostart = h == '0'
+		if not zerostart: 
+			zero_count = 0
+			continue
+		zero_count += 1
+		zero_counts[zero_count] = i 
+
+	for i, x in enumerate(range(zero_counts[max(zero_counts)], zero_counts[max(zero_counts)]-max(zero_counts), -1)):
+		if i == 0:
+			s[x] = ':'
+		else:
+			del(s[x])
+
+	for i, x in enumerate(s):
+		if i == 0 or i == len(s)-1: continue
+		if x == ':': s[i] = ''
+
+	s = ":".join(s)
+	if s  == ":": s = "::"
+	if withMask:
+		s += "/"+mask
+	return s 
+
 def get_hext(v6subnet, hexTnum, s=''):	
 	"""get the a hextate of v6 subnet.
 
@@ -916,6 +954,14 @@ class IPv6(IP):
 		"""		
 		return expand(self.subnet)
 
+	def shrinked(self, withMask=True):
+		"""shrinked format of ipv6 address.
+
+		Returns:
+			str: shrinked format ipv6 address.
+		"""		
+		return shrink(self.subnet_zero(withMask=True), withMask=withMask)
+
 	@property
 	def decimalMask(self):
 		'''decimal mask of given subnet
@@ -1146,6 +1192,8 @@ class IPv4(IP):
 			return self[n] + " " + self.binmask
 		except:
 			raise Exception(f'Invalid Input : detected')
+
+	ipnetmask = ipbinmask
 
 	def ipinvmask(self, n=0):
 		"""IP with Inverse Mask for provided IP/Subnet,

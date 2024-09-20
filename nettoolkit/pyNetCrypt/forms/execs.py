@@ -1,6 +1,6 @@
 
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file
+from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file, open_excel_file, open_folder
 from pathlib import *
 import sys
 
@@ -10,6 +10,9 @@ from nettoolkit.pyNetCrypt import get_md5
 
 
 # ================================ [ NetCrypt ] ========================================
+
+def exec_netcrypt_file_input_open(i):
+	open_folder(i['netcrypt_file'])
 
 def netcrypt_cisco_enc_start(obj, i):
 	try:
@@ -52,6 +55,8 @@ def netcrypt_file_dec_start(obj, i):
 		if line.startswith("#"): f = decrypt_doller9_file_passwords
 		if f: break
 	f(input_file, output_file)
+	op = f"File Wrote: {output_file}"
+	obj.event_update_element(netcrypt_output_pw={'value': op})	
 
 def netcrypt_file_mask_start(obj, i):
 	if not i['netcrypt_file']: return 
@@ -65,6 +70,8 @@ def netcrypt_file_mask_start(obj, i):
 		if line.startswith("#"): f = mask_doller9_file_passwords
 		if f: break
 	f(input_file, output_file)
+	op = f"File Wrote: {output_file}"
+	obj.event_update_element(netcrypt_output_pw={'value': op})	
 
 def netcrypt_file_hash_start(obj, i):
 	if not i['netcrypt_file']: return 
@@ -82,6 +89,8 @@ CRYPT_EVENT_FUNCS = {
 	'netcrypt_file_dec_btn_start': netcrypt_file_dec_start,
 	'netcrypt_file_mask_btn_start': netcrypt_file_mask_start,
 	'netcrypt_file_hash_btn_start': netcrypt_file_hash_start,
+
+	'netcrypt_file_input_open': exec_netcrypt_file_input_open,
 }
 
 CRYPT_EVENT_UPDATERS = {

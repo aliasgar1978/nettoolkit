@@ -1,6 +1,6 @@
 
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file
+from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file, open_folder
 from pathlib import *
 import sys
 
@@ -11,6 +11,9 @@ from nettoolkit.configure import ConfigureByExcel
 def update_cache_confit(i): 
 	update_cache(CACHE_FILE, confit_cred_un=i['confit_cred_un'])
 	update_cache(CACHE_FILE, confit_folder_log=i['confit_folder_log'])
+
+def exec_confit_folder_log_open(i):
+	open_folder(i['confit_folder_log'])
 
 def configure_it_start(obj, i):
 	auth = {
@@ -87,6 +90,7 @@ CONFIGURE_EVENT_FUNCS = {
 	'confit_excel': add_to_confit_config_excel_in,
 	'confit_config_excel_in': update_confit_config_excel_in_to_out,
 	'confit_config_excel_out': update_confit_config_excel_out_to_in,
+	'confit_folder_log_open': exec_confit_folder_log_open,
 }
 CONFIGURE_EVENT_UPDATERS = {'confit_excel', 'confit_btn_start'}
 CONFIGURE_ITEM_UPDATERS = {'confit_config_excel_in', 'confit_config_excel_out', }

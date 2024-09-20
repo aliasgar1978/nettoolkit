@@ -14,6 +14,7 @@ def capture_it_frame():
 					relief=sg.RELIEF_SUNKEN, 
 					layout=[
 
+
 		[sg.Text('Credentials',  font=('TimesNewRoman', 12), text_color="black"),], 
 		[sg.Text("un:",     text_color="black"),sg.InputText(get_cache(CACHE_FILE, 'cit_cred_un'), key='cit_cred_un', size=(8,1), change_submits=True),
 		 sg.Text("pw:",     text_color="black"),sg.InputText("", key='cit_cred_pw', password_char='*', size=(20,1),),
@@ -22,13 +23,16 @@ def capture_it_frame():
 
 		[sg.Text('output folder:\t\t', text_color="black"), 
 		 sg.InputText(get_cache(CACHE_FILE, 'cit_path_captures'), key='cit_path_captures', change_submits=True),  
-		 sg.FolderBrowse(button_color="orange"), ],
+		 sg.FolderBrowse(button_color="orange"), 
+		 sg.Button("open", change_submits=True, key='cit_folder_path_captures_open', button_color="darkgrey"),],
 		[sg.Text('execution log folder:\t', text_color="black"), 
 		 sg.InputText(get_cache(CACHE_FILE, 'cit_path_logs'), key='cit_path_logs', change_submits=True), 
-		 sg.FolderBrowse(button_color="orange"), ],
+		 sg.FolderBrowse(button_color="orange"), 
+		 sg.Button("open", change_submits=True, key='cit_folder_path_logs_open', button_color="darkgrey"),],
 		[sg.Text('summary log folder:\t', text_color="black"), 
 		 sg.InputText(get_cache(CACHE_FILE, 'cit_path_summary'), key='cit_path_summary', change_submits=True),  
-		 sg.FolderBrowse(button_color="orange"), ],
+		 sg.FolderBrowse(button_color="orange"), 
+		 sg.Button("open", change_submits=True, key='cit_folder_path_summary_open', button_color="darkgrey"),],
 
 		[sg.Text('Hosts/IPs file:\t\t', text_color="black"), 
 	     sg.InputText(get_cache(CACHE_FILE, 'cit_file_hosts'), size=(30,1),  key='cit_file_hosts', change_submits=True,), 
@@ -82,13 +86,16 @@ def capture_it_by_xl_frame():
 
 		[sg.Text('output folder:\t\t', text_color="black"), 
 		 sg.InputText(get_cache(CACHE_FILE, 'cit_path_captures'), key='cit_path_captures1', change_submits=True),  
-		 sg.FolderBrowse(button_color="orange"), ],
+		 sg.FolderBrowse(button_color="orange"), 
+		 sg.Button("open", change_submits=True, key='cit_folder_path_captures_open1', button_color="darkgrey"),],
 		[sg.Text('execution log folder:\t', text_color="black"), 
 		 sg.InputText(get_cache(CACHE_FILE, 'cit_path_logs'), key='cit_path_logs1', change_submits=True), 
-		 sg.FolderBrowse(button_color="orange"), ],
+		 sg.FolderBrowse(button_color="orange"), 
+		 sg.Button("open", change_submits=True, key='cit_folder_path_logs_open1', button_color="darkgrey"),],
 		[sg.Text('summary log folder:\t', text_color="black"), 
 		 sg.InputText(get_cache(CACHE_FILE, 'cit_path_summary'), key='cit_path_summary1', change_submits=True),  
-		 sg.FolderBrowse(button_color="orange"), ],
+		 sg.FolderBrowse(button_color="orange"), 
+		 sg.Button("open", change_submits=True, key='cit_folder_path_summary_open1', button_color="darkgrey"),],
 
 		[sg.Text('Device-Commands Excel file:', text_color="black"), 
 	     sg.InputText(get_cache(CACHE_FILE, 'cit_by_xl_file_dev_cmd_xl_file'), size=(30,1),  key='cit_by_xl_file_dev_cmd_xl_file', change_submits=True,), 

@@ -1,6 +1,6 @@
 
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file
+from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file, open_folder
 from pathlib import *
 import sys
 
@@ -15,6 +15,16 @@ from nettoolkit.addressing.batch import create_batch_file
 def update_cache_addressing(i): 
 	update_cache(CACHE_FILE, addressing_ipscan_folder_output=i['addressing_ipscan_folder_output'])
 	update_cache(CACHE_FILE, batch_folder_output=i['batch_folder_output'])
+
+def exec_addressing_folder_ipscan_open(i):
+	open_folder(i['addressing_ipscan_folder_output'])
+def exec_addressing_folder_compare_file1_open(i):
+	open_folder(i['addressing_ipscan_compare_file_1'])
+def exec_addressing_folder_compare_file2_open(i):
+	open_folder(i['addressing_ipscan_compare_file_2'])
+def exec_batch_folder_output_open(i):
+	open_folder(i['batch_folder_output'])
+
 
 # ================================ [ ip scanner ] ========================================
 
@@ -119,6 +129,10 @@ ADDRESSING_EVENT_FUNCS = {
 	'pfxs_oper_break_btn_start': pfxs_oper_break_start,
 	'batch_make_btn_start': batch_make_start,
 	'batch_folder_output': update_cache_addressing,
+	'addressing_folder_ipscan_open': exec_addressing_folder_ipscan_open,
+	'addressing_folder_compare_file1_open': exec_addressing_folder_compare_file1_open,
+	'addressing_folder_compare_file2_open': exec_addressing_folder_compare_file2_open,
+	'batch_folder_output_open': exec_batch_folder_output_open,
 }
 ADDRESSING_EVENT_UPDATERS = { 
 	'addressing_ipscan_btn_count_ip', 

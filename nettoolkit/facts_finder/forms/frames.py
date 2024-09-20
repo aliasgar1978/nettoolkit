@@ -16,10 +16,11 @@ def facts_finder_frame():
 		[sg.Text('Facts Generator', font=('TimesNewRoman', 12), text_color="black") ],
 
 		[sg.Text('log files', text_color="black"), 
-			sg.InputText('', key='ff_log_files'), sg.FilesBrowse(key='ff_log_files_btn') ],
+		 sg.InputText('', key='ff_log_files'), 
+		 sg.FilesBrowse(key='ff_log_files_btn'), ],
 		under_line(80),
-		[sg.Text('Options',  font=('TimesNewRoman', 12), text_color="black") ],
 
+		[sg.Text('Options',  font=('TimesNewRoman', 12), text_color="black") ],
 		[sg.Checkbox('convert to capture_it ', key='ff_convert_to_cit', default=True, text_color='black')],
 		[sg.Checkbox('remove backup/tmp file', key='ff_remove_cit_bkp', default=True, text_color='black')],
 		[sg.Checkbox('skip parsed excel outputs', key='ff_skip_txtfsm', default=True, text_color='black')],

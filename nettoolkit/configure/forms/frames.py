@@ -20,7 +20,8 @@ def configure_it_frame():
 		under_line(80),
 
 		[sg.Text('Provide configuration Excel(s):', text_color="black"), 
-		 sg.InputText('', disabled=True, key='confit_excel', change_submits=True,), sg.FilesBrowse(), ],
+		 sg.InputText('', disabled=True, key='confit_excel', change_submits=True,), 
+		 sg.FilesBrowse(),],
 
 		[sg.Listbox([], key='confit_config_excel_in', change_submits=False, size=(80,3), horizontal_scroll=True, bind_return_key=True)],
 		[sg.Text('Re-Sequence Files as required Execution Order:', text_color="black")], 
@@ -30,7 +31,9 @@ def configure_it_frame():
 		 sg.InputCombo(['ascending', 'reversed'], default_value='ascending' , key='confit_tab_orders', size=(12,1)),],
 
 		[sg.Text('Provide Log folder:', text_color="black"), 
-		 sg.InputText(get_cache(CACHE_FILE, 'confit_folder_log'), key='confit_folder_log', change_submits=True), sg.FolderBrowse(),],
+		 sg.InputText(get_cache(CACHE_FILE, 'confit_folder_log'), key='confit_folder_log', change_submits=True), 
+		 sg.FolderBrowse(),
+		 sg.Button("open", change_submits=True, key='confit_folder_log_open', button_color="darkgrey"),],
 
 		[sg.Checkbox('Configuration Logs', key='confit_cb_conf_log', default=True, text_color='black'),
 		 sg.Checkbox('Execution Logs',     key='confit_cb_exec_log', default=True, text_color='black'),

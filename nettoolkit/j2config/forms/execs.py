@@ -1,6 +1,6 @@
 
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file
+from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file, open_folder, open_excel_file
 from pathlib import *
 import sys
 
@@ -14,6 +14,17 @@ def update_cache_j2(i):
 	update_cache(CACHE_FILE, cit_file_custom_yml=i['j2_file_custom_yml'])
 	update_cache(CACHE_FILE, j2_file_regional=i['j2_file_regional'])	
 	update_cache(CACHE_FILE, j2_output_folder=i['j2_output_folder'])	
+
+def exec_j2_file_regional_open(i):
+	open_excel_file(i['j2_file_regional'])
+def exec_j2_folder_output_open(i):
+	open_folder(i['j2_output_folder'])
+def exec_j2_file_data_open(i):
+	open_excel_file(i['j2_file_data'])
+def exec_j2_file_template_open(i):
+	open_text_file(i['j2_file_template'])
+
+
 
 def add_path(file):
 	sys.path.insert(len(sys.path), str(Path(file).resolve().parents[0]))
@@ -60,6 +71,11 @@ J2CONFIG_EVENT_FUNCS = {
 	'j2_file_custom_yml': update_cache_j2,
 	'j2_output_folder': update_cache_j2,
 	'j2_file_regional': update_cache_j2,
+
+	'j2_file_template_open': exec_j2_file_template_open,
+	'j2_file_data_open': exec_j2_file_data_open,
+	'j2_folder_output_open': exec_j2_folder_output_open,
+	'j2_file_regional_open': exec_j2_file_regional_open,
 }
 J2CONFIG_EVENT_UPDATERS = set()
 J2CONFIG_ITEM_UPDATERS = set()

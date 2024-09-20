@@ -1,6 +1,6 @@
 
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file, open_excel_file
+from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file, open_excel_file, open_folder
 from pathlib import *
 import sys
 
@@ -49,6 +49,20 @@ def exec_cit_file_juniper_open(i):
 
 def cit_by_xl_file_dev_cmd_xl_file_open(i):
 	open_excel_file(i['cit_by_xl_file_dev_cmd_xl_file'])
+
+def exec_cit_folder_path_captures_open(i):
+	open_folder(i['cit_path_captures'])
+def exec_cit_folder_path_logs_open(i):
+	open_folder(i['cit_path_logs'])
+def exec_cit_folder_path_summary_open(i):
+	open_folder(i['cit_path_summary'])
+def exec_cit_folder_path_captures_open1(i):
+	open_folder(i['cit_path_captures1'])
+def exec_cit_folder_path_logs_open1(i):
+	open_folder(i['cit_path_logs1'])
+def exec_cit_folder_path_summary_open1(i):
+	open_folder(i['cit_path_summary1'])
+
 
 def add_path(file):
 	p = Path(file)
@@ -179,6 +193,12 @@ CATPUREIT_EVENT_FUNCS = {
 	'cit_file_cisco_open': exec_cit_file_cisco_open,
 	'cit_file_juniper_open': exec_cit_file_juniper_open,
 	'cit_by_xl_file_dev_cmd_xl_file_open': cit_by_xl_file_dev_cmd_xl_file_open,
+	'cit_folder_path_captures_open': exec_cit_folder_path_captures_open,
+	'cit_folder_path_logs_open': exec_cit_folder_path_logs_open,
+	'cit_folder_path_summary_open': exec_cit_folder_path_summary_open,
+	'cit_folder_path_captures_open1': exec_cit_folder_path_captures_open1,
+	'cit_folder_path_logs_open1': exec_cit_folder_path_logs_open1,
+	'cit_folder_path_summary_open1': exec_cit_folder_path_summary_open1,
 }
 CAPTUREIT_EVENT_UPDATERS = set()
 CAPTUREIT_ITEM_UPDATERS = set()

@@ -335,3 +335,12 @@ def open_excel_file(file):
 		except Exception as e:
 			raise Exception(f"Unable to Open file {file} in excel\n{e}")
 
+
+def open_folder(folder):
+	"""Open folder
+
+	Args:
+		file (str): file name
+	"""    	
+	path = os.path.realpath(folder)
+	os.startfile(path)

@@ -17,7 +17,9 @@ def ipscanner_frame():
 		[sg.Text('IP Subnet Scanner', font=('TimesNewRoman', 12), text_color="black") ],
 
 		[sg.Text('Output folder:',  text_color="yellow"),
-		 sg.InputText(get_cache(CACHE_FILE, 'addressing_ipscan_folder_output'), key='addressing_ipscan_folder_output', change_submits=True), sg.FolderBrowse(), ],
+		 sg.InputText(get_cache(CACHE_FILE, 'addressing_ipscan_folder_output'), key='addressing_ipscan_folder_output', change_submits=True), 
+		 sg.FolderBrowse(),
+		 sg.Button("open", change_submits=True, key='addressing_folder_ipscan_open', button_color="darkgrey"),],
 
 		[sg.Text("Prefixes", text_color="yellow")],
 		[sg.Multiline("", key='addressing_ipscan_pfxs', autoscroll=True, size=(30,7), disabled=False),
@@ -39,10 +41,12 @@ def ipscanner_frame():
 		[sg.Text('Compare - IP Scanner Output files', font=('TimesNewRoman', 12), text_color="black") ],
 
 		[sg.Text('Select first scanner file:\t', text_color="black"), 
-		 sg.InputText(key='addressing_ipscan_compare_file_1'), sg.FileBrowse()],
+		 sg.InputText(key='addressing_ipscan_compare_file_1'), sg.FileBrowse(),
+		 sg.Button("open", change_submits=True, key='addressing_folder_compare_file1_open', button_color="darkgrey"),],
 
 		[sg.Text('Select second scanner file:\t', text_color="black"), 
-		 sg.InputText(key='addressing_ipscan_compare_file_2'), sg.FileBrowse()],
+		 sg.InputText(key='addressing_ipscan_compare_file_2'), sg.FileBrowse(),
+		 sg.Button("open", change_submits=True, key='addressing_folder_compare_file2_open', button_color="darkgrey"),],
 		# ------------------------------------------------------------------------------------
 		[sg.Text('\t\t\t\t\t\t\t\t'),
 		 sg.Button("Compare scans", change_submits=True, key='addressing_ipscan_compare_btn_start', button_color="blue"),],
@@ -116,7 +120,9 @@ def make_batch_frame():
 		[sg.Text('Make Batch', font=('TimesNewRoman', 12), text_color="black") ],
 
 		[sg.Text('output folder:', text_color="black"), 
-		 sg.InputText(get_cache(CACHE_FILE, 'batch_folder_output'), key='batch_folder_output', change_submits=True), sg.FolderBrowse(),],
+		 sg.InputText(get_cache(CACHE_FILE, 'batch_folder_output'), key='batch_folder_output', change_submits=True), 
+		 sg.FolderBrowse(),
+		 sg.Button("open", change_submits=True, key='batch_folder_output_open', button_color="darkgrey"),],
 		
 		[sg.Column([
 		  [sg.Text("Prefixes", text_color="black"),],
@@ -133,7 +139,7 @@ def make_batch_frame():
 		 sg.Column([
 		  [sg.Text("IP(s)", text_color="black")],
 		  [sg.Multiline("", key='batch_ips', autoscroll=True, size=(10,5), disabled=False) ],
-		  # [sg.Text("Example: \n1\n3,4,5")],
+
 		 ]),
 		],
 

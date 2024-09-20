@@ -68,7 +68,7 @@ class GuiTemplate():
 				self.clear_fields()
 				pass
 			if event in self.event_catchers:
-				# try:
+				try:
 					# ---------------------------------------------
 					if event in self.event_item_updaters:
 						self.event_catchers[event](self, i, event)
@@ -80,10 +80,10 @@ class GuiTemplate():
 							self.pallet_btn_click(key=event, frames=dic['frames'])
 					else:
 						self.event_catchers[event](i)
-				# except Exception as e:
-				# 	# ---------------------------------------------
-				# 	print(f"Error: {e}\nEvent Error {event},")
-				# 	# ---------------------------------------------
+				except Exception as e:
+					# ---------------------------------------------
+					print(f"Error: {e}\nEvent Error {event},")
+					# ---------------------------------------------
 
 			self.user_events(i, event)
 

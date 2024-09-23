@@ -85,11 +85,11 @@ BUTTUN_PALLETE_DICT = {
 	'addressing': {'key': 'btn_addressing', 'frames': ADDRESSING_FRAMES,  "button_name": "Addressing",},
 	'captureit':  {'key': 'btn_captureit',  'frames': CAPTUREIT_FRAMES,   "button_name": "Capture-IT",},
 	'configure':  {'key': 'btn_configure',  'frames': CONFIGURE_FRAMES,   "button_name": "Configure", },
-	'j2config':   {'key': 'btn_j2config',   'frames': J2CONFIG_FRAMES,    "button_name": "Config Gen",},
+	'configgen':  {'key': 'btn_j2config',   'frames': J2CONFIG_FRAMES,    "button_name": "Config Gen",},
 	'crypt':      {'key': 'btn_cryptology', 'frames': CRYPT_FRAMES,       "button_name": "Crypt",     },
-	'factsgen':   {'key': 'btn_factsfinder','frames': FACTSFINDER_FRAMES, "button_name": "Facts",     },
+	'facts':      {'key': 'btn_factsfinder','frames': FACTSFINDER_FRAMES, "button_name": "Facts",     },
 	'juniper':    {'key': 'btn_juniper' ,   'frames': JUNIPER_FRAMES,     "button_name": "Juniper",   },
-	'pyvig':      {'key': 'btn_pyvig',      'frames': PYVIG_FRAMES,       "button_name": "Visio Gen", },
+	'visiogen':   {'key': 'btn_pyvig',      'frames': PYVIG_FRAMES,       "button_name": "Visio Gen", },
 }
 
 # ---------------------------------------------------------------------------------------

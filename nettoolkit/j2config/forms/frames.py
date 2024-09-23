@@ -37,8 +37,8 @@ def j2config_frame():
 		under_line(80),
 
 		# ------------------------------------------------------------------------------------
-		[sg.Text('\t\t\t\t\t\t\t\t\t'),
-		 sg.Button("Config Generate", change_submits=True, key='j2_btn_start', button_color="blue"),],
+		[sg.Text('\t\t\t\t\t\t\t\t'),
+		 sg.Button("Config Generate", change_submits=True, size=(20,1), key='j2_btn_start', button_color="blue"),],
 
 		])
 

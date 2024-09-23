@@ -44,8 +44,8 @@ def configure_it_frame():
 		under_line(80),
 
 		# ------------------------------------------------------------------------------------
-		[sg.Text('\t\t\t\t\t\t\t\t\t'),
-		 sg.Button("Configure", change_submits=True, key='confit_btn_start', button_color="blue"),],
+		[sg.Text('\t\t\t\t\t\t\t'),
+		 sg.Button("Configure", change_submits=True, size=(20,1), key='confit_btn_start', button_color="brown"),],
 
 		])
 

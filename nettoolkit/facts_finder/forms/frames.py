@@ -32,8 +32,8 @@ def facts_finder_frame():
 		under_line(80),
 
 
-		[sg.Text('\t\t\t\t\t\t\t\t\t'),
-		 sg.Button("Facts-Finder", change_submits=True, key='ff_btn_start', button_color="blue"),],
+		[sg.Text('\t\t\t\t\t\t\t'),
+		 sg.Button("Facts Gen", change_submits=True, size=(20,1), key='ff_btn_start', button_color="blue"),],
 
 		])
 

@@ -30,10 +30,10 @@ def ipscanner_frame():
 		 sg.InputCombo(list(range(1,256)), key='addressing_ipscan_till', size=(20,1)),  
 		 sg.Text('Sockets', text_color="black"), sg.InputText(500, key='addressing_ipscan_socket', size=(20,1))],  
 
-		[sg.Checkbox('Separate tab for each subnet', key='addressing_ipscan_cb_tab', default=True, text_color='black'),
+		[sg.Checkbox('Separate tab for each subnet', key='addressing_ipscan_cb_tab', default=True, text_color='black'),],
 		# ------------------------------------------------------------------------------------
-		 sg.Text('\t\t\t\t\t'),
-		 sg.Button("IP-Scan", change_submits=True, key='addressing_ipscan_btn_start', button_color="blue"),],
+		[sg.Text('\t\t\t\t\t\t\t'),
+		 sg.Button("IP-Scan", change_submits=True, size=(20,1), key='addressing_ipscan_btn_start', button_color="darkblue"),],
 		under_line(80),
 		# ------------------------------------------------------------------------------------
 
@@ -48,8 +48,8 @@ def ipscanner_frame():
 		 sg.InputText(key='addressing_ipscan_compare_file_2'), sg.FileBrowse(),
 		 sg.Button("open", change_submits=True, key='addressing_folder_compare_file2_open', button_color="darkgrey"),],
 		# ------------------------------------------------------------------------------------
-		[sg.Text('\t\t\t\t\t\t\t\t'),
-		 sg.Button("Compare scans", change_submits=True, key='addressing_ipscan_compare_btn_start', button_color="blue"),],
+		[sg.Text('\t\t\t\t\t\t\t'),
+		 sg.Button("Compare scans", change_submits=True, size=(20,1), key='addressing_ipscan_compare_btn_start', button_color="darkblue"),],
 
 
 		])
@@ -73,8 +73,8 @@ def prefix_oper_frame():
 		[sg.Text('Prefixes:\t\t\t\t\tSummaries', text_color="black"), ],
 		[sg.Multiline("", key='pfxs_oper_summary_input', autoscroll=True, size=(30,5), disabled=False),
 		 sg.Multiline("", key='pfxs_oper_summary_output', autoscroll=True, size=(30,5), disabled=True), ],
-		[sg.Text('\t\t\t\t\t\t\t\t'),
-		 sg.Button("Summarize", change_submits=True, key='pfxs_oper_summary_btn_start', button_color="blue"),],
+		[sg.Text('\t\t\t\t\t\t\t'),
+		 sg.Button("Summarize", change_submits=True, size=(20,1), key='pfxs_oper_summary_btn_start', button_color="darkblue"),],
 		under_line(80),
 		# ------------------------------------------------------------------------------------
 		[sg.Text('Break Prefix', font=('TimesNewRoman', 12), text_color="black") ],
@@ -85,8 +85,8 @@ def prefix_oper_frame():
 		 sg.InputCombo(list(range(1,256)), key='pfxs_oper_break_pieces', size=(4,1)),],
 		[sg.Text('Result:', text_color="black"),
 		 sg.Multiline("", key='pfxs_oper_break_result', autoscroll=True, size=(20,5), disabled=True),], 
-		[sg.Text('\t\t\t\t\t\t\t\t'),
-		 sg.Button("  Break  ", change_submits=True, key='pfxs_oper_break_btn_start', button_color="blue"),],
+		[sg.Text('\t\t\t\t\t\t\t'),
+		 sg.Button("  Break  ", change_submits=True, size=(20,1), key='pfxs_oper_break_btn_start', button_color="darkblue"),],
 		under_line(80),
 		# ------------------------------------------------------------------------------------
 		[sg.Text('Check - Is Subset', font=('TimesNewRoman', 12), text_color="black") ],
@@ -97,8 +97,8 @@ def prefix_oper_frame():
 		 sg.InputText(key='pfxs_oper_issubset_input_supernet', size=(15,1)),], 
 		[sg.Text('Result:', text_color="black"),
 		 sg.InputText('', key='pfxs_oper_issubset_result' , size=(5,1),  text_color="black")], 
-		[sg.Text('\t\t\t\t\t\t\t\t'),
-		 sg.Button("Is Subset?", change_submits=True, key='pfxs_oper_issubset_btn_start', button_color="blue"),],
+		[sg.Text('\t\t\t\t\t\t\t'),
+		 sg.Button("Is Subset?", change_submits=True, size=(20,1), key='pfxs_oper_issubset_btn_start', button_color="darkblue"),],
 		under_line(80),
 
 		])
@@ -146,8 +146,8 @@ def make_batch_frame():
 		[sg.Text("Length of Prefixes and Prefix Names entries must match exactly", text_color="black")],
 		[sg.Text("Entries can be line(Enter) or comma(,) separated", text_color="black")],
 
-		[sg.Text('\t\t\t\t\t\t\t\t'),
-		 sg.Button("Make Batch", change_submits=True, key='batch_make_btn_start', button_color="blue"),],
+		[sg.Text('\t\t\t\t\t\t\t'),
+		 sg.Button("Make Batch", change_submits=True, size=(20,1), key='batch_make_btn_start', button_color="darkblue"),],
 		under_line(80),
 
 		])

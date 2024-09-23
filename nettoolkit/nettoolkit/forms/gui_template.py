@@ -53,6 +53,7 @@ class GuiTemplate():
 		]
 
 		self.w = sg.Window(self.header, layout, size=(self.form_width, self.form_height), finalize=True)#, icon='data/sak.ico')
+		if not self.button_pallete_dic.get(initial_click):  initial_click = ''
 		if initial_click:
 			self.pallet_btn_click(
 				key=self.button_pallete_dic[initial_click]['key'], 

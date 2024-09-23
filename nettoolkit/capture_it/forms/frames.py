@@ -60,8 +60,8 @@ def capture_it_frame():
 		 sg.InputText(100,  key='cit_opt_max_connections', size=(5,1) ), sg.Text('default:100 - Enter 1 for sequential process', text_color="white"), ],
 
 
-		[sg.Text('\t\t\t\t\t\t\t\t\t'),
-		 sg.Button("Capture-it", change_submits=True, key='cit_btn_start', button_color="blue"),],
+		[sg.Text('\t\t\t\t\t\t\t\t'),
+		 sg.Button("Capture-it", change_submits=True, size=(20,1), key='cit_btn_start', button_color="blue"),],
 
 		])
 
@@ -120,8 +120,8 @@ def capture_it_by_xl_frame():
 		 sg.InputText(100,  key='cit_opt_max_connections1', size=(5,1) ), sg.Text('default:100 - Enter 1 for sequential process', text_color="white"), ],
 
 
-		[sg.Text('\t\t\t\t\t\t\t'),
-		 sg.Button("Capture-it using Excel", change_submits=True, key='cit_by_xl_btn_start', button_color="blue"),],
+		[sg.Text('\t\t\t\t\t\t\t\t'),
+		 sg.Button("Capture-it using Excel", change_submits=True, size=(20,1), key='cit_by_xl_btn_start', button_color="blue"),],
 
 		])
 

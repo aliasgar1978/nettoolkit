@@ -24,10 +24,11 @@ def juniper_frame():
 		 sg.InputText(get_cache(CACHE_FILE, 'mini_juniper_folder_output'), key='mini_juniper_folder_output', change_submits=True), 
 		 sg.FolderBrowse(),
 		 sg.Button("open", change_submits=True, key='mini_juniper_folder_output_open', button_color="darkgrey"),],
+		blank_line(),
 		[sg.Text('\t\t'),
-		 sg.Button("  Convert to set   ", change_submits=True, key='mini_juniper_to_set_btn_start', button_color="blue"),],
-		[sg.Text('\t\t'),
-		 sg.Button("Remove Remarks", change_submits=True, key='mini_juniper_remove_remarks_btn_start', button_color="blue"), ],
+		 sg.Button("  Convert to set   ", change_submits=True, size=(20,1), key='mini_juniper_to_set_btn_start', button_color="blue"),
+		 sg.Text(' '),
+		 sg.Button("Remove Remarks", change_submits=True, size=(20,1), key='mini_juniper_remove_remarks_btn_start', button_color="blue"), ],
 		under_line(80),
 
 		])

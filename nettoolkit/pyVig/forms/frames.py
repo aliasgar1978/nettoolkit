@@ -61,7 +61,8 @@ def pyvig_frame():
 		[sg.Text('\t\t\t\t\t\t\t\t'),
 		 sg.Button("Visio Drawing", size=(20,1), change_submits=True, key='pv_btn_start_visio', button_color="blue"),],
 		under_line(80),
-		[sg.Button("Cable Matrix + Visio Drawing", size=(40,1), change_submits=True, key='pv_btn_start_cm_visio', button_color="blue"),],
+		[sg.Text('\t\t\t'),
+		 sg.Button("Cable Matrix + Visio Drawing", size=(40,1), change_submits=True, key='pv_btn_start_cm_visio', button_color="blue"),],
 		])
 
 

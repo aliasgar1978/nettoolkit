@@ -16,10 +16,10 @@ def netcrypt_frame():
 		[sg.Text('Password Encryption/Decryption', font=('TimesNewRoman', 12), text_color="black") ],
 
 		[sg.Text('Password string:', text_color="black"), sg.InputText(key='netcrypt_input_pw'), ],
-		[sg.Text('\t'), sg.Button("Cisco Encrypt (7)", size=(20,1), change_submits=True, key='netcrypt_cisco_enc_btn_start', button_color="blue"),
-		 sg.Text(''), sg.Button("Juniper Encrypt ($9)", size=(20,1), change_submits=True, key='netcrypt_juniper_enc_btn_start', button_color="blue"),],
-		[sg.Text('\t'),   sg.Button("Cisco Decrypt (7)", size=(20,1), change_submits=True, key='netcrypt_cisco_dec_btn_start', button_color="blue"),
-		 sg.Text(''),   sg.Button("Juniper Decrypt ($9)", size=(20,1), change_submits=True, key='netcrypt_juniper_dec_btn_start', button_color="blue"),],
+		[sg.Text('\t'), sg.Button("Cisco Encrypt (7)", size=(20,1), change_submits=True, key='netcrypt_cisco_enc_btn_start', button_color="darkblue"),
+		 sg.Text(''), sg.Button("Juniper Encrypt ($9)", size=(20,1), change_submits=True, key='netcrypt_juniper_enc_btn_start', button_color="darkblue"),],
+		[sg.Text('\t'),   sg.Button("Cisco Decrypt (7)", size=(20,1), change_submits=True, key='netcrypt_cisco_dec_btn_start', button_color="darkblue"),
+		 sg.Text(''),   sg.Button("Juniper Decrypt ($9)", size=(20,1), change_submits=True, key='netcrypt_juniper_dec_btn_start', button_color="darkblue"),],
 		under_line(80),
 
 		[sg.Text('Configuration File Password - Decryptor / Masker', font=('TimesNewRoman', 12), text_color="black") ],
@@ -31,10 +31,10 @@ def netcrypt_frame():
 		 sg.Button("open", change_submits=True, key='netcrypt_file_input_open', button_color="darkgrey"),],
 
 		[sg.Text('\t'),
-		 sg.Button("Decrypt Passwords", size=(20,1),  change_submits=True, key='netcrypt_file_dec_btn_start', button_color="blue"),
-		 sg.Button("Mask Passwords", size=(20,1),  change_submits=True, key='netcrypt_file_mask_btn_start', button_color="blue")],
+		 sg.Button("Decrypt Passwords", size=(20,1),  change_submits=True, key='netcrypt_file_dec_btn_start', button_color="darkblue"),
+		 sg.Button("Mask Passwords", size=(20,1),  change_submits=True, key='netcrypt_file_mask_btn_start', button_color="darkblue")],
 		[sg.Text('\t'),
-		 sg.Button("Generate MD5 Hex", size=(20,1),  change_submits=True, key='netcrypt_file_hash_btn_start', button_color="blue"),],
+		 sg.Button("Generate MD5 Hex", size=(20,1),  change_submits=True, key='netcrypt_file_hash_btn_start', button_color="darkblue"),],
 
 		under_line(80),
 

@@ -27,13 +27,13 @@ GUI Launch
    * addressing
    * captureit
    * configure
-   * j2config
+   * configgen
    * crypt
-   * factsgen
+   * facts
    * juniper
-   * pyvig
+   * visiogen
 
-* Launching Nettoolkit without any of above initial_frame; will load all frames and focus on first.
+* Launching Nettoolkit without any of above or wrong input initial_frame; will load all frames and focus on first.
 
 Continue enjoy your exploration with it.
 

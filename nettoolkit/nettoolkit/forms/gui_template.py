@@ -55,9 +55,11 @@ class GuiTemplate():
 		self.w = sg.Window(self.header, layout, size=(self.form_width, self.form_height), finalize=True)#, icon='data/sak.ico')
 		if not self.button_pallete_dic.get(initial_click):  initial_click = ''
 		if initial_click:
+			disabled = self.button_pallete_dic[initial_click]['disabled'] if self.button_pallete_dic[initial_click].get('disabled') else False
 			self.pallet_btn_click(
 				key=self.button_pallete_dic[initial_click]['key'], 
-				frames=self.button_pallete_dic[initial_click]['frames']
+				frames=self.button_pallete_dic[initial_click]['frames'],
+				disabled=disabled,
 			)
 		while True:
 			event, (i) = self.w.Read()
@@ -78,7 +80,8 @@ class GuiTemplate():
 					elif event in self.button_pallete_updaters:                 ## button_pallete_updaters
 						for short_name, dic in self.button_pallete_dic.items():
 							if dic['key'] != event: continue
-							self.pallet_btn_click(key=event, frames=dic['frames'])
+							disabled = dic['disabled'] if dic.get('disabled') else False
+							self.pallet_btn_click(key=event, frames=dic['frames'], disabled=disabled)
 					else:
 						self.event_catchers[event](i)
 				except Exception as e:
@@ -90,9 +93,10 @@ class GuiTemplate():
 
 		self.w.Close()
 
-	def pallet_btn_click(self, key, frames):
+	def pallet_btn_click(self, key, frames, disabled):
 		"""dynamic button pallete click event actions
 		"""    
+		if disabled is True: return
 		enable_disable(self, 
 			group=key,                      ## ascociated button
 			group_frames=frames,            ## frames to be enable

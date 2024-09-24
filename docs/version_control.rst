@@ -28,7 +28,7 @@ Version 1.x updates
 
    * - 1.7.5
      - Sep 21, 2024
-       * fixed - facts-finder execution termination sequence
+     - * fixed - facts-finder execution termination sequence
        * fixed - capture_it_by_excel execution to accept only provided device_types 
        * fixed - gui nettoolkit initial frame load, and added a few more fields in cache,
        * ``gui`` - capture_it_by_excel added,  separated nettoolkitgui and NTGui codes. a few bug fixes in gui codes. VisioGen display changed

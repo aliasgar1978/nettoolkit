@@ -175,11 +175,11 @@ class Execute_Device():
 		#
 		missed_cmds = []
 		if isinstance(self.cmds, dict):
-			missed_cmds = self.get_missing_commands(c, set(self.cmds[self.dev.dtype]))
+			missed_cmds = self.get_missing_commands(c, set(self.cmds[self.dev.dtype]), purpose='missing')
 			if missed_cmds is not None: 
 				self.cmds[self.dev.dtype] = missed_cmds
 		elif isinstance(self.cmds, (list, set, tuple)):
-			missed_cmds = self.get_missing_commands(c, set(self.cmds))
+			missed_cmds = self.get_missing_commands(c, set(self.cmds), purpose='missing')
 			if missed_cmds is not None: 
 				self.cmds = missed_cmds
 		if missed_cmds:
@@ -336,7 +336,7 @@ class Execute_Device():
 			set: missed mandatory commands
 		"""		
 		necessary_cmds = ff.get_necessary_cmds(self.dev.dtype)
-		return self.get_missing_commands(c, necessary_cmds)
+		return self.get_missing_commands(c, necessary_cmds, purpose='factsgen')
 
 	def check_facts_finder_requirements(self, c):
 		"""checks and returns missed mandatory capture commands
@@ -368,7 +368,7 @@ class Execute_Device():
 		if missed_cmds:	
 			self._device_exec_log(display=True, msg=f"{c.hn} - Error capture all mandatory commands, try do manually..")
 
-	def get_missing_commands(self, c, cmds):
+	def get_missing_commands(self, c, cmds, purpose):
 		"""checks and returns missed capture commands
 
 		Args:
@@ -383,8 +383,11 @@ class Execute_Device():
 			with open(file, 'r') as f:
 				log_lines = f.readlines()
 		except:
-			self._device_exec_log(display=True, msg=f'{c.hn} : INFO: File not found {c.capture_path+"/"+c.hn+".log"}: Cumulative capture file required ')
-			return None
+			if purpose == 'missing':
+				self._device_exec_log(display=True, msg=f'{c.hn} : Error: File not found {c.capture_path+"/"+c.hn+".log"}: Cumulative capture file required ')
+				return []
+			if purpose == 'factsgen':
+				return cmds
 		captured_cmds = set()
 		for log_line in log_lines:
 			if log_line[1:].startswith(cmd_line_pfx):

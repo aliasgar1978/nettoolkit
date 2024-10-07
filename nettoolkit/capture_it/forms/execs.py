@@ -9,8 +9,11 @@ from nettoolkit.capture_it import quick_display
 
 # ====================================================================================
 def get_item_list(file, index=None):
-	with open(file, 'r') as f:
-		lns = f.readlines()
+	try:
+		with open(file, 'r') as f:
+			lns = f.readlines()
+	except:
+		return []
 	if index is not None:
 		try:
 			return [line.strip().split()[index] for line in lns]
@@ -73,6 +76,11 @@ def capture_it_start(i):
 	if i['cit_file_custom_yml']:
 		add_path(i['cit_file_custom_yml'])
 		custom =  read_yaml_mode_us(i['cit_file_custom_yml']) 
+	else:
+		custom = None
+	if not i['cit_cred_un'] or not i['cit_cred_pw']:
+		sg.Popup("Mandatory information missing:  Credentionals")
+		return
 	auth = { 'un':i['cit_cred_un'], 'pw':i['cit_cred_pw'], 'en':i['cit_cred_en'] if i['cit_cred_en'] else i['cit_cred_pw'] }
 	devices = get_item_list(i['cit_file_hosts'], index=0)
 	cmds = {
@@ -98,17 +106,20 @@ def capture_it_start(i):
 	c.append_capture = i['cit_opt_append']
 	c.missing_captures_only = i['cit_opt_missing']
 	#
-	if i['cit_opt_dependent'] and i['cit_file_custom_yml']:
+	if i['cit_opt_dependent'] and custom:
 		try:
 			c.dependent_cmds(custom_dynamic_cmd_class=custom['capture_it']['custom_dynamic_cmd_class'])
 		except:
 			print(f"Cutom Commands fetch fails")
 	#
-	if i['cit_opt_parsed_output'] and i['cit_file_custom_yml']:
+	if i['cit_opt_parsed_output']:
 		try:
-			c.generate_facts(CustomDeviceFactsClass=custom['facts_finder']['CustomDeviceFactsClass'], foreign_keys=custom['facts_finder']['foreign_keys'])
+			if custom:
+				c.generate_facts(CustomDeviceFactsClass=custom['facts_finder']['CustomDeviceFactsClass'], foreign_keys=custom['facts_finder']['foreign_keys'])
+			else:
+				c.generate_facts()
 		except:
-			print(f"Custom Parser functions fetcg fails")
+			print(f"Custom Parser functions fetch fails")
 	#
 	c()
 	#
@@ -125,6 +136,8 @@ def capture_it_by_xl_start(i):
 	if i['cit_file_custom_yml1']:
 		add_path(i['cit_file_custom_yml1'])
 		custom =  read_yaml_mode_us(i['cit_file_custom_yml1']) 
+	else:
+		custom = None
 	auth = { 'un':i['cit_cred_un1'], 'pw':i['cit_cred_pw1'], 'en':i['cit_cred_en1'] if i['cit_cred_en1'] else i['cit_cred_pw1'] }
 
 	cumulative = True
@@ -145,15 +158,18 @@ def capture_it_by_xl_start(i):
 	c.append_capture = i['cit_opt_append1']
 	c.missing_captures_only = i['cit_opt_missing1']
 	#
-	if i['cit_opt_dependent1'] and i['cit_file_custom_yml1']:
+	if i['cit_opt_dependent1'] and custom:
 		try:
 			c.dependent_cmds(custom_dynamic_cmd_class=custom['capture_it']['custom_dynamic_cmd_class'])
 		except:
 			print(f"Cutom Commands fetch fails")
 	#
-	if i['cit_opt_parsed_output1'] and i['cit_file_custom_yml1']:
+	if i['cit_opt_parsed_output1']:
 		try:
-			c.generate_facts(CustomDeviceFactsClass=custom['facts_finder']['CustomDeviceFactsClass'], foreign_keys=custom['facts_finder']['foreign_keys'])
+			if custom:
+				c.generate_facts(CustomDeviceFactsClass=custom['facts_finder']['CustomDeviceFactsClass'], foreign_keys=custom['facts_finder']['foreign_keys'])
+			else:
+				c.generate_facts()
 		except:
 			print(f"Custom Parser functions fetcg fails")
 	#

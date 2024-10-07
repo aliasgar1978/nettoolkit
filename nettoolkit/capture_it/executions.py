@@ -103,7 +103,7 @@ class Execute_Common():
 		self.foreign_keys = {}
 		self.fg = False
 		self.max_connections = 100
-		self.mandatory_cmds_retries = 0
+		self.mandatory_cmds_retries = 1
 		self.missing_captures_only = False
 		self.append_capture = False or self.missing_captures_only
 		#

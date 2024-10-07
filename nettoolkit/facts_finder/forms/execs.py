@@ -25,6 +25,8 @@ def facts_finder_start(i):
 	if i['ff_file_custom_yml']:
 		add_path(i['ff_file_custom_yml'])
 		custom =  read_yaml_mode_us(i['ff_file_custom_yml'])['facts_finder'] 
+	else:
+		custom = None
 	for log_file in i['ff_log_files'].split(";"):
 		if not log_file.endswith(".log"): continue
 		device = get_host(log_file)
@@ -48,16 +50,18 @@ def facts_finder_start(i):
 			continue
 		#
 		try:
-			ADF = custom['CustomDeviceFactsClass'](cleaned_fact, aggregation=False)
-			ADF()
-			ADF.write()
-			print(f"Custom Data Modifications done...,", end='\t')
+			if custom:
+				ADF = custom['CustomDeviceFactsClass'](cleaned_fact, aggregation=False)
+				ADF()
+				ADF.write()
+				print(f"Custom Data Modifications done...,", end='\t')
 		except Exception as e:
 			print(f"Custom Data Modifications failed...,")
 			print(e)
 		#
 		try:
-			rearrange_tables(cleaned_fact.clean_file, foreign_keys=custom['foreign_keys'])
+			foreign_keys = custom['foreign_keys'] if custom else {}
+			rearrange_tables(cleaned_fact.clean_file, foreign_keys=foreign_keys)
 			print(f"Column Rearranged done..., ", end='\t')
 		except Exception as e:
 			print(f"Column Rearrange failed...,")

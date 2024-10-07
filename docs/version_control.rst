@@ -26,6 +26,10 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.7.6
+     - Oct 12, 2024
+     - * fixed - nettoolkit-gui,  custom executions.
+       * **capture-it** - can now execute without providing any commands text if custom/facts gen require, it will auto detect commands and captures missing ones.
    * - 1.7.5
      - Sep 21, 2024
      - * fixed - facts-finder execution termination sequence

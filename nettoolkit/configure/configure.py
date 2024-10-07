@@ -428,21 +428,19 @@ class GroupsConfigure(Multi_Execution):
 		}
 		self.configure = configure
 
-	@printmsg(pre=f'{"-"*40}\nINFO: \tA Group Configuration, Called...',
-			 post=f'INFO: \t\tA Group Configuration, Ended...\n{"-"*43}' )
+	@printmsg(pre=f'{"-"*40}\nINFO: A Group Configuration, Called...', post=f'{"-"*43}' )
 	def __call__(self):
 		self._verify_inputs()
 		if self.config_by_order: self.configure_by_orderlist()
 
-	@printmsg(pre='INFO: \tVerifying inputs...',
-			 post='INFO: \t\tVerifying inputs, done...' )
+	@printmsg(pre='INFO: Verifying inputs...',)
 	def _verify_inputs(self):
 		self._get_dev_conf_dict_ip_list()
 		self._get_order_list()
 		self.remove_empty_config_lines()
 
-	@printmsg(pre='INFO: \tconfiguring in order by order_list...',
-			 post='INFO: \t\tconfiguration by order_list, done...' )
+	@printmsg(pre='INFO: configuring devices in order by order_list...',
+			 post='INFO: configuration of this order_list completed...' )
 	def configure_by_orderlist(self):
 		"""configure devices as per sequence provided in order_list
 		"""    		
@@ -460,7 +458,7 @@ class GroupsConfigure(Multi_Execution):
 			ip (str): device ip or FQDN
 		"""    		
 		conf_list = self.devices_config_dict[ip]['cmds_list']
-		print(f"\t\t\tStarting Configuration on: {ip}")
+		print(f"\t\tStarting Configuration on: {ip}")
 		if self.configure:
 			CFG = Configure(ip, self.auth, 
 				conf_list=conf_list,
@@ -468,10 +466,8 @@ class GroupsConfigure(Multi_Execution):
 			)
 			CFG.apply()
 		else:
-			print(f"\t\t\tConfiguration skipped as `configure` parameter is set to `{self.configure}`",
+			print(f"\t\tConfiguration skipped as `configure` parameter is set to `{self.configure}`",
 				 ", change it True in order to start configure process.")
-			# print("delta changes:\n", "\n".join(conf_list))
-			# print('\t\t\t' + "-"*80)
 
 
 	def _get_dev_conf_dict_ip_list(self):
@@ -506,7 +502,7 @@ class GroupsConfigure(Multi_Execution):
 	def _get_order_list(self):
 		if not self.order_list:
 			self.order_list = [{ip for ip, value in self.devices_config_dict.items() if not value.get('skip')},]
-			print(f"INFO: \t\tNo order_list provided, cretated one {self.order_list}")
+			print(f"INFO: No order_list provided, cretated one \n{self.order_list}")
 			return None
 		if not isinstance(self.order_list, (list, tuple)):
 			raise Exception(f"CRITICAL: Incorrect input: order_list. expected (tuple/list), got {type(self.order_list)}")
@@ -605,16 +601,14 @@ class ConfigureByExcel(ConfigEnvironmentals):
 		self.cmds_groups = self._get_cmds_ordered_group()
 		self.run()
 
-	@printmsg(pre='INFO: \tReading Excel file and Loading tabs...',
-			 post='INFO: \t\tReading Excel file and Loading tabs... DONE...' )
+	@printmsg(pre='INFO: \tReading Excel file and Loading tabs...', pre_ends="\t", post='Done...' )
 	def _load_dfs(self):
 		self.ordered_configs_df_dict_list = []
 		if isinstance(self.files, list):
 			for file in self.files:
 				self.ordered_configs_df_dict_list.append(read_xl_all_sheet(file))
 
-	@printmsg(pre='INFO: \tDefining sort order...',
-			 post='INFO: \t\tDefining sort order... DONE...' )
+	@printmsg(pre='INFO: \tDefining sort order...', pre_ends="\t", post='Done...' )
 	def _define_sort_order(self):
 		if self.tab_sort_order in ('ascending', 'ordered', 'alphabetical', []):
 			self._set_sort_order('ascending')
@@ -641,8 +635,7 @@ class ConfigureByExcel(ConfigEnvironmentals):
 			print(f"\tSheets available = {dfd.keys()}")
 			quit()
 
-	@printmsg(pre='INFO: \tDefining commands groups...',
-			 post='INFO: \t\tDefining commands groups... DONE...' )
+	@printmsg(pre='INFO: \tDefining commands groups...', pre_ends="\t", post="Done...")
 	def _get_cmds_ordered_group(self):
 		cmds_groups = []
 		for tso, dfd in zip(self.tab_sort_order, self.ordered_configs_df_dict_list):
@@ -654,8 +647,8 @@ class ConfigureByExcel(ConfigEnvironmentals):
 				cmds_groups.append(cmds_group)
 		return cmds_groups
 
-	@printmsg(pre='INFO: \tConfiguration of devices, Started...',
-			 post='INFO: \t\tConfiguration of devices, Ended...' )
+	@printmsg(pre='INFO: START: Configuing devices',
+			 post='INFO: END  : Configuing devices')
 	def run(self):
 		"""starts configuration of devices
 		"""
@@ -673,7 +666,7 @@ class ConfigureByExcel(ConfigEnvironmentals):
 
 	@staticmethod
 	def get_concurrance(i, cg, tso_list):
-		user_concern = input(f"Configuration on group of devices GROUP{i+1}: [{tso_list[i]}] : ({set(cg.keys())}) ready to process. Want to continue [y/n]")
+		user_concern = input(f"Configuration on group of devices GROUP{i+1}: [{tso_list[i]}] :\n ({set(cg.keys())}) ready to process. \nWant to continue [y/n]")
 		if user_concern.lower() == 'y':  return True
 		print(f"  Configuration on group of devices GROUP{i+1}: [{tso_list[i]}] : Not confirmed, Aborted !!!")
 		return False

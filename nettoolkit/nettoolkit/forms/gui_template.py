@@ -6,6 +6,7 @@ except:
 	pass
 from abc import abstractclassmethod, abstractproperty, abstractmethod
 from dataclasses import dataclass, field
+from nettoolkit.nettoolkit_common import LST
 
 from .formitems import *
 
@@ -36,6 +37,7 @@ class GuiTemplate():
 		copyright = " (by: Aliasgar [ALI])"
 		self.var_dict = {}
 		self.header = self.header + copyright
+		self.max_buttons_in_a_row = 6
 
 	def __call__(self, initial_click):
 		self.standard_button_pallete_buttons()
@@ -52,7 +54,13 @@ class GuiTemplate():
 			footer(self.version, self.form_width),
 		]
 
-		self.w = sg.Window(self.header, layout, size=(self.form_width, self.form_height), finalize=True)#, icon='data/sak.ico')
+		self.w = sg.Window(self.header, layout, 
+			size=(self.form_width, self.form_height), finalize=True, 
+			return_keyboard_events=True,
+			# icon='data/sak.ico',
+		)
+		self.w.bind("<Escape>", "-ESCAPE-")
+		self.w.bind('Alt_L', 'c')
 		if not self.button_pallete_dic.get(initial_click):  initial_click = ''
 		if initial_click:
 			disabled = self.button_pallete_dic[initial_click]['disabled'] if self.button_pallete_dic[initial_click].get('disabled') else False
@@ -65,9 +73,9 @@ class GuiTemplate():
 			event, (i) = self.w.Read()
 
 			# - Events Triggers - - - - - - - - - - - - - - - - - - - - - - - 
-			if event in ('Close', sg.WIN_CLOSED) : 
+			if event in ('Close', sg.WIN_CLOSED, '-ESCAPE-') : 
 				break
-			if event in ('Clear',) : 
+			if event in ('Clear', 'c') : 
 				self.clear_fields()
 				pass
 			if event in self.event_catchers:
@@ -90,6 +98,7 @@ class GuiTemplate():
 					# ---------------------------------------------
 
 			self.user_events(i, event)
+			# print(event)
 
 		self.w.Close()
 
@@ -142,11 +151,17 @@ class GuiTemplate():
 
 		Returns:
 			list: list with sg.Frame containing buttons
-		"""    		
+		"""
+		if len(self.button_pallete_buttons) > self.max_buttons_in_a_row:
+			pallet_buttons = [x for x in LST.split(self.button_pallete_buttons, self.max_buttons_in_a_row)]
+		else:
+			pallet_buttons = [self.button_pallete_buttons]
+		#
 		return [sg.Frame(title='Button Pallete', 
 				title_color='blue', 
 				relief=sg.RELIEF_RIDGE, 
-				layout=[self.button_pallete_buttons] ),]
+				layout = pallet_buttons,
+				),]
 
 	def event_update_element(self, **kwargs):
 		"""update an element based on provided kwargs

@@ -163,6 +163,24 @@ def yaml_to_dict(file):
 		return yaml.safe_load(f)
 
 
+def dict_to_yaml(d, file=None, mode='a'):
+	"""converts dictionary to yaml and write it out to a file
+
+	Args:
+		d (dict): dictionary
+		file (str): output file name ( display on screen otherwise )
+		mode (str): character string of mode `a`=append, `w`=write mode.
+
+	"""    	
+	s = yaml.dump(d, indent=2)
+	if file:
+		with open(file, mode) as f:
+			f.write(s)
+	else: 
+		print(s)
+	return s
+
+
 # ----------------------------------------------------------------------------
 # Class to convert dictionary 
 # ----------------------------------------------------------------------------

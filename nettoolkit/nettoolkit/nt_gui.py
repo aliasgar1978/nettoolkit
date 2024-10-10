@@ -39,9 +39,10 @@ class Nettoolkit(NGui):
 			retractables        = RETRACTABLES,
 			event_catchers      = EVENT_FUNCTIONS,
 			button_pallete_dic  = BUTTUN_PALLETE_DICT,
-			form_width          = 820,
-			form_height         = 740,
+			form_width          = 700,
+			form_height         = 760,
 		)	
+		self.NG.max_buttons_in_a_row = 8
 
 	def __call__(self, initial_frame=None):
 		self.NG(initial_frame)

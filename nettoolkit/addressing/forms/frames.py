@@ -68,37 +68,37 @@ def prefix_oper_frame():
 					layout=[
 
 
-		[sg.Text('Summarize Prefixes', font=('TimesNewRoman', 12), text_color="black") ],
 
-		[sg.Text('Prefixes:\t\t\t\t\tSummaries', text_color="black"), ],
-		[sg.Multiline("", key='pfxs_oper_summary_input', autoscroll=True, size=(30,5), disabled=False),
-		 sg.Multiline("", key='pfxs_oper_summary_output', autoscroll=True, size=(30,5), disabled=True), ],
-		[sg.Text('\t\t\t\t\t\t\t'),
+		[sg.Text('Prefixes:\t\t\t\t\tSummaries', text_color="black"), 
+		],
+		[sg.Multiline("", key='pfxs_oper_summary_input', autoscroll=True, size=(30,4), disabled=False),
+		 sg.Text('∑', text_color="yellow"), 
+		 sg.Multiline("", key='pfxs_oper_summary_output', autoscroll=True, size=(30,4), disabled=True),
+		],
+		[sg.Text('\t\t\t\t\t', text_color="yellow"), 
 		 sg.Button("Summarize", change_submits=True, size=(20,1), key='pfxs_oper_summary_btn_start', button_color="darkblue"),],
 		under_line(80),
 		# ------------------------------------------------------------------------------------
-		[sg.Text('Break Prefix', font=('TimesNewRoman', 12), text_color="black") ],
 
-		[sg.Text('Subnet:', text_color="black"), 
+		[sg.Text('Prefix:', text_color="black"), 
 		 sg.InputText(key='pfxs_oper_break_subnet', size=(15,1)),
-		 sg.Text('devide by [/n]:', text_color="black"),
-		 sg.InputCombo(list(range(1,256)), key='pfxs_oper_break_pieces', size=(4,1)),],
-		[sg.Text('Result:', text_color="black"),
-		 sg.Multiline("", key='pfxs_oper_break_result', autoscroll=True, size=(20,5), disabled=True),], 
-		[sg.Text('\t\t\t\t\t\t\t'),
-		 sg.Button("  Break  ", change_submits=True, size=(20,1), key='pfxs_oper_break_btn_start', button_color="darkblue"),],
+		 sg.Text(' / ', text_color="black"),
+		 sg.InputCombo(list(range(1,256)), key='pfxs_oper_break_pieces', size=(4,1)),
+		 sg.Text(' = ', text_color="black"),
+		 sg.Multiline("", key='pfxs_oper_break_result', autoscroll=True, size=(20,4), disabled=True),], 
+		[sg.Text('\t\t\t\t\t', text_color="yellow"), 
+		 sg.Button("Split", change_submits=True, size=(20,1), key='pfxs_oper_break_btn_start', button_color="darkblue"),],
 		under_line(80),
 		# ------------------------------------------------------------------------------------
-		[sg.Text('Check - Is Subset', font=('TimesNewRoman', 12), text_color="black") ],
 
 		[sg.Text('Subnet:', text_color="yellow"), 
-		 sg.InputText(key='pfxs_oper_issubset_input_subnet', size=(15,1)),], 
-		[sg.Text('Supernet:', text_color="yellow"), 
-		 sg.InputText(key='pfxs_oper_issubset_input_supernet', size=(15,1)),], 
-		[sg.Text('Result:', text_color="black"),
+		 sg.InputText(key='pfxs_oper_issubset_input_subnet', size=(15,1)),
+		 sg.Text('Supernet:', text_color="yellow"), 
+		 sg.InputText(key='pfxs_oper_issubset_input_supernet', size=(15,1)),
+		 sg.Text('Result:', text_color="black"),
 		 sg.InputText('', key='pfxs_oper_issubset_result' , size=(5,1),  text_color="black")], 
-		[sg.Text('\t\t\t\t\t\t\t'),
-		 sg.Button("Is Subset?", change_submits=True, size=(20,1), key='pfxs_oper_issubset_btn_start', button_color="darkblue"),],
+		[sg.Text('\t\t\t\t\t', text_color="yellow"), 
+		 sg.Button("Check - Is Subset?", change_submits=True, size=(20,1), key='pfxs_oper_issubset_btn_start', button_color="darkblue"),],
 		under_line(80),
 
 		])

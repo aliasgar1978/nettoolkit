@@ -60,7 +60,6 @@ class GuiTemplate():
 			# icon='data/sak.ico',
 		)
 		self.w.bind("<Escape>", "-ESCAPE-")
-		self.w.bind('Alt_L', 'c')
 		if not self.button_pallete_dic.get(initial_click):  initial_click = ''
 		if initial_click:
 			disabled = self.button_pallete_dic[initial_click]['disabled'] if self.button_pallete_dic[initial_click].get('disabled') else False
@@ -75,7 +74,7 @@ class GuiTemplate():
 			# - Events Triggers - - - - - - - - - - - - - - - - - - - - - - - 
 			if event in ('Close', sg.WIN_CLOSED, '-ESCAPE-') : 
 				break
-			if event in ('Clear', 'c') : 
+			if event in ('Clear', ) : 
 				self.clear_fields()
 				pass
 			if event in self.event_catchers:
@@ -125,8 +124,8 @@ class GuiTemplate():
 		"""get list of standard button pallete
 		"""		
 		self._button_pallete_buttons = [ 
+			sg.Button("Clear", change_submits=True,size=(10, 1), key='Clear'),
 			button_cancel("Close"),
-			sg.Button("Clear", change_submits=True,size=(10, 1), key='Clear')
 		]
 
 	def set_button_pallete(self):
@@ -142,8 +141,9 @@ class GuiTemplate():
 
 		Args:
 			nbpb (list): list of additional buttons in pysimplegui format
-		"""		
-		self._button_pallete_buttons.extend(nbpb)
+		"""	
+		nbpb.extend(self._button_pallete_buttons)
+		self._button_pallete_buttons = nbpb
 
 
 	def button_pallete(self):

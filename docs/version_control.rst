@@ -30,8 +30,9 @@ Version 1.x updates
      - Oct 12, 2024
      - * fixed - nettoolkit-gui,  custom executions.
        * **capture-it** - can now execute without providing any commands text if custom/facts gen require, it will auto detect commands and captures missing ones.
-       * ``nettoolkit_db.dict_to_yaml`` - added.
-       * **NGui** : Added property ``max_buttons_in_a_row``; **Esc** closes window, **Alt+c** clear field 
+       * **Database Operations:** ``nettoolkit_db.dict_to_yaml`` - added.
+       * **NGui** : Added property ``max_buttons_in_a_row``; **Esc** closes window, **Alt+c** clear field
+       * **Config Generation:** ``nettoolkit.j2config.JinjaVarCheck`` - added.
    * - 1.7.5
      - Sep 21, 2024
      - * fixed - facts-finder execution termination sequence

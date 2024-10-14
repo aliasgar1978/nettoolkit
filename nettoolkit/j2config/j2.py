@@ -6,6 +6,7 @@ from .cmn import common_fn as cmn
 from . import func as func
 from .func import Vrf, Vlan, Physical, Bgp, Aggregated, Loopback, Ospf, Static
 from .general import *
+from .read_conditions import JinjaVarCheck
 
 
 class PrepareConfig():
@@ -56,6 +57,14 @@ class PrepareConfig():
 		self.output_folder = output_folder
 		self.regional_file = regional_file
 		self.regional_class = regional_class
+		self.check_jinja_var_tab_variables()
+
+	def check_jinja_var_tab_variables(self):
+		JVC = JinjaVarCheck(jinja_file=self.jtemplate_file, clean_file=self.data_file, global_file=self.regional_file)
+		JVC()
+		if JVC.xl_var_missing:
+			print(f"\nThere found Jinja variable(s) missing in your input excel database(s) `var` tab. please validate."
+				f"\nMissing Variables: ({', '.join(JVC.xl_var_missing)})")
 
 	def custom_class_add_to_filter(self, **kwargs):
 		"""add custom classes and its methods as jinja filters. External callable.

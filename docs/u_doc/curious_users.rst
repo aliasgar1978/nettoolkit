@@ -7,7 +7,7 @@ Curious User documentation!
    :alt: capture-it
    :align: right
 
-**Addressing**
+`Addressing <addressing/userdoc.html>`_
 
    * A module which helps define standard IPv4 and IPv6 objects, and allowing various operations on to it.
    * A few Examples: 
@@ -16,7 +16,9 @@ Curious User documentation!
       * Get a range of ip addresses from a prefix
       * Summarize prefixes, Add to Adjacent prefixes
       * Break Prefix in to smaller units
+      * IP Scanner,  scanned output comparator.
       * And many more..
+
 
 ---------------
 
@@ -25,8 +27,8 @@ Curious User documentation!
    :alt: capture-it
    :align: right
 
+`Capture-IT <capture_it/userdoc.html>`_
 
-**Capture-IT**
    * A module use to capture the show commands from network device(s) ( cisco, juniper, arista )
    * Define device, commands list in text files, and ready to Go. 
    * Or Prepare excel file with standard inputs, and ready to Go.
@@ -40,7 +42,7 @@ Curious User documentation!
    :alt: facts-finder
    :align: right
 
-**Facts-Finder**
+`Facts-Finder <facts_finder/userdoc.html>`_
 
    * A Ninja module use to get device configuration parameters parsed in to an Excel (clean) file.
    * Many more keys available, Explore.
@@ -54,7 +56,7 @@ Curious User documentation!
    :alt: configure via line
    :align: right
 
-**Configure**
+`Configure <configure/userdoc.html>`_
 
    * A module use to push the delta changes to device using ssh ( cisco/ juniper)
    * Batches can be created in order to push the configurations order wise.
@@ -67,7 +69,7 @@ Curious User documentation!
    :alt: capture-it
    :align: right
 
-**Compare-IT**
+`Compare-IT <compare_it/userdoc.html>`_
 
    * A module use to do the comparision between two text or excel files.
    * Compare two Text files to retrive changes between two. ( useful in preparation of Delta changes between two configurations. (cisco/juniper) )
@@ -80,7 +82,7 @@ Curious User documentation!
    :alt: configuration generations
    :align: right
 
-**Config-Gen**
+`Config-Gen <configure/userdoc.html>`_
 
    * A module use to generate the device configuration file, using Jinja template & Excel databse.
    * Custom package can be fork in to add more custom filters for Jinja.
@@ -93,7 +95,7 @@ Curious User documentation!
    :alt: pyJuniper
    :align: right
 
-**Juniper**
+`Juniper <pyjuniper/userdoc.html>`_
 
    * A module which defines various juniper specific operations.
    * Convert Juniper standard bracket configuration to set command configurations.
@@ -107,7 +109,7 @@ Curious User documentation!
    :alt: pyVig
    :align: right
 
-**Nettoolkit class Extensions**
+`Nettoolkit Class Extensions <nettoolkit/userdoc.html>`_
 
    * An extenstion functions module to standard python library.
    * Many custom functions and classes defined under this umbrella. 
@@ -120,8 +122,7 @@ Curious User documentation!
    :alt: pyVig
    :align: right
 
-
-**Crypto**
+`Crypto <pynetcrypt/userdoc.html>`_
 
    * A module which help working on Cryptology
    * Simple Password Encryption/Decryption
@@ -130,7 +131,7 @@ Curious User documentation!
 
 ---------------
 
-**Cable-Matrix-Gen**
+`Cable Matrix Generator <cable_matrix/cable_matrix.html>`_
 
    * A module use to generate standard Cable Matrix Excel file using the devices clean files.
    * Auto detects link types, SFP etc and fills gaps. 
@@ -141,7 +142,7 @@ Curious User documentation!
    :alt: pyVig
    :align: right
 
-**Visio Drawing-Gen**
+`Visio Drawing Generator <pyvig/userdoc.html>`_
 
    * A module which Generates MS-Visio drawing using the Cable-Matrix.
    * Many options are there to fine tune your drawing output

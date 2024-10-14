@@ -82,7 +82,7 @@ Curious User documentation!
    :alt: configuration generations
    :align: right
 
-`Config-Gen <configure/userdoc.html>`_
+`Config-Gen <j2config/userdoc.html>`_
 
    * A module use to generate the device configuration file, using Jinja template & Excel databse.
    * Custom package can be fork in to add more custom filters for Jinja.

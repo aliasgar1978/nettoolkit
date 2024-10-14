@@ -26,6 +26,9 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.7.7
+     - TBD, 2024
+     - * fixes - TBD
    * - 1.7.6
      - Oct 12, 2024
      - * fixed - nettoolkit-gui,  custom executions.

@@ -21,6 +21,7 @@
    :caption: Novice Users Documentation:
    :numbered:
 
+   Overview <docs/u_doc/novice_users>
    Nettoolkits GUI <docs/u_doc/gui/userdoc_ntgui>
    NGui Interface <docs/u_doc/gui/n_gui>
 
@@ -30,6 +31,7 @@
    :caption: Curious Users Documentation:
    :numbered:
 
+   Overview <docs/u_doc/curious_users>
    Addressing <docs/u_doc/addressing/userdoc>
    Capture-IT <docs/u_doc/capture_it/userdoc>
    Compare It <docs/u_doc/compare_it/userdoc> 
@@ -39,7 +41,7 @@
    Facts-Finder <docs/u_doc/facts_finder/userdoc>
    Juniper <docs/u_doc/pyjuniper/userdoc>
    Nettoolkit Class Extension <docs/u_doc/nettoolkit/userdoc>
-   Password Enc/Dec <docs/u_doc/pynetcrypt/userdoc>
+   Crypto <docs/u_doc/pynetcrypt/userdoc>
    Visio Drawing-Gen <docs/u_doc/pyvig/userdoc>
 
 
@@ -48,6 +50,7 @@
    :caption: Crazy Users API Documentation:
    :numbered:
 
+   Overview <docs/t_doc/adv_users>
    Addressing <docs/t_doc/addressing/tech_doc>
    capture-it <docs/t_doc/capture_it/tech_doc>
    compare-it <docs/t_doc/compare_it/tech_doc> 

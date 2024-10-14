@@ -328,20 +328,19 @@ You can use the NGui class to do GUI stuff for you.
 
 ------
 
-@Decorator popupmsg()
-============================================
+**@Decorator popupmsg()**
 
-    * ``pre`` **(str, optional)**: Popup Message to display before function execution. Defaults to None.
-    * ``post`` **(str, optional)**: Popup Message to display after function execution. Defaults to None.
+* ``pre`` **(str, optional)**: Popup Message to display before function execution. Defaults to None.
+* ``post`` **(str, optional)**: Popup Message to display after function execution. Defaults to None.
 
-    .. code-block:: python
+.. code-block:: python
 
-        from nettoolkit.nettoolkit.forms.formitems import popupmsg
+    from nettoolkit.nettoolkit.forms.formitems import popupmsg
 
-        @popupmsg(pre="Popup msg before bfunction run", 
-                 post="Popup msg after function run")
-        def foo():
-            pass
+    @popupmsg(pre="Popup msg before bfunction run", 
+                post="Popup msg after function run")
+    def foo():
+        pass
 
 
 

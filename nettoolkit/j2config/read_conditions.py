@@ -58,23 +58,6 @@ def get_variables(jinja_flie):
 			conds.add(cond)
 	return conds
 
-# # -----------------------------------------------------------------------------------------
-
-def print_var_cond(variables=None, conditions=None):
-	if variables:
-		print("-"*80)
-		pprint(variables)
-		print("-"*80)
-	#
-	if conditions:
-		for x, y in conditions.items():
-			print("-"*80)
-			print(x)
-			print("-"*80)
-			for _ in y:
-				print(_.strip())
-			print("-"*80)
-
 # ---------------------------------------------------------------------------------------
 #  Jinja variables check class
 # ---------------------------------------------------------------------------------------

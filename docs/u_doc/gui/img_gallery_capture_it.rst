@@ -5,7 +5,6 @@ capture-it Tab
 * A Utility which helps **capturing the show commands output** from Cisco and Juniper devices efficiently.
 * Multiple devices can be accessed **parallelly** to achieve it quickly.
 
-
 Here are a few Keys to understand.
 
 * ``output folder``: Folder where all device show commands output captures will reside.
@@ -25,7 +24,7 @@ Here are a few Keys to understand.
 ----
 
 .. figure:: img/capture_it.png
-   :alt: capture commands list
+   :alt: capture using commands list
 
 
 
@@ -65,3 +64,25 @@ Sample Foreign key dictionary:
       'vrf':["vrf_vpnid", "vrfcolor", ],
       'interfaces':[ "int_type",  "int_type", "int_description", ],
    }
+
+
+--------
+
+
+Instead of capturing same commands for each device, devices can be group together in excel and outputs can be captured for those accordingly..
+
+.. figure:: img/capture_it_xl.png
+   :alt: capture using excel inpug
+
+
+.. Note::
+
+   **For Capture via Excel follow below points,**
+   
+   * **Tabs** should be separated for **group** of devices ( example : *access layer*, *core layer* etc..)
+   * each tab should have below columns.
+      * **ips**: list of all respective tab device ips follows it.
+      * **cisco_ios**: list of all cisco ios commands follows it.
+      * **juniper_junos**: list of all juniper (junos) commands follows it.
+      * **arista_eos**: list of all arista switch commands follows it. (leave blank if none.)
+   * IP's present in multiple tabs: outputs will be appened for all tabs where it present.

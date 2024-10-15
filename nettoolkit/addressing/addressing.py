@@ -1047,8 +1047,16 @@ class IPv4(IP):
 			int: difference of ips from provided ip to its network number
 		"""		
 		selfinteger = int(binsubnet(str(self)).encode('ascii'), 2)
-		networkinteger = int(binsubnet(str(IPv4(self.NetworkIP()))).encode('ascii'), 2)
-		return selfinteger - networkinteger
+		return selfinteger - self.network_number_int
+
+	@property
+	def network_number_int(self):
+		return int(binsubnet(str(IPv4(self.NetworkIP()))).encode('ascii'), 2)
+
+	@property
+	def broadcast_number_int(self):
+		return int(binsubnet(str(IPv4(self.BroadcastIP()))).encode('ascii'), 2)
+
 
 	def expand(self, new_mask):
 		"""expand the provided subnet to given bigger size subnet. provided subnet mask `new_mask` should be less in number to the existing subnet mask in such case.
@@ -1428,6 +1436,9 @@ class Summary(IPv4):
 		self.summaries = []
 		self.networks = sorted(self.networks)
 		self._validate_and_update_networks()
+
+	def __str__(self):
+		return str(self.prefixes)
 
 	@property
 	def prefixes(self):

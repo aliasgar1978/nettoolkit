@@ -116,7 +116,7 @@ def sort_dataframe_on_subnet(df, col, ascending=True):
 
 def _split_ip_octs(ip, x):
 	if ip:
-		return ip.split(".")[x]
+		return ip.split("/")[0].split(".")[x]
 	else:
 		return ''
 

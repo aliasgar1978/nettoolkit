@@ -27,8 +27,10 @@ Version 1.x updates
      - Updates
 
    * - 1.7.7
-     - TBD, 2024
-     - * fixes - TBD
+     - Oct 19, 2024
+     - * fixed - nettoolkit.nettoolkit_db - subnet sorting bug
+       * **nettoolkit.addressing.IPv4** - added properties ``network_number_int``, ``broadcast_number_int``
+       * **nettoolkit.addressing** - added a new module summary with new and efficient way of aggreation (``Aggregate``)
    * - 1.7.6
      - Oct 12, 2024
      - * fixed - nettoolkit-gui,  custom executions.

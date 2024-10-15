@@ -35,7 +35,7 @@ class AdevDevices():
 			'hostname': 'nbr_hostname' ,
 		}
 		#		
-		ll = [self.mandatory_columns, self. optional_columns]
+		ll = [self.mandatory_columns, self.optional_columns]
 		for l in ll: 
 			for k in l:
 				if k in mandatory_col_maps and k not in kwargs:

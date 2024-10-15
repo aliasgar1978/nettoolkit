@@ -32,7 +32,7 @@ class DFGen():
 	def __init__(self, files):
 		"""initializer of DF Generator
 		"""		
-		self.files = files
+		self.files = sorted(files)
 		self.default_stencil = None
 		self.default_x_spacing = 3.5
 		self.default_y_spacing = 2

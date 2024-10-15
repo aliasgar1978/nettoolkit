@@ -7,7 +7,8 @@ import sys
 from nettoolkit.nettoolkit_common import STR, LOG
 from nettoolkit.addressing.subnetscan import Ping, compare_ping_sweeps
 from nettoolkit.addressing import addressing
-from nettoolkit.addressing.addressing import get_summaries, addressing, isSubset
+from nettoolkit.addressing.addressing import addressing, isSubset
+from nettoolkit.addressing.summary import Aggregate
 from nettoolkit.addressing.batch import create_batch_file
 
 # ====================================================================================
@@ -75,7 +76,7 @@ def compare_scanner_outputs_exec(i):
 
 def pfxs_oper_summary_start(obj, i):
 	if i['pfxs_oper_summary_input'] == '': return
-	_summaries = get_summaries(*get_list(i['pfxs_oper_summary_input']))
+	_summaries = Aggregate(get_list(i['pfxs_oper_summary_input'])).summaries
 	obj.event_update_element(pfxs_oper_summary_output={'value': "\n".join([ str(p) for p in _summaries])})	
 
 def pfxs_oper_issubset_start(obj, i):

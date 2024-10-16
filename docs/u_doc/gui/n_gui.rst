@@ -249,6 +249,8 @@ Here are few **EVENT_UPDATORS** functions and **EVENT_ITEM_UPDATORS** functions.
     * ``event_catchers`` **(set)** Dictionary of event function keys and its respective functions (default: None)
     * ``button_pallete_dic`` **(dict)** Dictionary which defines Button pallete buttons ( Default: None )
 
+    * ``max_buttons_in_a_row`` **(int)** maximum Buttons in a row in button pallete. (if more buttons)
+
 
 .. note::
     

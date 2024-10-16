@@ -51,6 +51,8 @@ NT Capture-it - Normal
         ]
         CISCO_IOS_CMDS = ['sh run',  'sh int status','sh lldp nei', ]
         JUNIPER_JUNOS_CMDS = ['show configuration', 'show lldp neighbors', 'show interfaces descriptions', ]
+        # -- leave it blank for default commands --
+        #
         cmds = {
             'cisco_ios'  : CISCO_IOS_CMDS,
             'juniper_junos': JUNIPER_JUNOS_CMDS, 

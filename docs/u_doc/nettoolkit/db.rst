@@ -94,15 +94,43 @@ read_xl_all_sheet()
             <class 'pandas.core.frame.DataFrame'>
             <class 'pandas.core.frame.DataFrame'>
 
+
+dict_to_yaml()
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * converts dictionary to yaml format and write it to a yaml file.
+
+    .. code-block:: python
+
+        >>> d = {'a': [1,2,3], 'b': 'some string', 'c': {'ca': 'nested a', 'cb': 'nested b'} }
+        >>> dict_to_yaml(d, file='outputfile.yaml', mode='a')
+        'a:\n- 1\n- 2\n- 3\nb: some string\nc:\n  ca: nested a\n  cb: nested b\n'
+    
+
+    .. code-block::
+
+        # Output yaml file content
+
+        a:
+        - 1
+        - 2
+        - 3
+        b: some string
+        c:
+        ca: nested a
+        cb: nested b
+
+
 yaml_to_dict()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     * Reads yaml database, converts and return content in dictionary format
+    * lets use above output yaml file as input to see its content back in dictionary
 
     .. code-block:: python
 
-        >>> file = "c:/users/user/downloads/test.yaml"
+        >>> file = "outputfile.yaml"
         >>> d = yaml_to_dict(file)
         >>> print(d)
+        {'a': [1, 2, 3], 'b': 'some string', 'c': {'ca': 'nested a', 'cb': 'nested b'}}
 
-        *data from test.yaml will appear here as dictionary format.*

@@ -123,10 +123,21 @@ class Aggregate():
 			if not ranges:
 				ranges.append( (pfx_dict['net_num'], pfx_dict['bc_num']) ) 
 				continue
-			if ranges[-1][-1] + 1 != pfx_dict['net_num']:
-				ranges.append( (pfx_dict['net_num'], pfx_dict['bc_num']) ) 
-			else:
+			if ranges[-1][-1] + 1 == pfx_dict['net_num']:
 				ranges[-1] = ( ranges[-1][0], pfx_dict['bc_num'] )
+				continue
+			if (
+				(ranges[-1][0] >= pfx_dict['net_num'] <= ranges[-1][-1]) and
+				(ranges[-1][0] >= pfx_dict['bc_num']  <= ranges[-1][-1])
+				):
+				continue
+			if (
+				(ranges[-1][0] >= pfx_dict['net_num'] <= ranges[-1][-1]) and
+				(                 pfx_dict['bc_num']  >  ranges[-1][-1])
+				):
+				ranges[-1] = ( ranges[-1][0], pfx_dict['bc_num'] )
+				continue
+
 		return ranges
 
 	def get_aggregates_from_ranges(self):
@@ -173,54 +184,4 @@ def calc_summmaries(min_subnet_size, prefixes):
 
 if __name__ == "__main__":
 	pass
-	from pprint import pprint
-	# s = ['10.10.11.0/24', '10.10.13.0/24', '10.10.10.0/24', '10.10.14.0/24',]
-	# # s = ['10.10.10.0/32', '10.10.10.1/32', '10.10.10.3/32','10.10.10.4/32']
-	# # s = ['10.10.10.64/27', '10.10.10.32/27', '10.10.10.0/27', '10.10.10.128/27', '10.10.10.160/27',]
-	# # s = ['10.10.10.64/27', '10.10.10.32/28', '10.10.10.48/29', '10.10.10.56/29', '10.10.10.16/28', '10.10.10.128/27', '10.10.10.160/27',]
-	# s = ['9.240.192.0/23', '9.240.190.0/23', '9.240.194.0/23']
-	# s = list({'9.239.250.64/26', '9.239.24.0/21', '9.236.130.0/23', '9.240.24.0/22', '9.239.250.128/25', '9.239.250.0/26'})
-	# s = {'9.240.209.0/24', '9.240.80.0/23', '9.239.34.0/23', '9.240.152.0/22', '9.239.42.0/24', '9.239.36.0/22', '9.239.40.0/23'}
-	# s = {'9.236.206.0/23', '9.236.202.0/22', '9.240.201.0/24'} 
-	# s = {'9.233.10.0/23', '9.233.0.0/21'}
-
-	# Agg = Aggregate(s)
-	# print(Agg.prefixes)
-	# print(Agg.summaries)
-	# # print(Agg.aggregates)
-
-
-
-	# file = "C:/Users/al202t/Documents/acc.y1_172.x_files/results - iga-accy1 - Legacy/2024-09-25/2.database/0. cur_networks.xlsx"
-	# dfd = read_xl_all_sheet(file)
-	# ndf = {}
-	# for reso, df in dfd.items():
-	# 	# if reso not in ("4an", "aag", "act","c4p", "cbo","d3f","d4t","e2s","f2w","hke","hur","svl",): continue
-	# 	if reso != 'hke': continue
-	# 	Agg = Aggregate(list(df['subnets']))
-	# 	ndf[reso] = Agg.summaries
-	# 	pprint(Agg.prefixes)
-
-	# pprint(ndf)
-
-
-
-	# from nettoolkit.nettoolkit_common import LST
-
-	# folder = "C:/Users/al202t/Documents/iga-iiw 172.x Reip/results/2.database/"
-
-	# fileold = f"{folder}0. cur_summaries - users - Copy.xlsx"
-	# filenew = f"{folder}0. cur_summaries - users.xlsx"
-	# old_df = read_an_xl_sheet(fileold)
-	# new_df = read_an_xl_sheet(filenew)
-	# for col in new_df:
-	# 	new = set(LST.remove_empty_members( list(new_df[col] )))
-	# 	old = set(LST.remove_empty_members( list(old_df[col]) ))
-	# 	if old== new: continue
-	# 	print(col, old, '\t', new)
-
-
-
-
-
-
+# =========================================================================================== 

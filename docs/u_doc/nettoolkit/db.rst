@@ -94,6 +94,19 @@ read_xl_all_sheet()
             <class 'pandas.core.frame.DataFrame'>
             <class 'pandas.core.frame.DataFrame'>
 
+read_an_xl_sheet
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * Read an Excel file, which has a single tab in it. 
+    * returns DataFrame
+
+    .. code-block:: python
+
+        >>> file = "c:/users/user/downloads/test.xlsx"
+        >>> df = read_an_xl_sheet(file)
+        >>> print(type(df))
+        <class 'pandas.core.frame.DataFrame'>
+
 
 dict_to_yaml()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

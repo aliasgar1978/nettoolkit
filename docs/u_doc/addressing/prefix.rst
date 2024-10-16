@@ -30,7 +30,67 @@ Check prefix
 Create Summaries
 ------------------
 
-**Steps Involved:**
+**New Latest, efficient, and Fast summaries:**
+
+    * import the ``Aggregate`` from ``nettoolkit.addressing.summary``.
+    * Call it with list of prefixes.
+    * Object Instance Properties:
+        * prefixes: provided prefixes in ordered way.
+        * aggregates: Summarized IPv4 objects.
+        * summaries: Summarized prefixes (string).
+
+    .. code-block:: python
+
+        from nettoolkit.addressing.summary import Aggregate
+        networks = (
+            "10.10.0.0/24", "10.10.1.0/24", "10.20.6.0/23", 
+            "10.10.2.0/23", "10.20.4.0/23", "10.10.4.0/22"  
+        )
+        Agg = Aggregate(networks)
+        # -- below are sorted input prefixes -- 
+        Agg.prefixes
+        ['10.10.0.0/24', '10.10.1.0/24', '10.10.2.0/23', '10.10.4.0/22', '10.20.4.0/23', '10.20.6.0/23']
+        # -- below is list of aggregate object(s) --
+        Agg.aggregates
+        [10.10.0.0/21]
+        # -- below is list of aggregate strings --
+        Agg.summaries
+        ['10.10.0.0/21']
+        # -- check below  to see type of object in list --
+        for agg in Agg.aggregates:
+            print(type(agg))
+
+        <class 'nettoolkit.addressing.addressing.IPv4'>
+        # -- check below  to see type of object in list --
+        for agg in Agg.summaries:
+            print(type(agg))
+            
+        <class 'str'>
+
+
+create summaries with minimum prefix length
+--------------------------------------------
+
+    * import the ``calc_summmaries`` from ``nettoolkit.addressing.summary``.
+    * Call it with arguments = **1.**min_subnet_size & **2.**list of prefixes.
+
+    .. code-block:: python
+
+        from nettoolkit.addressing.summary import calc_summmaries
+        prefixes = (
+            "10.10.0.0/24", "10.10.1.0/24", "10.20.6.0/23", 
+            "10.10.2.0/23", "10.20.4.0/23", "10.10.4.0/22"  
+        )
+        calc_summmaries(min_subnet_size=19, prefixes=prefixes)
+        ['10.10.0.0/19']
+        ## See here even though summary can be /21, it has summarized to 19. ##
+
+
+
+
+**Deprycated**
+
+    **Steps Involved:**
 
     * import the ``get_summaries()`` function from ``nettoolkit.addressing`` to summarize provided prefixes.
     * list down all prefixes in an **iterator (list, tuple, set)** that needs to be summarized.
@@ -47,6 +107,12 @@ Create Summaries
             "10.10.2.0/23", "10.20.4.0/23", "10.10.4.0/22"  )
         get_summaries(*networks)
         [10.10.0.0/21, 10.20.4.0/22]			# // here is summary created for you // #
+
+
+
+
+
+
 
 -----
 
@@ -226,3 +292,6 @@ sort list of addresses
         '192.168.10.0/24',
         '10.10.10.0/25',
         '10.10.10.128/25']
+
+
+

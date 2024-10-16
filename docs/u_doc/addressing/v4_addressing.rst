@@ -95,6 +95,19 @@ IPv4 object - Properties:
             >>> s.size
             512
 
+    network_number_int
+
+        .. code-block:: python
+
+            >>> s.network_number_int
+            168430080
+
+    broadcast_number_int
+
+        .. code-block:: python
+
+            >>> s.broadcast_number_int
+            168430591
 
 
 

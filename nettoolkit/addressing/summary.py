@@ -120,23 +120,30 @@ class Aggregate():
 	def get_continuous_ranges(self):
 		ranges = []
 		for pfx, pfx_dict in self.pfxs_dict.items():
+			# -- First entry
 			if not ranges:
 				ranges.append( (pfx_dict['net_num'], pfx_dict['bc_num']) ) 
 				continue
+			# -- adjuscent to previous network
 			if ranges[-1][-1] + 1 == pfx_dict['net_num']:
 				ranges[-1] = ( ranges[-1][0], pfx_dict['bc_num'] )
 				continue
+			# -- network within or same as previous existing prefix 
 			if (
-				(ranges[-1][0] >= pfx_dict['net_num'] <= ranges[-1][-1]) and
-				(ranges[-1][0] >= pfx_dict['bc_num']  <= ranges[-1][-1])
+				(ranges[-1][0] <= pfx_dict['net_num'] <= ranges[-1][-1]) and
+				(ranges[-1][0] <= pfx_dict['bc_num']  <= ranges[-1][-1])
 				):
 				continue
+			# -- overlaping to previous network
 			if (
-				(ranges[-1][0] >= pfx_dict['net_num'] <= ranges[-1][-1]) and
+				(ranges[-1][0] <= pfx_dict['net_num'] <= ranges[-1][-1]) and
 				(                 pfx_dict['bc_num']  >  ranges[-1][-1])
 				):
 				ranges[-1] = ( ranges[-1][0], pfx_dict['bc_num'] )
 				continue
+
+			# -- Far apart previous
+			ranges.append( (pfx_dict['net_num'], pfx_dict['bc_num']) ) 
 
 		return ranges
 
@@ -185,3 +192,7 @@ def calc_summmaries(min_subnet_size, prefixes):
 if __name__ == "__main__":
 	pass
 # =========================================================================================== 
+
+
+
+

@@ -1,15 +1,38 @@
 # """Common Definitions used across project"""
 # ------------------------------------------------------------------------------
+from dataclasses import dataclass, field
 import yaml
 from yaml import UnsafeLoader
 import subprocess as sp
 import pandas as pd
 import os
+from  pathlib import Path
+
 # ------------------------------------------------------------------------------
 
 ### IDENTIFER OF COMMAND LINE ### >
 CMD_LINE_START_WITH = "output for command: "
+CISCO_ABS_COMMANDS = {
+	'show lldp neighbors',
+	'show cdp neighbors',
+	'show interfaces status',
+	'show interfaces description',
+	'show mac address-table',
+	'show ip arp',
+	'show running-config',
+	'show version',
+}
 
+JUNIPER_ABS_COMMANDS = {
+	'show interfaces descriptions'
+	'show lldp neighbors'
+	'show configuration'
+	'show version',
+	'show chassis hardware',
+	'show interfaces terse',
+	'show arp',
+	'show bgp summary',
+}
 # ------------------------------------------------------------------------------
 
 def remove_domain(hn):
@@ -118,9 +141,14 @@ def get_device_manufacturar(file):
 		str: Either one from - Cisco, Juniper, Unidentified
 	"""    	
 	file_lines = read_file(file)
-	for l in file_lines:
-		if l.startswith("!"): return "Cisco"
-		if l.startswith("#"): return "Juniper"
+	return detect_device_type(file_lines)	
+
+def detect_device_type(config_log_list):
+	for line in config_log_list:
+		if line[0] == "!":
+			return 'Cisco'
+		elif line[0] == "#":
+			return "Juniper"
 	return "Unidentified"
 
 def verifid_output(cmd_op):
@@ -344,3 +372,154 @@ def open_folder(folder):
 	"""    	
 	path = os.path.realpath(folder)
 	os.startfile(path)
+
+
+#  =======
+
+
+def abs_command_cisco(cmd):
+	"""returns absolute full command for shorteened cmd
+
+	Args:
+		cmd (str): executed/ captured command ( can be trunked or full )
+
+	Returns:
+		str: cisco command - full untrunked
+	"""
+	spl_cmd = cmd.split()
+	for c_cmd in CISCO_ABS_COMMANDS:
+		spl_c_cmd = c_cmd.split()
+		if len(spl_cmd) == len(spl_c_cmd):
+			for i, word in enumerate(spl_cmd):
+				try:
+					word_match = spl_c_cmd[i].startswith(word)
+					if not word_match: break
+				except:
+					word_match = False
+					break
+			if word_match: break
+		else:
+			word_match = False
+	if word_match:  return c_cmd
+	return cmd
+
+def abs_command_juniper(cmd):
+	"""returns absolute truked command if any filter applied
+
+	Args:
+		cmd (str): executed/ captured command ( can be trunked or full )
+
+	Returns:
+		str: juniper command - trunked
+	"""    	
+	abs_cmd = cmd.split("|")[0].strip()
+	for j_cmd in JUNIPER_ABS_COMMANDS:
+		match = abs_cmd == j_cmd
+		if match: return abs_cmd
+	return cmd
+
+
+# ==========================================================================================
+
+@dataclass
+class CapturesOut():
+	capture_log_file: list[str] = field(default_factory=[])
+
+	abs_cmd_function_map = {
+		'Cisco': abs_command_cisco,
+		'Juniper': abs_command_juniper,
+	}
+	abs_cmd_map = {
+		'Cisco': CISCO_ABS_COMMANDS,
+		'Juniper': JUNIPER_ABS_COMMANDS,
+	}
+
+	def __post_init__(self):		
+		self.read_capture_log_file()
+		self.get_hostname_from_file_name()
+		self.set_device_type()
+		self.device_parameters()
+		self.gen_output_list_dict()
+
+	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+	def cmd_output(self, cmd):
+		op_list = self._has(cmd)
+		return op_list if op_list else []
+
+	def has(self, cmd):
+		return self._has(cmd) != None
+
+	@property
+	def name(self):
+		return self.hostname
+
+	@property
+	def device_manufacturar(self):
+		return self.device_type
+
+	@property
+	def abs_commands(self):
+		return self.abs_cmd_map[self.device_type]
+
+	@property
+	def outputs(self):
+		return self.output_list_dict
+
+
+	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+	def read_capture_log_file(self):
+		self.capture_log_list = read_file(self.capture_log_file)
+
+	def get_hostname_from_file_name(self):
+		self.hostname = get_file_name(self.capture_log_file, ext=False)
+
+	def set_device_type(self):
+		self.device_type = detect_device_type(self.capture_log_list)
+
+	def device_parameters(self):
+		if self.abs_cmd_function_map.get(self.device_type):
+			self.abs_cmd_fn = self.abs_cmd_function_map[self.device_type] 
+		else:
+			raise Exception(f"Invalid configuration, Unable to determine Device type. {self.device_type} for provided capture log file")
+
+	def gen_output_list_dict(self):
+		toggle = 0
+		self.output_list_dict, op_lst = {}, []
+		for l in self.capture_log_list:
+			if toggle and l.find(CMD_LINE_START_WITH)>0:
+				self.output_list_dict[abs_cmd] = op_lst
+				op_lst = []
+				toggle=0
+			#
+			if l.find(CMD_LINE_START_WITH)>0:
+				toggle = True
+				if self.device_type == 'Juniper':
+					cmd_line_trunked = l[l.find(CMD_LINE_START_WITH)+20:].split("|")[0].strip()
+				else:
+					cmd_line_trunked = l[l.find(CMD_LINE_START_WITH)+20:].strip()
+				abs_cmd = self.abs_cmd_fn( cmd_line_trunked )
+				continue
+			#
+			if toggle:
+				op_lst.append(l.rstrip())
+		if toggle:
+			self.output_list_dict[abs_cmd] = op_lst
+			
+
+	def _has(self, cmd):
+		if self.device_type == 'Juniper':
+			cmd = cmd.split("|")[0].strip()
+		return self.output_list_dict.get(self.abs_cmd_fn(cmd))
+
+
+# ==========================================================================================
+
+def get_file_path(file):
+	p = Path(file)	
+	return p.parent
+
+def get_file_name(file, ext=False):
+	p = Path(file)	
+	return p.name if ext else p.stem
+		

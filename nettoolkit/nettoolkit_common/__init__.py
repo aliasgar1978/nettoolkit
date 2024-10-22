@@ -10,10 +10,11 @@ __all__ = [
 	'get_juniper_int_type', 'get_cisco_int_type', 'get_device_manu',
 
 	# common
-	"remove_domain", "read_file", "get_op", "get_ops", "blank_line", "get_device_manufacturar", "verifid_output", 
+	"remove_domain", "read_file", "get_op", "get_ops", "blank_line", "get_device_manufacturar", "detect_device_type", "verifid_output", 
 	"get_string_part", "get_string_trailing", "standardize_mac", "mac_2digit_separated", "mac_4digit_separated", 
 	"flatten", "dataframe_generate", "printmsg", "create_folders", "read_yaml_mode_us", "open_text_file", "open_excel_file",
-	"open_folder",
+	"open_folder", "get_file_name", "get_file_path",
+	"CapturesOut",
 ]
 
 
@@ -27,10 +28,11 @@ from .gpl import (Default, Container,
 	get_juniper_int_type, get_cisco_int_type, get_device_manu
 	)
 from .common import (
-	remove_domain, read_file, get_op, get_ops, blank_line, get_device_manufacturar, verifid_output, 
+	remove_domain, read_file, get_op, get_ops, blank_line, get_device_manufacturar, detect_device_type, verifid_output, 
 	get_string_part, get_string_trailing, standardize_mac, mac_2digit_separated, mac_4digit_separated,
 	flatten, dataframe_generate, printmsg, create_folders, read_yaml_mode_us, open_text_file, open_excel_file,
-	open_folder
+	open_folder, get_file_name, get_file_path,
+	CapturesOut
 	)
 
 

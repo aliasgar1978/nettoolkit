@@ -1,18 +1,38 @@
-"""Description: 
+"""Description: Cisco Parser
 """
-from pprint import pprint
+
 # ==============================================================================================
 #  Imports
 # ==============================================================================================
 from dataclasses import dataclass, field
-from nettoolkit.nettoolkit_common import CapturesOut
-from nettoolkit.yaml_facts.cisco import CiscoParser
-from nettoolkit.yaml_facts.juniper import JuniperParser
+from collections import OrderedDict
+from nettoolkit.yaml_facts.common import CommonParser
+from nettoolkit.yaml_facts.juniper.parsers import *
 
 # ==============================================================================================
 #  Local Statics
 # ==============================================================================================
+JUNIPER_CMD_PARSER_MAP = OrderedDict([
+	('show interfaces descriptions', (get_interface_description, )),
+	('show lldp neighbors', (get_lldp_neighbour,)),
+	('show configuration', (
+			get_interfaces_running, 
+			get_system_running, 
+			get_bgp_running,    
+			get_system_running_routes, 
+			get_system_running_prefix_lists
+	# 	)
+	)),
+	('show version', (get_version, )),
+	('show chassis hardware', (
+		get_chassis_hardware, 
+		get_chassis_serial,
+	)),
+	('show arp', (get_arp_table,)),
+	# 'show interfaces terse', (),
+	# 'show bgp summary', (),
 
+])
 
 
 # ==============================================================================================
@@ -24,42 +44,17 @@ from nettoolkit.yaml_facts.juniper import JuniperParser
 # ==============================================================================================
 #  Classes
 # ==============================================================================================
-
 @dataclass
-class FactsRead():
-	capture_log_file: str
+class JuniperParser(CommonParser):
+	captures: any
 	output_folder: str=''
 
-	parser_cls_map = {
-		'Cisco': CiscoParser,
-		'Juniper': JuniperParser,
-	}
-
-	def __post_init__(self):
-		self.captures = CapturesOut(self.capture_log_file)
-		self.CP = self.parser_cls_map[self.captures.device_manufacturar](self.captures, self.output_folder)
-		# self.CP = CiscoParser(self.captures, self.output_folder)
-		# self.CP = JuniperParser(self.captures, self.output_folder)
-
-
-
+	cmd_fn_parser_map = JUNIPER_CMD_PARSER_MAP
 
 # ==============================================================================================
 #  Main
 # ==============================================================================================
 if __name__ == '__main__':
 	pass
-	# file = "C:/Users/al202t/Documents/A T M/Captures/530-vua-1f1.log"
-	file = "C:/Users/al202t/Documents/A T M/Captures/530-end.log"
-	# file = 'C:/Users/al202t/Documents/A T M/Captures/z3o-ecd-b.log'
-
-	FR = FactsRead(file)	
-	# pprint(FR.captures.outputs)
-	# pprint(FR.captures.device_manufacturar)
-	# print(FR.captures.outputs.keys())
-	# pprint(FR.captures.cmd_output("show running-config"))
-	# print(FR.captures.has("show version"))
-
-	# print(FR.CP.output_yaml)
 
 # ==============================================================================================

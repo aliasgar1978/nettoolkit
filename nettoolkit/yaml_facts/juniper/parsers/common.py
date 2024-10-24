@@ -1,46 +1,50 @@
 """Description: 
 """
-from pprint import pprint
+
 # ==============================================================================================
 #  Imports
 # ==============================================================================================
 from dataclasses import dataclass, field
-from nettoolkit.nettoolkit_common import CapturesOut
-from nettoolkit.yaml_facts.cisco import CiscoParser
-from nettoolkit.yaml_facts.juniper import JuniperParser
+from collections import OrderedDict
+from nettoolkit.nettoolkit_common import *
+from nettoolkit.nettoolkit_common.gpl import *
+from nettoolkit.addressing import to_dec_mask, invmask_to_mask, addressing
+
+from nettoolkit.facts_finder.generators.commons import *
+from nettoolkit.facts_finder.generators.juniper.common import *
+
+from nettoolkit.pyNetCrypt import juniper_decrypt
 
 # ==============================================================================================
 #  Local Statics
 # ==============================================================================================
-
+merge_dict = DIC.merge_dict
 
 
 # ==============================================================================================
 #  Local Functions
 # ==============================================================================================
 
+def get_int_port_dict(op_dict, port):
+	int_filter = get_juniper_int_type(port).lower()
+	if not op_dict.get(int_filter):
+		op_dict[int_filter] = {}
+	int_filter_dict = op_dict[int_filter]
+	#
+	if port.startswith("irb."): 
+		port=int(port[4:])
+	elif port.startswith("ae") or port.startswith("lo"): 
+		port=port[2:]
+	#
+	if not int_filter_dict.get(port): 
+		int_filter_dict[port] = {}
+	return int_filter_dict[port]
+
 
 
 # ==============================================================================================
 #  Classes
 # ==============================================================================================
-
-@dataclass
-class FactsRead():
-	capture_log_file: str
-	output_folder: str=''
-
-	parser_cls_map = {
-		'Cisco': CiscoParser,
-		'Juniper': JuniperParser,
-	}
-
-	def __post_init__(self):
-		self.captures = CapturesOut(self.capture_log_file)
-		self.CP = self.parser_cls_map[self.captures.device_manufacturar](self.captures, self.output_folder)
-		# self.CP = CiscoParser(self.captures, self.output_folder)
-		# self.CP = JuniperParser(self.captures, self.output_folder)
-
 
 
 
@@ -49,17 +53,5 @@ class FactsRead():
 # ==============================================================================================
 if __name__ == '__main__':
 	pass
-	# file = "C:/Users/al202t/Documents/A T M/Captures/530-vua-1f1.log"
-	file = "C:/Users/al202t/Documents/A T M/Captures/530-end.log"
-	# file = 'C:/Users/al202t/Documents/A T M/Captures/z3o-ecd-b.log'
-
-	FR = FactsRead(file)	
-	# pprint(FR.captures.outputs)
-	# pprint(FR.captures.device_manufacturar)
-	# print(FR.captures.outputs.keys())
-	# pprint(FR.captures.cmd_output("show running-config"))
-	# print(FR.captures.has("show version"))
-
-	# print(FR.CP.output_yaml)
 
 # ==============================================================================================

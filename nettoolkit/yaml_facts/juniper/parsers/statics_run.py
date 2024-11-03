@@ -15,7 +15,7 @@ class RunningRoutes(Running):
 		Args:
 			cmd_op (list, str): config output, either list of multiline string
 		""" 
-		self.n = 0   		    		
+		# self.n = 0   		    		
 		super().__init__(cmd_op)
 		self.route_dict = {}
 
@@ -45,12 +45,17 @@ class RunningRoutes(Running):
 			prefix = route_spl_sect[0]
 			vrf = vrf_spl_sect[2] if len(vrf_spl_sect)>2 else ""
 			if prefix != prev_prefix or vrf != prev_vrf:
-				self.n+=1
-				ports_dict[self.n] = {} 
+				if not self.route_dict.get(vrf):
+					self.route_dict[vrf] = {}
+				vrf_routes = self.route_dict[vrf]
+				if not vrf_routes.get(prefix):
+					vrf_routes[prefix] = {}
+				vrf_pfx_route = vrf_routes[prefix]
+
 			prev_prefix = prefix
 			prev_vrf = vrf 
-			rdict = ports_dict[self.n]
-			func(rdict,  l, vrf_spl_sect, route_spl_sect, v)
+
+			func(vrf_pfx_route, l, vrf_spl_sect, route_spl_sect, v)
 		return ports_dict
 
 	# ----------------------------------------------------------------------------- #
@@ -80,36 +85,33 @@ class RunningRoutes(Running):
 		"""
 		## Do not use negative index for any items other than remark, it may not work.
 		#
-		if not dic.get('prefix'): dic['prefix'] = route_spl_sect[0]
-		if not dic.get('pfx_vrf') and len(vrf_spl_sect)> 1: dic['pfx_vrf'] = vrf_spl_sect[2]
-		#
-		if not dic.get('next_hop'):
-			dic['next_hop'] = ''
+		# if not dic.get('next_hop'):
+		# 	dic['next_hop'] = ''
 		#
 		if route_spl_sect[1] == 'next-hop': 
-			if dic['next_hop']:
-				dic['next_hop'] += "\n"+route_spl_sect[2] 
-			else:
-				dic['next_hop'] = route_spl_sect[2]
-		if route_spl_sect[1] == 'preference': dic['adminisrative_distance'] = route_spl_sect[2] 
-		if route_spl_sect[1] == 'tag': dic['tag_value'] = route_spl_sect[2] 
-		if not dic.get('version'): dic['version'] = v
+			next_hop = route_spl_sect[2]
+			append_attribute(dic, attribute='next_hop', value=route_spl_sect[2])
+
+		if route_spl_sect[1] == 'preference': 
+			append_attribute(dic, attribute='adminisrative_distance', value=route_spl_sect[2])
+		if route_spl_sect[1] == 'tag': 
+			append_attribute(dic, attribute='tag_value', value=route_spl_sect[2])
+		if not dic.get('version'): 
+			dic['version'] = v
 		if not dic.get('remark'): 
-			if l.find("  ## comment: ")>1:
-				dic['remark'] = l.split("  ## comment: ")[-1]
-			else:
-				dic['remark'] = ""
+			remark = l.split("  ## comment: ")[-1] if l.find("  ## comment: ")>1 else ""
+			append_attribute(dic, attribute='remark', value=remark)
 		#
-		if not dic.get('resolve'): 
-			dic['resolve'] = True if l.find(" resolve")>1 else ""
-		if not dic.get('retain'): 
-			dic['retain'] = True if l.find(" retain")>1 else ""
-		#
+		if not dic.get('resolve'):  dic['resolve'] = True if l.find(" resolve")>1 else ""
+		if not dic.get('retain'):   dic['retain']  = True if l.find(" retain")>1  else ""
+
 
 
 
 
 	# # Add more static route related methods as needed.
+
+
 
 
 # ------------------------------------------------------------------------------

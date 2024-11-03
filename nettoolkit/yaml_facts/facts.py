@@ -26,7 +26,7 @@ from nettoolkit.yaml_facts.juniper import JuniperParser
 # ==============================================================================================
 
 @dataclass
-class FactsRead():
+class YamlFacts():
 	capture_log_file: str
 	output_folder: str=''
 
@@ -38,9 +38,6 @@ class FactsRead():
 	def __post_init__(self):
 		self.captures = CapturesOut(self.capture_log_file)
 		self.CP = self.parser_cls_map[self.captures.device_manufacturar](self.captures, self.output_folder)
-		# self.CP = CiscoParser(self.captures, self.output_folder)
-		# self.CP = JuniperParser(self.captures, self.output_folder)
-
 
 
 
@@ -53,7 +50,7 @@ if __name__ == '__main__':
 	file = "C:/Users/al202t/Documents/A T M/Captures/530-end.log"
 	# file = 'C:/Users/al202t/Documents/A T M/Captures/z3o-ecd-b.log'
 
-	FR = FactsRead(file)	
+	FR = YamlFacts(file)	
 	# pprint(FR.captures.outputs)
 	# pprint(FR.captures.device_manufacturar)
 	# print(FR.captures.outputs.keys())

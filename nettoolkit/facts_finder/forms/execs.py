@@ -6,12 +6,14 @@ import sys
 
 import nettoolkit.facts_finder as ff
 from nettoolkit.facts_finder import CleanFacts, rearrange_tables
+from nettoolkit.yaml_facts import YamlFacts
 
 # ====================================================================================
 
 #### -- cache updates -- ####
 def update_cache_ff(i):
 	update_cache(CACHE_FILE, cit_file_custom_yml=i['ff_file_custom_yml'])
+	update_cache(CACHE_FILE, yf_output_folder=i['yf_output_folder'])
 
 def add_path(file):
 	sys.path.insert(len(sys.path), str(Path(file).resolve().parents[0]))
@@ -72,12 +74,29 @@ def facts_finder_start(i):
 	print("Facts-Finder All Task(s) Complete..")
 
 
+def yaml_facts_start(i):
+	for log_file in i['ff_log_files'].split(";"):
+		if not log_file.endswith(".log"): continue
+		device = get_host(log_file)
+		#
+		try:
+			YF = YamlFacts(log_file, i['yf_output_folder'])
+			print(f"Yaml File Generated for {device}...")
+		except Exception as e:
+			print(f"Yaml File Generation failed for {device}...")
+			print(e)
+			continue
+		#
+	print("Yaml Facts-Finder All Task(s) Complete..")
+
 
 # ======================================================================================
 
 FACTSFINDER_EVENT_FUNCS = {
 	'ff_btn_start': facts_finder_start,
+	'yf_btn_start': yaml_facts_start,
 	'ff_file_custom_yml': update_cache_ff,
+	'yf_output_folder': update_cache_ff,
 }
 FACTSFINDER_EVENT_UPDATERS = set()
 FACTSFINDER_ITEM_UPDATERS = set()

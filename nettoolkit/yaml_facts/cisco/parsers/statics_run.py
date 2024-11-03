@@ -26,7 +26,7 @@ class RunningRoutes():
 		Returns:
 			dict: parsed output dictionary
 		"""    		
-		n = 0
+		# n = 0
 		ports_dict = OrderedDict()
 		for l in self.cmd_op:
 			if blank_line(l): continue
@@ -34,11 +34,11 @@ class RunningRoutes():
 			if not l.startswith("ip route ") and not l.startswith("ipv6 route "): continue
 			#
 			spl = l.strip().split()
-			n += 1
-			ports_dict[n] = {}
-			rdict = ports_dict[n]
-			# rdict['filter'] = 'static'
-			func(rdict,  l, spl)
+			vrf = get_singel_idx_item('vrf', spl)
+			if not self.route_dict.get(vrf):
+				self.route_dict[vrf] = {}
+			vrf_routes = self.route_dict[vrf]
+			func(vrf_routes,  l, spl)
 		return ports_dict
 
 	def routes_dict(self):
@@ -48,11 +48,11 @@ class RunningRoutes():
 		merge_dict(self.route_dict, self.route_read(func))
 
 	@staticmethod
-	def get_route_dict(dic, l, spl):
+	def get_route_dict(vrf_routes, l, spl):
 		"""parser function to update route details
 
 		Args:
-			dic (dict): blank dictionary to update a route info
+			vrf_routes (dict): blank dictionary to update a route info
 			l (str): line to parse
 
 		Returns:
@@ -67,16 +67,17 @@ class RunningRoutes():
 		if spl[2] == 'vrf':  idx_update += 2
 		#
 		prefix, next_hop, idx_update = get_pfx_nh_idxdist(version, spl, idx_update)
+		if not vrf_routes.get(prefix):
+			vrf_routes[prefix] = {}
+		vrf_pfx_route = vrf_routes[prefix]
 		#
-		dic['version'] = version
-		dic['pfx_vrf'] = get_singel_idx_item('vrf', spl)
-		dic['prefix'] = prefix
-		dic['next_hop'] = next_hop
-		dic['adminisrative_distance'] = get_administrative_dist(spl, next_hop, idx_distance=idx_update)
-		dic['tag_value'] = get_singel_idx_item('tag', spl)
-		dic['remark'] = get_multi_idx_item('name', spl)
-		dic['track'] = get_singel_idx_item('track', spl)
-		return dic
+		vrf_pfx_route['version'] = version
+
+		append_attribute(dic=vrf_pfx_route, attribute='next_hop', value=next_hop)
+		append_attribute(dic=vrf_pfx_route, attribute='track', value=get_singel_idx_item('track', spl))
+		vrf_pfx_route['adminisrative_distance'] = get_administrative_dist(spl, next_hop, idx_distance=idx_update)
+		vrf_pfx_route['tag_value'] = get_singel_idx_item('tag', spl)
+		vrf_pfx_route['remark'] = get_multi_idx_item('name', spl)
 
 
 

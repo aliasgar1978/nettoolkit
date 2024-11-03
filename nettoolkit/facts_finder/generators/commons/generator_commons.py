@@ -10,6 +10,16 @@ from nettoolkit.pyJuniper import *
 # common functions
 # ================================================================================================
 
+def append_attribute(dic, attribute, value):
+	if not dic.get(attribute):
+		dic[attribute] = value		
+	elif dic[attribute] and isinstance(dic[attribute], str):
+		dic[attribute] = [ dic[attribute], value ]
+	elif dic[attribute] and isinstance(dic[attribute], list):
+		dic[attribute].append( value )
+	else:
+		dic[attribute] = value
+
 def get_appeneded_value(dic, key, value):
 	"""appends the value to an existing value found in dictionary with provided key if exist other wise returns same value
 

@@ -15,10 +15,12 @@ def j2config_frame():
 
 		[sg.Text('Configuration Generator', font=('TimesNewRoman', 12), text_color="black") ],
 
-		[sg.Text('Template file\t', text_color="black"), sg.InputText('', key='j2_file_template'), 
+		[sg.Text('Template file\t', text_color="black"), 
+		 sg.InputText(get_cache(CACHE_FILE, 'j2_file_template'), key='j2_file_template', change_submits=True), 
 		 sg.FileBrowse(),
 		 sg.Button("open", change_submits=True, key='j2_file_template_open', button_color="darkgrey"),],
-		[sg.Text('Data file\t\t', text_color="black"),     sg.InputText('', key='j2_file_data'),   
+		[sg.Text('Data file\t\t', text_color="black"),
+		 sg.InputText(get_cache(CACHE_FILE, 'j2_file_data'), key='j2_file_data', change_submits=True),   
 		 sg.FileBrowse(),
 		 sg.Button("open", change_submits=True, key='j2_file_data_open', button_color="darkgrey"),],
 		[sg.Text('Output Folder\t', text_color="black"), 

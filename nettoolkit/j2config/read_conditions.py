@@ -7,17 +7,17 @@ from nettoolkit.nettoolkit_db import read_xl_all_sheet
 
 # ---------------------------------------------------------------------------------------
 
-def get_conditions(jinja_flie):
+def get_conditions(jinja_file):
 	"""get all conditional statements from jinja file
 
 	Args:
-		jinja_flie (str): jinja template file
+		jinja_file (str): jinja template file
 
 	Returns:
 		dict: dictionary with list of jinja variables, conditions, and loops.
 	"""	
 	d = {'conditions':set(), 'loops':set(), 'variables': set() }
-	with open(jinja_flie, 'r') as f:
+	with open(jinja_file, 'r') as f:
 		lns = f.readlines()
 	for ln in lns:
 		if ln.strip().startswith("{% for "):
@@ -28,17 +28,17 @@ def get_conditions(jinja_flie):
 			d['variables'].add(ln)
 	return d
 
-def get_variables(jinja_flie):
+def get_variables(jinja_file):
 	"""get all jinja variables defined in jinja file
 
 	Args:
-		jinja_flie (str): jinja template file
+		jinja_file (str): jinja template file
 
 	Returns:
 		set: set of jinja variables
 	"""	
 	conds = set()
-	with open(jinja_flie, 'r') as f:
+	with open(jinja_file, 'r') as f:
 		lns = f.readlines()
 	for ln in lns:
 		starts, ends = [], []

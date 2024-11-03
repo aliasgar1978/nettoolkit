@@ -14,6 +14,8 @@ def update_cache_j2(i):
 	update_cache(CACHE_FILE, cit_file_custom_yml=i['j2_file_custom_yml'])
 	update_cache(CACHE_FILE, j2_file_regional=i['j2_file_regional'])	
 	update_cache(CACHE_FILE, j2_output_folder=i['j2_output_folder'])	
+	update_cache(CACHE_FILE, j2_file_template=i['j2_file_template'])	
+	update_cache(CACHE_FILE, j2_file_data=i['j2_file_data'])	
 
 def exec_j2_file_regional_open(i):
 	open_excel_file(i['j2_file_regional'])
@@ -71,6 +73,8 @@ J2CONFIG_EVENT_FUNCS = {
 	'j2_file_custom_yml': update_cache_j2,
 	'j2_output_folder': update_cache_j2,
 	'j2_file_regional': update_cache_j2,
+	'j2_file_data': update_cache_j2,
+	'j2_file_template': update_cache_j2,
 
 	'j2_file_template_open': exec_j2_file_template_open,
 	'j2_file_data_open': exec_j2_file_data_open,

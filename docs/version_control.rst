@@ -26,6 +26,10 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.8.0
+     - Nov 3, 2024
+     - * ``yaml_facts``: New module added ( yaml fact file generation added, for cisco_ios and juniper_junos devices )
+
    * - 1.7.7
      - Oct 19, 2024
      - * fixed - nettoolkit.nettoolkit_db - subnet sorting bug

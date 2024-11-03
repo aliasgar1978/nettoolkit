@@ -19,14 +19,19 @@ def j2config_frame():
 		 sg.InputText(get_cache(CACHE_FILE, 'j2_file_template'), key='j2_file_template', change_submits=True), 
 		 sg.FileBrowse(),
 		 sg.Button("open", change_submits=True, key='j2_file_template_open', button_color="darkgrey"),],
-		[sg.Text('Data file\t\t', text_color="black"),
+		[sg.Text('Data file(s)\t', text_color="black"),
 		 sg.InputText(get_cache(CACHE_FILE, 'j2_file_data'), key='j2_file_data', change_submits=True),   
-		 sg.FileBrowse(),
+		 sg.FilesBrowse(),
 		 sg.Button("open", change_submits=True, key='j2_file_data_open', button_color="darkgrey"),],
 		[sg.Text('Output Folder\t', text_color="black"), 
 		 sg.InputText(get_cache(CACHE_FILE, 'j2_output_folder'), key='j2_output_folder', change_submits=True), 
 		 sg.FolderBrowse(),
 		 sg.Button("open", change_submits=True, key='j2_folder_output_open', button_color="darkgrey"),],
+
+		[sg.Text('Output Files\t', text_color="black"), 
+		 sg.InputText('', key='j2_output_files', disabled=True), 
+		 sg.Button("open", change_submits=True, key='j2_files_output_open', button_color="darkgrey"),],
+
 		under_line(80),
 
 		[sg.Text('Regional Data Excel [optional]', text_color="black"), 

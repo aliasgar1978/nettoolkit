@@ -43,6 +43,7 @@ def netcrypt_juniper_dec_start(obj, i):
 		obj.event_update_element(netcrypt_output_pw={'value': "invalid"})	
 
 
+@activity_finish_popup
 def netcrypt_file_dec_start(obj, i):
 	if not i['netcrypt_file']: return 
 	input_file = i['netcrypt_file']
@@ -58,6 +59,7 @@ def netcrypt_file_dec_start(obj, i):
 	op = f"File Wrote: {output_file}"
 	obj.event_update_element(netcrypt_output_pw={'value': op})	
 
+@activity_finish_popup
 def netcrypt_file_mask_start(obj, i):
 	if not i['netcrypt_file']: return 
 	input_file = i['netcrypt_file']

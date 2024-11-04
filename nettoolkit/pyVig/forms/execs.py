@@ -51,7 +51,7 @@ def get_filename(file):
 	return Path(file).stem
 
 @printmsg(pre=f'Start Prepating Cable Matrix', post="Finish Preparing Cable Matrix..")
-def pyvig_start_cm(obj, i):
+def pyvig_start_cm(obj, i, followedbyvisio=False):
 	if i['pv_file_custom_yml']:
 		add_path(i['pv_file_custom_yml'])
 		custom =  read_yaml_mode_us(i['pv_file_custom_yml'])['pyvig'] 
@@ -80,6 +80,8 @@ def pyvig_start_cm(obj, i):
 	write_to_xl(opd['data_file'], CM.df_dict, index=False, overwrite=True)
 	obj.event_update_element(pv_file_cable_matrix={'value': opd['data_file']})	
 	#
+	if not followedbyvisio:
+		sg.Popup("Activity Finished")
 	return opd
 
 
@@ -102,6 +104,7 @@ def prepare_visio_drawing(dic, i):
 		dic['cols_to_merge'] = custom['cols_to_merge']
 	#
 	pyVig(**dic)
+	sg.Popup("Activity Finished")
 
 
 def pyvig_start_visio(obj, i):
@@ -111,7 +114,7 @@ def pyvig_start_visio(obj, i):
 
 def pv_start_cm_visio(obj, i):
 	update_keep_all_cols(obj, i)
-	dic = pyvig_start_cm(obj, i)
+	dic = pyvig_start_cm(obj, i, followedbyvisio=True)
 	prepare_visio_drawing(dic, i)
 
 # ======================================================================================

@@ -23,6 +23,7 @@ def get_host(log_file):
 	return Path(log_file).stem
 
 
+@activity_finish_popup
 def facts_finder_start(i):
 	if i['ff_file_custom_yml']:
 		add_path(i['ff_file_custom_yml'])
@@ -74,6 +75,7 @@ def facts_finder_start(i):
 	print("Facts-Finder All Task(s) Complete..")
 
 
+@activity_finish_popup
 def yaml_facts_start(i):
 	for log_file in i['ff_log_files'].split(";"):
 		if not log_file.endswith(".log"): continue

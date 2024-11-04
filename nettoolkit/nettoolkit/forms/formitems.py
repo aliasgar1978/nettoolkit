@@ -38,6 +38,9 @@ def popupmsg(pre=None, *, post=None,):
 		return inner
 	return outer
 
+
+activity_finish_popup = popupmsg(post="Activity Completed")
+
 # ---------------------------------------------------------------------------------------
 
 def blank_line(): 

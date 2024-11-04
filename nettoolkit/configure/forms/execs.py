@@ -15,6 +15,7 @@ def update_cache_confit(i):
 def exec_confit_folder_log_open(i):
 	open_folder(i['confit_folder_log'])
 
+@activity_finish_popup
 def configure_it_start(obj, i):
 	auth = {
 		'un': i['confit_cred_un'] ,

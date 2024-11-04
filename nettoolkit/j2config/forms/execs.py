@@ -44,6 +44,7 @@ def get_custom_funcs(custom):
 	return { v for k, v in custom['j2_functions_filters'].items() }
 
 
+@activity_finish_popup
 def j2config_start(obj, i):
 	if i['j2_file_custom_yml']:
 		add_path(i['j2_file_custom_yml'])

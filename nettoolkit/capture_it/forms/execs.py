@@ -72,6 +72,7 @@ def add_path(file):
 	_path = p.resolve().parents[0]
 	sys.path.insert(len(sys.path), str(_path))
 
+@activity_finish_popup
 def capture_it_start(i):
 	if i['cit_file_custom_yml']:
 		add_path(i['cit_file_custom_yml'])
@@ -130,8 +131,10 @@ def capture_it_start(i):
 		transpose_excel_report=i['cit_opt_summary_xpose'],
 	)
 	print("Capture Task(s) Complete..")
+	
 
 
+@activity_finish_popup
 def capture_it_by_xl_start(i):
 	if i['cit_file_custom_yml1']:
 		add_path(i['cit_file_custom_yml1'])

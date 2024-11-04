@@ -20,7 +20,7 @@ setuptools.setup(
     ],
     python_requires='>=3.10',
     install_requires=['pandas', 'openpyxl', 'PySimpleGUI==4.60.5', 'numpy',
-        'xlrd', 'jinja2', 'paramiko', 'netmiko', 'ntc-templates', 'pyyaml', 'attrs',
+        'xlrd', 'jinja2', 'paramiko', 'netmiko', 'ntc-templates', 'pyyaml', 'attrs', 'textfsm',
         # 'pywin32',                    ## Windows specific library, need to do manually...
     ],
     package_data={

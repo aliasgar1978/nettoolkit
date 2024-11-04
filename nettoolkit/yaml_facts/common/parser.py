@@ -6,6 +6,8 @@
 # ==============================================================================================
 from dataclasses import dataclass, field
 from pathlib import Path
+import sys, os
+import textfsm
 from nettoolkit.nettoolkit_common import get_file_name, get_file_path, DIC
 from nettoolkit.nettoolkit_db import dict_to_yaml
 
@@ -19,6 +21,47 @@ merge_dict = DIC.merge_dict
 # ==============================================================================================
 #  Local Functions
 # ==============================================================================================
+def parse_to_list_cmd(abs_cmd, data_list, cmd_parser_file_map):
+	template_file = get_template_file(abs_cmd, cmd_parser_file_map)
+	return parse_to_list(template_file, data_list)
+
+def parse_to_dict_cmd(abs_cmd, data_list, cmd_parser_file_map):
+	template_file = get_template_file(abs_cmd, cmd_parser_file_map)
+	return parse_to_dict(template_file, data_list)
+
+def parse_to_list(template_file, data_list):
+	data = "\n".join(data_list)
+	with open(template_file) as f:
+		textfsm_parser = textfsm.TextFSM(f)
+		parsed_data = textfsm_parser.ParseText(data)
+	return parsed_data
+
+def parse_to_dict(template_file, data_list):
+	data = "\n".join(data_list)
+	with open(template_file) as f:
+		textfsm_parser = textfsm.TextFSM(f)
+		parsed_data = textfsm_parser.ParseTextToDicts(data)
+	return parsed_data
+
+
+
+def get_template_dir():
+	folder = ""
+	for path in sys.path:
+		p = Path(path)
+		if not p.is_dir(): continue
+		if p.name == "site-packages" :
+			folder = p
+			break
+	if not folder:
+		print(f"Could not locate ntc template directory...")
+	template_dir = p.resolve().parents[0].joinpath("site-packages/ntc_templates/templates")
+	return template_dir
+
+def get_template_file(abs_cmd, cmd_parser_file_map):
+	p = get_template_dir()
+	if not cmd_parser_file_map.get(abs_cmd): return ""
+	return str(p.joinpath(cmd_parser_file_map[abs_cmd]))
 
 
 # ==============================================================================================

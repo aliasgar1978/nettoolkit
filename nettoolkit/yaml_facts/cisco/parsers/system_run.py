@@ -73,8 +73,6 @@ class RunningSystem():
 					port = spl[spl.index('port')+1]
 		tdic = {'tacacs':{}}
 		dic = tdic['tacacs']
-		for i, srv in enumerate(servers):
-			dic['server_' + str(i+1)] = srv
 		dic['servers'] = servers
 		dic['key'] = key
 		dic['tcp_port'] = port
@@ -91,8 +89,6 @@ class RunningSystem():
 					if i<2: continue
 					add_to_list(servers, x)
 		dic = {}
-		for i, srv in enumerate(servers):
-			dic['dns_server_' + str(i+1)] = srv
 		dic['dns_servers'] = servers
 		return dic
 
@@ -107,8 +103,6 @@ class RunningSystem():
 					if i<2: continue
 					add_to_list(servers, x)
 		dic = {}
-		for i, srv in enumerate(servers):
-			dic['syslog_server_' + str(i+1)] = srv
 		dic['syslog_servers'] = servers
 		return dic
 
@@ -123,8 +117,6 @@ class RunningSystem():
 					if i<2: continue
 					add_to_list(servers, x)
 		dic = {}
-		for i, srv in enumerate(servers):
-			dic['ntp_server_' + str(i+1)] = srv
 		dic['ntp_servers'] = servers
 		return dic
 
@@ -162,11 +154,6 @@ def get_system_running(command_output):
 	R.system_dict.update(R.system_ntp_server())
 	R.system_dict.update(R.system_exec_banner())
 	R.system_dict.update(R.system_hostname())
-
-
-	# # # update more interface related methods as needed.
-	# if not R.system_dict:
-	# 	R.system_dict['dummy_col'] = ""
 
 	return {'system': R.system_dict }
 

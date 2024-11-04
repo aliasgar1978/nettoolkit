@@ -55,6 +55,7 @@ def get_template_dir():
 			break
 	if not folder:
 		print(f"Could not locate ntc template directory...")
+	# template_dir = os.path.join(p, "templates")
 	template_dir = p.resolve().parents[0].joinpath("site-packages/ntc_templates/templates")
 	return template_dir
 

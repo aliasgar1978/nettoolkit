@@ -145,6 +145,7 @@ class BGPConf():
 
 	def _get_vrf_router_ids(self):
 		for vrf, vrf_dict in self.vrfs.items():
+			if not vrf_dict.get('lines'): continue
 			for line in vrf_dict['lines']:
 				self._get_router_id(self.bgp_peer_dict[vrf], line)
 

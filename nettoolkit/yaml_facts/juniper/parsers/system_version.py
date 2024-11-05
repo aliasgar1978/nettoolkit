@@ -10,10 +10,16 @@ def get_version(cmd_op):
 	for l in cmd_op:
 		if blank_line(l): continue
 		if l.strip().startswith("#"): continue
-		if l.startswith("Junos: "):  version = l.split()[-1]
-		if l.startswith("Model: "): model = l.split()[-1]
-
-	if not op_dict.get('junos_version'): op_dict['junos_version'] = version
-	if not op_dict.get('model'): op_dict['model'] = model
+		if l.strip().startswith("---"): continue
+		if l.startswith('fpc'):
+			fpc = l.split(":")[0]
+			if not op_dict.get(fpc):
+				op_dict[fpc] = {}
+			fpc_dict = op_dict[fpc]
+			continue
+		if not fpc_dict.get('make'): fpc_dict['make'] = 'juniper'
+		if l.startswith("Model: "):  fpc_dict['model'] = l.strip().split()[-1]
+		if l.startswith("JUNOS Base OS Software Suite"):  
+			fpc_dict['junos_version'] = l.strip().split()[-1].replace("[", '').replace("]", '')
 	return {'system': op_dict}
 # ------------------------------------------------------------------------------

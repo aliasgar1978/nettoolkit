@@ -20,14 +20,15 @@ JUNIPER_CMD_PARSER_MAP = OrderedDict([
 			get_system_running, 
 			get_bgp_running,    
 			get_system_running_routes, 
-			get_system_running_prefix_lists
-	# 	)
-	)),
+			get_system_running_prefix_lists,
+		)
+	),
 	('show version', (get_version, )),
 	('show chassis hardware', (
-		get_chassis_hardware, 
-		get_chassis_serial,
-	)),
+			get_chassis_hardware,
+			get_chassis_serial,
+		)
+	),
 	('show arp', (get_arp_table,)),
 	# 'show interfaces terse', (),
 	# 'show bgp summary', (),

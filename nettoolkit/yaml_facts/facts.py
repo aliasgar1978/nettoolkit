@@ -6,6 +6,7 @@ from pprint import pprint
 # ==============================================================================================
 from dataclasses import dataclass, field
 from nettoolkit.nettoolkit_common import CapturesOut
+from nettoolkit.facts_finder.inputlog import to_cit
 from nettoolkit.yaml_facts.cisco import CiscoParser
 from nettoolkit.yaml_facts.juniper import JuniperParser
 
@@ -36,6 +37,7 @@ class YamlFacts():
 	}
 
 	def __post_init__(self):
+		self.capture_log_file = to_cit(self.capture_log_file)
 		self.captures = CapturesOut(self.capture_log_file)
 		self.CP = self.parser_cls_map[self.captures.device_manufacturar](self.captures, self.output_folder)
 

@@ -376,9 +376,5 @@ def get_interfaces_running(command_output):
 	R.interface_v4_helpers()
 	R.interface_v6_helpers()
 
-	# # # update more interface related methods as needed.
-	# if not R.interface_dict:
-	# 	R.interface_dict['dummy_int'] = ""
-
 	return {'interfaces': R.interface_dict }
 

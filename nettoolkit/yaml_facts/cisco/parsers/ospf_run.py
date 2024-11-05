@@ -87,7 +87,7 @@ class OSPF():
 			None: None
 		"""
 		if len(spl)>1 and spl[0] == 'no' and spl[1] == 'passive-interface':
-			vrf_op_dict['active_interfaces']  = get_appeneded_value(vrf_op_dict, 'active_interfaces', spl[-1])
+			append_attribute(vrf_op_dict, 'active_interfaces', spl[-1])			
 
 
 	def networks(self):
@@ -112,14 +112,11 @@ class OSPF():
 			mask = invmask_to_mask(spl[2])
 			area = spl[4] if spl[3] == 'area' else ''
 			network = str(addressing(subnet+"/"+str(mask)))
-			if not vrf_op_dict.get('areas'):
-				vrf_op_dict['areas'] = {}
-			network_op_dict = vrf_op_dict['areas']
-			area_num = get_appeneded_value(network_op_dict, 'area', area)
-			if not network_op_dict.get(area_num):
-				network_op_dict[area_num] = {}
-			network_op_dict[area_num]['network']  = get_appeneded_value(network_op_dict, 'network', network)
-			# network_op_dict[area_num]['area_'+area+'_networks'] = get_appeneded_value(network_op_dict, 'area_'+area+'_networks', network)
+			if not vrf_op_dict.get('area'):
+				vrf_op_dict['area'] = {}
+			network_op_dict = vrf_op_dict['area']
+			if not network_op_dict.get(area): network_op_dict[area] = {}
+			append_attribute(network_op_dict[area], 'active_on_networks', network)
 
 
 	def summaries(self):
@@ -144,20 +141,23 @@ class OSPF():
 			subnet = spl[3]
 			mask = to_dec_mask(spl[4])
 			prefix = str(addressing(subnet+"/"+str(mask)))
-			if not vrf_op_dict.get('areas'):
-				vrf_op_dict['areas'] = {}
-			range_op_dict = vrf_op_dict['areas']
-			area_num = get_appeneded_value(range_op_dict, 'area', area)
-			if not range_op_dict.get(area_num):
-				range_op_dict[area_num] = {}
+			if not vrf_op_dict.get('area'):
+				vrf_op_dict['area'] = {}
+			range_op_dict = vrf_op_dict['area']
 
-			# if not vrf_op_dict.get('summary'):
-			# 	vrf_op_dict['summary'] = {}
-			# range_op_dict = vrf_op_dict['summary']
-			### === to be re check and update.. === #
+			if not range_op_dict.get(area):
+				range_op_dict[area] = {}
+			append_attribute(range_op_dict[area], 'area-summaries', prefix)
 
-			range_op_dict['prefixes']  = get_appeneded_value(range_op_dict, 'prefixes', prefix)
-			# range_op_dict['area_'+area+'_prefixes'] = get_appeneded_value(range_op_dict, 'area_'+area+'_prefixes', prefix)
+		elif len(spl)>=3 and spl[0] == 'summary-address':
+			subnet = spl[1]
+			mask = to_dec_mask(spl[2])
+			prefix = str(addressing(subnet+"/"+str(mask)))
+			if not vrf_op_dict.get('external'):
+				vrf_op_dict['external'] = {}
+			ext_op_dict = vrf_op_dict['external']
+			append_attribute(ext_op_dict, 'summaries', prefix)
+
 
 
 # ------------------------------------------------------------------------------

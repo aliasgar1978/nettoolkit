@@ -335,7 +335,7 @@ class RunningInterfaces(Running):
 			try:
 				pw = juniper_decrypt(pw)
 			except: pass
-			port_dict['ospf_auth'] = pw
+			port_dict['ospf_auth_key'] = pw
 		return port_dict
 
 

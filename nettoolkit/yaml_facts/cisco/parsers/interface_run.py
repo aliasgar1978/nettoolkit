@@ -117,8 +117,12 @@ class RunningInterfaces():
 		"""    		
 		address = get_inet_address(l)
 		secondary_address = get_secondary_inet_address(l)
-		if address: port_dict['subnet'] = get_subnet(address)
-		if secondary_address: port_dict['subnet_secondary'] = get_subnet(secondary_address)
+		if address: 
+			port_dict['inet_address'] = address
+			port_dict['v4subnet'] = get_subnet(address)
+		if secondary_address: 
+			port_dict['inet_address_secondary'] = secondary_address
+			port_dict['subnet_secondary'] = get_subnet(secondary_address)
 
 
 	def interface_v6_ips(self):
@@ -144,6 +148,7 @@ class RunningInterfaces():
 		if not address: return None
 		if link_local:
 			return None
+		port_dict['inet6_address'] = address
 		port_dict['v6subnet'] = get_v6_subnet(address)
 		port_dict['h4block'] = IPv6(address).getHext(4)
 
@@ -292,7 +297,7 @@ class RunningInterfaces():
 		"""    		
 		auth, auth_type = None, None
 		if l.strip().startswith("ip ospf authentication-key"):
-			port_dict['ospf_auth'] = decrypt_type7(l.strip().split()[-1])
+			port_dict['ospf_auth_key'] = decrypt_type7(l.strip().split()[-1])
 		if l.strip().startswith("ip ospf network "):
 			port_dict['ospf_auth_type'] = l.strip().split()[-1]
 		if not auth and not auth_type: return None

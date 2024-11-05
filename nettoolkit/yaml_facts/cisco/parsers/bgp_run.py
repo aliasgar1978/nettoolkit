@@ -15,6 +15,8 @@ class BGPConf():
 		self._get_instances_lists_dict()
 		self._get_peer_group_names()
 		self._get_peer_group_dict()
+		#
+		self._get_vrf_router_ids()
 
 	def _iterate_running(self):
 		start = False
@@ -109,7 +111,6 @@ class BGPConf():
 					self._get_peers(peer_grp, pg_dict, line, spl)
 		self.bgp_peer_dict = vrf_pg_dict
 
-
 	def _get_local_as(self, peer_grp, pg_dict, line, spl):
 		if spl[2] == 'description':
 			if spl[1] == peer_grp:
@@ -136,7 +137,21 @@ class BGPConf():
 	def _get_peers(self, peer_grp, pg_dict, line, spl):
 		if len(spl)<4: return
 		if spl[2] == 'peer-group' and spl[3] == peer_grp: 
-			pg_dict['peers'] = {spl[1]: {}}
+			if not pg_dict.get('peers'):
+				pg_dict['peers'] = {}
+			pg_dict['peers'].update( {spl[1]: {}} )
+
+	# ---------------------------------------------------------------------- #
+
+	def _get_vrf_router_ids(self):
+		for vrf, vrf_dict in self.vrfs.items():
+			for line in vrf_dict['lines']:
+				self._get_router_id(self.bgp_peer_dict[vrf], line)
+
+	def _get_router_id(self, vrf_dict, line):
+		if line.startswith("bgp router-id "):
+			spl = line.strip().split()
+			vrf_dict['router-id'] = spl[-1]
 
 
 def get_bgp_running(command_output):

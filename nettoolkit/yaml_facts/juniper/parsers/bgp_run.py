@@ -146,6 +146,48 @@ class BGPPeers(Running):
 			rd = ":".join(spl[-1].split(":")[-2:])
 			vrf_dict[f"{spl[4]} target"].add( rd )
 
+	# ============================================================================ 
+
+	def get_system_helpers(self):
+		"""parser function to update system helpers
+
+		Args:
+			op_dict (dict): dictionary with a port info
+			l (str): string line to parse
+			spl (list): splitted line to parse
+
+		Returns:
+			None: None
+		"""    		
+		op_dict = {}
+		for line in self.set_cmd_op:
+			line = line.strip()
+			if not line: continue
+			if line.startswith("#"): continue
+			spl = line.split()
+			#
+			if "dhcp-relay" in spl and "server-group" in spl: 
+				vrf = None
+				if spl[1] == 'routing-instances':
+					vrf = spl[2]
+				try:
+					ipadd = addressing(spl[-1])
+					if ipadd.version == 4:
+						section = 'dhcp_helpers_v4'
+					elif ipadd.version == 6:
+						section = 'dhcp_helpers_v6'
+
+					if not op_dict.get(vrf):
+						op_dict[vrf] = {}
+					if not op_dict[vrf].get(section):
+						op_dict[vrf][section] = []
+					op_dict[vrf][section].append(spl[-1])
+				except:
+					pass
+		merge_dict(self.instance_vrf_dict, op_dict)
+
+	# ============================================================================ 
+
 
 # =====================================================================================
 
@@ -161,6 +203,8 @@ def get_bgp_running(cmd_op):
 	"""    	
 	R  = BGPPeers(cmd_op)
 	R()
+	R.get_system_helpers()
+
 
 	protocols_dict = {'bgp': {'instances': R.instance_dict}} if R.instance_dict else {}
 

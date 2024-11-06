@@ -1,7 +1,6 @@
 """juniper prefix list parsing from set config  """
 
 # ------------------------------------------------------------------------------
-# from nettoolkit.addressing import addressing
 from .common import *
 from .run import Running
 # ------------------------------------------------------------------------------

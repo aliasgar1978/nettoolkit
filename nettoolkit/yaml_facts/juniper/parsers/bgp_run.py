@@ -18,7 +18,12 @@ class BGPPeers(Running):
 		for vrf in self.jPtObj.VRFs.keys():
 			VRF = self.jPtObj.VRFs[vrf]
 			vd = self._iterate_over_vrf_peers(peers=VRF.PEERs, vrf=vrf)
-			if vd: instance_dict[vrf] = vd
+			if not vd: continue
+			if not instance_dict.get(vrf):
+				instance_dict[vrf] = {}
+			if not instance_dict[vrf].get('peers'):
+				instance_dict[vrf]['peers'] = {}
+			instance_dict[vrf]['peers'] = vd
 		return instance_dict
 
 	def _iterate_over_vrf_peers(self, peers, vrf):
@@ -157,10 +162,11 @@ def get_bgp_running(cmd_op):
 	R  = BGPPeers(cmd_op)
 	R()
 
-	return {
-	  'protocols': {'bgp': {'instances': R.instance_dict}},
-	  'vrf': R.instance_vrf_dict,
+	protocols_dict = {'bgp': {'instances': R.instance_dict}} if R.instance_dict else {}
 
+	return {
+	  'protocols': protocols_dict,
+	  'vrf': R.instance_vrf_dict,
 	}
 
 # =====================================================================================

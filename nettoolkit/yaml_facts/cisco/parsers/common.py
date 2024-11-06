@@ -5,6 +5,7 @@
 #  Imports
 # ==============================================================================================
 from collections import OrderedDict
+from dataclasses import dataclass, field
 from nettoolkit.nettoolkit_common import *
 from nettoolkit.nettoolkit_common.gpl import *
 from nettoolkit.addressing import to_dec_mask, invmask_to_mask, addressing

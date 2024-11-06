@@ -119,10 +119,10 @@ class RunningInterfaces():
 		secondary_address = get_secondary_inet_address(l)
 		if address: 
 			port_dict['inet_address'] = address
-			port_dict['v4subnet'] = get_subnet(address)
+			port_dict['inet_subnet'] = get_subnet(address)
 		if secondary_address: 
 			port_dict['inet_address_secondary'] = secondary_address
-			port_dict['subnet_secondary'] = get_subnet(secondary_address)
+			port_dict['inet_subnet_secondary'] = get_subnet(secondary_address)
 
 
 	def interface_v6_ips(self):
@@ -149,7 +149,7 @@ class RunningInterfaces():
 		if link_local:
 			return None
 		port_dict['inet6_address'] = address
-		port_dict['v6subnet'] = get_v6_subnet(address)
+		port_dict['inet6_subnet'] = get_v6_subnet(address)
 		port_dict['h4block'] = IPv6(address).getHext(4)
 
 	def interface_mode(self):

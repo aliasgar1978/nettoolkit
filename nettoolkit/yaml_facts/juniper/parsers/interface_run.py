@@ -120,9 +120,11 @@ class RunningInterfaces(Running):
 		Returns:
 			None: None
 		"""    		
-		subnet = _get_v4_subnet(spl, l)
-		if not subnet: return		
-		port_dict['subnet'] = subnet
+		inet_address = _get_v4_address(spl, l)
+		if not inet_address: return		
+		inet_subnet = _get_v4_subnet(inet_address)
+		port_dict['inet_address'] = inet_address
+		port_dict['inet_subnet'] = inet_subnet
 
 	def interface_v6_ips(self):
 		"""update the interface ipv6 ip address details
@@ -147,7 +149,8 @@ class RunningInterfaces(Running):
 		link_local = _is_link_local(address)
 		if link_local :
 			return None
-		port_dict['v6subnet'] = get_v6_subnet(address)
+		port_dict['inet6_address'] = address
+		port_dict['inet6_subnet'] = shrink(get_v6_subnet(address))
 
 
 	def interface_vlans(self):
@@ -433,7 +436,7 @@ def _juniper_port(int_type, spl):
 	else:
 		return spl[2]
 
-def _get_v4_subnet(spl, line):
+def _get_v4_address(spl, line):
 	"""get ipv4 subnet/mask detail from provided splitted set command line list, or string line.
 
 	Args:
@@ -444,7 +447,11 @@ def _get_v4_subnet(spl, line):
 		str: subnet if found or None
 	"""	
 	if not _is_v4_addressline(line): return None
-	return get_subnet(spl[spl.index("address") + 1])
+	return spl[spl.index("address") + 1]
+
+
+def _get_v4_subnet(address):
+	return get_subnet(address)
 
 
 def _is_v4_addressline(line):	
@@ -456,7 +463,7 @@ def _is_v4_addressline(line):
 	Returns:
 		bool: True if found else None
 	"""	
-	if line.find("family inet") == -1: return None
+	if line.find("family inet ") == -1: return None
 	if line.find("address") == -1: return None
 	return True
 # ------------------------------------------------------------------------------

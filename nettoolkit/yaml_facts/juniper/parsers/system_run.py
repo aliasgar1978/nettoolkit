@@ -137,11 +137,11 @@ class RunningSystem(Running):
 		if not op_dict.get('tacacs'): 
 			op_dict['tacacs'] = {}
 		tacacs_dict = op_dict['tacacs']
-		if ip and not tacacs_dict.get('server'):
-			tacacs_dict['server'] = []
+		if ip and not tacacs_dict.get('servers'):
+			tacacs_dict['servers'] = []
 			tacacs_dict['tcp_port'] = '49'
 			tacacs_dict['key'] = ''
-		if ip: add_to_list(tacacs_dict['server'], ip)
+		if ip: add_to_list(tacacs_dict['servers'], ip)
 		if ip and spl[4] == 'port':
 			tacacs_dict['tcp_port'] = spl[5]
 		if ip and spl[4] == 'secret':
@@ -169,9 +169,9 @@ class RunningSystem(Running):
 		"""    		
 		ip = ""
 		if l.startswith("set system syslog host") : ip = spl[4]
-		if ip and not op_dict.get('syslog_servers'):
-			op_dict['syslog_servers'] = []
-		if ip: add_to_list(op_dict['syslog_servers'], ip)
+		if ip and not op_dict.get('syslog'):
+			op_dict['syslog'] = {'servers': []}
+		if ip: add_to_list(op_dict['syslog']['servers'], ip)
 		return op_dict
 
 
@@ -195,9 +195,9 @@ class RunningSystem(Running):
 		"""    		
 		ip = ""
 		if l.startswith("set system ntp server") : ip = spl[4]
-		if ip and not op_dict.get('ntp_servers'):
-			op_dict['ntp_servers'] = []
-		if ip: add_to_list(op_dict['ntp_servers'], ip)
+		if ip and not op_dict.get('ntp'):
+			op_dict['ntp'] = {'servers': []}
+		if ip: add_to_list(op_dict['ntp']['servers'], ip)
 		return op_dict
 
 

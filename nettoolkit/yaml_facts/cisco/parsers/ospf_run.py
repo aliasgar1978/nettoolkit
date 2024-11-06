@@ -158,6 +158,10 @@ class OSPF():
 			ext_op_dict = vrf_op_dict['external']
 			append_attribute(ext_op_dict, 'summaries', prefix)
 
+	def _remove_empty_instances(self):
+		for instance in list(self.op_dict.keys()):
+			if not self.op_dict[instance]:
+				del(self.op_dict[instance])
 
 
 # ------------------------------------------------------------------------------
@@ -176,6 +180,9 @@ def get_ospf_running(command_output):
 	R.active_interfaces()
 	R.networks()
 	R.summaries()
+	R._remove_empty_instances()
 	
-	return {'protocols': { 'ospf' : R.op_dict} }
-
+	if R.op_dict:
+		return {'protocols': { 'ospf' : R.op_dict} }
+	else:
+		return {'protocols': {}}

@@ -1,7 +1,6 @@
 """cisco running-config parser for bgp section output """
 
 # ------------------------------------------------------------------------------
-from dataclasses import dataclass, field
 from .common import *
 # ------------------------------------------------------------------------------
 
@@ -17,11 +16,14 @@ class BGPConf():
 		self._get_peer_group_dict()
 		#
 		self._get_vrf_router_ids()
+		#
+		self._remove_empty_vrfs()
 
 	def _iterate_running(self):
 		start = False
 		lst = []
 		for line in self.run_list:
+			if not line.strip() : continue
 			start = start or line.startswith("router bgp ")
 			if start and line[0] == "!": break
 			if not start: continue
@@ -89,8 +91,10 @@ class BGPConf():
 			if not vrf_dict.get('vrf_peer_grps'): continue
 			for peer_grp in vrf_dict['vrf_peer_grps']:
 				other = None
-				vrf_pg_dict[vrf][peer_grp] = {}
-				pg_dict = vrf_pg_dict[vrf][peer_grp]
+				if not vrf_pg_dict[vrf].get('peers'):
+					vrf_pg_dict[vrf]['peers'] = {}
+				vrf_pg_dict[vrf]['peers'][peer_grp] = {}
+				pg_dict = vrf_pg_dict[vrf]['peers'][peer_grp]
 				for line in vrf_dict['lines']:
 					if not line.startswith("neighbor"): continue
 					spl = line.split()
@@ -154,14 +158,24 @@ class BGPConf():
 			spl = line.strip().split()
 			vrf_dict['router-id'] = spl[-1]
 
+	# ---------------------------------------------------------------------- #
+
+	def _remove_empty_vrfs(self):
+		for vrf in list(self.bgp_peer_dict.keys()):
+			if not self.bgp_peer_dict[vrf]:
+				del(self.bgp_peer_dict[vrf])
+
+# ====================================================================================================
 
 def get_bgp_running(command_output):
 	BC = BGPConf(command_output)
+	if BC.bgp_peer_dict:
+		return {'protocols': {'bgp': {'instances': BC.bgp_peer_dict}} }
+	else:
+		return {'protocols': {}}
 
-	return {'protocols': {'bgp': {'instances': BC.bgp_peer_dict}} }
 
-
-# # ====================================================================================================
+# ====================================================================================================
 
 
 

@@ -1,9 +1,6 @@
 """juniper arp table command output parser """
 
 # ------------------------------------------------------------------------------
-from collections import OrderedDict
-
-from nettoolkit.facts_finder.generators.commons import *
 from .common import *
 # ------------------------------------------------------------------------------
 

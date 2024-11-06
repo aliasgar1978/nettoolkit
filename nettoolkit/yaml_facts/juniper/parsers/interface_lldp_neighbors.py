@@ -1,9 +1,7 @@
 """juniper lldp neighbour command output parser """
 
 # ------------------------------------------------------------------------------
-from nettoolkit.facts_finder.generators.commons import *
 from .common import *
-
 # ------------------------------------------------------------------------------
 
 def get_lldp_neighbour(cmd_op):

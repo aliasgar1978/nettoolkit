@@ -12,7 +12,11 @@ def get_lldp_neighbour(command_output):
 		nbr_d[local_if] = {'neighbor': {}}
 		nbr = nbr_d[local_if]['neighbor']
 		nbr['hostname'] = spl[0]
-		nbr['interface'] = STR.if_standardize(spl[3])
+		try:
+			nbrintf = STR.if_standardize(spl[3])
+		except:
+			nbrintf = spl[3]
+		nbr['interface'] = nbrintf
 
 	return {'interfaces': {'physical': nbr_d} }
 

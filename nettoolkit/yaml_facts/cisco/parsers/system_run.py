@@ -76,7 +76,7 @@ class RunningSystem():
 		dic['servers'] = servers
 		dic['key'] = key
 		dic['tcp_port'] = port
-		return dic
+		return tdic
 
 	def system_name_server(self):
 		"""get list of dns name server ips from configurations
@@ -88,8 +88,8 @@ class RunningSystem():
 				for i, x in enumerate(spl):
 					if i<2: continue
 					add_to_list(servers, x)
-		dic = {}
-		dic['dns_servers'] = servers
+		dic = {'dns':{}}
+		dic['dns']['servers'] = servers
 		return dic
 
 	def system_syslog_server(self):
@@ -102,8 +102,8 @@ class RunningSystem():
 				for i, x in enumerate(spl):
 					if i<2: continue
 					add_to_list(servers, x)
-		dic = {}
-		dic['syslog_servers'] = servers
+		dic = {'syslog': {}}
+		dic['syslog']['servers'] = servers
 		return dic
 
 	def system_ntp_server(self):
@@ -116,8 +116,8 @@ class RunningSystem():
 				for i, x in enumerate(spl):
 					if i<2: continue
 					add_to_list(servers, x)
-		dic = {}
-		dic['ntp_servers'] = servers
+		dic = {'ntp': {}}
+		dic['ntp']['servers'] = servers
 		return dic
 
 	def system_exec_banner(self):

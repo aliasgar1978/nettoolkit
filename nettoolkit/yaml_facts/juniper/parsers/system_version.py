@@ -7,6 +7,7 @@ from .common import *
 def get_version(cmd_op):
 	op_dict = {}
 	version, model = "", ""
+	fpc_dict = None
 	for l in cmd_op:
 		if blank_line(l): continue
 		if l.strip().startswith("#"): continue
@@ -17,6 +18,7 @@ def get_version(cmd_op):
 				op_dict[fpc] = {}
 			fpc_dict = op_dict[fpc]
 			continue
+		if fpc_dict is None: fpc_dict = op_dict
 		if not fpc_dict.get('make'): fpc_dict['make'] = 'juniper'
 		if l.startswith("Model: "):  fpc_dict['model'] = l.strip().split()[-1]
 		if l.startswith("JUNOS Base OS Software Suite"):  

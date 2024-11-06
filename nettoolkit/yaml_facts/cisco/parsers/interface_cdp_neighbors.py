@@ -13,7 +13,11 @@ def get_cdp_neighbour(command_output):
 		nbr = nbr_d[local_if]['neighbor']
 		nbr['hostname'] = spl[0]
 		nbr['plateform'] = spl[3]
-		nbr['interface'] = STR.if_standardize(spl[4])
+		try:
+			nbr_int = STR.if_standardize(spl[4])
+		except:
+			nbr_int = spl[4]
+		nbr['interface'] = nbr_int
 
 	return {'interfaces': {'physical': nbr_d} }
 

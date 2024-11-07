@@ -348,6 +348,65 @@ class RunningInterfaces():
 				port_dict['v6_helpers'] = set()
 			port_dict['v6_helpers'].add(l.strip().split()[-1])
 
+	def interface_rip(self):
+		"""update the interface rip details
+		"""   
+		func = self.get_interface_rip
+		merge_dict(self.interface_dict, self.interface_read(func))
+
+
+	def get_interface_rip(self, port_dict, l):	
+		"""parser function to update interface rip details
+
+		Args:
+			port_dict (dict): dictionary with a port info
+			l (str): string line to parse
+
+		Returns:
+			None: None
+		"""  
+		l = l.strip()
+		self._int_rip_auth_keychain(port_dict, l)
+		self._int_rip_auth_mode(port_dict, l)
+		self._int_rip_version(port_dict, l)
+		self._int_rip_split_horizon(port_dict, l)
+		self._int_rip_summary_address(port_dict, l)
+
+
+	def _int_rip_auth_keychain(self, port_dict, l):
+		if l.startswith("ip rip authentication key-chain"):
+			spl = l.split()
+			add_blankdict_key(port_dict, 'rip')
+			add_blankdict_key(port_dict['rip'], 'authentication')
+			port_dict['rip']['authentication']['key-chain'] = spl[-1]
+
+	def _int_rip_auth_mode(self, port_dict, l):
+		if l.startswith("ip rip authentication mode "):
+			spl = l.split()
+			add_blankdict_key(port_dict, 'rip')
+			add_blankdict_key(port_dict['rip'], 'authentication')
+			port_dict['rip']['authentication']['mode'] = spl[-1]
+
+	def _int_rip_version(self, port_dict, l):
+		txrx = ('send', 'receive')
+		for way in txrx:
+			if l.startswith(f"ip rip {way} version"):
+				spl = l.split()
+				add_blankdict_key(port_dict, 'rip')
+				port_dict['rip'][f'{way}-version'] = spl[-1]
+
+	def _int_rip_split_horizon(self, port_dict, l):
+		if l.find("ip split horizon") > -1:
+			spl = l.split()
+			add_blankdict_key(port_dict, 'rip')
+			port_dict['rip']['split-horizon'] = spl[1] == 'no'
+
+	def _int_rip_summary_address(self, port_dict, l):
+		if l.startswith("ip summary-address rip "):
+			spl = l.split()
+			network = str(addressing(spl[-2], spl[-1]))
+			add_blankdict_key(port_dict, 'rip')
+			append_attribute(port_dict['rip'], 'summaries', network)
 
 	# # Add more interface related methods as needed.
 
@@ -377,6 +436,7 @@ def get_interfaces_running(command_output):
 
 	R.interface_channel_group()
 	R.interface_ospf_auth()
+	R.interface_rip()
 	R.interface_udld()
 	R.interface_v4_helpers()
 	R.interface_v6_helpers()

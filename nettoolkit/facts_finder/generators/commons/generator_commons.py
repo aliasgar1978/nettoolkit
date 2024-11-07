@@ -96,4 +96,29 @@ def get_int_mask(ip):
 		str: mask
 	"""	
 	return ip.split("/")[-1]
+# ================================================================================================
 
+
+def add_blankdict_key(dic, key):
+	if not dic.get(key):
+		dic[key] = {}
+
+def add_blankset_key(dic, key):
+	if not dic.get(key):
+		dic[key] = set()
+
+def add_blanklist_key(dic, key):
+	if not dic.get(key):
+		dic[key] = []
+
+def add_blanktuple_key(dic, key):
+	if not dic.get(key):
+		dic[key] = ()
+
+def add_blanknone_key(dic, key):
+	if not dic.get(key):
+		dic[key] = None
+
+def update_key_value(dic, key, value):
+	if not dic.get(key):
+		dic[key] = value

@@ -366,6 +366,26 @@ def range_subset(range1, range2):
 		return False  # steps check
 	return range1.start in range2 and range1[-1] in range2
 
+def classful_subnet(ip):
+	"""proives ip-subnet object for classfull summary of given ip
+
+	Args:
+		ip (str): ip address or number
+
+	Returns:
+		IPv4: IPv4 object
+	"""    	
+	classes = {
+		'0'    : 8 ,   ## A
+		'10'   : 16,   ## B
+		'110'  : 24,   ## C
+		'1110' : None, ## D Multicast, mask not defined
+		'11110': None, ## E Reserved, mask not defined
+	}
+	binary_ip = binsubnet(ip)
+	for leadingbits, mask in classes.items():
+		if binary_ip.startswith(leadingbits):
+			return addressing(f"{ip}/{mask}") if mask else addressing(ip)
 
 def addressing(subnet, ddc_mask=None):
 	"""proives ip-subnet object for various functions on it

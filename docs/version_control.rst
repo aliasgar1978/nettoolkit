@@ -29,6 +29,7 @@ Version 1.x updates
    * - 1.8.0
      - Nov 3, 2024
      - * ``yaml_facts``: New module added to package ( yaml fact file generation added, for cisco_ios and juniper_junos devices ). Documentation in progress.
+       * ``addressing.classful_subnet``: added a new function
 
    * - 1.7.7
      - Oct 19, 2024

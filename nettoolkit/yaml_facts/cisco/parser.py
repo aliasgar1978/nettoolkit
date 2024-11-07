@@ -22,6 +22,7 @@ CISCO_CMD_PARSER_MAP = OrderedDict([
 	('show running-config', (
 			get_system_running, 
 			get_bgp_running, 
+			get_rip_running,
 			get_interfaces_running, 
 			get_vrfs_running,
 			get_ospf_running,

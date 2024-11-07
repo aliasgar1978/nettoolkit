@@ -15,7 +15,7 @@ from .system_version           import get_version
 from .system_serial            import get_chassis_serial
 from .system_run               import get_system_running
 
-from .bgp_run                  import get_bgp_running
+from .protocol_bgp_run         import get_bgp_running
 
 from .statics_run              import get_system_running_routes
 

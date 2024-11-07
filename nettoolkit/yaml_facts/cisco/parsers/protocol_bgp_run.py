@@ -2,74 +2,25 @@
 
 # ------------------------------------------------------------------------------
 from .common import *
+from .protocols import ProtocolsConfig
 # ------------------------------------------------------------------------------
 
 @dataclass
-class BGPConf():
+class BGPConf(ProtocolsConfig):
 	run_list: list[str] = field(default_factory=[])
 
+	supported_af_types = ('ipv4', 'vpnv4', 'ipv6', 'vpnv6')
+
 	def __post_init__(self):
-		self.bgp_list = self._iterate_running()
-		self.vrfs = self._get_instances()
-		self._get_instances_lists_dict()
+		self.bgp_peer_dict = {}
+		self.protocol_config_initialize(protocol='bgp')
+		self._get_bgp_peer_informations()
+		self._iterate_vrfs()
+		self.remove_empty_vrfs(self.bgp_peer_dict)
+
+	def _get_bgp_peer_informations(self):
 		self._get_peer_group_names()
 		self._get_peer_group_dict()
-		#
-		self._get_vrf_router_ids()
-		#
-		self._remove_empty_vrfs()
-
-	def _iterate_running(self):
-		start = False
-		lst = []
-		for line in self.run_list:
-			if not line.strip() : continue
-			start = start or line.startswith("router bgp ")
-			if start and line[0] == "!": break
-			if not start: continue
-			lst.append(line)
-		return lst
-
-	def _get_instances(self):
-		vrfs = { }
-		for line in self.bgp_list:
-			if not line[1:].startswith("address-family"): continue
-			spl = line.strip().split()
-			if not 'vrf' in spl: continue
-			if not vrfs.get(spl[-1]):
-				vrfs[spl[-1]] = {}
-			if spl[1] in ('ipv4', 'vpnv4', 'ipv6', 'vpnv6'):
-				if not vrfs[spl[-1]].get('type'):
-					vrfs[spl[-1]]['type'] = set()
-				vrfs[spl[-1]]['type'].add(spl[1])
-		vrfs[None] = {}
-		return vrfs
-
-	def _get_instances_lists_dict(self):
-		for vrf, vrf_dict in self.vrfs.items():
-			if vrf == None: continue
-			start = False
-			lst = []
-			for line in self.bgp_list:
-				if line.strip().startswith("address-family") and line.strip().endswith(f"vrf {vrf}"):
-					start = True
-					spl = line.strip().split()
-					vrf_type = ''
-					if spl[1] in ('ipv4', 'vpnv4', 'ipv6', 'vpnv6'): vrf_type = spl[1]
-					if not vrf_dict.get('lines'):
-						vrf_dict['lines'] = []
-				if line.strip() == 'exit-address-family': start = False
-				if not start: continue
-				vrf_dict['lines'].append(line.strip())
-		for vrf, vrf_dict in self.vrfs.items():
-			if vrf : continue
-			lst = []
-			for line in self.bgp_list:
-				if line.strip().startswith("address-family"):
-					break
-				if not vrf_dict.get('lines'):
-					vrf_dict['lines'] = []
-				vrf_dict['lines'].append(line.strip())
 
 	def _get_peer_group_names(self):
 		for vrf, vrf_dict in self.vrfs.items():
@@ -147,7 +98,7 @@ class BGPConf():
 
 	# ---------------------------------------------------------------------- #
 
-	def _get_vrf_router_ids(self):
+	def _iterate_vrfs(self):
 		for vrf, vrf_dict in self.vrfs.items():
 			if not vrf_dict.get('lines'): continue
 			for line in vrf_dict['lines']:
@@ -159,11 +110,6 @@ class BGPConf():
 			vrf_dict['router-id'] = spl[-1]
 
 	# ---------------------------------------------------------------------- #
-
-	def _remove_empty_vrfs(self):
-		for vrf in list(self.bgp_peer_dict.keys()):
-			if not self.bgp_peer_dict[vrf]:
-				del(self.bgp_peer_dict[vrf])
 
 # ====================================================================================================
 

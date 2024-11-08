@@ -12,10 +12,22 @@ from .common import *
 class ProtocolsConfig():
 	run_list: list[str] = field(default_factory=[])
 
+	single_instance_protocols = { 'rip', 'bgp' }
+	multi_instance_protocols = { 'ospf', 'eigrp' }
+
+
 	def protocol_config_initialize(self, protocol):
-		self.routing_protocol_config_list = self._get_router_configurations(protocol)
-		self.vrfs = self._get_instances()
-		self._add_instances_lines_to_instance_dict()
+		if protocol in self.single_instance_protocols:		
+			self.routing_protocol_config_list = self._get_router_configurations(protocol)
+			self.vrfs = self._get_instances()
+			self._add_instances_lines_to_instance_dict()
+		elif protocol in self.multi_instance_protocols:
+			self.vrfs = self._get_router_configurations_for_multi_instance_protocols(protocol)
+
+		else:
+			raise Exception(f"UnsupportedProtocol: Protocol detail extraction unavailable for the protocol {protocol}")
+
+	### Single instance Protocol Methods
 
 	def _get_router_configurations(self, protocol):
 		start = False
@@ -82,6 +94,39 @@ class ProtocolsConfig():
 				if not vrf_dict.get('lines'):
 					vrf_dict['lines'] = []
 				vrf_dict['lines'].append(line.strip())
+
+	### Multi instance protocol methods
+
+	def _get_router_configurations_for_multi_instance_protocols(self, protocol):
+		self.protocol_vrf_dict = {}
+		start = False
+		dic = {}
+		for line in self.run_list:
+			if not line.strip() : continue
+			if line.startswith(f"router {protocol} "):
+				spl = line.split()
+				vrf = next_index_item(spl, 'vrf') if 'vrf' in spl else None					
+				process_id, lst = spl[2], []
+				start = True
+				self._add_instance_name_for_multi_instance_protocols(process_id, vrf)
+			if start and line[0] == "!": 
+				dic[process_id] = lst
+				start = False
+				lst.append(line)
+				continue
+			if not start: continue
+			lst.append(line)
+		return dic
+
+	def _add_instance_name_for_multi_instance_protocols(self, process_id, vrf):
+		add_blankdict_key(self.protocol_vrf_dict, process_id)
+		update_key_value(self.protocol_vrf_dict[process_id], 'process-id', process_id)
+		update_key_value(self.protocol_vrf_dict[process_id], 'vrf', vrf)
+
+
+
+
+	### GENERAL
 
 	def _get_attributes(self, lines):
 		attr_dict = {}

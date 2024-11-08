@@ -161,49 +161,15 @@ class OSPF(ProtocolsConfig):
 	]
 
 	def __post_init__(self):
-		self.ospf_vrf_dict = {}
-		self.vrfs = self._get_router_ospf_configurations()
+		self.protocol_config_initialize(protocol='ospf')
+		self.ospf_vrf_dict = self.protocol_vrf_dict
 		self._iterate_vrfs()
 		self.remove_empty_vrfs(self.ospf_vrf_dict)
 
-	def _get_router_ospf_configurations(self):
-		start = False
-		dic = {}
-		for line in self.run_list:
-			if not line.strip() : continue
-			if line.startswith("router ospf "):
-				spl = line.split()
-				vrf = spl[4] if len(spl) > 4 and 'vrf' in spl else None
-				process_id, lst = spl[2], []
-				start = True
-				self.add_instance_name(vrf, spl)
-			if start and line[0] == "!": 
-				dic[vrf] = lst
-				start = False
-				lst.append(line)
-				continue
-			if not start: continue
-			lst.append(line)
-		return dic
-
-	def add_instance_name(self, vrf, spl):
-		# vrf = spl[4] if len(spl) > 4 and 'vrf' in spl else None
-		add_blankdict_key(self.ospf_vrf_dict, vrf)
-		update_key_value(self.ospf_vrf_dict[vrf], 'process-id', spl[2])
 
 	def _iterate_vrfs(self):
-		for vrf, lines in self.vrfs.items():
-			self.ospf_vrf_dict[vrf].update( self._get_attributes(lines))
-
-	def _get_attributes(self, lines):
-		attr_dict = {}
-		for line in lines:
-			line = line.strip()
-			spl  = line.split()
-			for f in self.attr_functions:
-				f(attr_dict, line, spl)
-		return attr_dict		
-
+		for process_id, lines in self.vrfs.items():
+			self.ospf_vrf_dict[process_id].update( self._get_attributes(lines))
 
 
 # ====================================================================================================

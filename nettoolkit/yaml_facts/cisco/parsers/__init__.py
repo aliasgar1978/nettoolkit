@@ -18,6 +18,7 @@ from .prefix_list_run          import get_system_running_prefix_lists
 from .protocol_bgp_run         import get_bgp_running
 from .protocol_ospf_run        import get_ospf_running
 from .protocol_rip_run         import get_rip_running
+from .protocol_eigrp_run       import get_eigrp_running
 
 from .statics_run              import get_system_running_routes
 

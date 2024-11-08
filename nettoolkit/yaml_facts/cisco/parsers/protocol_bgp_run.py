@@ -18,7 +18,7 @@ def __update_item_for_next_index(attr_dict, pg_dict, spl, item, f=None):
 		n_pg_dict[item] = f(next_index_item(spl, item))
 
 def _get_str_next_items(attr_dict, pg_dict, line, spl):
-	items = ('local-as', 'remote-as', 'update-source', 'unsuppress-map', 'advertise-map'
+	items = ('local-as', 'remote-as', 'update-source', 'unsuppress-map', 
 		'exist-map', 'non-exist-map',
 	)
 	for item in items:
@@ -127,8 +127,6 @@ def _get_networks(attr_dict, line, spl):
 			append_attribute(network_dict, 'route-map', spl[spl.index('route-map')+1])
 		if 'backdoor' in spl:
 			append_attribute(network_dict, 'backdoor-route', True)
-
-
 
 def _get_aggregates(attr_dict, line, spl):
 	if spl[0] == 'aggregate-address': 

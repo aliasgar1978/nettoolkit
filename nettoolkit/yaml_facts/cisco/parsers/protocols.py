@@ -4,6 +4,10 @@
 from .common import *
 # ------------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------------
+#  Class
+# ------------------------------------------------------------------------------
+
 @dataclass
 class ProtocolsConfig():
 	run_list: list[str] = field(default_factory=[])
@@ -29,14 +33,15 @@ class ProtocolsConfig():
 		for line in self.routing_protocol_config_list:
 			if not line[1:].startswith("address-family"): continue
 			spl = line.strip().split()
-			if not 'vrf' in spl: continue
+			if 'vrf' not in spl: continue
 			if not vrfs.get(spl[-1]):
 				vrfs[spl[-1]] = {}
 			if spl[1] in self.supported_af_types:
 				if not vrfs[spl[-1]].get('af_type'):
 					vrfs[spl[-1]]['af_type'] = set()
 				vrfs[spl[-1]]['af_type'].add(spl[1])
-		vrfs[None] = {}
+
+		add_blankdict_key(vrfs, None)
 		return vrfs
 
 	def _add_instances_lines_to_instance_dict(self):
@@ -78,7 +83,30 @@ class ProtocolsConfig():
 					vrf_dict['lines'] = []
 				vrf_dict['lines'].append(line.strip())
 
+	def _get_attributes(self, lines):
+		attr_dict = {}
+		for line in lines:
+			line = line.strip()
+			spl  = line.split()
+			for f in self.attr_functions:
+				f(attr_dict, line, spl)
+		return attr_dict		
+
+
 	def remove_empty_vrfs(self, vrf_dict):
 		for vrf in list(vrf_dict.keys()):
 			if not vrf_dict[vrf]:
 				del(vrf_dict[vrf])
+
+
+# ------------------------------------------------------------------------------
+#  functions
+# ------------------------------------------------------------------------------
+
+def get_protocol_instance_dict(protocol, instances_dic):
+	if instances_dic:
+		return {'protocols': {protocol: {'instances': instances_dic}} }
+	else:
+		return {'protocols': {}}
+
+

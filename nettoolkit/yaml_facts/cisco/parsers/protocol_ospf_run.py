@@ -2,169 +2,213 @@
 
 # ------------------------------------------------------------------------------
 from .common import *
+from .protocols import ProtocolsConfig, get_protocol_instance_dict
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+#  OSPF ATTR FUNCS
 # ------------------------------------------------------------------------------
 
-class OSPF():
-	"""parent object for OSPF running config parser
+def _get_router_id(attr_dict, l, spl):
+	if len(spl)>0 and spl[0] == 'router-id':
+		attr_dict['router_id'] = spl[-1]
 
-	Args:
-		cmd_op (list, str): running config output, either list of multiline string
-	"""    	
+def _get_active_interfaces(attr_dict, l, spl):
+	if len(spl)>1 and spl[0] == 'no' and spl[1] == 'passive-interface':
+		append_attribute(attr_dict, 'active_interfaces', spl[-1])
 
-	def __init__(self, cmd_op):
-		"""initialize the object by providing the running config output
-		"""    		    		
-		self.cmd_op = cmd_op
-		self.op_dict = {}
+def _get_networks(attr_dict, l, spl):
+	if len(spl) > 0 and spl[0] == 'network':
+		subnet = spl[1]
+		mask = invmask_to_mask(spl[2])
+		area = spl[4] if spl[3] == 'area' else ''
+		network = str(addressing(subnet+"/"+str(mask)))
+		network_op_dict = add_blankdict_key(attr_dict, 'area')
+		area_dict = add_blankdict_key(network_op_dict, area)
+		append_attribute(area_dict, 'active_on_networks', network)
 
-	def ospf_read(self, func):
-		"""directive function to get the various ospf level output
+def _get_summaries(attr_dict, l, spl):
+	if len(spl)>3 and spl[0] == 'area' and spl[2] == 'range':
+		area = spl[1]
+		subnet = spl[3]
+		mask = to_dec_mask(spl[4])
+		prefix = str(addressing(subnet+"/"+str(mask)))
+		range_op_dict = add_blankdict_key(attr_dict, 'area')
+		area_dict = add_blankdict_key(range_op_dict, area)
+		append_attribute(area_dict, 'area-summaries', prefix)
 
-		Args:
-			func (method): method to be executed on ospf config line
+	elif len(spl)>=3 and spl[0] == 'summary-address':
+		subnet = spl[1]
+		mask = to_dec_mask(spl[2])
+		prefix = str(addressing(subnet+"/"+str(mask)))
+		ext_summary_dict = add_blankdict_key(attr_dict, 'external-summaries')
+		summary_pfx_dict = add_blankdict_key(ext_summary_dict, prefix)
+		if "not-advertise" in spl:
+			append_attribute(summary_pfx_dict, 'advertise', False)
+		if "nssa-only" in spl:
+			append_attribute(summary_pfx_dict, 'nssa-only', True)
+		if "tag" in spl:
+			tag = spl[spl.index('tag') +1]
+			append_attribute(summary_pfx_dict, 'tag', tag)
 
-		Returns:
-			dict: parsed output dictionary
-		"""    		
-		toggle, af, update_dict = False, False, ""
-		op_dicts = {'instances':{}}
-		op_dict = op_dicts['instances']
-		for l in self.cmd_op:
-			spl = l.strip().split()
-			if l.startswith("router ospf "):
-				p = spl[2]
-				vrf = spl[4] if len(spl) > 3 and spl[3] == 'vrf' else ""
-				if not op_dict.get(p): op_dict[p] = {}
-				vrf_op_dict = op_dict[p]
-				vrf_op_dict['vrf']= vrf
-				toggle = True
+def _get_area_types(attr_dict, l, spl):
+	ospf_area_types = {'stub', 'nssa'}
+	if len(spl)>2 and spl[0] == 'area' and spl[2] in ospf_area_types:
+		area = spl[1]
+		range_op_dict = add_blankdict_key(attr_dict, 'area')
+		area_dict = add_blankdict_key(range_op_dict, area)
+		totally = "Totally " if spl[-1] == 'no-summary' else ""
+		area_type = totally + spl[2]
+		append_attribute(area_dict, 'area_type', area_type)
+
+def _get_area_default_cost(attr_dict, l, spl):
+	if len(spl)>2 and spl[0] == 'area' and spl[2] == 'default-cost':
+		area = spl[1]
+		range_op_dict = add_blankdict_key(attr_dict, 'area')
+		area_dict = add_blankdict_key(range_op_dict, area)
+		append_attribute(area_dict, 'default-cost', spl[-1])
+
+def _get_transit_area(attr_dict, l, spl):
+	if len(spl)>2 and spl[0] == 'area' and spl[2] == 'virtual-link':
+		area = spl[1]
+		router_id = spl[3]
+		attribs = ('authentication', 'hello-interval', 'retransmit-interval', 'transmit-delay',
+			'dead-interval', )
+		auth_attribs = ('authentication-key', 'message-digest-key', 'md5')
+		attrib_dict = {attr: spl[spl.index(attr)+1] for attr in attribs if attr in spl}
+		auth_attrib_dict = {}
+		for attr in auth_attribs:
+			if attr in spl:
+				try:
+					auth_attrib_dict[attr] = decrypt_type7( spl[spl.index(attr)+1])
+				except:
+					auth_attrib_dict[attr] = spl[spl.index(attr)+1]
+		#
+		range_op_dict = add_blankdict_key(attr_dict, 'area')
+		area_dict = add_blankdict_key(range_op_dict, area)
+		append_attribute(area_dict, 'area_type', 'transit')
+		append_attribute(area_dict, 'router-id', router_id)
+		merge_dict(area_dict, attrib_dict)
+		merge_dict(area_dict, auth_attrib_dict)
+
+def _get_neighbors(attr_dict, l, spl):
+	if len(spl)>1 and spl[0] == 'neighbor':
+		nbrs_dict = add_blankdict_key(attr_dict, 'neighbors')
+		nbr_dict = add_blankdict_key(nbrs_dict, spl[1])
+		if 'cost' in spl:
+			nbr_dict['cost'] = spl[spl.index('cost')+1]			
+		if 'database-filter' in spl:
+			dfidx = spl.index('database-filter')
+			nbr_dict['database-filter'] = {'filter': spl[dfidx+1], 'direction': spl[dfidx+2]}			
+
+def _get_ospf_cost(attr_dict, l, spl):
+	if l.startswith("ip ospf cost "):
+		attr_dict['cost'] = spl[-1]
+
+def _get_ospf_priority(attr_dict, l, spl):
+	if l.startswith("ip ospf priority "):
+		attr_dict['priority'] = spl[-1]
+
+def _get_ospf_intervals(attr_dict, l, spl):
+	if len(spl) > 2 and spl[2] in ('hello-interval', 'dead-interval'):
+		op_dict = add_blankdict_key(attr_dict, 'intervals')
+		for interval in ('hello', 'dead'):
+			if spl[2].startswith(interval):
+				op_dict[interval] = spl[-1]
+
+def _get_ospf_auto_cost_ref_bw(attr_dict, l, spl):
+	if l.startswith("auto-cost reference-bandwidth "):
+		attr_dict['auto-cost reference-bandwidth'] = spl[-1]
+
+def _get_redistribution(attr_dict, l, spl):
+	if spl[0] == 'redistribute':
+		protocol = spl[1]
+		protocol_id = spl[2]
+		attribs = {'metric', 'metric-type', 'match', 'tag', 'route-map'}
+		static_attribs = {'subnets', 'nssa-only'}
+		attrib_dict = {attr: spl[spl.index(attr)+1] for attr in attribs if attr in spl}
+		op_dict = add_blankdict_key(attr_dict, 'redistribute')
+		protocol_dict = add_blankdict_key(op_dict, protocol)
+		protocol_id_dict = add_blankdict_key(protocol_dict, protocol_id)
+		for attr in static_attribs:
+			if attr in spl:
+				append_attribute(protocol_id_dict, attr, True)
+		merge_dict(protocol_id_dict, attrib_dict)
+
+
+
+# ====================================================================================================
+#  OSPF Config extractor Class
+# ====================================================================================================
+
+@dataclass
+class OSPF(ProtocolsConfig):
+	run_list: list[str] = field(default_factory=[])
+
+	attr_functions = [
+		_get_router_id,
+		_get_active_interfaces,
+		_get_networks,
+		_get_summaries,
+		_get_neighbors,
+		_get_ospf_cost,
+		_get_ospf_priority,
+		_get_ospf_intervals,
+		_get_area_types,
+		_get_area_default_cost,
+		_get_transit_area,
+		_get_ospf_auto_cost_ref_bw,
+		_get_redistribution,
+	]
+
+	def __post_init__(self):
+		self.ospf_vrf_dict = {}
+		self.vrfs = self._get_router_ospf_configurations()
+		self._iterate_vrfs()
+		self.remove_empty_vrfs(self.ospf_vrf_dict)
+
+	def _get_router_ospf_configurations(self):
+		start = False
+		dic = {}
+		for line in self.run_list:
+			if not line.strip() : continue
+			if line.startswith("router ospf "):
+				spl = line.split()
+				vrf = spl[4] if len(spl) > 4 and 'vrf' in spl else None
+				process_id, lst = spl[2], []
+				start = True
+				self.add_instance_name(vrf, spl)
+			if start and line[0] == "!": 
+				dic[vrf] = lst
+				start = False
+				lst.append(line)
 				continue
-			if l.startswith("!"): toggle = False
-			if toggle:
-				func(vrf_op_dict, l, spl)
+			if not start: continue
+			lst.append(line)
+		return dic
 
-		return op_dicts
+	def add_instance_name(self, vrf, spl):
+		# vrf = spl[4] if len(spl) > 4 and 'vrf' in spl else None
+		add_blankdict_key(self.ospf_vrf_dict, vrf)
+		update_key_value(self.ospf_vrf_dict[vrf], 'process-id', spl[2])
 
+	def _iterate_vrfs(self):
+		for vrf, lines in self.vrfs.items():
+			self.ospf_vrf_dict[vrf].update( self._get_attributes(lines))
 
-
-	def router_id(self):
-		"""update the router-id details
-		"""    		
-		merge_dict(self.op_dict, self.ospf_read(self.get_router_id))
-
-	@staticmethod
-	def get_router_id(vrf_op_dict, l, spl):
-		"""parser function to get router-id details
-
-		Args:
-			vrf_op_dict (dict): dictionary with a vrf info
-			l (str): string line to parse
-			spl (list): splitted line to parse
-
-		Returns:
-			None: None
-		"""
-
-		if len(spl)>0 and spl[0] == 'router-id':
-			vrf_op_dict['router_id'] = spl[-1]
+	def _get_attributes(self, lines):
+		attr_dict = {}
+		for line in lines:
+			line = line.strip()
+			spl  = line.split()
+			for f in self.attr_functions:
+				f(attr_dict, line, spl)
+		return attr_dict		
 
 
-	def active_interfaces(self):
-		"""update the active interfaces
-		"""    		
-		merge_dict(self.op_dict, self.ospf_read(self.get_active_interfaces))
 
-	@staticmethod
-	def get_active_interfaces(vrf_op_dict, l, spl):
-		"""parser function to get active interfaces
-
-		Args:
-			vrf_op_dict (dict): dictionary with a vrf info
-			l (str): string line to parse
-			spl (list): splitted line to parse
-
-		Returns:
-			None: None
-		"""
-		if len(spl)>1 and spl[0] == 'no' and spl[1] == 'passive-interface':
-			append_attribute(vrf_op_dict, 'active_interfaces', spl[-1])			
-
-
-	def networks(self):
-		"""update the networks
-		"""    		
-		merge_dict(self.op_dict, self.ospf_read(self.get_networks))
-
-	@staticmethod
-	def get_networks(vrf_op_dict, l, spl):
-		"""parser function to get networks
-
-		Args:
-			vrf_op_dict (dict): dictionary with a vrf info
-			l (str): string line to parse
-			spl (list): splitted line to parse
-
-		Returns:
-			None: None
-		"""
-		if len(spl) > 0 and spl[0] == 'network':
-			subnet = spl[1]
-			mask = invmask_to_mask(spl[2])
-			area = spl[4] if spl[3] == 'area' else ''
-			network = str(addressing(subnet+"/"+str(mask)))
-			if not vrf_op_dict.get('area'):
-				vrf_op_dict['area'] = {}
-			network_op_dict = vrf_op_dict['area']
-			if not network_op_dict.get(area): network_op_dict[area] = {}
-			append_attribute(network_op_dict[area], 'active_on_networks', network)
-
-
-	def summaries(self):
-		"""update the ospf area range summaries
-		"""    		
-		merge_dict(self.op_dict, self.ospf_read(self.get_summaries))
-
-	@staticmethod
-	def get_summaries(vrf_op_dict, l, spl):
-		"""parser function to get ospf area range summaries
-
-		Args:
-			vrf_op_dict (dict): dictionary with a vrf info
-			l (str): string line to parse
-			spl (list): splitted line to parse
-
-		Returns:
-			None: None
-		"""
-		if len(spl)>3 and spl[0] == 'area' and spl[2] == 'range':
-			area = spl[1]
-			subnet = spl[3]
-			mask = to_dec_mask(spl[4])
-			prefix = str(addressing(subnet+"/"+str(mask)))
-			if not vrf_op_dict.get('area'):
-				vrf_op_dict['area'] = {}
-			range_op_dict = vrf_op_dict['area']
-
-			if not range_op_dict.get(area):
-				range_op_dict[area] = {}
-			append_attribute(range_op_dict[area], 'area-summaries', prefix)
-
-		elif len(spl)>=3 and spl[0] == 'summary-address':
-			subnet = spl[1]
-			mask = to_dec_mask(spl[2])
-			prefix = str(addressing(subnet+"/"+str(mask)))
-			if not vrf_op_dict.get('external'):
-				vrf_op_dict['external'] = {}
-			ext_op_dict = vrf_op_dict['external']
-			append_attribute(ext_op_dict, 'summaries', prefix)
-
-	def _remove_empty_instances(self):
-		for instance in list(self.op_dict.keys()):
-			if not self.op_dict[instance]:
-				del(self.op_dict[instance])
-
-
-# ------------------------------------------------------------------------------
+# ====================================================================================================
+#  RIP Config extractor function
+# ====================================================================================================
 
 def get_ospf_running(command_output):
 	"""defines set of methods executions. to get various ospf parameters.
@@ -175,14 +219,7 @@ def get_ospf_running(command_output):
 	Returns:
 		dict: output dictionary with parsed with ospf fields
 	"""    	
-	R  = OSPF(command_output)
-	R.router_id()
-	R.active_interfaces()
-	R.networks()
-	R.summaries()
-	R._remove_empty_instances()
+	O  = OSPF(command_output)
+	return get_protocol_instance_dict(protocol='ospf', instances_dic=O.ospf_vrf_dict)
 	
-	if R.op_dict:
-		return {'protocols': { 'ospf' : R.op_dict} }
-	else:
-		return {'protocols': {}}
+# ====================================================================================================

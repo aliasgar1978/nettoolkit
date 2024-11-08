@@ -297,9 +297,17 @@ class RunningInterfaces():
 		"""    		
 		auth, auth_type = None, None
 		if l.strip().startswith("ip ospf authentication-key"):
-			port_dict['ospf_auth_key'] = decrypt_type7(l.strip().split()[-1])
-		if l.strip().startswith("ip ospf network "):
-			port_dict['ospf_auth_type'] = l.strip().split()[-1]
+			ospf_dict = add_blankdict_key(port_dict, 'ospf')
+			update_key_value(ospf_dict, 'auth_key', decrypt_type7(l.strip().split()[-1]))
+		elif l.strip().startswith("ip ospf network "):
+			ospf_dict = add_blankdict_key(port_dict, 'ospf')
+			update_key_value(ospf_dict, 'network_type', l.strip().split(' ospf network ')[-1])
+		elif l.strip().startswith("ip ospf message-digest-key "):
+			ospf_dict = add_blankdict_key(port_dict, 'ospf')
+			update_key_value(ospf_dict, 'md5_key', decrypt_type7(l.strip().split()[-1]))
+		elif l.strip().startswith("ip ospf authentication "):
+			ospf_dict = add_blankdict_key(port_dict, 'ospf')
+			update_key_value(ospf_dict, 'auth_type', l.strip().split()[-1])
 		if not auth and not auth_type: return None
 
 	def interface_v4_helpers(self):

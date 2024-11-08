@@ -102,22 +102,27 @@ def get_int_mask(ip):
 def add_blankdict_key(dic, key):
 	if not dic.get(key):
 		dic[key] = {}
+	return dic[key]
 
 def add_blankset_key(dic, key):
 	if not dic.get(key):
 		dic[key] = set()
+	return dic[key]
 
 def add_blanklist_key(dic, key):
 	if not dic.get(key):
 		dic[key] = []
+	return dic[key]
 
 def add_blanktuple_key(dic, key):
 	if not dic.get(key):
 		dic[key] = ()
+	return dic[key]
 
 def add_blanknone_key(dic, key):
 	if not dic.get(key):
 		dic[key] = None
+	return dic[key]
 
 def update_key_value(dic, key, value):
 	if not dic.get(key):

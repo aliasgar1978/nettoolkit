@@ -26,6 +26,9 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.8.0
+     - release soon
+     - * ``yaml_facts``: New module ( **yaml facts generation**, for cisco_ios and juniper_junos )
    * - 1.7.6
      - Oct 12, 2024
      - * fixed - nettoolkit-gui,  custom executions.

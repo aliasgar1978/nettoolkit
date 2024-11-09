@@ -25,6 +25,7 @@ CISCO_CMD_PARSER_MAP = OrderedDict([
 			get_rip_running,
 			get_eigrp_running,
 			get_ospf_running,
+			get_isis_running,
 			get_interfaces_running, 
 			get_vrfs_running,
 			get_system_running_routes,

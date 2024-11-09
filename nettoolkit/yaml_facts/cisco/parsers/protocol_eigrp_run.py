@@ -147,7 +147,7 @@ def _get_eigrp_passive_intf(attr_dict, l, spl):
 		if "passive-interface" == spl[-1]: 
 			append_attribute(attr_dict, "passive-interface", False)
 		else:
-			append_attribute(attr_dict, "active-interface", next_index_item(spl, "passive-interface"))
+			append_attribute(attr_dict, "no passive-interface", next_index_item(spl, "passive-interface"))
 	elif "passive-interface" == spl[-1]:
 		append_attribute(attr_dict, "passive-interface", True)
 	else:
@@ -191,10 +191,8 @@ class EIGRPConf(ProtocolsConfig):
 		self.eigrp_af_lines_dict = self.get_eigrp_af_lines_dict(self.eigrp_lines_dict, "address-family ", "exit-address-family")
 		self.eigrp_af_lines_dict = self.get_eigrp_sub_af_lines_dict(self.eigrp_af_lines_dict, "topology ", "exit-af-topology")
 		self.eigrp_af_lines_dict = self.get_eigrp_sub_af_lines_dict(self.eigrp_af_lines_dict, "af-interface ", "exit-af-interface")
-
 		self._iterate_vrfs()
 		self.shirnk_None_vrf_dict()
-		# self.remove_empty_vrfs(self.eigrp_vrf_dict)
 
 	def shirnk_None_vrf_dict(self):
 		for process_id in list(self.eigrp_vrf_dict.keys()):

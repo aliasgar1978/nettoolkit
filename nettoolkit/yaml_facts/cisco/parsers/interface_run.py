@@ -416,6 +416,59 @@ class RunningInterfaces():
 			add_blankdict_key(port_dict, 'rip')
 			append_attribute(port_dict['rip'], 'summaries', network)
 
+
+	def interface_eigrp(self):
+		func = self.get_interface_eigrp
+		merge_dict(self.interface_dict, self.interface_read(func))
+
+
+	def get_interface_eigrp(self, port_dict, l):	
+		l = l.strip()
+		if l.find('eigrp') == -1: return
+		spl = l.strip().split()
+		dic = add_blankdict_key(port_dict, 'eigrp')
+		dic = add_blankdict_key(dic, next_index_item(spl, 'eigrp'))
+
+		self._int_eigrp_auth(dic, l, spl)
+		self._int_eigrp_summary(dic, l, spl)
+		self._int_eigrp_splithorizon(dic, l, spl)
+		self._int_eigrp_attrs(dic, l, spl)
+
+	def _int_eigrp_auth(self, dic, l, spl):
+		if 'authentication' not in spl: return
+		if 'mode' in spl:
+			dic = add_blankdict_key(dic, 'authentication')
+			update_key_value(dic, 'mode', spl[-1])
+		if 'key-chain' in spl:
+			dic = add_blankdict_key(dic, 'authentication')
+			update_key_value(dic, 'key-chain', spl[-1] )
+
+	def _int_eigrp_summary(self, dic, l, spl):
+		if "summary-address" not in spl: return
+		dic = add_blankdict_key(dic, 'summaries')
+		mask = None if "/" in spl[4] else spl[5]
+		diff = 1 if "/" in spl[4] else 0
+		network = addressing(spl[4], mask)
+		dic = add_blankdict_key(dic, str(network))
+		if len(spl) > 6-diff:
+			try:
+				append_attribute(dic, 'AD', spl[6-diff])
+			except: pass
+			if 'leak-map' in spl:
+				update_key_value(dic, 'leak-map', next_index_item(spl, 'leak-map'))
+
+	def _int_eigrp_splithorizon(self, dic, l, spl):
+		if "split-horizon" not in spl: return
+		dic["split-horizon"] = spl[0] != 'no'
+
+	def _int_eigrp_attrs(self, dic, l, spl):
+		attrs = ('hello-interval', 'hold-time', 'bandwidth-percent', )
+		for attr in attrs:
+			if attr not in spl: continue
+			dic[attr] = spl[-1]
+
+
+
 	# # Add more interface related methods as needed.
 
 
@@ -445,6 +498,7 @@ def get_interfaces_running(command_output):
 	R.interface_channel_group()
 	R.interface_ospf_auth()
 	R.interface_rip()
+	R.interface_eigrp()
 	R.interface_udld()
 	R.interface_v4_helpers()
 	R.interface_v6_helpers()

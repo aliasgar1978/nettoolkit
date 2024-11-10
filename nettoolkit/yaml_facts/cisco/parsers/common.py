@@ -8,7 +8,7 @@ from collections import OrderedDict
 from dataclasses import dataclass, field
 from nettoolkit.nettoolkit_common import *
 from nettoolkit.nettoolkit_common.gpl import *
-from nettoolkit.addressing import to_dec_mask, invmask_to_mask, addressing, classful_subnet
+from nettoolkit.addressing import to_dec_mask, invmask_to_mask, addressing, classful_subnet, shrink
 
 from nettoolkit.facts_finder.generators.commons import *
 from nettoolkit.facts_finder.generators.cisco.common import *
@@ -53,6 +53,12 @@ def parse_to_dict_using_ntc(cmd, command_output):
 
 def next_index_item(lst, item):
 	return lst[lst.index(item)+1]
+
+def cisco_addressing_on_list(spl, ip_index, mask_index):
+	mask = None if "/" in spl[ip_index] else spl[mask_index]
+	return addressing(spl[ip_index], mask)
+
+
 
 # ==============================================================================================
 #  Classes

@@ -41,8 +41,8 @@ CISCO_IFSH_IDENTIFIERS = {
 }
 JUNIPER_IFS_IDENTIFIERS = {
 	"VLAN": ('irb', 'vlan', 'iw'),
-	"LOOPBACK": 'lo',
-	"RANGE": 'interface-range',
+	"LOOPBACK": ('lo', ),
+	"RANGE": ('interface-range', ),
 	"TUNNEL": ('lt', 'gr', 'ip', 'mt', 'vt', 'vtep', 'xt' ),
 	"AGGREGATED": ('ae', 'as', 'fc'),
 	"PHYSICAL": ('fe', 'ge', 'xe', 'et', 'xle', 'fte', ),

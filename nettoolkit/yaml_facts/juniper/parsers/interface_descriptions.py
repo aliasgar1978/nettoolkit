@@ -16,6 +16,7 @@ def get_interface_description(cmd_op):
 			continue
 		spl = l.strip().split()
 		p = spl[0]
+		if p.endswith(".0"): p = p[:-2]
 		port = get_int_port_dict(op_dict=op_dict, port=p)
 		if not (port.get('description') and port['description']):
 			port['description'] = get_string_trailing(l, desc_begin_at)

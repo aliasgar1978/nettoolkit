@@ -30,8 +30,8 @@ JUNIPER_CMD_PARSER_MAP = OrderedDict([
 		)
 	),
 	('show arp', (get_arp_table,)),
-	# 'show interfaces terse', (),
-	# 'show bgp summary', (),
+	# 'show interfaces terse', (),     ## Not implemented yet
+	# 'show bgp summary', (),          ## Not implemented yet
 
 ])
 

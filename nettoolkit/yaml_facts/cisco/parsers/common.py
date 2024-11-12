@@ -51,9 +51,6 @@ def parse_to_list_using_ntc(cmd, command_output):
 def parse_to_dict_using_ntc(cmd, command_output):
 	return parse_to_dict_cmd(cmd, remove_remarks(command_output), CISCO_CMD_NTC_PARSER_FILE_MAP)
 
-def next_index_item(lst, item):
-	return lst[lst.index(item)+1]
-
 def cisco_addressing_on_list(spl, ip_index, mask_index):
 	mask = None if "/" in spl[ip_index] else spl[mask_index]
 	return addressing(spl[ip_index], mask)

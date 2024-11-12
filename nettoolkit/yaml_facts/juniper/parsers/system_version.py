@@ -25,3 +25,10 @@ def get_version(cmd_op):
 			fpc_dict['junos_version'] = l.strip().split()[-1].replace("[", '').replace("]", '')
 	return {'system': op_dict}
 # ------------------------------------------------------------------------------
+##
+#
+#  NTC Template not givinng optimal result for chassis switches
+#  hence creating it manually
+#
+##
+# ------------------------------------------------------------------------------

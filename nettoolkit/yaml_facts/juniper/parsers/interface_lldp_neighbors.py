@@ -19,8 +19,8 @@ def get_lldp_neighbour(cmd_op):
 			port_info = standardize_if(dic['PORT_INFO'])
 		except:
 			port_info = dic['PORT_INFO']
-		nbr['port_info'] = port_info
-		nbr['device_suspect'] = remote_device
+		nbr['port'] = port_info
+		nbr['suspected'] = remote_device
 
 	return {'interfaces': nbr_d}
 

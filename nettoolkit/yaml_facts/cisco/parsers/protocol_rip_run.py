@@ -89,6 +89,7 @@ class RIPConf(ProtocolsConfig):
 
 	def _iterate_vrfs(self):
 		for vrf, vrf_dict in self.vrfs.items():
+			if not vrf_dict.get('lines'): continue
 			self.rip_vrf_dict[vrf] = self._get_attributes(vrf_dict['lines'])
 
 # ====================================================================================================

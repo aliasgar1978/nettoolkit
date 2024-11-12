@@ -10,12 +10,14 @@ from nettoolkit.pyJuniper import *
 # common functions
 # ================================================================================================
 
-def append_attribute(dic, attribute, value):
+def append_attribute(dic, attribute, value, remove_duplicate=False):
 	if not dic.get(attribute):
 		dic[attribute] = value		
 	elif dic[attribute] and isinstance(dic[attribute], str):
+		if remove_duplicate and value == dic[attribute]: return
 		dic[attribute] = [ dic[attribute], value ]
 	elif dic[attribute] and isinstance(dic[attribute], list):
+		if remove_duplicate and value in dic[attribute]: return
 		dic[attribute].append( value )
 	else:
 		dic[attribute] = value
@@ -127,3 +129,6 @@ def add_blanknone_key(dic, key):
 def update_key_value(dic, key, value):
 	if not dic.get(key):
 		dic[key] = value
+
+def next_index_item(lst, item):
+	return lst[lst.index(item)+1]

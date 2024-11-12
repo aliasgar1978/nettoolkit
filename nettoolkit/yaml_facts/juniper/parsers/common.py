@@ -42,14 +42,14 @@ def get_int_port_dict(op_dict, port):
 		op_dict[int_filter] = {}
 	int_filter_dict = op_dict[int_filter]
 	#
+	return get_numbered_port_dict(int_filter_dict, port)
+
+def get_numbered_port_dict(op_dict, port):
 	if port.startswith("irb."): 
 		port=int(port[4:])
 	elif port.startswith("ae") or port.startswith("lo"): 
 		port=port[2:]
-	#
-	if not int_filter_dict.get(port): 
-		int_filter_dict[port] = {}
-	return int_filter_dict[port]
+	return add_blankdict_key(op_dict, port)
 
 def parse_to_list_using_ntc(cmd, command_output):
 	return parse_to_list_cmd(cmd, remove_remarks(command_output), JUNIPER_CMD_NTC_PARSER_FILE_MAP)

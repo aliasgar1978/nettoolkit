@@ -5,135 +5,119 @@ from .common import *
 from .run import Running
 # ------------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------------
+#  static parser functions
+# ------------------------------------------------------------------------------
+
+def get_static_next_hop(op_dict, spl):
+	if spl[1] != 'next-hop': return 
+	append_attribute(op_dict, attribute='next_hop', value=spl[2])
+
+def get_static_preferance(op_dict, spl):
+	if spl[1] != 'preference': return 
+	append_attribute(op_dict, attribute='adminisrative_distance', value=spl[2])
+
+def get_static_tag(op_dict, spl):
+	if spl[1] != 'tag': return 
+	append_attribute(op_dict, attribute='tag_value', value=spl[2])
+
+def get_static_remark(op_dict, spl):
+	if "comment:" not in spl: return 
+	remark = " ".join(spl[spl.index("comment:")+1:])
+	append_attribute(op_dict, attribute='remark', value=remark)
+
+def get_static_resolve(op_dict, spl):
+	if "resolve" not in spl: return 
+	append_attribute(op_dict, attribute='resolve', value=True)
+
+def get_static_retain(op_dict, spl):
+	if "retain" not in spl: return 
+	append_attribute(op_dict, attribute='retain', value=True)
+
+# ------------------------------------------------------------------------------
+#  statics extractor class
+# ------------------------------------------------------------------------------
+
+@dataclass
 class RunningRoutes(Running):
-	"""object for routes level config parser
-	"""    	
+	cmd_op: list[str,] = field(default_factory=[])
 
-	def __init__(self, cmd_op):
-		"""initialize the object by providing the  config output
+	route_spl_str = {
+		4: ' routing-options static route ',
+		6: ' routing-options rib blue.inet6.0 static route ',
+	}
 
-		Args:
-			cmd_op (list, str): config output, either list of multiline string
-		""" 
-		# self.n = 0   		    		
-		super().__init__(cmd_op)
+	attr_functions = [
+		get_static_next_hop,
+		get_static_preferance,
+		get_static_tag,
+		get_static_remark,
+		get_static_resolve,
+		get_static_retain,
+
+	]
+
+	def __post_init__(self):
+		super().__post_init__()
 		self.route_dict = {}
+		for v, spl_str in self.route_spl_str.items():
+			self.filter_n_merge(v, spl_str)
 
-	# ----------------------------------------------------------------------------- #
-	def route_read(self, func, v=4):
-		"""directive function to get the various static routes level output
+	def filter_n_merge(self, v, spl_str):
+		routes_lines = self.filter_routes_lines(spl_str)
+		vrf_and_route_tuple = self.split_vrf_and_route_portions(routes_lines, spl_str)
+		vrfs = self.get_vrf_list(vrf_and_route_tuple)
+		vrf_pfx_lines = self.get_vrf_pfx_lines(vrf_and_route_tuple, vrfs)
+		attr_dict = self.get_attributes(vrf_pfx_lines, version=v)
+		merge_dict( self.route_dict, attr_dict )
 
-		Args:
-			func (method): method to be executed on set commands
+	def filter_routes_lines(self, route_spl_str):
+		return [line.strip() for line in self.set_cmd_op if line.find(route_spl_str) > -1]
 
-		Returns:
-			dict: parsed output dictionary
-		"""
-		v4spl_str = ' routing-options static route '
-		v6spl_str = ' routing-options rib blue.inet6.0 static route '
-		if v == 4: spl_str = v4spl_str
-		if v == 6: spl_str = v6spl_str
-		prev_prefix, prev_vrf = "", ""		
-		ports_dict = {}
-		for l in self.set_cmd_op:
-			if blank_line(l): continue
-			if l.strip().startswith("#"): continue
-			if not l.find(spl_str) > -1: continue
-			vrf_spl_route = l.split(spl_str)
-			vrf_spl_sect = vrf_spl_route[0].split()
-			route_spl_sect = vrf_spl_route[-1].split()
-			prefix = route_spl_sect[0]
-			vrf = vrf_spl_sect[2] if len(vrf_spl_sect)>2 else ""
-			if prefix != prev_prefix or vrf != prev_vrf:
-				if not self.route_dict.get(vrf):
-					self.route_dict[vrf] = {}
-				vrf_routes = self.route_dict[vrf]
-				if not vrf_routes.get(prefix):
-					vrf_routes[prefix] = {}
-				vrf_pfx_route = vrf_routes[prefix]
+	def split_vrf_and_route_portions(self, routes_lines, route_spl_str):
+		return [ [item.strip().split() for item in line.split(route_spl_str)] for line in routes_lines]
 
-			prev_prefix = prefix
-			prev_vrf = vrf 
+	def get_vrf_list(self, vrf_and_route_tuple):
+		vrfs = set()
+		for vrf_l, route_l in  vrf_and_route_tuple:
+			# spl_vrf_l = vrf_l.strip().split()
+			if len(vrf_l)>2:
+				vrfs.add(vrf_l[2])
+			else:
+				vrfs.add(None)
+		return vrfs
 
-			func(vrf_pfx_route, l, vrf_spl_sect, route_spl_sect, v)
-		return ports_dict
+	def get_vrf_pfx_lines(self, vrf_and_route_tuple, vrfs):
+		vrf_pfx_lines = {}		
+		for vrf in vrfs:
+			vrf_dict = add_blankdict_key(vrf_pfx_lines, vrf)
+			for vrf_l, route_l in vrf_and_route_tuple:
+				if (len(vrf_l)>2 and vrf != vrf_l[2]) or (len(vrf_l) < 2 and vrf is not None): continue
+				pfx = route_l[0]
+				pfx_list = add_blanklist_key(vrf_dict, pfx)
+				pfx_list.append(route_l)
+		return vrf_pfx_lines
 
-	# ----------------------------------------------------------------------------- #
-
-	def routes_dict(self):
-		"""update the route details
-		"""   
-		func = self.get_route_dict
-		merge_dict(self.route_dict, self.route_read(func, 4))
-
-	def v6routes_dict(self):
-		"""update the route details
-		"""   
-		func = self.get_route_dict
-		merge_dict(self.route_dict, self.route_read(func, 6))
-
-	@staticmethod
-	def get_route_dict(dic, l, vrf_spl_sect, route_spl_sect, v):
-		"""parser function to update route details
-
-		Args:
-			dic (dict): blank dictionary to update a route info
-			l (str): line to parse
-
-		Returns:
-			None: None
-		"""
-		## Do not use negative index for any items other than remark, it may not work.
-		#
-		# if not dic.get('next_hop'):
-		# 	dic['next_hop'] = ''
-		#
-		if route_spl_sect[1] == 'next-hop': 
-			next_hop = route_spl_sect[2]
-			append_attribute(dic, attribute='next_hop', value=route_spl_sect[2])
-
-		if route_spl_sect[1] == 'preference': 
-			append_attribute(dic, attribute='adminisrative_distance', value=route_spl_sect[2])
-		if route_spl_sect[1] == 'tag': 
-			append_attribute(dic, attribute='tag_value', value=route_spl_sect[2])
-		if not dic.get('version'): 
-			dic['version'] = v
-		if not dic.get('remark'): 
-			remark = l.split("  ## comment: ")[-1] if l.find("  ## comment: ")>1 else ""
-			append_attribute(dic, attribute='remark', value=remark)
-		#
-		if not dic.get('resolve'):  dic['resolve'] = True if l.find(" resolve")>1 else ""
-		if not dic.get('retain'):   dic['retain']  = True if l.find(" retain")>1  else ""
-
-
-
-
-
-	# # Add more static route related methods as needed.
-
-
+	def get_attributes(self, vrf_pfx_lines, version):
+		attr_dict = {}
+		for vrf, vrf_dict in vrf_pfx_lines.items():
+			vrf_attr_dict = add_blankdict_key(attr_dict, vrf)
+			ip_vrf_attr_dict = add_blankdict_key(vrf_attr_dict, f"ipv{version}")
+			for pfx, lines in vrf_dict.items():
+				vrf_pfx_attr_dict = add_blankdict_key(ip_vrf_attr_dict, pfx)
+				for spl in lines:
+					for f in self.attr_functions:
+						# try:
+							f(vrf_pfx_attr_dict, spl)
+						# except IndexError: pass
+		return attr_dict
 
 
 # ------------------------------------------------------------------------------
-
-
+#  system parser calling function
+# ------------------------------------------------------------------------------
 def get_system_running_routes(cmd_op):
-	"""defines set of methods executions. to get various instance of route parameters.
-	uses RunningRoutes in order to get all.
-
-	Args:
-		cmd_op (list, str): running config output, either list of multiline string
-
-	Returns:
-		dict: output dictionary with parsed with system fields
-	"""    	
 	R  = RunningRoutes(cmd_op)
-	R.routes_dict()
-	R.v6routes_dict()
-
 	return {'statics': R.route_dict}
-
-
-
 # ------------------------------------------------------------------------------
 

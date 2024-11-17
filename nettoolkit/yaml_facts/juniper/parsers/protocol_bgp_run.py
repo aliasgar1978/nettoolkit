@@ -5,7 +5,6 @@ from .common import *
 from .run import Running, jProtocolLines, VrfLines, PeerLines
 # ------------------------------------------------------------------------------
 
-
 class BGPPeers(Running):
 
 	def __call__(self):

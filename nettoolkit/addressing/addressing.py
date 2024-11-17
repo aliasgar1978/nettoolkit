@@ -55,7 +55,10 @@ def shrink(v6subnet, withMask=True):
 		str: shrinked v6 subnet
 	"""	
 	if v6subnet.find("::") > -1: return v6subnet
-	if withMask: mask = v6subnet.split("/")[1]
+	try:
+		if withMask: mask = v6subnet.split("/")[1]
+	except Exception as e:
+		raise Exception(f"InvalidInput {v6subnet}, {withMask}\n{e}")
 	s = v6subnet.split("/")[0].split(":")
 
 	zero_count, zero_counts, zerostart = 0 , {}, False

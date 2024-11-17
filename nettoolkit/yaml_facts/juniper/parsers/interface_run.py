@@ -24,11 +24,6 @@ def get_int_ip_details(port_dict, l, spl):
 		dic = add_blankdict_key(port_dict, 'secondary') if port_dict.get("primary") else port_dict
 	else:
 		dic = add_blankdict_key(port_dict, ip_type)	
-		
-	# port_dict['inet_address'] = inet_address
-	# port_dict['inet_subnet']  = inet_subnet
-	# else:
-	# 	dic = add_blankdict_key(port_dict, ip_type)	
 	dic['inet_address'] = inet_address
 	dic['inet_subnet']  = inet_subnet
 
@@ -298,7 +293,7 @@ def set_of_voice_vlans(set_cmd_op):
 
 
 # ------------------------------------------------------------------------------
-#  system parser calling function
+#  interfaces parser calling function
 # ------------------------------------------------------------------------------
 def get_interfaces_running(cmd_op):
 	R  = RunningInterfaces(cmd_op)

@@ -46,7 +46,7 @@ JUNIPER_IFS_IDENTIFIERS = {
 	"TUNNEL": ('lt', 'gr', 'ip', 'mt', 'vt', 'vtep', 'xt' ),
 	"AGGREGATED": ('ae', 'as', 'fc'),
 	"PHYSICAL": ('fe', 'ge', 'xe', 'et', 'xle', 'fte', ),
-	"MANAGEMENT": ('mg', 'em', 'me', 'fxp', 'vme'),
+	"MANAGEMENT": ('mg', 'em', 'me', 'fxp', 'vme', 'bme', 'bm'),
 	"INTERNAL": ('sxe', 'bcm', 'cp', 'demux', 'dsc', 'es', 'gre', 'ipip', 'ixgbe', 'lc','lsi', 'mo',
 		'ms', 'pd', 'pimd', 'rlsq', 'rms', 'rsp', 'sp', 'tap', 'umd', 'vsp', 'vc4',  ),
 	"CIRCUIT": ('at', 'cau4', 'ce1', 'coc1', 'coc3', 'coc12', 'coc48', 'cstm1', 'cstm4', 'cstm16', 

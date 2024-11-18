@@ -26,6 +26,8 @@ JUNIPER_CMD_NTC_PARSER_FILE_MAP = {
 	'show chassis hardware' : 'juniper_junos_show_chassis_hardware.textfsm',
 	'show lldp neighbors'   : 'juniper_junos_show_lldp_neighbors.textfsm'  ,
 	# 'show version'          : 'juniper_junos_show_version.textfsm',        # NIU, chassis info wrong
+	'show arp'              : 'juniper_junos_show_arp.textfsm',
+
 }
 
 

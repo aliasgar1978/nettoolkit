@@ -25,5 +25,6 @@ setuptools.setup(
     ],
     package_data={
         'nettoolkit.nettoolkit.forms':  ['cable_n_connectors.xlsx', ],
+        'nettoolkit.yaml_facts.templates':  ['*.textfsm', ],
     },
 )

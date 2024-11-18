@@ -45,7 +45,7 @@ def parse_to_dict(template_file, data_list):
 
 
 
-def get_template_dir():
+def get_template_dir(template_path):
 	folder = ""
 	for path in sys.path:
 		p = Path(path)
@@ -56,14 +56,36 @@ def get_template_dir():
 	if not folder:
 		print(f"Could not locate ntc template directory...")
 	# template_dir = os.path.join(p, "templates")
-	template_dir = p.resolve().parents[0].joinpath("site-packages/ntc_templates/templates")
+	template_dir = p.resolve().parents[0].joinpath(template_path)
 	return template_dir
 
 def get_template_file(abs_cmd, cmd_parser_file_map):
-	p = get_template_dir()
 	if not cmd_parser_file_map.get(abs_cmd): return ""
+	#
+	file = get_ntc_template_file(abs_cmd, cmd_parser_file_map)
+	if is_exist(file): 
+		return file
+	#
+	file = get_self_template_file(abs_cmd, cmd_parser_file_map)
+	if is_exist(file): 
+		return file
+	else:
+		raise Exception(f"Unable to read file {file}, check file does exist..")
+
+def get_ntc_template_file(abs_cmd, cmd_parser_file_map):
+	p = get_template_dir("site-packages/ntc_templates/templates")
 	return str(p.joinpath(cmd_parser_file_map[abs_cmd]))
 
+def get_self_template_file(abs_cmd, cmd_parser_file_map):
+	p = get_template_dir("site-packages/nettoolkit/yaml_facts/templates")
+	return str(p.joinpath(cmd_parser_file_map[abs_cmd]))
+
+def is_exist(file):
+	try:
+		with open(file, 'r') as f: pass
+		return True
+	except:
+		return False
 
 # ==============================================================================================
 #  Classes

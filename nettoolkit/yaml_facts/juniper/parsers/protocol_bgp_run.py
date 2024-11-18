@@ -2,30 +2,99 @@
 
 # ------------------------------------------------------------------------------
 from .common import *
-from .run import Running, jProtocolLines, VrfLines, PeerLines
+from .run import ProtocolObject
 # ------------------------------------------------------------------------------
 
-class BGPPeers(Running):
+# ------------------------------------------------------------------------------
+#  bgp parser functions
+# ------------------------------------------------------------------------------
+def get_bgp_peer_peers(peer_dict, spl):
+	if 'neighbor' not in spl: return
+	dic = add_blankdict_key(peer_dict, 'peers')
+	add_blankdict_key(dic, spl[5])
 
-	def __call__(self):
-		self.jPtObj = jProtocolLines(self.set_cmd_op, 'bgp')
-		self.instance_dict = self._iterate_over_vrfs()
-		self.instance_vrf_dict =  self._iterate_over_vrfs_for_instance()
+def get_bgp_peer_description(peer_dict, spl):
+	if "description" not in spl: return
+	desc_idx = spl.index("description")+1
+	desc = " ".join(spl[desc_idx:]).strip()
+	if desc[0] == '"': desc = desc[1:]
+	if desc[-1] == '"': desc = desc[:-1]
+	if desc_idx == 7:
+		peer_dict = peer_dict['peers'][spl[5]]
+	peer_dict['description'] = desc
 
-	def _iterate_over_vrfs(self):
-		instance_dict = {}
+def get_bgp_peer_auth(peer_dict, spl):
+	if 'authentication-key' not in spl: return
+	key_idx = spl.index("authentication-key")+1
+	pw = " ".join(spl[key_idx:]).strip().split("##")[0].strip()
+	if pw[0] == '"': pw = pw[1:]
+	if pw[-1] == '"': pw = pw[:-1]
+	try:
+		pw = juniper_decrypt(pw)
+	except: pass
+	if key_idx == 7:
+		peer_dict = peer_dict['peers'][spl[5]]		
+	peer_dict['password'] = pw
+
+def get_bgp_peer_peeras(peer_dict, spl):
+	get_bgp_peer_common_info(peer_dict, spl, item='peer-as', sub_item_idx=7)
+
+def get_bgp_peer_localas(peer_dict, spl):
+	get_bgp_peer_common_info(peer_dict, spl, item='local-as', sub_item_idx=7)
+
+def get_bgp_peer_multihop(peer_dict, spl):
+	item, sub_item_idx = 'multihop', 7
+	if item not in spl: return
+	_idx = spl.index(item)+1
+	if sub_item_idx == _idx:
+		peer_dict = peer_dict['peers'][spl[sub_item_idx-2]]
+	peer_dict[item] = spl[-1]
+
+### // Common // ###
+def get_bgp_peer_common_info(peer_dict, spl, item, sub_item_idx):
+	if item not in spl: return
+	_idx = spl.index(item)+1
+	if sub_item_idx == _idx:
+		peer_dict = peer_dict['peers'][spl[sub_item_idx-2]]
+	peer_dict[item] = spl[_idx]
+
+# ------------------------------------------------------------------------------
+#  bgp extractor class
+# ------------------------------------------------------------------------------
+
+@dataclass
+class BGP(ProtocolObject):
+	cmd_op: list[str,] = field(default_factory=[])
+
+	bgp_attr_functions = (
+		## tbd
+	)
+	peer_attr_functions = [
+		get_bgp_peer_peers,
+		get_bgp_peer_description,
+		get_bgp_peer_auth,
+		get_bgp_peer_peeras,
+		get_bgp_peer_localas,
+		get_bgp_peer_multihop,
+	]
+
+
+	def __post_init__(self):
+		super().initialize('bgp')
+		self.add_protocol_bgp_instance_peers()
+		self.protocol_bgp_dict = {'bgp': {'instances': self.protocol_instances}} if self.protocol_instances else {}
+			
+
+	def add_protocol_bgp_instance_peers(self):
+		self.protocol_instances = {}
 		for vrf in self.jPtObj.VRFs.keys():
 			VRF = self.jPtObj.VRFs[vrf]
-			vd = self._iterate_over_vrf_peers(peers=VRF.PEERs, vrf=vrf)
+			vd = self.get_peers_dict(peers=VRF.PEERs, vrf=vrf)
 			if not vd: continue
-			if not instance_dict.get(vrf):
-				instance_dict[vrf] = {}
-			if not instance_dict[vrf].get('peers'):
-				instance_dict[vrf]['peers'] = {}
-			instance_dict[vrf]['peers'] = vd
-		return instance_dict
+			instance_dict = add_blankdict_key(self.protocol_instances, vrf)
+			instance_dict['peers'] = vd
 
-	def _iterate_over_vrf_peers(self, peers, vrf):
+	def get_peers_dict(self, peers, vrf):
 		peers_dict = {}
 		for peer in peers.keys():
 			psd = self._iterate_peer_lines(peers, peer)
@@ -34,183 +103,22 @@ class BGPPeers(Running):
 
 	def _iterate_peer_lines(self, peers, peer):
 		peer_dict = {}
-		for line in peers[peer]:
-			spl = line.split()
+		for line, spl in peers[peer]:
 			proto_idx = spl.index('protocols')
 			spl = spl[proto_idx:]
-			self.get_bgp_grp_info(peer_dict, line, spl)
+			self.iterate_peer_funcs(peer_dict, spl)
 		return peer_dict
 
-
-	def get_bgp_grp_info(self, peer_dict, line, spl):
-
-		## --- peer/neighbors ---
-		if 'neighbor' in spl:
-			if not peer_dict.get('peers'):
-				peer_dict['peers'] = {}
-			peer_dict['peers'][spl[5]] = {}
+	def iterate_peer_funcs(self, peer_dict, spl):
+		for f in self.peer_attr_functions:
+			f(peer_dict, spl)
 
 
-		## --- description and vrf ---
-		if len(spl)>4 and spl[4] == 'description':
-			desc = " ".join(spl[5:]).strip()
-			if desc[0] == '"': desc = desc[1:]
-			if desc[-1] == '"': desc = desc[:-1]
-			peer_dict['description'] = desc
-		elif len(spl)>6 and spl[6] == 'description':
-			desc = " ".join(spl[7:]).strip()
-			if desc[0] == '"': desc = desc[1:]
-			if desc[-1] == '"': desc = desc[:-1]
-			peer_dict['peers'][spl[5]]['description'] = desc
-
-
-		## --- auth key - peer group ---
-		if len(spl)>4 and spl[4] == 'authentication-key':
-			pw = " ".join(spl[5:]).strip().split("##")[0].strip()
-			if pw[0] == '"': pw = pw[1:]
-			if pw[-1] == '"': pw = pw[:-1]
-			try:
-				pw = juniper_decrypt(pw)
-			except: pass
-			peer_dict['password'] = pw
-		## --- auth key - peer ---
-		elif len(spl)>6 and spl[6] == 'authentication-key':
-			pw = " ".join(spl[7:]).strip().split("##")[0].strip()
-			if pw[0] == '"': pw = pw[1:]
-			if pw[-1] == '"': pw = pw[:-1]
-			try:
-				pw = juniper_decrypt(pw)
-			except: pass
-			peer_dict['peers'][spl[5]]['password'] = pw
-
-		## --- peer-as - peer group ---
-		if len(spl)>4 and spl[4] == 'peer-as':
-			peer_dict['peer_as'] = spl[5]
-		## --- peer-as - peer ---
-		if len(spl)>6 and spl[6] == 'peer-as':
-			peer_dict['peers'][spl[5]]['peer_as'] = spl[7]
-
-		## --- local-as - peer group ---
-		if len(spl)>4 and spl[4] == 'local-as':
-			peer_dict['local_as'] = spl[5]
-		## --- local-as - peer ---
-		if len(spl)>6 and spl[6] == 'local-as':
-			peer_dict['peers'][spl[5]]['local_as'] = spl[7]
-
-		## --- ebgp multihops ---
-		if len(spl)>5 and spl[4] == 'multihop':
-			peer_dict['ebgp_multihops'] = spl[-1]
-
-		return peer_dict
-
-	# ============================================================================ 
-
-	def _iterate_over_vrfs_for_instance(self):
-		instance_dict = {}
-		for vrf in self.jPtObj.VRFs.keys():
-			VRF = self.jPtObj.VRFs[vrf]
-			vd = self.vrf_instance_read(vrf, VRF)
-			if vd: instance_dict[vrf] = vd
-		return instance_dict
-
-	def vrf_instance_read(self, vrf, VRF):
-		vrf_dict = {}
-		for l in self.set_cmd_op:
-			if blank_line(l): continue
-			if l.strip().startswith("#"): continue
-			if not l.startswith(f"set routing-instances {vrf} "): continue
-			if l in VRF.bgp_peer_group_lines: continue
-			if l in VRF.bgp_other_lines: continue
-			spl = l.split()
-			self.add_vrf_route_target(vrf_dict, l, spl)
-			self.add_vrf_description(vrf_dict, l, spl)
-			self.add_vrf_rd(vrf_dict, l, spl)
-		return vrf_dict
-
-	def add_vrf_route_target(self, vrf_dict, l, spl):
-		if spl[3] == 'route-distinguisher':
-			vrf_dict['default_rd'] = spl[-1].strip().split(":")[-1]
-
-	def add_vrf_description(self, vrf_dict, l, spl):
-		if spl[3] == 'description':
-			desc = " ".join(spl[4:]).strip()
-			if desc[0] == '"': desc = desc[1:]
-			if desc[-1] == '"': desc = desc[:-1]
-			vrf_dict['description'] = desc
-
-	def add_vrf_rd(self, vrf_dict, l, spl):
-		if spl[3] == 'vrf-target':
-			if not vrf_dict.get(f"{spl[4]} target"):
-				vrf_dict[f"{spl[4]} target"] = set()
-			rd = ":".join(spl[-1].split(":")[-2:])
-			vrf_dict[f"{spl[4]} target"].add( rd )
-
-	# ============================================================================ 
-
-	def get_system_helpers(self):
-		"""parser function to update system helpers
-
-		Args:
-			op_dict (dict): dictionary with a port info
-			l (str): string line to parse
-			spl (list): splitted line to parse
-
-		Returns:
-			None: None
-		"""    		
-		op_dict = {}
-		for line in self.set_cmd_op:
-			line = line.strip()
-			if not line: continue
-			if line.startswith("#"): continue
-			spl = line.split()
-			#
-			if "dhcp-relay" in spl and "server-group" in spl: 
-				vrf = None
-				if spl[1] == 'routing-instances':
-					vrf = spl[2]
-				try:
-					ipadd = addressing(spl[-1])
-					if ipadd.version == 4:
-						section = 'dhcp_helpers_v4'
-					elif ipadd.version == 6:
-						section = 'dhcp_helpers_v6'
-
-					if not op_dict.get(vrf):
-						op_dict[vrf] = {}
-					if not op_dict[vrf].get(section):
-						op_dict[vrf][section] = []
-					op_dict[vrf][section].append(spl[-1])
-				except:
-					pass
-		merge_dict(self.instance_vrf_dict, op_dict)
-
-	# ============================================================================ 
-
-
-# =====================================================================================
-
+# ------------------------------------------------------------------------------
+#  bgp parser calling function
+# ------------------------------------------------------------------------------
 def get_bgp_running(cmd_op):
-	"""defines set of methods executions. to get various instance parameters.
-	uses RunningIntanceBGP in order to get all.
-
-	Args:
-		cmd_op (list, str): running config output, either list of multiline string
-
-	Returns:
-		dict: output dictionary with parsed with system fields
-	"""    	
-	R  = BGPPeers(cmd_op)
-	R()
-	R.get_system_helpers()
-
-
-	protocols_dict = {'bgp': {'instances': R.instance_dict}} if R.instance_dict else {}
-
-	return {
-	  'protocols': protocols_dict,
-	  'vrf': R.instance_vrf_dict,
-	}
-
-# =====================================================================================
+	B = BGP(cmd_op)
+	return { 'protocols': B.protocol_bgp_dict }
+# ------------------------------------------------------------------------------
 

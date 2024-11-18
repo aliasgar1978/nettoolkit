@@ -1,12 +1,12 @@
-"""juniper set config initiator - parent """
+"""juniper protocol related common classes - parent """
 
 # ------------------------------------------------------------------------------
 from .common import *
 # ------------------------------------------------------------------------------
 
-
 # ==========================================================================
 #  STANDARD CLASS GATHERING INFO ON SHOW CONFIGURATION
+#  Initialize by converting standard config to set config
 # ==========================================================================
 @dataclass
 class Running():
@@ -21,13 +21,9 @@ class Running():
 			self.set_cmd_op = []
 			raise Exception(f'Missing Configuration capture.. {self.cmd_op}, verify input')
 
-# ------------------------------------------------------------------------------
-
-
-
-
-
-
+# ==========================================================================
+#  STANDARD CLASS GATHERING BGP PEER COMMANDS
+# ==========================================================================
 @dataclass
 class PeerLines():
 	bgp_peer_group_lines: list[str] = field(default_factory=[])
@@ -35,28 +31,40 @@ class PeerLines():
 
 	def __post_init__(self):
 		self._set_peer_group_lines()
+		self._set_peer_group_lines_spl()
 
 	def __iter__(self):
-		for x in self.peer_group_lines:
-			yield x
+		for line, spl in zip(self.peer_group_lines, self.peer_group_lines_spl):
+			yield (line, spl)
 
 	@property
 	def peer_group_lines(self):
 		return self._peer_group_lines
 
+	@property
+	def peer_group_lines_spl(self):
+		return self._peer_group_lines_spl
+
 	def _set_peer_group_lines(self):
 		self._peer_group_lines = [line for line in self.bgp_peer_group_lines if line.find(f" protocols bgp group {self.peer} ") > 0]
 
+	def _set_peer_group_lines_spl(self):
+		self._peer_group_lines_spl = [line.strip().split() for line in self.peer_group_lines ]
+
+# ==========================================================================
+#  STANDARD CLASS GATHERING INSTANCE LINES OF A PROTOCOL
+# ==========================================================================
 @dataclass
 class VrfLines():
 	protocol: str = 'bgp'
-	protocol_lines: list[str] = field(default_factory=[])
 	vrf: str = ''
+	protocol_lines: list[str] = field(default_factory=[])
+	protocol_spl_lines: list[str] = field(default_factory=[])
 
 	def __post_init__(self):
 		self._get_protocol_vrf_lines()
-		self._bgp_peer_group_lines()
-		self._bgp_other_lines()
+		self._get_bgp_peer_group_lines()
+		self._get_bgp_other_lines()
 		self._get_peer_groupnames()
 		self()
 
@@ -71,8 +79,7 @@ class VrfLines():
 
 	def _get_protocol_vrf_lines(self):
 		lns = []
-		for line in self.protocol_lines:
-			spl = line.split()
+		for line, spl in zip(self.protocol_lines, self.protocol_spl_lines):
 			if spl[1] == 'protocols':
 				if self.vrf: continue
 				lns.append(line)
@@ -97,11 +104,11 @@ class VrfLines():
 	def peer_group_names(self):
 		return self._peer_group_names
 
-	def _bgp_peer_group_lines(self):
+	def _get_bgp_peer_group_lines(self):
 		if self.protocol != 'bgp': return []
 		self._bgp_peer_group_lines = [ line for line in self.protocol_vrf_lines if line.find(" protocols bgp group ") > 0 ]
 
-	def _bgp_other_lines(self):
+	def _get_bgp_other_lines(self):
 		if self.protocol != 'bgp': return []
 		self._bgp_other_lines = [ line for line in self.protocol_vrf_lines if line.find(" protocols bgp group ") == -1 ]
 
@@ -115,9 +122,9 @@ class VrfLines():
 		for peer in self.peer_group_names:
 			self.PEERs[peer] = PeerLines(self.bgp_peer_group_lines, peer)
 
-
-
-
+# ==========================================================================
+#  STANDARD CLASS GATHERING ALL PROTOCOLS LINES
+# ==========================================================================
 @dataclass
 class jProtocolLines():
 	config_lines: list[str,] = field(default_factory=[])
@@ -134,16 +141,19 @@ class jProtocolLines():
 
 	def _get_protocol_set_commands(self):
 		lns = []
+		spl_lns = []
 		for line in self.config_lines:
 			if blank_line(line): continue
 			if line.strip().startswith("#"): continue
 			# line = line.strip()
 			if line.find(f' protocols {self.protocol} ') == -1: continue
-			spl = line.split()
+			spl = line.strip().split()
 			proto_idx = spl.index('protocols')
 			# if "prefix-list" in spl and spl.index('prefix-list') < proto_idx: continue
 			lns.append(line)
+			spl_lns.append(spl)
 		self.protocol_lines = lns
+		self.protocol_spl_lines = spl_lns
 
 	def _get_vrfs(self):
 		vrfs = {None,}
@@ -156,5 +166,20 @@ class jProtocolLines():
 	def _iterate_vrfs(self):
 		self.VRFs = {}
 		for vrf in self.vrfs:
-			self.VRFs[vrf] = VrfLines(self.protocol, self.protocol_lines, vrf)
+			self.VRFs[vrf] = VrfLines(self.protocol, vrf, self.protocol_lines,  self.protocol_spl_lines)
 
+
+# ==========================================================================
+#  STANDARD PROTOCOL IMPLEMENTATION
+#  CLASS RETURNING AN INITIALIZED PROTOCOL OBJECT
+#  INHERIT TO UTILIZE ITS FUNCTIONALITY
+# ==========================================================================
+@dataclass
+class ProtocolObject(Running):
+	cmd_op: list[str,] = field(default_factory=[])
+
+	def initialize(self, protocol):
+		super().__post_init__()
+		self.jPtObj = jProtocolLines(self.set_cmd_op, protocol)
+
+# ==========================================================================

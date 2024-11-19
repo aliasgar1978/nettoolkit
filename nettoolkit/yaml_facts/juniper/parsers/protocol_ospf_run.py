@@ -151,8 +151,14 @@ class OSPF(ProtocolObject):
 
 	def __post_init__(self):
 		super().initialize(self.protocol)
+
+	def __call__(self):
+		self.iterate_logical_systems(hierarchy='protocols')
+
+	def start(self):
 		self.get_protocol_ospf_instance_lines()
 		self.protocol_ospf_dict = {self.protocol: self.iterate_for_ospf()}
+		return self.protocol_ospf_dict
 			
 
 	def get_protocol_ospf_instance_lines(self):
@@ -212,10 +218,12 @@ class OSPF(ProtocolObject):
 # ------------------------------------------------------------------------------
 def get_ospf_running(cmd_op):
 	O = OSPF(cmd_op, 'ospf')
-	return { 'protocols': O.protocol_ospf_dict}
+	O()
+	return O.logical_systems_dict
 
 def get_ospf3_running(cmd_op):
 	O = OSPF(cmd_op, 'ospf3')
-	return { 'protocols': O.protocol_ospf_dict}
+	O()
+	return O.logical_systems_dict
 # ------------------------------------------------------------------------------
 

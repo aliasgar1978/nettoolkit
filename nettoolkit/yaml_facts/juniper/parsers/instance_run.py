@@ -15,8 +15,7 @@ def get_vrf_rd(vrf_dict, spl):
 def get_vrf_rt(vrf_dict, spl):
 	if spl[3] != 'vrf-target': return
 	rd = ":".join(spl[-1].split(":")[-2:])
-	rt_set = add_blankset_key(vrf_dict, f"{spl[4]} target")
-	vrf_dict[f"{spl[4]} target"].add(rd)
+	append_attribute(vrf_dict, attribute=f"{spl[4]} target", value=rd)
 
 def get_vrf_desc(vrf_dict, spl):
 	if spl[3] != 'description': return
@@ -41,9 +40,15 @@ class Instances(ProtocolObject):
 
 	def __post_init__(self):
 		super().initialize('bgp')
+
+	def __call__(self):
+		self.iterate_logical_systems(hierarchy='vrf')
+
+	def start(self):
 		self.protocol_instances = {}
 		self.get_instance_lines()
 		self.add_protocol_instance_info()
+		return self.protocol_instances
 
 	def get_instance_lines(self):
 		self.instances_line_dict = {}
@@ -73,7 +78,8 @@ class Instances(ProtocolObject):
 # ------------------------------------------------------------------------------
 def get_instance_running(cmd_op):
 	I = Instances(cmd_op)
-	return { 'vrf': I.protocol_instances }
+	I()
+	return I.logical_systems_dict
 
 # ------------------------------------------------------------------------------
 

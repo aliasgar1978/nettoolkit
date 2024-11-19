@@ -74,8 +74,14 @@ class RunningSystem(Running):
 
 	def __post_init__(self):
 		super().__post_init__()
+
+	def __call__(self):
+		self.iterate_logical_systems(hierarchy='system')
+
+	def start(self):
 		system_lines = self.filter_system_lines()
-		self.system_dict = self._get_attributes(system_lines)
+		system_dict = self._get_attributes(system_lines)
+		return system_dict
 
 	def filter_system_lines(self):
 		system_lines = []
@@ -104,6 +110,7 @@ class RunningSystem(Running):
 # ------------------------------------------------------------------------------
 def get_system_running(cmd_op):
 	R  = RunningSystem(cmd_op)
-	return {'system': R.system_dict}
+	R()
+	return R.logical_systems_dict
 # ------------------------------------------------------------------------------
 

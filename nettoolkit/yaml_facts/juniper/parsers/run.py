@@ -2,6 +2,7 @@
 
 # ------------------------------------------------------------------------------
 from .common import *
+from abc import abstractclassmethod
 # ------------------------------------------------------------------------------
 
 # ==========================================================================
@@ -16,10 +17,37 @@ class Running():
 		if self.cmd_op:	
 			JS = JSet(input_list=self.cmd_op)
 			JS.to_set
-			self.set_cmd_op = verifid_output(JS.output)
+			self._set_cmd_op = verifid_output(JS.output)
+			self.separate_logical_systems()
+			self.set_cmd_op = self.logical_systems[None]
 		else:
-			self.set_cmd_op = []
+			self._set_cmd_op = []
 			raise Exception(f'Missing Configuration capture.. {self.cmd_op}, verify input')
+
+	def separate_logical_systems(self):
+		self.logical_systems = {None: []}
+		for line in self._set_cmd_op:
+			if line.startswith("set logical-systems "):
+				system_name = line.split()[2]
+				if not self.logical_systems.get(system_name):
+					self.logical_systems[system_name] = []
+				self.logical_systems[system_name].append(line)
+			else:
+				self.logical_systems[None].append(line)
+
+	def iterate_logical_systems(self, hierarchy):
+		self.logical_systems_dict = {}		
+		sys_dict = add_blankdict_key(self.logical_systems_dict, 'logical-systems')
+		for logical_system, logical_system_list in self.logical_systems.items():
+			self.set_cmd_op = logical_system_list
+			dic = self.start()
+			if not dic: continue
+			sys_dict[logical_system] = {hierarchy: dic}
+		if len(self.logical_systems_dict['logical-systems'].keys()) == 1 :
+			self.logical_systems_dict =  self.logical_systems_dict['logical-systems'][None]
+
+	@abstractclassmethod
+	def start(self): pass
 
 # ==========================================================================
 #  STANDARD CLASS GATHERING BGP PEER COMMANDS

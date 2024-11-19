@@ -59,9 +59,15 @@ class RunningRoutes(Running):
 
 	def __post_init__(self):
 		super().__post_init__()
+
+	def __call__(self):
+		self.iterate_logical_systems(hierarchy='statics')
+
+	def start(self):
 		self.route_dict = {}
 		for v, spl_str in self.route_spl_str.items():
 			self.filter_n_merge(v, spl_str)
+		return self.route_dict
 
 	def filter_n_merge(self, v, spl_str):
 		routes_lines = self.filter_routes_lines(spl_str)
@@ -118,6 +124,7 @@ class RunningRoutes(Running):
 # ------------------------------------------------------------------------------
 def get_system_running_routes(cmd_op):
 	R  = RunningRoutes(cmd_op)
-	return {'statics': R.route_dict}
+	R()
+	return R.logical_systems_dict
 # ------------------------------------------------------------------------------
 

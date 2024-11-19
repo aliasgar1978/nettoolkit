@@ -81,8 +81,14 @@ class BGP(ProtocolObject):
 
 	def __post_init__(self):
 		super().initialize('bgp')
+
+	def __call__(self):
+		self.iterate_logical_systems(hierarchy='protocols')
+
+	def start(self):
 		self.add_protocol_bgp_instance_peers()
 		self.protocol_bgp_dict = {'bgp': {'instances': self.protocol_instances}} if self.protocol_instances else {}
+		return self.protocol_bgp_dict
 			
 
 	def add_protocol_bgp_instance_peers(self):
@@ -119,6 +125,7 @@ class BGP(ProtocolObject):
 # ------------------------------------------------------------------------------
 def get_bgp_running(cmd_op):
 	B = BGP(cmd_op)
-	return { 'protocols': B.protocol_bgp_dict }
+	B()
+	return B.logical_systems_dict
 # ------------------------------------------------------------------------------
 

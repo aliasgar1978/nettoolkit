@@ -33,11 +33,17 @@ class RunningPrefixLists(Running):
 
 	def __post_init__(self):
 		super().__post_init__()
+
+	def __call__(self):
+		self.iterate_logical_systems(hierarchy='prefix-lists')
+
+	def start(self):
 		self.pl_dict = {}
 		self.filter_prefixlist_lines()
 		self.spl_prefix_list_lines = [ line.strip().split() for line in self.prefix_list_lines ]
 		self.get_pfx_lines_dict()
 		self.get_attributes()
+		return self.pl_dict
 
 	def filter_prefixlist_lines(self):
 		self.prefix_list_lines = [line.strip() for line in self.set_cmd_op if line.find(self.pfx_str_begin_with) > -1]
@@ -66,6 +72,7 @@ class RunningPrefixLists(Running):
 # ------------------------------------------------------------------------------
 def get_system_running_prefix_lists(cmd_op):
 	R  = RunningPrefixLists(cmd_op)
-	return {'prefix-lists': R.pl_dict}
+	R()
+	return R.logical_systems_dict
 # ------------------------------------------------------------------------------
 

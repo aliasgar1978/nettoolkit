@@ -108,6 +108,11 @@ class RunningInterfaces(Running):
 
 	def __post_init__(self):
 		super().__post_init__()
+
+	def __call__(self):
+		self.iterate_logical_systems(hierarchy='interfaces')
+
+	def start(self):
 		self.interface_dict = {}
 		self.intf_lines = self.filter_interface_lines()
 		self.spl_intf_lines = [ line.strip().split() for line in self.intf_lines ]
@@ -123,6 +128,7 @@ class RunningInterfaces(Running):
 		# #
 		self.get_attributes()
 		#
+		return self.interface_dict
 
 	@property
 	def lines_to_function_map(self):
@@ -290,6 +296,7 @@ def set_of_voice_vlans(set_cmd_op):
 # ------------------------------------------------------------------------------
 def get_interfaces_running(cmd_op):
 	R  = RunningInterfaces(cmd_op)
-	return {'interfaces': R.interface_dict}
+	R()
+	return R.logical_systems_dict
 # ------------------------------------------------------------------------------
 

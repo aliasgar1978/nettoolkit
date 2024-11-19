@@ -17,6 +17,7 @@ JUNIPER_CMD_PARSER_MAP = OrderedDict([
 	('show lldp neighbors', (get_lldp_neighbour,)),
 	('show configuration', (
 			get_ospf_running,
+			get_ospf3_running,
 			get_interfaces_running, 
 			get_system_running, 
 			get_bgp_running,    

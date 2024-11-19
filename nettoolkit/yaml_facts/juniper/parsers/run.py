@@ -43,7 +43,7 @@ class Running():
 			dic = self.start()
 			if not dic: continue
 			sys_dict[logical_system] = {hierarchy: dic}
-		if len(self.logical_systems_dict['logical-systems'].keys()) == 1 :
+		if len(self.logical_systems.keys()) == 1 :
 			self.logical_systems_dict =  self.logical_systems_dict['logical-systems'][None]
 
 	@abstractclassmethod

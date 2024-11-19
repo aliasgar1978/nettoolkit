@@ -120,13 +120,16 @@ class CommonParser():
 		dict_to_yaml(self.device_dict, file=self.output_yaml, mode='w')
 
 	def parse(self):
+		unavailable_cmds = set()
 		for cmd, funcs in self.cmd_fn_parser_map.items():
 			cmd_output = self.captures.cmd_output(cmd)
-			if not cmd_output: 
-				print(f"{self.captures.name}: [{cmd}] output missing")
+			if not cmd_output:
+				unavailable_cmds.add(cmd) 
 				continue
 			for fn in funcs:
 				self.parse_func(fn, cmd_output)
+		if unavailable_cmds:
+			print(f"{self.captures.name}: Missing Captures {unavailable_cmds}")
 
 
 	def parse_func(self, fn, cmd_output):

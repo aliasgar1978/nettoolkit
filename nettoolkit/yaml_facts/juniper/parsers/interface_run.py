@@ -3,6 +3,7 @@
 # ------------------------------------------------------------------------------
 from .common import *
 from .run import Running
+from .protocol_ospf_run import get_area_interface_auth_attributes
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
@@ -73,19 +74,11 @@ def get_int_instance(port_dict, l, spl):
 
 
 def get_int_ospf_auth(port_dict, l, spl):
-	ospf_idx = spl.index('ospf')
-	if spl[ospf_idx+5] == 'interface-type':
-		port_dict['ospf_auth_type'] = spl[-1]
-	if spl[ospf_idx+5] == 'authentication':
-		pw = " ".join(spl[ospf_idx+6:]).strip().split("##")[0].strip()
-		if pw[0] == '"': pw = pw[1:]
-		if pw[-1] == '"': pw = pw[:-1]
-		try:
-			pw = juniper_decrypt(pw)
-		except: pass
-		port_dict['ospf_auth_key'] = pw
-	return port_dict
-
+	if "ospf" not in spl or  "authentication" not in spl: return
+	ospf_dict = add_blankdict_key(port_dict, 'ospf')
+	line = l.split(" protocols ospf ")[-1]
+	spl = line.split()
+	get_area_interface_auth_attributes(ospf_dict, line, spl)
 
 
 # ------------------------------------------------------------------------------

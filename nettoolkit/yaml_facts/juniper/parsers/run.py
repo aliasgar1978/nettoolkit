@@ -105,12 +105,14 @@ class VrfLines():
 		return self._peer_group_names
 
 	def _get_bgp_peer_group_lines(self):
-		if self.protocol != 'bgp': return []
-		self._bgp_peer_group_lines = [ line for line in self.protocol_vrf_lines if line.find(" protocols bgp group ") > 0 ]
+		self._bgp_peer_group_lines = []
+		if self.protocol == 'bgp':
+			self._bgp_peer_group_lines = [ line for line in self.protocol_vrf_lines if line.find(" protocols bgp group ") > 0 ]
 
 	def _get_bgp_other_lines(self):
-		if self.protocol != 'bgp': return []
-		self._bgp_other_lines = [ line for line in self.protocol_vrf_lines if line.find(" protocols bgp group ") == -1 ]
+		self._bgp_other_lines = []
+		if self.protocol == 'bgp':
+			self._bgp_other_lines = [ line for line in self.protocol_vrf_lines if line.find(" protocols bgp group ") == -1 ]
 
 	def _get_peer_groupnames(self):
 		self._peer_group_names = set()
@@ -177,6 +179,7 @@ class jProtocolLines():
 @dataclass
 class ProtocolObject(Running):
 	cmd_op: list[str,] = field(default_factory=[])
+	protocol: str = None
 
 	def initialize(self, protocol):
 		super().__post_init__()

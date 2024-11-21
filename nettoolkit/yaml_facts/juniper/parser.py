@@ -25,6 +25,8 @@ JUNIPER_CMD_PARSER_MAP = OrderedDict([
 			get_system_running_prefix_lists,
 			get_instance_running,
 			get_helper_running,
+			get_rip_running,
+			get_isis_running,
 		)
 	),
 	('show version', (get_version, )),

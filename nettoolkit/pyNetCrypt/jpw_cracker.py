@@ -54,7 +54,10 @@ def _gap_decode(gaps, dec):
 def juniper_decrypt(crypt):
     """Juniper $9$ password decryptor
     """
-    chars = crypt.split("$9$", 1)[1]
+    try:
+        chars = crypt.split("$9$", 1)[1]
+    except:
+        return crypt
     first, chars = _nibble(chars, 1)
     toss, chars = _nibble(chars, EXTRA[first])
     prev = first

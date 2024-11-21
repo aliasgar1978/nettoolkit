@@ -17,7 +17,9 @@ from .interface_run            import get_interfaces_running
 from .prefix_list_run          import get_system_running_prefix_lists
 
 from .protocol_bgp_run         import get_bgp_running
+from .protocol_isis_run        import get_isis_running
 from .protocol_ospf_run        import get_ospf_running, get_ospf3_running
+from .protocol_rip_run         import get_rip_running
 
 from .statics_run              import get_system_running_routes
 

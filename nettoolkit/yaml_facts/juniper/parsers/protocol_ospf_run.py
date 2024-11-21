@@ -9,45 +9,17 @@ from .run import ProtocolObject
 #  ospf parser functions
 # ------------------------------------------------------------------------------
 
-#### //// COMMON FUNCTIONS //// ####
-
-def get_pw(spl, key):
-	pw = spl[spl.index(key)+1]
-	if pw[0] == '"': pw = pw[1:]
-	if pw[-1] == '"': pw = pw[:-1]
-	return juniper_decrypt( pw )
-
-def _get_instance_parameter_for_items(dic, line, spl, items):
-	for item in items:
-		_get_instance_parameter(dic, line, spl, item)
-
-def _get_instance_parameter(dic, line, spl, item):
-	if item not in spl: return
-	append_attribute(dic, attribute=item, value=spl[spl.index(item)+1])
-
-def _update_true_instance_items(dic, line, spl, items):
-	for item in items:
-		_update_true_instance(dic, line, spl, item)
-
-def _update_true_instance(dic, line, spl, item):
-	if item not in spl: return
-	dic[item]=True
-
 #### //// INSTANCE FUNCTIONS //// ####
-
-def _get_instance_parameter(vrf_dict, line, spl, item):
-	if item not in spl: return
-	append_attribute(vrf_dict, attribute=item, value=spl[spl.index(item)+1])
 
 def get_instance_attributes(vrf_dict, line, spl):
 	nxt_value_attrs = ('export', 'import', 'rib-group', 'preference', 'external-preference', 'reference-bandwidth')
-	_get_instance_parameter_for_items(vrf_dict, line, spl, nxt_value_attrs)
+	get_instance_parameter_for_items(vrf_dict, line, spl, nxt_value_attrs)
 
 def get_instance_attribute_spf_options(vrf_dict, line, spl):
 	if 'spf-options' not in spl: return
 	spf_dict = add_blankdict_key(vrf_dict, 'spf-options')
 	nxt_value_attrs = ('delay', 'holddown')
-	_get_instance_parameter_for_items(spf_dict, line, spl, nxt_value_attrs)
+	get_instance_parameter_for_items(spf_dict, line, spl, nxt_value_attrs)
 
 
 #### //// AREA FUNCTIONS //// ####
@@ -63,11 +35,11 @@ def get_area_interface_attributes(vrf_dict, line, spl):
 def get_area_interface_next_item_attributes(int_dict, line, spl):
 	nxt_value_attrs = ('interface-type', 'metric', 'neighbor', 'poll-interval', 'hello-interval','dead-interval',
 		'retransmit-interval', 'transit-delay', 'priority')
-	_get_instance_parameter_for_items(int_dict, line, spl, nxt_value_attrs)
+	get_instance_parameter_for_items(int_dict, line, spl, nxt_value_attrs)
 
 def get_area_interface_true_item_attributes(int_dict, line, spl):
 	true_value_attrs = ('passive', 'disable', 'secondary', 'flood-reduction')
-	_update_true_instance_items(int_dict, line, spl, items=true_value_attrs)
+	update_true_instance_items(int_dict, line, spl, items=true_value_attrs)
 
 def get_area_interface_auth_attributes(int_dict, line, spl):
 	if 'authentication' not in spl: return
@@ -92,37 +64,37 @@ def get_area_stub_attributes(vrf_dict, line, spl):
 
 def get_area_stub_next_item_attributes(stub_dict, line, spl):
 	nxt_value_attrs = ('default-metric', 'area-range')
-	_get_instance_parameter_for_items(stub_dict, line, spl, nxt_value_attrs)
+	get_instance_parameter_for_items(stub_dict, line, spl, nxt_value_attrs)
 
 def get_area_stub_true_item_attributes(stub_dict, line, spl):
 	true_value_attrs = ('no-summaries',)
-	_update_true_instance_items(stub_dict, line, spl, items=true_value_attrs)
+	update_true_instance_items(stub_dict, line, spl, items=true_value_attrs)
 
 def get_area_stub_def_lsa_item_attributes(stub_dict, line, spl):
 	if 'default-lsa' not in spl: return
 	def_lsa_dict = add_blankdict_key(stub_dict, 'default-lsa')
 	nxt_value_attrs = ('default-metric', 'metric-type')
 	true_value_attrs = ('type-7',)
-	_get_instance_parameter_for_items(def_lsa_dict, line, spl, nxt_value_attrs)
-	_update_true_instance_items(def_lsa_dict, line, spl, true_value_attrs)
+	get_instance_parameter_for_items(def_lsa_dict, line, spl, nxt_value_attrs)
+	update_true_instance_items(def_lsa_dict, line, spl, true_value_attrs)
 
 
 def get_area_range_attributes(vrf_dict, line, spl):
 	if spl[2] != 'area-range': return
 	nxt_value_attrs = ('area-range',)
-	_get_instance_parameter_for_items(vrf_dict, line, spl, nxt_value_attrs)
+	get_instance_parameter_for_items(vrf_dict, line, spl, nxt_value_attrs)
 
 def get_area_virtuallink_attributes(vrf_dict, line, spl):
 	if 'virtual-link' not in spl: return
 	vl_dict = add_blankdict_key(vrf_dict, 'virtual-link')
 	nxt_value_attrs = ('neighbor-id', 'transit-area', 'ipsec-sa')
-	_get_instance_parameter_for_items(vl_dict, line, spl, nxt_value_attrs)
+	get_instance_parameter_for_items(vl_dict, line, spl, nxt_value_attrs)
 
 def get_area_shamlink_attributes(vrf_dict, line, spl):
 	if 'sham-link' not in spl and 'sham-link-remote' not in spl : return	
 	shm_dict = add_blankdict_key(vrf_dict, 'sham-link')
 	nxt_value_attrs = ('sham-link-remote', 'metric', 'local')
-	_get_instance_parameter_for_items(shm_dict, line, spl, nxt_value_attrs)
+	get_instance_parameter_for_items(shm_dict, line, spl, nxt_value_attrs)
 
 
 
@@ -157,7 +129,9 @@ class OSPF(ProtocolObject):
 
 	def start(self):
 		self.get_protocol_ospf_instance_lines()
-		self.protocol_ospf_dict = {self.protocol: self.iterate_for_ospf()}
+		_dict = self.iterate_for_ospf()
+		_dict = self.remove_parent_vrf_if_standalone(_dict)
+		self.protocol_ospf_dict = {self.protocol: _dict}
 		return self.protocol_ospf_dict
 			
 

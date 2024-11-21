@@ -43,11 +43,19 @@ class Running():
 			dic = self.start()
 			if not dic: continue
 			sys_dict[logical_system] = {hierarchy: dic}
+		if not self.logical_systems_dict['logical-systems']: return
 		if len(self.logical_systems.keys()) == 1 :
 			self.logical_systems_dict =  self.logical_systems_dict['logical-systems'][None]
 
 	@abstractclassmethod
 	def start(self): pass
+
+	def remove_parent_vrf_if_standalone(self, protocol_dict):
+		if len(protocol_dict.keys()) == 1 and None in protocol_dict:
+			protocol_dict = protocol_dict[None]
+		return protocol_dict
+
+
 
 # ==========================================================================
 #  STANDARD CLASS GATHERING BGP PEER COMMANDS

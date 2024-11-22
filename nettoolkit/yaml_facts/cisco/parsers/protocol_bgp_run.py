@@ -158,8 +158,8 @@ def _get_redistributions(attr_dict, line, spl):
 	redistribute = spl[1]
 	redis_dict = add_blankdict_key(attr_dict, 'redistribute')
 	redis_dict_l1 = add_blankdict_key(redis_dict, redistribute)
-	item = 'route-map'
-	redis_dict_l1[item] = next_index_item(spl, item)
+	items = ('route-map', 'ospf', 'rip', 'eigrp', 'bgp', 'isis',)
+	get_instance_parameter_for_items(redis_dict_l1, line, spl, items)
 
 # ====================================================================================================
 #  BGP Config extractor Class

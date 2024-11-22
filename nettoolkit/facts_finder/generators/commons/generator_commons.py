@@ -22,6 +22,44 @@ def append_attribute(dic, attribute, value, remove_duplicate=False):
 	else:
 		dic[attribute] = value
 
+def get_instance_parameter_for_items(dic, line, spl, items, unique=False):
+	for item in items:
+		_get_instance_parameter(dic, line, spl, item, unique)
+
+def _get_instance_parameter(dic, line, spl, item, unique=False):
+	if item not in spl: return
+	append_attribute(dic, attribute=item, value=spl[spl.index(item)+1], remove_duplicate=unique)
+
+def update_true_instance_items(dic, line, spl, items):
+	for item in items:
+		_update_true_instance(dic, line, spl, item)
+
+def _update_true_instance(dic, line, spl, item):
+	if item not in spl: return
+	dic[item]=True
+
+def get_nest_attributes(input_dict, line, spl, nest_attrs, next_attr=True, unique=False):
+	if isinstance(nest_attrs, dict):
+		for k, v in nest_attrs.items():
+			if not v: continue
+			if k not in spl: continue
+			dic = add_blankdict_key(input_dict, k)
+			get_nest_attributes(dic, line, spl, v, next_attr, unique)
+
+	elif isinstance(nest_attrs, (list, tuple, set)):
+		if next_attr:
+			get_instance_parameter_for_items(input_dict, line, spl, nest_attrs, unique)
+		else:
+			update_true_instance_items(input_dict, line, spl, nest_attrs)
+
+	else:
+		print(f"Unidentified attribute type: {type(nest_attrs)}, {nest_attrs}")
+
+
+
+
+
+
 def get_appeneded_value(dic, key, value):
 	"""appends the value to an existing value found in dictionary with provided key if exist other wise returns same value
 

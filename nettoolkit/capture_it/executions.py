@@ -637,21 +637,24 @@ class Execute_By_Excel(Execute_Common):
 
 	def execute(self):
 		"""execute all devices excel tab wise
-		"""    		
+		"""   
+		i = 0 		
 		for sht, dev_cmd_dict in self.devices_command_dicts.items():
-			self.execute_a_tab(sht, dev_cmd_dict)
+			self.execute_a_tab(sht, dev_cmd_dict, i)
+			i += 1
 		self.device_type_all=self.device_type_all1
 		self.cmd_exec_logs_all=self.cmd_exec_logs_all1
 		print(f"\n! {'='*20} [ ALL CAPTURES COMPLETED ] {'='*20} !")		
 		print(f"! {'='*20} [  FINAL REPORT FOLLOWS  ] {'='*20} !\n")		
 
-	def execute_a_tab(self, sht, dev_cmd_dict):
+	def execute_a_tab(self, sht, dev_cmd_dict, i):
 		"""execute a single excel tab devices
 
 		Args:
 			sht (str): excel tab/sheet
 			dev_cmd_dict (dict): device commands dictionary
-		"""    		
+		"""    
+		print(f"Start working on sheet {sht}")		
 		capture_instance = Execute_By_Login(
 			ip_list=dev_cmd_dict['ip_list'], 
 			auth=self.auth, 
@@ -659,15 +662,15 @@ class Execute_By_Excel(Execute_Common):
 			capture_path=self.capture_path, 
 			exec_log_path=self.exec_log_path
 		)
-		self.instance_properties_update(capture_instance)
+		self.instance_properties_update(capture_instance, i)
 		self.instance_custom_class(capture_instance)
-		self.instance_fact_finder(capture_instance)
+		# self.instance_fact_finder(capture_instance)
 		capture_instance()
 		capture_instance.log_summary(onscreen=True, to_file=False)
 		self.update_self_log_properties(capture_instance)
 		print(f"Capture Task(s) for sheet `{sht}`Complete..")
 
-	def instance_properties_update(self, capture_instance):
+	def instance_properties_update(self, capture_instance, i):
 		"""load instance properties from parent properties
 
 		Args:
@@ -676,11 +679,11 @@ class Execute_By_Excel(Execute_Common):
 		capture_instance.cumulative             = self.cumulative
 		capture_instance.forced_login           = self.forced_login
 		capture_instance.parsed_output          = self.parsed_output
-		capture_instance.append_capture         = True
-		capture_instance.missing_captures_only  = self.missing_captures_only
+		capture_instance.append_capture         = False if i == 0 else True
+		capture_instance.missing_captures_only  = self.missing_captures_only if i == 0 else True
 		capture_instance.max_connections        = self.max_connections
-		capture_instance.CustomClass            = self.CustomClass
-		capture_instance.CustomDeviceFactsClass = self.CustomDeviceFactsClass
+		capture_instance.CustomClass            = self.CustomClass if i == 0 else None
+		# capture_instance.CustomDeviceFactsClass = self.CustomDeviceFactsClass if i == 0 else None
 		capture_instance.foreign_keys           = deepcopy(self.foreign_keys)
 		capture_instance.fg                     = self.fg
 		capture_instance.mandatory_cmds_retries = self.mandatory_cmds_retries
@@ -705,8 +708,8 @@ class Execute_By_Excel(Execute_Common):
 		Args:
 			capture_instance (Execute_By_Login): instance of Execute_By_Login
 		"""    		
-		if not self.CustomClass: return
-		capture_instance.dependent_cmds(custom_dynamic_cmd_class=self.CustomClass)
+		if not capture_instance.CustomClass: return
+		capture_instance.dependent_cmds(custom_dynamic_cmd_class=capture_instance.CustomClass)
 
 	def instance_fact_finder(self, capture_instance):
 		"""add facts finder class to capture instance

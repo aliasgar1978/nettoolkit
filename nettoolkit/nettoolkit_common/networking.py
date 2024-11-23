@@ -3,9 +3,7 @@
 # Imports
 # ---------------------------------------------------------------------------------
 from os import popen
-from nettoolkit.addressing import IPv4, IPv6
 from nettoolkit.pyNetCrypt.jpw_cracker import juniper_decrypt
-from nettoolkit.addressing import to_dec_mask, invmask_to_mask, addressing
 from nettoolkit.nettoolkit_common.gpl import standardize_if, STR, LST
 
 # ---------------------------------------------------------------------------------
@@ -24,29 +22,6 @@ def nslookup(ip):
 	for line in lst:
 		if line.startswith("Name"): return line.split()[-1]
 	return ""
-
-def get_subnet(address):
-	"""derive subnet number for provided ipv4 address
-
-	Args:
-		address (str): ipv4 address in string format a.b.c.d/mm
-
-	Returns:
-		str: subnet zero == network address
-	"""    	
-	return IPv4(address).subnet_zero()
-
-def get_v6_subnet(address):
-	"""derive subnet number for provided ipv6 address
-
-	Args:
-		address (str): ipv6 address in string with mask
-
-	Returns:
-		str: subnet zero == network address
-	"""    	
-	return IPv6(address).subnet_zero()
-
 
 def get_int_ip(ip): 
 	"""get ip address from ip/mask info
@@ -270,73 +245,6 @@ def trunk_vlans_cisco(line):
 		return set(newvllist)
 # ---------------------------------------------------------------
 
-
-def get_inet_address(line):
-	"""derive the ipv4 information from provided line
-
-	Args:
-		line (str): interface config line
-
-	Returns:
-		str: ipv4 address with /mask , None if not found.
-	"""    	
-	if line.strip().startswith("ip address ") and not line.strip().endswith('secondary'):
-		spl = line.strip().split()
-		ip  = spl[2]
-		if ip == 'dhcp': return ""
-		mask = to_dec_mask(spl[3])
-		s = ip+"/"+str(mask)
-		return s
-	return None
-
-def get_secondary_inet_address(line):
-	"""derive the secondary ipv4 information from provided line
-
-	Args:
-		line (str): interface config line
-
-	Returns:
-		str: ipv4 address with /mask , None if not found.
-	"""    	
-	if line.strip().startswith("ip address ") and line.strip().endswith('secondary'):
-		spl = line.strip().split()
-		ip  = spl[2]
-		if ip == 'dhcp': return ""
-		mask = to_dec_mask(spl[3])
-		s = ip+"/"+str(mask)
-		return s
-	return None
-
-
-def inet_address(ip, mask):
-	"""return inet address from cisco standard ip and mask format
-
-	Args:
-		ip (str): ip address
-		mask (str): subnet mask
-
-	Returns:
-		str: ip/mask
-	"""	
-	mm = to_dec_mask(mask)
-	return ip+"/"+str(mm)
-
-
-def get_inetv6_address(line, link_local):
-	"""derive the ipv6 information from provided line
-
-	Args:
-		line (str): interface config line
-
-	Returns:
-		str: ipv6 address with /mask , None if not found.
-	"""    	
-	v6idx = -2 if link_local else -1
-	if line.strip().startswith("ipv6 address "):
-		spl = line.split()
-		ip  = spl[v6idx]
-		return ip
-	return None
 
 
 

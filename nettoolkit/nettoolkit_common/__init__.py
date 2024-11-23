@@ -15,8 +15,6 @@ __all__ = [
 	"flatten", "dataframe_generate", "printmsg", "read_yaml_mode_us", "open_text_file", "open_excel_file",
 	"open_folder", 
 	"CapturesOut",
-
-	# path
 	"get_file_name", "get_file_path", "create_folders",
 
 	# facts
@@ -25,10 +23,9 @@ __all__ = [
 	"get_appeneded_value", "add_to_list",
 
 	# networking
-	"nslookup", "IP", "get_subnet", "get_v6_subnet", "get_int_ip", "get_int_mask",
+	"nslookup", "IP", "get_int_ip", "get_int_mask",
 	'get_vlans_juniper', 'get_juniper_pw_string', 
 	'expand_if', 'expand_if_dict', 'get_interface_cisco', 'get_vlans_cisco', 'trunk_vlans_cisco',
-	'get_inet_address', 'get_secondary_inet_address', 'inet_address', 'get_inetv6_address',
 	'get_vrf_cisco'
 ]
 
@@ -49,9 +46,7 @@ from .common import (
 	remove_domain, read_file, get_op, get_ops, blank_line, get_device_manufacturar, detect_device_type, verifid_output, 
 	get_string_part, get_string_trailing, standardize_mac, mac_2digit_separated, mac_4digit_separated,
 	flatten, dataframe_generate, printmsg, read_yaml_mode_us, open_text_file, open_excel_file,
-	open_folder
-	)
-from .path import (
+	open_folder,
 	get_file_name, get_file_path, create_folders
 )
 from .facts import (
@@ -61,9 +56,9 @@ from .facts import (
 )
 from .networking import (
 	IP, 
-	nslookup, get_subnet, get_v6_subnet, get_int_ip, get_int_mask,
+	nslookup, get_int_ip, get_int_mask,
 	get_vlans_juniper, get_juniper_pw_string, 
 	expand_if, expand_if_dict, get_interface_cisco, get_vlans_cisco, trunk_vlans_cisco,
-	get_inet_address, get_secondary_inet_address, inet_address, get_inetv6_address,
+	# get_inet_address, get_secondary_inet_address, inet_address, get_inetv6_address,
 	get_vrf_cisco
 )

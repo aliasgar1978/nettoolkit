@@ -225,6 +225,71 @@ def binsubnet(subnet):
 	except:
 		pass
 
+
+def inet_address(ip, mask):
+	"""return inet address from cisco standard ip and mask format
+
+	Args:
+		ip (str): ip address
+		mask (str): subnet mask
+
+	Returns:
+		str: ip/mask
+	"""	
+	mm = to_dec_mask(mask)
+	return ip+"/"+str(mm)
+
+def get_inet_address(line):
+	"""derive the ipv4 information from provided line
+
+	Args:
+		line (str): interface config line
+
+	Returns:
+		str: ipv4 address with /mask , None if not found.
+	"""    	
+	if line.strip().startswith("ip address ") and not line.strip().endswith('secondary'):
+		spl = line.strip().split()
+		ip  = spl[2]
+		if ip == 'dhcp': return ""
+		return inet_address(ip, spl[3])
+	return None
+
+def get_secondary_inet_address(line):
+	"""derive the secondary ipv4 information from provided line
+
+	Args:
+		line (str): interface config line
+
+	Returns:
+		str: ipv4 address with /mask , None if not found.
+	"""    	
+	if line.strip().startswith("ip address ") and line.strip().endswith('secondary'):
+		spl = line.strip().split()
+		ip  = spl[2]
+		if ip == 'dhcp': return ""
+		return inet_address(ip, spl[3])
+	return None
+
+
+def get_inetv6_address(line, link_local):
+	"""derive the ipv6 information from provided line
+
+	Args:
+		line (str): interface config line
+
+	Returns:
+		str: ipv6 address with /mask , None if not found.
+	"""    	
+	v6idx = -2 if link_local else -1
+	if line.strip().startswith("ipv6 address "):
+		spl = line.split()
+		ip  = spl[v6idx]
+		return ip
+	return None
+
+
+
 # integer to octet
 def dec2dotted_ip(n):
 	"""convert decimal ip address to dotted decimal ip notation.
@@ -293,8 +358,31 @@ def subnet_size_to_mask(n):
 	else:
 		return masks
 
+def get_subnet(address):
+	"""derive subnet number for provided ipv4 address
+
+	Args:
+		address (str): ipv4 address in string format a.b.c.d/mm
+
+	Returns:
+		str: subnet zero == network address
+	"""    	
+	return IPv4(address).subnet_zero()
+
+
+def get_v6_subnet(address):
+	"""derive subnet number for provided ipv6 address
+
+	Args:
+		address (str): ipv6 address in string with mask
+
+	Returns:
+		str: subnet zero == network address
+	"""    	
+	return IPv6(address).subnet_zero()
+
 # decimal network ip and length -> subnet/mask
-def get_subnet(decimal_network_ip, length):
+def _get_subnet(decimal_network_ip, length):
 	"""get subnet/mask from decimal network ip and size of subnet
 
 	Args:
@@ -1617,7 +1705,7 @@ class Allocations():
 		start = pfx.to_decimal()
 		cri = self.check_range_in(range(start, start + len(pfx)))
 		if cri:
-			conflict = get_subnet(cri[0], cri[-1]-cri[0]+1)
+			conflict = _get_subnet(cri[0], cri[-1]-cri[0]+1)
 			if self.display_warning: print(f"Prefix {pfx} is already allocated, or it has clash with existing assignment {conflict}")
 		else:
 			self.add(range(start, start + len(pfx)), forwhat)
@@ -1700,7 +1788,7 @@ class Allocations():
 		sr = [x for x in rng]
 		for x in range(1048576):
 			try:
-				return get_subnet(sr[0]+x, sr[-1]-sr[0]+1)
+				return _get_subnet(sr[0]+x, sr[-1]-sr[0]+1)
 			except:
 				pass
 
@@ -1765,7 +1853,7 @@ class Subnet_Allocate():
 		sr = [x for x in self.checked_range]
 		for x in range(1048576):
 			try:
-				return get_subnet(sr[0]+x, self.subnet_size)
+				return _get_subnet(sr[0]+x, self.subnet_size)
 			except:
 				pass
 

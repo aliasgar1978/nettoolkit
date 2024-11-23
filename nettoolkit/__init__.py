@@ -5,8 +5,8 @@
 # ---------------- nettoolkit-common ---------------- #
 from .nettoolkit_common.gpl import (Default, Container, 
 	DifferenceDict, DictMethods, DIC,
-	STR, IO, LST, LOG, DB, IP, XL_READ, XL_WRITE, 
-	Multi_Execution, nslookup, standardize_if,
+	STR, IO, LST, LOG, DB, XL_READ, XL_WRITE, 
+	Multi_Execution, standardize_if,
 	get_username, get_password, 
 	get_juniper_int_type, get_cisco_int_type, get_device_manu
 )
@@ -41,8 +41,8 @@ __all__ = [
 	# ---------------- nettoolkit-common ---------------- #
 	# .gpl
 	'Default', 'Container', 'DifferenceDict', 
-	'STR', 'IO', 'LST', 'DIC', 'LOG', 'DB', 'IP', 'XL_READ', 'XL_WRITE', 
-	'DictMethods', 'Multi_Execution', 'nslookup', 'standardize_if', 'get_username', 'get_password', 
+	'STR', 'IO', 'LST', 'DIC', 'LOG', 'DB', 'XL_READ', 'XL_WRITE', 
+	'DictMethods', 'Multi_Execution', 'standardize_if', 'get_username', 'get_password', 
 	'get_juniper_int_type', 'get_cisco_int_type', 'get_device_manu',
 
 	# common

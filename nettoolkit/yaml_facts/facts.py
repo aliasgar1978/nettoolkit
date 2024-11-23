@@ -40,6 +40,7 @@ class YamlFacts():
 		self.capture_log_file = to_cit(self.capture_log_file)
 		self.captures = CapturesOut(self.capture_log_file)
 		self.CP = self.parser_cls_map[self.captures.device_manufacturar](self.captures, self.output_folder)
+		self.unavailable_cmds = self.CP.unavailable_cmds
 
 
 

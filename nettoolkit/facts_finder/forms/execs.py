@@ -80,12 +80,17 @@ def yaml_facts_start(i):
 	for log_file in i['ff_log_files'].split(";"):
 		if not log_file.endswith(".log"): continue
 		device = get_host(log_file)
+		print(">> starting", device, "...", end='\t')
 		#
 		try:
 			YF = YamlFacts(log_file, i['yf_output_folder'])
-			print(f"Yaml File Generated for {device}...")
+			print(f"Yaml File Generation done...,", end='\t')
+			print(f"Tasks Completed !! {device} !!")
+			if YF.unavailable_cmds:
+				print(f"\t{device}: Missing Captures {YF.unavailable_cmds}")
+
 		except Exception as e:
-			print(f"Yaml File Generation failed for {device}...")
+			print(f"Yaml File Generation failed...")
 			print(e)
 			continue
 		#

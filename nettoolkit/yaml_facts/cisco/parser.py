@@ -13,24 +13,24 @@ from nettoolkit.yaml_facts.cisco.parsers import *
 #  Local Statics
 # ==============================================================================================
 CISCO_CMD_PARSER_MAP = OrderedDict([
-	('show interfaces status', (get_interface_status, )),
-	('show cdp neighbors', (get_cdp_neighbour, )),
-	('show lldp neighbors', (get_lldp_neighbour, )),
-	('show interfaces description', (get_interface_description, )), 
-	('show mac address-table', (get_mac_address_table, )),
-	('show ip arp', (get_arp_table, )), 
 	('show running-config', (
-			get_system_running, 
+			get_interfaces_running, 
+			get_system_running_routes,
+			get_system_running_prefix_lists,
 			get_bgp_running, 
 			get_rip_running,
 			get_eigrp_running,
 			get_ospf_running,
 			get_isis_running,
-			get_interfaces_running, 
 			get_vrfs_running,
-			get_system_running_routes,
-			get_system_running_prefix_lists,
+			get_system_running, 
 	)),
+	('show interfaces status', (get_interface_status, )),
+	('show cdp neighbors', (get_cdp_neighbour, )),
+	('show lldp neighbors', (get_lldp_neighbour, )),
+	# ('show interfaces description', (get_interface_description, )),    ## part of runing so removed
+	# ('show mac address-table', (get_mac_address_table, )),             ## skip for now.. slower
+	# ('show ip arp', (get_arp_table, )),                                ## skip for now.. slower
 	('show version', (get_version, )),
 ])
 

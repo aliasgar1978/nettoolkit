@@ -248,7 +248,7 @@ class LogSummary():
 # -----------------------------------------------------------------------------
 
 
-
+## Not implemented ## -unused
 class SummaryDisplay():
 
 	def __init__(self, d):

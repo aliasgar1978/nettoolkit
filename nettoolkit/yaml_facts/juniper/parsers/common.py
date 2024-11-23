@@ -7,13 +7,9 @@
 from dataclasses import dataclass, field
 from collections import OrderedDict
 from nettoolkit.nettoolkit_common import *
-from nettoolkit.nettoolkit_common.gpl import *
-from nettoolkit.addressing import to_dec_mask, invmask_to_mask, addressing, shrink
-from nettoolkit.pyNetCrypt import juniper_decrypt
+from nettoolkit.addressing import *
+from nettoolkit.pyNetCrypt import *
 from nettoolkit.pyJuniper import JSet
-
-from nettoolkit.facts_finder.generators.commons import *
-from nettoolkit.facts_finder.generators.juniper.common import *
 
 from nettoolkit.yaml_facts.common import *
 

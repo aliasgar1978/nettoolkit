@@ -9,7 +9,6 @@ from abc import ABC, abstractproperty, abstractclassmethod
 import datetime
 from re import compile
 from collections import OrderedDict
-from os import popen
 import os
 import threading
 from getpass import getpass
@@ -58,20 +57,6 @@ JUNIPER_IFS_IDENTIFIERS = {
 # -----------------------------------------------------------------------------
 #                              Common Classes                                 #
 # -----------------------------------------------------------------------------
-
-def nslookup(ip):
-	"""return discovered hostname for provided ip
-
-	Args:
-		ip (str): ip address
-
-	Returns:
-		str: domain name string
-	"""	
-	lst = popen(f"nslookup {ip}").read().split("\n")
-	for line in lst:
-		if line.startswith("Name"): return line.split()[-1]
-	return ""
 
 
 def get_username():
@@ -1560,6 +1545,8 @@ class DB():
 # ------------------------------------------------------------------------------
 class XL_WRITE():
 	"""Excel file generate
+	Deprycated: use methods available in nettoolkit.nettoolkitdb ( append_to_xl, write_to_xl) instead.
+	This will be removed in future version
 
 	Args:
 		hostname (str): excel file
@@ -1614,6 +1601,8 @@ class XL_WRITE():
 # ------------------------------------------------------------------------------
 class XL_READ:
 	"""Excel file read
+	DEPRYCATED METHOD -- use - methods available in  nettoolkit.nettoolkitdb ( read_xl_all_sheet, read_an_xl_sheet, ) instead.
+	This will be removed in future version
 
 	Args:
 		xl (str): Excel file name
@@ -1670,64 +1659,6 @@ class XL_READ:
 		return self.filter(**kwarg)[column]
 
 
-
-
-# -----------------------------------------------------------------------------
-#                               IP OPERATIONS                                 #
-# -----------------------------------------------------------------------------
-
-class IP():
-	"""Collection of static methods for Networking on (IP).
-	see more...	
-	"""
-
-	@staticmethod
-	def ping_average(ip):
-		"""return average ping responce for provided ip
-
-		Args:
-			ip (str): ip address string
-
-		Returns:
-			int, None: responce time or None
-		"""		
-		lst = popen(f"ping {ip}").read().split("\n")
-		for x in lst:
-			if "Average" in x:
-				avg = x.split()[-1]
-				s = ''
-				for i, n in enumerate(avg):
-					if n.isdigit(): s += n
-				return int(s)
-
-	@staticmethod
-	def bin2dec(binmask):
-		"""convert binary mask to decimal mask
-
-		Args:
-			binmask (str): binary mask value
-
-		Returns:
-			int: Decimal mask
-		"""		
-		return 32 - IP.inv2dec(binmask)
-
-	@staticmethod
-	def inv2dec(invmask):
-		"""convert inverse mask to decimal mask
-
-		Args:
-			invmask (str): inverse mask value
-
-		Returns:
-			int: Decimal mask
-		"""		
-		m_octs = invmask.split(".")
-		count_of_ones = 0
-		for x in m_octs:
-			x = bin(int(x))
-			count_of_ones += x.count("1")
-		return 32 - count_of_ones
 
 
 # -----------------------------------------------------------------------------

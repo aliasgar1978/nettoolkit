@@ -8,6 +8,7 @@ from .func import Vrf, Vlan, Physical, Bgp, Aggregated, Loopback, Ospf, Static
 from .general import *
 from .read_conditions import JinjaVarCheck
 
+# =======================================================================================================
 
 class PrepareConfig():
 	"""boiler plate code class for start configuration preparation

@@ -6,7 +6,8 @@ from nettoolkit.addressing import IPv4
 # -----------------------------------------------------------------------------------------------
 
 class Common():
-
+	"""COMMON FUNCTIONALITY CLASS TO INHERIT 
+	"""
 	def __init__(self, table):
 		self.table = table
 		self.filter = self.__class__.__name__.lower()

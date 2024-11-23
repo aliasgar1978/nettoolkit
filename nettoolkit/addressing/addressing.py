@@ -1441,6 +1441,8 @@ class Routes(object):
 MAX_RECURSION_DEPTH = 100		# default recursion depth, increase if exceeding and need to go deep more.
 class Summary(IPv4):
 	'''Defines Summaries of prefixes
+	DEPRYCATED CLASS -- will be removed in future version..
+	USE `addressing.summary.Aggregate` instead for better performance.
 	'''
 
 	# __slots__ = ['networks', 'summaries', 'del_eligibles','mask','first','second',

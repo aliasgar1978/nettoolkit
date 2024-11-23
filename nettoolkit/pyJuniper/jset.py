@@ -21,7 +21,7 @@ class JSet(Default, STR, Container):
 		"""		
 		self.output = []
 		self.err = False
-		if input_file or input_list: self.set_input(input_file, input_list)
+		if input_file or input_list: self._set_input(input_file, input_list)
 
 	@property
 	def objVar(self): 
@@ -32,7 +32,7 @@ class JSet(Default, STR, Container):
 		"""		
 		return self.output
 
-	def set_input(self, input_file=None, input_list=None):
+	def _set_input(self, input_file=None, input_list=None):
 		"""set input list from either provided input.
 
 		Args:

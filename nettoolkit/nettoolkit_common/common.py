@@ -6,7 +6,7 @@ from yaml import UnsafeLoader
 import subprocess as sp
 import pandas as pd
 import os
-from  pathlib import Path
+from nettoolkit.nettoolkit_common import get_file_name
 
 # ------------------------------------------------------------------------------
 
@@ -313,30 +313,6 @@ def printmsg(pre=None, *, post=None, pre_ends="\n", justify_pre=True, justificat
 
 # ------------------------------------------------------------------------
 
-def create_folders(folders, *, silent=True):
-	"""Creates Folders
-
-	Args:
-		folders (list,str): folder(s)
-		silent (bool, optional): Create without prompt. Defaults to True.
-
-	Returns:
-		bool: Success/Fail
-	"""    	
-	cf = 1
-	if isinstance(folders, str):
-		folders = [folders,]
-	for folder in folders:
-		if not os.path.exists(folder):
-			if not silent: print(f"Creating: {folder}", end="\t")
-			try:
-				os.makedirs(folder)
-				print("OK.")
-			except:
-				print("Failed.")
-				cf = 0
-	return bool(cf)
-
 
 def open_text_file(file):
 	"""Open Text file in Notepad.exe
@@ -423,7 +399,17 @@ def abs_command_juniper(cmd):
 
 @dataclass
 class CapturesOut():
-	capture_log_file: list[str] = field(default_factory=[])
+	"""Class define common methods and properties on captured output file.
+
+	Args:
+		capture_log_file (str): Output capture file
+
+	Raises:
+		Exception: _description_
+
+	"""    	
+	# capture_log_file: list[str] = field(default_factory=[])
+	capture_log_file: str     #### To be verify earlier it was given list which seems a typo
 
 	abs_cmd_function_map = {
 		'Cisco': abs_command_cisco,
@@ -434,56 +420,98 @@ class CapturesOut():
 		'Juniper': JUNIPER_ABS_COMMANDS,
 	}
 
-	def __post_init__(self):		
-		self.read_capture_log_file()
-		self.get_hostname_from_file_name()
-		self.set_device_type()
-		self.device_parameters()
-		self.gen_output_list_dict()
+	def __post_init__(self):
+		self._read_capture_log_file()
+		self._get_hostname_from_file_name()
+		self._set_device_type()
+		self._device_parameters()
+		self._gen_output_list_dict()
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 	def cmd_output(self, cmd):
+		"""provides filtered output of provided command
+
+		Args:
+			cmd (str): command string
+
+		Returns:
+			list: list of outout for provided command
+		"""    		
 		op_list = self._has(cmd)
 		return op_list if op_list else []
 
 	def has(self, cmd):
+		"""Checks if outout has provided command output or not.
+
+		Args:
+			cmd (str): command string
+
+		Returns:
+			bool: True / False based on match.
+		"""    		
 		return self._has(cmd) != None
 
 	@property
 	def name(self):
+		"""Returns device hostname from capture output.
+
+		Returns:
+			str: hostname of device
+		"""    		
 		return self.hostname
 
 	@property
 	def device_manufacturar(self):
+		"""Returns device manufacturer from capture output.
+
+		Returns:
+			str: manufacturer of device
+		"""    		
 		return self.device_type
 
+	# Absolute commands map 
 	@property
 	def abs_commands(self):
+		"""Returns absolute commands
+
+		Returns:
+			dict: absolute command map
+		"""		
 		return self.abs_cmd_map[self.device_type]
 
 	@property
 	def outputs(self):
+		"""returns dictionary of commands: output-list.
+
+		Returns:
+			dict: outputs splitted in dictionary by its command as key
+		"""    		
 		return self.output_list_dict
 
 
 	# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-	def read_capture_log_file(self):
+	# read capture log file and store as full list
+	def _read_capture_log_file(self):
 		self.capture_log_list = read_file(self.capture_log_file)
 
-	def get_hostname_from_file_name(self):
+	# extract hostname from list
+	def _get_hostname_from_file_name(self):
 		self.hostname = get_file_name(self.capture_log_file, ext=False)
 
-	def set_device_type(self):
+	# extract device type from list
+	def _set_device_type(self):
 		self.device_type = detect_device_type(self.capture_log_list)
 
-	def device_parameters(self):
+	# extract other device parameters from list
+	def _device_parameters(self):
 		if self.abs_cmd_function_map.get(self.device_type):
 			self.abs_cmd_fn = self.abs_cmd_function_map[self.device_type] 
 		else:
 			raise Exception(f"Invalid configuration, Unable to determine Device type. {self.device_type} for provided capture log file")
 
-	def gen_output_list_dict(self):
+	# generate dictionary by outputs splitted by its command as key 
+	def _gen_output_list_dict(self):
 		toggle = 0
 		self.output_list_dict, op_lst = {}, []
 		for l in self.capture_log_list:
@@ -506,7 +534,7 @@ class CapturesOut():
 		if toggle:
 			self.output_list_dict[abs_cmd] = op_lst
 			
-
+	# verify if output has provided command output or not.
 	def _has(self, cmd):
 		if self.device_type == 'Juniper':
 			cmd = cmd.split("|")[0].strip()
@@ -515,11 +543,4 @@ class CapturesOut():
 
 # ==========================================================================================
 
-def get_file_path(file):
-	p = Path(file)	
-	return p.parent
-
-def get_file_name(file, ext=False):
-	p = Path(file)	
-	return p.name if ext else p.stem
 		

@@ -78,29 +78,29 @@ class JinjaVarCheck():
 		self.dfd = read_xl_all_sheet(self.clean_file)
 
 	def __call__(self):
-		self.jinja_var_only_variables = set(self.get_var_only_variables())
+		self.jinja_var_only_variables = set(self._get_var_only_variables())
 		self.device_xl_var_only_variables = set(self.var_df['var'])
 		if not self.global_df.empty:
 			self.global_xl_var_only_variables = set(self.global_df['var'])
-		# self.xl_table_variables = self.get_xl_table_variables()
-		# self.jinja_table_variables = set(self.get_otherthan_vars_variables())
-		self.merge_global_device_vars()
-		self.check()
+		# self.xl_table_variables = self._get_xl_table_variables()
+		# self.jinja_table_variables = set(self._get_otherthan_vars_variables())
+		self._merge_global_device_vars()
+		self._check()
 
-	def merge_global_device_vars(self):
+	def _merge_global_device_vars(self):
 		if not self.global_df.empty:
 			self.xl_var_only_variables = self.device_xl_var_only_variables | self.global_xl_var_only_variables
 		else:
 			self.xl_var_only_variables = self.device_xl_var_only_variables
 
-	def get_xl_table_variables(self):
+	def _get_xl_table_variables(self):
 		del(self.dfd['var'])
 		table_vars = set()
 		for df in self.dfd.values():
 			table_vars = table_vars | set(df.keys())
 		return table_vars
 
-	def get_var_only_variables(self):
+	def _get_var_only_variables(self):
 		nvs = []
 		for v in self.variables:
 			v = v.split("{{")[-1].split("}}")[0].strip()
@@ -109,7 +109,7 @@ class JinjaVarCheck():
 				nvs.append(v[4:])
 		return nvs
 
-	def get_otherthan_vars_variables(self):
+	def _get_otherthan_vars_variables(self):
 		nvs = []
 		for v in self.variables:
 			v = v.split("{{")[-1].split("}}")[0].strip()
@@ -122,7 +122,7 @@ class JinjaVarCheck():
 					nvs.append(s)
 		return nvs
 
-	def check(self):
+	def _check(self):
 		self.xl_var_missing = self.jinja_var_only_variables - self.xl_var_only_variables
 		# self.jinja_var_missing = self.xl_var_only_variables - self.jinja_var_only_variables
 		# self.xl_table_missing = self.jinja_table_variables - self.xl_table_variables

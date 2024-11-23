@@ -128,6 +128,11 @@ class COMMAND():
 		return fname
 
 def delete_file_ifexist(fname):
+	"""deletes file
+
+	Args:
+		fname (str): file name with full path.
+	"""    	
 	try:
 		os.remove(fname)
 	except:

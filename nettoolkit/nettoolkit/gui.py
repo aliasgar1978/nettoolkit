@@ -12,7 +12,20 @@ from .forms.formitems import *
 # -----------------------------------------------------------------------------
 
 class NGui(GuiTemplate):
+	"""class to define a custom GUI window
 
+	Args:
+		header (str, optional): Header on GUI Window. Defaults to "Set Your private Header".
+		banner (str, optional): Banner in Window. Defaults to "Set Your private Banner".
+		form_width (int, optional): width of form. Defaults to 1440.
+		form_height (int, optional): height of form. Defaults to 700.
+		frames_dict (dict, optional): dictionary of frames. Defaults to {}.
+		event_catchers (dict, optional): dictionary of event catchers and its events. Defaults to {}.
+		event_updaters (set, optional): set of event updators. Defaults to set().
+		event_item_updaters (set, optional): set of an event item updators. Defaults to set().
+		retractables (set, optional): set of retractable fields. Defaults to set().
+		button_pallete_dic (dict, optional): button pallete dictionary. Defaults to {}.
+	"""	
 
 	def __init__(self, * ,
 		header="Set Your private Header",

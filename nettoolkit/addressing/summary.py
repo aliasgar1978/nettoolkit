@@ -46,10 +46,12 @@ MASK_RANGE = {
 # =========================================================================================== 
 # Functions
 # =========================================================================================== 
-def split_continuous_ranges(int_ranges):
+
+# recursive, club adjascent ranges and split diverse ones. 
+def _split_continuous_ranges(int_ranges):
 	ranges = []
 	for start, end in int_ranges:
-		max_mask_range = max(get_range_parts(end-start+1))
+		max_mask_range = max(_get_range_parts(end-start+1))
 		ip = dec2dotted_ip(start)
 		for _ in reversed(MASK_RANGE):
 			if _ > max_mask_range: continue
@@ -59,11 +61,11 @@ def split_continuous_ranges(int_ranges):
 		ranges.append( (i.network_number_int, i.broadcast_number_int) )
 		if i.network_number_int == start and i.broadcast_number_int == end:
 			continue
-		ranges.extend( split_continuous_ranges([(i.broadcast_number_int+1, end),]))
+		ranges.extend( _split_continuous_ranges([(i.broadcast_number_int+1, end),]))
 	return ranges
 
-
-def get_range_parts(diff):
+# get the mask ranges for provided differences.
+def _get_range_parts(diff):
 	mask_ranges = set() 
 	for k in sorted(MASK_RANGE.keys()):
 		if k > diff: break
@@ -83,23 +85,33 @@ def get_masks(lst, diff):
 # =========================================================================================== 
 @dataclass
 class Aggregate():
+	"""class Aggregating provided IPV4 prefixes..
+
+	Raises:
+		Exception: Incorrect IP / Format Received
+
+	Returns:
+		Aggregate: Object instance of Aggregate
+	"""    	
 	prefixes: list[str] = field(default_factory=list)
 
 	def __post_init__(self):
-		self.sort_prefixes()
+		self._sort_prefixes()
 		self.pfxs_dict = {}
-		self.get_ip_objects()
-		self.count_start_stop()
-		self.int_ranges = self.get_continuous_ranges()
-		self.int_ranges = split_continuous_ranges(self.int_ranges)
-		self.get_aggregates_from_ranges()
+		self._get_ip_objects()
+		self._count_start_stop()
+		self.int_ranges = self._get_continuous_ranges()
+		self.int_ranges = _split_continuous_ranges(self.int_ranges)
+		self._get_aggregates_from_ranges()
 
-	def sort_prefixes(self):
+	# Sorting prefixes on ascending order
+	def _sort_prefixes(self):
 		df = pd.DataFrame({'subnets': list(self.prefixes)})
 		df = sort_dataframe_on_subnet(df, 'subnets')
 		self.prefixes = list(df['subnets'])
 
-	def get_ip_objects(self):
+	# convert prefixes as IPv4 objects.
+	def _get_ip_objects(self):
 		for pfx in self.prefixes:
 			try:
 				if isinstance(pfx, str):
@@ -111,13 +123,14 @@ class Aggregate():
 			except Exception as e:
 				raise Exception(f"Incorrect IP / Format Received {pfx}\n{e}")
 
-
-	def count_start_stop(self):
+	# count and store network and broadcast number for each prefixes.
+	def _count_start_stop(self):
 		for pfx in self.pfxs_dict.keys():
 			self.pfxs_dict[pfx]['net_num'] = pfx.network_number_int
 			self.pfxs_dict[pfx]['bc_num'] = pfx.broadcast_number_int
 
-	def get_continuous_ranges(self):
+	# sorted ranges 
+	def _get_continuous_ranges(self):
 		ranges = []
 		for pfx, pfx_dict in self.pfxs_dict.items():
 			# -- First entry
@@ -147,7 +160,8 @@ class Aggregate():
 
 		return ranges
 
-	def get_aggregates_from_ranges(self):
+	# get aggregate addresses from sorted ranges
+	def _get_aggregates_from_ranges(self):
 		self._summaries = []
 		for start, end in self.int_ranges:
 			ip = addressing(f"{dec2dotted_ip(start)}/{inv_subnet_size_to_mask(end-start)}")
@@ -156,12 +170,24 @@ class Aggregate():
 				continue
 			raise Exception(f"Script Error: Invalid Summary Found: {ip}")
 
+	### ----- Available Properties --- ###
+
 	@property
 	def aggregates(self):
+		"""returns list of aggregate IPv4 objects 
+
+		Returns:
+			list: list of IPv4 objects
+		"""    		
 		return self._summaries
 
 	@property
 	def summaries(self):
+		"""returns list of aggregate strings.
+
+		Returns:
+			list: list of summary address strings
+		"""    		
 		return [str(_) for _ in self._summaries]
 
 # =========================================================================================== 

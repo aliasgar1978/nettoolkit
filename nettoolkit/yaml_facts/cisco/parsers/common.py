@@ -7,11 +7,8 @@
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from nettoolkit.nettoolkit_common import *
-from nettoolkit.nettoolkit_common.gpl import *
-from nettoolkit.addressing import to_dec_mask, invmask_to_mask, addressing, classful_subnet, shrink
-
-from nettoolkit.facts_finder.generators.commons import *
-from nettoolkit.facts_finder.generators.cisco.common import *
+from nettoolkit.addressing import *
+from nettoolkit.pyNetCrypt import *
 
 from nettoolkit.yaml_facts.common import *
 

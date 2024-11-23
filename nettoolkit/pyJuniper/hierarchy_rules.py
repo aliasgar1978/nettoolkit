@@ -1,6 +1,10 @@
 
 
 
+###
+### NOTE: PROVIDED LIST/SETS ARE NOT COMPLETE, IT MAY NEED EDIT/ADDS AS FOUND MORE
+###
+
 candidates_require_suffix = {
 	'family', 
 	'filter', 

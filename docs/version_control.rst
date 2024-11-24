@@ -28,9 +28,26 @@ Version 1.x updates
 
    * - 1.8.0
      - Nov 3, 2024
-     - * ``yaml_facts``: New module added to package ( yaml fact file generation added, for cisco_ios and juniper_junos devices ). Documentation in progress.
-       * ``addressing.classful_subnet``: added a new function
-
+     - * **New Major Addition**: ``yaml_facts`` - New module added ( cisco_ios and juniper_junos switches parser and create yaml config for mostly used parameters)
+          * Interface parameters ( loopback, physical, vlans, aggregate, tunnel, )
+          * System configs ( hostname, serial, model, make, boot info, servers-dns,syslog,ntp,tacacs,)
+          * Vrf/instances and its parameters
+          * Protocols: RIP,OSPF,ISIS,EIGRP,BGP
+          * Static Routes: for each instance ipv4/ipv6
+          * Prefix-Lists
+          * And many more
+       * **Other Additions**:
+          * **addressing**: inet_address, get_inet_address, get_secondary_inet_address, get_inetv6_address, get_subnet, get_v6_subnet, classful_subnet
+          * **Decorator** : activity_finish_popup
+          * **nettoolkit_common.common**: get_file_path, get_file_name, create_folders, detect_device_type, abs_command_cisco, abs_command_juniper, CapturesOut
+          * **nettoolkit_common.facts**: add_blankdict_key, add_blankset_key, add_blanklist_key, add_blanktuple_key, add_blanknone_key, update_key_value, next_index_item, next_index_item, get_instance_parameter_for_items, update_true_instance_items, update_true_instance_items, get_appeneded_value, add_to_list, 
+          * **nettoolkit_common.networking**: nslookup, get_int_ip, get_int_mask, expand_if, expand_if_dict, get_interface_cisco, get_vlans_cisco, trunk_vlans_cisco, get_vrf_cisco
+          * **nettoolkit_db.read_an_xl_sheet**: ( optional argument added *sheet_name* )
+       * **Bug fixes**: Capture-IT (excel mode), Config Generator (GUI execution)
+       * **Deprycate waring**:
+          * nettoolkit_common.gpl.XL_WRITE
+          * nettoolkit_common.gpl.XL_READ
+          * addressing.Summary
    * - 1.7.7
      - Oct 19, 2024
      - * fixed - nettoolkit.nettoolkit_db - subnet sorting bug

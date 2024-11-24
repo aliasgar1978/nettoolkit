@@ -664,7 +664,7 @@ class Execute_By_Excel(Execute_Common):
 		)
 		self.instance_properties_update(capture_instance, i)
 		self.instance_custom_class(capture_instance)
-		# self.instance_fact_finder(capture_instance)
+		# self.instance_fact_finder(capture_instance)		        ## Removed since excel mode will be mostly for capture only..
 		capture_instance()
 		capture_instance.log_summary(onscreen=True, to_file=False)
 		self.update_self_log_properties(capture_instance)
@@ -683,7 +683,7 @@ class Execute_By_Excel(Execute_Common):
 		capture_instance.missing_captures_only  = self.missing_captures_only if i == 0 else True
 		capture_instance.max_connections        = self.max_connections
 		capture_instance.CustomClass            = self.CustomClass if i == 0 else None
-		# capture_instance.CustomDeviceFactsClass = self.CustomDeviceFactsClass if i == 0 else None
+		# capture_instance.CustomDeviceFactsClass = self.CustomDeviceFactsClass if i == 0 else None          ## Removed since excel mode will be mostly for capture only
 		capture_instance.foreign_keys           = deepcopy(self.foreign_keys)
 		capture_instance.fg                     = self.fg
 		capture_instance.mandatory_cmds_retries = self.mandatory_cmds_retries

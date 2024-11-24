@@ -43,6 +43,7 @@
    Nettoolkit Class Extension <docs/u_doc/nettoolkit/userdoc>
    Crypto <docs/u_doc/pynetcrypt/userdoc>
    Visio Drawing-Gen <docs/u_doc/pyvig/userdoc>
+   Yaml Facts <docs/u_doc/yaml_facts/userdoc>
 
 
 .. toctree::

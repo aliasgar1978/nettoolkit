@@ -28,6 +28,8 @@ from nettoolkit.yaml_facts.juniper import JuniperParser
 
 @dataclass
 class YamlFacts():
+	"""Base class generates the yaml facts file from provided capture_log_file at given output_folder.
+	"""    	
 	capture_log_file: str
 	output_folder: str=''
 

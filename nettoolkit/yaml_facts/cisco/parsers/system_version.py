@@ -5,6 +5,14 @@ from .common import *
 # ------------------------------------------------------------------------------
 
 def get_version(command_output):
+	"""parse output of : show version
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: system level parsed output dictionary
+	"""    	
 	op_dict = {}
 	parsed_data = parse_to_dict_using_ntc('show version', command_output)[0]
 	#

@@ -46,6 +46,11 @@ CISCO_CMD_PARSER_MAP = OrderedDict([
 # ==============================================================================================
 @dataclass
 class CiscoParser(CommonParser):
+	"""Cisco Parser Class - parse juniper configurations using CISCO_CMD_PARSER_MAP
+
+	Inherits:
+		CommonParser (class): Common Parser class
+	"""    	
 	captures: any
 	output_folder: str=''
 

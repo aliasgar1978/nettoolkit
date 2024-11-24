@@ -5,6 +5,14 @@ from .common import *
 # ------------------------------------------------------------------------------
 
 def get_mac_address_table(command_output):
+	"""parse output of : show mac address-table
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: interfaces level parsed output dictionary
+	"""    	
 	op_dict = {}
 	parsed_data = parse_to_list_using_ntc('show mac address-table', command_output)
 	#

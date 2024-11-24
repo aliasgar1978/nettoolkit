@@ -295,6 +295,14 @@ def set_of_voice_vlans(set_cmd_op):
 #  interfaces parser calling function
 # ------------------------------------------------------------------------------
 def get_interfaces_running(cmd_op):
+	"""parse output of : show configurtain
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: interfaces level parsed output dictionary
+	"""    	
 	R  = RunningInterfaces(cmd_op)
 	R()
 	return R.logical_systems_dict

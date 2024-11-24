@@ -310,6 +310,14 @@ class RunningInterfaces():
 
 
 def get_interfaces_running(command_output):
+	"""parse output of : show running-config
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: interfaces level parsed output dictionary
+	"""    	
 	R  = RunningInterfaces(command_output)
 
 	return {'interfaces': R.interface_dict }

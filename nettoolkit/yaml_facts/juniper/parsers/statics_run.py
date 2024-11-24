@@ -123,6 +123,14 @@ class RunningRoutes(Running):
 #  system parser calling function
 # ------------------------------------------------------------------------------
 def get_system_running_routes(cmd_op):
+	"""parse output of : show configurtain
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: statics level parsed output dictionary
+	"""    	
 	R  = RunningRoutes(cmd_op)
 	R()
 	return R.logical_systems_dict

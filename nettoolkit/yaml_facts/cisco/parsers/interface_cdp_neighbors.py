@@ -4,6 +4,14 @@
 from .common import *
 # ------------------------------------------------------------------------------
 def get_cdp_neighbour(command_output):
+	"""parse output of : show cdp neighbor
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: physical interfaces level parsed output dictionary
+	"""    	
 	nbr_d = {}
 	parsed_data = parse_to_list_using_ntc('show cdp neighbors', command_output)
 	#

@@ -77,6 +77,14 @@ class Instances(ProtocolObject):
 #  instance parser calling function
 # ------------------------------------------------------------------------------
 def get_instance_running(cmd_op):
+	"""parse output of : show configurtain
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: vrf level parsed output dictionary
+	"""    	
 	I = Instances(cmd_op)
 	I()
 	return I.logical_systems_dict

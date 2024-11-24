@@ -240,6 +240,14 @@ class ISISConf(ProtocolsConfig):
 # ====================================================================================================
 
 def get_isis_running(command_output):
+	"""parse output of : show running-config
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: protocols isis and isis-instance level parsed output dictionary
+	"""    	
 	RC = ISISConf(command_output)
 	return get_protocol_instance_dict(protocol='isis', instances_dic=RC.isis_vrf_dict)
 

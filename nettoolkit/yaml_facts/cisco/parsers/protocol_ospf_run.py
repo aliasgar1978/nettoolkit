@@ -177,13 +177,13 @@ class OSPF(ProtocolsConfig):
 # ====================================================================================================
 
 def get_ospf_running(command_output):
-	"""defines set of methods executions. to get various ospf parameters.
+	"""parse output of : show running-config
 
 	Args:
-		command_output (list, str): running config output, either list of multiline string
+		command_output (list): command output
 
 	Returns:
-		dict: output dictionary with parsed with ospf fields
+		dict: protocols ospf and ospfv6 level parsed output dictionary
 	"""    	
 	O  = OSPF(command_output)
 	return get_protocol_instance_dict(protocol='ospf', instances_dic=O.ospf_vrf_dict)

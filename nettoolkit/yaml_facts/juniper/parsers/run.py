@@ -11,6 +11,11 @@ from abc import abstractclassmethod
 # ==========================================================================
 @dataclass
 class Running():
+	"""Base class for show configuration parsing common methods
+
+	Raises:
+		Exception: if necessary capture is missing in output
+	"""    
 	cmd_op: list[str,] = field(default_factory=[])
 
 	def __post_init__(self):
@@ -62,6 +67,11 @@ class Running():
 # ==========================================================================
 @dataclass
 class PeerLines():
+	"""Base class to filter BGP Peer lines 
+
+	Yields:
+		tuple: peer lines, splitted peer lines
+	"""    	
 	bgp_peer_group_lines: list[str] = field(default_factory=[])
 	peer: str = ''
 
@@ -92,6 +102,11 @@ class PeerLines():
 # ==========================================================================
 @dataclass
 class VrfLines():
+	"""Base class to filter a protocol instance lines
+
+	Yields:
+		str: filtered lines
+	"""    	
 	protocol: str = 'bgp'
 	vrf: str = ''
 	protocol_lines: list[str] = field(default_factory=[])
@@ -165,6 +180,11 @@ class VrfLines():
 # ==========================================================================
 @dataclass
 class jProtocolLines():
+	"""Base class for all protocol lines
+
+	Yields:
+		str: protocol lines
+	"""    	
 	config_lines: list[str,] = field(default_factory=[])
 	protocol: str = 'bgp'
 
@@ -214,6 +234,12 @@ class jProtocolLines():
 # ==========================================================================
 @dataclass
 class ProtocolObject(Running):
+	"""Base class to return an object for a protocol lines.
+
+	Args:
+		cmd_op (list): list of output
+		protocol (str): protocol for which lines to be filtered.
+	"""
 	cmd_op: list[str,] = field(default_factory=[])
 	protocol: str = None
 

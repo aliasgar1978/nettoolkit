@@ -321,6 +321,14 @@ class EIGRPConf(ProtocolsConfig):
 # ====================================================================================================
 
 def get_eigrp_running(command_output):
+	"""parse output of : show running-config
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: protocols eigrp level parsed output dictionary
+	"""    	
 	EC = EIGRPConf(command_output)
 	return get_protocol_instance_dict(protocol='eigrp', instances_dic=EC.eigrp_vrf_dict)
 

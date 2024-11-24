@@ -63,6 +63,14 @@ class HelperAddresses(Running):
 #  helper parser calling function
 # ------------------------------------------------------------------------------
 def get_helper_running(cmd_op):
+	"""parse output of : show configurtain
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: vrf level parsed output dictionary for dhcp helper recognition 
+	"""    	
 	HA = HelperAddresses(cmd_op)
 	return {'vrf': HA.helper_dict}
 # ------------------------------------------------------------------------------

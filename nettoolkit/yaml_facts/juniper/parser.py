@@ -1,4 +1,4 @@
-"""Description: Cisco Parser
+"""Description: Juniper Parser
 """
 
 # ==============================================================================================
@@ -53,6 +53,11 @@ JUNIPER_CMD_PARSER_MAP = OrderedDict([
 # ==============================================================================================
 @dataclass
 class JuniperParser(CommonParser):
+	"""Juniper Parser Class - parse juniper configurations using JUNIPER_CMD_PARSER_MAP
+
+	Inherits:
+		CommonParser (class): Common Parser class
+	"""    	
 	captures: any
 	output_folder: str=''
 

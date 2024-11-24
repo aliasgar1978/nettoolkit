@@ -124,6 +124,14 @@ class BGP(ProtocolObject):
 #  bgp parser calling function
 # ------------------------------------------------------------------------------
 def get_bgp_running(cmd_op):
+	"""parse output of : show configurtain
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: protocols bgp level parsed output dictionary
+	"""    	
 	B = BGP(cmd_op)
 	B()
 	return B.logical_systems_dict

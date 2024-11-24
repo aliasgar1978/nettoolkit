@@ -5,6 +5,14 @@ from .common import *
 # ------------------------------------------------------------------------------
 
 def get_chassis_hardware(cmd_op):
+	"""parse output of : show chassis hardware
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: interface level parsed output dictionary
+	"""    	
 	op_dict = {}
 	try:
 		parsed_data_dict_list = parse_to_dict_using_ntc('show chassis hardware', cmd_op)

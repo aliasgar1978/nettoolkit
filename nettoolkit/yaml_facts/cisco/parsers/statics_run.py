@@ -5,7 +5,7 @@ from .common import *
 # ------------------------------------------------------------------------------
 
 class RunningRoutes():
-	"""object for running config routes parser
+	"""Base class for running config routes parser
 	"""    	
 
 	def __init__(self, cmd_op):

@@ -10,6 +10,12 @@ from .common import *
 
 @dataclass
 class ProtocolsConfig():
+	"""Base class for protocols standard methods implementation
+
+	Raises:
+		Exception: if any unsupported protocol provided
+
+	"""    	
 	run_list: list[str] = field(default_factory=[])
 
 	single_instance_protocols = { 'rip', 'bgp' }

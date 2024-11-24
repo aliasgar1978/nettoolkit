@@ -97,6 +97,14 @@ class RIPConf(ProtocolsConfig):
 # ====================================================================================================
 
 def get_rip_running(command_output):
+	"""parse output of : show running-config
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: protocols rip level parsed output dictionary
+	"""    	
 	RC = RIPConf(command_output)
 	return get_protocol_instance_dict(protocol='rip', instances_dic=RC.rip_vrf_dict)
 

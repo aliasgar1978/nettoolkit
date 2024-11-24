@@ -5,6 +5,14 @@ from .common import *
 # ------------------------------------------------------------------------------
 
 def get_version(cmd_op):
+	"""parse output of : show version
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: system level parsed output dictionary
+	"""    	
 	op_dict = {}
 	version, model = "", ""
 	fpc_dict = None

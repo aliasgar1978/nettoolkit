@@ -109,6 +109,14 @@ class RunningSystem(Running):
 #  system parser calling function
 # ------------------------------------------------------------------------------
 def get_system_running(cmd_op):
+	"""parse output of : show configurtain
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: system level parsed output dictionary
+	"""    	
 	R  = RunningSystem(cmd_op)
 	R()
 	return R.logical_systems_dict

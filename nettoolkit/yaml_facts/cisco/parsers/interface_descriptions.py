@@ -5,6 +5,14 @@ from .common import *
 # ------------------------------------------------------------------------------
 
 def get_interface_description(command_output):
+	"""parse output of : show interface description
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: interfaces level parsed output dictionary
+	"""    	
 	int_desc_dict = {}
 	parsed_data = parse_to_list_using_ntc('show interfaces description', command_output)
 	#

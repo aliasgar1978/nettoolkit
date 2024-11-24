@@ -135,6 +135,14 @@ class ISIS(ProtocolObject):
 #   parser calling function
 # ------------------------------------------------------------------------------
 def get_isis_running(cmd_op):
+	"""parse output of : show configurtain
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: protocols isis and isis-instance level parsed output dictionary
+	"""    	
 	parent_dict = get_isis_parent_running(cmd_op)
 	instance_dict = get_isis_instance_running(cmd_op)
 	merge_dict(parent_dict, instance_dict)

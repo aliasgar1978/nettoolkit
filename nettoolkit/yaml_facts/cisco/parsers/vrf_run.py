@@ -145,14 +145,13 @@ class RunningVRFs():
 
 
 def get_vrfs_running(command_output):
-	"""defines set of methods executions. to get various vrf parameters.
-	uses RunningVRFs in order to get all.
+	"""parse output of : show running-config
 
 	Args:
-		command_output (list, str): running config output, either list of multiline string
+		command_output (list): command output
 
 	Returns:
-		dict: output dictionary with parsed with system fields
+		dict: vrf level parsed output dictionary
 	"""    	
 	R  = RunningVRFs(command_output)
 	R.vrf_description()

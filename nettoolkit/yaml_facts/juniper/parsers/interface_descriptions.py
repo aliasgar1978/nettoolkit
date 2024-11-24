@@ -6,6 +6,14 @@ from .common import *
 
 
 def get_interface_description(cmd_op):
+	"""parse output of : show interfaces description
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: interfaces level parsed output dictionary
+	"""    	
 	op_dict = {}
 	for l in cmd_op:
 		if blank_line(l): continue

@@ -86,15 +86,14 @@ class RunningPrefixLists():
 # ------------------------------------------------------------------------------
 
 def get_system_running_prefix_lists(command_output):
-	"""defines set of methods executions. to get various ip prefix-list parameters.
-	uses RunningPrefixLists in order to get all.
+	"""parse output of : show running-config
 
 	Args:
-		command_output (list, str): running config output, either list of multiline string
+		command_output (list): command output
 
 	Returns:
-		dict: output dictionary with parsed with system fields
-	"""
+		dict: prefix-lists level parsed output dictionary
+	"""    	
 	R  = RunningPrefixLists(command_output)
 	R.pl_dict()
 

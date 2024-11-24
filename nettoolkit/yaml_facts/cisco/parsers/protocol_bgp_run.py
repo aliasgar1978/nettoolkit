@@ -310,6 +310,14 @@ class BGPConf(ProtocolsConfig):
 # ====================================================================================================
 
 def get_bgp_running(command_output):
+	"""parse output of : show running-config
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: protocols bgp level parsed output dictionary
+	"""    	
 	BC = BGPConf(command_output)
 	return get_protocol_instance_dict(protocol='bgp', instances_dic=BC.bgp_peer_dict)
 

@@ -4,6 +4,14 @@
 from .common import *
 # ------------------------------------------------------------------------------
 def get_arp_table(cmd_op, *args):
+	"""parse output of : show arp
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: interfaces level parsed output dictionary
+	"""    	
 	nbr_d = {}
 	parsed_data = parse_to_dict_using_ntc('show arp', cmd_op)
 

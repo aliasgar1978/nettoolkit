@@ -146,6 +146,14 @@ class RIP(ProtocolObject):
 #  rip parser calling function
 # ------------------------------------------------------------------------------
 def get_rip_running(cmd_op):
+	"""parse output of : show configurtain
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: protocols rip level parsed output dictionary
+	"""    	
 	R = RIP(cmd_op, 'rip')
 	R()
 	return R.logical_systems_dict

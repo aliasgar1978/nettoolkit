@@ -191,11 +191,27 @@ class OSPF(ProtocolObject):
 #  ospf parser calling function
 # ------------------------------------------------------------------------------
 def get_ospf_running(cmd_op):
+	"""parse output of : show configurtain
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: protocols ospf level parsed output dictionary
+	"""    	
 	O = OSPF(cmd_op, 'ospf')
 	O()
 	return O.logical_systems_dict
 
 def get_ospf3_running(cmd_op):
+	"""parse output of : show configurtain
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: protocols ospf3 level parsed output dictionary
+	"""    	
 	O = OSPF(cmd_op, 'ospf3')
 	O()
 	return O.logical_systems_dict

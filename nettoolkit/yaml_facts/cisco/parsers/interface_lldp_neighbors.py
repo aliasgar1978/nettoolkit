@@ -4,6 +4,14 @@
 from .common import *
 # ------------------------------------------------------------------------------
 def get_lldp_neighbour(command_output):
+	"""parse output of : show lldp neighbor
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: physical interfaces level parsed output dictionary
+	"""    	
 	nbr_d = {}
 	parsed_data = parse_to_list_using_ntc('show lldp neighbors', command_output)
 	#

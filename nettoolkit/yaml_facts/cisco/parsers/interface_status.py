@@ -6,6 +6,14 @@ from .common import *
 # ------------------------------------------------------------------------------
 
 def get_interface_status(command_output):
+	"""parse output of : show interface status
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: interfaces level parsed output dictionary
+	"""    	
 	int_status_dict = {}
 	parsed_data = parse_to_list_using_ntc('show interfaces status', command_output)
 	#

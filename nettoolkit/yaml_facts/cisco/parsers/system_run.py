@@ -145,6 +145,14 @@ class RunningSystem():
 
 
 def get_system_running(command_output):
+	"""parse output of : show running-config
+
+	Args:
+		command_output (list): command output
+
+	Returns:
+		dict: system level parsed output dictionary
+	"""    	
 	R  = RunningSystem(command_output)
 	R.system_dict.update(R.system_bgp_as_number())
 	R.system_dict.update(R.system_ca_certificate())

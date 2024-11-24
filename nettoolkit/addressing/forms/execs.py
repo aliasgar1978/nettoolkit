@@ -88,7 +88,7 @@ def pfxs_oper_issubset_start(obj, i):
 		obj.event_update_element(pfxs_oper_issubset_result={'value': 'No', 'text_color': "red" })	
 
 def pfxs_oper_break_start(obj, i):
-	if i['pfxs_oper_break_subnet'] == '' or i['pfxs_oper_break_pieces'] == '': reutrn
+	if i['pfxs_oper_break_subnet'] == '' or i['pfxs_oper_break_pieces'] == '': return
 	ipobj = addressing(i['pfxs_oper_break_subnet'])
 	result = ipobj / int(i['pfxs_oper_break_pieces'])
 	obj.event_update_element(pfxs_oper_break_result={'value': "\n".join([ str(p) for p in result])})	

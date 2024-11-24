@@ -5,7 +5,7 @@
 
 from nettoolkit.facts_finder.generators.cisco_parser import CMD_LINE_START_WITH
 from nettoolkit.compare_it import CompareText, get_string_diffs
-from nettoolkit import IO
+from nettoolkit.nettoolkit_common import IO
 
 
 # ----------------------------------------------------------------------------------

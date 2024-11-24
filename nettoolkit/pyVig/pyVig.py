@@ -12,7 +12,7 @@ def cabling_data_operations(**dic):
 	"""create and return cabling data object
 
 	Args:
-		dic (**dic): keyword arguments
+		dic (kwargs): keyword arguments
 
 	Returns:
 		CableMatrixData: Cablings data object
@@ -25,7 +25,7 @@ def device_data_operations(**dic):
 	"""creates and returns devices data object after merging columns of the list provided for `cols_to_merge` key  
 
 	Args:
-		dic (**kwarg): keyword arguments.
+		dic (kwargs): keyword arguments.
 
 	Returns:
 		DeviceData: Devices data object
@@ -44,7 +44,7 @@ def visio_operations(devices_data, cable_matrix_data, stencils, **dic):
 		devices_data (DeviceData): Devices data object
 		cable_matrix_data (CableMatrixData): Cablings data object
 		stencils (list): list of visio stencils 
-		dic (**dic): keyword arguments
+		dic (kwargs): keyword arguments
 
 	Returns:
 		None: None
@@ -82,7 +82,7 @@ def repeat_for_filter(v, devices_data, cable_matrix_data,
 		filt_key (str): filter key
 		filt_value (str, tuple, list, set): filter value(s)
 		page_key (str): page key (suffix for filter values in case if multiple filt_values)
-		dic (**dic): keyword arguments
+		dic (kwargs): keyword arguments
 	"""	
 	flt ={filt_key:filt_value}
 	cmd = deepcopy(cable_matrix_data)
@@ -98,7 +98,7 @@ def visio_page_operation(v, devices_data, cable_matrix_data, flt, page_key=None,
 		cable_matrix_data (CableMatrixData): Cablings data object
 		flt (dict): filters {key: value} pairs
 		page_key (str, optional): page key (suffix for filter values in case if multiple filt_values). Defaults to None.
-		dic (**dic): keyword arguments
+		dic (kwargs): keyword arguments
 	"""	
 	if 'filter_on_include_col' in dic:
 		cable_matrix_data.filter_eligible_cables_only() # [Optional]
@@ -119,7 +119,7 @@ def pyVig(**dic):
 	"""main function starting the python based cli - visio generation
 
 	Args:
-		**dic (dict): inputs dictionary ( valid and mandatory keys = stencil_folder, data_file ) (valid but optional keys = default_stencil, cols_to_merge, is_sheet_filter, sheet_filters ... and many more from DEFAULT_DIC )
+		dic (kwargs): inputs dictionary ( valid and mandatory keys = stencil_folder, data_file ) (valid but optional keys = default_stencil, cols_to_merge, is_sheet_filter, sheet_filters ... and many more from DEFAULT_DIC )
 
 	Returns:
 		None: None

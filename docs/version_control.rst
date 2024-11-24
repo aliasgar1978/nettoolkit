@@ -2,12 +2,14 @@ Version Control
 =================================================
 
 .. figure:: images/nettoolkit_logo.jpg
-   :scale: 15%
+   :scale: 5%
    :alt: Nettoolkit
    :align: right
 
 
 Nettoolkit keeps updated and released on a regular basis. 
+
+Keep Your copy upgraded and updated with latest features and bug fix releases.
 
 Here is version changes detail.
 
@@ -27,7 +29,7 @@ Version 1.x updates
      - Updates
 
    * - 1.8.0
-     - Nov 3, 2024
+     - Nov 24, 2024
      - * **New Major Addition**: ``yaml_facts`` - New module added ( cisco_ios and juniper_junos switches parser and create yaml config for mostly used parameters)
           * Interface parameters ( loopback, physical, vlans, aggregate, tunnel, )
           * System configs ( hostname, serial, model, make, boot info, servers-dns,syslog,ntp,tacacs,)

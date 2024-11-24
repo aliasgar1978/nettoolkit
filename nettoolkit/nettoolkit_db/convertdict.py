@@ -169,7 +169,7 @@ def dict_to_yaml(d, file=None, mode='a'):
 	Args:
 		d (dict): dictionary
 		file (str): output file name ( display on screen otherwise )
-		mode (str): character string of mode `a`=append, `w`=write mode.
+		mode (str): character string of mode a=append, w=write mode.
 
 	"""    	
 	s = yaml.dump(d, indent=2)

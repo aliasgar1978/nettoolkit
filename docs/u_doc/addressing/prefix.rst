@@ -43,43 +43,37 @@ Create Summaries
 
         from nettoolkit.addressing.summary import Aggregate
         networks = (
-            "10.10.0.0/24", "10.10.1.0/24", "10.20.6.0/23", 
-            "10.10.2.0/23", "10.20.4.0/23", "10.10.4.0/22"  
+            '10.10.0.0/24', '10.10.1.0/24', '10.20.6.0/23', 
+            '10.10.2.0/23', '10.20.4.0/23', '10.10.4.0/22'  
         )
+
         Agg = Aggregate(networks)
+
         # -- below are sorted input prefixes -- 
         Agg.prefixes
         ['10.10.0.0/24', '10.10.1.0/24', '10.10.2.0/23', '10.10.4.0/22', '10.20.4.0/23', '10.20.6.0/23']
+
         # -- below is list of aggregate object(s) --
         Agg.aggregates
         [10.10.0.0/21]
+
         # -- below is list of aggregate strings --
         Agg.summaries
         ['10.10.0.0/21']
-        # -- check below  to see type of object in list --
-        for agg in Agg.aggregates:
-            print(type(agg))
-
-        <class 'nettoolkit.addressing.addressing.IPv4'>
-        # -- check below  to see type of object in list --
-        for agg in Agg.summaries:
-            print(type(agg))
-            
-        <class 'str'>
 
 
 create summaries with minimum prefix length
 --------------------------------------------
 
     * import the ``calc_summmaries`` from ``nettoolkit.addressing.summary``.
-    * Call it with arguments = **1.**min_subnet_size & **2.**list of prefixes.
+    * Call it with arguments = min_subnet_size and list of prefixes.
 
     .. code-block:: python
 
         from nettoolkit.addressing.summary import calc_summmaries
         prefixes = (
-            "10.10.0.0/24", "10.10.1.0/24", "10.20.6.0/23", 
-            "10.10.2.0/23", "10.20.4.0/23", "10.10.4.0/22"  
+            '10.10.0.0/24', '10.10.1.0/24', '10.20.6.0/23', 
+            '10.10.2.0/23', '10.20.4.0/23', '10.10.4.0/22'  
         )
         calc_summmaries(min_subnet_size=19, prefixes=prefixes)
         ['10.10.0.0/19']

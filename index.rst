@@ -61,6 +61,7 @@
    pyjuniper <docs/t_doc/pyjuniper/tech_doc>
    pynetcrypt <docs/t_doc/pynetcrypt/tech_doc>
    pyvig <docs/t_doc/pyvig/tech_doc>
+   yaml_facts <docs/t_doc/yaml_facts/tech_doc>
 
 
 

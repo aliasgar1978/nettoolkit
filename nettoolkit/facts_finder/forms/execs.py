@@ -6,7 +6,8 @@ import sys
 
 import nettoolkit.facts_finder as ff
 from nettoolkit.facts_finder import CleanFacts, rearrange_tables
-from nettoolkit.yaml_facts import YamlFacts
+
+from nettoolkit.yaml_facts import exec_yaml_facts
 
 # ====================================================================================
 
@@ -75,28 +76,12 @@ def facts_finder_start(i):
 
 	print("Facts-Finder All Task(s) Complete..")
 
-
 @activity_finish_popup
 def yaml_facts_start(i):
-	print_banner("Yaml Facts", 'yellow')
-	for log_file in i['ff_log_files'].split(";"):
-		if not log_file.endswith(".log"): continue
-		device = get_host(log_file)
-		print(">> starting", device, "...", end='\t')
-		#
-		try:
-			YF = YamlFacts(log_file, i['yf_output_folder'])
-			print(f"Yaml File Generation done...,", end='\t')
-			print(f"Tasks Completed !! {device} !!")
-			if YF.unavailable_cmds:
-				print(f"\t{device}: Missing Captures {YF.unavailable_cmds}")
-
-		except Exception as e:
-			print(f"Yaml File Generation failed...")
-			print(e)
-			continue
-		#
-	print("Yaml Facts-Finder All Task(s) Complete..")
+	exec_yaml_facts(
+		log_files=i['ff_log_files'].split(";"),
+		output_folder=i['yf_output_folder'],
+	)
 
 
 # ======================================================================================

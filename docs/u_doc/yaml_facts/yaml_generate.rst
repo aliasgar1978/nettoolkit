@@ -22,19 +22,19 @@ Yaml Facts Generation
     # -------------------------------------------------------------------------------------------------------------
     # Provide above inputs to YamlFacts class.
     # -------------------------------------------------------------------------------------------------------------
-    FR = YamlFacts(
+    YamlFacts(
         capture_log_file=capture_log_file,
         output_folder=output_folder
     )
 
 
 
-**YamlFacts Object Properties**
+**YamlFacts Object arguments**
 
-    **YamlFacts** object, possess below properties.
+    **YamlFacts** object, requires below arguments.
 
         * **capture_log_file**: show commands output capture log file.
-        * **output_folder**: output folder where yaml output to be stored.
+        * **output_folder**: output folder where yaml output to be stored. [optional]
 
 .. important::
     

@@ -263,7 +263,8 @@ Here are few **EVENT_UPDATORS** functions and **EVENT_ITEM_UPDATORS** functions.
 
 ------
 
-**@Decorator popupmsg()**
+**Decorator**
+**@popupmsg()**
 
 * ``pre`` **(str, optional)**: Popup Message to display before function execution. Defaults to None.
 * ``post`` **(str, optional)**: Popup Message to display after function execution. Defaults to None.
@@ -278,5 +279,16 @@ Here are few **EVENT_UPDATORS** functions and **EVENT_ITEM_UPDATORS** functions.
         pass
 
 
+**Decorator**
+**@activity_finish_popup**
 
+* This decorator will provide "Activity done." Popup message once function execution is completed
+
+.. code-block:: python
+
+    from nettoolkit.nettoolkit.forms.formitems import activity_finish_popup
+
+    @activity_finish_popup
+    def foo():
+        pass
 

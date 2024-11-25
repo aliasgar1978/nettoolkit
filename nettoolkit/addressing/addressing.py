@@ -272,18 +272,22 @@ def get_secondary_inet_address(line):
 	return None
 
 
-def get_inetv6_address(line, link_local):
+def get_inetv6_address(line, link_local=None):
 	"""derive the ipv6 information from provided line
 
 	Args:
 		line (str): interface config line
+		link_local (optional, bool): is link-local address or not.
 
 	Returns:
 		str: ipv6 address with /mask , None if not found.
 	"""    	
-	v6idx = -2 if link_local else -1
+	spl = line.split()
+	if link_local is None:
+		v6idx = -2  if spl[-1] == 'link-local' else -1
+	else:
+		v6idx = -2 if link_local else -1
 	if line.strip().startswith("ipv6 address "):
-		spl = line.split()
 		ip  = spl[v6idx]
 		return ip
 	return None

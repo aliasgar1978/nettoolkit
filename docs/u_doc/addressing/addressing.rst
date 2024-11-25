@@ -168,3 +168,87 @@ IP.ping
 		>>> IP.ping_average("8.8.8.8")
 		289
 
+
+
+-----
+
+inet_address
+-------------
+
+	* Use the ``inet_address()`` for converting cisco interface ip address to standard notation.
+
+	.. code-block:: python
+
+		inet_address("192.168.100.3", "255.255.255.0")
+		'192.168.100.3/24'
+
+get_inet_address
+-----------------
+
+	* Use the ``get_inet_address()`` for getting standard notation of cisco interface primary ip address line.
+
+	.. code-block:: python
+
+		get_inet_address("ip address 192.168.100.3 255.255.255.0 secondary")  ## Does Not returns
+		get_inet_address("ip address 192.168.100.3 255.255.255.0")
+		'192.168.100.3/24'
+
+get_secondary_inet_address
+-----------------------------
+
+	* Use the ``get_secondary_inet_address()`` for getting standard notation of cisco interface secondary ip address line.
+
+	.. code-block:: python
+
+		get_secondary_inet_address("ip address 192.168.100.3 255.255.255.0")            ## Does Not returns
+		get_secondary_inet_address("ip address 192.168.100.3 255.255.255.0 secondary")
+		'192.168.100.3/24'
+
+get_inetv6_address
+-------------------
+
+	* Use the ``get_inetv6_address()`` for getting ipv6 address out from cisco interface command line.
+	* link_local is an optional argument, to exclusively provide information if address is link-local or not.
+
+	.. code-block:: python
+
+		get_inetv6_address("ipv6 address FE80::A link-local", link_local=True)
+		'FE80::A'
+		get_inetv6_address("ipv6 address 2620:123:4567::1:1:A/128", link_local=False)
+		'2620:123:4567::1:1:A/128'
+
+get_subnet
+-------------------
+
+	* Use the ``get_subnet()`` to get the subnet number from provided standard ipv4 ip/mask.
+
+	.. code-block:: python
+
+		get_subnet("192.168.20.5/25")
+		'192.168.20.0/25'
+
+get_v6_subnet
+-------------------
+
+	* Use the ``get_v6_subnet()`` to get the subnet number from provided standard ipv6 ip/mask.
+
+	.. code-block:: python
+
+		get_v6_subnet("2620:123:4567::1:1:A/64")
+		'2620:123:4567:0:0:0:0:0/64'
+
+classful_subnet
+-------------------
+
+	* Use the ``classful_subnet()`` to add classful subnet mask to provided ip (ipv4).
+	* Do not provide ip with its existing mask, only ip address is required.
+
+	.. code-block:: python
+
+		classful_subnet("10.10.20.4")
+		10.10.20.4/8
+		classful_subnet("192.168.20.2")
+		192.168.20.2/24
+		classful_subnet("172.17.20.2")
+		172.17.20.2/16
+

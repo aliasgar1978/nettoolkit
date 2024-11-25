@@ -98,12 +98,14 @@ read_an_xl_sheet
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
     * Read an Excel file, which has a single tab in it. 
-    * returns DataFrame
+    * Alternatively read a single specific sheet from multi-tab excel file.
+    * sheet_name: is an optional argument, default reads first sheet if not provided.
+    * returns a DataFrame
 
     .. code-block:: python
 
         >>> file = "c:/users/user/downloads/test.xlsx"
-        >>> df = read_an_xl_sheet(file)
+        >>> df = read_an_xl_sheet(file, sheet_name='mySheet')
         >>> print(type(df))
         <class 'pandas.core.frame.DataFrame'>
 

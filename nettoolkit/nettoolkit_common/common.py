@@ -24,9 +24,9 @@ CISCO_ABS_COMMANDS = {
 }
 
 JUNIPER_ABS_COMMANDS = {
-	'show interfaces descriptions'
-	'show lldp neighbors'
-	'show configuration'
+	'show interfaces descriptions',
+	'show lldp neighbors',
+	'show configuration',
 	'show version',
 	'show chassis hardware',
 	'show interfaces terse',

@@ -41,6 +41,7 @@ class Execute_Common():
 	# verify data, start capture, write logs
 	def __call__(self):
 		self._verifications()
+		print_banner("CaptureIT", 'blue')
 		self.start()
 
 	def _add_auth_para(self, auth):

@@ -26,5 +26,6 @@ from .cablings import ADevCablings
 from .general import get_physical_if_up, get_physical_if_relevants
 from .general import get_patterns, update_pattern
 from .pyVig import pyVig
+from .exec_fns import exec_pyvig_cable_matrix, exec_pyvig_visio 
 # ------------------------------------------------------------------------------
 

@@ -7,7 +7,7 @@ from netmiko import ConnectHandler
 from itertools import zip_longest
 from time import sleep
 import traceback
-from nettoolkit.nettoolkit_common import printmsg, STR, LST, Multi_Execution
+from nettoolkit.nettoolkit_common import printmsg, STR, LST, Multi_Execution, print_banner
 from nettoolkit.nettoolkit_db import read_xl_all_sheet
 
 from nettoolkit.detect import DeviceType
@@ -592,10 +592,8 @@ class ConfigureByExcel(ConfigEnvironmentals):
 			print(f"Invalid argument `files`: should be of `list` type, got `{type(files)}`")
 			quit()
 
-
-	@printmsg(pre='INFO: CONFIGURATION PROCESS...BEGINNING',
-			 post='INFO: CONFIGURATION PROCESS...ENDS' )
 	def __call__(self):
+		print_banner("Configure", 'red')
 		self._load_dfs()
 		self._define_sort_order()
 		self.cmds_groups = self._get_cmds_ordered_group()

@@ -1,7 +1,10 @@
 
 # ---------------------------------------------------------------------------------------
 import nettoolkit as nt
+import pyfiglet
+from colorama import Fore
 from .gui import NGui
+from nettoolkit.nettoolkit_common import print_banner
 
 from nettoolkit.capture_it.forms.frames   import CAPTUREIT_FRAMES
 from nettoolkit.facts_finder.forms.frames import FACTSFINDER_FRAMES
@@ -45,6 +48,7 @@ class Nettoolkit(NGui):
 		self.NG.max_buttons_in_a_row = 8
 
 	def __call__(self, initial_frame=None):
+		print_banner("NetToolkit ~~~~~~~~~~~~~~~", 'cyan')
 		self.NG(initial_frame)
 
 	def initialize_custom_variables(self):

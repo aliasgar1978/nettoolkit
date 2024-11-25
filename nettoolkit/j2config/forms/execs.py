@@ -1,6 +1,6 @@
 
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file, open_folder, open_excel_file
+from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file, open_folder, open_excel_file, print_banner
 from pathlib import *
 import sys
 
@@ -52,6 +52,8 @@ def j2config_start(obj, i):
 	#
 	regional_file = i['j2_file_regional'] if i['j2_file_regional'] else None
 	regional_class = custom['j2_regional']['regional_class'] if i['j2_file_custom_yml'] else None
+	#
+	print_banner("Config Gen", 'green')
 	#
 	for data_file in i['j2_file_data'].split(";"):
 		if not data_file.endswith(".xlsx"): continue

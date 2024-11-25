@@ -26,7 +26,10 @@ __all__ = [
 	"nslookup", "IP", "get_int_ip", "get_int_mask",
 	'get_vlans_juniper', 'get_juniper_pw_string', 
 	'expand_if', 'expand_if_dict', 'get_interface_cisco', 'get_vlans_cisco', 'trunk_vlans_cisco',
-	'get_vrf_cisco'
+	'get_vrf_cisco',
+
+	# formatting
+	'print_banner',
 ]
 
 
@@ -62,3 +65,4 @@ from .networking import (
 	# get_inet_address, get_secondary_inet_address, inet_address, get_inetv6_address,
 	get_vrf_cisco
 )
+from .formatting import print_banner

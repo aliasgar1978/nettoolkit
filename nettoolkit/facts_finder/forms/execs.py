@@ -1,6 +1,6 @@
 
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file
+from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file, print_banner
 from pathlib import *
 import sys
 
@@ -30,6 +30,7 @@ def facts_finder_start(i):
 		custom =  read_yaml_mode_us(i['ff_file_custom_yml'])['facts_finder'] 
 	else:
 		custom = None
+	print_banner("Excel Facts", 'yellow')
 	for log_file in i['ff_log_files'].split(";"):
 		if not log_file.endswith(".log"): continue
 		device = get_host(log_file)
@@ -77,6 +78,7 @@ def facts_finder_start(i):
 
 @activity_finish_popup
 def yaml_facts_start(i):
+	print_banner("Yaml Facts", 'yellow')
 	for log_file in i['ff_log_files'].split(";"):
 		if not log_file.endswith(".log"): continue
 		device = get_host(log_file)

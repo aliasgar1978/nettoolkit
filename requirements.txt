@@ -12,3 +12,4 @@ xlrd
 pyyaml
 attrs
 pyfiglet
+colorama

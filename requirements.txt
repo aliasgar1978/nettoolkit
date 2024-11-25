@@ -11,3 +11,4 @@ textfsm
 xlrd
 pyyaml
 attrs
+pyfiglet

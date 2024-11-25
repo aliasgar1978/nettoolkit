@@ -1,12 +1,10 @@
 
 from nettoolkit.nettoolkit.forms.formitems import *
-from nettoolkit.nettoolkit_common import read_yaml_mode_us, create_folders, open_text_file, print_banner
+from nettoolkit.nettoolkit_common import create_folders, open_text_file
 from pathlib import *
 import sys
 
-import nettoolkit.facts_finder as ff
-from nettoolkit.facts_finder import CleanFacts, rearrange_tables
-
+from nettoolkit.facts_finder import exec_facts_finder
 from nettoolkit.yaml_facts import exec_yaml_facts
 
 # ====================================================================================
@@ -19,62 +17,19 @@ def update_cache_ff(i):
 def add_path(file):
 	sys.path.insert(len(sys.path), str(Path(file).resolve().parents[0]))
 
-
-def get_host(log_file):
-	return Path(log_file).stem
-
-
 @activity_finish_popup
 def facts_finder_start(i):
-	if i['ff_file_custom_yml']:
-		add_path(i['ff_file_custom_yml'])
-		custom =  read_yaml_mode_us(i['ff_file_custom_yml'])['facts_finder'] 
-	else:
-		custom = None
-	print_banner("Excel Facts", 'yellow')
-	for log_file in i['ff_log_files'].split(";"):
-		if not log_file.endswith(".log"): continue
-		device = get_host(log_file)
-		print(">> starting", device, "...", end='\t')
-		#
-		try:
-			cleaned_fact = CleanFacts(
-				capture_log_file=log_file,
-				convert_to_cit=i['ff_convert_to_cit'],
-				remove_cit_bkp=i['ff_remove_cit_bkp'],
-				skip_txtfsm=i['ff_skip_txtfsm'],
-				new_suffix=i['ff_new_suffix'],
-				use_cdp=False,
-				debug=False,
-			)
-			cleaned_fact()
-			print(f"Cleaning done...,", end='\t')
-		except Exception as e:
-			print(f"Cleaning failed...,")
-			print(e)
-			continue
-		#
-		try:
-			if custom:
-				ADF = custom['CustomDeviceFactsClass'](cleaned_fact, aggregation=False)
-				ADF()
-				ADF.write()
-				print(f"Custom Data Modifications done...,", end='\t')
-		except Exception as e:
-			print(f"Custom Data Modifications failed...,")
-			print(e)
-		#
-		try:
-			foreign_keys = custom['foreign_keys'] if custom else {}
-			rearrange_tables(cleaned_fact.clean_file, foreign_keys=foreign_keys)
-			print(f"Column Rearranged done..., ", end='\t')
-		except Exception as e:
-			print(f"Column Rearrange failed...,")
-			print(e)
-		print(f"Tasks Completed !! {device} !!")
-
-
-	print("Facts-Finder All Task(s) Complete..")
+	custom = i['ff_file_custom_yml']
+	if custom:
+		add_path(custom)
+	exec_facts_finder(
+		log_files=i['ff_log_files'].split(";"),
+		custom=custom,
+		convert_to_cit=i['ff_convert_to_cit'],
+		remove_cit_bkp=i['ff_remove_cit_bkp'],
+		skip_txtfsm=i['ff_skip_txtfsm'],
+		new_suffix=i['ff_new_suffix'],
+	)
 
 @activity_finish_popup
 def yaml_facts_start(i):

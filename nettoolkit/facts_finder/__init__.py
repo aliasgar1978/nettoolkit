@@ -9,7 +9,7 @@ from .rearrange import rearrange_tables
 from .generators import get_necessary_cmds, get_absolute_command
 
 from .clean import CleanFacts
-
+from .exec_fns import exec_facts_finder
 
 
 __all__ = [ 
@@ -17,5 +17,6 @@ __all__ = [
 	'CleanFacts',
 	'rearrange_tables',
 	'get_necessary_cmds', 'get_absolute_command',
-	]
+	'exec_facts_finder',
+]
 

@@ -29,8 +29,8 @@ Version 1.x updates
      - Updates
 
    * - 1.8.1
-     - TBD
-     - * Bug fixes
+     - Nov 25, 2024
+     - *pyfiglet*, and *colorama* supprot added for console display.
    * - 1.8.0
      - Nov 24, 2024
      - * **New Major Addition**: ``yaml_facts`` - New module added ( cisco_ios and juniper_junos switches parser and create yaml config for mostly used parameters)

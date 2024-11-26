@@ -852,7 +852,7 @@ class IP():
 		_nip = int(binsubnet(self.subnet_zero()), 2)
 		_bcip = int(binsubnet(self.broadcast_address()), 2)
 		_iis = (_bcip - _nip + 1) // p
-		for i2, x2 in enumerate(range(_nip, _bcip, _iis)):
+		for i2, x2 in enumerate(range(_nip, _bcip+1, _iis)):
 			_iplst.append(self.n_thIP(i2*_iis)+ "/" + str(_nsm))
 		return tuple(_iplst)
 
@@ -863,7 +863,7 @@ class IP():
 			_bcip = int(binsubnet(self.broadcast_address()), 2)
 		else:
 			_bcip = _nip + (end-begin)
-		for i2, x2 in enumerate(range(_nip, _bcip)):
+		for i2, x2 in enumerate(range(_nip, _bcip+1)):
 			if begin>0:  i2 = i2+begin
 			yield self.n_thIP(i2)
 

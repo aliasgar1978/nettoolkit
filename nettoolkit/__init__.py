@@ -17,5 +17,5 @@ __all__ = [
 
 ]
 
-__version__ = "1.8.2"
+__version__ = "1.8.3"
 __doc__ = '''Networking Tool Set '''

@@ -15,7 +15,7 @@ __all__ = [
 	"flatten", "dataframe_generate", "printmsg", "read_yaml_mode_us", "open_text_file", "open_excel_file",
 	"open_folder", 
 	"CapturesOut",
-	"get_file_name", "get_file_path", "create_folders",
+	"get_file_name", "get_file_path", "create_folders", "deprycation_warning",
 
 	# facts
 	"add_blankdict_key", "add_blankset_key", "add_blanklist_key", "add_blanktuple_key", "add_blanknone_key", "update_key_value",
@@ -50,7 +50,7 @@ from .common import (
 	get_string_part, get_string_trailing, standardize_mac, mac_2digit_separated, mac_4digit_separated,
 	flatten, dataframe_generate, printmsg, read_yaml_mode_us, open_text_file, open_excel_file,
 	open_folder,
-	get_file_name, get_file_path, create_folders
+	get_file_name, get_file_path, create_folders, deprycation_warning
 )
 from .facts import (
 	add_blankdict_key, add_blankset_key, add_blanklist_key, add_blanktuple_key, add_blanknone_key, update_key_value,

@@ -347,6 +347,9 @@ def dataframe_generate(d):
 	return pd.DataFrame(new_d).fillna("").T
 # ------------------------------------------------------------------------------
 
+def deprycation_warning(fn):
+	print(f"{'-'*80}\nDEPRYCATION WARNING:\n{fn} usage is getting deprycated. kindly refer documentation for alternate option.\n{'-'*80}")
+
 # ------------------------------------------------------------------------
 def printmsg(pre=None, *, post=None, pre_ends="\n", justify_pre=True, justification_len=80):
 	def outer(func):

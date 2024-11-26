@@ -12,6 +12,7 @@ from collections import OrderedDict
 import os
 import threading
 from getpass import getpass
+from .common import deprycation_warning
 
 intBeginWith = compile(r'^\D+')
 # ------------------------------------------------------------------------------
@@ -1536,6 +1537,7 @@ class DB():
 		Returns:
 			DataFrame: pandas Dataframe Object
 		"""		
+		deprycation_warning("class: DB")
 		return pd.read_excel(file, sheet_name=sheet, **kwargs)
 
 
@@ -1561,6 +1563,7 @@ class XL_WRITE():
 	def __init__(self, hostname, folder, index=False, **sht_df):
 		"""initializer
 		"""		
+		deprycation_warning("class: XL_WRITE")
 		i = 0
 		self.hostname = hostname
 		self.folder = folder
@@ -1618,6 +1621,7 @@ class XL_READ:
 	def __init__(self, xl, shtName='Sheet1'):
 		"""initializer
 		"""		
+		deprycation_warning("class: XL_READ")
 		self.df = pd.read_excel(xl, sheet_name=shtName)
 
 	def __repr__(self):

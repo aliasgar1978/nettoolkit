@@ -199,7 +199,7 @@ class Execute_Device():
 
 	# -- for facts generation -- presence of mandary commands, and capture if not --
 	def run_facts_generation_required_commands(self, c, cc):
-		if not (self.fg or self.mandatory_cmds_retries): return
+		if not self.fg or not self.mandatory_cmds_retries: return
 		#
 		self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Starting with Mandatory commands capture (if any missing).")
 		missed_cmds = self.check_facts_finder_requirements(c)

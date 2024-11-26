@@ -31,7 +31,7 @@ Version 1.x updates
    * - 1.8.2
      - Date_TBD
      - * bug fix in addressing module on division
-       * ``portscan`` module added under addressing. New functions available: **ip_port_scan**, **subnet_port_scan** 
+       * ``portscan`` module added under addressing. New functions available: **ip_port_scan**, **subnet_port_scan**, GUI-Portscanner added. 
    * - 1.8.1
      - Nov 25, 2024
      - A few minor bug fixes. And *pyfiglet*, and *colorama* supprot added for console display

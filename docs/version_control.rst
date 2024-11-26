@@ -29,7 +29,7 @@ Version 1.x updates
      - Updates
 
    * - 1.8.2
-     - Date_TBD
+     - Nov 26, 2024
      - * bug fix in addressing module on division
        * ``portscan`` module added under addressing. New functions available: **ip_port_scan**, **subnet_port_scan**, GUI-Portscanner added. 
    * - 1.8.1

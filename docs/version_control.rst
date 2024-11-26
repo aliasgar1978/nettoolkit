@@ -31,6 +31,7 @@ Version 1.x updates
    * - 1.8.3
      - TBD
      - * **Capture-IT** : enhancements on excel captures
+       * Added *tabulate* support for reporting.
    * - 1.8.2
      - Nov 26, 2024
      - * bug fix in addressing module on division

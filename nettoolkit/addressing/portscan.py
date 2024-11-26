@@ -72,7 +72,7 @@ def ip_port_scan(target_ip, port_start=None, port_end=None, max_connections=6553
 	PS.start()
 	return PS.open_ports
 
-def subnet_port_scan(subnet):
+def subnet_port_scan(subnet, port_start=None, port_end=None, max_connections=65535):
 	result = {}
 	network = addressing(subnet)
 	for ip in network:

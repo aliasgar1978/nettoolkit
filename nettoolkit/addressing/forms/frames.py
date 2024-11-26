@@ -153,12 +153,54 @@ def make_batch_frame():
 		])
 
 
+# ============================ [ Port Scanner ] ======================================= #
+
+def portscanner_frame():
+	"""tab display
+
+	Returns:
+		sg.Frame: Frame with filter selection components
+	"""    		
+	return sg.Frame(title=None, 
+					relief=sg.RELIEF_SUNKEN, 
+					layout=[
+
+
+		[sg.Text('IP Port Scanner', font=('TimesNewRoman', 12), text_color="black") ],
+
+		blank_line(),
+
+		[sg.Text("IP or Subnet:\t\t", text_color="yellow"),
+		 sg.InputText("", key='addressing_portscan_pfx', size=(20,1)),],
+
+		# blank_line(),
+
+		[sg.Text("Port Range [optional]:\t", text_color="yellow"),
+		 sg.Text("start:\t", text_color="yellow"),
+		 sg.InputText("", key='addressing_portscan_range_start', size=(6,1)),],
+		[sg.Text("\t\t\t", text_color="yellow"),
+		 sg.Text("end:\t", text_color="yellow"),
+		 sg.InputText("", key='addressing_portscan_range_end', size=(6,1)),
+		],
+
+		# [sg.Text("Max Threads", text_color="yellow"),
+		#  sg.InputText(65535, key='addressing_portscan_max_threads', size=(20,1)),],
+
+		# ------------------------------------------------------------------------------------
+		[sg.Text('\t\t\t\t\t\t\t'),
+		 sg.Button("Ports-Scan", change_submits=True, size=(20,1), key='addressing_portscan_btn_start', button_color="darkblue"),],
+		under_line(80),
+		# ------------------------------------------------------------------------------------
+
+		])
+
 
 
 
 # ========================================================================
 ADDRESSING_FRAMES = {
 	'IP Scanner': ipscanner_frame(),
+	'Port Scanner': portscanner_frame(),
 	'Prefix Operations': prefix_oper_frame(),
 	'Ping Batch': make_batch_frame(),
 }

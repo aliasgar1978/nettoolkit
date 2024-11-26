@@ -10,6 +10,7 @@ from nettoolkit.addressing import addressing
 from nettoolkit.addressing.addressing import addressing, isSubset
 from nettoolkit.addressing.summary import Aggregate
 from nettoolkit.addressing.batch import create_batch_file
+from nettoolkit.addressing import subnet_port_scan
 
 # ====================================================================================
 
@@ -118,6 +119,15 @@ def batch_make_start(i):
 		print(s)
 		sg.Popup(s)
 
+def exec_addressing_portscan_btn_start(i):
+	sps = subnet_port_scan(
+		subnet=i['addressing_portscan_pfx'],
+		port_start=i['addressing_portscan_range_start'],
+		port_end=i['addressing_portscan_range_end'],
+		# max_connections=int(i['addressing_portscan_max_threads']),
+	)
+	print(sps)
+
 # ======================================================================================
 
 ADDRESSING_EVENT_FUNCS = {
@@ -134,6 +144,7 @@ ADDRESSING_EVENT_FUNCS = {
 	'addressing_folder_compare_file1_open': exec_addressing_folder_compare_file1_open,
 	'addressing_folder_compare_file2_open': exec_addressing_folder_compare_file2_open,
 	'batch_folder_output_open': exec_batch_folder_output_open,
+	'addressing_portscan_btn_start': exec_addressing_portscan_btn_start,
 }
 ADDRESSING_EVENT_UPDATERS = { 
 	'addressing_ipscan_btn_count_ip', 
@@ -145,6 +156,7 @@ ADDRESSING_RETRACTABLES = {
 	'addressing_ipscan_folder_output', 'addressing_ipscan_pfxs', 'addressing_ipscan_ip_count' ,
 	'batch_pfxs', 'batch_pfx_names', 'batch_ips', 
 	'addressing_ipscan_compare_file_1', 'addressing_ipscan_compare_file_2',
+	'addressing_portscan_pfx', 'addressing_portscan_range_start', 'addressing_portscan_range_end',
 
 }
 

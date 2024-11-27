@@ -105,6 +105,7 @@ def capture_it_start(i):
 	c.max_connections = int(i['cit_opt_max_connections'])
 	c.append_capture = i['cit_opt_append']
 	c.missing_captures_only = i['cit_opt_missing']
+	c.tablefmt = i['cit_tablefmt']
 	#
 	if i['cit_opt_dependent'] and custom:
 		try:
@@ -143,6 +144,7 @@ def capture_it_by_xl_start(i):
 		exec_log_path=i['cit_path_logs1'],
 	)
 	c.max_connections = int(i['cit_opt_max_connections1'])
+	c.tablefmt = i['cit_tablefmt1']
 	c()
 	print("Capture Task(s) Complete..")
 

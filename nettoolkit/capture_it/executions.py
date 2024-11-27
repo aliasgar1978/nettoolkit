@@ -107,6 +107,7 @@ class Execute_Common():
 		self.mandatory_cmds_retries = 1
 		self.missing_captures_only = False
 		self.append_capture = False or self.missing_captures_only
+		self.tablefmt = 'pretty'
 		#
 		self.cmd_exec_logs_all = OrderedDict()
 		self.device_type_all = OrderedDict()
@@ -264,7 +265,7 @@ class Execute_Common():
 			self.device_type_all,
 		)
 		ER(transpose_report='auto')
-		if onscreen: ER.show()
+		if onscreen: ER.show(tablefmt=self.tablefmt)
 		if excel_report_file: ER.write_to(excel_report_file)
 
 

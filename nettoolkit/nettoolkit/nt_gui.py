@@ -48,8 +48,9 @@ class Nettoolkit(NGui):
 		self.NG.max_buttons_in_a_row = 8
 
 	def __call__(self, initial_frame=None):
-		print_banner(f"\nNetToolkit ~~~~~~~~~~~~~~~", 'cyan')
+		print_banner(f"NetToolkit ~~~~~~~~~~~~~~~", 'cyan')
 		self.NG(initial_frame)
+		print_banner(f"Bye . . .", 'cyan')
 
 	def initialize_custom_variables(self):
 		"""Initialize all custom variables

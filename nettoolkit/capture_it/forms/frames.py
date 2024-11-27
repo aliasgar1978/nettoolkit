@@ -2,6 +2,13 @@
 from nettoolkit.nettoolkit.forms.formitems import *
 
 # ===================================================================
+TABLE_FORMATS = [
+	'rounded_outline', 'simple_outline', 'heavy_outline', 'mixed_outline', 'double_outline', 'fancy_outline',
+	'presto', 'outline', 'pipe',
+	'pretty',  'psql',  
+	'orgtbl', 'jira', 'textile', 'html', 'latex',
+]
+
 
 def capture_it_frame():
 	"""tab display - Credential inputs
@@ -55,7 +62,9 @@ def capture_it_frame():
 		[sg.Checkbox('Transpose summary log\t\t\t',   	    		key='cit_opt_summary_xpose', default=True,  text_color='black'),
 		 sg.Checkbox('Forced Login',                    			key='cit_opt_forced_login',  default=True,  text_color='black')],
 		[sg.Text('Output Mode:', text_color="black"), 
-		 sg.InputCombo(cumulative, default_value=cumulative[0], key='cit_opt_cumulative', size=(15,1)),],
+		 sg.InputCombo(cumulative, default_value=cumulative[0], key='cit_opt_cumulative', size=(15,1)),
+		 sg.Text('\tSummary Table Format:', text_color="black"), 
+		 sg.InputCombo(TABLE_FORMATS, key='cit_tablefmt', default_value='pretty'), ],
 		[sg.Text('Concurrent Connections ', text_color="black"), 
 		 sg.InputText(100,  key='cit_opt_max_connections', size=(5,1) ), sg.Text('Use 1 for sequential process', text_color="white"), ],
 
@@ -84,6 +93,7 @@ def capture_it_by_xl_frame():
 		 sg.Text("secret:", text_color="black"),sg.InputText("", key='cit_cred_en1',  password_char='*', size=(20,1)), ],
 		under_line(80),
 
+		[sg.Text('Inputs',  font=('TimesNewRoman', 12), text_color="black"),], 
 		[sg.Text('output folder:\t\t', text_color="black"), 
 		 sg.InputText(get_cache(CACHE_FILE, 'cit_path_captures'), key='cit_path_captures1', change_submits=True),  
 		 sg.FolderBrowse(button_color="orange"), 
@@ -102,6 +112,9 @@ def capture_it_by_xl_frame():
 	     sg.FileBrowse(button_color="grey"), sg.Button("open file", change_submits=True, key='cit_by_xl_file_dev_cmd_xl_file_open', button_color="darkgrey"),],
 		blank_line(),
 		under_line(80),
+		[sg.Text('Options',  font=('TimesNewRoman', 12), text_color="black"),], 
+		[sg.Text('Summary Table Format:', text_color="black"), 
+		 sg.InputCombo(TABLE_FORMATS, key='cit_tablefmt1', default_value='pretty'), ],
 
 		[sg.Text('Concurrent Connections ', text_color="black"), 
 		 sg.InputText(100,  key='cit_opt_max_connections1', size=(5,1) ), sg.Text('Use 1 for sequential process', text_color="white"), ],

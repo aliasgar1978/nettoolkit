@@ -25,6 +25,6 @@ fore_color_map = {
 
 def print_banner(banner, color):
 	banner = pyfiglet.figlet_format(banner, font='doom')
-	print(fore_color_map[color] + banner)
+	print(fore_color_map[color] + '\n' + banner)
 	print(Fore.WHITE + "")
 

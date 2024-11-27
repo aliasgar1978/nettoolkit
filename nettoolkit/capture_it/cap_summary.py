@@ -361,11 +361,14 @@ class TableReport():
 				for cmd in device_cmds.difference(dev_cmd_exist):
 					dev_dict[cmd] = ''
 			self.new_cmd_exec_log[dt] = pd.DataFrame(new_d)
-			if transpose:
+			if ( 
+					(transpose in ('auto', 'dynamic') and  
+					 len(self.new_cmd_exec_log[dt].columns) > len(self.new_cmd_exec_log[dt])
+					) 
+					or 
+					transpose
+				):
 				self.new_cmd_exec_log[dt] = self.new_cmd_exec_log[dt].T
-			if transpose in ('auto', 'dynamic'):
-				if len(self.new_cmd_exec_log[dt].columns) > len(self.new_cmd_exec_log[dt]):
-					self.new_cmd_exec_log[dt] = self.new_cmd_exec_log[dt].T
 
 	def show(self, tablefmt='rounded_outline'):
 		## available good formats = pretty, psql, 'rounded_outline' 

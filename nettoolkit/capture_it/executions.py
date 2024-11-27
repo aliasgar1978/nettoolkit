@@ -580,6 +580,7 @@ class Execute_By_Excel(Execute_Common, Multi_Execution):
 		Execute_Common.__init__(self, auth, capture_path, exec_log_path)
 		self.input_file = input_file
 		self.get_devices_commands_dicts()
+		self.remove_blank_entries()
 		self._override_defaults()
 		self.items = self.devices
 
@@ -619,5 +620,13 @@ class Execute_By_Excel(Execute_Common, Multi_Execution):
 						pass
 		#
 		self.devices = list(self.ip_cmd_dict.keys())
+
+	def remove_blank_entries(self):
+		self.ip_cmd_dict = {
+			ip: { cmd_type:LST.remove_empty_members(sorted(cmds_list))  for cmd_type, cmds_list in cmds_dict.items() } 
+			for ip, cmds_dict in self.ip_cmd_dict.items()
+		}
+
+
 
 # -----------------------------------------------------------------------------------------------

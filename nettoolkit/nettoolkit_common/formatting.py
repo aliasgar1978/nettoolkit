@@ -2,6 +2,7 @@
 
 import pyfiglet
 from colorama import Fore
+from tabulate import tabulate
  
 DEBU = Fore.CYAN
 INFO = Fore.GREEN
@@ -28,3 +29,7 @@ def print_banner(banner, color):
 	print(fore_color_map[color] + '\n' + banner)
 	print(Fore.WHITE + "")
 
+def print_table(df, tablefmt='rounded_outline'):
+	printable = tabulate(df, headers='keys', tablefmt=tablefmt)
+	print(printable)
+	

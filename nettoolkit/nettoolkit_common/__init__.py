@@ -29,7 +29,7 @@ __all__ = [
 	'get_vrf_cisco',
 
 	# formatting
-	'print_banner',
+	'print_banner', 'print_table',
 ]
 
 
@@ -65,4 +65,4 @@ from .networking import (
 	# get_inet_address, get_secondary_inet_address, inet_address, get_inetv6_address,
 	get_vrf_cisco
 )
-from .formatting import print_banner
+from .formatting import print_banner, print_table

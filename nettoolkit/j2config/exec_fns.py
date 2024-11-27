@@ -1,7 +1,8 @@
 
 # ====================================================================================
 
-from nettoolkit.nettoolkit_common import read_yaml_mode_us, print_banner
+import pandas as pd
+from nettoolkit.nettoolkit_common import read_yaml_mode_us, print_banner, print_table, add_blankdict_key
 from nettoolkit.j2config import PrepareConfig
 from pathlib import *
 
@@ -31,12 +32,13 @@ def exec_config_generation(
 	except Exception as e:
 		raise Exception(f"Custom Yaml is mandatory for selection of item and hierarchical_orders")
 	#
+	device_log_dict = {}
 	for data_file in data_files:
 		if not data_file.endswith(".xlsx"): continue
 		device = get_host(data_file)
+		device_dict = add_blankdict_key(device_log_dict, device)
 		print(f"Generating Configuration for {device}", end="\t")
-		# try:
-		if True:
+		try:
 			PrCfg = PrepareConfig(
 				data_file=data_file,
 				jtemplate_file=template_file,
@@ -52,9 +54,13 @@ def exec_config_generation(
 			#
 			PrCfg.start()
 			print(f"Done..")
-		# except:
-		# 	print(f"Failed..")
+			device_dict['Config Gen'] = 'Yes'
+		except:
+			print(f"Failed..")
+			device_dict['Config Gen'] = 'No'
 
 	print("Configuration Generation All Task(s) Complete..")
+	df = pd.DataFrame(device_log_dict).T
+	print_table(df)	
 
 # ====================================================================================

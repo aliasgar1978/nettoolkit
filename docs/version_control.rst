@@ -28,6 +28,9 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.8.5
+     - Nov 29, 2024
+     - * a few minor Bug fixes in configure module
    * - 1.8.4
      - Nov 28, 2024
      - * a few minor Bug fixes

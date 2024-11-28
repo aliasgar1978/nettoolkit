@@ -28,8 +28,11 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.8.4
+     - Nov 28, 2024
+     - * a few minor Bug fixes
    * - 1.8.3
-     - TBD
+     - Nov 27, 2024
      - * **Capture-IT** : enhancements on excel captures
        * Added *tabulate* support for reporting.
    * - 1.8.2

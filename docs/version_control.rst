@@ -31,6 +31,7 @@ Version 1.x updates
    * - 1.8.4
      - Nov 28, 2024
      - * a few minor Bug fixes
+       * gui frames modified
    * - 1.8.3
      - Nov 27, 2024
      - * **Capture-IT** : enhancements on excel captures

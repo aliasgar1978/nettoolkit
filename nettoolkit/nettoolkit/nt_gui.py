@@ -43,7 +43,7 @@ class Nettoolkit(NGui):
 			event_catchers      = EVENT_FUNCTIONS,
 			button_pallete_dic  = BUTTUN_PALLETE_DICT,
 			form_width          = 700,
-			form_height         = 650,
+			form_height         = 660,
 		)	
 		self.NG.max_buttons_in_a_row = 8
 

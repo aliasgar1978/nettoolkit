@@ -100,7 +100,7 @@ def capture_it_start(i):
 		exec_log_path=i['cit_path_logs'],
 	)
 	c.cumulative = cumulative
-	c.forced_login = i['cit_opt_forced_login']
+	c.forced_login = True
 	c.parsed_output = False
 	c.max_connections = int(i['cit_opt_max_connections'])
 	c.append_capture = i['cit_opt_append']
@@ -128,7 +128,6 @@ def capture_it_start(i):
 		onscreen=True, 
 		to_file=i['cit_path_summary'] + "/capture_it_summary_log.txt", 
 		excel_report_file=i['cit_path_summary'] + "/capture_it_summary_log.xlsx",
-		transpose_excel_report=i['cit_opt_summary_xpose'],
 	)
 	print("Capture Task(s) Complete..")
 	

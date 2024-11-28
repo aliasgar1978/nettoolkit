@@ -13,7 +13,7 @@ def netcrypt_frame():
 					relief=sg.RELIEF_SUNKEN, 
 					layout=[
 
-		[sg.Text('Password Encryption/Decryption', font=('TimesNewRoman', 12), text_color="black") ],
+		[sg.Text('Password Encryption/Decryption', font=('TimesNewRoman', 12), text_color="orange") ],
 
 		[sg.Text('Password string:', text_color="black"), sg.InputText(key='netcrypt_input_pw'), ],
 		[sg.Text('\t'), sg.Button("Cisco Encrypt (7)", size=(20,1), change_submits=True, key='netcrypt_cisco_enc_btn_start', button_color="darkblue"),
@@ -22,9 +22,8 @@ def netcrypt_frame():
 		 sg.Text(''),   sg.Button("Juniper Decrypt ($9)", size=(20,1), change_submits=True, key='netcrypt_juniper_dec_btn_start', button_color="darkblue"),],
 		under_line(80),
 
-		[sg.Text('Configuration File Password - Decryptor / Masker', font=('TimesNewRoman', 12), text_color="black") ],
-		[sg.Text('File MD5 Hash Calculator', font=('TimesNewRoman', 12), text_color="black") ],
-		blank_line(),
+		[sg.Text('Configuration File Password - Decryptor / Masker', font=('TimesNewRoman', 12), text_color="orange") ],
+		[sg.Text('File MD5 Hash Calculator', font=('TimesNewRoman', 12), text_color="orange") ],
 
 		[sg.Text('Input file:',  text_color="black"), 
 		 sg.InputText(key='netcrypt_file'), sg.FileBrowse(),

@@ -248,14 +248,13 @@ class Execute_Common():
 		print(f"{hn}{info_banner}Facts-Generation Tasks Finished !!! {hn} !!")
 		# ------------------------------------------------------------------------
 
-	def log_summary(self, *, onscreen, to_file=None, excel_report_file=None, transpose_excel_report=False):
+	def log_summary(self, *, onscreen, to_file=None, excel_report_file=None):
 		"""display and write log summary to output file(s)
 
 		Args:
 			onscreen (bool): Display report on screen
 			to_file (str, optional): text file name to store summary report. Defaults to None.  (Deprycated, and fn removed..)
 			excel_report_file (str, optional): excel file name to store summary report. Defaults to None.
-			transpose_excel_report (bool, optional): Transpose the excel report Defaults to False (Deprycated, and fn removed..)
 		"""
 		self.show_failures
 		ER = TableReport(
@@ -264,7 +263,7 @@ class Execute_Common():
 			self.host_vs_ips,
 			self.device_type_all,
 		)
-		ER(transpose_report='auto')
+		ER()
 		if onscreen: ER.show(tablefmt=self.tablefmt)
 		if excel_report_file: ER.write_to(excel_report_file)
 

@@ -327,9 +327,9 @@ class TableReport():
 	host_vs_ips: dict
 	device_type_all: dict
 
-	def __call__(self, transpose_report=False):
+	def __call__(self):
 		self.split_by_device_types()
-		self.get_updated_cmd_exec_log(transpose=transpose_report)
+		self.get_updated_cmd_exec_log()
 
 	def split_by_device_types(self):
 		"""split the device based on its device types
@@ -339,7 +339,7 @@ class TableReport():
 			if not self.new_cmd_exec_log.get(dt): self.new_cmd_exec_log[dt]={}
 			self.new_cmd_exec_log[dt][hn]={}
 
-	def get_updated_cmd_exec_log(self, *, transpose):
+	def get_updated_cmd_exec_log(self):
 		"""get the updated command execution log in DFD format to write to excel
 
 		Args:
@@ -355,19 +355,13 @@ class TableReport():
 						new_d[device] = {}
 						dev_dict = new_d[device]
 					for _ in self.cmd_exec_logs_all[device]:
-						if _['command'] != cmd: continue
+						if _['command'].replace("| no-more ", "") != cmd: continue
 						dev_dict[cmd] = 'success' if _['raw'] else 'failure'
 						dev_cmd_exist.add(cmd) 
 				for cmd in device_cmds.difference(dev_cmd_exist):
 					dev_dict[cmd] = ''
 			self.new_cmd_exec_log[dt] = pd.DataFrame(new_d)
-			if ( 
-					(transpose in ('auto', 'dynamic') and  
-					 len(self.new_cmd_exec_log[dt].columns) > len(self.new_cmd_exec_log[dt])
-					) 
-					or 
-					transpose
-				):
+			if len(self.new_cmd_exec_log[dt].columns) > len(self.new_cmd_exec_log[dt]):
 				self.new_cmd_exec_log[dt] = self.new_cmd_exec_log[dt].T
 
 	def show(self, tablefmt='rounded_outline'):

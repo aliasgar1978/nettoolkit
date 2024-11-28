@@ -13,10 +13,7 @@ def pyvig_frame():
 					relief=sg.RELIEF_SUNKEN, 
 					layout=[
 
-		[sg.Text('Cable Matrix Generation', font=('TimesNewRoman', 12), text_color="black") ],
-
-
-		# under_line(80),
+		[sg.Text('Cable Matrix Generation', font=('TimesNewRoman', 12), text_color="orange") ],
 
 		[sg.Text('clean data files:\t\t', text_color="black"),
 		 sg.InputText('', key='pv_files_clean_data'), sg.FilesBrowse(), ],
@@ -29,13 +26,11 @@ def pyvig_frame():
 		[sg.Text('Custom Package Yaml file:\t', text_color="black"), 
 	     sg.InputText(get_cache(CACHE_FILE, 'cit_file_custom_yml'), key='pv_file_custom_yml', change_submits=True,), 
 	     sg.FileBrowse(button_color="grey"), ],
-		[sg.Checkbox('Keep All Columns\t\t', key='pv_opt_keep_all_cols', default=True, text_color='black'),],
-		[sg.Text('\t\t\t\t\t\t\t\t'),
-		 sg.Button("Cable Matrix", size=(20,1), change_submits=True, key='pv_btn_start_cm', button_color="blue"),],
-		under_line(80),
+		[sg.Checkbox('Keep All Columns \t        ', key='pv_opt_keep_all_cols', default=True, text_color='black'),
+		 sg.Button("Cable Matrix Only", size=(20,1), change_submits=True, key='pv_btn_start_cm', button_color="blue"),],
 		# ------------------------------------------------------------------------------------
 
-		[sg.Text('Visio Drawing Generation', font=('TimesNewRoman', 12), text_color="black") ],
+		[sg.Text('Visio Drawing Generation', font=('TimesNewRoman', 12), text_color="orange") ],
 
 		[sg.Text('Cable Matrix file:\t\t', text_color="black"), 
 	     sg.InputText(get_cache(CACHE_FILE, 'pv_file_cable_matrix'), key='pv_file_cable_matrix', change_submits=True), 
@@ -55,11 +50,8 @@ def pyvig_frame():
 	     sg.InputText(get_cache(CACHE_FILE, 'pv_file_output_file_visio'), key='pv_file_output_file_visio', text_color="darkred",  disabled=True), 
 		 sg.Button("open", change_submits=True, key='pv_file_output_file_visio_open', button_color="darkgrey"),],
 
-		# [sg.Text('Add Sheet Filters (if any) - in python dictionary format', text_color='black'),], 
-		# [sg.Multiline("""{\n}""",  key='pv_custom_sheet_filters', text_color='black', size=(40,5)),], 
-
-		[sg.Text('\t\t\t\t\t\t\t\t'),
-		 sg.Button("Visio Drawing", size=(20,1), change_submits=True, key='pv_btn_start_visio', button_color="blue"),],
+		[sg.Text("\t"*3),
+		 sg.Button("Visio Drawing Only", size=(20,1), change_submits=True, key='pv_btn_start_visio', button_color="blue"),],
 		under_line(80),
 		[sg.Text('\t\t\t'),
 		 sg.Button("Cable Matrix + Visio Drawing", size=(40,1), change_submits=True, key='pv_btn_start_cm_visio', button_color="blue"),],

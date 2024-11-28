@@ -13,7 +13,7 @@ def j2config_frame():
 					relief=sg.RELIEF_SUNKEN, 
 					layout=[
 
-		[sg.Text('Configuration Generator', font=('TimesNewRoman', 12), text_color="black") ],
+		[sg.Text('Configuration Generator', font=('TimesNewRoman', 12), text_color="orange") ],
 
 		[sg.Text('Template file\t', text_color="black"), 
 		 sg.InputText(get_cache(CACHE_FILE, 'j2_file_template'), key='j2_file_template', change_submits=True), 

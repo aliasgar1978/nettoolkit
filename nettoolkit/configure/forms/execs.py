@@ -33,7 +33,7 @@ def configure_it_start(obj, i):
 		config_log=i['confit_cb_conf_log'],
 		exec_log=i['confit_cb_exec_log'],
 		exec_display=i['confit_cb_show_log'],
-		configure=not i['confit_cb_test'],                    ## Default False for test , True to configure
+		configure=True,                    ## Default False for test , True to configure
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 	)
 	C()

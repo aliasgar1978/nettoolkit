@@ -14,14 +14,14 @@ def ipscanner_frame():
 					layout=[
 
 
-		[sg.Text('IP Subnet Scanner', font=('TimesNewRoman', 12), text_color="black") ],
+		[sg.Text('IP Subnet Scanner', font=('TimesNewRoman', 12), text_color="orange") ],
 
-		[sg.Text('Output folder:',  text_color="yellow"),
+		[sg.Text('Output folder:',  text_color="black"),
 		 sg.InputText(get_cache(CACHE_FILE, 'addressing_ipscan_folder_output'), key='addressing_ipscan_folder_output', change_submits=True), 
 		 sg.FolderBrowse(),
 		 sg.Button("open", change_submits=True, key='addressing_folder_ipscan_open', button_color="darkgrey"),],
 
-		[sg.Text("Prefixes", text_color="yellow")],
+		[sg.Text("Prefixes", text_color="black")],
 		[sg.Multiline("", key='addressing_ipscan_pfxs', autoscroll=True, size=(30,7), disabled=False),
 		 sg.Button("Count_ips", change_submits=True, key='addressing_ipscan_btn_count_ip', button_color='grey'), 
 		 sg.Text('', key="addressing_ipscan_ip_count") ],
@@ -34,11 +34,10 @@ def ipscanner_frame():
 		# ------------------------------------------------------------------------------------
 		[sg.Text('\t\t\t\t\t\t\t'),
 		 sg.Button("IP-Scan", change_submits=True, size=(20,1), key='addressing_ipscan_btn_start', button_color="darkblue"),],
-		under_line(80),
 		# ------------------------------------------------------------------------------------
 
 
-		[sg.Text('Compare - IP Scanner Output files', font=('TimesNewRoman', 12), text_color="black") ],
+		[sg.Text('Compare - IP Scanner Output files', font=('TimesNewRoman', 12), text_color="orange") ],
 
 		[sg.Text('Select first scanner file:\t', text_color="black"), 
 		 sg.InputText(key='addressing_ipscan_compare_file_1'), sg.FileBrowse(),
@@ -68,14 +67,15 @@ def prefix_oper_frame():
 					layout=[
 
 
+		[sg.Text('Prefix Operations', font=('TimesNewRoman', 12), text_color="orange") ],
 
 		[sg.Text('Prefixes:\t\t\t\t\tSummaries', text_color="black"), 
 		],
 		[sg.Multiline("", key='pfxs_oper_summary_input', autoscroll=True, size=(30,4), disabled=False),
-		 sg.Text('∑', text_color="yellow"), 
+		 sg.Text('∑', text_color="black"), 
 		 sg.Multiline("", key='pfxs_oper_summary_output', autoscroll=True, size=(30,4), disabled=True),
 		],
-		[sg.Text('\t\t\t\t\t', text_color="yellow"), 
+		[sg.Text('\t\t\t\t\t', text_color="black"), 
 		 sg.Button("Summarize", change_submits=True, size=(20,1), key='pfxs_oper_summary_btn_start', button_color="darkblue"),],
 		under_line(80),
 		# ------------------------------------------------------------------------------------
@@ -86,18 +86,18 @@ def prefix_oper_frame():
 		 sg.InputCombo(list(range(1,256)), key='pfxs_oper_break_pieces', size=(4,1)),
 		 sg.Text(' = ', text_color="black"),
 		 sg.Multiline("", key='pfxs_oper_break_result', autoscroll=True, size=(20,4), disabled=True),], 
-		[sg.Text('\t\t\t\t\t', text_color="yellow"), 
+		[sg.Text('\t\t\t\t\t', text_color="black"), 
 		 sg.Button("Split", change_submits=True, size=(20,1), key='pfxs_oper_break_btn_start', button_color="darkblue"),],
 		under_line(80),
 		# ------------------------------------------------------------------------------------
 
-		[sg.Text('Subnet:', text_color="yellow"), 
+		[sg.Text('Subnet:', text_color="black"), 
 		 sg.InputText(key='pfxs_oper_issubset_input_subnet', size=(15,1)),
-		 sg.Text('Supernet:', text_color="yellow"), 
+		 sg.Text('Supernet:', text_color="black"), 
 		 sg.InputText(key='pfxs_oper_issubset_input_supernet', size=(15,1)),
 		 sg.Text('Result:', text_color="black"),
 		 sg.InputText('', key='pfxs_oper_issubset_result' , size=(5,1),  text_color="black")], 
-		[sg.Text('\t\t\t\t\t', text_color="yellow"), 
+		[sg.Text('\t\t\t\t\t', text_color="black"), 
 		 sg.Button("Check - Is Subset?", change_submits=True, size=(20,1), key='pfxs_oper_issubset_btn_start', button_color="darkblue"),],
 		under_line(80),
 
@@ -117,7 +117,7 @@ def make_batch_frame():
 					layout=[
 
 
-		[sg.Text('Make Batch', font=('TimesNewRoman', 12), text_color="black") ],
+		[sg.Text('Make Batch', font=('TimesNewRoman', 12), text_color="orange") ],
 
 		[sg.Text('output folder:', text_color="black"), 
 		 sg.InputText(get_cache(CACHE_FILE, 'batch_folder_output'), key='batch_folder_output', change_submits=True), 
@@ -166,25 +166,22 @@ def portscanner_frame():
 					layout=[
 
 
-		[sg.Text('IP Port Scanner', font=('TimesNewRoman', 12), text_color="black") ],
+		[sg.Text('IP Port Scanner', font=('TimesNewRoman', 12), text_color="orange") ],
 
 		blank_line(),
 
-		[sg.Text("IP or Subnet:\t\t", text_color="yellow"),
+		[sg.Text("IP or Subnet:\t\t", text_color="black"),
 		 sg.InputText("", key='addressing_portscan_pfx', size=(20,1)),],
 
 		# blank_line(),
 
-		[sg.Text("Port Range [optional]:\t", text_color="yellow"),
-		 sg.Text("start:\t", text_color="yellow"),
+		[sg.Text("Port Range [optional]:\t", text_color="black"),
+		 sg.Text("start:\t", text_color="black"),
 		 sg.InputText("", key='addressing_portscan_range_start', size=(6,1)),],
-		[sg.Text("\t\t\t", text_color="yellow"),
-		 sg.Text("end:\t", text_color="yellow"),
+		[sg.Text("\t\t\t", text_color="black"),
+		 sg.Text("end:\t", text_color="black"),
 		 sg.InputText("", key='addressing_portscan_range_end', size=(6,1)),
 		],
-
-		# [sg.Text("Max Threads", text_color="yellow"),
-		#  sg.InputText(65535, key='addressing_portscan_max_threads', size=(20,1)),],
 
 		# ------------------------------------------------------------------------------------
 		[sg.Text('\t\t\t\t\t\t\t'),

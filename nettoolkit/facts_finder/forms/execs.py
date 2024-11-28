@@ -25,9 +25,9 @@ def facts_finder_start(i):
 	exec_facts_finder(
 		log_files=i['ff_log_files'].split(";"),
 		custom=custom,
-		convert_to_cit=i['ff_convert_to_cit'],
-		remove_cit_bkp=i['ff_remove_cit_bkp'],
-		skip_txtfsm=i['ff_skip_txtfsm'],
+		convert_to_cit=True,
+		remove_cit_bkp=True,
+		skip_txtfsm=True,
 		new_suffix=i['ff_new_suffix'],
 	)
 

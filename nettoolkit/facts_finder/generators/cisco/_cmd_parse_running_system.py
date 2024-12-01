@@ -82,6 +82,7 @@ class RunningSystem():
 		dic['tacacs_servers'] = "\n".join(servers)
 		dic['tacacs_key'] = key
 		dic['tacacs_tcp_port'] = port
+		if not servers: return {}
 		return dic
 
 	def system_name_server(self):
@@ -98,6 +99,7 @@ class RunningSystem():
 		for i, srv in enumerate(servers):
 			dic['dns_server_' + str(i+1)] = srv
 		dic['dns_servers'] = "\n".join(servers)
+		if not servers: return {}
 		return dic
 
 	def system_syslog_server(self):
@@ -105,15 +107,19 @@ class RunningSystem():
 		"""
 		servers = []
 		for l in self.cmd_op:
-			if l.startswith("logging host "):
+			if l.startswith("logging "):
 				spl = l.split()
 				for i, x in enumerate(spl):
-					if i<2: continue
-					add_to_list(servers, x)
+					try:
+						addressing(x)
+						add_to_list(servers, x)
+					except:
+						continue
 		dic = {}
 		for i, srv in enumerate(servers):
 			dic['syslog_server_' + str(i+1)] = srv
 		dic['syslog_servers'] = "\n".join(servers)
+		if not servers: return {}
 		return dic
 
 	def system_ntp_server(self):
@@ -130,6 +136,7 @@ class RunningSystem():
 		for i, srv in enumerate(servers):
 			dic['ntp_server_' + str(i+1)] = srv
 		dic['ntp_servers'] = "\n".join(servers)
+		if not servers: return {}
 		return dic
 
 	def system_exec_banner(self):

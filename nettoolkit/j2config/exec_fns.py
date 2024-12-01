@@ -25,12 +25,13 @@ def exec_config_generation(
 		custom,
 	):
 	print_banner("Config Gen", 'green')
+	regional_class, custom_classes, custom_funcs = None, {}, []
 	try:
-		regional_class = None
-		custom = read_yaml_mode_us(custom)
-		regional_class = custom['j2_regional']['regional_class']
+		if custom:
+			custom = read_yaml_mode_us(custom)
+			regional_class = custom['j2_regional']['regional_class']
 	except Exception as e:
-		raise Exception(f"Custom Yaml is mandatory for selection of item and hierarchical_orders")
+		raise Exception(f"Custom Yaml Read failed or missing information")
 	#
 	device_log_dict = {}
 	for data_file in data_files:
@@ -46,8 +47,9 @@ def exec_config_generation(
 				regional_file=regional_file,
 				regional_class=regional_class,
 			)
-			custom_classes = get_custom_classes(custom)
-			custom_funcs = get_custom_funcs(custom)
+			if custom:
+				custom_classes = get_custom_classes(custom)
+				custom_funcs = get_custom_funcs(custom)
 			#
 			PrCfg.custom_class_add_to_filter(**custom_classes)
 			PrCfg.custom_module_methods_add_to_filter(*custom_funcs)

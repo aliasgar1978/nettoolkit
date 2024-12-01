@@ -109,7 +109,6 @@ class Config_common():
 		Returns:
 			conn: connection object
 		"""    		
-		conn = ConnectHandler(**self.dev_var)
 		try:
 			conn = ConnectHandler(**self.dev_var)
 			self.connectionsuccess = True
@@ -310,9 +309,9 @@ class Configure(Config_common):
 			] ):
 			for tries in range(3):
 				try:
-					if self.net_connect.check_enable_mode():
+					if self.conn.check_enable_mode():
 						break
-					self.net_connect.enable(cmd="enable")
+					self.conn.enable(cmd="enable")
 					break
 				except:
 					self.write_exec_log(self.hn, f"{self.hn} - enable failed on attemp {tries}")

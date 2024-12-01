@@ -76,6 +76,7 @@ class RunningSystem():
 		dic['servers'] = servers
 		dic['key'] = key
 		dic['tcp_port'] = port
+		if not servers: return {}
 		return tdic
 
 	def system_name_server(self):
@@ -88,6 +89,7 @@ class RunningSystem():
 				for i, x in enumerate(spl):
 					if i<2: continue
 					add_to_list(servers, x)
+		if not servers: return {}
 		dic = {'dns':{}}
 		dic['dns']['servers'] = servers
 		return dic
@@ -97,11 +99,15 @@ class RunningSystem():
 		"""
 		servers = []
 		for l in self.cmd_op:
-			if l.startswith("logging host "):
+			if l.startswith("logging "):
 				spl = l.split()
 				for i, x in enumerate(spl):
-					if i<2: continue
-					add_to_list(servers, x)
+					try:
+						addressing(x)
+						add_to_list(servers, x)
+					except:
+						continue
+		if not servers: return {}
 		dic = {'syslog': {}}
 		dic['syslog']['servers'] = servers
 		return dic
@@ -116,6 +122,7 @@ class RunningSystem():
 				for i, x in enumerate(spl):
 					if i<2: continue
 					add_to_list(servers, x)
+		if not servers: return {}
 		dic = {'ntp': {}}
 		dic['ntp']['servers'] = servers
 		return dic

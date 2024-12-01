@@ -38,6 +38,8 @@ CISCO_IFSH_IDENTIFIERS = {
 	"LOOPBACK": {'Loopback':2,} ,
 	"AGGREGATED": {'Port-channel':2,},
 	"PHYSICAL": PHYSICAL_IFS,
+	"NVI": {'NVI':2,},
+	"NV": {'NV':2,},
 }
 JUNIPER_IFS_IDENTIFIERS = {
 	"VLAN": ('irb', 'vlan', 'iw'),

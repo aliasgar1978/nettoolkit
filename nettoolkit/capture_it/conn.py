@@ -149,9 +149,7 @@ class conn(object):
 
 		self._devvar['host'] = STR.hostname(self.net_connect).lower()
 		self._hn = self._devvar['host']
-		if any( [
-			self._devvar['device_type'].lower() == 'cisco_ios'
-			] ):
+		if self._devvar['device_type'].lower() in ('cisco_ios', ):
 			for tries in range(3):
 				try:
 					if self.net_connect.check_enable_mode():

@@ -16,7 +16,10 @@ def get_version(command_output):
 	op_dict = {}
 	parsed_data = parse_to_dict_using_ntc('show version', command_output)[0]
 	#
-	if isinstance(parsed_data['SERIAL'], list ):
+	if not parsed_data.get('MAC') and parsed_data.get('MAC_ADDRESS'): 
+		parsed_data['MAC'] = parsed_data['MAC_ADDRESS']
+	#
+	if parsed_data.get('SERIAL') and isinstance(parsed_data['SERIAL'], list ):
 		for i, (model, serial, mac) in enumerate(zip(
 													parsed_data['HARDWARE'],
 													parsed_data['SERIAL'],

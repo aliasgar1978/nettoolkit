@@ -29,7 +29,10 @@ Version 1.x updates
      - Updates
 
    * - 1.8.5
-     - Nov 29, 2024
+     - Dec 25, 2024
+     - * a few minor Bug fixes
+   * - 1.8.5
+     - Dec 14, 2024
      - * a few minor Bug fixes in configure module
        * facts-finder: bug fix for output folder selection while doing excel facts generation
    * - 1.8.4

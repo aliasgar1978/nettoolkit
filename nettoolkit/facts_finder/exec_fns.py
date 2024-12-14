@@ -22,6 +22,7 @@ def exec_facts_finder(
 	new_suffix='-clean',
 	use_cdp=False,
 	debug=False,
+	output_folder='.',
 	):
 	print_banner("Excel Facts", 'yellow')
 	if custom:	
@@ -45,6 +46,7 @@ def exec_facts_finder(
 				new_suffix=new_suffix,
 				use_cdp=use_cdp,
 				debug=debug,
+				output_folder=output_folder,
 			)
 			cleaned_fact()
 			print(f"Cleaning done...,", end='\t')

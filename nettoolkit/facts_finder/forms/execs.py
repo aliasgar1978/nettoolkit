@@ -29,6 +29,7 @@ def facts_finder_start(i):
 		remove_cit_bkp=True,
 		skip_txtfsm=True,
 		new_suffix=i['ff_new_suffix'],
+		output_folder=i['yf_output_folder'],
 	)
 
 @activity_finish_popup

@@ -42,6 +42,7 @@ class CleanFacts:
 		new_suffix='-clean',
 		use_cdp=False,
 		debug=False,
+		output_folder=".",
 		):
 		"""Instance Initializer
 		"""		
@@ -53,16 +54,17 @@ class CleanFacts:
 		self.new_suffix = new_suffix
 		self.use_cdp = use_cdp
 		self.debug = debug
+		self.output_folder = output_folder
 		try:
 			if convert_to_cit: 
 				self.capture_log_file = to_cit(self.capture_log_file)
 		except Exception as e:
 			print(f'log file convert to Capture-it failed..\n{e}')
 		#
-		self._clean_file = get_clean_filename(self.capture_log_file, self.new_suffix)
+		self._clean_file = get_clean_filename(self.output_folder, self.capture_log_file, self.new_suffix)
 		if debug:
-			self._fg_data_file = get_clean_filename(self.capture_log_file, "-fg")
-			self._fm_data_file = get_clean_filename(self.capture_log_file, "-fm")
+			self._fg_data_file = get_clean_filename(self.output_folder, self.capture_log_file, "-fg")
+			self._fm_data_file = get_clean_filename(self.output_folder, self.capture_log_file, "-fm")
 
 	def __call__(self):
 		self.get_facts_gen()
@@ -162,11 +164,12 @@ class CleanFacts:
 
 # ========================================================================================
 
-def get_clean_filename(file, suffix):
+def get_clean_filename(path, file, suffix):
 	"""get a new clened filename appended with suffix string
 
 	Args:
-		file (str): full path with output file name
+		path (str): full path with output file name
+		file (str): capture file name
 		suffix (str): suffix to be appened
 
 	Returns:
@@ -175,8 +178,11 @@ def get_clean_filename(file, suffix):
 	p = Path(file)
 	filename_wo_ext = str(p.stem)
 	file_ext = ".xlsx"
-	cur_folder = str(p.resolve().parents[0])
-	return cur_folder+"/"+filename_wo_ext+suffix+file_ext
+	if not path or path == ".":
+		folder = str(p.resolve().parents[0])
+	else:
+		folder = path
+	return folder+"/"+filename_wo_ext+suffix+file_ext
 
 def get_hostname_from_logfile(file):
 	"""get device hostname from log file name

@@ -28,9 +28,10 @@ Version 1.x updates
      - Date   
      - Updates
 
-   * - 1.8.5
+   * - 1.8.6
      - Dec 25, 2024
-     - * a few minor Bug fixes
+     - * a few minor Bug fixes,
+       * capture-it: added standard_output format
    * - 1.8.5
      - Dec 14, 2024
      - * a few minor Bug fixes in configure module

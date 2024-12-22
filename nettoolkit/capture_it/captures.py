@@ -29,6 +29,7 @@ class Captures(CLP):
 		conn, 
 		cumulative=False, 
 		parsed_output=False,
+		standard_output=False,
 		append_capture=False,
 		):
 		"""Initiate captures
@@ -40,12 +41,14 @@ class Captures(CLP):
 			logger(list): device logging messages list
 			cumulative (bool, optional): True/False/both. Defaults to False.
 			parsed_output(bool): Need to parse output and generate excel or not.
+			standard_output(bool): Output  in standard format or capture it format.
 			append_capture(bool): Appends commands output to an existing capture file, instead of creating a new.
 		"""    		
 		# self.logger_list = logger_list
 		super().__init__(conn, parsed_output)    # , visual_progress, logger_list)
 		self.op = ''
 		self.cumulative = cumulative
+		self.standard_output = standard_output
 		self.cumulative_filename = None
 		self.del_old_file = not append_capture
 

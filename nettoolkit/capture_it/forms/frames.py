@@ -61,7 +61,8 @@ def capture_it_frame():
 		 # sg.Text('\tSummary Table Format', text_color="black"), 
 		], 
 		[sg.Checkbox('Missing only',	key='cit_opt_missing',       default=False, text_color='black'),
-		 sg.Checkbox('Append',	    key='cit_opt_append',        default=False, text_color='black'),
+		 sg.Checkbox('Append',	        key='cit_opt_append',        default=False, text_color='black'),
+		 sg.Checkbox('CIT Format',	    key='cit_opt_format',        default=True,  text_color='black'),
 		 sg.Checkbox('Excel Facts',     key='cit_opt_parsed_output', default=False, text_color='black'),
 		 sg.InputCombo(CAPTURE_MODES, default_value=CAPTURE_MODES[0], key='cit_opt_cumulative'),
 		 # sg.Text('\tSummary Table Format:', text_color="black"), 
@@ -117,6 +118,8 @@ def capture_it_by_xl_frame():
 		# under_line(80),
 
 		[sg.Text('Options',  font=('TimesNewRoman', 12), text_color="orange"),], 
+		[sg.Checkbox('CIT Format',	    key='cit_opt_format1',        default=True,  text_color='black'),],
+
 		[sg.Text('SummaryTableFormat:', text_color="black"), 
 		 sg.InputCombo(TABLE_FORMATS, key='cit_tablefmt1', default_value='pretty'), ],
 

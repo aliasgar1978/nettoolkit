@@ -41,6 +41,7 @@ class Execute_Device():
 	cumulative            : bool 
 	forced_login          : bool
 	parsed_output         : bool
+	standard_output       : bool
 	CustomClass           : 'typing.Any'
 	fg                    : bool
 	mandatory_cmds_retries: int
@@ -307,6 +308,7 @@ class Execute_Device():
 			conn=c, 
 			cumulative=self.cumulative,
 			parsed_output=self.parsed_output,
+			standard_output=self.standard_output,
 			append_capture=self.append_capture,
 			)
 		return cc

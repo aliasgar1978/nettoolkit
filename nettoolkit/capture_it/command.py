@@ -25,7 +25,7 @@ class COMMAND():
 	"""    	
 
 	# INITIALIZE class vars
-	def __init__(self, conn, cmd, parsed_output, 
+	def __init__(self, conn, cmd, parsed_output, standard_output,
 		del_old_file
 		):
 		"""initialize a command object
@@ -33,16 +33,18 @@ class COMMAND():
 		Args:
 			conn (conn): connection object
 			cmd (str): a command to be executed
+			standard_output(bool): write output as standard capture or capture_it format.
 			parsed_output(bool): Need to parse output and generate excel or not.
 		"""    		
 		self.conn = conn
 		self.cmd = cmd
 		self.parsed_output = parsed_output
+		self.standard_output = standard_output
 		self.del_old_file = del_old_file    ## internal use only
 		self._commandOP(conn)
 
 
-	def op_to_file(self, cumulative=False):
+	def _op_to_file(self, cumulative=False):
 		"""store output of command to file, cumulative (True,False,both) to store output in a single file, individual files, both
 
 		Args:
@@ -118,14 +120,23 @@ class COMMAND():
 			str: filename where output got appended
 		"""    		
 		banner = self.banner if self.banner else ""
-		rem = "#" if self.conn.devtype == 'juniper_junos' else "!"
-		cmd_header = f"\n{rem}{'='*80}\n{rem}{cmd_line_pfx}{self.cmd}\n{rem}{'='*80}\n\n"
-		fname = STR.get_logfile_name(self.conn.capture_path, hn=self.conn.hn, cmd="", ts="")
 
+		cmd_header = self.get_cmd_banner()
+		
+		fname = STR.get_logfile_name(self.conn.capture_path, hn=self.conn.hn, cmd="", ts="")
 		if self.del_old_file: delete_file_ifexist(fname)
 
 		IO.add_to_file(filename=fname, matter=banner+cmd_header+output)
 		return fname
+
+	def get_cmd_banner(self):
+		if self.standard_output:
+			cmd_header = f"\n{self.conn.net_connect.find_prompt()}{self.cmd}\n"
+		else:
+			rem = "#" if self.conn.devtype == 'juniper_junos' else "!"
+			cmd_header = f"\n{rem}{'='*80}\n{rem}{cmd_line_pfx}{self.cmd}\n{rem}{'='*80}\n\n"
+		return cmd_header
+
 
 def delete_file_ifexist(fname):
 	"""deletes file

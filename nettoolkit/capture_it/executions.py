@@ -99,6 +99,7 @@ class Execute_Common():
 		self.cumulative = True
 		self.forced_login = True
 		self.parsed_output = False
+		self.standard_output = False
 		self.CustomClass = None
 		self.CustomDeviceFactsClass = None
 		self.foreign_keys = {}
@@ -299,6 +300,7 @@ class Execute_Common():
 			'cumulative': self.cumulative,
 			'forced_login': self.forced_login, 
 			'parsed_output': self.parsed_output,
+			'standard_output': self.standard_output,
 			'CustomClass': self.CustomClass,
 			'fg': self.fg,
 			'mandatory_cmds_retries': self.mandatory_cmds_retries,
@@ -442,6 +444,7 @@ class Execute_By_Individual_Commands(Multi_Execution, Execute_Common):
 		* cumulative (bool, optional): True: will store all commands output in a single file, False will store each command output in differet file. Defaults to False. and 'both' will do both.
 		* forced_login (bool, optional): True: will try to ssh/login to devices even if ping respince fails. False will try to ssh/login only if ping responce was success. (default: False)
 		* parsed_output (bool, optional): True: will check the captures and generate the general parsed excel file. False will omit this step. No excel will be generated in the case. (default: False)
+		* standard_output (bool, optional): False: output in standard format or capture it format. (default: False)
 		* max_connections (int, optional): 100: manipulate how many max number of concurrent connections to be establish. default is 100.
 		* CustomClass (class): Custom class definitition to execute additional custom commands
 

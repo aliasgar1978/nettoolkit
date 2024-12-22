@@ -73,7 +73,7 @@ class CLP():
 	# Raw Command Capture
 	def _cmd_capture_raw(self, cmd, cumulative=False, banner=False, del_old_file=False):
 		try:
-			cmdObj = COMMAND(conn=self.conn, cmd=cmd, parsed_output=False, 
+			cmdObj = COMMAND(conn=self.conn, cmd=cmd, parsed_output=False, standard_output=self.standard_output,
 				del_old_file=del_old_file)
 		except:
 			self.conn._device_conn_log(display=True, msg=f"{self.hn} : ERROR: error executing command {cmd}")
@@ -81,7 +81,7 @@ class CLP():
 			return None
 		try:
 			cmdObj.banner = banner		
-			cmdObj.op_to_file(cumulative=cumulative)
+			cmdObj._op_to_file(cumulative=cumulative)
 			self.cmd_exec_logs[-1]['raw'] = True
 			if cumulative: self.cumulative_filename = cmdObj.cumulative_filename
 			return cmdObj
@@ -93,7 +93,7 @@ class CLP():
 	# Parsed Command Capture
 	def _cmd_capture_parsed(self, cmd, cumulative=False, banner=False):
 		try:
-			cmdObj_parsed = COMMAND(conn=self.conn, cmd=cmd, parsed_output=True)
+			cmdObj_parsed = COMMAND(conn=self.conn, cmd=cmd, parsed_output=True, standard_output=self.standard_output)
 		except:
 			self.conn._device_conn_log(display=True, msg=f"{self.hn} : ERROR: error parsing command - {cmd}")
 			self.cmd_exec_logs[-1]['parsed'] = False

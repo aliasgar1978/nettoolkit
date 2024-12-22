@@ -102,6 +102,7 @@ def capture_it_start(i):
 	c.cumulative = cumulative
 	c.forced_login = True
 	c.parsed_output = False
+	c.standard_output = not i['cit_opt_format']
 	c.max_connections = int(i['cit_opt_max_connections'])
 	c.append_capture = i['cit_opt_append']
 	c.missing_captures_only = i['cit_opt_missing']
@@ -143,6 +144,7 @@ def capture_it_by_xl_start(i):
 		exec_log_path=i['cit_path_logs1'],
 	)
 	c.max_connections = int(i['cit_opt_max_connections1'])
+	c.standard_output = not i['cit_opt_format1']
 	c.tablefmt = i['cit_tablefmt1']
 	c()
 	print("Capture Task(s) Complete..")

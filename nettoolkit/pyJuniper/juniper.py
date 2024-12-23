@@ -85,33 +85,17 @@ class Juniper():
 		return H.output
 
 def convert_to_set_from_captures(conf_file, output_file=None):
-	"""enhanced version of jset conversion, which identify the show configuration from multiple show output captures, captured by capture-it and convert it to set.
-	GOING TO DEPRYCATE.. use native Juniper class for better result
+	"""jset conversion, 
+
 	Args:
 		conf_file (str): configuration capture file, using capture-it
 		output_file (str, optional): output file name. Defaults to None.
 
 	Returns:
-		_type_: _description_
+		list: list of set commands configuration.
 	"""	
-	with open(conf_file, 'r') as f:
-		ops = f.readlines()
-	toggle = False
-	conflist = ""
-	for line in ops:
-		if line.startswith("# output for command: show configuration| no-more"):
-			toggle=True
-			continue
-		if not toggle: continue
-		if line.startswith("# output for command: "): 
-			break
-		conflist+=line
-	_tmp_config = conf_file[:-4]+".tmp"
-	with open(_tmp_config, 'w') as f:
-		f.write(conflist)
-	J = Juniper(_tmp_config, output_file)
-	set_list = J.convert_to_set(output_file)
-	os.remove(_tmp_config)
+	J = Juniper(conf_file, output_file)
+	set_list = J.convert_to_set(to_file=True)
 	return set_list
 
 # ------------------------------------------------------------------------------

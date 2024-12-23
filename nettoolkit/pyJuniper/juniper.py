@@ -95,7 +95,7 @@ def convert_to_set_from_captures(conf_file, output_file=None):
 		list: list of set commands configuration.
 	"""	
 	J = Juniper(conf_file, output_file)
-	set_list = J.convert_to_set(to_file=True)
+	set_list = J.convert_to_set(to_file=output_file)
 	return set_list
 
 # ------------------------------------------------------------------------------

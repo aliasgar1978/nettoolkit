@@ -22,10 +22,12 @@ def exec_mini_juniper_file_input_open(i):
 
 @activity_finish_popup
 def mini_juniper_to_set_start(i):
-	if i['mini_juniper_file_input'] == '' or i['mini_juniper_folder_output'] == '': return
+	if i['mini_juniper_file_input'] == '' : return
 	p = Path(i['mini_juniper_file_input'])
 	input_file = p.name
-	output_file = i['mini_juniper_folder_output'] + '/' + ".".join(input_file.split(".")[:-1]) + '.set.txt'
+	output_file = ''
+	if i['mini_juniper_folder_output']:
+		output_file = i['mini_juniper_folder_output'] + '/' + ".".join(input_file.split(".")[:-1]) + '.set.txt'
 	try:
 		J = Juniper(i['mini_juniper_file_input'], output_file)    # define a Juniper Object
 		s = J.convert_to_set(to_file=True)      # convert the Juniper config to set mode.
@@ -34,13 +36,18 @@ def mini_juniper_to_set_start(i):
 
 @activity_finish_popup
 def mini_juniper_remove_remarks_start(i):
-	if i['mini_juniper_file_input'] == '' or i['mini_juniper_folder_output'] == '': return
+	if i['mini_juniper_file_input'] == '': return
 	p = Path(i['mini_juniper_file_input'])
 	input_file = p.name
-	output_file = i['mini_juniper_folder_output'] + '/' + ".".join(input_file.split(".")[:-1]) + '.-remarks.txt'
+	output_file = ''
+	if i['mini_juniper_folder_output']:
+		output_file = i['mini_juniper_folder_output'] + '/' + ".".join(input_file.split(".")[:-1]) + '.-remarks.txt'
 	try:
 		J = Juniper(i['mini_juniper_file_input'], output_file)    # define a Juniper Object
-		s = J.remove_remarks(to_file=True)      # convert the Juniper config to set mode.
+		s = J.remove_remarks(
+			to_file=True, 
+			config_only=i['mini_juniper_remove_remarks_configonly']
+		)
 	except:
 		print(f"Juniper Remarks removal faced some issue... Please verify input")
 

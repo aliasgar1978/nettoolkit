@@ -29,6 +29,9 @@ def juniper_frame():
 		 sg.Button("  Convert to set   ", change_submits=True, size=(20,1), key='mini_juniper_to_set_btn_start', button_color="blue"),
 		 sg.Text(' '),
 		 sg.Button("Remove Remarks", change_submits=True, size=(20,1), key='mini_juniper_remove_remarks_btn_start', button_color="blue"), ],
+		[sg.Text('\t\t\t\t\t\t'), 
+		 sg.Checkbox('Config only',	key='mini_juniper_remove_remarks_configonly',  default=True, text_color='black'),],
+
 		under_line(80),
 
 		])

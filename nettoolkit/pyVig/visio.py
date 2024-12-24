@@ -6,7 +6,7 @@ try:
 	import win32com.client
 	from win32com.client import constants
 except:
-	print("Please install the win32com client using - pip install pywin32")
+	print("[-] Please install the win32com client using - pip install pywin32")
 import traceback
 from random import randint
 
@@ -62,7 +62,7 @@ class VisioObject():
 		if save_success:
 			self._closeVisio()
 		else:
-			print(f"Information:\tVisio file save did not happen, please save and close visio manually")
+			print(f"[-] Information:\tVisio file save did not happen, please save and close visio manually")
 		#
 		if exc_type is not None:
 			traceback.print_exception(exc_type, exc_value, tb)
@@ -78,7 +78,7 @@ class VisioObject():
 	# save visio output file
 	def _saveVisio(self, file):
 		try: 
-			print(f"Information:\tattempting to save file as {file}... ", end='\t')
+			print(f"[+] Information:\tattempting to save file as {file}... ", end='\t')
 			self.doc.SaveAs(file)
 			print(f"Success ")
 			return True
@@ -89,7 +89,7 @@ class VisioObject():
 	# close visio application
 	def _closeVisio(self):
 		try:
-			print(f"Information:\tattempting to close/quite visio... ", end='\t')
+			print(f"[+] Information:\tattempting to close/quite visio... ", end='\t')
 			self.doc.Close()
 			self.visio.Quit()
 			print(f"Success ")
@@ -100,30 +100,30 @@ class VisioObject():
 	@property
 	def _startVisio(self):
 		try:
-			print(f"Information:\tstarting visio application..", end='\t')
+			print(f"[+] Information:\tstarting visio application..", end='\t')
 			self.visio = win32com.client.Dispatch("Visio.Application")
 			print(f"success..",)
 		except Exception as e:
 			print(f"fail..",)
-			print(f"Critical:\tVisio application load failed, retry after clearing temp, verify macros all allowed with vBA access, verify visio application installation..",)
-			print(f"Debug:\t\t{e}",)
+			print(f"[-] Critical:\tVisio application load failed, retry after clearing temp, verify macros all allowed with vBA access, verify visio application installation..",)
+			print(f"[-] Debug:\t\t{e}",)
 			self.visio = None
 
 	# Internal use only: Open a blank visio page inside opened Visio Application
 	def _openBlankVisioDoc(self):
 		try:
-			print(f"Information:\tadding a new blank page on visio application..", end='\t')
+			print(f"[+] Information:\tadding a new blank page on visio application..", end='\t')
 			# self.doc = self.visio.Documents.Add('Basic Diagram.vst')
 			self.doc = self.visio.Documents.Add('')
 			print(f"success..",)
 		except Exception as e:
 			print(f"fail..",)
-			print(f"Critical:\tadding a new blank page on visio application failed..",)
+			print(f"[-] Critical:\tadding a new blank page on visio application failed..",)
 
 	def insert_new_page(self, name=None):
 		self.page_number += 1
 		try:
-			print(f"Information:\tappending a new page on visio application..", end='\t')
+			print(f"[+] Information:\tappending a new page on visio application..", end='\t')
 			self.page = self.doc.Pages.Add()
 			self.page = self.doc.Pages.Item(self.page_number)
 			if name: 
@@ -132,7 +132,7 @@ class VisioObject():
 			print(f"success..",)
 		except Exception as e:
 			print(f"fail..",)
-			print(f"Critical:\tappending a new page on visio application failed..",)
+			print(f"[+] Critical:\tappending a new page on visio application failed..",)
 
 	# Return item from Stencil
 	def _selectItemfromStencil(self, item, stencil):
@@ -147,8 +147,8 @@ class VisioObject():
 			itemProp = self.page.Drop(item, posY, posX)
 			return itemProp
 		except Exception as e:
-			print(f"Error:\t\tItem Drop failed for {item}, verify stencil, item icon available in stencil",)
-			print(f"Debug:\t\t{e}",)
+			print(f"[-] Error:\t\tItem Drop failed for {item}, verify stencil, item icon available in stencil",)
+			print(f"[-] Debug:\t\t{e}",)
 
 	@staticmethod
 	def _border(item, borderLineColor=None, borderLinePattern=None,
@@ -212,7 +212,7 @@ class VisioObject():
 			if height:
 				item.CellsSRC(visSectionObject, visRowXFormOut, visXFormHeight).FormulaU = f"{height} in"
 		except:
-			print(f"Error:\t\tResizing of item {item} not allowed for gaurded stencil items. Match text box size manually")
+			print(f"[-] Error:\t\tResizing of item {item} not allowed for gaurded stencil items. Match text box size manually")
 
 	# --------------------------------------------------------------------------
 	#  External
@@ -230,14 +230,14 @@ class VisioObject():
 		"""		
 		stencil = stencil.replace("/", "\\")
 		try:
-			print(f"Information:\tattempting to open visio stencil {stencil}..", end='\t')
+			print(f"[+] Information:\tattempting to open visio stencil {stencil}..", end='\t')
 			s = self.visio.Documents.Open(stencil)
 			print("success..")
 			return s
 		except Exception as e:
 			print("fail..")
-			print(f"Error:\t\tUnable to open visio stencil {stencil}, verify stencil existance",)
-			print(f"Debug:\t\t{e}",)
+			print(f"[-] Error:\t\tUnable to open visio stencil {stencil}, verify stencil existance",)
+			print(f"[-] Debug:\t\t{e}",)
 
 	def selectNdrop(self, stencil, item, posX, posY, **format):
 		"""Selects item `item` from provided stencil `stencil` for selected visio object.
@@ -434,7 +434,7 @@ class Connector():
 		try:
 			self.obj.Characters.Text = remarks
 		except:
-			print(f"Error:\t\tDescription set for object failed `{remarks}` ")
+			print(f"[-] Error:\t\tDescription set for object failed `{remarks}` ")
 
 	def line_color(self, color=None):
 		"""color of a line object
@@ -466,7 +466,7 @@ class Connector():
 			self.obj.CellsSRC(visSectionObject, visRowLine, visLineColor).FormulaU = clr
 		except:
 			pass
-			print(f"Error:\t\tLine color formatting failed, `{visRowLine}`, for color `{color}`")
+			print(f"[-] Error:\t\tLine color formatting failed, `{visRowLine}`, for color `{color}`")
 
 	def line_weight(self, weight=None):
 		"""set weight/thickness of a line

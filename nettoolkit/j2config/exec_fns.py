@@ -31,14 +31,14 @@ def exec_config_generation(
 			custom = read_yaml_mode_us(custom)
 			regional_class = custom['j2_regional']['regional_class']
 	except Exception as e:
-		raise Exception(f"Custom Yaml Read failed or missing information")
+		raise Exception(f"[-] Custom Yaml Read failed or missing information")
 	#
 	device_log_dict = {}
 	for data_file in data_files:
 		if not data_file.endswith(".xlsx"): continue
 		device = get_host(data_file)
 		device_dict = add_blankdict_key(device_log_dict, device)
-		print(f"Generating Configuration for {device}", end="\t")
+		print(f"[+] Generating Configuration for {device}", end="\t")
 		try:
 			PrCfg = PrepareConfig(
 				data_file=data_file,
@@ -61,7 +61,7 @@ def exec_config_generation(
 			print(f"Failed..")
 			device_dict['Config Gen'] = 'No'
 
-	print("Configuration Generation All Task(s) Complete..")
+	print("[+] Configuration Generation All Task(s) Complete..")
 	df = pd.DataFrame(device_log_dict).T
 	print_table(df)	
 

@@ -139,7 +139,7 @@ class RunningInterfaces(Running):
 				self.ospfauth_attr_functions: self.ospfauth_lines_dict,
 			}
 		except:
-			raise Exception(f"MissingFunctionLinesMap: Invalid or unavailable dictionary, Check input")
+			raise Exception(f"[-] MissingFunctionLinesMap: Invalid or unavailable dictionary, Check input")
 
 	### /// Interface /// ###
 

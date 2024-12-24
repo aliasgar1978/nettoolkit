@@ -58,7 +58,7 @@ class ADevCablings():
 				except:
 					self.cablings[k].append("")
 					if k != 'b_device' and k != 'a_media_type':
-						print(f"Mandatory requirement missing, df gen may fails {k}")
+						print(f"[-] Mandatory requirement missing, df gen may fails {k}")
 
 		for k in self.cabling_optional_columns:
 			try:

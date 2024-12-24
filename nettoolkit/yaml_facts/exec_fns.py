@@ -30,27 +30,26 @@ def exec_yaml_facts(
 	for log_file in log_files:
 		if not log_file.endswith(".log"): continue
 		device = get_host(log_file)
-		print(">> starting", device, "...", end='\t')
+		print("[+] starting", device, "...", end='\t')
 		device_dict = add_blankdict_key(device_log_dict, device)
 		#
 		try:
 			YF = YamlFacts(log_file, output_folder)
-			print(f"Yaml File Generation done...,", end='\t')
-			print(f"Tasks Completed !! {device} !!")
+			print(f"[+] Yaml File Generation Tasks Completed !! {device} !!")
 			device_dict['yaml_facts generated'] = "Yes"
 			device_dict['remark'] = ""
 			if YF.unavailable_cmds:
-				print(f"\t{device}: Missing Captures {YF.unavailable_cmds}")
+				print(f"[-] {device}: Missing Captures {YF.unavailable_cmds}")
 				device_dict['remark'] = f"Missing Captures {YF.unavailable_cmds}"
 
 		except Exception as e:
-			print(f"Yaml File Generation failed...")
+			print(f"[-] Yaml File Generation failed...")
 			print(e)
 			device_dict['yaml_facts generated'] = "No"
 			device_dict['remark'] = f"{e.splitlines()[0]}"
 			continue
 		#
-	print("Yaml Facts-Finder All Task(s) Complete..")
+	print("[+] Yaml Facts-Finder All Task(s) Complete..")
 	df = pd.DataFrame(device_log_dict).T
 	print_table(df)	
 

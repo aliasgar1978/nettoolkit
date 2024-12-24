@@ -5,7 +5,7 @@ from nettoolkit.nettoolkit_db import write_to_xl, read_xl_all_sheet
 from nettoolkit.pyVig import pyVig, CableMatrix
 
 
-@printmsg(pre=f'Start Prepating Cable Matrix', post="Finish Preparing Cable Matrix..")
+@printmsg(post="[+] Finish Preparing Cable Matrix..")
 def exec_pyvig_cable_matrix(
 		files,
 		output_file,	        ## full path
@@ -16,6 +16,7 @@ def exec_pyvig_cable_matrix(
 	#
 	print_banner("Cable Matrix", 'magenta')
 	#
+	print(f'[+] Start Prepating Cable Matrix')
 	files = [file for file in files if file.endswith(".xlsx")]
 	opd = {'sheet_filters': {}}
 	#
@@ -24,7 +25,7 @@ def exec_pyvig_cable_matrix(
 		try:
 			pyvig_custom = read_yaml_mode_us(custom)['pyvig'] 
 		except Exception as e:
-			raise Exception(f"Custom Yaml is mandatory for selection of item and hierarchical_orders")
+			raise Exception(f"[-] Custom Yaml is mandatory for selection of item and hierarchical_orders")
 	#
 	CM = CableMatrix(files)
 	CM.custom_attributes( default_stencil=default_stencil )
@@ -51,7 +52,7 @@ def exec_pyvig_cable_matrix(
 	return opd
 
 
-@printmsg(pre=f'Start Generating Visio', post=f'Finished Generating Visio')
+@printmsg(post=f'[+] Finished Generating Visio')
 def exec_pyvig_visio(
 		data_file,				## excel cable matrix
 		output_file,	        ## full path
@@ -61,6 +62,7 @@ def exec_pyvig_visio(
 	):
 	#
 	print_banner("Visio Gen", 'magenta')
+	print(f'[+] Start Generating Visio')
 	dic['data_file'] = data_file
 	dic['op_file'] = output_file
 	dic['stencil_folder'] =  stencil_folder
@@ -70,7 +72,7 @@ def exec_pyvig_visio(
 		try:
 			pyvig_custom = read_yaml_mode_us(custom)['pyvig'] 
 		except Exception as e:
-			raise Exception(f"Custom Yaml is mandatory for selection of item and hierarchical_orders")
+			raise Exception(f"[-] Custom Yaml is mandatory for selection of item and hierarchical_orders")
 	#
 	if not dic.get('sheet_filters'):
 		dfd = read_xl_all_sheet(dic['data_file'])

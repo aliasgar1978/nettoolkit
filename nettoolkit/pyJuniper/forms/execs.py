@@ -32,7 +32,7 @@ def mini_juniper_to_set_start(i):
 		J = Juniper(i['mini_juniper_file_input'], output_file)    # define a Juniper Object
 		s = J.convert_to_set(to_file=True)      # convert the Juniper config to set mode.
 	except:
-		print(f"Set Conversion faced some issue... Please verify input")
+		print(f"[-] Set Conversion faced some issue... Please verify input")
 
 @activity_finish_popup
 def mini_juniper_remove_remarks_start(i):
@@ -49,7 +49,7 @@ def mini_juniper_remove_remarks_start(i):
 			config_only=i['mini_juniper_remove_remarks_configonly']
 		)
 	except:
-		print(f"Juniper Remarks removal faced some issue... Please verify input")
+		print(f"[-] Juniper Remarks removal faced some issue... Please verify input")
 
 
 # ======================================================================================

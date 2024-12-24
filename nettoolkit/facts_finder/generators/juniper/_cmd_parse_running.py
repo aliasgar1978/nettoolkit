@@ -23,6 +23,6 @@ class Running():
 			self.set_cmd_op = verifid_output(JS.output)
 		else:
 			self.set_cmd_op = []
-			raise Exception(f'Missing Configuration capture.. {cmd_op}, verify input')
+			raise Exception(f'[-] Missing Configuration capture.. {cmd_op}, verify input')
 
 # ------------------------------------------------------------------------------

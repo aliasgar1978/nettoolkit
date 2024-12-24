@@ -119,9 +119,9 @@ class Aggregate():
 				elif isinstance(pfx, IPv4):
 					self.pfxs_dict[pfx] = {}
 				else:
-					raise Exception(f"Incorrect IP / Format Received {pfx}\n{e}")					
+					raise Exception(f"[-] Incorrect IP / Format Received {pfx}\n{e}")					
 			except Exception as e:
-				raise Exception(f"Incorrect IP / Format Received {pfx}\n{e}")
+				raise Exception(f"[-] Incorrect IP / Format Received {pfx}\n{e}")
 
 	# count and store network and broadcast number for each prefixes.
 	def _count_start_stop(self):
@@ -168,7 +168,7 @@ class Aggregate():
 			if ip.network_number_int == start and ip.broadcast_number_int == end:
 				self._summaries.append(ip)
 				continue
-			raise Exception(f"Script Error: Invalid Summary Found: {ip}")
+			raise Exception(f"[-] Script Error: Invalid Summary Found: {ip}")
 
 	### ----- Available Properties --- ###
 

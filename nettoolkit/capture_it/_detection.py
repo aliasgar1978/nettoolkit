@@ -8,8 +8,6 @@ from nettoolkit.nettoolkit_common import STR
 
 
 # -----------------------------------------------------------------------------
-# Device Type Detection (1st Connection)
-# -----------------------------------------------------------------------------
 class DeviceType():
 	"""Deprycated"""    	
 
@@ -40,7 +38,7 @@ def quick_display(dev_ip, auth, cmds, wait):
 				paramiko.ssh_exception.AuthenticationException, 
 				paramiko.AuthenticationException
 				) as e:
-			print(f"{dev_ip} - Device SSH Connection Failure - using username {auth['un']}")
+			print(f"[-] {dev_ip}: Device SSH Connection Failure - using username {auth['un']}")
 			return None
 
 		if isinstance(cmds, str):

@@ -74,17 +74,17 @@ class conn(object):
 		if self.connectionsuccess:
 			self.__set_hostname
 			self.clsString = f'Device Connection: {self.devtype}/{self._devvar["ip"]}/{self._devvar["host"]}'
-			self._device_conn_log(display=True, msg=f"{self._devvar['ip']} - conn - entered - {self.clsString}")
+			self._device_conn_log(display=True, msg=f"[+] {self._devvar['ip']} - conn - entered - {self.clsString}")
 		else:
-			self._device_conn_log(display=True, msg=f"{self._devvar['ip']} - conn - entery - failed")
+			self._device_conn_log(display=True, msg=f"[-] {self._devvar['ip']} - conn - entery - failed")
 		return self      # ip connection object
 
 	# cotext end
 	def __exit__(self, exc_type, exc_value, tb):
 		try:
-			self._device_conn_log(display=True, msg=f"{self._devvar['host']} : INFO : conn - terminate - {self.clsString}")
+			self._device_conn_log(display=True, msg=f"[+] {self._devvar['host']} : INFO : conn - terminate - {self.clsString}")
 		except:
-			self._device_conn_log(display=True, msg=f"{self._devvar['ip']} - conn - terminate - {self.clsString}")
+			self._device_conn_log(display=True, msg=f"[-] {self._devvar['ip']} - conn - terminate - {self.clsString}")
 		self.__terminate
 		if exc_type is not None:
 			traceback.print_exception(exc_type, exc_value, tb)
@@ -126,7 +126,7 @@ class conn(object):
 	# set connection var|properties
 	def __set_local_var(self, un, pw, en):
 		'''Inherit User Variables'''
-		self._device_conn_log(display=True, msg=f"{self._devvar['ip']} - conn - setting up auth parameters")
+		self._device_conn_log(display=True, msg=f"[+] {self._devvar['ip']} - conn - setting up auth parameters")
 		self._devvar['username'] = un
 		self._devvar['password'] = pw
 		self._devvar['secret'] = en
@@ -139,7 +139,7 @@ class conn(object):
 	# establish connection
 	@property
 	def __connect(self):
-		self._device_conn_log(display=True, msg=f"{self._devvar['ip']} - conn - start ConnectHandler")
+		self._device_conn_log(display=True, msg=f"[+] {self._devvar['ip']} - conn - start ConnectHandler")
 		try:
 			self.net_connect = ConnectHandler(**self._devvar) 
 			self.connectionsuccess = True			
@@ -157,7 +157,7 @@ class conn(object):
 					self.net_connect.enable(cmd="enable")
 					break
 				except:
-					self._device_conn_log(display=True, msg=f"{self._devvar['host']} - enable failed on attemp {tries}")
+					self._device_conn_log(display=True, msg=f"[-] {self._devvar['host']} - enable failed on attemp {tries}")
 					continue
 
 	# set connection hostname property

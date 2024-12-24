@@ -25,8 +25,8 @@ def get_list_of_stencils(folder, devices_data):
 	default_stencil = devices_data.default_stencil
 	stencil_col = 'stencil'
 	if not stencil_col in devices_data.df:
-		print(f"column information incorrect, check column existance `{stencil_col}`") 
-		Popup(f"column information incorrect, check column existance `{stencil_col}`") 
+		print(f"[-] column information incorrect, check column existance `{stencil_col}`") 
+		Popup(f"[-] column information incorrect, check column existance `{stencil_col}`") 
 		devices_data.df[stencil_col] = ""
 
 	used_stn = set(devices_data.df[stencil_col])
@@ -57,7 +57,7 @@ def get_list_of_stencils(folder, devices_data):
 		return found_stn
 	else:
 		pass
-		print("Error:\t\tBelow mentioned stencil(s) are missing; ",
+		print("[-] Error:\t\tBelow mentioned stencil(s) are missing; ",
 		"Kindly update/correct data before re-run.\n",
 		used_stn.difference(stn_file), "\n",
 		)

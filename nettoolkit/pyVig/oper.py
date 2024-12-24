@@ -421,7 +421,7 @@ def update_b_media_type(cable_df_b_device, cable_df_bport, DCT):
 	try:
 		filtered_df = remote_ph_df[remote_ph_df['interface'] == STR.if_standardize(cable_df_bport)]
 	except:
-		print(f"ERROR getting b-device info for port {cable_df_b_device} - {cable_df_bport}")
+		print(f"[-] ERROR getting b-device info for port {cable_df_b_device} - {cable_df_bport}")
 		return ""
 	if filtered_df.empty: 
 		return ""

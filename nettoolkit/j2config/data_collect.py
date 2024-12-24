@@ -22,7 +22,7 @@ def read_worksheet(file, wks):
 	try:
 		df = pd.read_excel(file, sheet_name=wks).fillna("")
 	except:
-		raise Exception(f"CRITICAL: {file} File Read failed. Expected Worksheet named '{wks}' missing")
+		raise Exception(f"[-] CRITICAL: {file} File Read failed. Expected Worksheet named '{wks}' missing")
 	return df
 
 def read_excel(file):
@@ -82,11 +82,11 @@ class DeviceDetails():
 			Exception: Raised for input error: if provided device file missing or read fails.
 		"""		
 		if not self.device_filename:
-			raise Exception(f'input error: input device file name {self.device_filename}')
+			raise Exception(f'[-] input error: input device file name {self.device_filename}')
 		try:
 			self.dev_details = self.read_device()								## require		
 		except Exception as e:
-			raise Exception(f'input error: input device file either missing or missing with necessary sheets\n{e}')
+			raise Exception(f'[-] input error: input device file either missing or missing with necessary sheets\n{e}')
 
 	def read_device(self):
 		"""reads device database

@@ -200,11 +200,11 @@ class XL_WRITE():
 					df.to_excel(writer_file, sheet_name=sht_name, index=index, index_label=index_label)
 				except:
 					try:
-						print(f"writing data for {fileName} sheet {sht_name} ...failed!!!, length of sheet name = {len(sht_name)}")
+						print(f"[-] writing data for {fileName} sheet {sht_name} ...failed!!!, length of sheet name = {len(sht_name)}")
 						df.to_excel(writer_file, sheet_name=sht_name[:31], index=index, index_label=index_label)
-						print(f"instead data for {fileName} sheet {sht_name[:31]} - trunked ...done!")
+						print(f"[+] instead data for {fileName} sheet {sht_name[:31]} - trunked ...done!")
 					except:
-						print(f"writing data for {fileName} sheet {sht_name[:31]} - trunked ...failed!!!")
+						print(f"[-] writing data for {fileName} sheet {sht_name[:31]} - trunked ...failed!!!")
 
 	def copy_of_file(self, file, n):
 		"""return a valid next available file name.

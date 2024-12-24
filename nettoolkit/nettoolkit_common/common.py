@@ -78,7 +78,7 @@ def create_folders(folders, *, silent=True):
 		folders = [folders,]
 	for folder in folders:
 		if not os.path.exists(folder):
-			if not silent: print(f"Creating: {folder}", end="\t")
+			if not silent: print(f"[+] Creating: {folder}", end="\t")
 			try:
 				os.makedirs(folder)
 				print("OK.")
@@ -118,7 +118,7 @@ def read_yaml_mode_us(file):
 		with open(file, 'r') as f:
 			return  yaml.load(f, Loader=UnsafeLoader)
 	except Exception as e:
-		raise Exception(f"Unable to Read the file, or invalid data \n{e}")
+		raise Exception(f"[-] Unable to Read the file, or invalid data \n{e}")
 
 
 # ------------------------------------------------------------------------------
@@ -394,7 +394,7 @@ def open_excel_file(file):
 		try:
 			sp.Popen(["C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE", file])
 		except Exception as e:
-			raise Exception(f"Unable to Open file {file} in excel\n{e}")
+			raise Exception(f"[-] Unable to Open file {file} in excel\n{e}")
 
 
 def open_folder(folder):
@@ -565,7 +565,7 @@ class CapturesOut():
 		if self.abs_cmd_function_map.get(self.device_type):
 			self.abs_cmd_fn = self.abs_cmd_function_map[self.device_type] 
 		else:
-			raise Exception(f"Invalid configuration, Unable to determine Device type. {self.device_type} for provided capture log file")
+			raise Exception(f"[-] Invalid configuration, Unable to determine Device type. {self.device_type} for provided capture log file")
 
 	# generate dictionary by outputs splitted by its command as key 
 	def _gen_output_list_dict(self):

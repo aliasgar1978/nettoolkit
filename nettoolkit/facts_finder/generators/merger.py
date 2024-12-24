@@ -95,7 +95,7 @@ def device(file):
 	dev_manu = get_device_manufacturar(file)
 	if dev_manu == "Cisco":  return Cisco(file)
 	if dev_manu == "Juniper": return Juniper(file)
-	raise TypeError("Device configuration Unidentified, please re-check")
+	raise TypeError("[-] Device configuration Unidentified, please re-check")
 
 def get_cmd_hierachylevels(device):
 	"""get the dictionary of hierarcy levels  and commands list based on device type
@@ -116,6 +116,6 @@ def get_cmd_hierachylevels(device):
 		cmds_list = juniper_cmds_list
 		hierachy_levels = juniper_cmds_op_hierachy_level
 	else:
-		raise TypeError("Device configuration Unidentified, please re-check")
+		raise TypeError("[-] Device configuration Unidentified, please re-check")
 	return {'cmds_list': cmds_list, 'hierachy_levels': hierachy_levels}
 

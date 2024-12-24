@@ -111,11 +111,11 @@ def batch_make_start(i):
 	for ip in ips_create_batch:
 		success = create_batch_file(pfxs_create_batch, names_create_batch, ip, i['batch_folder_output'])
 	if success:
-		s = 'batch file creation process complete. please verify'
+		s = '[+] batch file creation process complete. please verify'
 		print(s)
 		sg.Popup(s)
 	else:
-		s = 'batch file creation process encounter errors. please verify inputs'
+		s = '[-] batch file creation process encounter errors. please verify inputs'
 		print(s)
 		sg.Popup(s)
 

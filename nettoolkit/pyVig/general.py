@@ -173,7 +173,7 @@ def __get_a_vlan_info_string(vlan_df, vlan):
 		s += series_item_0_value(df['intvrf']) + " "
 		s += series_item_0_value(df['subnet']) + "\n"
 	except:
-		print(f'Information:\tmissing information for vlan: {vlan}')
+		print(f'[-] Information:\tmissing information for vlan: {vlan}')
 	return s
 
 

@@ -79,7 +79,7 @@ def capture_it_start(i):
 	else:
 		custom = None
 	if not i['cit_cred_un'] or not i['cit_cred_pw']:
-		sg.Popup("Mandatory information missing:  Credentionals")
+		sg.Popup("[-] Mandatory information missing:  Credentionals")
 		return
 	auth = { 'un':i['cit_cred_un'], 'pw':i['cit_cred_pw'], 'en':i['cit_cred_en'] if i['cit_cred_en'] else i['cit_cred_pw'] }
 	devices = get_item_list(i['cit_file_hosts'], index=0)
@@ -112,7 +112,7 @@ def capture_it_start(i):
 		try:
 			c.dependent_cmds(custom_dynamic_cmd_class=custom['capture_it']['custom_dynamic_cmd_class'])
 		except:
-			print(f"Cutom Commands fetch fails")
+			print(f"[-] Cutom Commands fetch fails")
 	#
 	if i['cit_opt_parsed_output']:
 		try:
@@ -121,7 +121,7 @@ def capture_it_start(i):
 			else:
 				c.generate_facts()
 		except:
-			print(f"Custom Parser functions fetch fails")
+			print(f"[-] Custom Parser functions fetch fails")
 	#
 	c()
 	#
@@ -130,7 +130,7 @@ def capture_it_start(i):
 		to_file=i['cit_path_summary'] + "/capture_it_summary_log.txt", 
 		excel_report_file=i['cit_path_summary'] + "/capture_it_summary_log.xlsx",
 	)
-	print("Capture Task(s) Complete..")
+	print("[+] Capture Task(s) Complete..")
 	
 
 
@@ -147,7 +147,7 @@ def capture_it_by_xl_start(i):
 	c.standard_output = not i['cit_opt_format1']
 	c.tablefmt = i['cit_tablefmt1']
 	c()
-	print("Capture Task(s) Complete..")
+	print("[+] Capture Task(s) Complete..")
 
 
 # ======================================================================================

@@ -52,10 +52,10 @@ class Config_common():
 				un=auth['un'], 
 				pw=auth['pw'],
 			)
-			self.write_exec_log(ip, f"{ip} - Device Type Detection successful - {dev.dtype}")
+			self.write_exec_log(ip, f"[+] {ip} - Device Type Detection successful - {dev.dtype}")
 			return dev.dtype
 		except Exception as e:
-			self.write_exec_log(ip, f"{ip} - Device Type Detection Failed with Exception \n{e}")
+			self.write_exec_log(ip, f"[-] {ip} - Device Type Detection Failed with Exception \n{e}")
 			return None
 
 	def write_config_log(self, host, log):
@@ -66,10 +66,10 @@ class Config_common():
 			log (str/multiline): log to be write to
 		"""    		
 		if self.config_log and self.log_folder:
-			self.write_exec_log(host, f"writing configuration application log @ {self.log_folder}/{host}-config-apply.log", ends="\t")
+			self.write_exec_log(host, f"[+] writing configuration application log @ {self.log_folder}/{host}-config-apply.log")
 			with open(f"{self.log_folder}/{host}-config-apply.log", 'a') as f:
 				f.write(log)
-			self.write_exec_log(host, f"...done")
+			self.write_exec_log(host, f"[+] writing configuration application log @ {self.log_folder}/{host}-config-apply.log\t...done")
 
 	def write_exec_log(self, host, s, ends='\n'):
 		"""writes execution log (internal)
@@ -94,13 +94,13 @@ class Config_common():
 		Returns:
 			bool: success/fail
 		"""    		
-		self.write_exec_log(self.conn.host, f"applying config to {self.device_type} // {self.conn.host} // {self.ip}", ends="\t")
+		self.write_exec_log(self.conn.host, f"[+] applying config to {self.device_type} // {self.conn.host} // {self.ip}")
 		try:
 			self.op_return = self.conn.send_config_set(conf_list)
-			self.write_exec_log(self.conn.host, f"...done")
+			self.write_exec_log(self.conn.host, f"[+] applying config to {self.device_type} // {self.conn.host} // {self.ip}\t...done")
 			return True
 		except:
-			self.write_exec_log(self.conn.host, f"... Failed")
+			self.write_exec_log(self.conn.host, f"[-] applying config to {self.device_type} // {self.conn.host} // {self.ip}\t...Failed")
 			return False
 
 	def get_connection(self):
@@ -114,7 +114,7 @@ class Config_common():
 			self.connectionsuccess = True
 			return conn
 		except:
-			self.write_exec_log(self.ip, f"Connection Failed to establish {self.device_type} // No connection // {self.ip}", ends="\n\n")
+			self.write_exec_log(self.ip, f"[-] Connection Failed to establish {self.device_type} // No connection // {self.ip}", ends="\n\n")
 			self.connectionsuccess = False
 			return None
 
@@ -132,7 +132,7 @@ class Config_common():
 		try:
 			self.dev_var['host'] = STR.hostname(self.conn).lower()
 		except:
-			self.write_exec_log(self.conn.host, f"Hostname Retrival failed for device {self.ip} ")
+			self.write_exec_log(self.conn.host, f"[-] Hostname Retrival failed for device {self.ip} ")
 			self.dev_var['host'] = self.ip
 		self.hn = self.dev_var['host']
 
@@ -181,10 +181,10 @@ class Configure(Config_common):
 					conf_list = f.readlines()
 					conf_list = [ _.rstrip() for _ in conf_list ]
 			except:
-				self.write_exec_log(self.conn.host, f"Error Reading file {self.conf_file}", ends="\n\n")
+				self.write_exec_log(self.conn.host, f"[-] Error Reading file {self.conf_file}", ends="\n\n")
 				return None
 			if self.conf_list and conf_list:
-				_d = input(f"BEWARE: DUAL INPUT DETECTED, conf_list as well as conf_file. configuration file will override list. Continue [Y/N]")
+				_d = input(f"[-] DUAL INPUT DETECTED, conf_list as well as conf_file. configuration file will override list. Continue [Y/N]")
 				if _d.upper() != 'Y': quit()
 			if conf_list:
 				self.conf_list = conf_list
@@ -193,7 +193,7 @@ class Configure(Config_common):
 		"""apply the configuration to active connection
 		"""    		
 		if not self.conf_list:
-			self.write_exec_log(self.conn.host, f"No configurations to apply for {self.ip} // configuration=[{self.conf_list}]")
+			self.write_exec_log(self.conn.host, f"[-] No configurations to apply for {self.ip} // configuration=[{self.conf_list}]")
 		if isinstance(self.conf_list, str):
 			self.conf_list = [self.conf_list, ]
 		self.device_type = self.get_device_type(self.ip, self.auth)
@@ -208,7 +208,7 @@ class Configure(Config_common):
 	def _start_push(self):
 		if self.device_type == 'juniper_junos':  self.juniper_push()
 		elif self.device_type == 'cisco_ios':  self.cisco_push()
-		else: print(f"Undetected device {self.ip}")
+		else: print(f"[-] Undetected device {self.ip}")
 
 	## -------------- Juniper ------------------
 
@@ -227,14 +227,14 @@ class Configure(Config_common):
 		#
 		send_conf = self.send_configuration(self.conf_list)
 		if not send_conf:
-			self.write_exec_log(self.conn.host, f"Termination without configuration apply for {self.device_type} // {self.conn.host} // {self.ip}", ends="\n\n")
+			self.write_exec_log(self.conn.host, f"[-] Termination without configuration apply for {self.device_type} // {self.conn.host} // {self.ip}", ends="\n\n")
 			self.terminate_connection()
 			return None
 		self.write_config_log(self.conn.host, self.op_return)
 		#
 		check = self.juniper_verify_push_op(self.op_return)
 		if not check: 
-			self.write_exec_log(self.conn.host, f"ERROR: Termination without configuration apply for {self.device_type} // {self.conn.host} // {self.ip}", ends="\n\n")
+			self.write_exec_log(self.conn.host, f"[-] ERROR: Termination without configuration apply for {self.device_type} // {self.conn.host} // {self.ip}", ends="\n\n")
 			self.terminate_connection()
 			return None
 		#
@@ -254,15 +254,15 @@ class Configure(Config_common):
 			bool: success or syntex error
 		"""    		
 		check = False
-		self.write_exec_log(self.conn.host, f"checking applied configuration for {self.device_type} // {self.conn.host} // {self.ip}", ends="\t" )
+		self.write_exec_log(self.conn.host, f"[+] checking applied configuration for {self.device_type} // {self.conn.host} // {self.ip}")
 		for line in op.splitlines():
 			if line.strip().startswith('syntax error'): break
 			check = line == "configuration check succeeds"
 			if check: break
 		if check:
-			self.write_exec_log(self.conn.host, f"...done")
+			self.write_exec_log(self.conn.host, f"[+] checking applied configuration for {self.device_type} // {self.conn.host} // {self.ip}\t...done" )
 		else:
-			self.write_exec_log(self.conn.host, f"...Failed\n.  Re-Check configuration manually before commit\nGot:\n{self.op_return}")
+			self.write_exec_log(self.conn.host, f"[-] checking applied configuration for {self.device_type} // {self.conn.host} // {self.ip}\t...Failed\n.  Re-Check configuration manually before commit\nGot:\n{self.op_return}")
 		return check
 
 	def juniper_verify_commit_op(self, op):
@@ -271,7 +271,7 @@ class Configure(Config_common):
 		Args:
 			op (multiline str): configuaration log output
 		"""    		
-		self.write_exec_log(self.conn.host, f"verifying configuration commit to {self.device_type} // {self.conn.host} // {self.ip}", ends="\t")
+		self.write_exec_log(self.conn.host, f"[+] verifying configuration commit to {self.device_type} // {self.conn.host} // {self.ip}")
 		check = 0
 		for line in op.splitlines():
 			if (line.strip().startswith("configuration check succeeds") 
@@ -280,9 +280,9 @@ class Configure(Config_common):
 				check+=1 
 		#
 		if check == 2:
-			self.write_exec_log(self.conn.host, f"...done")
+			self.write_exec_log(self.conn.host, f"[+] verifying configuration commit to {self.device_type} // {self.conn.host} // {self.ip}\t...done")
 		else:
-			self.write_exec_log(self.conn.host, f"...Failed\nGot\n{op}")
+			self.write_exec_log(self.conn.host, f"[-] verifying configuration commit to {self.device_type} // {self.conn.host} // {self.ip}\t...Failed\nGot\n{op}")
 
 	def juniper_commit(self):
 		"""commiting the pushed juniper configurations.
@@ -290,13 +290,13 @@ class Configure(Config_common):
 		Returns:
 			bool: success or fail
 		"""    		
-		self.write_exec_log(self.conn.host, f"commiting configurations to {self.device_type} // {self.conn.host} // {self.ip}", ends="\t")
+		self.write_exec_log(self.conn.host, f"[+] commiting configurations to {self.device_type} // {self.conn.host} // {self.ip}")
 		try:
 			commit_return = self.conn.commit()
-			self.write_exec_log(self.conn.host, f"...done")
+			self.write_exec_log(self.conn.host, f"[+] commiting configurations to {self.device_type} // {self.conn.host} // {self.ip}\t...done")
 			return commit_return
 		except:
-			self.write_exec_log(self.conn.host, f"...failed\nGot\n{commit_return}")
+			self.write_exec_log(self.conn.host, f"[-] commiting configurations to {self.device_type} // {self.conn.host} // {self.ip}\t...failed\nGot\n{commit_return}")
 			return False
 
 	## -------------- Cisco ------------------
@@ -314,7 +314,7 @@ class Configure(Config_common):
 					self.conn.enable(cmd="enable")
 					break
 				except:
-					self.write_exec_log(self.hn, f"{self.hn} - enable failed on attemp {tries}")
+					self.write_exec_log(self.hn, f"[-] {self.hn} - enable failed on attemp {tries}")
 					continue
 
 	def cisco_push(self):
@@ -330,7 +330,7 @@ class Configure(Config_common):
 		#
 		send_conf = self.send_configuration(self.conf_list)
 		if not send_conf:
-			self.write_exec_log(self.conn.host, f"Termination without configuration apply for {self.device_type} // {self.conn.host} // {self.ip}", ends="\n\n")
+			self.write_exec_log(self.conn.host, f"[-] Termination without configuration apply for {self.device_type} // {self.conn.host} // {self.ip}", ends="\n\n")
 			self.terminate_connection()
 			return None
 		#
@@ -338,7 +338,7 @@ class Configure(Config_common):
 		#
 		error = self.cisco_verify_push_op(self.op_return)
 		if error: 
-			self.write_exec_log(self.conn.host, f"ERROR: Termination without configuration apply for {self.device_type} // {self.conn.host} // {self.ip}", ends="\n\n")
+			self.write_exec_log(self.conn.host, f"[-] ERROR: Termination without configuration apply for {self.device_type} // {self.conn.host} // {self.ip}", ends="\n\n")
 			self.terminate_connection()
 			return None
 		#
@@ -356,15 +356,15 @@ class Configure(Config_common):
 			bool: success or syntex error
 		"""    		
 		error = False
-		self.write_exec_log(self.conn.host, f"checking applied configuration for {self.device_type} // {self.conn.host} // {self.ip}", ends="\t" )
+		self.write_exec_log(self.conn.host, f"[+] checking applied configuration for {self.device_type} // {self.conn.host} // {self.ip}" )
 		for line in op.splitlines():
 			error = line.strip().startswith("^")
 			if error: break
 		#
 		if error:
-			self.write_exec_log(self.conn.host, f"...Failed\n.  Re-Check configuration manually and reapply\nGot:\n{self.op_return}")
+			self.write_exec_log(self.conn.host, f"[-] checking applied configuration for {self.device_type} // {self.conn.host} // {self.ip}\t...Failed\n.  Re-Check configuration manually and reapply\nGot:\n{self.op_return}")
 		else:
-			self.write_exec_log(self.conn.host, f"...done")
+			self.write_exec_log(self.conn.host, f"[+] checking applied configuration for {self.device_type} // {self.conn.host} // {self.ip}\t...done")
 		return error
 
 
@@ -375,13 +375,13 @@ class Configure(Config_common):
 		Returns:
 			bool: success or fail
 		"""    		
-		self.write_exec_log(self.conn.host, f"saving configurations for {self.device_type} // {self.conn.host} // {self.ip}", ends="\t")
+		self.write_exec_log(self.conn.host, f"[+] saving configurations for {self.device_type} // {self.conn.host} // {self.ip}")
 		try:
 			_return = self.conn.save_config()
-			self.write_exec_log(self.conn.host, f"...done")
+			self.write_exec_log(self.conn.host, f"[+] saving configurations for {self.device_type} // {self.conn.host} // {self.ip}\t...done")
 			return _return
 		except:
-			self.write_exec_log(self.conn.host, f"...failed\nGot\n{_return}")
+			self.write_exec_log(self.conn.host, f"[+] saving configurations for {self.device_type} // {self.conn.host} // {self.ip}\t...failed\nGot\n{_return}")
 			return False
 
 # ----------------------------------------------------------------------------------------------------
@@ -427,19 +427,19 @@ class GroupsConfigure(Multi_Execution):
 		}
 		self.configure = configure
 
-	@printmsg(pre=f'{"-"*40}\nINFO: A Group Configuration, Called...', post=f'{"-"*43}' )
+	@printmsg(pre=f'{"-"*40}\n[+] INFO: A Group Configuration, Called...', post=f'{"-"*43}' )
 	def __call__(self):
 		self._verify_inputs()
 		if self.config_by_order: self.configure_by_orderlist()
 
-	@printmsg(pre='INFO: Verifying inputs...',)
+	@printmsg(pre='[+] INFO: Verifying inputs...',)
 	def _verify_inputs(self):
 		self._get_dev_conf_dict_ip_list()
 		self._get_order_list()
 		self.remove_empty_config_lines()
 
-	@printmsg(pre='INFO: configuring devices in order by order_list...',
-			 post='INFO: configuration of this order_list completed...' )
+	@printmsg(pre='[+] INFO: configuring devices in order by order_list...',
+			 post='[+] INFO: configuration of this order_list completed...' )
 	def configure_by_orderlist(self):
 		"""configure devices as per sequence provided in order_list
 		"""    		
@@ -457,7 +457,7 @@ class GroupsConfigure(Multi_Execution):
 			ip (str): device ip or FQDN
 		"""    		
 		conf_list = self.devices_config_dict[ip]['cmds_list']
-		print(f"\t\tStarting Configuration on: {ip}")
+		print(f"[+] \t\tStarting Configuration on: {ip}")
 		if self.configure:
 			CFG = Configure(ip, self.auth, 
 				conf_list=conf_list,
@@ -465,21 +465,21 @@ class GroupsConfigure(Multi_Execution):
 			)
 			CFG.apply()
 		else:
-			print(f"\t\tConfiguration skipped as `configure` parameter is set to `{self.configure}`",
+			print(f"[-] \t\tConfiguration skipped as `configure` parameter is set to `{self.configure}`",
 				 ", change it True in order to start configure process.")
 
 
 	def _get_dev_conf_dict_ip_list(self):
 		for ip, value in self.devices_config_dict.items():
 			if not isinstance(value, dict):
-				raise Exception(f"ERROR: Incorrect input: configuration parameters in devices_config_dict",
+				raise Exception(f"[-] ERROR: Incorrect input: configuration parameters in devices_config_dict",
 					f"Expected `dict` got {type(value)} for {ip}")
 			if 'cmds_list' in value and 'cmd_file' in value:
-				print(f"WARNING: Dual configuration input detected for ip {ip}"
+				print(f"[-] WARNING: Dual configuration input detected for ip {ip}"
 					'file input will be prefered and considered')
 			if 'cmd_file' in value:
 				if not isinstance(value['cmd_file'], str):
-					raise Exception(f"CRITICAL: Incorrect input: command file name for ip {ip}: {value['cmd_file']}")
+					raise Exception(f"[-] CRITICAL: Incorrect input: command file name for ip {ip}: {value['cmd_file']}")
 				try:
 					with open(value['cmd_file'], 'r') as f:
 						value['cmds_list'] = f.readlines()
@@ -487,35 +487,35 @@ class GroupsConfigure(Multi_Execution):
 						del(value['cmd_file'])
 					continue
 				except Exception as e:
-					print(f"CRITICAL: Error Occured for ip {ip}: {e}")
+					print(f"[-] CRITICAL: Error Occured for ip {ip}: {e}")
 					quit()
 			if 'cmds_list' in value:
 				for _ in value['cmds_list']:
 					if isinstance(_, str): continue
-					print(f"CRITICAL: Invalid input: command detected for ip {ip},{_}, Expected `str`. got {type(_)} ")
+					print(f"[-] CRITICAL: Invalid input: command detected for ip {ip},{_}, Expected `str`. got {type(_)} ")
 					quit()
 				continue
-			print(f"WARNING: No configuration input detected for ip {ip}: {value}. This device will be skipped")
+			print(f"[-] WARNING: No configuration input detected for ip {ip}: {value}. This device will be skipped")
 			value['skip'] = True
 
 	def _get_order_list(self):
 		if not self.order_list:
 			self.order_list = [{ip for ip, value in self.devices_config_dict.items() if not value.get('skip')},]
-			print(f"INFO: No order_list provided, cretated one \n{self.order_list}")
+			print(f"[+] INFO: No order_list provided, cretated one \n{self.order_list}")
 			return None
 		if not isinstance(self.order_list, (list, tuple)):
-			raise Exception(f"CRITICAL: Incorrect input: order_list. expected (tuple/list), got {type(self.order_list)}")
+			raise Exception(f"[-] CRITICAL: Incorrect input: order_list. expected (tuple/list), got {type(self.order_list)}")
 		self._cd_to_ol()
 		self._ol_to_cd()
 
 	def _cd_to_ol(self):
 		flatten_ol = set(LST.flatten(self.order_list))
 		missing_ones = tuple([ip for ip, value in self.devices_config_dict.items() if not value.get('skip')  and ip not in flatten_ol])
-		print(f"WARNING: Device(s) missing in order list [{missing_ones}] were appened.")
+		print(f"[+] WARNING: Device(s) missing in order list [{missing_ones}] were appened.")
 		self.order_list.append(missing_ones)
 		self.flatten_ol = flatten_ol.union(set(missing_ones))
 		if missing_ones:
-			print(f"\tINFO: updated order_list={self.order_list}")
+			print(f"[+] \tINFO: updated order_list={self.order_list}")
 
 	def _ol_to_cd(self):
 		removed = False
@@ -525,7 +525,7 @@ class GroupsConfigure(Multi_Execution):
 				removed = True
 		if removed:
 			self.order_list = LST.remove_empty_members(self.order_list)
-			print(f"INFO: updated order_list={self.order_list}")
+			print(f"[+] INFO: updated order_list={self.order_list}")
 
 	def remove_empty_config_lines(self):
 		"""sanitizer: removes empty lines from configuration
@@ -544,7 +544,7 @@ class GroupsConfigure(Multi_Execution):
 			if isinstance(_, str):
 				if _ == item:
 					lst.remove(_)
-					print(f"WARNING: Addititional device `{_}`found in ordered list, which is missing in devices_config_dict.",
+					print(f"[+] WARNING: Addititional device `{_}`found in ordered list, which is missing in devices_config_dict.",
 						"Removed from order_list ")
 			elif isinstance(_, (set, tuple, list)):
 				self.remove_order_list_item(item, _)
@@ -588,7 +588,7 @@ class ConfigureByExcel(ConfigEnvironmentals):
 		self.configure = configure
 		self.sleep_time_between_group = sleep_time_between_group
 		if not isinstance(files, list):
-			print(f"Invalid argument `files`: should be of `list` type, got `{type(files)}`")
+			print(f"[-] Invalid argument `files`: should be of `list` type, got `{type(files)}`")
 			quit()
 
 	def __call__(self):
@@ -598,14 +598,14 @@ class ConfigureByExcel(ConfigEnvironmentals):
 		self.cmds_groups = self._get_cmds_ordered_group()
 		self.run()
 
-	@printmsg(pre='INFO: \tReading Excel file and Loading tabs...', pre_ends="\t", post='Done...' )
+	@printmsg(pre='[+] INFO: \tReading Excel file and Loading tabs...', pre_ends="\t", post='Done...' )
 	def _load_dfs(self):
 		self.ordered_configs_df_dict_list = []
 		if isinstance(self.files, list):
 			for file in self.files:
 				self.ordered_configs_df_dict_list.append(read_xl_all_sheet(file))
 
-	@printmsg(pre='INFO: \tDefining sort order...', pre_ends="\t", post='Done...' )
+	@printmsg(pre='[+] INFO: \tDefining sort order...', pre_ends="\t", post='Done...' )
 	def _define_sort_order(self):
 		if self.tab_sort_order in ('ascending', 'ordered', 'alphabetical', []):
 			self._set_sort_order('ascending')
@@ -623,16 +623,16 @@ class ConfigureByExcel(ConfigEnvironmentals):
 	def _verify_sort_orders(self):
 		for tso, dfd in zip_longest(self.tab_sort_order, self.ordered_configs_df_dict_list):
 			if tso is None or dfd is None:
-				print("CRITICAL: Length of Order sequences v/s excel files count mismatch, both should be with same length")
+				print("[-] CRITICAL: Length of Order sequences v/s excel files count mismatch, both should be with same length")
 				quit()
 			#
 			if set(tso) == set(dfd.keys()): continue
-			print(f"CRITICAL: Mismatch Sheet Names with provided order, please check")
+			print(f"[-] CRITICAL: Mismatch Sheet Names with provided order, please check")
 			print(f"\tSort Order = {tso}")
 			print(f"\tSheets available = {dfd.keys()}")
 			quit()
 
-	@printmsg(pre='INFO: \tDefining commands groups...', pre_ends="\t", post="Done...")
+	@printmsg(pre='[+] INFO: \tDefining commands groups...', pre_ends="\t", post="Done...")
 	def _get_cmds_ordered_group(self):
 		cmds_groups = []
 		for tso, dfd in zip(self.tab_sort_order, self.ordered_configs_df_dict_list):
@@ -644,8 +644,8 @@ class ConfigureByExcel(ConfigEnvironmentals):
 				cmds_groups.append(cmds_group)
 		return cmds_groups
 
-	@printmsg(pre='INFO: START: Configuing devices',
-			 post='INFO: END  : Configuing devices')
+	@printmsg(pre='[+] INFO: START: Configuing devices',
+			 post='[+] INFO: END  : Configuing devices')
 	def run(self):
 		"""starts configuration of devices
 		"""
@@ -663,8 +663,8 @@ class ConfigureByExcel(ConfigEnvironmentals):
 
 	@staticmethod
 	def get_concurrance(i, cg, tso_list):
-		user_concern = input(f"Configuration on group of devices GROUP{i+1}: [{tso_list[i]}] :\n ({set(cg.keys())}) ready to process. \nWant to continue [y/n]")
+		user_concern = input(f"[+] Configuration on group of devices GROUP{i+1}: [{tso_list[i]}] :\n ({set(cg.keys())}) ready to process. \nWant to continue [y/n]")
 		if user_concern.lower() == 'y':  return True
-		print(f"  Configuration on group of devices GROUP{i+1}: [{tso_list[i]}] : Not confirmed, Aborted !!!")
+		print(f"[-] Configuration on group of devices GROUP{i+1}: [{tso_list[i]}] : Not confirmed, Aborted !!!")
 		return False
 

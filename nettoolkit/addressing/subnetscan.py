@@ -138,7 +138,7 @@ def compare_ping_sweeps(first, second):
 	missing = pinging1.difference(pinging2)
 	added = pinging2.difference(pinging1)
 	if not missing and not added:
-		s = f'All ping responce same, no changes'
+		s = f'[+] All ping responce same, no changes'
 		print(s)
 		sg.Popup(s)
 	else:

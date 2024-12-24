@@ -54,7 +54,7 @@ class Data():
 		try:
 			self.df = pd.read_excel(self.data_file, sheet_name=sheet_name).fillna("")
 		except Exception as e:
-			print(f'Critical:\tMandatory sheet "{sheet_name}" missing or invalid, Please check data')
+			print(f'[-] Critical:\tMandatory sheet "{sheet_name}" missing or invalid, Please check data')
 			quit("")
 
 	def verify_mandatory_declared_cols_availabilty(self, declared=[]):
@@ -70,7 +70,7 @@ class Data():
 			if col not in self.df.columns:
 				missing_cols.add(col)
 		if missing_cols:
-			print(f"Critical:\tMandatory and/or Declared column(s) {missing_cols} missing or invalid, Please check data")
+			print(f"[-] Critical:\tMandatory and/or Declared column(s) {missing_cols} missing or invalid, Please check data")
 			quit()
 
 
@@ -133,11 +133,11 @@ class DeviceData(Data):
 			try:
 				cols.append(self.df[x])
 			except:
-				print(f"Warning:\t\tcolumn `{x}` is missing in input file")
+				print(f"[-] Warning:\t\tcolumn `{x}` is missing in input file")
 		try:
 			self.df['description'] = self.df.hostname
 		except:
-			raise ValueError("Critical:\tMissing mandatory column `hostname` ")
+			raise ValueError("[-] Critical:\tMissing mandatory column `hostname` ")
 
 		for col in cols:
 			if col.empty:  continue

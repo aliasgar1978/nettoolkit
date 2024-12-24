@@ -58,9 +58,9 @@ class FactsGen:
 			elif isinstance(self.model, Juniper):
 				return 'juniper'
 			else:
-				raise Exception(f'Invalid device type ``{type(self.model)}``. verify config')
+				raise Exception(f'[-] Invalid device type ``{type(self.model)}``. verify config')
 		except Exception as e:
-			raise Exception(f"FactsGen needs to be called in order to get the device type."
+			raise Exception(f"[-] FactsGen needs to be called in order to get the device type."
 				f"\n\tEither it is not called or invalid config present in device capture."
 				f"\n\t{e}")
 

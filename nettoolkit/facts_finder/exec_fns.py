@@ -34,7 +34,7 @@ def exec_facts_finder(
 	for log_file in log_files:
 		if not log_file.endswith(".log"): continue
 		device = get_host(log_file)
-		print(">> starting", device, "...", end='\t')
+		print("[+] starting", device, "...", end='\t')
 		device_dict = add_blankdict_key(device_log_dict, device)
 		#
 		try:
@@ -81,7 +81,7 @@ def exec_facts_finder(
 		print(f"Tasks Completed !! {device} !!")
 
 
-	print("Facts-Finder All Task(s) Complete..")
+	print("[+] Facts-Finder All Task(s) Complete..")
 	df = pd.DataFrame(device_log_dict).T
 	print_table(df)	
 

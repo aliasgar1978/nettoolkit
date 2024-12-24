@@ -31,7 +31,7 @@ class ProtocolsConfig():
 			self.vrfs = self._get_router_configurations_for_multi_instance_protocols(protocol)
 
 		else:
-			raise Exception(f"UnsupportedProtocol: Protocol detail extraction unavailable for the protocol {protocol}")
+			raise Exception(f"[-] UnsupportedProtocol: Protocol detail extraction unavailable for the protocol {protocol}")
 
 	### Single instance Protocol Methods
 

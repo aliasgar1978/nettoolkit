@@ -37,7 +37,7 @@ def configure_it_start(obj, i):
 		# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 	)
 	C()
-	print("Configuration All Task(s) Complete..")
+	print("[+] Configuration All Task(s) Complete..")
 
 # ================================ [ Listbox updates ] ========================================
 
@@ -66,7 +66,7 @@ def add_remove_lb_config_excel_files_sequenced(what, obj, i, event):
 	try:
 		item = i[event][0]
 	except IndexError:
-		print("No Such element")
+		print("[-] No Such element")
 		return False
 	if what == 'add':
 		lst2.append(item)

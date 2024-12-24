@@ -51,7 +51,7 @@ def visio_operations(devices_data, cable_matrix_data, stencils, **dic):
 	"""	
 	outputFile = dic['op_file'] if 'op_file' in dic else None
 	with VisioObject(stencils, outputFile) as v:
-		print(f"Information:\tVisio Drawing Inprogress, Do not close Visio Drawing while its running...")
+		print(f"[+] Information:\tVisio Drawing Inprogress, Do not close Visio Drawing while its running...")
 		if (	(  'sheet_filters' in dic and dic['sheet_filters'])
 			# and not ('is_sheet_filter' in dic and dic['is_sheet_filter'] != True) 			
 			) :
@@ -125,9 +125,9 @@ def pyVig(**dic):
 		None: None
 	"""	
 	if 'stencil_folder' not in dic:
-		raise Exception(f'Mandatory input "stencil_folder" missing kindly provide.')
+		raise Exception(f'[-] Mandatory input "stencil_folder" missing kindly provide.')
 	if 'data_file' not in dic:
-		raise Exception(f'Mandatory input "data_file" missing kindly provide.')
+		raise Exception(f'[-] Mandatory input "data_file" missing kindly provide.')
 	#
 	devices_data = device_data_operations(**dic)
 	cable_matrix_data = cabling_data_operations(**dic)

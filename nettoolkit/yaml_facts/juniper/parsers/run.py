@@ -27,7 +27,7 @@ class Running():
 			self.set_cmd_op = self.logical_systems[None]
 		else:
 			self._set_cmd_op = []
-			raise Exception(f'Missing Configuration capture.. {self.cmd_op}, verify input')
+			raise Exception(f'[-] Missing Configuration capture.. {self.cmd_op}, verify input')
 
 	def separate_logical_systems(self):
 		self.logical_systems = {None: []}

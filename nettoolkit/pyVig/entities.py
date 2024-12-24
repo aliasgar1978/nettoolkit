@@ -143,7 +143,7 @@ class ItemObjects(Multi_Execution):
 
 		# if not format['stencil']: stencil = self.devices_data.default_stencil
 		if not format['stencil']:
-			print(f"Warning:\t\tno stencil or no default-stencil found for {dev.hostname} ")
+			print(f"[-] Warning:\t\tno stencil or no default-stencil found for {dev.hostname} ")
 
 		# -- start drops ---
 		self.devices[dev.hostname] = device(						# drop device

@@ -52,7 +52,7 @@ class DeviceType():
 	@dtype.setter
 	def dtype(self, devtype='cisco'):
 		self.device_type = self.device_types.get(devtype, 'cisco_ios')
-		self._device_detection_log(display=True, msg=f"{self.dev_ip} - Detected Device Type - {self.device_type}")
+		self._device_detection_log(display=True, msg=f"[+] {self.dev_ip} - Detected Device Type - {self.device_type}")
 		return self.device_type
 
 	# device make retrival by login
@@ -62,26 +62,26 @@ class DeviceType():
 			ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 			try:
 				ssh.connect(dev_ip, username=un, password=pw)
-				self._device_detection_log(display=True, msg=f"{dev_ip} - Device SSH Connection Success - using username {un}")
+				self._device_detection_log(display=True, msg=f"[+] {dev_ip} - Device SSH Connection Success - using username {un}")
 				connection = True
 			except (paramiko.SSHException, 
 					paramiko.ssh_exception.AuthenticationException, 
 					paramiko.AuthenticationException
 					) as e:
-				self._device_detection_log(display=True, msg=f"{dev_ip} - Device SSH Connection Failure - using username {un}")
+				self._device_detection_log(display=True, msg=f"[-] {dev_ip} - Device SSH Connection Failure - using username {un}")
 				pass
 			if not connection: return None
 			with ssh.invoke_shell() as remote_conn:
 				remote_conn.send('\n')
 				sleep(1)
-				self._device_detection_log(display=True, msg=f"{dev_ip} - Verifying show version output")
+				self._device_detection_log(display=True, msg=f"[+] {dev_ip} - Verifying show version output")
 				remote_conn.send('ter len 0 \nshow version\n')
 				sleep(2)
 				output = remote_conn.recv(5000000).decode('UTF-8').lower()
 				#
 				for k, v in self.device_types.items():
 					if STR.found(output, k): 
-						self._device_detection_log(display=True, msg=f"{dev_ip} - Got - {k}")
+						self._device_detection_log(display=True, msg=f"[+] {dev_ip} - Got - {k}")
 						return k
 
 # -----------------------------------------------------------------------------

@@ -265,7 +265,7 @@ def get_summaries(lst_of_pfxs):
 	try:
 		return nt_get_summaries(*lst_of_pfxs)
 	except:
-		print(f"ERROR RECEIVE SUMMARIES")# {lst_of_pfxs}")
+		print(f"[-] ERROR RECEIVE SUMMARIES")# {lst_of_pfxs}")
 		return []
 
 def iprint(x): 

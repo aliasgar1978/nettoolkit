@@ -111,7 +111,7 @@ class Container(ABC):
 		else:
 			return reversed(self.objVar)
 		
-	def __missing__(self, i): raise Exception(f'key {i} unavailable') # only for dict subclass
+	def __missing__(self, i): raise Exception(f'[-] key {i} unavailable') # only for dict subclass
 	def __iter__(self):
 		if isinstance(self.objVar, (list, tuple, set, str)):
 			for line in self.objVar:
@@ -1123,7 +1123,7 @@ class LST():
 					r = set(range(s, e+1))
 					exp_vl_list = exp_vl_list.union(r)
 				except:
-					raise Exception(f"Invalid vlan number.  Expected int got {type(s)}, {type(e)}")
+					raise Exception(f"[-] Invalid vlan number.  Expected int got {type(s)}, {type(e)}")
 		return exp_vl_list
 
 	@staticmethod
@@ -1403,7 +1403,7 @@ def _get_differences(subject, change):
 			else: 
 				diff[key] = ''
 	else:
-		raise Exception(f"InvalidSubjectTypeError: {type(subject)}:{subject}")
+		raise Exception(f"[-] InvalidSubjectTypeError: {type(subject)}:{subject}")
 	return diff
 
 
@@ -1428,7 +1428,7 @@ def dict_differences(d1, d2, change):
 	if d1 == d2: return None
 	if (not (isinstance(d1, (dict, set)) or isinstance(d2, (dict, set))) and
 		type(d1) != type(d2)): 		
-		raise Exception(f"TypeMismatch- d1:{type(d1)}d2:{type(d2)} - {d1}{d2}")
+		raise Exception(f"[-] TypeMismatch- d1:{type(d1)}d2:{type(d2)} - {d1}{d2}")
 	if isinstance(d1, dict):
 		for k_d1, v_d1 in d1.items():
 			if k_d1 not in d2: 

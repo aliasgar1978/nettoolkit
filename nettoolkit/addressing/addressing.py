@@ -494,9 +494,9 @@ def addressing(subnet, ddc_mask=None):
 			if len(subnet.split("/")) == 1:
 				subnet += "/" + str(mask)
 			else:
-				print(f"Multiple mask entries received.\nsubnet mask value will {subnet} override, ddc_mask value {ddc_mask}")
+				print(f"[-] Multiple mask entries received.\nsubnet mask value will {subnet} override, ddc_mask value {ddc_mask}")
 		except:
-			raise Exception("Invalid dotted decimal mask provided... required format [255.255.255.0] got [{ddc_mask}]")
+			raise Exception("[-] Invalid dotted decimal mask provided... required format [255.255.255.0] got [{ddc_mask}]")
 	v_obj = Validation(subnet)	
 	if v_obj.validated: return v_obj.ip_obj
 
@@ -1434,7 +1434,7 @@ class Routes(object):
 				pfxlst.append(self[x])
 				return pfxlst[0]
 			except:
-				print("prefixesNotinAnySubnet: Error")
+				print("[-] prefixesNotinAnySubnet: Error")
 				return None
 		elif isinstance(prefix, IPv4):
 			x = self.__check_in_table(prefix.subnet)
@@ -1445,11 +1445,11 @@ class Routes(object):
 				if px:
 					pfxlst.append(px)
 		else:
-			raise Exception("INPUTERROR")
+			raise Exception("[-] INPUTERROR")
 		if len(set(pfxlst)) == 1:
 			return pfxlst[0]
 		else:
-			print("prefixesNotinSamesubnet: Error")
+			print("[-] prefixesNotinSamesubnet: Error")
 
 	def inTable(self, prefix):
 		"""check if prefix is in routes table, return for default-route otherwise
@@ -1568,7 +1568,7 @@ class Summary(IPv4):
 	def _validate_and_update_networks(self):
 		for network in self.networks:
 			if not Validation(str(network)).validated:
-				print(f"InvalidSubnetDetected-Removed: {network}")
+				print(f"[-] InvalidSubnetDetected-Removed: {network}")
 				self.networks.remove(network)
 
 	# kick
@@ -1706,7 +1706,7 @@ class Allocations():
 		cri = self.check_range_in(range(start, start + len(pfx)))
 		if cri:
 			conflict = _get_subnet(cri[0], cri[-1]-cri[0]+1)
-			if self.display_warning: print(f"Prefix {pfx} is already allocated, or it has clash with existing assignment {conflict}")
+			if self.display_warning: print(f"[-] Prefix {pfx} is already allocated, or it has clash with existing assignment {conflict}")
 		else:
 			self.add(range(start, start + len(pfx)), forwhat)
 
@@ -1731,14 +1731,14 @@ class Allocations():
 				# print( int(self.assignment_dict[forwhat]) ,   int(self.get_subnet(rng).split("/")) )
 				if isinstance(self.assignment_dict[forwhat], str):
 					if IPv4(self.assignment_dict[forwhat]).size >= IPv4(self.get_subnet(rng)).size:
-						if self.display_warning: print(f"Subneet already found same or bigger, comparative allocations will not add")
+						if self.display_warning: print(f"[-] Subneet already found same or bigger, comparative allocations will not add")
 					else:
 						self.ranges.append(rng)
 						self.assignment_dict[forwhat] = {self.assignment_dict[forwhat], self.get_subnet(rng)}
 				elif isinstance(self.assignment_dict[forwhat], set):
 					for ad_fw in self.assignment_dict[forwhat]:
 						if IPv4(ad_fw).size >= IPv4(self.get_subnet(rng)).size:
-							if self.display_warning: print(f"Subneet already found same or bigger, comparative allocations will not add")
+							if self.display_warning: print(f"[-] Subneet already found same or bigger, comparative allocations will not add")
 						else:
 							self.assignment_dict[forwhat].add(self.get_subnet(rng))
 

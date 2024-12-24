@@ -37,29 +37,29 @@ def create_batch_file(pfxs, names, ip, op_folder):
 		try:
 			ip = int(ip)
 		except:
-			s = f"incorrect ip detected .`{ip}`, will be skipped"
+			s = f"[-] incorrect ip detected .`{ip}`, will be skipped"
 			sg.Popup(s)
 			print(s)
 			return None
 	if not op_folder:
-		s = f'Mandatory argument output folder was missing.\ncould not proceed, check inputs\n'
+		s = f'[-] Mandatory argument output folder was missing.\ncould not proceed, check inputs\n'
 		sg.Popup(s)
 		print(s)
 		return None
 	op_batch_filename = f"{op_folder}/ping_test-ips-.{ip}.bat"  
 	#
 	if not isinstance(pfxs, (list, tuple)):
-		s = f'Wrong type of prefix list \n{pfxs}, \ncould not proceed, check inputs\nExpected <class "list"> or <class "tuple">, got {type(pfxs)}\n'
+		s = f'[-] Wrong type of prefix list \n{pfxs}, \ncould not proceed, check inputs\nExpected <class "list"> or <class "tuple">, got {type(pfxs)}\n'
 		sg.Popup(s)
 		print(s)
 		return None
 	if not isinstance(names, (list, tuple)):
-		s = f'Wrong type of name list \n{names}, \ncould not proceed, check inputs\nExpected <class "list"> or <class "tuple">, got {type(names)}\n'
+		s = f'[-] Wrong type of name list \n{names}, \ncould not proceed, check inputs\nExpected <class "list"> or <class "tuple">, got {type(names)}\n'
 		sg.Popup(s)
 		print(s)
 		return None
 	if len(pfxs) != len(names):
-		s = "length of prefixes mismatch with length of names. both should be of same length \ncould not proceed, check inputs"
+		s = "[-] length of prefixes mismatch with length of names. both should be of same length \ncould not proceed, check inputs"
 		sg.Popup(s)
 		print(s)
 		return None
@@ -114,7 +114,7 @@ def write_out_batch_file(op_batch_filename, s):
 		op_batch_filename (str): output file name
 		s (str): mutliline string to write to file
 	"""	
-	print(f'creating batch file {op_batch_filename}')
+	print(f'[+] creating batch file {op_batch_filename}')
 	with open(op_batch_filename, 'w') as f:
 		f.write(s)
 

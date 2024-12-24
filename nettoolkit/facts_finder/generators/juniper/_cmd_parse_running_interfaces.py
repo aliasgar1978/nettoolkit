@@ -46,7 +46,7 @@ class RunningInterfaces(Running):
 					int_type = k
 					break
 			if not int_type: 
-				print(f"UndefinedInterface(Type)-{spl[2]}")
+				print(f"[-] UndefinedInterface(Type)-{spl[2]}")
 				continue
 			p = _juniper_port(int_type, spl)
 			if not p: continue

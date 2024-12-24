@@ -59,7 +59,7 @@ class Execute_Device():
 		self.ip = self.ip.strip()
 		if not self.ip:
 			self.failed_reason = f"Missing device ip: [{self.ip}]"
-			self._device_exec_log(display=True, msg=f"{self.failed_reason} - skipping it")
+			self._device_exec_log(display=True, msg=f"[-] {self.failed_reason} - skipping it")
 			return None
 		#
 		self.pinging = self._check_ping(self.ip)
@@ -79,18 +79,18 @@ class Execute_Device():
 			int: delay factor if device reachable,  else False
 		"""    		
 		try:
-			self._device_exec_log(display=True, msg=f"{ip} - Checking ping response")
+			self._device_exec_log(display=True, msg=f"[+] {ip} - Checking ping response")
 			self.delay_factor = IP.ping_average (ip)/100 + 3
-			self._device_exec_log(display=True, msg=f"{ip} - Delay Factor={self.delay_factor}")
+			self._device_exec_log(display=True, msg=f"[+] {ip} - Delay Factor={self.delay_factor}")
 			return self.delay_factor
 		except:
-			self._device_exec_log(display=True, msg=f"{ip} - Ping was unsuccessful")
+			self._device_exec_log(display=True, msg=f"[-] {ip} - Ping was unsuccessful")
 			return False
 
 	def _start_execution(self, ip):
 		if not (self.forced_login or self.pinging): return
 		if not self.pinging:
-			self._device_exec_log(display=True, msg=f"{ip} - Trying for Forced login")
+			self._device_exec_log(display=True, msg=f"[+] {ip} - Attempt login")
 		dtype_result = self._get_device_type(ip)
 		if not dtype_result: return
 		if self.dev is None: return
@@ -98,7 +98,7 @@ class Execute_Device():
 			self._execute(ip)
 		except:
 			if self.dev.dtype != 'cisco_ios': return
-			self._device_exec_log(display=True, msg=f"{ip} - sleeping progress for 65 seconds due to known cisco ios bug")					
+			self._device_exec_log(display=True, msg=f"[-] {ip} - sleeping progress for 65 seconds due to known cisco ios bug")					
 			sleep(65)
 			self._execute(ip)
 
@@ -119,7 +119,7 @@ class Execute_Device():
 			self._device_exec_log(display=False, msg=self.dev.tmp_device_detection_log)
 			return self.dev
 		except Exception as e:			
-			self.failed_reason = f"[{ip}] - Device Type Detection Failed with Exception \n{e}"
+			self.failed_reason = f"[-] [{ip}] - Device Type Detection Failed with Exception \n{e}"
 			self._device_exec_log(display=True, msg=f"{'- '*40}\n{self.failed_reason}\n{'- '*40}")
 			return None
 
@@ -145,7 +145,7 @@ class Execute_Device():
 		Args:
 			ip (str): device ip
 		"""
-		self._device_exec_log(display=True, msg=f"{ip} - Initializing")
+		self._device_exec_log(display=True, msg=f"[+] {ip} - Initializing")
 
 		with conn(ip=ip, device=self) as c:
 			if self.verify_connection(c, ip) == None: return None
@@ -184,11 +184,11 @@ class Execute_Device():
 			if missed_cmds is not None: 
 				self.cmds = missed_cmds
 		if missed_cmds:
-			self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Missed Cmds =  {missed_cmds}")
+			self._device_exec_log(display=True, msg=f"[+] {c.hn} : INFO : Missed Cmds =  {missed_cmds}")
 		elif missed_cmds is None:
-			self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Cumulative file missing, new file will be generated.")
+			self._device_exec_log(display=True, msg=f"[+] {c.hn} : INFO : Cumulative file missing, new file will be generated.")
 		else:
-			self._device_exec_log(display=True, msg=f"{c.hn} : INFO : No missing Command found in existing capture..")
+			self._device_exec_log(display=True, msg=f"[+] {c.hn} : INFO : No missing Command found in existing capture..")
 
 	def run_cmds(self, c):
 		cc = self.command_capture(c)
@@ -202,7 +202,7 @@ class Execute_Device():
 	def run_facts_generation_required_commands(self, c, cc):
 		if not self.fg or not self.mandatory_cmds_retries: return
 		#
-		self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Starting with Mandatory commands capture (if any missing).")
+		self._device_exec_log(display=True, msg=f"[+] {c.hn} : INFO : Starting with Mandatory commands capture (if any missing).")
 		missed_cmds = self.check_facts_finder_requirements(c)
 		self.retry_missed_cmds(c, cc, missed_cmds)
 		self.add_cmds_to_self(missed_cmds)
@@ -213,7 +213,7 @@ class Execute_Device():
 	def run_custom_commands(self, c, cc):
 		if not self.CustomClass: return
 		#
-		self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Starting with custom commands capture.")
+		self._device_exec_log(display=True, msg=f"[+] {c.hn} : INFO : Starting with custom commands capture.")
 		CC = self.CustomClass(c.capture_path+"/"+c.hn+".log", self.dev.dtype)
 		self.get_max_cmd_length(c, CC.cmds)
 		cc.grp_cmd_capture(CC.cmds)
@@ -275,7 +275,7 @@ class Execute_Device():
 				if cmd not in self.cmds[self.dev.dtype]:
 					self.cmds[self.dev.dtype].append(cmd)
 		else:
-			self._device_exec_log(display=True, msg=f"{self.c.hn} : ERROR : Non standard command input {type(self.cmds)}\n{self.cmds}")
+			self._device_exec_log(display=True, msg=f"[-] {self.c.hn} : ERROR : Non standard command input {type(self.cmds)}\n{self.cmds}")
 
 	def get_max_cmd_length(self, c, cmds):
 		"""returns the length of longest command
@@ -302,7 +302,7 @@ class Execute_Device():
 		Args:
 			c (conn): connection object
 		"""
-		self._device_exec_log(display=True, msg=f"{c.hn} : INFO : Starting Capture in `{'append' if self.append_capture else 'add'}` mode")
+		self._device_exec_log(display=True, msg=f"[+] {c.hn} : INFO : Starting Capture in `{'append' if self.append_capture else 'add'}` mode")
 
 		cc = Captures(
 			conn=c, 
@@ -324,7 +324,7 @@ class Execute_Device():
 			missed_cmds (set): list/set of commands for which output to be recapture
 			x (int, optional): iteration value
 		"""		
-		self._device_exec_log(display=True, msg=f"{c.hn} - Retrying missed_cmds({x+1}): {missed_cmds}")
+		self._device_exec_log(display=True, msg=f"[+] {c.hn} - Retrying missed_cmds({x+1}): {missed_cmds}")
 		self.get_max_cmd_length(c, missed_cmds)
 		cc.grp_cmd_capture(missed_cmds)
 
@@ -368,7 +368,7 @@ class Execute_Device():
 			self.missed_commands_capture(c, cc, missed_cmds, x)
 			missed_cmds = self.is_any_ff_cmds_missed(c)
 		if missed_cmds:	
-			self._device_exec_log(display=True, msg=f"{c.hn} - Error capture all mandatory commands, try do manually..")
+			self._device_exec_log(display=True, msg=f"[-] {c.hn} - Error capture all mandatory commands, try do manually..")
 
 	def get_missing_commands(self, c, cmds, purpose):
 		"""checks and returns missed capture commands
@@ -386,7 +386,7 @@ class Execute_Device():
 				log_lines = f.readlines()
 		except:
 			if purpose == 'missing':
-				self._device_exec_log(display=True, msg=f'{c.hn} : Error: File not found {c.capture_path+"/"+c.hn+".log"}: Cumulative capture file required ')
+				self._device_exec_log(display=True, msg=f'[-] {c.hn} : Error: File not found {c.capture_path+"/"+c.hn+".log"}: Cumulative capture file required ')
 				return []
 			if purpose == 'factsgen':
 				return cmds

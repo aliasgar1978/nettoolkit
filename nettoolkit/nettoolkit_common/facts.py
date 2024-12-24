@@ -192,7 +192,7 @@ def get_nest_attributes(input_dict, line, spl, nest_attrs, next_attr=True, uniqu
 			update_true_instance_items(input_dict, line, spl, nest_attrs)
 
 	else:
-		print(f"Unidentified attribute type: {type(nest_attrs)}, {nest_attrs}")
+		print(f"[-] Unidentified attribute type: {type(nest_attrs)}, {nest_attrs}")
 
 def get_appeneded_value(dic, key, value):
 	"""appends the value to an existing value found in dictionary with provided key if exist other wise returns same value

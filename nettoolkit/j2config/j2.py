@@ -64,8 +64,8 @@ class PrepareConfig():
 		JVC = JinjaVarCheck(jinja_file=self.jtemplate_file, clean_file=self.data_file, global_file=self.regional_file)
 		JVC()
 		if JVC.xl_var_missing:
-			print(f"\nThere found Jinja variable(s) missing in your input excel database(s) `var` tab. please validate."
-				f"\nMissing Variables: ({', '.join(JVC.xl_var_missing)})")
+			print(f"\n[-] There found Jinja variable(s) missing in your input excel database(s) `var` tab. please validate."
+				f"\n[-] Missing Variables: ({', '.join(JVC.xl_var_missing)})")
 
 	def custom_class_add_to_filter(self, **kwargs):
 		"""add custom classes and its methods as jinja filters. External callable.
@@ -77,7 +77,7 @@ class PrepareConfig():
 				self.filters.update(dict(getmembers(_cls, lambda x:not(isroutine(x))))['__dict__'] )
 				post = self.filters.keys()
 			except Exception as e:
-				raise Exception(f"Class Insertion Failed for filter {filtername}\n{e}")
+				raise Exception(f"[-] Class Insertion Failed for filter {filtername}\n{e}")
 
 	def custom_module_methods_add_to_filter(self, *modules):
 		"""add custom methods from module(s) as jinja filters. External callable.
@@ -86,7 +86,7 @@ class PrepareConfig():
 			try:
 				self.filters.update(dict(getmembers(module, isfunction)))
 			except Exception as e:
-				raise Exception(f"Module Insertion Failed {module}\n{e}")
+				raise Exception(f"[-] Module Insertion Failed {module}\n{e}")
 
 	def start(self):
 		"""kick start generation

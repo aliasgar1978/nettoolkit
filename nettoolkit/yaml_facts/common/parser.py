@@ -100,7 +100,7 @@ def get_template_dir(template_path):
 			folder = p
 			break
 	if not folder:
-		print(f"Could not locate ntc template directory...")
+		print(f"[-] Could not locate ntc template directory...")
 	# template_dir = os.path.join(p, "templates")
 	template_dir = p.resolve().parents[0].joinpath(template_path)
 	return template_dir
@@ -128,7 +128,7 @@ def get_template_file(abs_cmd, cmd_parser_file_map):
 	if is_exist(file): 
 		return file
 	else:
-		raise Exception(f"Unable to read file {file}, check file does exist..")
+		raise Exception(f"[-] Unable to read file {file}, check file does exist..")
 
 def get_ntc_template_file(abs_cmd, cmd_parser_file_map):
 	"""returns ntc template file.
@@ -209,7 +209,7 @@ class CommonParser():
 			hostname = get_file_name(self.captures.capture_log_file)
 			self._yaml_file = self.output_folder.joinpath(hostname + ".yaml")
 		except:
-			raise Exception(f"Error determining output yaml file, either input is invalid.")
+			raise Exception(f"[-] Error determining output yaml file, either input is invalid.")
 
 	# writes out yaml file (owerright)
 	def write_yaml(self):

@@ -93,7 +93,7 @@ class GuiTemplate():
 						self.event_catchers[event](i)
 				except Exception as e:
 					# ---------------------------------------------
-					print(f"Error: {e}\nEvent Error {event},")
+					print(f"\n[-] Error: {e}\n[-] Event Error {event},")
 					# ---------------------------------------------
 
 			self.user_events(i, event)

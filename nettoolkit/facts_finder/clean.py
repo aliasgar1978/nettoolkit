@@ -59,7 +59,7 @@ class CleanFacts:
 			if convert_to_cit: 
 				self.capture_log_file = to_cit(self.capture_log_file)
 		except Exception as e:
-			print(f'log file convert to Capture-it failed..\n{e}')
+			print(f'[-] log file convert to Capture-it failed..\n{e}')
 		#
 		self._clean_file = get_clean_filename(self.output_folder, self.capture_log_file, self.new_suffix)
 		if debug:
@@ -99,7 +99,7 @@ class CleanFacts:
 		elif self.Fg.dev_type == 'juniper':
 			self._config = juniper_config(self.capture_log_file)
 		else:
-			raise Exception(f"undetected device type {self.Fg.dev_type}, cannot proceed")
+			raise Exception(f"[-] undetected device type {self.Fg.dev_type}, cannot proceed")
 
 	def merge_class(self):
 		""" returns Modifier Merge Class from the generated Facts 
@@ -109,7 +109,7 @@ class CleanFacts:
 		elif self.Fg.dev_type == 'juniper':
 			MergeClass = JuniperMerge
 		else:
-			raise Exception(f"undetected device type {self.Fg.dev_type}, cannot proceed")
+			raise Exception(f"[-] undetected device type {self.Fg.dev_type}, cannot proceed")
 		return MergeClass
 
 	def call(self, MergeClass):
@@ -158,7 +158,7 @@ class CleanFacts:
 				pass
 			except Exception as e:
 				if not self.Fg.dev_type == 'juniper':
-					print(f"Error Removing duplicate file\n{e}")
+					print(f"[-] Error Removing duplicate file\n{e}")
 
 
 

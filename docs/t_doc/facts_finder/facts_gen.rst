@@ -28,7 +28,7 @@ device
 	:undoc-members:
 	:show-inheritance:
 
-exec_fns
+excel facts generator - execution boilerplate codes
 -------------------------------------------------------------------------------
 
 .. automodule:: nettoolkit.facts_finder.exec_fns

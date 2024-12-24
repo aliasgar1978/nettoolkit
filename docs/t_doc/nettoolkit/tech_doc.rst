@@ -11,6 +11,8 @@ Nettoolkit API documentation!
 	Convert Dictionary <convertdict>
 	Database <db>
 	Common Functions <common>
+	Formatting <formatting>
+	Networking <networking>
 	Forms <forms>
 
 

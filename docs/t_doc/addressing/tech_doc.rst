@@ -8,5 +8,7 @@ Addressing API documentation!
 
 
 	Addressing <addressing>
+	Prefix Summaries <summary>
 	Batch-Gen <batch>
-	Subnet-Scan & Compare O/P <subnetscan>
+	IP Subnet-Scan & Compare O/P <subnetscan>
+	Port-Scan <portscan>

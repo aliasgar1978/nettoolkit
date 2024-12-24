@@ -105,18 +105,6 @@ inv_subnet_size_to_mask
 		>>> inv_subnet_size_to_mask(511)
 		23
 
-get_subnet
-----------
-
-	* get subnet/mask from decimal network ip and size of subnet (unvalidated)
-
-	.. code-block:: python
-
-		>>> get_subnet(183490304, 256)
-		'10.239.215.0/24'
-		>>> get_subnet(183490304, 512)
-		Invalid subnet/mask cannot return 10.239.215.0/23
-		''
 
 ipv4_octets
 -----------

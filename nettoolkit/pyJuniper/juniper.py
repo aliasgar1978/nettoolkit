@@ -19,9 +19,10 @@ class Juniper():
 	output_file: str = ''
 
 	def _set_output_file(self, filt):
+		_spl = self.input_file.split(".")
 		if not self.output_file:
-			_spl = self.input_file.split(".")
 			self.output_file = ".".join(_spl[:-1]) + filt + _spl[-1]
+		self.conversion_log_file = ".".join(_spl[:-1]) + '-conversion.log'
 
 	def _get_clean_output_file_lst(self):
 		output_file_lst = []
@@ -53,7 +54,7 @@ class Juniper():
 			IO.to_file(self.output_file, output_file_lst)
 		return output_file_lst
 
-	def convert_to_set(self, to_file=True):
+	def convert_to_set(self, to_file=True, conversion_log_file=True):
 		"""convert configuration to set mode
 
 		Args:
@@ -67,6 +68,8 @@ class Juniper():
 		J()
 		if to_file:
 			IO.to_file(self.output_file, J.output)
+		if conversion_log_file:
+			IO.to_file(self.conversion_log_file, J.conversion_log)
 		return J.output
 
 	def convert_to_hierarchy(self, to_file=True):
@@ -83,6 +86,7 @@ class Juniper():
 		if to_file and self.output_file:
 			IO.to_file(self.output_file, H.output)
 		return H.output
+
 
 def convert_to_set_from_captures(conf_file, output_file=None):
 	"""jset conversion, 

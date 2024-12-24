@@ -30,7 +30,7 @@ Version 1.x updates
 
    * - 1.8.6
      - Dec 25, 2024
-     - * a few minor Bug fixes,
+     - * a few minor Bug fixes.
        * capture-it: added standard_output format.
        * juniper set converter: rewamped and enhanced ( with backward compatible code )
        * modifications in execution log output format.

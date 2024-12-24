@@ -28,3 +28,11 @@ device
 	:undoc-members:
 	:show-inheritance:
 
+exec_fns
+-------------------------------------------------------------------------------
+
+.. automodule:: nettoolkit.facts_finder.exec_fns
+	:members:
+	:undoc-members:
+	:show-inheritance:
+

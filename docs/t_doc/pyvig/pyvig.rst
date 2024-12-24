@@ -23,3 +23,11 @@ pyVig - statics
 	:members:
 	:undoc-members:
 	:show-inheritance:
+
+pyVig - exec_fns
+-------------------------------------------------------------------------------
+
+.. automodule:: nettoolkit.pyVig.exec_fns
+	:members:
+	:undoc-members:
+	:show-inheritance:

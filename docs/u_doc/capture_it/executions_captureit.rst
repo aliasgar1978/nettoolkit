@@ -1,118 +1,142 @@
-NT Capture-it - Normal
+NT Capture-it - All devices same commands 
 =================================================
 
 .. warning::
 
-    ``capture-it`` version 1.7.0 has changed the implementation of capture-it slightly.  
-    Kindly refer to following documentation pages to understand and co-relate changes.
-    Your previous execution codes may fail, and requires to be modified slightly in order to support version 1.7.0 onward.
+    since version ***1.7.0*** ``capture-it`` has changed the implementation methods.
+    Below explanation depicts latest implementation of capture-it. 
+    Kindly refer to following documentation and co-relate changes as per your running version or update your copy with latest.
+
+
+.. important::
+
+    * Use the below explained method if you have list of devices where, you want to capture the same show commands output from all of devices.
+    * Use the next Excel method if you have multiple groups of devices, where you want to run a particuar set of show commands for each groups.
 
 
 #. **Execution Steps**
 
+    Step by step boiler plate code with explanation. Modify it as per your need.
+
     .. code-block:: python
 
         # --------------------------------------------
-        # IMPORTS
+        # 1. IMPORT NECESSARY PACKAGE/MODULES
         # --------------------------------------------
         from nettoolkit.capture_it import capture
         from nettoolkit import *
         from pathlib import *
         import sys, os
         import pandas as pd
-        pd.set_option('mode.chained_assignment', None)          ## disable pandas warning msgs
+        pd.set_option('mode.chained_assignment', None)          ## disabling pandas warning msgs
 
 
         # -------------------------------------------------------------------------------------------------------------
-        # Custom Project Imports (Optional/Additional), a sample project import mentioned as below. (modify as per own)
+        # 2. Custom Project Imports (Optional/Additional), a sample project import mentioned as below. (modify as per own)
         # -------------------------------------------------------------------------------------------------------------
-        from custom.custom_captureit.cisco_bgp import BgpAdv   ## Where BgpAdv is a class which has a cmds property to return show commands for specific neighbours advertising route
-        from custom.custom_factsgen import CustomDeviceFacts     ## CustomDeviceFacts is a class to modify output database as per custom requirement.
-        from custom.custom_factsgen import FOREIGN_KEYS          ## FOREIGN_KEYS, define dictionary with additional custom columns require in output databse {tab_name : [column names]} format.
+        from custom.custom_captureit.cisco_bgp import BgpAdv     ## **BgpAdv** class should have a **cmds** property to return custom show commands
+        from custom.custom_factsgen import CustomDeviceFacts     ## **CustomDeviceFacts** class is to modify output excel database as per custom requirement.
+        from custom.custom_factsgen import FOREIGN_KEYS          ## **FOREIGN_KEYS**, dictionary has custom columns example: {tab_name : [column names]} format.
 
         # --------------------------------------------
-        #    INPUT: Credentials
+        # 3. INPUT: Credentials
         # --------------------------------------------
         auth = {
             'un':'provide username' , 
             'pw':'provide login password', 
             'en':'provide enable password'  
         }
-        ## Make sure to use static passwords. Refrain using OTP, as ID may get locked due to multiple simultaneous login.
-
 
         # --------------------------------------------
-        #    INPUT: necessary devices, commands
+        #  4. INPUT: List of devices
         # --------------------------------------------
         devices = [
             '192.168.1.1',
             '10.10.10.1',
-            #  list down all ip addresses for which output to be captured  
         ]
-        CISCO_IOS_CMDS = ['sh run',  'sh int status','sh lldp nei', ]
-        JUNIPER_JUNOS_CMDS = ['show configuration', 'show lldp neighbors', 'show interfaces descriptions', ]
-        # -- leave it blank for default commands --
-        #
+
+        # --------------------------------------------------
+        #  5. INPUT: List of COMMANDS (cisco/juniper) each
+        #      -- leave it blank for default commands --
+        # --------------------------------------------------
+        CISCO_IOS_CMDS = [
+            'sh run',  
+            'sh int status',
+            'sh lldp nei', 
+        ]
+        JUNIPER_JUNOS_CMDS = [
+            'show configuration', 
+            'show lldp neighbors', 
+            'show interfaces descriptions', 
+        ]
+
+        # --------------------------------------------------
+        #  6. INPUT: Create Dictionary of List of COMMANDS
+        # --------------------------------------------------
         cmds = {
             'cisco_ios'  : CISCO_IOS_CMDS,
             'juniper_junos': JUNIPER_JUNOS_CMDS, 
         }
-        # Note: ``arista_eos`` for the Arista switch commands list.
+        # Use: ``arista_eos`` for the Arista switch commands list.
 
         # --------------------------------------------
-        #    Output: provide output path
+        #  7. INPUT: Provide Output paths
         # --------------------------------------------
-        capture_path = './captures/'
-        exec_log_path = './exec_logs/'
+        capture_path     = './captures/'
+        exec_log_path    = './logs/'
 
         # --------------------------------------------
-        #    Define Capture
+        # 8. Define capture Object as cap
         # --------------------------------------------
-        captures = capture(
-            ip_list=devices,  # mandatory - list of devices
-            auth=auth,        # mandatory - authentication parameters dictionary
-            cmds=cmds,        # mandatory - dictionary of list of commands
-            capture_path=capture_path,     # output capture path (str)
-            exec_log_path=exec_log_path,   # execution logs output path (str)
+        cap = capture(
+            ip_list=devices,
+            auth=auth,
+            cmds=cmds,
+            capture_path=capture_path,
+            exec_log_path=exec_log_path,
         )
 
         # -------------------------------------------------------------------------
-        #    Additional [optional] key settings ( Remove if do not want to change )
+        # 9. Optional: capture keys modifications
         # -------------------------------------------------------------------------
-        captures.cumulative = 'both'    # default: True ( options: True, False, 'both')
-        captures.forced_login = False   # default: True ( options: True, False )
-        captures.parsed_output = True   # default: False ( options: True, False )
-        captures.max_connections = 1    # default: 100 ( Options: any number input ) ( define max concurrent connections, 1 for sequencial )
-        captures.append_capture = True  # default: False ( Options: True, False )
-        captures.missing_captures_only = True # default: False ( Options: True, False )
+        cap.cumulative = 'both'    # default: True ( options: True, False, 'both')
+        cap.forced_login = False   # default: True ( options: True, False )
+        cap.parsed_output = True   # default: False ( options: True, False )
+        cap.standard_output = True   # default: False ( options: True, False )
+        cap.max_connections = 500    # default: 100 ( Options: number input ) ( Use 1 for sequencial )
+        cap.append_capture = True  # default: False ( Options: True, False )
+        cap.missing_captures_only = True # default: False ( Options: True, False )
+        cap.tablefmt = 'outline' # default: 'pretty' ( Options: see below** )
 
         # -----------------------------------------------------------------------------
-        #    Additional [optional] run dynamic custom commands ( Remove if not needed )
+        # 10. Optional dynamic custom commands.
+        #     Remove if not importing custom captureit class in step 2
         # -----------------------------------------------------------------------------
-        captures.dependent_cmds(custom_dynamic_cmd_class=BgpAdv)  # where BgpAdv is custom class imported above
+        cap.dependent_cmds(custom_dynamic_cmd_class=BgpAdv)  # BgpAdv is custom class
 
         # -------------------------------------------------------------------------------
-        #    Additional [optional] to generate Facts file ( Remove if not needed )
-        #    provide CustomDeviceFactsClass, foreign_keys if want to customize Facts file
+        # 11.Optional to generate Facts
+        #    Remove arguments in generate_facts if not importing custom class in step 2
         # --------------------------------------------------------------------------------
-        captures.mandatory_cmds_retries = 2     # default: 0
-        captures.generate_facts(
-            CustomDeviceFactsClass=CustomDeviceFacts,  # optional (provide if need, custom class imported above )
-            foreign_keys=FOREIGN_KEYS,                 # optional (provide if need, custom variable imported above )
+        cap.generate_facts(
+            CustomDeviceFactsClass=CustomDeviceFacts,  ## custom, optional
+            foreign_keys=FOREIGN_KEYS,                 ## custom, optional
         )
 
         # -----------------------------------------------------------------------------
-        #    Start Capture
+        # 12. Start Capture
         # -----------------------------------------------------------------------------
-        captures()
+        cap()
 
         # -----------------------------------------------------------------------------
-        #    Log-Summary ( Modify/Enable keys as requires )
+        # 13. Log-Summary ( Modify as require )
         # -----------------------------------------------------------------------------
-        captures.log_summary(
-            on_screen_display=True,                        ## display on screen. (default: False)
-            to_file=txt_log_file,                     # summary to text file
-            excel_report_file=xl_log_file,            # summary to excel file
+        txt_log_file = exec_log_path + "/" + "summary_log.txt"
+        xl_log_file  = exec_log_path + "/" + "summary_log.xlsx"
+        cap.log_summary(
+            on_screen_display=True,                   # on screen display
+            to_file=txt_log_file,                     # to text file
+            excel_report_file=xl_log_file,            # to excel file
         )
 
         # -----------------------------------------------------------------------------
@@ -199,6 +223,7 @@ NT Capture-it - Normal
     * ``cumulative``  (Options: True, False, 'Both', None) defines how to store each command output. True=Save all output in a single file. False=Save all command output in individual file. 'Both'=will generate both kinds of output. None=will not save text log outout to any file, but display it on screen
     * ``forced_login``  (Options: True, False) (Default: False)  Forced login to device even if device ping doesn't succeded.
     * ``parsed_output``  (Options: True, False) (Default: False) Parse the command output and generates device database in excel file.  Each command output try to generate a pased detail tab.
+    * ``standard_output``  (Options: True, False) (Default: False) capture to be done in capture it format or normal standard capture format.
     * ``max_connections``  (numeric) (Default: 100), change the number of simultaneous device connections as per link connection and your pc cpu processng performance.
     * ``mandatory_cmds_retries`` (numeric) (Default: 0), retry count for facts-finder require dcommands change the number to update behaviour
     * ``append_capture``  (Options: True, False) (Default: False)  
@@ -206,6 +231,11 @@ NT Capture-it - Normal
     * ``on_screen_display`` (bool): displays result summary on screen. Defaults to False.
     * ``to_file`` (str): text filename, writes summary result summary to text file. Defaults to None 
     * ``excel_report_file`` (str): excel filename, writes summary result summary to excel file. Default to None 
+    * ``tablefmt`` ( Options:
+        'rounded_outline', 'simple_outline', 'heavy_outline', 'mixed_outline', 'double_outline', 'fancy_outline',
+        'presto', 'outline', 'pipe',
+        'pretty',  'psql',  
+        'orgtbl', 'jira', 'textile', 'html', 'latex' )
 
 
 
@@ -218,3 +248,4 @@ NT Capture-it - Normal
 -----------------------
 
 Watch out terminal if any errors and see your output in given output path.
+

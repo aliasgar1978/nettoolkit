@@ -31,3 +31,10 @@ Crypt Tab
 |  * **output:** calculated MD5 has value on textbox                          |
 |                                                                             |
 +-----------------------------------------------------------------------------+
+
+
+Demo Video - Crypt Tab
+--------------------------
+
+`A small sample Demo video on YouTube  <https://www.youtube.com/watch?v=5cuwFYHZtO0>`_
+

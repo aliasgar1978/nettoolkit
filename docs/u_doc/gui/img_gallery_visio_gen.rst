@@ -17,6 +17,13 @@ Here is a few Keys and requirements to understand.
 * ``custom package yaml file``: Yaml file containing custom package and class listing. ( more details below )
 * ``sheet filters``: dictionary of connection filters. A separate visio tab will be generated based on provided sheet filters.  sheet filters should be selected accordingly via custom code to add to cabling page.
 
+
+Demo Video - Visio Gen Tab
+--------------------------
+
+`A small sample Demo video on YouTube  <https://www.youtube.com/watch?v=-89fiIj5BDs>`_
+
+
 ----
 
 

@@ -21,6 +21,12 @@ Here are a few Keys to understand.
 * ``output mode``: Define output format. ( Either individual files for each commands output, or club all in a single file, or both )
 * ``concurrent connections`` : Set it as per your choice and device/network capability.
 
+Demo Video - Capture-IT
+--------------------------
+
+`A small sample Demo video on YouTube  <https://www.youtube.com/watch?v=aplJu2ghgTw>`_
+
+
 ----
 
 .. figure:: img/capture_it.png

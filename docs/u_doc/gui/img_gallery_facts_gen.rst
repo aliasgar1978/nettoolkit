@@ -18,6 +18,11 @@ Other options are:
 * ``skip parsed excel files``: Enable support for older textfsm output parser output merge in output.
 * ``custom package yaml file``: Yaml file containing custom package and class listing. ( more details below )
 
+Demo Video - Facts Tab
+--------------------------
+
+`A small sample Demo video on YouTube  <https://www.youtube.com/watch?v=q7wz70bZ5ig>`_
+
 ----
 
 .. figure:: img/factsfinder.png

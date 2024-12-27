@@ -28,6 +28,10 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.8.8
+     - Dec 27, 2024
+     - * a few minor Bug fixes.
+       * GUI Modifications: juniper input can be multiple files now. Crypt tab modified and file password can accept multiple files now. 
    * - 1.8.7
      - Dec 25, 2024
      - * a few minor Bug fixes.

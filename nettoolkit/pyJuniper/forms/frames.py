@@ -17,7 +17,7 @@ def juniper_frame():
 		[sg.Text('Juniper Set converter', font=('TimesNewRoman', 12), text_color="orange") ],
 
 		[sg.Text('Juniper Config file:\t',  text_color="black"), 
-		 sg.InputText(key='mini_juniper_file_input'), sg.FileBrowse(),
+		 sg.InputText(key='mini_juniper_file_input'), sg.FilesBrowse(),
 		 sg.Button("open", change_submits=True, key='mini_juniper_file_input_open', button_color="darkgrey"),],
 
 		[sg.Text('Output folder:\t',  text_color="black"), 

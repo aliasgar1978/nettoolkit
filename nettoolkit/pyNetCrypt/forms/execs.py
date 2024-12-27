@@ -46,38 +46,46 @@ def netcrypt_juniper_dec_start(obj, i):
 @activity_finish_popup
 def netcrypt_file_dec_start(obj, i):
 	if not i['netcrypt_file']: return 
-	input_file = i['netcrypt_file']
-	output_file = input_file[:-4] + '-pw-decrypted.' + input_file[-3:]
-	with open(input_file, 'r') as f:
-		lines = f.readlines()
-	f = None
-	for line in lines:
-		if line.startswith("!"): f = decrypt_file_passwords
-		if line.startswith("#"): f = decrypt_doller9_file_passwords
-		if f: break
-	f(input_file, output_file)
-	op = f"File Wrote: {output_file}"
-	obj.event_update_element(netcrypt_output_pw={'value': op})	
+	input_files = i['netcrypt_file'].split(";")
+	for input_file in input_files:
+		if i['netcrypt_file_dec_overwrite']:
+			output_file = input_file
+		else:
+			output_file = input_file[:-4] + '-pw-decrypted.' + input_file[-3:]
+		with open(input_file, 'r') as f:
+			lines = f.readlines()
+		f = None
+		for line in lines:
+			if line.startswith("!"): f = decrypt_file_passwords
+			if line.startswith("#"): f = decrypt_doller9_file_passwords
+			if f: break
+		f(input_file, output_file)
+		op = f"File Wrote: {output_file}"
+		obj.event_update_element(netcrypt_output_pw={'value': op})	
 
 @activity_finish_popup
 def netcrypt_file_mask_start(obj, i):
 	if not i['netcrypt_file']: return 
-	input_file = i['netcrypt_file']
-	output_file = input_file[:-4] + '-pw-masked.' + input_file[-3:]
-	with open(input_file, 'r') as f:
-		lines = f.readlines()
-	f = None
-	for line in lines:
-		if line.startswith("!"): f = mask_file_passwords
-		if line.startswith("#"): f = mask_doller9_file_passwords
-		if f: break
-	f(input_file, output_file)
-	op = f"File Wrote: {output_file}"
-	obj.event_update_element(netcrypt_output_pw={'value': op})	
+	input_files = i['netcrypt_file'].split(";")
+	for input_file in input_files:
+		if i['netcrypt_file_dec_overwrite']:
+			output_file = input_file
+		else:
+			output_file = input_file[:-4] + '-pw-masked.' + input_file[-3:]
+		with open(input_file, 'r') as f:
+			lines = f.readlines()
+		f = None
+		for line in lines:
+			if line.startswith("!"): f = mask_file_passwords
+			if line.startswith("#"): f = mask_doller9_file_passwords
+			if f: break
+		f(input_file, output_file)
+		op = f"File Wrote: {output_file}"
+		obj.event_update_element(netcrypt_output_pw={'value': op})	
 
 def netcrypt_file_hash_start(obj, i):
-	if not i['netcrypt_file']: return 
-	_hash = get_md5(i['netcrypt_file'])
+	if not i['md5_generate_file']: return 
+	_hash = get_md5(i['md5_generate_file'])
 	obj.event_update_element(netcrypt_output_pw={'value': _hash})	
 
 

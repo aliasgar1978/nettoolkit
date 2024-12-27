@@ -57,7 +57,7 @@ def capture_it_frame():
 		# under_line(80),
 
 		[sg.Text('Options',  font=('TimesNewRoman', 12), text_color="orange"),
-		 sg.Text('\t\t\t\tMode\t\t     SummaryTableFormat', text_color="black"), 
+		 sg.Text('\t\t\t\t\t\tMode\t\tSummaryTableFormat', text_color="black"), 
 		 # sg.Text('\tSummary Table Format', text_color="black"), 
 		], 
 		[sg.Checkbox('Missing only',	key='cit_opt_missing',       default=False, text_color='black'),
@@ -68,7 +68,7 @@ def capture_it_frame():
 		 # sg.Text('\tSummary Table Format:', text_color="black"), 
 		 sg.InputCombo(TABLE_FORMATS, default_value='pretty', key='cit_tablefmt'), 
 		],
-		[sg.Text('Concurrent Connections ', text_color="black"), 
+		[sg.Text('Concurrent connections throttle', text_color="black"), 
 		 sg.InputText(100,  key='cit_opt_max_connections', size=(5,1) ), sg.Text('Use 1 for sequential process', text_color="white"), ],
 
 		[sg.Text('\t\t\t\t\t\t\t\t'),

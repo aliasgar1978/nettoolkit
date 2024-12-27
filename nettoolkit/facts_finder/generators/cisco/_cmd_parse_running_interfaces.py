@@ -281,7 +281,10 @@ class RunningInterfaces():
 		"""    		
 		auth, auth_type = None, None
 		if l.strip().startswith("ip ospf authentication-key"):
-			port_dict['ospf_auth'] = decrypt_type7(l.strip().split()[-1])
+			try:
+				port_dict['ospf_auth'] = decrypt_type7(l.strip().split()[-1])
+			except:
+				port_dict['ospf_auth'] = l.strip().split()[-1]
 		if l.strip().startswith("ip ospf network "):
 			port_dict['ospf_auth_type'] = l.strip().split()[-1]
 		if not auth and not auth_type: return None

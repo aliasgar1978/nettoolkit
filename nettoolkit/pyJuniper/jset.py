@@ -16,6 +16,7 @@ class JSet(STR):
 	end_chars = ( "{", "}", ";" )
 	vlan_configs_begins = ('set vlans ', 'set bridge-domains ')
 	hostname_str = ('host-name', 'hostname')
+	vlan_configs_begin = ('vlans ', 'bridge-domains ')
 
 	def __post_init__(self):
 		self.device = 'Unidentified'
@@ -78,7 +79,7 @@ class JSet(STR):
 		probable_config_end = False
 		undefined_probable_line_printed = False
 
-		self.send_to_conversion_log(f"[+] {self.device}: Starting Set conversion")
+		# self.send_to_conversion_log(f"[+] {self.device}: Starting Set conversion")
 
 		for line in self.input_list:
 			line_counter += 1
@@ -156,8 +157,8 @@ class JSet(STR):
 
 		if err:
 			self.send_to_conversion_log(f"[-] {self.device}: Set conversion task ended with one or more errors")
-		else:
-			self.send_to_conversion_log(f"[+] {self.device}: Set conversion task completed successfully")
+		# else:
+		# 	self.send_to_conversion_log(f"[+] {self.device}: Set conversion task completed successfully")
 
 		self.print_conversion_log()
 
@@ -244,13 +245,22 @@ class JSet(STR):
 		"""
 		plain_config_list = []
 		multiline_string_prev_line = ''
+		config_end_section = False
 		for line in self.input_list:
 			stripped_line = self.delete_trailing_remarks(line.strip())
+			if not stripped_line: continue
+			if stripped_line[0] == "#": continue
 			annotation_line = self.save_last_annotation(stripped_line)
 			multiline_string_prev_line, terminate = self._get_multiline_str(multiline_string_prev_line, stripped_line)
-			#
+
 			if stripped_line.endswith(self.end_chars) or annotation_line or terminate or multiline_string_prev_line:
 				plain_config_list.append(line.rstrip('\n'))
+
+			if stripped_line.startswith(self.vlan_configs_begin):
+				config_end_section = True
+			if config_end_section and line.rstrip() == "}":
+				break
+
 		return plain_config_list
 
 	def send_to_conversion_log(self, line):

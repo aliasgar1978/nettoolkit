@@ -75,7 +75,7 @@ def prepare_visio_drawing(dic, i):
 		add_path(custom)
 	#
 	visextension = "" if i['pv_file_output_visio'].endswith(".vsdx") else ".vsdx" 
-	output_file = str(Path(i['pv_folder_output'])) + "/" + i['pv_file_output_db'] + visextension
+	output_file = str(Path(i['pv_folder_output'])) + "/" + i['pv_file_output_visio'] + visextension
 	#
 	exec_pyvig_visio(
 		data_file=i['pv_file_cable_matrix'],

@@ -128,9 +128,15 @@ def get_int_ospf_auth(port_dict, l, spl):
 	if not l.startswith("ip ospf "): return
 	ospf_dict = add_blankdict_key(port_dict, 'ospf')
 	if spl[2] == "authentication-key":
-		update_key_value(ospf_dict, 'auth_key', decrypt_type7(spl[-1]))
+		try:
+			update_key_value(ospf_dict, 'auth_key', decrypt_type7(spl[-1]))
+		except:
+			update_key_value(ospf_dict, 'auth_key', spl[-1])
 	elif spl[2] == "message-digest-key":
-		update_key_value(ospf_dict, 'md5_key', decrypt_type7(l.strip().split()[-1]))
+		try:
+			update_key_value(ospf_dict, 'md5_key', decrypt_type7(l.strip().split()[-1]))
+		except:
+			update_key_value(ospf_dict, 'md5_key', l.strip().split()[-1])
 	elif spl[2] == "authentication":
 		update_key_value(ospf_dict, 'auth_type', spl[-1])
 	elif spl[2] == "network":

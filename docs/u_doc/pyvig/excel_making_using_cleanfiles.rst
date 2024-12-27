@@ -213,6 +213,33 @@ Provide Necessary Input Parameters for visio database preparation
   
 
 
+----
+
+Line Color Code
+----------------
+
+.. code-block:: python
+
+  # ------------------------------------------------------------------------------------------------------------
+  # Note:
+  # ------------------------------------------------------------------------------------------------------------
+  # CURRENTLY `COLOR MAP` IS PREDEFINED AS BELOW
+  #     'aoc':          'red',
+  #     'copper':       'darkgray',
+  #     'fiber om3 mm': 'skyblue',
+  #     'fiber om4 mm': 'skyblue',
+  #     'fiber mm':     'green',
+  #     'fiber sm':     'yellow',
+  # 
+  #  To ADD and/or UPDATE: 
+  #    * Use below map_color() method as an exmaple below. 
+  #    * Add it before - CM.run()
+  #    CM.map_color(simplex_sm_fiber='gray', simplex_mm_fiber='green')
+  # ------------------------------------------------------------------------------------------------------------
+
+
+
+----
 
 
 At this point a new Cable Matrix Excel file will be generated.  

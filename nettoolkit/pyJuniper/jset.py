@@ -151,6 +151,9 @@ class JSet(STR):
 				self.send_to_conversion_log(f"[-] {self.device}: Error line {line_counter}:{line.rstrip()}")
 				err = True
 
+		if not config_start:
+			self.send_to_conversion_log(f"[-] {self.device}: Juniper set converter: Juniper configuration missing")
+
 		if len(bt_item_in_orders) > 0:
 			self.send_to_conversion_log(f"[-] {self.device}: Juniper set converter: Diagnosed Bracket Error(s). closure missing {len(bt_item_in_orders)}")
 			err = True

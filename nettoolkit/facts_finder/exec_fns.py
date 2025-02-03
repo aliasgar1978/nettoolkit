@@ -32,7 +32,7 @@ def exec_facts_finder(
 	#
 	device_log_dict = {}
 	for log_file in log_files:
-		if not log_file.endswith(".log"): continue
+		# if not log_file.endswith(".log"): continue
 		device = get_host(log_file)
 		print("[+] starting", device, "...", end='\t')
 		device_dict = add_blankdict_key(device_log_dict, device)

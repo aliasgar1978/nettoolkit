@@ -173,4 +173,37 @@ class conn(object):
 		except:
 			pass
 
+	@property
+	def find_prompt(self):
+		try:
+			return self.net_connect.find_prompt()
+		except:
+			print(f"Unable to retrive prompt from connection")
 
+	@property
+	def host(self):
+		try:
+			return self.net_connect.host
+		except:
+			print(f"Unable to retrive host from connection")
+
+	@property
+	def device_type(self):
+		try:
+			return self.net_connect.device_type
+		except:
+			print(f"Unable to retrive device_type from connection")
+
+	@property
+	def check_enable_mode(self):
+		try:
+			return self.net_connect.check_enable_mode()
+		except:
+			print(f"Unable to retrive check_enable_mode from connection")
+
+	@property
+	def check_config_mode(self):
+		try:
+			return self.net_connect.check_config_mode()
+		except:
+			print(f"Unable to retrive check_config_mode from connection")

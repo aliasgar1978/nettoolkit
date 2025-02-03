@@ -6,6 +6,7 @@ import sys
 
 from nettoolkit.capture_it import capture, capture_by_excel, LogSummary
 from nettoolkit.capture_it import quick_display
+from nettoolkit.capture.forms.execs import *
 
 # ====================================================================================
 def get_item_list(file, index=None):
@@ -34,6 +35,9 @@ def update_cache_cit(i):
 	update_cache(CACHE_FILE, cit_file_cisco=i['cit_file_cisco'])
 	update_cache(CACHE_FILE, cit_file_juniper=i['cit_file_juniper'])
 	update_cache(CACHE_FILE, cit_file_custom_yml=i['cit_file_custom_yml'])
+	update_cache(CACHE_FILE, cit_jump_server=i['cit_jump_server'])
+	update_cache(CACHE_FILE, cit_jump_server_login_un=i['cit_jump_server_login_un'])
+	update_cache(CACHE_FILE, cit_file_psk=i['cit_file_psk'])
 
 def update_cache_cit_by_xl(i):
 	update_cache(CACHE_FILE, cit_cred_un=i['cit_cred_un1'])
@@ -180,6 +184,26 @@ CATPUREIT_EVENT_FUNCS = {
 	'cit_folder_path_captures_open1': exec_cit_folder_path_captures_open1,
 	'cit_folder_path_logs_open1': exec_cit_folder_path_logs_open1,
 	'cit_folder_path_summary_open1': exec_cit_folder_path_summary_open1,
+
+	'cit_cred_un3': 	update_cache_cit,
+	'cit_path_captures3': update_cache_cit,
+	'cit_file_hosts3': update_cache_cit,
+	'cit_file_cisco3': update_cache_cit,
+	'cit_file_juniper3': update_cache_cit,
+	'cit_jump_server': update_cache_cit,
+	'cit_jump_server_login_un': update_cache_cit,
+	'cit_file_psk': update_cache_cit,
+
+
+	'cit_via_server_btn_start': capture_via_jump_start,
+
+	'cit_file_hosts_open3': exec_cit_file_hosts_open,
+	'cit_file_cisco_open3': exec_cit_file_cisco_open,
+	'cit_file_juniper_open3': exec_cit_file_juniper_open,
+
+	'cit_folder_path_captures_open3': exec_cit_folder_path_captures_open3,
+
+
 }
 CAPTUREIT_EVENT_UPDATERS = set()
 CAPTUREIT_ITEM_UPDATERS = set()
@@ -187,4 +211,5 @@ CAPTUREIT_ITEM_UPDATERS = set()
 CAPTUREIT_RETRACTABLES = {
 	'cit_cred_un', 'cit_cred_en', 'cit_cred_pw',
 	'cit_cred_un1', 'cit_cred_en1', 'cit_cred_pw1',
+	'cit_cred_un3', 'cit_cred_en3', 'cit_cred_pw3',
 }

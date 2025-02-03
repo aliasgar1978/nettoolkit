@@ -398,4 +398,3 @@ class Execute_Device():
 		missed_cmds = cmds.difference(captured_cmds)
 		return list(missed_cmds)
 
-

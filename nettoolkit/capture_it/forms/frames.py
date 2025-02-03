@@ -1,5 +1,6 @@
 
 from nettoolkit.nettoolkit.forms.formitems import *
+from nettoolkit.capture.forms.frames import *
 
 # ===================================================================
 TABLE_FORMATS = [
@@ -137,4 +138,5 @@ def capture_it_by_xl_frame():
 CAPTUREIT_FRAMES = {
 	'Capture-It': capture_it_frame(),
 	'Capture-It using-Excel': capture_it_by_xl_frame(),
+	'Capture via Poller': capture_it_poller_frame(),
 }

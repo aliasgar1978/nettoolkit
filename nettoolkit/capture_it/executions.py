@@ -485,7 +485,7 @@ class Execute_By_Excel(Execute_Common, Multi_Execution):
 		cmd_cols = ('cisco_ios', 'juniper_junos', 'arista_eos')
 		df_dict = read_xl_all_sheet(self.input_file)
 		self.ip_cmd_dict = {}
-
+		#
 		for tab, df in df_dict.items():
 			for ip in df.ips:
 				if not ip: continue

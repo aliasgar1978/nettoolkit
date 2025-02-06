@@ -34,6 +34,7 @@
    Overview <docs/u_doc/curious_users>
    Addressing <docs/u_doc/addressing/userdoc>
    Capture-IT <docs/u_doc/capture_it/userdoc>
+   Capture via JumpSSH <docs/u_doc/capture/userdoc>
    Compare It <docs/u_doc/compare_it/userdoc> 
    Config-Gen <docs/u_doc/j2config/userdoc>
    Configure <docs/u_doc/configure/userdoc> 
@@ -54,6 +55,7 @@
    Overview <docs/t_doc/adv_users>
    Addressing <docs/t_doc/addressing/tech_doc>
    capture-it <docs/t_doc/capture_it/tech_doc>
+   capture via jumpssh <docs/t_doc/capture/tech_doc>
    compare-it <docs/t_doc/compare_it/tech_doc> 
    configure <docs/t_doc/configure/tech_doc> 
    facts-finder <docs/t_doc/facts_finder/tech_doc>

@@ -78,7 +78,7 @@ Sample Foreign key dictionary:
 Instead of capturing same commands for each device, devices can be group together in excel and outputs can be captured for those accordingly..
 
 .. figure:: img/capture_it_xl.png
-   :alt: capture using excel inpug
+   :alt: capture using excel input
 
 
 .. Note::
@@ -92,3 +92,12 @@ Instead of capturing same commands for each device, devices can be group togethe
       * **juniper_junos**: list of all juniper (junos) commands follows it.
       * **arista_eos**: list of all arista switch commands follows it. (leave blank if none.)
    * IP's present in multiple tabs: outputs will be appened for all tabs where it present.
+
+--------
+
+
+Capture via a jump host server is possible via below tab.
+
+.. figure:: img/capture_via_jump_ssh_gui.png
+   :alt: capture via jumpssh host 
+

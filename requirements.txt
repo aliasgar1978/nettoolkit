@@ -13,3 +13,4 @@ pyyaml
 attrs
 pyfiglet
 colorama
+jumpssh

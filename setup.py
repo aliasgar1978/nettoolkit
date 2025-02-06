@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nettoolkit",
-    version="1.8.9",
+    version="1.8.10",
     author="ALIASGAR - ALI",
     author_email="aholo2000@gmail.com",
     description="Tool Set for Networking Geeks",
@@ -20,7 +20,7 @@ setuptools.setup(
     ],
     python_requires='>=3.10',
     install_requires=['pandas', 'openpyxl', 'PySimpleGUI==4.60.5', 'numpy', 'pyfiglet', 'colorama', 'tabulate',
-        'xlrd', 'jinja2', 'paramiko', 'netmiko', 'ntc-templates', 'pyyaml', 'attrs', 'textfsm',
+        'xlrd', 'jinja2', 'paramiko', 'netmiko', 'ntc-templates', 'pyyaml', 'attrs', 'textfsm', 'jumpssh',
         # 'pywin32',                    ## Windows specific library, need to do manually...
     ],
     package_data={

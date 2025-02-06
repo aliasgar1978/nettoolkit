@@ -28,9 +28,10 @@ Version 1.x updates
      - Date   
      - Updates
 
-   * - 1.8.9
-     - Feb 03, 2025
+   * - 1.8.10
+     - Feb 06, 2025
      - * Capture: New Module Added which enables accessing ssh to devices via jump server. Added GUI Tab under Capture-IT section.
+       * v1.8.9 ( was having upload error )
    * - 1.8.8
      - Dec 27, 2024
      - * a few minor Bug fixes.

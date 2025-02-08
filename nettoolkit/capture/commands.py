@@ -102,7 +102,7 @@ class Command():
 
 		# ------------------------ RETRY COUNT EXCEEDED ------------------------ #
 		self.capture_result = 'failed'
-		self.log_message.append(f'    [-] Error Retriving output for {self.device} - of command: {self.cmd}, skipped since exceeded retry count')
+		self.log_message(f'    [-] Error Retriving output for {self.device} - of command: {self.cmd}, skipped since exceeded retry count')
 
 
 	@staticmethod

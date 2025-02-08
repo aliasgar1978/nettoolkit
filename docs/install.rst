@@ -61,13 +61,17 @@ Inherited python packages
 	* PySimpleGUI
 	* numpy
 	* xlrd
-	* pywin32
+	* pywin32 ( manual install required )
 	* pyyaml
 	* attrs
 	* jinja2
 	* paramiko
 	* netmiko
 	* ntc-templates
+	* jumpssh
+	* tabulate
+	* colorama
+	* pyfiglet
 
 
 -------------------------------------

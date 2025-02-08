@@ -79,10 +79,11 @@ create summaries with minimum prefix length
         ['10.10.0.0/19']
         ## See here even though summary can be /21, it has summarized to 19. ##
 
+------
 
 
-
-**Deprycated**
+Create Summaries - **Deprycated**
+-------------------------------------
 
     **Steps Involved:**
 

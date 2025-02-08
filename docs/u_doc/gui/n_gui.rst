@@ -26,6 +26,7 @@ You can use the NGui class to do GUI stuff for you.
         # -----------------------------------------------------------------------------------
         #  Import form items from nettoolkit
         # -----------------------------------------------------------------------------------
+        import PySimpleGUI as sg
         from nettoolkit.nettoolkit.forms.formitems import *
 
         # -----------------------------------------------------------------------------------

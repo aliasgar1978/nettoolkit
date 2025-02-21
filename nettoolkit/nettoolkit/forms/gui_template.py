@@ -34,10 +34,10 @@ class GuiTemplate():
 
 	# Object Initializer
 	def __post_init__(self):
-		copyright = " (by: Aliasgar [ALI])"
 		self.var_dict = {}
-		self.header = self.header + copyright
 		self.max_buttons_in_a_row = 6
+		# copyright = " (by: Aliasgar [ALI])"
+		# self.header = self.header + copyright
 
 	def __call__(self, initial_click):
 		self.standard_button_pallete_buttons()
@@ -51,7 +51,7 @@ class GuiTemplate():
 			banner(self.banner), 
 			self.button_pallete(),
 			tabs_display(**self.tabs_dic),
-			footer(self.version, self.form_width),
+			# self.footer(self.version, self.form_width),
 		]
 
 		self.w = sg.Window(self.header, layout, 

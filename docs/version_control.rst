@@ -29,8 +29,8 @@ Version 1.x updates
      - Updates
 
    * - 1.8.11
-     - Feb TBD, 2025
-     - * TBD
+     - Feb 21, 2025
+     - * Removed copyright message from gui.
    * - 1.8.10
      - Feb 06, 2025
      - * Capture: New Module Added which enables accessing ssh to devices via jump server. Added GUI Tab under Capture-IT section.

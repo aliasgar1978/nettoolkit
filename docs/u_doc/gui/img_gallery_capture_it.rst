@@ -2,7 +2,7 @@ CaptureIT Button
 -----------------
 
 
-capture-it Tab
+Capture-it Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -80,7 +80,7 @@ Sample Foreign key dictionary:
    }
 
 
-capture-it using Excel Tab
+capture-it using Excel
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Instead of capturing same commands for each device, devices can be group together in excel and outputs can be captured for those accordingly..
@@ -103,7 +103,7 @@ Instead of capturing same commands for each device, devices can be group togethe
 
 
 
-capture-it via Server Excel Tab
+capture-it via Server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Capture via a jump host server is possible via below tab.

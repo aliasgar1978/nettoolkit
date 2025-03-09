@@ -1,7 +1,10 @@
 
-Visio Gen Tab
+Visio Gen Button
 -------------------------
 
+
+VisioGen Requirements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * A Utility which helps **generating cabling matrix** and than **visio drawing** based on provided devices facts files..
 * Microsoft visio is required to be installed. ( tested on visio 2013, prior versions may or may not compatible )
@@ -18,20 +21,12 @@ Here is a few Keys and requirements to understand.
 * ``sheet filters``: dictionary of connection filters. A separate visio tab will be generated based on provided sheet filters.  sheet filters should be selected accordingly via custom code to add to cabling page.
 
 
-Demo Video - Visio Gen Tab
---------------------------
-
-`A small sample Demo video on YouTube  <https://www.youtube.com/watch?v=-89fiIj5BDs>`_
-
-
-----
-
-
 .. figure:: img/visio_gen.png
    :alt: Visio generator
 
-----
 
+Customize VisioGen
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Sample of customer.yaml**
 
@@ -66,3 +61,10 @@ sheet filter requiremnets:
 
    * *update.sheet_filter_columns_add*:  Adds sheet filter columns to cabling data 
    * *sheet_filter.get_sheet_filter_columns*: retrive sheet_filters dynamically for those added using above update method.
+
+
+Demo Video - Visio Gen Tab
+--------------------------
+
+`A small sample Demo video on YouTube  <https://www.youtube.com/watch?v=-89fiIj5BDs>`_
+

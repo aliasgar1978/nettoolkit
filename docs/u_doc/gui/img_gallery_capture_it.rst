@@ -1,6 +1,10 @@
+CaptureIT Button
+-----------------
+
 
 capture-it Tab
-------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 * A Utility which helps **capturing the show commands output** from Cisco and Juniper devices efficiently.
 * Multiple devices can be accessed **parallelly** to achieve it quickly.
@@ -21,20 +25,24 @@ Here are a few Keys to understand.
 * ``output mode``: Define output format. ( Either individual files for each commands output, or club all in a single file, or both )
 * ``concurrent connections`` : Set it as per your choice and device/network capability.
 
-Demo Video - Capture-IT
---------------------------
-
-`A small sample Demo video on YouTube  <https://www.youtube.com/watch?v=aplJu2ghgTw>`_
-
-
-----
 
 .. figure:: img/capture_it.png
    :alt: capture using commands list
 
 
 
----
+Demo Video - Capture-IT
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`A small sample Demo video on YouTube  <https://www.youtube.com/watch?v=aplJu2ghgTw>`_
+
+
+
+------
+
+Customize - Capture-IT
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 **Sample of customer.yaml**
 
@@ -72,8 +80,8 @@ Sample Foreign key dictionary:
    }
 
 
---------
-
+capture-it using Excel Tab
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Instead of capturing same commands for each device, devices can be group together in excel and outputs can be captured for those accordingly..
 
@@ -93,8 +101,10 @@ Instead of capturing same commands for each device, devices can be group togethe
       * **arista_eos**: list of all arista switch commands follows it. (leave blank if none.)
    * IP's present in multiple tabs: outputs will be appened for all tabs where it present.
 
---------
 
+
+capture-it via Server Excel Tab
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Capture via a jump host server is possible via below tab.
 

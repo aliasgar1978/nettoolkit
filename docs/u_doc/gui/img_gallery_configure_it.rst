@@ -1,5 +1,5 @@
 
-Configure Tab
+Configure Button
 --------------------------------
 
 * A Utility which helps **pushing the configuration** to Cisco and Juniper devices using ssh.
@@ -7,6 +7,8 @@ Configure Tab
 * Devices can be grouped together to process **batch wise**.
 * *SLOW WARNING*: Since it is using ssh and not netconf, it is slower.
 
+Required Fields
+~~~~~~~~~~~~~~~~~~~
 
 Here are a few Keys to understand.
 
@@ -15,8 +17,11 @@ Here are a few Keys to understand.
 * ``Excel tab Execution ordering``: Ascending/Descending order if a single Excel has multiple tabs.
 * ``Log folder``: where execution logs will be stored.
 
-----
 
 .. figure:: img/configure_it.png
    :alt: capture commands list
 
+Demo Video - Config push
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`A small sample Demo video on YouTube of Configuration Push <https://www.youtube.com/watch?v=6ymNZVU1EKA>`_

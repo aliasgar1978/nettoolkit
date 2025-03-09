@@ -1,3 +1,5 @@
+Addressing Button
+--------------------
 
 **GUI - addressing**
 
@@ -5,7 +7,7 @@ Enjoy IP Addressing calculations at your finger tips. Below are a few minitools 
 
 
 IP Scanner Tab
-----------------
+~~~~~~~~~~~~~~~
 
 +-----------------------------------------------------------------------------+
 | **IP Subnets Scanner**                                                      |
@@ -39,7 +41,8 @@ IP Scanner Tab
 
 
 Prefix Operation Tab
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 
 +-----------------------------------------------------------------------------+
@@ -82,7 +85,8 @@ Prefix Operation Tab
 
 
 Ping Batch Tab
---------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 +-----------------------------------------------------------------------------+
 | **Create Ping batch script file**                                           |

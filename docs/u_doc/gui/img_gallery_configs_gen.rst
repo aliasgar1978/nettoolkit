@@ -1,6 +1,9 @@
 
-Config Gen Tab
+Config Gen Button
 ---------------------------
+
+Config Generation Fields
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 aka: j2config
 
@@ -17,13 +20,22 @@ Here is a few Keys and requirements to understand.
 * ``custom package yaml file``: Yaml file containing custom package and class listing. ( more details below )
 
 
-----
-
 .. figure:: img/config_gen.png
    :alt: configuration generator
 
+Demo Video - ConfigGen
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
----
+`A small sample Demo video on YouTube of Configuration Generation <https://www.youtube.com/watch?v=ExqLuQ7ZTWI>`_
+
+Refer below additional videos on primary understanding of Device Database and Jinja Template
+`A small sample video on Device Database Preparation <https://www.youtube.com/watch?v=iimr-zI8-MU>`_
+`A small sample video on Jinja Template Preparation <https://www.youtube.com/watch?v=ffxYFXoR6a4>`_
+
+
+
+Customize - config gen
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Sample of customer.yaml**
 

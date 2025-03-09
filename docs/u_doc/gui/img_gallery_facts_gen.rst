@@ -1,11 +1,14 @@
 
-Facts Tab
+Facts Button
 ----------------------------
 
 
 * A Utility which helps **generating device facts** in user understandable **excel** format.
 * It supports for *cisco-ios & juniper - switches & routers* for now.
 
+
+Facts Generation Requirements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here is a few Keys and requirements to understand.
 
@@ -18,18 +21,14 @@ Other options are:
 * ``skip parsed excel files``: Enable support for older textfsm output parser output merge in output.
 * ``custom package yaml file``: Yaml file containing custom package and class listing. ( more details below )
 
-Demo Video - Facts Tab
---------------------------
-
-`A small sample Demo video on YouTube  <https://www.youtube.com/watch?v=q7wz70bZ5ig>`_
-
-----
 
 .. figure:: img/factsfinder.png
    :alt: facts generation
 
-----
 
+
+Customized Facts Generation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Sample of customer.yaml**
 
@@ -58,3 +57,10 @@ Sample Foreign key dictionary:
       'vrf':["vrf_vpnid", "vrfcolor", ],
       'interfaces':[ "int_type",  "int_type", "int_description", ],
    }
+
+
+Demo Video - Facts Generation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`A small sample Demo video on YouTube  <https://www.youtube.com/watch?v=q7wz70bZ5ig>`_
+

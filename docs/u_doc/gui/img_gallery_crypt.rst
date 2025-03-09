@@ -1,7 +1,9 @@
 
-Crypt Tab
+Crypt Button
 ------------------
 
+Password Encryption Decryption
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. figure:: img/crypt.png
    :alt: password encryption decryption
@@ -34,7 +36,7 @@ Crypt Tab
 
 
 Demo Video - Crypt Tab
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 `A small sample Demo video on YouTube  <https://www.youtube.com/watch?v=5cuwFYHZtO0>`_
 

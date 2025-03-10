@@ -21,3 +21,5 @@ Generate device configuration using jinja tempalte and excel database.
    Customize <j2_step2_customize>
    Generate <j2_step3_generate>
    Jinja Template - Sample <template>
+   Filters <j2_filters>
+   Table Classes <j2_table_classes>

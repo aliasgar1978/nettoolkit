@@ -28,6 +28,9 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.8.12
+     - Aug 05, 2025
+     - * Bug fixes.     
    * - 1.8.11
      - Feb 21, 2025
      - * Removed copyright message from gui.

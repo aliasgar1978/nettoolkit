@@ -25,11 +25,16 @@ fore_color_map = {
 }
 
 def print_banner(banner, color):
-	banner = pyfiglet.figlet_format(banner, font='doom')
-	print(fore_color_map[color] + '\n' + banner)
-	print(Fore.WHITE + "")
+	try:
+		banner = pyfiglet.figlet_format(banner, font='doom')
+		print(fore_color_map[color] + '\n' + banner)
+		print(Fore.WHITE + "")
+	except:
+		pass
 
 def print_table(df, tablefmt='rounded_outline'):
-	printable = tabulate(df, headers='keys', tablefmt=tablefmt)
-	print(printable)
-	
+	try:
+		printable = tabulate(df, headers='keys', tablefmt=tablefmt)
+		print(printable)
+	except:
+		print(f"[-] Unable to print table.")

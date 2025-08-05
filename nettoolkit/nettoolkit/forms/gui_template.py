@@ -36,8 +36,11 @@ class GuiTemplate():
 	def __post_init__(self):
 		self.var_dict = {}
 		self.max_buttons_in_a_row = 6
-		# copyright = " (by: Aliasgar [ALI])"
-		# self.header = self.header + copyright
+		self.display_footer = True
+		self.display_close_cancel = True
+		self.display_NGui_credit = False
+		self.hide_button_pallete_buttons = False
+		self.credit = " (by: Aliasgar [ALI])"
 
 	def __call__(self, initial_click):
 		self.standard_button_pallete_buttons()
@@ -46,13 +49,15 @@ class GuiTemplate():
 
 	def create_form(self, initial_click):
 		"""initialize the form, and keep it open until some event happens.
-		"""    	
-		layout = [
-			banner(self.banner), 
-			self.button_pallete(),
-			tabs_display(**self.tabs_dic),
-			# self.footer(self.version, self.form_width),
-		]
+		"""   
+		layout = []
+		if self.banner: layout.append(banner(self.banner))
+		layout.append(self.button_pallete())
+		layout.append(tabs_display(**self.tabs_dic))
+		if self.display_footer: layout.append(footer(self.version, self.form_width))
+
+		if self.display_NGui_credit:
+			self.header += self.credit
 
 		self.w = sg.Window(self.header, layout, 
 			size=(self.form_width, self.form_height), finalize=True, 
@@ -123,10 +128,13 @@ class GuiTemplate():
 	def standard_button_pallete_buttons(self):
 		"""get list of standard button pallete
 		"""		
-		self._button_pallete_buttons = [ 
-			sg.Button("Clear", change_submits=True,size=(10, 1), key='Clear'),
-			button_cancel("Close"),
-		]
+		if self.display_close_cancel: 
+			self._button_pallete_buttons = [ 
+				sg.Button("Clear", change_submits=True,size=(10, 1), key='Clear'),
+				button_cancel("Close"),
+			]
+		else:
+			self._button_pallete_buttons = []
 
 	def set_button_pallete(self):
 		nbpb = [sg.Button(dic['button_name'], change_submits=True, key=dic['key']) for short_name, dic in self.button_pallete_dic.items()]
@@ -152,13 +160,14 @@ class GuiTemplate():
 		Returns:
 			list: list with sg.Frame containing buttons
 		"""
+		if self.hide_button_pallete_buttons: return []
 		if len(self.button_pallete_buttons) > self.max_buttons_in_a_row:
 			pallet_buttons = [x for x in LST.split(self.button_pallete_buttons, self.max_buttons_in_a_row)]
 		else:
 			pallet_buttons = [self.button_pallete_buttons]
 		#
 		return [sg.Frame(title='Button Pallete', 
-				title_color='blue', 
+				title_color='black', 
 				relief=sg.RELIEF_RIDGE, 
 				layout = pallet_buttons,
 				),]

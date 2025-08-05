@@ -28,8 +28,8 @@ class NGui(GuiTemplate):
 	"""	
 
 	def __init__(self, * ,
-		header="Set Your private Header",
-		banner="Set Your private Banner",
+		header="",
+		banner="",
 		form_width=1440,
 		form_height=700,
 		frames_dict={},
@@ -48,6 +48,8 @@ class NGui(GuiTemplate):
 		self.button_pallete_updaters = {v['key'] for k, v in self.button_pallete_dic.items()}
 
 	def __call__(self, initial_frame=None):
+		if self.hide_button_pallete_buttons:
+			initial_frame = None
 		if not self.tabs_dic: self.collate_frames()
 		super().__call__(initial_frame) 
 

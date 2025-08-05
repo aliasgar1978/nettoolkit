@@ -488,6 +488,7 @@ def addressing(subnet, ddc_mask=None):
 	Returns:
 		IPv4, IPv6: IPv4 or IPv6 object
 	"""    	
+	subnet = subnet.strip()
 	if ddc_mask is not None:
 		try:
 			mask = to_dec_mask(ddc_mask)
@@ -497,7 +498,7 @@ def addressing(subnet, ddc_mask=None):
 				print(f"[-] Multiple mask entries received.\nsubnet mask value will {subnet} override, ddc_mask value {ddc_mask}")
 		except:
 			raise Exception("[-] Invalid dotted decimal mask provided... required format [255.255.255.0] got [{ddc_mask}]")
-	v_obj = Validation(subnet)	
+	v_obj = Validation(subnet)
 	if v_obj.validated: return v_obj.ip_obj
 
 

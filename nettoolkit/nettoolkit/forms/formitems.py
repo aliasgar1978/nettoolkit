@@ -5,9 +5,12 @@ try:
 	import PySimpleGUI as sg
 except:
 	pass
+from abc import abstractclassmethod
 import pandas as pd
 from pathlib import *
 import nettoolkit.nettoolkit.forms as frm
+import time
+
 
 # ---------------------------------------------------------------------------------------
 formpath_str = str(frm).split('from')[-1].split(">")[0].strip()[1:-1]
@@ -15,6 +18,42 @@ p = Path(formpath_str)
 previous_path = p.resolve().parents[0]
 CACHE_FILE = previous_path.joinpath('caches.xlsx')
 CONNECTOR_TYPES_FILE = previous_path.joinpath('cable_n_connectors.xlsx')
+
+
+# ------------------------------------------------------------------------
+#   DOUBLE CLICK ACtion
+# ------------------------------------------------------------------------
+class DoubleClick():
+	"""Class which defines basic methods to detect the mouse double click 
+	threshold is set to 0.5 ms
+	
+	should always have a do_action() method to determine what to when
+	mouse double click is detected.
+
+	Args:
+		obj (NGui): NGui object.
+		i (dict): NGui Window object fields.
+	"""
+
+	last_click_time = 0
+
+	def __init__(self, obj, i):
+		self.open_gtacmfa_devopt(obj, i)
+
+	def is_double_clicked(self, threshold=0.5):
+		current_time = time.time()
+		if current_time - DoubleClick.last_click_time <= threshold:
+			return True
+		return False
+
+	def open_gtacmfa_devopt(self, obj, i):
+		if self.is_double_clicked():
+			self.do_action()
+		DoubleClick.last_click_time = time.time()	
+
+	@abstractclassmethod
+	def do_action(self, **kwargs):
+		pass
 
 
 # ------------------------------------------------------------------------
@@ -83,7 +122,7 @@ def banner(version):
 	Returns:
 		list: list with banner text
 	"""    		
-	return [sg.Text(version, font='arialBold', justification='center', size=(768,1))] 
+	return [sg.Text(version, font=('Calibri', 20, 'bold'), text_color='lightgray', justification='center', size=(768,1))] 
 
 
 def footer(version, width):
@@ -220,8 +259,11 @@ def get_cache(cache_file, key):
 	try:
 		df = pd.read_excel(cache_file).fillna("")
 	except FileNotFoundError:
-		df = pd.DataFrame({'VARIABLE': [], 'VALUE':[]})
-		df.to_excel(cache_file, index=False)
+		try:
+			df = pd.DataFrame({'VARIABLE': [], 'VALUE':[]})
+			df.to_excel(cache_file, index=False)
+		except:
+			return ""
 	dic = df.to_dict()
 	#
 	for vrk, vr in dic['VARIABLE'].items():

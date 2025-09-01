@@ -36,8 +36,8 @@ Version 1.x updates
    * - 1.8.12
      - Aug 05, 2025
      - * addressing metod - Bug fix.
-     - * NGui: Added boolean instance variables and modified necessary code for their actions. ( hide_button_pallete_buttons, display_footer, display_close_cancel, display_NGui_credit, ).  Also added `DoubleClick` class to catch double click, banner font updated, get_cache method bug fix.
-     - * nettoolkit_common.formatting.print_banner & nettoolkit_common.formatting.print_table - bug fixed.
+       * NGui: Added boolean instance variables and modified necessary code for their actions. ( hide_button_pallete_buttons, display_footer, display_close_cancel, display_NGui_credit, ).  Also added `DoubleClick` class to catch double click, banner font updated, get_cache method bug fix.
+       * nettoolkit_common.formatting.print_banner & nettoolkit_common.formatting.print_table - bug fixed.
    * - 1.8.11
      - Feb 21, 2025
      - * Removed copyright message from gui.

@@ -79,6 +79,29 @@ create summaries with minimum prefix length
         ['10.10.0.0/19']
         ## See here even though summary can be /21, it has summarized to 19. ##
 
+find minssing prefixes from a summary
+--------------------------------------------
+
+    * import the ``Subnet_Spare`` from ``nettoolkit.addressing.summary``.
+    * Call it with arguments = summary and list of prefixes.
+
+    .. code-block:: python
+
+        from nettoolkit.addressing.summary import Subnet_Spare
+        
+        summary = '192.168.0.0/23'
+        prefixes = ['192.168.0.160/27', '192.168.1.64/27', '10.10.10.0/24', '224.0.0.0/24']
+
+        SS = Subnet_Spare(summary=summary, prefixes=prefixes)
+        SS.unused_prefixes(obj=True)
+        [192.168.0.0/25, 192.168.0.128/27, 192.168.0.192/26, 192.168.1.0/26, 192.168.1.96/27, 192.168.1.128/25]
+        ## Returns IP objects list ##
+
+        SS.unused_prefixes()
+        ['192.168.0.0/25', '192.168.0.128/27', '192.168.0.192/26', '192.168.1.0/26', '192.168.1.96/27', '192.168.1.128/25']
+        ## Returns subnets (str) list ##
+
+
 ------
 
 

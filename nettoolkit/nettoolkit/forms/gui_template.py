@@ -36,6 +36,8 @@ class GuiTemplate():
 	def __post_init__(self):
 		self.var_dict = {}
 		self.max_buttons_in_a_row = 6
+		self.background_color = '#64778d'
+		self.hide_titlebar = False
 		self.display_footer = True
 		self.display_close_cancel = True
 		self.display_NGui_credit = False
@@ -51,9 +53,9 @@ class GuiTemplate():
 		"""initialize the form, and keep it open until some event happens.
 		"""   
 		layout = []
-		if self.banner: layout.append(banner(self.banner))
+		if self.banner: layout.append(banner(self.banner, self.background_color))
 		layout.append(self.button_pallete())
-		layout.append(tabs_display(**self.tabs_dic))
+		layout.append(tabs_display(self.background_color, **self.tabs_dic))
 		if self.display_footer: layout.append(footer(self.version, self.form_width))
 
 		if self.display_NGui_credit:
@@ -62,6 +64,10 @@ class GuiTemplate():
 		self.w = sg.Window(self.header, layout, 
 			size=(self.form_width, self.form_height), finalize=True, 
 			return_keyboard_events=True,
+			no_titlebar=self.hide_titlebar,
+			background_color=self.background_color,
+			titlebar_background_color=self.background_color,
+			resizable=True,
 			# icon='data/sak.ico',
 		)
 		self.w.bind("<Escape>", "-ESCAPE-")
@@ -170,6 +176,7 @@ class GuiTemplate():
 				title_color='black', 
 				relief=sg.RELIEF_RIDGE, 
 				layout = pallet_buttons,
+				background_color=self.background_color,
 				),]
 
 	def event_update_element(self, **kwargs):

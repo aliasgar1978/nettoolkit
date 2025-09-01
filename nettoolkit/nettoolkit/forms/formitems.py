@@ -55,6 +55,67 @@ class DoubleClick():
 	def do_action(self, **kwargs):
 		pass
 
+# ------------------------------------------------------------------------
+#   Triple CLICK ACtion
+# ------------------------------------------------------------------------
+class TripleClick():
+	"""Class which defines basic methods to detect the mouse triple click 
+	threshold is set to 0.5 ms
+	
+	should always have a do_action() method to determine what to when
+	mouse double click is detected.
+
+	Args:
+		obj (NGui): NGui object.
+		i (dict): NGui Window object fields.
+	"""
+
+	first_click_time = 0
+	second_click_time = 1
+
+	def __init__(self, obj, i, threshold=0.5):
+		self.i = i
+		self.obj = obj
+		self.threshold = threshold
+		self.open_gtacmfa_devopt(obj, i)
+
+	def is_triple_clicked(self, threshold=0.5):
+		current_time = time.time()
+		if current_time - TripleClick.second_click_time <= threshold:
+			return True
+		return False
+
+	def open_gtacmfa_devopt(self, obj, i):
+		current_time = time.time()
+		if self.is_triple_clicked():
+			print('[*] Triple click achieved, Saving Passphrase to user preferences file')
+			self.do_action(obj=obj, i=i)
+		if current_time - TripleClick.first_click_time <= self.threshold:
+			TripleClick.first_click_time = current_time	
+		elif current_time - TripleClick.first_click_time <= self.threshold*2:
+			TripleClick.second_click_time = current_time
+
+		if (
+			current_time - TripleClick.first_click_time <= self.threshold and
+			current_time - TripleClick.second_click_time <= self.threshold*2
+			):
+			TripleClick.second_click_time = current_time
+
+		elif (TripleClick.second_click_time == 1 and TripleClick.first_click_time == 0  )or current_time - TripleClick.first_click_time <= self.threshold:
+			TripleClick.second_click_time = current_time
+
+		elif TripleClick.first_click_time ==0 or current_time - TripleClick.first_click_time <= self.threshold:
+			TripleClick.first_click_time = current_time	
+
+		else:
+			TripleClick.first_click_time = 0
+			TripleClick.second_click_time = 1
+
+
+
+	@abstractclassmethod
+	def do_action(self, *args, **kwargs):
+		pass
 
 # ------------------------------------------------------------------------
 def popupmsg(pre=None, *, post=None,):
@@ -102,7 +163,7 @@ def item_line(item, length):
 	"""    	
 	return [sg.Text(item*length)]
 
-def under_line(length): 
+def under_line(length, background_color=None): 
 	"""To draw a line
 
 	Args:
@@ -111,9 +172,13 @@ def under_line(length):
 	Returns:
 		list: underline row
 	"""		
-	return [sg.Text('_'*length)]
+	if background_color is None:
+		return [sg.Text('_'*length)]
+	else:
+		return [sg.Text('_'*length, background_color=background_color)]
 
-def banner(version):
+
+def banner(version, background_color):
 	"""Banner / Texts with bold center aligned fonts
 
 	Args:
@@ -122,7 +187,10 @@ def banner(version):
 	Returns:
 		list: list with banner text
 	"""    		
-	return [sg.Text(version, font=('Calibri', 20, 'bold'), text_color='lightgray', justification='center', size=(768,1))] 
+	return [sg.Text(version, font=('Calibri', 20, 'bold'), text_color='lightgray', justification='center', 
+		size=(768,1), background_color=background_color,
+
+	)] 
 
 
 def footer(version, width):
@@ -137,16 +205,20 @@ def footer(version, width):
 	"""    	
 	return [sg.Text(f"Prepared using Nettoolkit NGUI {version}", justification='right', size=(width, 1))]
 
-def tabs(**kwargs):
+def tabs(background_color, **kwargs):
 	"""create tab groups for provided kwargs
 
 	Returns:
 		sg.TabGroup: Tab groups
 	"""    		
-	tabs = []
+	_tabs = []
 	for k, v in kwargs.items():
-		tabs.append( sg.Tab(k, [[v]]) )
-	return sg.TabGroup( [tabs] )
+		_tabs.append( sg.Tab(k, [[v]], background_color=background_color,   ) )
+	return sg.TabGroup( [_tabs], 
+		background_color=background_color,
+		tab_background_color=background_color,
+		selected_background_color=background_color,
+	)
 
 
 def button_ok(text, **kwargs):  
@@ -204,13 +276,13 @@ def get_list(raw_items):
 		lst[i] = item.strip()		
 	return lst
 
-def tabs_display(**tabs_dic):
+def tabs_display(background_color, **tabs_dic):
 	"""define tabs display
 
 	Returns:
 		list: list of tabs
 	"""    		
-	return [tabs(**tabs_dic),]
+	return [tabs(background_color, **tabs_dic),]
 
 # ---------------------------------------------------------------------------------------
 

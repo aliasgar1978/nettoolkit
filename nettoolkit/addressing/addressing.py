@@ -868,6 +868,18 @@ class IP():
 			if begin>0:  i2 = i2+begin
 			yield self.n_thIP(i2)
 
+	@property
+	def startsat_dec(self):
+		return int(binsubnet(self.subnet_zero()), 2)
+	@property
+	def endsat_dec(self):
+		return int(binsubnet(self.broadcast_address()), 2)
+	@property
+	def range(self):
+		return range(self.startsat_dec, self.endsat_dec+1)
+
+	def is_subset(self, summary):
+		return isSubset(self, summary)
 
 
 # ----------------------------------------------------------------------------

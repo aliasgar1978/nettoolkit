@@ -1,7 +1,7 @@
 
 import pandas as pd
 from dataclasses import dataclass, field
-from nettoolkit.addressing import addressing, dec2dotted_ip, inv_subnet_size_to_mask, IPv4
+from nettoolkit.addressing import addressing, dec2dotted_ip, inv_subnet_size_to_mask, IPv4, isSubset
 from nettoolkit.nettoolkit_db import sort_dataframe_on_subnet, read_xl_all_sheet, read_an_xl_sheet
 
 # =========================================================================================== 
@@ -214,11 +214,64 @@ def calc_summmaries(min_subnet_size, prefixes):
 	return nSummaries
 
 # =========================================================================================== 
+#  Get unused prefixes details from provided summary subnet 
+# =========================================================================================== 
+@dataclass
+class Subnet_Spare():
+	summary: str
+	prefixes: list = field(default_factory=[])
 
+	def __post_init__(self):
+		try:
+			self.sbig = addressing(self.summary) 
+		except:
+			self.sbig = None
+		self.get_subset_subnets()
+		self.remove_used_chunks()
+
+	def get_subset_subnets(self):
+		self.subset_prefixes = []
+		if not self.sbig: return
+		for subnet in self.prefixes:
+			try:
+				ssmall = addressing(subnet)
+			except:
+				## invalid subnets not checked
+				continue 
+			if ssmall.is_subset(self.sbig):
+				self.subset_prefixes.append(ssmall)
+
+	@property
+	def smallest_pfx_mask(self):
+		return min({s.mask for s in self.subset_prefixes})
+
+	@property
+	def smallest_pfx_host_count(self):
+		return 2**(32-self.smallest_pfx_mask)
+
+	@property
+	def min_divisor(self):
+		return int(len(self.sbig) / self.smallest_pfx_host_count)
+
+	@property
+	def smallest_divisions(self):
+		return self.sbig / self.min_divisor
+
+	def remove_used_chunks(self):
+		self.remaining_chunk_pfx = set(self.smallest_divisions)
+		for chunk in self.smallest_divisions:
+			for subset_pfx in self.subset_prefixes:
+				if isSubset(chunk, subset_pfx):
+					self.remaining_chunk_pfx.remove(chunk)
+
+	def unused_prefixes(self, obj=False):
+		Agg = Aggregate(self.remaining_chunk_pfx)
+		if obj:
+			return Agg.aggregates
+		return Agg.summaries
+
+# =========================================================================================== 
 if __name__ == "__main__":
 	pass
 # =========================================================================================== 
-
-
-
 

@@ -31,6 +31,8 @@ Version 1.x updates
    * - 1.8.13
      - Sep 01, 2025
      - * addressing.summary New class added ``Subnet_Spare``.
+       * addressing.IP class added new properties (**startsat_dec**, **endsat_dec**, **range**), added new method **is_subset**
+       * NGui: properties added - (**background_color**, **hide_titlebar** ), Enable window resizing,  added `TripleClick` class to catch triple click action,       
    * - 1.8.12
      - Aug 05, 2025
      - * addressing metod - Bug fix.

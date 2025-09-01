@@ -28,6 +28,9 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.8.13
+     - Sep 01, 2025
+     - * addressing.summary New class added ``Subnet_Spare``.
    * - 1.8.12
      - Aug 05, 2025
      - * addressing metod - Bug fix.

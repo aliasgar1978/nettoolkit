@@ -38,6 +38,14 @@ def expand(v6subnet, withMask=False):
 			p = STR.string_concate(p, '0', conj=":")
 		if p != '':
 			v6subnet = p + ':' + v6subnet
+
+		# ~~~~~~~ Pad hextate zeros ~~~~~~~
+		for i, x in enumerate(v6subnet.split(":")):
+			hxtt = get_hext(v6subnet, hexTnum=i+1)
+			hxtt = hxtt.rjust(4, "0")
+			p = STR.string_concate(p, hxtt , conj=':')
+		v6subnet = p
+
 	if withMask:
 		return f'{v6subnet}/{mask}'
 	else:
@@ -63,7 +71,7 @@ def shrink(v6subnet, withMask=True):
 
 	zero_count, zero_counts, zerostart = 0 , {}, False
 	for i, h in enumerate(s):
-		zerostart = h == '0'
+		zerostart = h[0] == '0'
 		if not zerostart: 
 			zero_count = 0
 			continue

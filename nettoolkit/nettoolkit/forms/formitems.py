@@ -187,7 +187,7 @@ def banner(version, background_color):
 	Returns:
 		list: list with banner text
 	"""    		
-	return [sg.Text(version, font=('Calibri', 20, 'bold'), text_color='lightgray', justification='center', 
+	return [sg.Text(version, font=('Calibri', 20, 'bold'), text_color='#00388F', justification='center', 
 		size=(768,1), background_color=background_color,
 
 	)] 

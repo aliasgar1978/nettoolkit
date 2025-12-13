@@ -1389,6 +1389,11 @@ class DifferenceDict(dict):
 def _get_differences(subject, change):
 	if isinstance(subject, (str, int, float)):
 		diff = change + str(subject)
+	elif isinstance(subject, (list, tuple)):
+		diff = []
+		for item in subject:
+			df = _get_differences(item, change)
+			diff.append(df)
 	elif isinstance(subject, set):
 		diff = set()
 		for item in subject:

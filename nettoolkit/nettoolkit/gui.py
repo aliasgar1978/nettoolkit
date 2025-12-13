@@ -47,11 +47,11 @@ class NGui(GuiTemplate):
 		self.event_catchers.update({v['key']: None for k, v in self.button_pallete_dic.items()})
 		self.button_pallete_updaters = {v['key'] for k, v in self.button_pallete_dic.items()}
 
-	def __call__(self, initial_frame=None):
+	def __call__(self, initial_frame=None, read_loop_event=True):
 		if self.hide_button_pallete_buttons:
 			initial_frame = None
 		if not self.tabs_dic: self.collate_frames()
-		super().__call__(initial_frame) 
+		super().__call__(initial_frame, read_loop_event) 
 
 	def update_set(self, name, value):
 		if self.__dict__.get(name): 

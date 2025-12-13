@@ -44,12 +44,12 @@ class GuiTemplate():
 		self.hide_button_pallete_buttons = False
 		self.credit = " (by: Aliasgar [ALI])"
 
-	def __call__(self, initial_click):
+	def __call__(self, initial_click, read_loop_event):
 		self.standard_button_pallete_buttons()
 		self.set_button_pallete()
-		self.create_form(initial_click)
+		self.create_form(initial_click, read_loop_event)
 
-	def create_form(self, initial_click):
+	def create_form(self, initial_click, read_loop_event):
 		"""initialize the form, and keep it open until some event happens.
 		"""   
 		layout = []
@@ -79,6 +79,10 @@ class GuiTemplate():
 				frames=self.button_pallete_dic[initial_click]['frames'],
 				disabled=disabled,
 			)
+		if read_loop_event:
+			self.read_event_loop()
+
+	def read_event_loop(self):
 		while True:
 			event, (i) = self.w.Read()
 
@@ -89,7 +93,7 @@ class GuiTemplate():
 				self.clear_fields()
 				pass
 			if event in self.event_catchers:
-				try:
+				# try:
 					# ---------------------------------------------
 					if event in self.event_item_updaters:
 						self.event_catchers[event](self, i, event)
@@ -102,10 +106,10 @@ class GuiTemplate():
 							self.pallet_btn_click(key=event, frames=dic['frames'], disabled=disabled)
 					else:
 						self.event_catchers[event](i)
-				except Exception as e:
-					# ---------------------------------------------
-					print(f"\n[-] Error: {e}\n[-] Event Error {event},")
-					# ---------------------------------------------
+				# except Exception as e:
+				# 	# ---------------------------------------------
+				# 	print(f"\n[-] Error: {e}\n[-] Event Error {event},")
+				# 	# ---------------------------------------------
 
 			self.user_events(i, event)
 			# print(event)

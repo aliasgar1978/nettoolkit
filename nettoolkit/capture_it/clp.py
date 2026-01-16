@@ -2,7 +2,7 @@
 # Imports
 # -----------------------------------------------------------------------------
 import pandas as pd
-from .command import COMMAND
+from nettoolkit.capture_it.command import COMMAND
 
 # -----------------------------------------------------------------------------
 # Execution of Show Commands on a single device. 

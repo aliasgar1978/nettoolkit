@@ -20,7 +20,6 @@ setuptools.setup(
     ],
     python_requires='>=3.10',
     install_requires=['pandas', 'openpyxl', 
-        'PySimpleGUI', 
         'numpy', 'pyfiglet', 'colorama', 'tabulate',
         'xlrd', 'jinja2', 'paramiko', 'netmiko', 'ntc-templates', 'pyyaml', 'attrs', 'textfsm', 'jumpssh',
         'requests',

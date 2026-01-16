@@ -10,9 +10,9 @@ from pathlib import Path
 import nettoolkit.facts_finder as ff
 from collections import OrderedDict
 
-from .exec_device import Execute_Device
-from .common import exec_log
-from .cap_summary import TableReport
+from nettoolkit.capture_it.exec_device import Execute_Device
+from nettoolkit.capture_it.common import exec_log
+from nettoolkit.capture_it.cap_summary import TableReport
 
 # -----------------------------------------------------------------------------
 

@@ -1,10 +1,8 @@
 
 import os
-try:
-	from PySimpleGUI import Popup
-except:
-	pass
+from nettoolkit.nettoolkit.forms.formitems import sg
 
+Popup = sg.Popup
 
 # -----------------------------------------------------------------------------------
 # Stencil functions

@@ -30,7 +30,8 @@ Version 1.x updates
 
    * - 1.8.14
      - Oct 27, 2025
-     - * Bug fixes: IPv6 sunet expand/shrink function.  NGui-Banner text color changed from gray to blue,  
+     - * Bug fixes: IPv6 sunet expand/shrink function.  NGui-Banner text color changed from gray to blue
+       * fix for gui issue
    * - 1.8.13
      - Sep 01, 2025
      - * addressing.summary New class added ``Subnet_Spare``.

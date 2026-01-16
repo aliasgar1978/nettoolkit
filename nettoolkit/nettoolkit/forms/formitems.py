@@ -1,10 +1,6 @@
 
 # ---------------------------------------------------------------------------------------
-sg = None
-try:
-	import PySimpleGUI as sg
-except:
-	pass
+import nettoolkit.pySG.pysg as sg
 from abc import abstractclassmethod
 import pandas as pd
 from pathlib import *

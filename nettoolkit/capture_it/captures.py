@@ -4,8 +4,8 @@
 import pandas as pd
 from nettoolkit.nettoolkit_db import append_to_xl
 	
-from .common import juniper_add_no_more
-from .clp import CLP
+from nettoolkit.capture_it.common import juniper_add_no_more
+from nettoolkit.capture_it.clp import CLP
 
 # -----------------------------------------------------------------------------
 # Captures Class

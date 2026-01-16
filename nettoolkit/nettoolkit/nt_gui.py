@@ -3,7 +3,7 @@
 import nettoolkit as nt
 import pyfiglet
 from colorama import Fore
-from .gui import NGui
+from nettoolkit.nettoolkit.gui import NGui
 from nettoolkit.nettoolkit_common import print_banner
 
 from nettoolkit.capture_it.forms.frames   import CAPTUREIT_FRAMES

@@ -2,16 +2,16 @@
 # Imports
 # -----------------------------------------------------------------------------
 from time import sleep
-from nettoolkit.nettoolkit_common import STR, LST, IP
 from dataclasses import dataclass
 import typing
 
 from copy import deepcopy
 import nettoolkit.facts_finder as ff
 from nettoolkit.detect import DeviceType
-from .conn import conn
-from .captures import Captures
-from .common import cmd_line_pfx
+from nettoolkit.capture_it.conn import conn
+from nettoolkit.capture_it.captures import Captures
+from nettoolkit.capture_it.common import cmd_line_pfx
+from nettoolkit.nettoolkit_common import STR, LST, IP
 
 # -----------------------------------------------------------------------------
 # Execution of Show Commands on a single device. 

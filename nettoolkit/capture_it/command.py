@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 import os
 from nettoolkit.nettoolkit_common import STR, IO, printmsg
-from .common import cmd_line_pfx
+from nettoolkit.capture_it.common import cmd_line_pfx
 
 
 # -----------------------------------------------------------------------------

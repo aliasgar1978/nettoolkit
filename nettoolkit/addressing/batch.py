@@ -2,11 +2,8 @@
 # provide prefixes and names of prefixes to it. 
 # """
 
-from .addressing import addressing
-try:
-	import PySimpleGUI as sg
-except:
-	pass
+from nettoolkit.addressing.addressing import addressing
+from nettoolkit.nettoolkit.forms.formitems import sg
 
 # -----------------------------------------------------------------------------
 # Class to initiate UserForm

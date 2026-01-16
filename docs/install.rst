@@ -58,7 +58,6 @@ Inherited python packages
 
 	* pandas
 	* openpyxl
-	* PySimpleGUI
 	* numpy
 	* xlrd
 	* pywin32 ( manual install required )

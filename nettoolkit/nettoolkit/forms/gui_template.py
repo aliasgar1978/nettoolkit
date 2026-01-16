@@ -1,9 +1,6 @@
 
 # ---------------------------------------------------------------------------------------
-try:
-	import PySimpleGUI as sg
-except:
-	pass
+import nettoolkit.pySG.pysg as sg
 from abc import abstractclassmethod, abstractproperty, abstractmethod
 from dataclasses import dataclass, field
 from nettoolkit.nettoolkit_common import LST

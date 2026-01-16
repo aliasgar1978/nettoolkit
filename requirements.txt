@@ -6,7 +6,6 @@ numpy
 openpyxl
 pandas
 paramiko
-PySimpleGUI
 textfsm
 xlrd
 pyyaml

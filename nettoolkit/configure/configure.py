@@ -7,9 +7,9 @@ from netmiko import ConnectHandler
 from itertools import zip_longest
 from time import sleep
 import traceback
+
 from nettoolkit.nettoolkit_common import printmsg, STR, LST, Multi_Execution, print_banner
 from nettoolkit.nettoolkit_db import read_xl_all_sheet
-
 from nettoolkit.detect import DeviceType
 
 # -----------------------------------------------------------------------------

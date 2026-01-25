@@ -4,11 +4,11 @@ Installation & Requirements
 Requirements
 ==================
 
-	1. python >= 3.9
-	2. MS-Excel
-	3. MS-Visio
-	4. Visio stencil(s)
-	5. Jinja Templates
+	1. python >= 3.9     ( Tested with python 3.10 )
+	2. MS-Excel          ( Tested with Office 365  )
+	3. MS-Visio          ( Tested on MS Visio2013  )
+	4. Visio stencil(s)  ( Free available on web   )
+	5. Jinja Templates   ( Create your own - samples given )
 
 -----------------
 
@@ -43,7 +43,7 @@ Install windows os library for python::
 	# or 
     python -m pip install --upgrade pywin32
 
-This is mandatory for MS-visio drawing generation. And it will work only on windows platforms.
+This is mandatory for MS-visio drawing generation. And it will work only on **windows** platforms.
 
 
 
@@ -53,14 +53,13 @@ This is mandatory for MS-visio drawing generation. And it will work only on wind
 Inherited python packages
 ====================================
 
-	Below are a few inherited packages by Nettoolkit.  By default those will also get auto install along with Nettoolkit.
+	Below are a few inherited packages by Nettoolkit.  By default those will also get auto install along with Nettoolkit except pywin32.
 	However just in case if any of these are missing and could not installed, please try to manually install those with pip install command as mentioned above.
 
-	* pandas
+	* pandas         ( Tested on - 2.3.1 )
 	* openpyxl
-	* numpy
+	* numpy          ( Tested on - 2.2.6 )
 	* xlrd
-	* pywin32 ( manual install required )
 	* pyyaml
 	* attrs
 	* jinja2
@@ -71,6 +70,7 @@ Inherited python packages
 	* tabulate
 	* colorama
 	* pyfiglet
+	* pywin32        ( manual install required - this is to interact with MS office apps )
 
 
 -------------------------------------
@@ -78,7 +78,7 @@ Inherited python packages
 Do this: Enable Macros for MS-Visio
 ***********************************
 
-Enable all macros from Trust Center settings in order to allow visio access for script. ( Only in case if access error )
+Enable all macros from Trust Center settings in order to allow visio access for script. ( Optional, Only in case if access error ) 
 
 .. image:: u_doc/img/trust.png
   :width: 400

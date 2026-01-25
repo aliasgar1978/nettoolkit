@@ -1,6 +1,5 @@
-#!/usr/bin/python3
 
-### Courtesy - pySimpleGui v4.60.5
+### Courtesy - pySimpleGui v4.60.5 ### THANK YOU!!!
 
 version = __version__ = "4.60.5 Released 21-May-2023"
 

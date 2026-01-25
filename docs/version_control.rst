@@ -28,10 +28,15 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.9.0
+     - Jan 25, 2026
+     - * Re-Upload
    * - 1.8.14
-     - Oct 27, 2025
+     - Jan 24, 2026
      - * Bug fixes: IPv6 sunet expand/shrink function.  NGui-Banner text color changed from gray to blue
        * fix for gui issue
+       * Imported new module pysg
+       * Don't use it - error in upload, corrupted files v1.8
    * - 1.8.13
      - Sep 01, 2025
      - * addressing.summary New class added ``Subnet_Spare``.

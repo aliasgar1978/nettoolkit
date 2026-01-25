@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nettoolkit",
-    version="1.8.14",                                           ### To be Published.
+    version="1.9.0",                                           ### To be Published.
     author="ALIASGAR - ALI",
     author_email="aholo2000@gmail.com",
     description="Tool Set for Networking Geeks",
@@ -19,11 +19,25 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.10',
-    install_requires=['pandas', 'openpyxl', 
-        'numpy', 'pyfiglet', 'colorama', 'tabulate',
-        'xlrd', 'jinja2', 'paramiko', 'netmiko', 'ntc-templates', 'pyyaml', 'attrs', 'textfsm', 'jumpssh',
+    install_requires=[
+        'pandas', 
+        'openpyxl', 
+        'numpy', 
+        'pyfiglet', 
+        'colorama', 
+        'tabulate',
+        'xlrd', 
+        'jinja2', 
+        'paramiko', 
+        'netmiko', 
+        'ntc-templates', 
+        'pyyaml', 
+        'attrs', 
+        'textfsm', 
+        'jumpssh',
         'requests',
         # 'pywin32',                    ## Windows specific library, need to do manually...
+        # 'pysimplegui',                ## incorporated. since deprecated v4.x
     ],
     package_data={
         'nettoolkit.nettoolkit.forms':  ['cable_n_connectors.xlsx', ],

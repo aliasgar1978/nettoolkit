@@ -7,6 +7,7 @@ import pandas as pd
 
 from abc import ABC, abstractproperty, abstractclassmethod
 import datetime
+from time import sleep
 from re import compile
 from collections import OrderedDict
 import os
@@ -1682,6 +1683,7 @@ class Multi_Execution(Default):
 	"""
 
 	max_connections = 100
+	sleep_by = 0
 
 	def __str__(self): return self._repr()
 
@@ -1737,6 +1739,9 @@ class Multi_Execution(Default):
 			t = threading.Thread(target=self.execute, args=(hn,) )
 			t.start()
 			ts.append(t)
+			if self.sleep_by and isinstance(self.sleep_by, int):
+				sleep(self.sleep_by)
+
 		for t in ts: t.join()
 
 	def execute_sequencial(self):

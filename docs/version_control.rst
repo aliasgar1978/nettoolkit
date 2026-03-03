@@ -28,6 +28,9 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.9.1
+     - Mar 5, 2026
+     - * **Multi_Execution** class updated to enable sleep timer between threads (**sleep_by**) 
    * - 1.9.0
      - Jan 25, 2026
      - * Re-Upload

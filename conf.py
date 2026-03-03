@@ -21,7 +21,7 @@ copyright = '2023, ALIASGAR [ALI]'
 author = 'ALIASGAR [ALI]'
 
 # The full version, including alpha/beta/rc tags
-release = '1.9.0'
+release = '1.9.1'
 
 # -- General configuration ---------------------------------------------------
 

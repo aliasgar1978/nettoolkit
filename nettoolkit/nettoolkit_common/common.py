@@ -422,35 +422,26 @@ def abs_command_cisco(cmd):
 	spl_cmd = cmd.split()
 	for c_cmd in CISCO_ABS_COMMANDS:
 		spl_c_cmd = c_cmd.split()
-		if len(spl_cmd) == len(spl_c_cmd):
-			for i, word in enumerate(spl_cmd):
-				try:
-					word_match = spl_c_cmd[i].startswith(word)
-					if not word_match: break
-				except:
-					word_match = False
-					break
-			if word_match: break
-		else:
-			word_match = False
-	if word_match:  return c_cmd
+		if len(spl_cmd) != len(spl_c_cmd):
+			continue
+		if all(c_word.startswith(word) for word, c_word in zip(spl_cmd, spl_c_cmd)):
+			return c_cmd
 	return cmd
+
 
 def abs_command_juniper(cmd):
-	"""returns absolute truked command if any filter applied
+	"""Return the full Juniper command for a truncated input.
 
 	Args:
-		cmd (str): executed/ captured command ( can be trunked or full )
+		cmd (str): executed/captured command (can be truncated or contain filters)
 
 	Returns:
-		str: juniper command - trunked
-	"""    	
-	abs_cmd = cmd.split("|")[0].strip()
-	for j_cmd in JUNIPER_ABS_COMMANDS:
-		match = abs_cmd == j_cmd
-		if match: return abs_cmd
-	return cmd
-
+		str: matched Juniper command, or the original input if no match found
+	"""
+	base_cmd = cmd.split("|", 1)[0].strip()
+	if base_cmd in JUNIPER_ABS_COMMANDS:
+		return base_cmd
+	return next((j_cmd for j_cmd in JUNIPER_ABS_COMMANDS if j_cmd.startswith(base_cmd)), cmd)
 
 # ==========================================================================================
 
@@ -567,29 +558,30 @@ class CapturesOut():
 		else:
 			raise Exception(f"[-] Invalid configuration, Unable to determine Device type. {self.device_type} for provided capture log file")
 
-	# generate dictionary by outputs splitted by its command as key 
+
+	# generate dictionary by outputs split by command as key
 	def _gen_output_list_dict(self):
-		toggle = 0
-		self.output_list_dict, op_lst = {}, []
-		for l in self.capture_log_list:
-			if toggle and l.find(CMD_LINE_START_WITH)>0:
-				self.output_list_dict[abs_cmd] = op_lst
-				op_lst = []
-				toggle=0
-			#
-			if l.find(CMD_LINE_START_WITH)>0:
-				toggle = True
+		self.output_list_dict = {}
+		current_cmd = None
+		current_output = []
+
+		for line in self.capture_log_list:
+			stripped_line = line.strip()
+			if stripped_line.startswith(CMD_LINE_START_WITH):
+				if current_cmd is not None:
+					self.output_list_dict[current_cmd] = current_output
+				current_output = []
+				cmd_line = stripped_line[len(CMD_LINE_START_WITH):]
 				if self.device_type == 'Juniper':
-					cmd_line_trunked = l[l.find(CMD_LINE_START_WITH)+20:].split("|")[0].strip()
-				else:
-					cmd_line_trunked = l[l.find(CMD_LINE_START_WITH)+20:].strip()
-				abs_cmd = self.abs_cmd_fn( cmd_line_trunked )
+					cmd_line = cmd_line.split("|", 1)[0].strip()
+				current_cmd = self.abs_cmd_fn(cmd_line)
 				continue
-			#
-			if toggle:
-				op_lst.append(l.rstrip())
-		if toggle:
-			self.output_list_dict[abs_cmd] = op_lst
+
+			if current_cmd is not None:
+				current_output.append(line.rstrip())
+
+		if current_cmd is not None:
+			self.output_list_dict[current_cmd] = current_output
 			
 	# verify if output has provided command output or not.
 	def _has(self, cmd):

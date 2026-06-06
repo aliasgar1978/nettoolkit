@@ -1,7 +1,7 @@
 import inspect
 import unittest
 
-from nettoolkit.addressing import sorted_v4_addresses, sort_by_size
+from nettoolkit.addressing import IPv4, sorted_v4_addresses, sort_by_size
 # from addressing import IPv4, sorted_v4_addresses, sort_by_size
 
 

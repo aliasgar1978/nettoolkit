@@ -788,6 +788,7 @@ class IP():
 		spl_subnet = self.subnet.split("/")
 		self.mask = int(spl_subnet[1]) if len(spl_subnet) > 1 else self.bit_length
 		self.net = spl_subnet[0] if len(spl_subnet) > 0 else None
+
 	def __hash__(self):
 		try:
 			return int(self)*self.mask
@@ -842,6 +843,9 @@ class IP():
 	def host_count(self):
 		return len(self)
 	@property
+	def ip_count(self):
+		return len(self)
+	@property
 	def is_host(self):
 		return self.mask == self.bit_length
 	@property
@@ -872,7 +876,7 @@ class IP():
 			_bcip = int(binsubnet(self.broadcast_address()), 2)
 		else:
 			_bcip = _nip + (end-begin)
-		for i2, x2 in enumerate(range(_nip, _bcip+1)):
+		for i2, x2 in enumerate(range(_nip, _bcip)):
 			if begin>0:  i2 = i2+begin
 			yield self.n_thIP(i2)
 

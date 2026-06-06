@@ -28,6 +28,12 @@ Version 1.x updates
      - Date   
      - Updates
 
+   * - 1.9.3
+     - Jun, 2026
+      - * Bug fixes: 1. Addressing module - n_thIP method withMask argument bug fix. 2. Addressing module - expand method bug fix.
+        * documentation updates.
+        * added unittest for addressing, summary, and aggregate modules.
+
    * - 1.9.1
      - Mar 5, 2026
      - * **Multi_Execution** class added a new property `sleep_by` to enable sleep timer between threads. 

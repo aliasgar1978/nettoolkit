@@ -217,9 +217,9 @@ Two adjacent IPv4 Objects can be clubbed together to get the summary out of it (
         >>> s1 + s2
         10.10.8.0/22
         
-        # notice, return type is IPv4 not a string
+        # notice, return type is string
         >>> type(s1 + s2)		
-        'nettoolkit.addressing.IPv4'
+        <class 'str'>
 
 
 *Non-contiguous*, *un-summarizable*, *greater than 2* - subnets **cannot club** this way.  Refer *Create Summaries* section on *Prefix Operation* page for more.

@@ -55,11 +55,11 @@ Create Summaries
 
         # -- below is list of aggregate object(s) --
         Agg.aggregates
-        [10.10.0.0/21]
+        [10.10.0.0/21, 10.20.4.0/22]
 
         # -- below is list of aggregate strings --
         Agg.summaries
-        ['10.10.0.0/21']
+        ['10.10.0.0/21', '10.20.4.0/22'] 
 
 
 create summaries with minimum prefix length
@@ -76,7 +76,7 @@ create summaries with minimum prefix length
             '10.10.2.0/23', '10.20.4.0/23', '10.10.4.0/22'  
         )
         calc_summmaries(min_subnet_size=19, prefixes=prefixes)
-        ['10.10.0.0/19']
+        ['10.10.0.0/19', '10.20.0.0/19']
         ## See here even though summary can be /21, it has summarized to 19. ##
 
 find minssing prefixes from a summary

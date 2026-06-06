@@ -1,13 +1,12 @@
 import inspect
 import unittest
 
-# from nettoolkit.addressing.addressing import IPv4
-# from nettoolkit.addressing.summary import Aggregate
-# from nettoolkit.addressing import isSubset
-from nettoolkit.addressing.summary import calc_summmaries
+from nettoolkit.addressing.addressing import IPv4
+from nettoolkit.addressing import isSubset
+from nettoolkit.addressing.summary import calc_summmaries, Subnet_Spare, Aggregate
 
-from addressing import IPv4, isSubset
-from summary import Aggregate, calc_summmaries, Subnet_Spare
+# from addressing import IPv4, isSubset
+# from summary import Aggregate, calc_summmaries, Subnet_Spare
 
 
 

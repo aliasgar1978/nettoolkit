@@ -1,11 +1,8 @@
 import inspect
 import unittest
 
-# from nettoolkit.addressing.addressing import IPv4
-# from nettoolkit.addressing.summary import Aggregate
-# from nettoolkit.addressing import sorted_v4_addresses, sort_by_size
-
-from addressing import IPv4, sorted_v4_addresses, sort_by_size
+from nettoolkit.addressing import sorted_v4_addresses, sort_by_size
+# from addressing import IPv4, sorted_v4_addresses, sort_by_size
 
 
 class TestIPv4Subnet(unittest.TestCase):

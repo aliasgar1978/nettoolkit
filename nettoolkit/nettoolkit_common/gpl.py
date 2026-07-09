@@ -41,6 +41,7 @@ CISCO_IFSH_IDENTIFIERS = {
 	"PHYSICAL": PHYSICAL_IFS,
 	"NVI": {'NVI':2,},
 	"NV": {'NV':2,},
+	
 }
 JUNIPER_IFS_IDENTIFIERS = {
 	"VLAN": ('irb', 'vlan', 'iw'),
@@ -56,6 +57,10 @@ JUNIPER_IFS_IDENTIFIERS = {
 		'ct1', 'ct3', 'ds', 'e1', 'e3', 'ls', 'ml', 'oc3', 'pip', 'se', 'si',  'so', 'stm1', 'stm4', 'stm16',
 		't1', 't3',    ),
 	"MONITORING": ('dfc', ),
+	"BRIDGE": ('br', 'bd'),
+	"VPLS": ('vpls', ),
+	"VIRTUAL": ( 'vif', 'virt'),
+	"STACK": ('st', ),
 }
 
 # -----------------------------------------------------------------------------
@@ -120,6 +125,7 @@ class Container(ABC):
 		elif isinstance(self.objVar, (dict, OrderedDict)):
 			for key, value in self.objVar.items():
 				yield (key, value)
+
 
 ## TBD / NOT IMPLEMENTED YET ##
 # class Numeric():
@@ -1200,6 +1206,7 @@ class LST():
 			if not hn in devices: devices.add(hn)
 		return devices
 
+	
 	@staticmethod
 	def split(lst, n):
 		"""yield provided list with group of n number of items
@@ -1211,11 +1218,15 @@ class LST():
 		Yields:
 			list generator: group of items
 		"""		
-		s = 0
-		lst = tuple(lst)
-		for _ in range(s, len(lst), n):
-			yield lst[_: s+n]
-			s += n
+		# normalize to a sequence supporting slicing
+		try:
+			length = len(lst)
+		except TypeError:
+			# if not sized, convert to list
+			lst = list(lst)
+			length = len(lst)
+		for i in range(0, length, n):
+			yield lst[i:i+n]
 
 	@staticmethod
 	def list_to_octet(lst):
@@ -1235,6 +1246,7 @@ class LST():
 		for x in lst: l = str(x) if l == '' else l +'.'+ str(x)
 		return l
 
+	
 	@staticmethod
 	def flatten(lst):
 		"""flattens nested list to single list

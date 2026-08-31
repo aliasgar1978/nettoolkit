@@ -63,3 +63,40 @@ def compare_two_ping_files(pre_file, post_file):
         print("🟢 NEW (NOT responding BEFORE, but started responding AFTER):")
         print(", ".join(sorted(new_ips)))
         print(border)
+
+
+# ====================================================================================
+# Replacement of below
+# def sort_dataframe_on_subnet(df, col, ascending=True):
+# ====================================================================================
+def sort_subnet_list(prefixes, ascending=True):
+    """Sorts a list of subnet strings in place.
+
+    Args:
+        prefixes (list): List of subnet strings (e.g., ['10.0.0.0/24', '192.168.1.0/24'])
+        ascending (bool, optional): Sort order. Defaults to True.
+
+    Returns:
+        list: The sorted list of subnets.
+    """
+    def get_sort_key(subnet_str):
+        try:
+            # 1. Split IP from prefix (e.g., '192.168.1.0/24' -> '192.168.1.0', '24')
+            if '/' in subnet_str:
+                ip_str, prefix_str = subnet_str.split('/', 1)
+                prefix = int(prefix_str)
+            else:
+                ip_str, prefix = subnet_str, 32
+
+            # 2. Convert IP octets to a tuple of integers (e.g., (192, 168, 1, 0))
+            octets = tuple(int(x) for x in ip_str.split('.'))
+
+            # 3. Return a combined sorting key: (octets, prefix)
+            return octets + (prefix,)
+        except (ValueError, AttributeError):
+            # Handle empty or malformed strings gracefully by forcing them to the end
+            return (256, 256, 256, 256, 32)
+
+    # Sort the list using the custom integer-tuple key
+    return sorted(prefixes, key=get_sort_key, reverse=not ascending)
+# ====================================================================================

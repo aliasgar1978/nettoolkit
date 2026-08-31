@@ -1,8 +1,9 @@
-
-import pandas as pd
+# =========================================================================================== 
+# Imports
+# =========================================================================================== 
 from dataclasses import dataclass, field
 from nettoolkit.addressing import addressing, dec2dotted_ip, inv_subnet_size_to_mask, IPv4, isSubset
-from nettoolkit.nettoolkit_db import sort_dataframe_on_subnet
+from nettoolkit.addressing.common import sort_subnet_list
 
 # =========================================================================================== 
 # Static Global Variable
@@ -106,9 +107,10 @@ class Aggregate():
 
 	# Sorting prefixes on ascending order
 	def _sort_prefixes(self):
-		df = pd.DataFrame({'subnets': list(self.prefixes)})
-		df = sort_dataframe_on_subnet(df, 'subnets')
-		self.prefixes = list(df['subnets'])
+		self.prefixes = sort_subnet_list(self.prefixes)
+		# df = pd.DataFrame({'subnets': list(self.prefixes)})
+		# df = sort_dataframe_on_subnet(df, 'subnets')
+		# self.prefixes = list(df['subnets'])
 
 	# convert prefixes as IPv4 objects.
 	def _get_ip_objects(self):

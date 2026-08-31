@@ -2034,7 +2034,7 @@ def sorted_v4_addresses(args, ascending=True):
 		list: sorted list
 	"""	
 	return _join_octets_fr_df(
-		_get_sorted_dataframe(
+		_get_sorted_records(
 			_convert_list_to_dict([ ipv4_octets(ip) for ip in args ]), ascending=ascending )
 		)
 
@@ -2049,7 +2049,7 @@ def sort_by_size(args):
 		list: sorted list
 	"""	
 	return _join_octets_fr_df(
-		_get_sorted_dataframe(
+		_get_sorted_records(
 			_convert_list_to_dict([ ipv4_octets(ip) for ip in args ]),ascending=True, bymask=True )
 		)
 

@@ -1,10 +1,8 @@
 
 # -----------------------------------------------------------------------------
-import pandas as pd
-from nettoolkit.nettoolkit.forms.formitems import sg
-from nettoolkit.nettoolkit_common import Multi_Execution, IP, nslookup
-from nettoolkit.nettoolkit_db.database import write_to_xl, read_xl, get_merged_DataFrame_of_file
+import os, csv
 
+from nettoolkit.nettoolkit_common import Multi_Execution, IP, nslookup
 from nettoolkit.addressing.addressing import addressing
 
 ping = IP.ping_average
@@ -95,15 +93,34 @@ class Ping(Multi_Execution):
 		Args:
 			opfile (str): output excel file 
 		"""		
-		if self.create_tabs:
-			d = {}
-			for pfx, ipresults in self.results_dict.items():
-				d[pfx.replace("/", "_")] = pd.DataFrame(ipresults).T
-			write_to_xl(opfile, d, index=True, overwrite=False, index_label='ip')
-		else:
-			df = pd.DataFrame(self.result)
-			df.to_excel(opfile, index_label='ip')
+		print("DEPRYCATED.., TBD (convert to op_to_csv_files)")
 
+	def op_to_csv_files(self, op_dir):
+		"""
+		creates a folder and update with individual 
+		CSV files for every network prefix available in results_dict.
+		"""
+		# Ensure the destination directory exists
+		os.makedirs(op_dir, exist_ok=True)
+		headers = ['ip', 'ping_ms', 'dns_result', 'ping_results']
+
+		# loop over the available prefixes
+		for pfx, ipresults in self.results_dict.items():
+			# Clean prefix text to create a valid file name (e.g., '10.0.0.0_24.csv')
+			filename = f"{pfx.replace('/', '_')}.csv"
+			filepath = os.path.join(op_dir, filename)
+			
+			with open(filepath, mode='w', newline='', encoding='utf-8') as f:
+				writer = csv.writer(f)
+				writer.writerow(headers)  # header row
+				
+				for ip, stats in ipresults.items():   # data rows
+					writer.writerow([
+						ip, 
+						stats.get('ping_ms'), 
+						stats.get('dns_result'), 
+						stats.get('ping_results')
+					])
 
 
 def compare_ping_sweeps(first, second):
@@ -116,40 +133,8 @@ def compare_ping_sweeps(first, second):
 	Returns:
 		None: Returns None, prints out result on console/screen
 	"""	
+	print("DEPRYCATED -- TBD (to be replace by .common.compare_two_ping_files() )")
 	#
-	df1 = get_merged_DataFrame_of_file(first)
-	df2 = get_merged_DataFrame_of_file(second)
-	df1 = df1.set_index('ip')
-	df2 = df2.set_index('ip')
-	#
-	sdf1 = df1.sort_values(by=['ping_results', 'ip'])
-	sdf2 = df2.sort_values(by=['ping_results', 'ip'])
-	#
-	pinging1 = set(sdf1[(sdf1['ping_results'] == True)].index)
-	not_pinging1 = set(sdf1[(sdf1['ping_results'] == False)].index)
-	pinging2 = set(sdf2[(sdf2['ping_results'] == True)].index)
-	not_pinging2 = set(sdf2[(sdf2['ping_results'] == False)].index)
-
-	# -----------------------------------------------------------------------------
-
-	missing = pinging1.difference(pinging2)
-	added = pinging2.difference(pinging1)
-	if not missing and not added:
-		s = f'[+] All ping responce same, no changes'
-		print(s)
-		sg.Popup(s)
-	else:
-		if missing:
-			s = f'\n{"="*80}\nips which were pinging in first file, but not pinging in second file\n{"="*80}\n{missing}\n{"="*80}\n'
-			print(s)
-			sg.Popup(s)
-		if added:
-			s = f'\n{"="*80}\nips which were not-pinging in first file, but it is pinging in second file\n{"="*80}\n{added}\n{"="*80}\n'
-			print(s)
-			sg.Popup(s)
-
-	return None
-
 
 
 # -----------------------------------------------------------------------------

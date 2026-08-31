@@ -3,7 +3,6 @@
 # """
 
 from nettoolkit.addressing.addressing import addressing
-from nettoolkit.nettoolkit.forms.formitems import sg
 
 # -----------------------------------------------------------------------------
 # Class to initiate UserForm
@@ -14,7 +13,6 @@ class CreateBatch():
 	def __init__(self):
 		s = "Deprycated class, use `Nettoolkit` instead"
 		print(s)
-		sg.Popup(s)
 
 
 # ------------------------------------
@@ -35,29 +33,24 @@ def create_batch_file(pfxs, names, ip, op_folder):
 			ip = int(ip)
 		except:
 			s = f"[-] incorrect ip detected .`{ip}`, will be skipped"
-			sg.Popup(s)
 			print(s)
 			return None
 	if not op_folder:
 		s = f'[-] Mandatory argument output folder was missing.\ncould not proceed, check inputs\n'
-		sg.Popup(s)
 		print(s)
 		return None
 	op_batch_filename = f"{op_folder}/ping_test-ips-.{ip}.bat"  
 	#
 	if not isinstance(pfxs, (list, tuple)):
 		s = f'[-] Wrong type of prefix list \n{pfxs}, \ncould not proceed, check inputs\nExpected <class "list"> or <class "tuple">, got {type(pfxs)}\n'
-		sg.Popup(s)
 		print(s)
 		return None
 	if not isinstance(names, (list, tuple)):
 		s = f'[-] Wrong type of name list \n{names}, \ncould not proceed, check inputs\nExpected <class "list"> or <class "tuple">, got {type(names)}\n'
-		sg.Popup(s)
 		print(s)
 		return None
 	if len(pfxs) != len(names):
 		s = "[-] length of prefixes mismatch with length of names. both should be of same length \ncould not proceed, check inputs"
-		sg.Popup(s)
 		print(s)
 		return None
 	#

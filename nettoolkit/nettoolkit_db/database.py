@@ -44,7 +44,7 @@ def read_xl(file):
 	xlrd.read_sheets()
 	return xlrd
 
-
+# Not in use now --
 def get_merged_DataFrame_of_file(file):
 	"""returns merged DataFrame after clubbing all tabs of file
 
@@ -53,13 +53,15 @@ def get_merged_DataFrame_of_file(file):
 
 	Returns:
 		pandas DataFrame: merged database
-	"""	
-	xlr = read_xl(file)
-	df = pd.DataFrame()
-	for k, v in xlr:
-		v = v.fillna("")
-		df = pd.concat([v,df])
-	return df
+	"""		
+	print( "Deprycated -- Not in use ")
+
+	# xlr = read_xl(file)
+	# df = pd.DataFrame()
+	# for k, v in xlr:
+	# 	v = v.fillna("")
+	# 	df = pd.concat([v,df])
+	# return df
 
 def append_to_xl(file, df_dict, overwrite=True, index_label=""):
 	"""appends dictionary of dataframes to an Excel file

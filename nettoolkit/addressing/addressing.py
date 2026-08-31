@@ -1,7 +1,6 @@
 
 from collections import OrderedDict
 from functools import total_ordering
-import pandas as pd
 
 from nettoolkit.nettoolkit_common import STR, LST, IO
 
@@ -1989,17 +1988,22 @@ def ipv4_octets(ip):
 	return { 'octets': octets, 'mask':mask }
 
 # sorted dataframe based on ip octets
-def _get_sorted_dataframe(dic, ascending, byip=True, bymask=False):
-	df = pd.DataFrame(dic)
-	for x in range(4):
-		df[x] = pd.to_numeric(df[x], errors='coerce')
-	df['mm'] = pd.to_numeric(df['mm'], errors='coerce')
-	byip = not bymask
-	if byip:
-		df.sort_values([0,1,2,3,'mm'], inplace=True, ascending=ascending)
-	else:
-		df.sort_values(['mm', 0,1,2,3], inplace=True, ascending=ascending)
-	return df
+def _get_sorted_records(dic, ascending, byip=True, bymask=False):
+    keys = (0, 1, 2, 3, 'mm')
+    
+    # 1. Zip columns into rows and convert using list comprehension
+    rows = [{k: int(v) for k, v in zip(keys, tpl)} for tpl in zip(*(dic[k] for k in keys))]
+
+    # 2. Determine sort priority based on selection
+    byip = not bymask
+    sort_keys = (0, 1, 2, 3, 'mm') if byip else ('mm', 0, 1, 2, 3)
+
+    # 3. Sort
+    return sorted(
+        rows, 
+        key=lambda r: tuple(r[k] for k in sort_keys), 
+        reverse=not ascending
+    )
 
 # converts octets list to dictionary
 def _convert_list_to_dict(lst):

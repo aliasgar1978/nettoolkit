@@ -1,7 +1,7 @@
 import jinja2
 from inspect import getmembers, isfunction, isclass, isroutine
 
-from .data_collect import DeviceDetails
+# from .data_collect import DeviceDetails
 from .cmn import common_fn as cmn
 from . import func as func
 from .func import Vrf, Vlan, Physical, Bgp, Aggregated, Loopback, Ospf, Static
@@ -88,19 +88,33 @@ class PrepareConfig():
 			except Exception as e:
 				raise Exception(f"[-] Module Insertion Failed {module}\n{e}")
 
+	def load_device_data(self):
+		# ----------------------------------------------------------------
+		## TBD // To be completely refactor // instead of excel use yaml 
+		# ----------------------------------------------------------------
+		print("DEPRYCATED - TBD To be completely refactor // instead of excel use yaml")
+		quit()
+		# # ## LOAD - DATA
+		# DD = DeviceDetails(self.data_file)
+		# frames = []
+		# try:
+		# 	RCD = self.regional_class(DD.device_details, self.regional_file)
+		# 	frames = RCD.frames
+		# except:
+		# 	pass
+		# DD.merge_with_var_frames(frames)
+		# DD.read_table()
+
+
 	def start(self):
 		"""kick start generation
 		"""
-		# ## LOAD - DATA
-		DD = DeviceDetails(self.data_file)
-		frames = []
-		try:
-			RCD = self.regional_class(DD.device_details, self.regional_file)
-			frames = RCD.frames
-		except:
-			pass
-		DD.merge_with_var_frames(frames)
-		DD.read_table()
+		DD = self.load_device_data()
+		# ----------------------------------------------------------------
+		# where DD.data is as per below self.data
+		# self.table = self.dev_details['table'].T.to_dict()
+		# self.data = {'var': self.var, 'table': self.table}
+		# ----------------------------------------------------------------
 
 		# ## LOAD - JINJA TEMPLATE AND ENVIRONMENT
 		templateLoader = jinja2.FileSystemLoader(searchpath='')

@@ -1,7 +1,6 @@
 
-# import fields
-from .cmn.common_fn import *
-from nettoolkit.addressing import IPv4
+from .cmn.common_fn import str_to_list
+# from nettoolkit.addressing import IPv4
 
 # -----------------------------------------------------------------------------------------------
 

@@ -1,8 +1,7 @@
 
 # ====================================================================================
 
-import pandas as pd
-from nettoolkit.nettoolkit_common import read_yaml_mode_us, print_banner, print_table, add_blankdict_key
+from nettoolkit.nettoolkit_common import read_yaml_mode_us, print_banner, dic_to_table, add_blankdict_key
 from nettoolkit.j2config import PrepareConfig
 from pathlib import *
 
@@ -62,7 +61,6 @@ def exec_config_generation(
 			device_dict['Config Gen'] = 'No'
 
 	print("[+] Configuration Generation All Task(s) Complete..")
-	df = pd.DataFrame(device_log_dict).T
-	print_table(df)	
+	print(dic_to_table(device_log_dict))
 
 # ====================================================================================

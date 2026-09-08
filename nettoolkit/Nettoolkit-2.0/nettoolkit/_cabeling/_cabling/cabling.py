@@ -1,5 +1,6 @@
 
 import os
+from copy import deepcopy
 from dataclasses import dataclass, field
 from nettoolkit.cmn.fio import read_yaml
 from nettoolkit.cmn.fdict import merge_dict
@@ -34,16 +35,16 @@ class DeviceData():
 
     @property
     def hostname(self):
-        return self.system_data.get('identity', "No Identity info").get("hostname", "")
+        return self.system_data.get('identity', {}).get("hostname", "")
     @property
     def serial(self):
-        return self.system_data.get('hardware', "No Hardware info").get("serial_number", "")
+        return self.system_data.get('hardware', {}).get("serial_number", "")
     @property
     def hardware(self):
-        return self.system_data.get('hardware', "No Hardware info").get("model", "")
+        return self.system_data.get('hardware', {}).get("model", "")
     @property
     def software(self):
-        return self.system_data.get('software', "No Software info").get("version", "")
+        return self.system_data.get('software', {}).get("version", "")
 
 
     def physical_interface_data(self, intf):
@@ -70,11 +71,11 @@ class DeviceData():
             self.telemetry_data = read_yaml(self.telemetry_file) or {}
 
     def merge_system(self):
-        self._system_dict = self.conf_data.get('system', {}).copy()
+        self._system_dict = deepcopy(self.conf_data.get('system', {}))
         merge_dict(self._system_dict, self.telemetry_data.get('system', {}))
 
     def merge_intf(self):
-        self._intfs_dict = self.conf_data.get('interfaces', {}).copy()
+        self._intfs_dict = deepcopy(self.conf_data.get('interfaces', {}))
         merge_dict(self._intfs_dict, self.telemetry_data.get('interfaces', {}))
 
 

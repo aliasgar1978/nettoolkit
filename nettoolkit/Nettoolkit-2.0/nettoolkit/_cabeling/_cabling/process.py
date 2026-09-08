@@ -31,6 +31,8 @@ class CablingLayoutGenerator:
         self.update_cabling_matrix()
 
     def load_data(self):
+        if not os.path.isdir(self.data_dir):
+            raise FileNotFoundError(f"Inventory directory not found: {self.data_dir}")
         all_files = os.listdir(self.data_dir)
         device_baselines = set()
 
@@ -54,9 +56,10 @@ class CablingLayoutGenerator:
 
     def get_staged_links(self):
         for hostname, device_data in self.devices_data.items():
+            hostname = hostname.lower()
             for raw_local_intf, intf_data in device_data.physical_interfaces.items():
                 if not intf_data: continue
-                remote_device = device_data.neighbor_hostname(raw_local_intf)
+                remote_device = device_data.neighbor_hostname(raw_local_intf).lower()
                 raw_remote_port = device_data.neighbor_intf(raw_local_intf)
                 if not remote_device or not raw_remote_port: continue
                 #
@@ -98,8 +101,9 @@ class CablingLayoutGenerator:
             if specs.medium == "Unknown Medium" and remote_sfp.upper().strip() not in ['MISSING OPTIC', 'MISSING REMOTE FILE']:
                 specs = CableSpecs(remote_sfp)
             #
-            local_units_str = ",".join(sorted(list(data['local_units'])))
-            remote_units_str = ",".join(sorted(list(data['remote_units'])))
+
+            local_units_str = ",".join(self.sort_units(list(data['local_units'])))
+            remote_units_str = ",".join(self.sort_units(list(data['remote_units'])))
             #
             cable_record = {
                 'local_device': local_host,
@@ -116,7 +120,10 @@ class CablingLayoutGenerator:
                 'cable_color_code': specs.color
             }
             self.cabling_matrix.append(cable_record)
-                
+
+    def sort_units(self, units):
+        return sorted(units, key=lambda x: int(x) if str(x).isdigit() else x)                
+
     def _get_logical_unit(self, interface_name):
         return str(interface_name).split(".")[-1] if "." in interface_name else "0"
 
@@ -134,13 +141,13 @@ class CablingLayoutGenerator:
     def export_to_csv(self, output_filename="cabling_layout_matrix.csv"):
         """Dumps compiled matrix entries out to a presentation-ready spreadsheet document."""
         if not self.cabling_matrix:
-            print("[-] Analysis complete: No data collected. Please call compile_matrix() first.")
+            print("[-] Analysis complete: No data collected. Please Run topology_engine() first.")
             return
 
         headers = [
             'Local Device Name', 'Local Port', 'Local Units', 'Local SFP',
             'Remote Device Name', 'Remote Port', 'Remote Units', 'Remote SFP',
-            'Cable Medium', 'Link Speed', 'Required Physical Patch Cable Type', 'Cable Color'
+            'Cable Medium', 'Link Speed', 'Required Physical Patch Cable Type', 'Suggested Cable Color'
         ]
 
         try:

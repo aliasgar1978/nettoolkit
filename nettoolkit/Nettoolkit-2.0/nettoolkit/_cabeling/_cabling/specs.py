@@ -22,10 +22,10 @@ class CableSpecs:
         """Isolates the core physical cable medium profile layer."""
         if self.sfp in ['MISSING OPTIC', 'MISSING REMOTE FILE']:
             return "Unknown Medium"
-        if any(x in self.sfp for x in ['-T', '10G-T', 'COPPER', 'RJ45', '1000BASE-T']):
-            return "Copper (Cat6/6A)"
         if any(x in self.sfp for x in ['DAC', 'TWINAX', 'PASSIVE COPPER', '10G-SFPP-CU']):
             return "Direct-Attach Copper (DAC)"
+        if any(x in self.sfp for x in ['-T', '10G-T', 'COPPER', 'RJ45', '1000BASE-T']):
+            return "Copper (Cat6/6A)"
         if any(x in self.sfp for x in ['LR', 'LX', 'LH', 'EX', 'ZX', 'ER', 'ZR', 'SR', 'SX', 'FX', 'FIBER', 'OPTIC', 'QSFP']):
             return "Fiber-Optic"
         return "Unknown Medium"
@@ -33,48 +33,73 @@ class CableSpecs:
     def derive_speed(self):
         """Captures the active operational link bandwidth capacity."""
         if self.sfp in ['MISSING OPTIC', 'MISSING REMOTE FILE']:
-            return "Unknown Speed"
-        if any(x in self.sfp for x in ['10G', 'LR', 'SR', 'ER', 'ZR']):
-            return "10Gbps"
-        if any(x in self.sfp for x in ['QSFP', '40G']):
-            return "40Gbps"
-        if '100G' in self.sfp:
-            return "100Gbps"
-        if any(x in self.sfp for x in ['1G', 'SX', 'LX', 'GIGABIT', '1000BASE']):
-            return "1Gbps"
-        return "1Gbps (Fallback)"
+            return 'Unknown Speed'
+
+        # 100G
+        if any(x in self.sfp for x in ['100G', 'QSFP28']):
+            return '100Gbps'
+
+        # 40G
+        if any(x in self.sfp for x in ['40G', 'QSFP+']):
+            return '40Gbps'
+
+        # 25G
+        if any(x in self.sfp for x in ['25G', 'SFP28']):
+            return '25Gbps'
+
+        # 10G
+        if any(x in self.sfp for x in ['10G', 'SFP+']):
+            return '10Gbps'
+
+        # 1G
+        if any(x in self.sfp for x in ['1000BASE', '1G', 'SX', 'LX']):
+            return '1Gbps'
+
+        return 'Unknown Speed'
 
     def derive_cable_type(self):
         """Maps out the exact physical patch cord connector type."""
         if self.sfp in ['MISSING OPTIC', 'MISSING REMOTE FILE']:
             return "Unknown Cable Type"
-        if "COPPER" in self.medium.upper():
-            return "RJ45 Copper Patch Cable"
-        if "DIRECT-ATTACH" in self.medium.upper():
-            return "Direct-Attach Twinax Cable"
-        if "QSFP" in self.sfp or "40G" in self.sfp:
-            return "MPO to 4xLC Multi-Mode Breakout Fiber"
         if any(x in self.sfp for x in ['LR', 'LX', 'LH', 'EX', 'ZX', 'ER', 'ZR']):
-            return "LC to LC Single-Mode Fiber (SMF)"
+            return "Single-Mode Fiber (SMF)"
         if any(x in self.sfp for x in ['SR', 'SX', 'FX']):
-            return "LC to SC Multi-Mode Fiber (MMF)" if 'SC' in self.sfp else "LC to LC Multi-Mode Fiber (MMF)"
-        return "LC to LC Fiber Patch Cable" if "FIBER" in self.medium.upper() else "Verify Physical Slot Optic"
+            return "Multi-Mode Fiber (MMF)"
+        if any(x in self.sfp for x in ['DAC', 'TWINAX']):
+            return "Direct-Attach Twinax Cable"
+        if any(x in self.sfp for x in ['1000BASE-T', '100BASE-T', '1GBASE-T', 'RJ45']):
+            return "RJ45 Copper Patch Cable"
+
 
     def derive_color(self):
-        """Assigns the standardized physical cable jacket or latch clip color coding."""
-        if self.sfp in ['MISSING OPTIC', 'MISSING REMOTE FILE']:
-            return "Unknown Color"
-        if "COPPER" in self.medium.upper():
+        """
+        Returns recommended visual identification color
+        for patching documentation purposes.
+
+        This is NOT necessarily the actual cable jacket color.
+        """
+        if self.medium == "Copper (Cat6/6A)":
+            return "Brown"
+
+        if self.medium == "Direct-Attach Copper (DAC)":
             return "Black"
-        if "DIRECT-ATTACH" in self.medium.upper():
-            return "Black / Twinax Grey"
-        if any(x in self.sfp for x in ['LR', 'LX', 'LH', 'EX', 'ZX', 'ER', 'ZR']):
-            return "Yellow"
-        if any(x in self.sfp for x in ['SR', 'SX', 'FX', 'QSFP']):
-            if any(x in self.sfp for x in ['OM3', '10GBASE-SR', 'QSFP', '40G']):
-                return "Sky Blue (Aqua)"
+
+        if self.speed == "1Gbps":
+            return "Green"
+
+        if self.speed == "10Gbps":
+            return "Blue"
+
+        if self.speed == "25Gbps":
+            return "Purple"
+
+        if self.speed == "40Gbps":
             return "Orange"
-        return "Verify Physical Cable Media"
+
+        if self.speed == "100Gbps":
+            return "Red"
+
+        return "Grey"
 
 # ===================================================================================
 if __name__ == "__main__":

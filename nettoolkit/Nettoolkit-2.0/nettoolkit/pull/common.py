@@ -3,7 +3,7 @@
 import ipaddress
 import time
 import re
-
+import logging
 
 # ------------------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ def get_device_ip_using_nlist(ssh_shell, target):
     if is_valid_ip(target):
         return target
 
-    print(f"[*] Resolving hostname '{target}' via jump server...")
+    logging.info(f"[*] Resolving hostname '{target}' via jump server...")
     
     # 1. Try 'nlist'
     ssh_shell.send(f"nlist {target}\n")
@@ -49,7 +49,7 @@ def get_device_ip_using_nlist(ssh_shell, target):
     resolved_ip = extract_ip_from_text(output)
     
     if resolved_ip:
-        print(f"[+] Resolved {target} to: {resolved_ip}")
+        logging.info(f"[+] Resolved {target} to: {resolved_ip}")
         return resolved_ip
     else:
         raise ValueError(f"[-] Could not extract a valid IPv4/IPv6 address for hostname: {target}")

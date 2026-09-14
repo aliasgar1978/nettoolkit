@@ -1,0 +1,38 @@
+timers:
+  prompt_timeout: 60
+  command_timeout: 60
+  auth_timeout: 60
+
+vendors:
+  juniper_junos:
+    signatures:
+      - junos
+      - juniper
+    terminal_length: set cli screen-length 0
+
+  cisco_viptela:
+    signatures:
+      - viptela
+      - vedge
+      - vedgeos
+    terminal_length: paginate false
+
+  aruba_silverpeak:
+    signatures:
+      - silver peak
+      - edgeconnect
+      - vx-
+      - ec-
+    terminal_length: terminal length 0
+
+  cisco_xe:
+    signatures:
+      - ios-xe
+      - ios xe
+      - cedge
+    terminal_length: terminal length 0
+
+  arista_eos:
+    signatures:
+      - arista
+    terminal_length: terminal length 0

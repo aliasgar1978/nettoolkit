@@ -219,7 +219,7 @@ def write_as_yaml(d, file, mode='w', indent=2, default_flow_style=False, sort_ke
 
 def read_yaml(file):
 	with open(file, "r") as f:
-		return yaml.safe_load(f)
+		return yaml.safe_load(f) or {}
 
 
 # ------------------------------------------------------------------------------

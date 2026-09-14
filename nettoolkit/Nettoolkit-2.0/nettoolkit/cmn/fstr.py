@@ -397,6 +397,9 @@ def if_suffix(intName):
 	except:
 		return ""
 
+def is_interface(intName):
+	int_type = interface_type(intName)
+	return bool(int_type[0] and int_type[1])
 
 def if_standardize(intName, expand=True):
 	"""standardize the interface for uneven length strings.
@@ -717,7 +720,7 @@ def interface_type(ifname):
 	if ifname: 
 		for int_type, int_types in  CISCO_IFSH_IDENTIFIERS.items():
 			for sub_int_type in int_types:
-				if sub_int_type.startswith(ifname):
+				if sub_int_type.lower().startswith(ifname.lower()):
 					return (int_type, sub_int_type)
 	return ("", "")
 

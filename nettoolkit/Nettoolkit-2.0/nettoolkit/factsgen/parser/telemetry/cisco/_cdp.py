@@ -61,13 +61,38 @@ def get_cdp_neighbour(cmd_op, *args, dsr=True):
 			nbr_d[filter] = {}
 		port_type_dict = nbr_d[filter]
 
-		port_type_dict[local_if] = {
-			'neighbor': {
-				'hostname': remote_hn.strip(),
-				'interface': remote_if.strip(),
-				'platform': remote_plateform.strip()
-			}
+		if not port_type_dict.get(local_if):
+			port_type_dict[local_if] = {}
+
+		port_type_dict[local_if]['neighbor'] = {
+			'hostname': remote_hn.strip(),
+			'interface': remote_if.strip(),
+			'platform': remote_plateform.strip()
 		}
+
+        ## diabled - multiple neighbors on sinlge interface ##
+		add_neighbor_info(
+			port_type_dict[local_if], 
+			hostname=remote_hn, interface=remote_if, platform=remote_plateform
+		)
+
 		remote_hn, remote_if, remote_plateform = "", "", ""
 	return {'op_dict': nbr_d }
 # ------------------------------------------------------------------------------
+
+def add_neighbor_info(unit_target, **kwards):
+    if not unit_target.get('neighbors'):
+        unit_target['neighbors'] = []
+    unit_target['neighbors'].append(kwards)
+    # elif isinstance(unit_target['neighbors'], list):
+    #     match = False
+    #     for item in unit_target['neighbors']:
+    #         if item.get('hostname') == remote_hn and item.get('interface') == remote_if:
+    #             match = True
+    #     if not match:
+    #         unit_target['neighbors'].append({'hostname': remote_hn, 'interface': remote_if, 'platform': remote_plateform})
+    # elif isinstance(unit_target['neighbors'], dict) and (unit_target['neighbors'].get('hostname') != remote_hn or unit_target['neighbors'].get('interface') != remote_if):
+    #     old_entry = unit_target['neighbors']
+    #     unit_target['neighbors'] = [old_entry, {'hostname': remote_hn, 'interface': remote_if, 'platform': remote_plateform}]
+
+

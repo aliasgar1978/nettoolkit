@@ -13,24 +13,27 @@ from ._arp_table import get_arp_table
 from ._version import get_version
 
 #
-
 #
 CISCO_CMD_REGISTER = {
-	'show lldp neighbors': (get_lldp_neighbour,),
-	'show cdp neighbors': (get_cdp_neighbour, ),
-	'show interfaces status': (get_interface_status, ),
-	'show interfaces description': (get_interface_description, ),
-	'show mac address-table': (get_mac_table, ),
-	'show ip arp' : (get_arp_table, ),
-	'show version': (get_version, ),	
-}
-
-CISCO_CMD_SECTION = {
-	'show version': ('system', ),	
-	'show interfaces description': ('interfaces', ),
-	'show interfaces status': ('interfaces', ),
-	'show cdp neighbors': ('interfaces', ),
-	'show lldp neighbors': ('interfaces',),
-	'show mac address-table': ('interfaces', ),
-	'show ip arp' : ('interfaces', ),
+	'show version'               : (
+        ('system', get_version),
+    ),
+	'show interfaces description': (
+        ('interfaces', get_interface_description),
+    ),
+	'show interfaces status'     : (
+        ('interfaces', get_interface_status),
+    ),
+	'show cdp neighbors'         : (
+        ('interfaces', get_cdp_neighbour),
+	),
+	'show lldp neighbors'        : (
+        ('interfaces', get_lldp_neighbour),
+	),
+	'show mac address-table'     : (
+        ('interfaces', get_mac_table),
+	),
+	'show ip arp'                : (
+        ('interfaces', get_arp_table),
+	),
 }

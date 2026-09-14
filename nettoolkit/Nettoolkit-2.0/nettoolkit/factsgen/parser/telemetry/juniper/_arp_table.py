@@ -89,7 +89,8 @@ def parse_juniper_arp_table(cmd_op):
         for i, x in enumerate(spl):
             filter = get_juniper_int_type(x)
             if filter: break
-        if not filter: break
+        if not filter: 
+            continue
 
         raw_mac = spl[0]
         ip_addr = spl[1]

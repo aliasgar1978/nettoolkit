@@ -40,7 +40,7 @@ def parse_juniper_system_single_pass(cmd_op):
         # Delegate parsing to dedicated sub-handlers
         _parse_identity_metadata(sys_dict, line, spl)
         _parse_network_services(sys_dict, line, spl)
-        _parse_management_ip(sys_dict, line, spl)
+        # _parse_management_ip(sys_dict, line, spl)
         _parse_aaa_tacacs(sys_dict, line, spl, state_ctx)
 
     # Post-parsing cleanup: Remove unpopulated tracking nodes
@@ -75,26 +75,30 @@ def _parse_network_services(sys_dict, line, spl):
             add_to_list_if_missing(sys_dict['services']['syslog_servers'], spl[4])
 
 
-def _parse_management_ip(sys_dict, line, spl):
-    """Extracts system-wide management loopback or binding source addresses."""
-    if line.startswith("set system ") and "source-address" in spl:
-        sys_dict['security']['management_ip'] = spl[-1]
+# def _parse_management_ip(sys_dict, line, spl):
+#     """Extracts system-wide management loopback or binding source addresses."""
+#     if line.startswith("set system ") and "source-address" in spl:
+#         sys_dict['security']['management_ip'] = spl[-1]
 
 
 def _parse_aaa_tacacs(sys_dict, line, spl, state_ctx):
     """Extracts global TACACS settings and embedded server parameters."""
     if line.startswith("set system tacplus-server"):
         ip = spl[3]
-        add_to_list_if_missing(sys_dict['aaa']['tacacs_servers'], ip)
-        
+        if not sys_dict['aaa']['tacacs_servers'].get(ip):
+            sys_dict['aaa']['tacacs_servers'][ip] = {}
+        server_dict = sys_dict['aaa']['tacacs_servers'][ip]
+
         if 'port' in spl:
             try:
-                sys_dict['aaa']['tacacs_tcp_port'] = int(spl[spl.index('port') + 1])
+                server_dict['port'] = int(spl[spl.index('port') + 1])
             except (ValueError, IndexError):
                 pass
         if 'secret' in spl:
             try:
-                sys_dict['aaa']['tacacs_key'] = get_juniper_pw_string(spl, spl.index('secret') + 1)
+                idx = spl.index('secret')
+                if 'key' in spl: idx = spl.index('key')
+                server_dict['key'] = spl[idx + 1]
             except (ValueError, IndexError):
                 pass
 

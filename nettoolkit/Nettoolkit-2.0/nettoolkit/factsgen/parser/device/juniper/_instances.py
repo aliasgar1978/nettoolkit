@@ -96,7 +96,5 @@ def _cleanup_juniper_instances(db):
 # ==============================================================================
 def get_instances(cmd_op, *args):
     # Synchronizes perfectly with your main context-aware 'main()' registers map pipeline loop
-    vrf_data = parse_juniper_instances_single_pass(cmd_op)
-    if not vrf_data:
-        vrf_data['dummy_instance'] = ''
+    vrf_data = parse_juniper_instances_single_pass(cmd_op) or {}
     return {'op_dict': vrf_data}

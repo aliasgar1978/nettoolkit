@@ -118,9 +118,11 @@ def split_families(bgp_lines):
     group_of_lines = {}
     group_name = None
     in_bgp_context = False    
-    for line in bgp_lines:
-        raw_line = line
-        line = line.strip()
+    for raw_line in bgp_lines:
+        if in_bgp_context and raw_line.rstrip() == "!":
+            break  # Stops processing entirely, ignoring all subsequent configuration lines
+
+        line = raw_line.strip()
         if not line or line == "!":
             continue        
         if line.startswith('router bgp '):
@@ -134,9 +136,6 @@ def split_families(bgp_lines):
 
         if not group_name: continue
 
-        # 2. Dynamic Exit Intercept: Stop processing line-by-line if the BGP block concludes
-        if in_bgp_context and raw_line.rstrip() == "!":
-                break  # Stops processing entirely, ignoring all subsequent configuration lines
 
         if group_name not in group_of_lines:
             group_of_lines[group_name] = []
@@ -187,7 +186,7 @@ def parse_all_bgp_peers(lines):
 
 
 
-def bgp_peer_attributes(op_dict, spl=[]):
+def bgp_peer_attributes(op_dict, spl=None):
     """parser function to update bgp neighbor attribute details
 
     Args:
@@ -197,7 +196,7 @@ def bgp_peer_attributes(op_dict, spl=[]):
     Returns:
         None: None
     """
-    if not spl or len(spl) < 3:
+    if not spl:
         return 
     identifiers = {
         'remote-as': ('peer_as', int),
@@ -205,9 +204,15 @@ def bgp_peer_attributes(op_dict, spl=[]):
         'ebgp-multihop': ('ebgp_multihop', int),          
         'local-as': ('local_as', int),
         'peer-group': ('peergrp', str),
-        'next-hop-self': ('next_hop_self', bool),      # Captures true if present
-        'send-community': ('send_community', str),     # Captures 'both', 'extended', etc.
+        # 'send-community': ('send_community', str),     # Captures 'both', 'extended', etc.
     }
+    flag_attributes = {
+        'next-hop-self': 'next_hop_self',      # Captures true if present
+    }
+    for keyword, yaml_key in flag_attributes.items():
+        if keyword in spl:
+            op_dict[yaml_key] = True
+    #
     for keyword, (yaml_key, data_type) in identifiers.items():
         if keyword in spl:
             try:
@@ -274,10 +279,23 @@ def bgp_peer_attributes(op_dict, spl=[]):
     if "password" in spl:
         pass_idx = spl.index("password") + 1
         if pass_idx < len(spl):
-            if spl[pass_idx] == "7" and pass_idx + 1 < len(spl):
-                op_dict["peer_password"] = type7_dec(spl[pass_idx + 1])
-            else:
-                op_dict["peer_password"] = spl[pass_idx]
+            # if spl[pass_idx] == "7" and pass_idx + 1 < len(spl):
+            #     op_dict["peer_password"] = spl[pass_idx + 1]
+            # else:
+            op_dict["peer_password"] = spl[pass_idx]
+
+    # ==========================================================
+    # Handle Sendcommunity (bare or with arguments)
+    # ==========================================================
+    if "send-community" in spl:
+        idx = spl.index("send-community")
+        if idx + 1 >= len(spl):
+            op_dict['send-community'] = 'standard'
+        elif spl[idx+1] in ['extended','both']:
+            op_dict['send-community'] = spl[idx+1]
+        else:
+            op_dict['send-community'] = 'standard'
+
 
 
 def bgp_other_attributes(op_dict, spl):

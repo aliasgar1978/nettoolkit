@@ -53,7 +53,7 @@ def parse_network_output_file(file_path: str, cmd_registers: dict) -> dict:
 		end_pos = (
 			matches[i + 1].start() if i + 1 < len(matches) else len(content)
 		)
-		raw_output = content[start_pos:end_pos+1].strip()
+		raw_output = content[start_pos: end_pos].strip()
 
 		# 1. Clean up: strip out any trailing terminal prompt line at the end of output
 		clean_output = re.sub(r"\n.*?[#>]?\s*$", "", raw_output).strip()
@@ -89,23 +89,9 @@ def parse_network_output_file(file_path: str, cmd_registers: dict) -> dict:
 # --- Example Execution ---
 if __name__ == "__main__":
 	pass
-	# # Replace with your actual log file path
-	target_file = "00h-ecd-a.log"
-	# target_file = "5aa-ecd-b.log"
 
-	# try:
-	result_data = parse_network_output_file(target_file)
-
-	#     # Print the final dictionary
-	from pprint import pprint
-	#     pprint(result_data, sort_dicts=False)
-
-	pprint(result_data['cmd_op'].keys())
-
-	# except FileNotFoundError as e:
-	#     print(e)
 # ===========================================================================
 
-__all__ = ['parse_a_network_output_file', ]
+__all__ = ['parse_network_output_file', ]
 
 

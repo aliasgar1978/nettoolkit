@@ -32,6 +32,8 @@ CISCO_IFSH_IDENTIFIERS = {
 	"physical": PHYSICAL_IFS,
 	"nvi": {'NVI':2,},
 	"nv": {'NV':2,},
+	"Sdwan-intf": {'Sdwan-intf': 10},
+	"vmanage_system": {'vmanage_system': 14},
 }
 JUNIPER_IFS_IDENTIFIERS = {
 	"l3vlan": ('irb', 'vlan', 'iw'),

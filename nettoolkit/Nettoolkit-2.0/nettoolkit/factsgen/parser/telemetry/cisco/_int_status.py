@@ -65,7 +65,7 @@ def get_interface_status(cmd_op, *args):
         # 'connected' = physical link is up & protocol is up (up/up)
         # 'notconnect' = admin is up, but physical cable is missing/unplugged (up/down)
         # 'disabled' = admin is explicitly shut down via configuration (down/down)
-        state = 'up'
+        protocol_state = 'up'
         admin_state = 'up'
         is_err_disabled = False
         
@@ -86,7 +86,7 @@ def get_interface_status(cmd_op, *args):
         # port['link_status'] = raw_status  # Captures literal 'connected', 'notconnect', etc.
         port['state'] = {
             'admin': admin_state,          # administratively configured state
-            'protocol': state             # live line protocol operational state
+            'protocol': protocol_state             # live line protocol operational state
         }
         if is_err_disabled:
             port['state']['err_disabled'] = True

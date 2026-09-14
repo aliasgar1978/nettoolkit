@@ -1,0 +1,1842 @@
+
+! ---------------------------------------------------------------------------- !
+! This output is generated using Nettoolkit utility.
+! Script written by : Aliasgar Hozaifa Lokhandwala (aholo2000@gmail.com)
+! Write an email if any errors found.
+! ---------------------------------------------------------------------------- !
+
+!================================================================================
+! output for command: show clock
+!================================================================================
+
+01:53:46.598 UTC Wed Sep 25 2024
+
+!================================================================================
+! output for command: show interfaces status
+!================================================================================
+
+
+Port         Name               Status       Vlan       Duplex  Speed Type
+Twe1/0/1     4s6/vID6b-vIA1/tru connected    trunk        full   1000 1000BaseLX SFP
+Twe1/0/2     4s6/vID6b-vPR2/glo connected    routed       full    10G SFP-10GBase-LR
+Twe1/0/3     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/4     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/5     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/6     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/7     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/8     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/9     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/10    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/11    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/12    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/13    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/14    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/15    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/16    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/17    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/18    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/19    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/20    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/21    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/22    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/23    ** Not In Use **   disabled     1            full   1000 1000BaseLX SFP
+Twe1/0/24    ** RESERVED-SPAN * disabled     1            auto   auto 10/100/1000BaseTX SFP
+Hu1/0/25     4s6/vID6b-vID6a.1/ connected    trunk        full    10G CVR QSFP SFP10G(SFP-10GBase-LR)
+Hu1/0/26     4s6/vID6b-vID6a.2/ connected    trunk        full    10G CVR QSFP SFP10G(SFP-10GBase-LR)
+Hu1/0/27     4s6/vID6b-vSCa/glo connected    routed       full    10G CVR QSFP SFP10G(SFP-10GBase-LR)
+Hu1/0/28     4s6/vID6b-vSCb/glo connected    routed       full    10G CVR QSFP SFP10G(SFP-10GBase-LR)
+Po101        4s6/vID6b-vID6a/tr connected    trunk      a-full  a-10G N/A
+
+!================================================================================
+! output for command: show interfaces description
+!================================================================================
+
+Interface                      Status         Protocol Description
+Vl1                            admin down     down     
+Vl1901                         up             up       4s6/vID6-vIA1/global/9.9.97.178.0/29/xA_mgmt
+Vl2021                         up             up       4s6/vID6-vIA1/blue-1/blue/9.189.122.128/28/2620:1F7:3A22::6:8101:0/112/krx1
+Vl2041                         up             up       4s6/vID6-vIA1/blue-2/blue/9.189.122.144/28/SBC
+Vl4090                         up             up       4s6/vID6b-vID6a/global/9.97.176.96/30/xlink
+Gi0/0                          admin down     down     ** RESERVED **
+Twe1/0/1                       up             up       4s6/vID6b-vIA1/trunk/4s6-via-hb1
+Twe1/0/2                       up             up       4s6/vID6b-vPR2/global/4s6-vpr-1
+Twe1/0/3                       admin down     down     ** Not In Use **
+Twe1/0/4                       admin down     down     ** Not In Use **
+Twe1/0/5                       admin down     down     ** Not In Use **
+Twe1/0/6                       admin down     down     ** Not In Use **
+Twe1/0/7                       admin down     down     ** Not In Use **
+Twe1/0/8                       admin down     down     ** Not In Use **
+Twe1/0/9                       admin down     down     ** Not In Use **
+Twe1/0/10                      admin down     down     ** Not In Use **
+Twe1/0/11                      admin down     down     ** Not In Use **
+Twe1/0/12                      admin down     down     ** Not In Use **
+Twe1/0/13                      admin down     down     ** Not In Use **
+Twe1/0/14                      admin down     down     ** Not In Use **
+Twe1/0/15                      admin down     down     ** Not In Use **
+Twe1/0/16                      admin down     down     ** Not In Use **
+Twe1/0/17                      admin down     down     ** Not In Use **
+Twe1/0/18                      admin down     down     ** Not In Use **
+Twe1/0/19                      admin down     down     ** Not In Use **
+Twe1/0/20                      admin down     down     ** Not In Use **
+Twe1/0/21                      admin down     down     ** Not In Use **
+Twe1/0/22                      admin down     down     ** Not In Use **
+Twe1/0/23                      admin down     down     ** Not In Use **
+Twe1/0/24                      admin down     down     ** RESERVED-SPAN **
+Hu1/0/25                       up             up       4s6/vID6b-vID6a.1/trunk/xlink
+Hu1/0/26                       up             up       4s6/vID6b-vID6a.2/trunk/xlink
+Hu1/0/27                       up             up       4s6/vID6b-vSCa/global
+Hu1/0/28                       up             up       4s6/vID6b-vSCb/global
+Po101                          up             up       4s6/vID6b-vID6a/trunk/xlink
+Lo0                            up             up       4s6/vID6b/lo0/global
+Lo10                           up             up       4s6/vID6b/lo10/blue
+
+!================================================================================
+! output for command: show lldp neighbors
+!================================================================================
+
+Capability codes:
+    (R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
+    (W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other
+
+Device ID           Local Intf     Hold-time  Capability      Port ID
+4s6-via-hb1.attmgmt.Twe1/0/1       120        B               Gi1/0/25
+4s6-vsc-a.attmgmt.ibHu1/0/27       120        B,R             Twe1/0/14
+4s6-vid-6a.attmgmt.iHu1/0/26       120        B,R             Hu1/0/26
+4s6-vpr-1.attmgmt.ibTwe1/0/2       120        B,R             Hu1/0/52
+4s6-vid-6a.attmgmt.iHu1/0/25       120        B,R             Hu1/0/25
+4s6-vsc-b.attmgmt.ibHu1/0/28       120        B,R             Twe1/0/14
+
+Total entries displayed: 6
+
+!================================================================================
+! output for command: show cdp neighbors
+!================================================================================
+
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+4s6-vid-6a.attmgmt.ibm.com
+                 Hun 1/0/26        29              R S I  C9500-24Y Hun 1/0/26
+4s6-vid-6a.attmgmt.ibm.com
+                 Hun 1/0/25        24              R S I  C9500-24Y Hun 1/0/25
+4s6-vsc-a.attmgmt.ibm.com
+                 Hun 1/0/27        26              R S I  C9500-24Y Twe 1/0/14
+4s6-vsc-b.attmgmt.ibm.com
+                 Hun 1/0/28        21              R S I  C9500-24Y Twe 1/0/14
+4s6-via-hb1.attmgmt.ibm.com
+                 Twe 1/0/1         28               S I   WS-C2960X Gig 1/0/25
+4s6-vpr-1.attmgmt.ibm.com
+                 Twe 1/0/2         29              R S I  C9500-48Y Hun 1/0/52
+
+Total cdp entries displayed : 6
+
+!================================================================================
+! output for command: show version
+!================================================================================
+
+Cisco IOS XE Software, Version 17.06.04
+Cisco IOS Software [Bengaluru], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 17.6.4, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2022 by Cisco Systems, Inc.
+Compiled Sun 14-Aug-22 08:58 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2022 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+BOOTLDR: System Bootstrap, Version 17.6.1r, RELEASE SOFTWARE (P)
+
+4s6-vid-6b uptime is 4 weeks, 5 days, 16 hours, 36 minutes
+Uptime for this control processor is 4 weeks, 5 days, 16 hours, 37 minutes
+System returned to ROM by Reload Command at 09:14:47 UTC Thu Aug 22 2024
+System restarted at 09:17:28 UTC Thu Aug 22 2024
+System image file is "bootflash:packages.conf"
+Last reload reason: Reload Command
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+
+Technology Package License Information: 
+
+------------------------------------------------------------------------------
+Technology-package                                     Technology-package
+Current                        Type                       Next reboot  
+------------------------------------------------------------------------------
+network-advantage   	Smart License                 	 network-advantage   
+dna-advantage       	Subscription Smart License    	 dna-advantage                 
+AIR License Level: AIR DNA Advantage
+Next reload AIR license Level: AIR DNA Advantage
+
+
+Smart Licensing Status: Registration Not Applicable/Not Applicable
+
+cisco C9500-24Y4C (X86) processor with 2889961K/6147K bytes of memory.
+Processor board ID CAT2415L0ZG
+5 Virtual Ethernet interfaces
+24 TwentyFive Gigabit Ethernet interfaces
+4 Hundred Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+15995688K bytes of physical memory.
+11161600K bytes of Bootflash at bootflash:.
+1638400K bytes of Crash Files at crashinfo:.
+
+Base Ethernet MAC Address          : ac:4a:67:c0:dd:80
+Motherboard Assembly Number        : 4874
+Motherboard Serial Number          : CAT2415L0ZG
+Model Revision Number              : V02
+Motherboard Revision Number        : 2
+Model Number                       : C9500-24Y4C         
+System Serial Number               : CAT2415L0ZG
+
+!================================================================================
+! output for command: show running-config
+!================================================================================
+
+Building configuration...
+
+Current configuration : 54513 bytes
+!
+! Last configuration change at 09:51:31 UTC Thu Aug 22 2024 by failsafe
+! NVRAM config last updated at 02:31:18 UTC Tue Sep 24 2024
+!
+version 17.6
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service counters max age 10
+no service dhcp
+no platform punt-keepalive disable-kernel-core
+!
+hostname 4s6-vid-6b
+!
+!
+vrf definition Mgmt-vrf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+vrf definition blue
+ description IBM-CIO Internal Network Blue - Global VPN
+ rd 9.97.176.102:100
+ route-target export 8:100
+ route-target import 8:100
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+logging userinfo
+logging buffered 1024000 informational
+no logging console
+enable secret 9 $9$QirfcL8VPe/NGk$kL1ooKJfunGyYWD4LWUisOiDKEo/NWuMlThrYNjKcKU
+!
+aaa new-model
+!
+!
+aaa group server tacacs+ GTAC
+ server-private 135.89.176.190 port 49170 timeout 6 key 7 03100E063C08024D4711295D024109270C1D7D203A
+ server-private 135.89.45.254 port 49170 timeout 6 key 7 06125A2C76492A180C0F2253195728002C1F653130
+ ip tacacs source-interface Loopback0
+!
+aaa authentication attempts login 5
+aaa authentication login default group GTAC local
+aaa authentication enable default group GTAC enable
+aaa authorization console
+aaa authorization exec default group GTAC if-authenticated 
+aaa accounting exec default start-stop group GTAC
+aaa accounting commands 15 default start-stop group GTAC
+aaa accounting connection default start-stop group GTAC
+aaa accounting system default start-stop group GTAC
+no aaa accounting system guarantee-first
+!
+aaa common-criteria policy cc_ans_local_user
+ min-length 15
+ max-length 127
+ char-changes 1
+ lifetime year 1
+!
+!
+!
+!
+!
+!
+aaa session-id common
+boot system bootflash:packages.conf
+fhrp version vrrp v3
+!
+ip name-server 9.0.0.1 9.0.0.2
+no ip domain lookup
+ip domain name attmgmt.ibm.com
+ip cef load-sharing algorithm original
+!
+!
+!
+login on-failure log
+login on-success log
+ipv6 unicast-routing
+ipv6 multicast rpf use-bgp
+ipv6 cef load-sharing algorithm original
+!
+!
+!
+!
+!
+qos queue-softmax-multiplier 1200
+!
+!
+vtp domain 4s6
+vtp mode transparent
+mpls label mode all-vrfs protocol all-afs per-vrf
+mpls label protocol ldp
+mpls ldp session protection
+!
+flow record fr_basic_ipv4
+ description ** Basic IPv4 netflow template **
+ match routing vrf input
+ match ipv4 tos
+ match ipv4 protocol
+ match ipv4 source address
+ match ipv4 destination address
+ match transport source-port
+ match transport destination-port
+ match flow direction
+ match interface input
+ collect transport tcp flags
+ collect interface output
+ collect counter bytes long
+ collect counter packets long
+!
+!
+flow record fr_basic_ipv6
+ description ** Basic IPv6 netflow template **
+ match routing vrf input
+ match ipv6 protocol
+ match ipv6 source address
+ match ipv6 destination address
+ match transport source-port
+ match transport destination-port
+ match flow direction
+ match interface input
+ collect transport tcp flags
+ collect interface output
+ collect counter bytes long
+ collect counter packets long
+!
+!
+flow exporter fe_cio_1
+ description ** Export netflow IBM collector **
+ destination 9.201.104.11
+ source Loopback0
+ transport udp 9995
+ export-protocol ipfix
+ template data timeout 60
+ option interface-table timeout 60
+!
+!
+flow exporter fe_cio_2
+ description ** Export netflow IBM collector **
+ destination 9.201.104.11
+ source Loopback0
+ transport udp 9995
+ export-protocol ipfix
+ template data timeout 60
+ option interface-table timeout 60
+!
+!
+flow monitor fm_basic_ipv4
+ description ** Basic IPv4 netflow monitor **
+ exporter fe_cio_1
+ exporter fe_cio_2
+ record fr_basic_ipv4
+!
+!
+flow monitor fm_basic_ipv6
+ description ** Basic IPv6 netflow monitor **
+ exporter fe_cio_1
+ exporter fe_cio_2
+ record fr_basic_ipv6
+!
+!
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  	quit
+!
+!
+port-channel load-balance src-dst-ip
+system mtu 9216
+license boot level network-advantage addon dna-advantage
+license smart reservation
+license smart transport off
+!
+!
+diagnostic bootup level complete
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+spanning-tree pathcost method short
+spanning-tree vlan 1901-4000 priority 16384
+spanning-tree vlan 4001-4090 priority 12288
+spanning-tree vlan 1901-4090 forward-time 6
+spanning-tree vlan 1901-4090 max-age 8
+archive
+ log config
+  logging enable
+  notify syslog contenttype plaintext
+memory free low-watermark processor 190000
+file privilege 7
+!
+errdisable recovery cause udld
+errdisable recovery interval 180
+username failsafe privilege 15 common-criteria-policy cc_ans_local_user secret 9 $9$VTW0nNnSa.w.E.$51wSj1ibcYrVJpdtjUOi8Z2AzOx20/wvFQ/5SiUlvyA
+!
+redundancy
+!
+!
+!
+!
+!
+!
+transceiver type all
+ monitoring
+!
+vlan 1901
+ name vID6-vIA1/global/xA_mgmt
+!
+vlan 2021
+ name vID6-vIA1/blue-1/krx1
+!
+vlan 2041
+ name vID6-vIA1/blue-2/SBC
+!
+vlan 4090
+ name vID6-vID6/global/xlink
+!
+vlan 4094
+ name vID6/Null
+lldp run
+!
+track 10 interface HundredGigE1/0/27 line-protocol
+!
+track 20 interface HundredGigE1/0/28 line-protocol
+cdp timer 10
+cdp holdtime 30
+!
+!
+class-map match-any system-cpp-police-ewlc-control
+  description EWLC Control 
+class-map match-any system-cpp-police-topology-control
+  description Topology control
+class-map match-any system-cpp-police-sw-forward
+  description Sw forwarding, L2 LVX data packets, LOGGING, Transit Traffic
+class-map match-any system-cpp-default
+  description EWLC Data, Inter FED Traffic 
+class-map match-any system-cpp-police-sys-data
+  description Openflow, Exception, EGR Exception, NFL Sampled Data, RPF Failed
+class-map match-any system-cpp-police-punt-webauth
+  description Punt Webauth
+class-map match-any cm_dscp_att_class2v
+ match dscp af41  af42 
+class-map match-any system-cpp-police-l2lvx-control
+  description L2 LVX control packets
+class-map match-any system-cpp-police-forus
+  description Forus Address resolution and Forus traffic
+class-map match-any system-cpp-police-multicast-end-station
+  description MCAST END STATION
+class-map match-any system-cpp-police-high-rate-app
+  description High Rate Applications 
+class-map match-any system-cpp-police-multicast
+  description MCAST Data
+class-map match-any system-cpp-police-l2-control
+  description L2 control
+class-map match-any system-cpp-police-dot1x-auth
+  description DOT1X Auth
+class-map match-any system-cpp-police-data
+  description ICMP redirect, ICMP_GEN and BROADCAST
+class-map match-any system-cpp-police-stackwise-virt-control
+  description Stackwise Virtual OOB
+class-map match-any non-client-nrt-class
+class-map match-any system-cpp-police-routing-control
+  description Routing control and Low Latency
+class-map match-any system-cpp-police-protocol-snooping
+  description Protocol snooping
+class-map match-any system-cpp-police-dhcp-snooping
+  description DHCP snooping
+class-map match-any cm_dscp_att_class2
+ match dscp af31  af32 
+class-map match-any cm_dscp_att_class3
+ match dscp af21  af22 
+class-map match-any cm_dscp_att_class1
+ match dscp ef  cs6  cs7 
+class-map match-any system-cpp-police-ios-routing
+  description L2 control, Topology control, Routing control, Low Latency
+class-map match-any system-cpp-police-system-critical
+  description System Critical and Gold Pkt
+class-map match-any cm_dscp_att_class_scavenger
+ match dscp af11  af12 
+class-map match-any system-cpp-police-ios-feature
+  description ICMPGEN,BROADCAST,ICMP,L2LVXCntrl,ProtoSnoop,PuntWebauth,MCASTData,Transit,DOT1XAuth,Swfwd,LOGGING,L2LVXData,ForusTraffic,ForusARP,McastEndStn,Openflow,Exception,EGRExcption,NflSampled,RpfFailed
+!
+policy-map system-cpp-policy
+policy-map pm_att_queuing
+ class cm_dscp_att_class1
+  priority level 1
+ class cm_dscp_att_class2
+  bandwidth remaining percent 25 
+ class cm_dscp_att_class2v
+  bandwidth remaining percent 20 
+ class cm_dscp_att_class3
+  bandwidth remaining percent 25 
+ class cm_dscp_att_class_scavenger
+  bandwidth remaining percent 5 
+ class class-default
+  bandwidth remaining percent 25 
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description 4s6/vID6b/lo0/global
+ ip address 9.97.176.102 255.255.255.255
+ load-interval 60
+!
+interface Loopback10
+ description 4s6/vID6b/lo10/blue
+ vrf forwarding blue
+ ip address 9.189.141.46 255.255.255.255
+ load-interval 60
+ ipv6 address FE80::B link-local
+ ipv6 address 2620:1F7:3A22::6:1B:B/128
+!
+interface Port-channel101
+ description 4s6/vID6b-vID6a/trunk/xlink
+ switchport trunk native vlan 4094
+ switchport trunk allowed vlan 4090
+ switchport mode trunk
+ switchport nonegotiate
+ load-interval 60
+ flowcontrol receive off
+!
+interface GigabitEthernet0/0
+ description ** RESERVED **
+ vrf forwarding Mgmt-vrf
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface TwentyFiveGigE1/0/1
+ description 4s6/vID6b-vIA1/trunk/4s6-via-hb1
+ switchport trunk native vlan 4094
+ switchport trunk allowed vlan 1901,2021,2041
+ switchport mode trunk
+ switchport nonegotiate
+ load-interval 60
+ udld port aggressive
+ flowcontrol receive off
+ service-policy output pm_att_queuing
+!
+interface TwentyFiveGigE1/0/2
+ description 4s6/vID6b-vPR2/global/4s6-vpr-1
+ no switchport
+ mtu 4486
+ ip address 9.97.178.10 255.255.255.254
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 4470
+ ip ospf authentication-key 7 0353413D0D08361860
+ ip ospf network point-to-point
+ load-interval 60
+ mpls ip
+ arp timeout 420
+ service-policy output pm_att_queuing
+!
+interface TwentyFiveGigE1/0/3
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/4
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/5
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/6
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/7
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/8
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/9
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/10
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/11
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/12
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/13
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/14
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/15
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/16
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/17
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/18
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/19
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/20
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/21
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/22
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/23
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/24
+ description ** RESERVED-SPAN **
+ switchport mode access
+ shutdown
+ no snmp trap link-status
+!
+interface HundredGigE1/0/25
+ description 4s6/vID6b-vID6a.1/trunk/xlink
+ switchport trunk native vlan 4094
+ switchport trunk allowed vlan 4090
+ switchport mode trunk
+ switchport nonegotiate
+ logging event bundle-status
+ load-interval 60
+ flowcontrol receive off
+ channel-group 101 mode active
+ service-policy output pm_att_queuing
+!
+interface HundredGigE1/0/26
+ description 4s6/vID6b-vID6a.2/trunk/xlink
+ switchport trunk native vlan 4094
+ switchport trunk allowed vlan 4090
+ switchport mode trunk
+ switchport nonegotiate
+ logging event bundle-status
+ load-interval 60
+ flowcontrol receive off
+ channel-group 101 mode active
+ service-policy output pm_att_queuing
+!
+interface HundredGigE1/0/27
+ description 4s6/vID6b-vSCa/global
+ no switchport
+ mtu 4486
+ ip address 9.97.176.107 255.255.255.254
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 4470
+ ip ospf authentication-key 7 0651151747491E4D2B
+ ip ospf network point-to-point
+ load-interval 60
+ mpls ip
+ flowcontrol receive off
+ arp timeout 420
+ service-policy output pm_att_queuing
+!
+interface HundredGigE1/0/28
+ description 4s6/vID6b-vSCb/global
+ no switchport
+ mtu 4486
+ ip address 9.97.176.111 255.255.255.254
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 4470
+ ip ospf authentication-key 7 124E1F21190C1B5004
+ ip ospf network point-to-point
+ load-interval 60
+ mpls ip
+ flowcontrol receive off
+ arp timeout 420
+ service-policy output pm_att_queuing
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan1901
+ description 4s6/vID6-vIA1/global/9.9.97.178.0/29/xA_mgmt
+ ip address 9.97.178.4 255.255.255.248
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.97.178.1 primary
+  exit-vrrp
+ arp timeout 420
+!
+interface Vlan2021
+ description 4s6/vID6-vIA1/blue-1/blue/9.189.122.128/28/2620:1F7:3A22::6:8101:0/112/krx1
+ vrf forwarding blue
+ ip flow monitor fm_basic_ipv4 input
+ ip address 9.189.122.132 255.255.255.240
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ ipv6 flow monitor fm_basic_ipv6 input
+ ipv6 address FE80::B link-local
+ ipv6 address 2620:1F7:3A22::6:8101:B/112
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22::6:8101:0/112 300 300 no-autoconfig
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.189.122.129 primary
+  exit-vrrp
+ vrrp 2 address-family ipv4
+  timers advertise 500
+  priority 200
+  preempt delay minimum 60
+  track 10 decrement 40
+  track 20 decrement 40
+  address 9.189.122.130 primary
+  exit-vrrp
+ vrrp 61 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::1 primary
+  address 2620:1F7:3A22::6:8101:1/112
+  exit-vrrp
+ arp timeout 420
+!
+interface Vlan2041
+ description 4s6/vID6-vIA1/blue-2/blue/9.189.122.144/28/SBC
+ vrf forwarding blue
+ ip address 9.189.122.148 255.255.255.240
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.189.122.145 primary
+  exit-vrrp
+ vrrp 2 address-family ipv4
+  timers advertise 500
+  priority 200
+  preempt delay minimum 60
+  track 10 decrement 40
+  track 20 decrement 40
+  address 9.189.122.146 primary
+  exit-vrrp
+ arp timeout 420
+!
+interface Vlan4090
+ description 4s6/vID6b-vID6a/global/9.97.176.96/30/xlink
+ mtu 4486
+ ip address 9.97.176.98 255.255.255.252
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 4470
+ ip ospf authentication-key 7 13520D24000B137E05
+ ip ospf network point-to-point
+ ip ospf cost 10
+ load-interval 60
+ mpls ip
+ arp timeout 420
+!
+router ospf 1
+ router-id 9.97.176.102
+ auto-cost reference-bandwidth 100000
+ area 0 authentication
+ area 6 authentication
+ area 6 range 9.97.178.0 255.255.255.0
+ area 6 range 9.97.179.32 255.255.255.224
+ timers throttle spf 1000 10000 10000
+ passive-interface default
+ no passive-interface Vlan4090
+ no passive-interface TwentyFiveGigE1/0/2
+ no passive-interface HundredGigE1/0/27
+ no passive-interface HundredGigE1/0/28
+ network 9.97.176.96 0.0.0.7 area 6
+ network 9.97.176.104 0.0.0.7 area 0
+ network 9.97.178.0 0.0.0.255 area 6
+ network 9.97.179.32 0.0.0.31 area 6
+ maximum-paths 2
+!
+router bgp 65449
+ bgp router-id 9.97.176.102
+ bgp asnotation dot
+ bgp log-neighbor-changes
+ bgp deterministic-med
+ no bgp default ipv4-unicast
+ timers bgp 5 15
+ neighbor rr peer-group
+ neighbor rr remote-as 65449
+ neighbor rr description ** 4s6 route reflectors **
+ neighbor rr password 7 0473312F2D0C6C5A1D1B54021718071D
+ neighbor rr update-source Loopback0
+ neighbor 9.97.176.13 peer-group rr
+ neighbor 9.97.176.13 description ** 4s6-rr-a **
+ neighbor 9.97.176.14 peer-group rr
+ neighbor 9.97.176.14 description ** 4s6-rr-b **
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family vpnv4
+  neighbor rr send-community both
+  neighbor rr route-map rm_from_rr in
+  neighbor rr route-map rm_to_rr out
+  neighbor rr unsuppress-map rm_unsup_to_rr
+  neighbor 9.97.176.13 activate
+  neighbor 9.97.176.14 activate
+ exit-address-family
+ !
+ address-family vpnv6
+  neighbor rr send-community both
+  neighbor rr route-map rm_from_rr in
+  neighbor rr route-map rm_to_rr out
+  neighbor rr unsuppress-map rm_unsup_to_rr
+  neighbor 9.97.176.13 activate
+  neighbor 9.97.176.14 activate
+ exit-address-family
+ !
+ address-family ipv4 vrf blue
+  import path selection bestpath
+  import path limit 2
+  bgp router-id 9.189.141.46
+  redistribute connected route-map rm_conn_to_bgp_blue
+  redistribute static route-map rm_static_to_bgp_vrf
+  neighbor kr1a peer-group
+  neighbor kr1a remote-as 65008.55196
+  neighbor kr1a local-as 65010.55196 no-prepend replace-as
+  neighbor kr1a description ** 4s6-KR1a-blue **
+  neighbor kr1a password 7 00131212170B05040831
+  neighbor kr1a send-community
+  neighbor kr1a as-override
+  neighbor kr1a prefix-list pl_non_kr1_blue out
+  neighbor kr1a route-map rm_from_kr1_blue_alt in
+  neighbor kr1a route-map rm_default_or_block_ab_alt out
+  neighbor kr1b peer-group
+  neighbor kr1b remote-as 65008.55196
+  neighbor kr1b local-as 65010.55196 no-prepend replace-as
+  neighbor kr1b description ** 4s6-KR1b-blue **
+  neighbor kr1b password 7 111E18110442050E033A
+  neighbor kr1b send-community
+  neighbor kr1b as-override
+  neighbor kr1b prefix-list pl_non_kr1_blue out
+  neighbor kr1b route-map rm_from_kr1_blue in
+  neighbor kr1b route-map rm_default_or_block_ab out
+  neighbor 9.189.122.139 peer-group kr1a
+  neighbor 9.189.122.139 description ** 4s6-kr1a-blue **
+  neighbor 9.189.122.139 activate
+  neighbor 9.189.122.140 peer-group kr1b
+  neighbor 9.189.122.140 description ** 4s6-kr1b-blue **
+  neighbor 9.189.122.140 activate
+  maximum-paths 2
+  maximum-paths ibgp 2
+  default-information originate
+ exit-address-family
+ !
+ address-family ipv6 vrf blue
+  redistribute connected route-map rm6_conn_to_bgp_blue
+  redistribute static route-map rm_static_to_bgp_vrf
+  default-information originate
+  maximum-paths 2
+  maximum-paths ibgp 2
+  import path selection bestpath
+  import path limit 2
+  bgp router-id 9.189.141.46
+  neighbor kr1a-v6 peer-group
+  neighbor kr1a-v6 remote-as 65008.55196
+  neighbor kr1a-v6 local-as 65010.55196 no-prepend replace-as
+  neighbor kr1a-v6 description ** 4s6-KR1a-blue-v6 **
+  neighbor kr1a-v6 password 7 06110E355F1E071B0207
+  neighbor kr1a-v6 send-community
+  neighbor kr1a-v6 as-override
+  neighbor kr1a-v6 prefix-list pl6_non_kr1_blue out
+  neighbor kr1a-v6 route-map rm_from_kr1_blue_alt in
+  neighbor kr1a-v6 route-map rm_default_or_block_ab_alt out
+  neighbor kr1b-v6 peer-group
+  neighbor kr1b-v6 remote-as 65008.55196
+  neighbor kr1b-v6 local-as 65010.55196 no-prepend replace-as
+  neighbor kr1b-v6 description ** 4s6-KR1b-blue-v6 **
+  neighbor kr1b-v6 password 7 08364D5A1A490B15151B
+  neighbor kr1b-v6 send-community
+  neighbor kr1b-v6 as-override
+  neighbor kr1b-v6 prefix-list pl6_non_kr1_blue out
+  neighbor kr1b-v6 route-map rm_from_kr1_blue in
+  neighbor kr1b-v6 route-map rm_default_or_block_ab out
+  neighbor 2620:1F7:3A22::6:8101:E00A peer-group kr1a-v6
+  neighbor 2620:1F7:3A22::6:8101:E00A description ** 4s6-kr1a-blue-v6 **
+  neighbor 2620:1F7:3A22::6:8101:E00A shutdown
+  neighbor 2620:1F7:3A22::6:8101:E00A activate
+  neighbor 2620:1F7:3A22::6:8101:E00B peer-group kr1b-v6
+  neighbor 2620:1F7:3A22::6:8101:E00B description ** 4s6-kr1b-blue-v6 **
+  neighbor 2620:1F7:3A22::6:8101:E00B shutdown
+  neighbor 2620:1F7:3A22::6:8101:E00B activate
+ exit-address-family
+!
+no ip forward-protocol nd
+ip tcp synwait-time 10
+ip tcp path-mtu-discovery
+no ip http server
+no ip http secure-server
+ip ftp source-interface Loopback0
+ip tftp source-interface Loopback0
+ip tftp blocksize 1468
+ip route vrf blue 0.0.0.0 0.0.0.0 Null0 240 name "/* Default route anchor */"
+ip route vrf blue 9.0.0.0 255.0.0.0 9.0.64.1 tag 100899 name "/* 9. top-level aggregate */"
+ip route vrf blue 9.64.0.0 255.255.0.0 9.0.64.1 tag 100898 name "/* Prefix reduction range to WAN beacon */"
+ip route vrf blue 9.189.122.128 255.255.255.240 Null0 240 tag 100811000 name "/* vIA1 subnet anchor< - 4s6-via-hb1> */"
+ip route vrf blue 9.189.122.144 255.255.255.240 Null0 240 tag 100811000 name "/* vIA1 subnet anchor< - SBC Media> */"
+ip route vrf blue 10.0.0.0 255.0.0.0 Null0 240 name "/* RFC 1918 private range */"
+ip route vrf blue 127.0.0.0 255.0.0.0 Null0 240 name "/* Bogon range */"
+ip route vrf blue 169.254.0.0 255.255.0.0 Null0 240 name "/* Link-local range */"
+ip route vrf blue 172.16.0.0 255.240.0.0 Null0 240 name "/* RFC 1918 private range */"
+ip route vrf blue 192.0.2.0 255.255.255.0 Null0 240 name "/* Bogon range */"
+ip route vrf blue 192.168.0.0 255.255.0.0 Null0 240 name "/* RFC 1918 private range */"
+ip route vrf blue 198.18.0.0 255.254.0.0 Null0 240 name "/* Bogon range */"
+ip ssh source-interface Loopback0
+ip ssh version 2
+ip ssh dscp 26
+ip ssh server algorithm mac hmac-sha2-256 hmac-sha2-512
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh server algorithm kex ecdh-sha2-nistp256 ecdh-sha2-nistp384 ecdh-sha2-nistp521
+ip ssh client algorithm mac hmac-sha2-256 hmac-sha2-512
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm kex ecdh-sha2-nistp256 ecdh-sha2-nistp384 ecdh-sha2-nistp521
+ip scp server enable
+!
+ip policy-list rp_vpn_scope permit
+ match community 54
+!
+ip policy-list rp_block_scope permit
+ match community 50
+!
+ip policy-list rp_default_scope permit
+ match community 101
+!
+ip policy-list rp_local_scope permit
+ match community 52
+!
+ip policy-list rp_pe_prefix permit
+ match community 71
+!
+ip policy-list rp_other_block permit
+ match community 110
+!
+ip policy-list rp_same_block_same_asn permit
+ match as-path 1
+ match community 10
+!
+ip policy-list rp_other_asn permit
+ match as-path 2
+!
+ip policy-list rp_kr_block_adjacent_asn permit
+ match as-path 11
+ match community 181
+!
+ip policy-list rp_limited_scope permit
+ match community 170
+!
+ip policy-list rp_same_block_adjacent_asn permit
+ match as-path 11
+ match community 10
+!
+ip policy-list rp_internal_same_block_any_asn permit
+ match route-type internal
+ match community 10
+!
+ip policy-list rp_prefix_reduction_prefix permit
+ match community 79
+!
+ip policy-list rp_vpn_id_blue permit
+ match community 100
+!
+ip policy-list rp_multi_source_backup permit
+ match community 138
+!
+ip policy-list rp_local_agg_multi_site_blue permit
+ match as-path 1
+ match community 198
+!
+ip policy-list rp_from_ab_vid permit
+ match as-path 1
+ match community 161
+!
+ip policy-list rp_multi_source_sink permit
+ match community 139
+!
+ip policy-list rp_sink permit
+ match community 39
+!
+ip policy-list rp_displaced_host_other_site_blue permit
+ match community 193
+ match extcommunity cl_rt_blue
+!
+ip policy-list rp_explicit_sub_agg permit
+ match community 75
+!
+ip policy-list rp_multi_source_alternate permit
+ match community 137
+!
+ip policy-list rp_everything permit
+ match as-path 100
+!
+ip policy-list rp_non_adjacent_asn permit
+ match as-path 3
+!
+ip policy-list rp_other_block_adjacent_asn permit
+ match as-path 11
+ match community 110
+!
+ip policy-list rp_same_asn permit
+ match as-path 1
+!
+ip policy-list rp_multi_source permit
+ match community 35
+!
+ip policy-list rp_vpn_id_1net permit
+ match community 200
+!
+ip policy-list rp_neighbor_scope permit
+ match community 51
+!
+ip extcommunity-list standard cl_rt_blue permit rt 8:100
+ip bgp-community new-format
+ip community-list 10 permit 2002:1006
+ip community-list 35 permit 2002:35
+ip community-list 39 permit 2002:39
+ip community-list 50 permit 2002:50
+ip community-list 51 permit 2002:51
+ip community-list 52 permit 2002:52
+ip community-list 54 permit 2002:54
+ip community-list 71 permit 2002:71
+ip community-list 75 permit 2002:75
+ip community-list 79 permit 2002:79
+ip community-list 100 permit _2002:100_
+ip community-list 101 deny _2002:5._
+ip community-list 101 permit .*
+ip community-list 110 deny _2002:1006_
+ip community-list 110 deny _2002:18.._
+ip community-list 110 permit _2002:1..._
+ip community-list 137 permit _2002:35_2002:37_
+ip community-list 138 permit _2002:35_2002:38_
+ip community-list 139 permit _2002:35_2002:39_
+ip community-list 161 permit _2002:61_.+_2002:1006_
+ip community-list 170 permit _2002:7._
+ip community-list 181 permit _2002:18.._
+ip community-list 193 deny _2002:53_
+ip community-list 193 permit _2002:93_
+ip community-list 198 permit _2002:98 2002:100_
+ip community-list 200 permit _2002:200_
+ip community-list standard cl_block_scope permit 2002:50
+ip community-list expanded cl_any_block_id permit _2002:1..._
+ip community-list expanded cl_any_route_scope permit _2002:5._
+ip as-path access-list 1 permit ^$
+ip as-path access-list 2 permit .+
+ip as-path access-list 3 permit .+_.+
+ip as-path access-list 11 deny .+_.+
+ip as-path access-list 11 permit .+
+ip as-path access-list 100 permit .*
+!
+ip access-list standard al_vty_access_aspr
+ 10 remark /**********************************************
+ 20 remark Restrict VTY access
+ 30 remark ***********************************************
+ 40 remark Site network infrastructure ranges
+ 50 remark **********************************************/
+ 60 permit 9.88.0.0 0.7.255.255
+ 70 permit 9.96.0.0 0.1.255.255
+ 200 remark /*********************************************-
+ 210 remark AT&T management segments
+ 220 remark *********************************************-/
+ 230 permit 9.0.63.128 0.0.0.127
+ 240 permit 9.17.223.224 0.0.0.31
+ 250 permit 135.89.45.0 0.0.0.255
+ 260 permit 135.89.84.128 0.0.0.127
+ 270 permit 135.89.162.0 0.0.0.127
+ 280 permit 135.89.176.0 0.0.0.255
+ 290 permit 135.89.213.0 0.0.0.255
+ 300 remark /********************************************--
+ 310 remark Global AT&T enclave address pool
+ 320 remark ********************************************--/
+ 330 permit 9.78.8.0 0.0.7.255
+ 340 permit 9.78.16.0 0.0.15.255
+ 350 permit 9.78.32.0 0.0.15.255
+ 400 remark /********************************************---
+ 410 remark Global IBM-CIO jump host address pool
+ 420 remark ********************************************---/
+ 430 permit 9.46.161.10 0.0.0.1
+ 440 permit 9.46.165.10 0.0.0.1
+ 450 permit 9.172.51.10 0.0.0.1
+ 460 permit 9.172.59.10 0.0.0.1
+ 470 permit 9.189.152.10 0.0.0.1
+ 480 permit 9.201.104.10 0.0.0.1
+ 490 permit 9.203.184.10 0.0.0.1
+ 500 permit 9.203.200.10 0.0.0.1
+ 9990 deny   any log
+!
+!
+!
+ip prefix-list pl_default_route seq 100 permit 0.0.0.0/0
+ip prefix-list pl_default_route seq 1000 deny 0.0.0.0/0 le 32
+!
+ip prefix-list pl_more_specific_blue seq 100 permit 9.68.18.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 110 permit 9.68.22.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 120 permit 9.68.24.0/21 ge 22
+ip prefix-list pl_more_specific_blue seq 130 permit 9.68.32.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 140 permit 9.68.36.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 150 permit 9.68.40.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 160 permit 9.68.64.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 170 permit 9.68.69.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 180 permit 9.68.70.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 190 permit 9.68.72.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 200 permit 9.68.76.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 210 permit 9.68.80.0/21 ge 22
+ip prefix-list pl_more_specific_blue seq 220 permit 9.68.97.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 230 permit 9.68.98.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 240 permit 9.68.100.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 250 permit 9.68.105.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 260 permit 9.68.106.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 270 permit 9.68.111.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 280 permit 9.68.118.0/25 ge 26
+ip prefix-list pl_more_specific_blue seq 290 permit 9.68.120.0/21 ge 22
+ip prefix-list pl_more_specific_blue seq 300 permit 9.68.128.0/19 ge 20
+ip prefix-list pl_more_specific_blue seq 310 permit 9.68.160.0/20 ge 21
+ip prefix-list pl_more_specific_blue seq 320 permit 9.68.176.0/21 ge 22
+ip prefix-list pl_more_specific_blue seq 330 permit 9.68.184.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 340 permit 9.68.192.0/21 ge 22
+ip prefix-list pl_more_specific_blue seq 350 permit 9.68.200.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 360 permit 9.68.204.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 370 permit 9.68.208.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 380 permit 9.68.216.0/21 ge 22
+ip prefix-list pl_more_specific_blue seq 390 permit 9.68.228.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 400 permit 9.68.238.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 410 permit 9.68.240.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 420 permit 9.68.244.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 430 permit 9.116.1.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 440 permit 9.116.2.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 450 permit 9.116.20.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 460 permit 9.116.24.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 470 permit 9.116.30.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 480 permit 9.116.32.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 490 permit 9.116.48.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 500 permit 9.116.56.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 510 permit 9.116.60.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 520 permit 9.116.80.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 530 permit 9.116.82.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 540 permit 9.116.85.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 550 permit 9.116.86.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 560 permit 9.116.88.0/21 ge 22
+ip prefix-list pl_more_specific_blue seq 570 permit 9.116.156.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 580 permit 9.116.192.0/18 ge 19
+ip prefix-list pl_more_specific_blue seq 590 permit 9.188.43.128/25 ge 26
+ip prefix-list pl_more_specific_blue seq 600 permit 9.188.77.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 610 permit 9.189.47.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 620 permit 9.189.112.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 630 permit 9.189.114.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 640 permit 9.189.116.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 650 permit 9.189.120.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 660 permit 9.189.121.128/25 ge 26
+ip prefix-list pl_more_specific_blue seq 670 permit 9.189.122.0/25 ge 26
+ip prefix-list pl_more_specific_blue seq 680 permit 9.189.140.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 690 permit 9.68.114.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 700 permit 9.68.115.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 710 permit 9.68.116.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 720 permit 9.68.117.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 730 permit 9.116.160.0/19 ge 20
+ip prefix-list pl_more_specific_blue seq 740 permit 9.189.160.0/20 ge 21
+ip prefix-list pl_more_specific_blue seq 750 permit 9.189.176.0/21 ge 22
+ip prefix-list pl_more_specific_blue seq 760 permit 9.189.184.0/22 ge 23
+ip prefix-list pl_more_specific_blue seq 770 permit 9.189.188.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 780 permit 9.189.190.0/23 ge 24
+ip prefix-list pl_more_specific_blue seq 790 permit 9.189.96.0/20 ge 21
+ip prefix-list pl_more_specific_blue seq 800 permit 9.68.108.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 810 permit 9.68.109.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 820 permit 9.189.122.128/27 ge 28
+ip prefix-list pl_more_specific_blue seq 830 permit 9.116.4.0/24 ge 25
+ip prefix-list pl_more_specific_blue seq 1000 deny 0.0.0.0/0 le 32
+!
+ip prefix-list pl_non_kr1_blue seq 100 deny 9.189.122.128/28 le 32
+ip prefix-list pl_non_kr1_blue seq 110 deny 9.116.1.0/24 le 32
+ip prefix-list pl_non_kr1_blue seq 120 deny 9.116.2.0/23 le 32
+ip prefix-list pl_non_kr1_blue seq 130 deny 9.116.20.0/22 le 32
+ip prefix-list pl_non_kr1_blue seq 140 deny 9.116.24.0/23 le 32
+ip prefix-list pl_non_kr1_blue seq 150 deny 9.116.30.0/24 le 32
+ip prefix-list pl_non_kr1_blue seq 160 deny 9.116.32.0/22 le 32
+ip prefix-list pl_non_kr1_blue seq 170 deny 9.116.48.0/24 le 32
+ip prefix-list pl_non_kr1_blue seq 180 deny 9.116.56.0/22 le 32
+ip prefix-list pl_non_kr1_blue seq 190 deny 9.116.60.0/23 le 32
+ip prefix-list pl_non_kr1_blue seq 200 deny 9.116.4.0/24 le 32
+ip prefix-list pl_non_kr1_blue seq 1000 permit 0.0.0.0/0 le 32
+!
+ip prefix-list pl_wan_beacon seq 100 permit 9.0.64.1/32
+ip prefix-list pl_wan_beacon seq 1000 deny 0.0.0.0/0 le 32
+logging history notifications
+logging trap notifications
+logging source-interface Loopback0
+logging host 135.89.176.123
+logging host 135.89.45.123
+ip access-list standard 79
+ 10 remark /**********************************************
+ 20 remark NTP authorized servers
+ 30 remark **********************************************/
+ 40 permit 135.89.176.123
+ 50 permit 135.89.45.123
+ 9990 deny   any
+ip access-list standard 80
+ 10 remark /**********************************************
+ 20 remark IBM-CIO SNMP RO authorized servers
+ 30 remark **********************************************/
+ 40 permit 9.46.161.252 0.0.0.1
+ 50 permit 9.46.165.252 0.0.0.1
+ 60 permit 9.172.51.252 0.0.0.1
+ 70 permit 9.172.59.252 0.0.0.1
+ 80 permit 9.189.152.252 0.0.0.1
+ 90 permit 9.201.104.252 0.0.0.1
+ 100 permit 9.203.184.252 0.0.0.1
+ 110 permit 9.203.200.252 0.0.0.1
+ 120 permit 9.208.15.32 0.0.0.1
+ 130 permit 9.217.0.0 0.0.0.1
+ 9990 deny   any
+ip access-list standard 93
+ 10 remark /**********************************************
+ 20 remark AT&T SNMP RW authorized servers
+ 30 remark **********************************************/
+ 40 permit 135.89.45.0 0.0.0.255
+ 50 permit 135.89.176.0 0.0.0.255
+ 60 permit 135.89.127.0 0.0.0.255
+ 70 permit 9.17.223.224 0.0.0.31
+ 80 permit 9.0.63.128 0.0.0.127
+ 90 permit 9.106.89.128 0.0.0.31
+ 100 permit 9.150.197.128 0.0.0.31
+ 110 permit 9.201.185.128 0.0.0.31
+ 9990 deny   any
+ip access-list standard 95
+ 10 remark /**********************************************
+ 20 remark AT&T SNMP RO authorized servers
+ 30 remark **********************************************/
+ 40 permit 135.89.45.0 0.0.0.255
+ 50 permit 135.89.176.0 0.0.0.255
+ 60 permit 135.89.127.0 0.0.0.255
+ 70 permit 9.17.223.224 0.0.0.31
+ 80 permit 9.0.63.128 0.0.0.127
+ 90 permit 9.106.89.128 0.0.0.31
+ 100 permit 9.150.197.128 0.0.0.31
+ 110 permit 9.201.185.128 0.0.0.31
+ 9990 deny   any
+ipv6 route vrf blue 2620:1F7:3A22::6:8101:0/112 Null0 240 tag 100811000 name "/* vIA1 subnet anchor */"
+ipv6 route vrf blue ::/0 Null0 240 name "/* IPv6 default route anchor */"
+!
+!
+ipv6 prefix-list pl6_default_route seq 100 permit ::/0
+ipv6 prefix-list pl6_default_route seq 1000 deny ::/0 le 128
+!
+ipv6 prefix-list pl6_non_kr1_blue seq 100 deny 2620:1F7:3A22:A000::/56 le 128
+ipv6 prefix-list pl6_non_kr1_blue seq 110 deny 2620:1F7:3A22::6:8101:0/112 le 128
+ipv6 prefix-list pl6_non_kr1_blue seq 1000 permit ::/0 le 128
+route-map rm_default_or_block_ab deny 100 
+ description ** Deny prefixes matching policy **
+ match policy-list rp_block_scope rp_from_ab_vid
+!
+route-map rm_default_or_block_ab permit 200 
+ description ** Allow local prefixes from same block; reset to neighbor scope **
+ match policy-list rp_kr_block_adjacent_asn rp_same_block_adjacent_asn rp_same_block_same_asn
+ continue 300
+ set comm-list cl_any_route_scope delete
+ set community 2002:51 additive
+!
+route-map rm_default_or_block_ab permit 250 
+ description ** Allow default route prefix **
+ match ip address prefix-list pl_default_route
+ match ipv6 address prefix-list pl6_default_route
+ continue 300
+!
+route-map rm_default_or_block_ab deny 290 
+ description ** Deny all other prefixes **
+ match policy-list rp_everything
+!
+route-map rm_default_or_block_ab permit 300 
+ description ** Set less preferred metric on internal prefixes from same block any AS **
+ match policy-list rp_internal_same_block_any_asn
+ set metric 85
+!
+route-map rm_default_or_block_ab permit 310 
+ description ** Set normal metric on all other prefixes **
+ set metric 50
+!
+route-map rm_to_rr deny 100 
+ description ** Deny neighbor-scope prefixes from other AS **
+ match policy-list rp_neighbor_scope
+ match policy-list rp_other_asn
+!
+route-map rm_to_rr deny 110 
+ description ** Deny local-scope prefixes from non-adjacent AS **
+ match policy-list rp_local_scope
+ match policy-list rp_non_adjacent_asn
+!
+route-map rm_to_rr deny 120 
+ description ** Deny multi-source sink prefixes from same AS **
+ match policy-list rp_multi_source_sink
+ match policy-list rp_same_asn
+!
+route-map rm_to_rr deny 130 
+ description ** Deny block-scope prefixes **
+ match policy-list rp_block_scope
+!
+route-map rm_to_rr permit 500 
+ description ** Allow all other prefixes **
+ match policy-list rp_everything
+!
+route-map rm_blue_table_ab_alt deny 100 
+ description ** Deny prefixes matching policy **
+ match policy-list rp_from_ab_vid rp_limited_scope
+!
+route-map rm_blue_table_ab_alt deny 110 
+ description ** Deny local blue multi-site aggregate prefixes **
+ match policy-list rp_local_agg_multi_site_blue
+!
+route-map rm_blue_table_ab_alt deny 120 
+ description ** Deny more-specific prefixes from other blocks **
+ match ip address prefix-list pl_more_specific_blue
+ match policy-list rp_other_block
+!
+route-map rm_blue_table_ab_alt deny 200 
+ description ** Deny neighbor-scope prefixes from other block or other AS **
+ match policy-list rp_neighbor_scope
+ match policy-list rp_other_asn rp_other_block
+!
+route-map rm_blue_table_ab_alt deny 210 
+ description ** Deny local-scope prefixes from non-adjacent AS or other-block adjacent AS **
+ match policy-list rp_local_scope
+ match policy-list rp_non_adjacent_asn rp_other_block_adjacent_asn
+!
+route-map rm_blue_table_ab_alt permit 220 
+ description ** Allow local prefixes from same block; reset to neighbor scope **
+ match policy-list rp_kr_block_adjacent_asn rp_same_block_adjacent_asn rp_same_block_same_asn
+ continue 300
+ set comm-list cl_any_route_scope delete
+ set community 2002:51 no-export additive
+!
+route-map rm_blue_table_ab_alt permit 300 
+ description ** Set less preferred alternate metric on internal prefixes from same block any AS **
+ match policy-list rp_internal_same_block_any_asn
+ set metric 95
+!
+route-map rm_blue_table_ab_alt permit 310 
+ description ** Set normal alternate metric on all other prefixes **
+ set metric 60
+!
+route-map rm_from_rr deny 100 
+ description ** Deny prefixes from same block tagged as sink **
+ match policy-list rp_sink
+ match policy-list rp_same_block_same_asn
+!
+route-map rm_from_rr deny 110 
+ description ** Deny block-scope prefixes from other blocks **
+ match policy-list rp_block_scope
+ match policy-list rp_other_block
+!
+route-map rm_from_rr deny 120 
+ description ** Deny blue displaced host prefixes for other sites **
+ match policy-list rp_displaced_host_other_site_blue
+!
+route-map rm_from_rr deny 200 
+ description ** Deny unneeded limited-scope prefixes **
+ match policy-list rp_explicit_sub_agg rp_pe_prefix
+!
+route-map rm_from_rr permit 210 
+ description ** Allow required limited-scope prefixes **
+ match policy-list rp_prefix_reduction_prefix
+!
+route-map rm_from_rr deny 290 
+ description ** Deny all other limited-scope prefixes **
+ match policy-list rp_limited_scope
+!
+route-map rm_from_rr permit 500 
+ description ** Allow all other prefixes **
+ match policy-list rp_everything
+!
+route-map rm_static_to_bgp_vrf permit 1001 
+ description ** Harden infrastructure access subnets in VRF blue **
+ match tag 100811000
+ set metric 999
+ set local-preference 50
+ set weight 0
+ set origin igp
+ set community 163:55196 2002:8 2002:11 2002:39 2002:100 2002:1006
+!
+route-map rm_static_to_bgp_vrf permit 1004 
+ description ** Static routes for infrastructure prefixes in VRF blue **
+ match tag 100811
+ set origin igp
+ set community 163:55196 2002:8 2002:11 2002:100 2002:1006
+!
+route-map rm_static_to_bgp_vrf permit 1005 
+ description ** Static routes for remote user prefixes in VRF blue **
+ match tag 100815
+ set origin igp
+ set community 163:55196 2002:8 2002:15 2002:100 2002:1006
+!
+route-map rm_static_to_bgp_vrf permit 1007 
+ description ** Static routes for yellow zone server NAT prefixes in VRF blue **
+ match tag 100413
+ set origin igp
+ set community 163:55196 2002:4 2002:13 2002:100 2002:1006
+!
+route-map rm_static_to_bgp_vrf permit 1008 
+ description ** Static routes for multi-site aggregate prefixes in VRF blue **
+ match tag 100898
+ set origin igp
+ set community 163:55196 2002:8 2002:50 2002:98 2002:100 2002:1006
+!
+route-map rm_static_to_bgp_vrf permit 1009 
+ description ** Static routes for top-level aggregate prefixes in VRF blue **
+ match tag 100899
+ set origin igp
+ set community 163:55196 2002:8 2002:50 2002:99 2002:100 2002:1006
+!
+route-map rm_local_vpn deny 100 
+ description ** Deny prefixes matching policy **
+ match policy-list rp_vpn_scope
+!
+route-map rm_local_vpn permit 200 
+ description ** Allow and set normal metric on prefixes from local VPN **
+ match policy-list rp_same_asn
+ set metric 50
+!
+route-map rm_blue_table_ab deny 100 
+ description ** Deny prefixes matching policy **
+ match policy-list rp_from_ab_vid rp_limited_scope
+!
+route-map rm_blue_table_ab deny 110 
+ description ** Deny local blue multi-site aggregate prefixes **
+ match policy-list rp_local_agg_multi_site_blue
+!
+route-map rm_blue_table_ab deny 120 
+ description ** Deny more-specific prefixes from other blocks **
+ match ip address prefix-list pl_more_specific_blue
+ match policy-list rp_other_block
+!
+route-map rm_blue_table_ab deny 200 
+ description ** Deny neighbor-scope prefixes from other block or other AS **
+ match policy-list rp_neighbor_scope
+ match policy-list rp_other_asn rp_other_block
+!
+route-map rm_blue_table_ab deny 210 
+ description ** Deny local-scope prefixes from non-adjacent AS or other-block adjacent AS **
+ match policy-list rp_local_scope
+ match policy-list rp_non_adjacent_asn rp_other_block_adjacent_asn
+!
+route-map rm_blue_table_ab permit 220 
+ description ** Allow local prefixes from same block; reset to neighbor scope **
+ match policy-list rp_kr_block_adjacent_asn rp_same_block_adjacent_asn rp_same_block_same_asn
+ continue 300
+ set comm-list cl_any_route_scope delete
+ set community 2002:51 no-export additive
+!
+route-map rm_blue_table_ab permit 300 
+ description ** Set less preferred metric on internal prefixes from same block any AS **
+ match policy-list rp_internal_same_block_any_asn
+ set metric 85
+!
+route-map rm_blue_table_ab permit 310 
+ description ** Set normal metric on all other prefixes **
+ set metric 50
+!
+route-map rm_default_or_block_ab_alt deny 100 
+ description ** Deny prefixes matching policy **
+ match policy-list rp_block_scope rp_from_ab_vid
+!
+route-map rm_default_or_block_ab_alt permit 200 
+ description ** Allow local prefixes from same block; reset to neighbor scope **
+ match policy-list rp_kr_block_adjacent_asn rp_same_block_adjacent_asn rp_same_block_same_asn
+ continue 300
+ set comm-list cl_any_route_scope delete
+ set community 2002:51 additive
+!
+route-map rm_default_or_block_ab_alt permit 250 
+ description ** Allow default route prefix **
+ match ip address prefix-list pl_default_route
+ match ipv6 address prefix-list pl6_default_route
+ continue 300
+!
+route-map rm_default_or_block_ab_alt deny 290 
+ description ** Deny all other prefixes **
+ match policy-list rp_everything
+!
+route-map rm_default_or_block_ab_alt permit 300 
+ description ** Set less preferred alternate metric on internal prefixes from same block any AS **
+ match policy-list rp_internal_same_block_any_asn
+ set metric 95
+!
+route-map rm_default_or_block_ab_alt permit 310 
+ description ** Set normal alternate metric on all other prefixes **
+ set metric 60
+!
+route-map rm_unsup_to_rr deny 100 
+ description ** Deny neighbor-scope suppressed prefixes from other AS **
+ match policy-list rp_neighbor_scope
+ match policy-list rp_other_asn
+!
+route-map rm_unsup_to_rr deny 110 
+ description ** Deny local-scope suppressed prefixes from non-adjacent AS **
+ match policy-list rp_local_scope
+ match policy-list rp_non_adjacent_asn
+!
+route-map rm_unsup_to_rr permit 500 
+ description ** Allow all other suppressed prefixes **
+ match policy-list rp_everything
+!
+route-map rm_from_kr1_blue_alt deny 100 
+ description ** Deny prefixes matching control lists **
+ match ip address prefix-list pl_non_kr1_blue
+ match ipv6 address prefix-list pl6_non_kr1_blue
+!
+route-map rm_from_kr1_blue_alt permit 500 
+ description ** Allow all other prefixes; set community tags and increase metric **
+ match policy-list rp_everything
+ set metric +10
+ set community 163:55196 2002:8 2002:14 2002:59 2002:100 2002:1801
+!
+route-map rm6_conn_to_bgp_blue permit 100 
+ description ** Set attributes for blue IPv6 loopback interface **
+ match interface Loopback10
+ set origin igp
+ set community 163:55196 2002:8 2002:11 2002:62 2002:100 2002:1006
+!
+route-map rm6_conn_to_bgp_blue permit 500 
+ description ** Set attributes for blue IPv6 access interfaces **
+ set origin igp
+ set community 163:55196 2002:8 2002:11 2002:100 2002:1006
+!
+route-map rm_default_or_block deny 100 
+ description ** Deny prefixes matching policy **
+ match policy-list rp_block_scope
+!
+route-map rm_default_or_block permit 200 
+ description ** Allow local prefixes from same block; reset to neighbor scope **
+ match policy-list rp_kr_block_adjacent_asn rp_same_block_adjacent_asn rp_same_block_same_asn
+ set metric 50
+ set comm-list cl_any_route_scope delete
+ set community 2002:51 additive
+!
+route-map rm_default_or_block permit 250 
+ description ** Allow default route prefix **
+ match ip address prefix-list pl_default_route
+ match ipv6 address prefix-list pl6_default_route
+ set metric 50
+!
+route-map rm_from_kr1_blue deny 100 
+ description ** Deny prefixes matching control lists **
+ match ip address prefix-list pl_non_kr1_blue
+ match ipv6 address prefix-list pl6_non_kr1_blue
+!
+route-map rm_from_kr1_blue permit 500 
+ description ** Allow all other prefixes; set community tags **
+ match policy-list rp_everything
+ set community 163:55196 2002:8 2002:14 2002:59 2002:100 2002:1801
+!
+route-map rm_conn_to_bgp_blue permit 100 
+ description ** Set attributes for blue IPv4 loopback interface **
+ match interface Loopback10
+ set origin igp
+ set community 163:55196 2002:8 2002:11 2002:59 2002:62 2002:70 2002:73 2002:100 2002:1006
+!
+route-map rm_conn_to_bgp_blue permit 500 
+ description ** Set attributes for blue IPv4 access interfaces **
+ set origin igp
+ set community 163:55196 2002:8 2002:11 2002:100 2002:1006
+!
+route-map rm_wan_beacon permit 100 
+ description ** Allow IPv4 WAN beacon prefix **
+ match ip address prefix-list pl_wan_beacon
+!
+route-map rm_deny_all deny 100 
+ description ** Deny all prefixes **
+ match policy-list rp_everything
+!
+route-map rm_set_global deny 100 
+ description ** Deny default route prefix **
+ match ip address prefix-list pl_default_route
+ match ipv6 address prefix-list pl6_default_route
+!
+route-map rm_set_global permit 200 
+ description ** Set global scope on default-scope prefixes **
+ match policy-list rp_default_scope
+ continue 300
+ set community 2002:59 additive
+!
+route-map rm_set_global permit 300 
+ description ** Set local alternate preference value on prefixes tagged as alternate **
+ match policy-list rp_multi_source_alternate
+ continue 500
+ set local-preference 850
+!
+route-map rm_set_global permit 310 
+ description ** Set local backup preference value on prefixes tagged as backup **
+ match policy-list rp_multi_source_backup
+ continue 500
+ set local-preference 550
+!
+route-map rm_set_global permit 320 
+ description ** Set local sink preference value on prefixes tagged as sink **
+ match policy-list rp_multi_source_sink
+ continue 500
+ set local-preference 350
+!
+route-map rm_set_global permit 390 
+ description ** Set local primary preference value on all other prefixes tagged as multiple-source **
+ match policy-list rp_multi_source
+ continue 500
+ set local-preference 950
+!
+route-map rm_set_global permit 500 
+ description ** Reset block ID on all prefixes **
+ match policy-list rp_everything
+ set comm-list cl_any_block_id delete
+ set community 2002:1006 additive
+!
+mpls ldp router-id Loopback0 force
+!
+snmp-server group sg_snmpv3_ro_cio v3 priv access 80
+snmp-server community 1BML0vesB1GData RO 80
+snmp-server community pbzvKE6Ak4ygnfcmSt RW 93
+snmp-server community WQgbxtam3ZmG9yceq RO 95
+snmp-server trap timeout 180
+snmp-server trap-source Loopback0
+snmp-server queue-length 100
+snmp-server location /RG=AP/CO=Japan/CI=Tokyo/LP=4s6/OF=+9/BG=Hakozaki/FL=18F/CL=NWroom/RA=NA
+snmp-server ip dscp 18
+snmp-server contact /GA=NA/FN=vID /TN=vIDb-vsc-9500y.txt/TV=23.0.0/TS=STANDARD/LD=NA
+snmp-server system-shutdown
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps fru-ctrl
+snmp-server enable traps entity
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config
+snmp-server enable traps bgp
+snmp-server host 135.89.176.123 version 2c WQgbxtam3ZmG9yceq 
+snmp-server host 135.89.176.246 version 2c WQgbxtam3ZmG9yceq  config
+snmp-server host 135.89.45.123 version 2c WQgbxtam3ZmG9yceq 
+snmp ifmib ifindex persist
+tacacs-server attribute allow unknown
+!
+!
+!
+ipv6 access-list al6_vty_access_aspr
+ sequence 10 remark /**********************************************
+ sequence 20 remark Restrict IPv6 VTY access
+ sequence 30 remark **********************************************/
+ sequence 40 deny ipv6 any any log
+!
+control-plane
+ service-policy input system-cpp-policy
+!
+privilege exec level 7 show running-config view full
+privilege exec level 7 show running-config view
+privilege exec level 7 show running-config
+privilege exec all level 1 show
+banner exec ^C *** Cisco 9500-24Y4C / 23.0.0 / vIDb-vsc-9500y.txt ***
+^C
+banner login ^C
+***********************************************************************
+*  Warning Notice:                                                    *
+*   This system is restricted solely to AT&T authorized users for     *
+*   legitimate business purposes only. You must have explicit,        *
+*   authorized permission by AT&T to access or configure this device. *
+*   All activities performed on this device are logged and monitored. *
+*   The actual or attempted unauthorized access, use, or modification *
+*   of this system is strictly prohibited by AT&T. Unauthorized users *
+*   are subject to Company disciplinary proceedings and/or criminal   *
+*   and civil penalties under state, federal, or other applicable     *
+*   domestic and foreign laws. The use of this system may be          *
+*   monitored and recorded for administrative and security reasons.   *
+*   Anyone accessing this system expressly consents to such           *
+*   monitoring and is advised that if monitoring reveals possible     *
+*   evidence of criminal activity, AT&T may provide the evidence of   *
+*   such activity to law enforcement officials. All users must comply *
+*   with AT&T company policies regarding the protection of AT&T       *
+*   information assets.                                               *
+***********************************************************************
+^C
+!
+line con 0
+ session-timeout 15 
+ exec-timeout 15 0
+ logging synchronous
+ stopbits 1
+line aux 0
+ session-timeout 15 
+ exec-timeout 15 0
+ logging synchronous
+line vty 0 4
+ session-timeout 15 
+ access-class al_vty_access_aspr in vrf-also
+ exec-timeout 15 0
+ ipv6 access-class al6_vty_access_aspr in
+ logging synchronous
+ transport input ssh
+line vty 5 15
+ session-timeout 15 
+ access-class al_vty_access_aspr in vrf-also
+ exec-timeout 15 0
+ ipv6 access-class al6_vty_access_aspr in
+ logging synchronous
+ transport input ssh
+line vty 16 31
+ transport input ssh
+!
+call-home
+ profile "CiscoTAC-1"
+  destination transport-method http
+ntp source Loopback0
+ntp access-group peer 79
+ntp server 135.89.176.123
+ntp server 135.89.45.123
+!
+!
+!
+!
+!
+!
+end

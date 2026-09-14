@@ -13,26 +13,15 @@ from ._routes import get_routes
 from ._prefix_list import get_prefix_lists
 
 
+## Registeredcommand: ( (Section , function), ... ) ##
 CISCO_CMD_REGISTER = {
 	'show running-config': (
-		get_interfaces, 
-		get_bgp, 
-		get_ospf,
-		get_vrfs, 
-		get_system, 
-		get_routes,
-		get_prefix_lists,
-	),
-}
-
-CISCO_CMD_SECTION = {
-	'show running-config': (
-		'interfaces', 
-		'routing', 
-		'routing',
-		'instances', 
-		'system', 
-		'routes',
-		'prefixes',
-	),
+		('interfaces', get_interfaces,    ),
+		('routing',    get_bgp,           ),
+		('routing',    get_ospf,          ),
+		('instances',  get_vrfs,          ),
+		('system',     get_system,        ),
+		('routes',     get_routes,        ),
+		('prefixes',   get_prefix_lists,  ),        
+	)
 }

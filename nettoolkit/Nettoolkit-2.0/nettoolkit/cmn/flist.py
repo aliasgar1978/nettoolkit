@@ -202,6 +202,8 @@ def add_to_list(lst, item):
 	Returns:
 		list: updated list
 	"""	
+	if not isinstance(lst, list):
+		lst  = [lst, ]
 	if item in lst:
 		return lst
 	return lst.append(item)

@@ -16,23 +16,30 @@ def cisco_absolute_command(cmd, cmd_register):
 	Returns:
 		str: cisco command - full untrunked
 	"""
-	spl_cmd = cmd.split()
-	for c_cmd in cmd_register:
-		spl_c_cmd = c_cmd.split()
-		if len(spl_cmd) == len(spl_c_cmd):
-			for i, word in enumerate(spl_cmd):
-				try:
-					word_match = spl_c_cmd[i].startswith(word)
-					if not word_match: break
-				except:
-					word_match = False
-					break
-			if word_match: break
-		else:
-			word_match = False
-	if word_match:  return c_cmd
+	words = cmd.lower().split()
+	matches = []
+	for registered_cmd in cmd_register:
+		registered_words = registered_cmd.lower().split()
+
+		if len(words) != len(registered_words):
+			continue
+
+		if all( registered.startswith(input_word) 
+				for input_word, registered in zip(words, registered_words)):
+			matches.append(registered_cmd)
+
+	if len(matches) == 1:
+		return matches[0]
+
+	if len(matches) > 1:
+		raise ValueError(
+			f"Ambiguous command abbreviation {cmd!r}: {matches}"
+		)
+
 	return cmd
+
 # ===================================================================================
+
 
 def juniper_absolute_command(cmd, cmd_register, op_filter=False):
 	"""returns absolute truked command if any filter applied

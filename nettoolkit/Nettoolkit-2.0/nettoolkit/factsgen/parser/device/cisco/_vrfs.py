@@ -97,7 +97,5 @@ def parse_vrfs_single_pass(cmd_op):
     return vrfs_dict
 
 def get_vrfs(cmd_op, *args):
-    vrf_result_dict = parse_vrfs_single_pass(cmd_op)
-    if not vrf_result_dict:
-        vrf_result_dict['dummy_vrf'] = ""
+    vrf_result_dict = parse_vrfs_single_pass(cmd_op) or {}
     return {'op_dict': vrf_result_dict}

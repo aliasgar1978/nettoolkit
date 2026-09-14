@@ -1,0 +1,3243 @@
+
+! ---------------------------------------------------------------------------- !
+! This output is generated using Nettoolkit utility.
+! Script written by : Aliasgar Hozaifa Lokhandwala (aholo2000@gmail.com)
+! Write an email if any errors found.
+! ---------------------------------------------------------------------------- !
+
+!================================================================================
+! output for command: show clock
+!================================================================================
+
+01:56:10.940 UTC Wed Sep 25 2024
+
+!================================================================================
+! output for command: show interfaces status
+!================================================================================
+
+
+Port         Name               Status       Vlan       Duplex  Speed Type
+Twe1/0/1     4s6/vWD5a-WLC1.1/t connected    trunk        full    10G SFP-10GBase-LR
+Twe1/0/2     4s6/vWD5a-WLC1.2/t connected    trunk        full    10G SFP-10GBase-LR
+Twe1/0/3     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/4     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/5     4s6/vWD5a-WLC1/HA/ connected    4027       a-full a-1000 10/100/1000BaseTX SFP
+Twe1/0/6     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/7     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/8     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/9     ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/10    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/11    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/12    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/13    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/14    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/15    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/16    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/17    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/18    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/19    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/20    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/21    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/22    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/23    ** Not In Use **   disabled     1            auto   auto unknown
+Twe1/0/24    ** RESERVED-SPAN * disabled     1            auto   auto unknown
+Hu1/0/25     4s6/vWD5a-vWD5b/tr connected    trunk        full    10G CVR QSFP SFP10G(SFP-10GBase-LR)
+Hu1/0/26     4s6/vWD5a-vWD5b/tr connected    trunk        full    10G CVR QSFP SFP10G(SFP-10GBase-LR)
+Hu1/0/27     4s6/vWD5a-vSCa/glo connected    routed       full    10G CVR QSFP SFP10G(SFP-10GBase-LR)
+Hu1/0/28     4s6/vWD5a-vSCb/glo connected    routed       full    10G CVR QSFP SFP10G(SFP-10GBase-LR)
+Po11         4s6/vWD5a-WLC1/tru connected    trunk      a-full  a-10G N/A
+Po101        4s6/vWD5a-vWD5b/tr connected    trunk      a-full  a-10G N/A
+
+!================================================================================
+! output for command: show interfaces description
+!================================================================================
+
+Interface                      Status         Protocol Description
+Vl1                            admin down     down     
+Vl2101                         up             up       4s6/vWD5-WLC/blue-1/blue/9.68.18.0/23/2620:1F7:3A22:1440::/64/wls1
+Vl2102                         up             up       4s6/vWD5-WLC/blue-2/blue/9.68.22.0/23/2620:1F7:3A22:1441::/64/wls1
+Vl2103                         up             up       4s6/vWD5-WLC/blue-3/blue/9.68.24.0/23/2620:1F7:3A22:1442::/64/wls1
+Vl2104                         up             up       4s6/vWD5-WLC/blue-4/blue/9.68.26.0/23/2620:1F7:3A22:1443::/64/wls1
+Vl2105                         up             up       4s6/vWD5-WLC/blue-5/blue/9.68.28.0/23/2620:1F7:3A22:1444::/64/wls1
+Vl2106                         up             up       4s6/vWD5-WLC/blue-6/blue/9.68.30.0/23/2620:1F7:3A22:1445::/64/wls1
+Vl2107                         up             up       4s6/vWD5-WLC/blue-7/blue/9.68.32.0/23/2620:1F7:3A22:1446::/64/wls1
+Vl2108                         up             up       4s6/vWD5-WLC/blue-8/blue/9.68.36.0/23/2620:1F7:3A22:1447::/64/wls1
+Vl2109                         up             up       4s6/vWD5-WLC/blue-9/blue/9.68.38.0/23/2620:1F7:3A22:1448::/64/wls1
+Vl2110                         up             up       4s6/vWD5-WLC/blue-10/blue/9.68.40.0/23/2620:1F7:3A22:1449::/64/wls1
+Vl2111                         up             up       4s6/vWD5-WLC/blue-11/blue/9.68.42.0/23/2620:1F7:3A22:144A::/64/wls1
+Vl2112                         up             up       4s6/vWD5-WLC/blue-12/blue/9.68.192.0/23/2620:1F7:3A22:144B::/64/wls1
+Vl2113                         up             up       4s6/vWD5-WLC/blue-13/blue/9.68.194.0/23/2620:1F7:3A22:144C::/64/wls1
+Vl2114                         up             up       4s6/vWD5-WLC/blue-14/blue/9.68.196.0/23/2620:1F7:3A22:144D::/64/wls1
+Vl2115                         up             up       4s6/vWD5-WLC/blue-15/blue/9.68.198.0/23/2620:1F7:3A22:144E::/64/wls1
+Vl2116                         up             up       4s6/vWD5-WLC/blue-16/blue/9.68.204.0/23/2620:1F7:3A22:144F::/64/wls1
+Vl2117                         up             up       4s6/vWD5-WLC/blue-17/blue/9.116.80.0/23/2620:1F7:3A22:1450::/64/wls1
+Vl2118                         up             up       4s6/vWD5-WLC/blue-18/blue/9.116.86.0/23/2620:1F7:3A22:1451::/64/wls1
+Vl2119                         up             up       4s6/vWD5-WLC/blue-19/blue/9.116.88.0/23/2620:1F7:3A22:1452::/64/wls1
+Vl2120                         up             up       4s6/vWD5-WLC/blue-20/blue/9.116.90.0/23/2620:1F7:3A22:1453::/64/wls1
+Vl2121                         up             up       4s6/vWD5-WLC/blue-21/blue/9.116.92.0/23/2620:1F7:3A22:1454::/64/wls1
+Vl2122                         up             up       4s6/vWD5-WLC/blue-22/blue/9.116.94.0/23/2620:1F7:3A22:1455::/64/wls1
+Vl2123                         up             up       4s6/vWD5-WLC/blue-23/blue/9.116.156.0/23/2620:1F7:3A22:1456::/64/wls1
+Vl2124                         up             up       4s6/vWD5-WLC/blue-24/blue/9.116.158.0/23/2620:1F7:3A22:1457::/64/wls1
+Vl2125                         up             up       4s6/vWD5-WLC/blue-25/blue/9.116.160.0/23/2620:1F7:3A22:1458::/64/wls1
+Vl2126                         up             up       4s6/vWD5-WLC/blue-26/blue/9.116.162.0/23/2620:1F7:3A22:1459::/64/wls1
+Vl2127                         up             up       4s6/vWD5-WLC/blue-27/blue/9.116.164.0/23/2620:1F7:3A22:145A::/64/wls1
+Vl2128                         up             up       4s6/vWD5-WLC/blue-28/blue/9.116.166.0/23/2620:1F7:3A22:145B::/64/wls1
+Vl2129                         up             up       4s6/vWD5-WLC/blue-29/blue/9.116.168.0/23/2620:1F7:3A22:145C::/64/wls1
+Vl2130                         up             up       4s6/vWD5-WLC/blue-30/blue/9.116.170.0/23/2620:1F7:3A22:145D::/64/wls1
+Vl2131                         up             up       4s6/vWD5-WLC/blue-31/blue/9.116.172.0/23/2620:1F7:3A22:145E::/64/wls1
+Vl2132                         up             up       4s6/vWD5-WLC/blue-32/blue/9.116.174.0/23/2620:1F7:3A22:145F::/64/wls1
+Vl2141                         up             up       4s6/vWD5-WLC/yellow-1/acc.y1/9.239.112.0/23/wls1
+Vl2142                         up             up       4s6/vWD5-WLC/yellow-2/acc.y1/9.239.114.0/23/wls1
+Vl2143                         up             up       4s6/vWD5-WLC/yellow-3/acc.y1/9.239.116.0/23/wls1
+Vl2144                         up             up       4s6/vWD5-WLC/yellow-4/acc.y1/9.239.118.0/23/wls1
+Vl2145                         up             up       4s6/vWD5-WLC/yellow-5/acc.y1/9.239.120.0/23/wls1
+Vl2146                         up             up       4s6/vWD5-WLC/yellow-6/acc.y1/9.239.122.0/23/wls1
+Vl2147                         up             up       4s6/vWD5-WLC/yellow-7/acc.y1/9.239.124.0/23/wls1
+Vl2148                         up             up       4s6/vWD5-WLC/yellow-8/acc.y1/9.239.126.0/23/wls1
+Vl2149                         up             up       4s6/vWD5-WLC/yellow-9/acc.y1/9.236.176.0/23/wls1
+Vl2150                         up             up       4s6/vWD5-WLC/yellow-10/acc.y1/9.236.178.0/23/wls1
+Vl2151                         up             up       4s6/vWD5-WLC/yellow-11/acc.y1/9.236.180.0/23/wls1
+Vl2152                         up             up       4s6/vWD5-WLC/yellow-12/acc.y1/9.236.182.0/23/wls1
+Vl2153                         up             up       4s6/vWD5-WLC/yellow-13/acc.y1/9.245.144.0/23/wls1
+Vl2154                         up             up       4s6/vWD5-WLC/yellow-14/acc.y1/9.245.146.0/23/wls1
+Vl2155                         up             up       4s6/vWD5-WLC/yellow-15/acc.y1/9.245.148.0/23/wls1
+Vl2156                         up             up       4s6/vWD5-WLC/yellow-16/acc.y1/9.245.150.0/23/wls1
+Vl2157                         up             up       4s6/vWD5-WLC/yellow-17/acc.y1/9.245.208.0/23/wls1
+Vl2158                         up             up       4s6/vWD5-WLC/yellow-18/acc.y1/9.245.210.0/23/wls1
+Vl2159                         up             up       4s6/vWD5-WLC/yellow-19/acc.y1/9.245.212.0/23/wls1
+Vl2160                         up             up       4s6/vWD5-WLC/yellow-20/acc.y1/9.245.214.0/23/wls1
+Vl4022                         up             up       4s6/vWD5-WLC/blue-wlc/blue/9.189.140.160/27/transport
+Vl4027                         up             up       4s6/WLC-WLC/L2/169.254.0.0/16/HA
+Vl4030                         up             up       4s6/vWD5-vWD5/global-1/global/9.97.177.0/27/dev_mgmt
+Vl4090                         up             up       4s6/vWD5a-vWD5b/global/9.97.176.80/30/xlink
+Gi0/0                          admin down     down     ** RESERVED **
+Twe1/0/1                       up             up       4s6/vWD5a-WLC1.1/trunk/4s6-wc-c1
+Twe1/0/2                       up             up       4s6/vWD5a-WLC1.2/trunk/4s6-wc-c1
+Twe1/0/3                       admin down     down     ** Not In Use **
+Twe1/0/4                       admin down     down     ** Not In Use **
+Twe1/0/5                       up             up       4s6/vWD5a-WLC1/HA/4s6-wc-c1
+Twe1/0/6                       admin down     down     ** Not In Use **
+Twe1/0/7                       admin down     down     ** Not In Use **
+Twe1/0/8                       admin down     down     ** Not In Use **
+Twe1/0/9                       admin down     down     ** Not In Use **
+Twe1/0/10                      admin down     down     ** Not In Use **
+Twe1/0/11                      admin down     down     ** Not In Use **
+Twe1/0/12                      admin down     down     ** Not In Use **
+Twe1/0/13                      admin down     down     ** Not In Use **
+Twe1/0/14                      admin down     down     ** Not In Use **
+Twe1/0/15                      admin down     down     ** Not In Use **
+Twe1/0/16                      admin down     down     ** Not In Use **
+Twe1/0/17                      admin down     down     ** Not In Use **
+Twe1/0/18                      admin down     down     ** Not In Use **
+Twe1/0/19                      admin down     down     ** Not In Use **
+Twe1/0/20                      admin down     down     ** Not In Use **
+Twe1/0/21                      admin down     down     ** Not In Use **
+Twe1/0/22                      admin down     down     ** Not In Use **
+Twe1/0/23                      admin down     down     ** Not In Use **
+Twe1/0/24                      admin down     down     ** RESERVED-SPAN **
+Hu1/0/25                       up             up       4s6/vWD5a-vWD5b/trunk/xlink
+Hu1/0/26                       up             up       4s6/vWD5a-vWD5b/trunk/xlink
+Hu1/0/27                       up             up       4s6/vWD5a-vSCa/global
+Hu1/0/28                       up             up       4s6/vWD5a-vSCb/global
+Po11                           up             up       4s6/vWD5a-WLC1/trunk/4s6-wc-c1a
+Po101                          up             up       4s6/vWD5a-vWD5b/trunk/xlink
+Lo0                            up             up       4s6/vWD5a/lo0/global
+Lo10                           up             up       4s6/vWD5a/lo10/blue
+
+!================================================================================
+! output for command: show lldp neighbors
+!================================================================================
+
+Capability codes:
+    (R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
+    (W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other
+
+Device ID           Local Intf     Hold-time  Capability      Port ID
+4s6-vsc-a.attmgmt.ibHu1/0/27       120        B,R             Twe1/0/9
+4s6-vwd-d5b.attmgmt.Hu1/0/26       120        B,R             Hu1/0/26
+4s6-vwd-d5b.attmgmt.Hu1/0/25       120        B,R             Hu1/0/25
+4s6-vsc-b.attmgmt.ibHu1/0/28       120        B,R             Twe1/0/9
+
+Total entries displayed: 4
+
+!================================================================================
+! output for command: show cdp neighbors
+!================================================================================
+
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+4s6-vsc-a.attmgmt.ibm.com
+                 Hun 1/0/27        27              R S I  C9500-24Y Twe 1/0/9
+4s6-vsc-b.attmgmt.ibm.com
+                 Hun 1/0/28        24              R S I  C9500-24Y Twe 1/0/9
+4s6-wc-c1a       Twe 1/0/1         177               H    AIR-CT552 Ten 0/0/1
+4s6-wc-c1a       Twe 1/0/2         177               H    AIR-CT552 Ten 0/0/2
+4s6-vwd-d5b.attmgmt.ibm.com
+                 Hun 1/0/26        27              R S I  C9500-24Y Hun 1/0/26
+4s6-vwd-d5b.attmgmt.ibm.com
+                 Hun 1/0/25        28              R S I  C9500-24Y Hun 1/0/25
+
+Total cdp entries displayed : 6
+
+!================================================================================
+! output for command: show version
+!================================================================================
+
+Cisco IOS XE Software, Version 17.06.04
+Cisco IOS Software [Bengaluru], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 17.6.4, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2022 by Cisco Systems, Inc.
+Compiled Sun 14-Aug-22 08:58 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2022 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+BOOTLDR: System Bootstrap, Version 17.6.1r, RELEASE SOFTWARE (P)
+
+4s6-vwd-d5a uptime is 21 weeks, 1 day, 17 hours, 44 minutes
+Uptime for this control processor is 21 weeks, 1 day, 17 hours, 45 minutes
+System returned to ROM by PowerOn at 13:32:12 UTC Sun Mar 12 2023
+System restarted at 08:11:40 UTC Mon Apr 29 2024
+System image file is "bootflash:packages.conf"
+Last reload reason: PowerOn
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+
+Technology Package License Information: 
+
+------------------------------------------------------------------------------
+Technology-package                                     Technology-package
+Current                        Type                       Next reboot  
+------------------------------------------------------------------------------
+network-advantage   	Smart License                 	 network-advantage   
+dna-advantage       	Subscription Smart License    	 dna-advantage                 
+AIR License Level: AIR DNA Advantage
+Next reload AIR license Level: AIR DNA Advantage
+
+
+Smart Licensing Status: Registration Not Applicable/Not Applicable
+
+cisco C9500-24Y4C (X86) processor with 2889961K/6147K bytes of memory.
+Processor board ID CAT2342L0BY
+57 Virtual Ethernet interfaces
+24 TwentyFive Gigabit Ethernet interfaces
+4 Hundred Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+15995688K bytes of physical memory.
+11161600K bytes of Bootflash at bootflash:.
+1638400K bytes of Crash Files at crashinfo:.
+
+Base Ethernet MAC Address          : 6c:31:0e:db:58:20
+Motherboard Assembly Number        : 4874
+Motherboard Serial Number          : CAT2342L0BY
+Model Revision Number              : V02
+Motherboard Revision Number        : 2
+Model Number                       : C9500-24Y4C         
+System Serial Number               : CAT2342L0BY
+
+!================================================================================
+! output for command: show running-config
+!================================================================================
+
+Building configuration...
+
+Current configuration : 97855 bytes
+!
+! Last configuration change at 07:45:49 UTC Tue Jun 11 2024 by m42429
+! NVRAM config last updated at 02:55:04 UTC Tue Sep 24 2024
+!
+version 17.6
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service counters max age 10
+no platform punt-keepalive disable-kernel-core
+!
+hostname 4s6-vwd-d5a
+!
+!
+vrf definition Mgmt-vrf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+vrf definition acc.y1
+ description IBM-CIO Yellow Access Guest Network - Global VPN
+ rd 9.97.176.85:210
+ route-target export 8:210
+ route-target import 8:210
+ !
+ address-family ipv4
+ exit-address-family
+!
+vrf definition blue
+ description IBM-CIO Internal Network Blue - Global VPN
+ rd 9.97.176.85:100
+ route-target export 8:100
+ route-target import 8:100
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+logging userinfo
+logging buffered 1024000 informational
+no logging console
+enable secret 9 $9$OBH0zLs1Y0O6pk$/CBIwgR.XZIC8wtPSmd.Cv28nwp7FcyNfypN7LeuoZ2
+!
+aaa new-model
+!
+!
+aaa group server tacacs+ GTAC
+ server-private 135.89.45.254 port 49170 timeout 6 key 7 0010460B3E5C280706397C161C4A073C1A3C5A0038
+ server-private 135.89.176.190 port 49170 timeout 6 key 7 140347063603092A2D30036D3740053D0B36005D4A
+ ip tacacs source-interface Loopback0
+!
+aaa authentication attempts login 5
+aaa authentication login default group GTAC local
+aaa authentication enable default group GTAC enable
+aaa authorization console
+aaa authorization exec default group GTAC if-authenticated 
+aaa accounting exec default start-stop group GTAC
+aaa accounting commands 15 default start-stop group GTAC
+aaa accounting connection default start-stop group GTAC
+aaa accounting system default start-stop group GTAC
+no aaa accounting system guarantee-first
+!
+!
+!
+!
+!
+!
+aaa session-id common
+boot system bootflash:packages.conf
+fhrp version vrrp v3
+!
+ip name-server 9.0.0.1 9.0.0.2
+no ip domain lookup
+ip domain name attmgmt.ibm.com
+ip cef load-sharing algorithm original
+!
+!
+!
+login on-failure log
+login on-success log
+ipv6 nd raguard policy pp6_raguard_client
+!
+ipv6 unicast-routing
+ipv6 dhcp guard policy pp6_dhcp_client
+!
+ipv6 multicast rpf use-bgp
+ipv6 cef load-sharing algorithm original
+!
+!
+!
+!
+!
+qos queue-softmax-multiplier 1200
+!
+!
+vtp domain 4s6
+vtp mode transparent
+mpls label mode all-vrfs protocol all-afs per-vrf
+mpls label protocol ldp
+mpls ldp session protection
+!
+!
+crypto pki trustpoint SLA-TrustPoint
+ revocation-check crl
+!
+!
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  	quit
+!
+!
+port-channel load-balance src-dst-ip
+system mtu 9216
+license boot level network-advantage addon dna-advantage
+license smart reservation
+license smart transport off
+!
+!
+diagnostic bootup level complete
+!
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
+spanning-tree pathcost method short
+spanning-tree vlan 2001-4090 priority 8192
+spanning-tree vlan 2001-4090 forward-time 6
+spanning-tree vlan 2001-4090 max-age 8
+archive
+ log config
+  logging enable
+  notify syslog contenttype plaintext
+memory free low-watermark processor 190000
+file privilege 7
+!
+username failsafe privilege 15 secret 9 $9$8S7E60VrluONZ.$amCvQS3.AJ2uSLBJn.MnwRwtnMB9Y18H0MXxJzf4KiI
+!
+redundancy
+!
+!
+!
+!
+!
+!
+transceiver type all
+ monitoring
+!
+vlan 2101
+ name vWD5-WLC/blue-1/wls1
+!
+vlan 2102
+ name vWD5-WLC/blue-2/wls1
+!
+vlan 2103
+ name vWD5-WLC/blue-3/wls1
+!
+vlan 2104
+ name vWD5-WLC/blue-4/wls1
+!
+vlan 2105
+ name vWD5-WLC/blue-5/wls1
+!
+vlan 2106
+ name vWD5-WLC/blue-6/wls1
+!
+vlan 2107
+ name vWD5-WLC/blue-7/wls1
+!
+vlan 2108
+ name vWD5-WLC/blue-8/wls1
+!
+vlan 2109
+ name vWD5-WLC/blue-9/wls1
+!
+vlan 2110
+ name vWD5-WLC/blue-10/wls1
+!
+vlan 2111
+ name vWD5-WLC/blue-11/wls1
+!
+vlan 2112
+ name vWD5-WLC/blue-12/wls1
+!
+vlan 2113
+ name vWD5-WLC/blue-13/wls1
+!
+vlan 2114
+ name vWD5-WLC/blue-14/wls1
+!
+vlan 2115
+ name vWD5-WLC/blue-15/wls1
+!
+vlan 2116
+ name vWD5-WLC/blue-16/wls1
+!
+vlan 2117
+ name vWD5-WLC/blue-17/wls1
+!
+vlan 2118
+ name vWD5-WLC/blue-18/wls1
+!
+vlan 2119
+ name vWD5-WLC/blue-19/wls1
+!
+vlan 2120
+ name vWD5-WLC/blue-20/wls1
+!
+vlan 2121
+ name vWD5-WLC/blue-21/wls1
+!
+vlan 2122
+ name vWD5-WLC/blue-22/wls1
+!
+vlan 2123
+ name vWD5-WLC/blue-23/wls1
+!
+vlan 2124
+ name vWD5-WLC/blue-24/wls1
+!
+vlan 2125
+ name vWD5-WLC/blue-25/wls1
+!
+vlan 2126
+ name vWD5-WLC/blue-26/wls1
+!
+vlan 2127
+ name vWD5-WLC/blue-27/wls1
+!
+vlan 2128
+ name vWD5-WLC/blue-28/wls1
+!
+vlan 2129
+ name vWD5-WLC/blue-29/wls1
+!
+vlan 2130
+ name vWD5-WLC/blue-30/wls1
+!
+vlan 2131
+ name vWD5-WLC/blue-31/wls1
+!
+vlan 2132
+ name vWD5-WLC/blue-32/wls1
+!
+vlan 2141
+ name vWD5-WLC/yellow-1/wls1
+!
+vlan 2142
+ name vWD5-WLC/yellow-2/wls1
+!
+vlan 2143
+ name vWD5-WLC/yellow-3/wls1
+!
+vlan 2144
+ name vWD5-WLC/yellow-4/wls1
+!
+vlan 2145
+ name vWD5-WLC/yellow-5/wls1
+!
+vlan 2146
+ name vWD5-WLC/yellow-6/wls1
+!
+vlan 2147
+ name vWD5-WLC/yellow-7/wls1
+!
+vlan 2148
+ name vWD5-WLC/yellow-8/wls1
+!
+vlan 2149
+ name vWD5-WLC/yellow-9/wls1
+!
+vlan 2150
+ name vWD5-WLC/yellow-10/wls1
+!
+vlan 2151
+ name vWD5-WLC/yellow-11/wls1
+!
+vlan 2152
+ name vWD5-WLC/yellow-12/wls1
+!
+vlan 2153
+ name vWD5-WLC/yellow-13/wls1
+!
+vlan 2154
+ name vWD5-WLC/yellow-14/wls1
+!
+vlan 2155
+ name vWD5-WLC/yellow-15/wls1
+!
+vlan 2156
+ name vWD5-WLC/yellow-16/wls1
+!
+vlan 2157
+ name vWD5-WLC/yellow-17/wls1
+!
+vlan 2158
+ name vWD5-WLC/yellow-18/wls1
+!
+vlan 2159
+ name vWD5-WLC/yellow-19/wls1
+!
+vlan 2160
+ name vWD5-WLC/yellow-20/wls1
+!
+vlan 4022
+ name vWD5-WLC/blue-wlc/transport
+!
+vlan 4027
+ name WLC-WLC/L2/HA
+!
+vlan 4030
+ name vWD5-vWD5/global-1/dev_mgmt
+!
+vlan 4090
+ name vWD5-vWD5/global/xlink
+!
+vlan 4094
+ name vWD5/Null
+lldp run
+!
+track 10 interface HundredGigE1/0/27 line-protocol
+!
+track 20 interface HundredGigE1/0/28 line-protocol
+cdp timer 10
+cdp holdtime 30
+!
+!
+class-map match-any system-cpp-police-ewlc-control
+  description EWLC Control 
+class-map match-any system-cpp-police-topology-control
+  description Topology control
+class-map match-any system-cpp-police-sw-forward
+  description Sw forwarding, L2 LVX data packets, LOGGING, Transit Traffic
+class-map match-any cm_dscp_att_class_nc
+ match dscp cs6  cs7 
+class-map match-any system-cpp-default
+  description EWLC Data, Inter FED Traffic 
+class-map match-any system-cpp-police-sys-data
+  description Openflow, Exception, EGR Exception, NFL Sampled Data, RPF Failed
+class-map match-any system-cpp-police-punt-webauth
+  description Punt Webauth
+class-map match-any cm_dscp_att_class2v
+ match dscp af41  af42 
+class-map match-any system-cpp-police-l2lvx-control
+  description L2 LVX control packets
+class-map match-any system-cpp-police-forus
+  description Forus Address resolution and Forus traffic
+class-map match-any system-cpp-police-multicast-end-station
+  description MCAST END STATION
+class-map match-any system-cpp-police-high-rate-app
+  description High Rate Applications 
+class-map match-any system-cpp-police-multicast
+  description MCAST Data
+class-map match-any system-cpp-police-l2-control
+  description L2 control
+class-map match-any system-cpp-police-dot1x-auth
+  description DOT1X Auth
+class-map match-any system-cpp-police-data
+  description ICMP redirect, ICMP_GEN and BROADCAST
+class-map match-any system-cpp-police-stackwise-virt-control
+  description Stackwise Virtual OOB
+class-map match-any non-client-nrt-class
+class-map match-any system-cpp-police-routing-control
+  description Routing control and Low Latency
+class-map match-any system-cpp-police-protocol-snooping
+  description Protocol snooping
+class-map match-any system-cpp-police-dhcp-snooping
+  description DHCP snooping
+class-map match-any cm_dscp_att_class2
+ match dscp af31  af32 
+class-map match-any cm_dscp_att_class3
+ match dscp af21  af22 
+class-map match-any cm_dscp_att_class1
+ match dscp ef  cs6  cs7 
+class-map match-any system-cpp-police-ios-routing
+  description L2 control, Topology control, Routing control, Low Latency
+class-map match-any system-cpp-police-system-critical
+  description System Critical and Gold Pkt
+class-map match-any cm_dscp_att_class_scavenger
+ match dscp af11  af12 
+class-map match-any system-cpp-police-ios-feature
+  description ICMPGEN,BROADCAST,ICMP,L2LVXCntrl,ProtoSnoop,PuntWebauth,MCASTData,Transit,DOT1XAuth,Swfwd,LOGGING,L2LVXData,ForusTraffic,ForusARP,McastEndStn,Openflow,Exception,EGRExcption,NflSampled,RpfFailed
+!
+policy-map pm_trust_valid_dscp
+ class cm_dscp_att_class_nc
+  set dscp cs6
+ class cm_dscp_att_class1
+  set dscp ef
+ class cm_dscp_att_class2
+  set dscp af31
+ class cm_dscp_att_class2v
+  set dscp af41
+ class cm_dscp_att_class3
+  set dscp af21
+ class cm_dscp_att_class_scavenger
+  set dscp af11
+ class class-default
+  set dscp default
+policy-map system-cpp-policy
+policy-map pm_att_queuing
+ class cm_dscp_att_class1
+  priority level 1
+ class cm_dscp_att_class2
+  bandwidth remaining percent 25 
+ class cm_dscp_att_class2v
+  bandwidth remaining percent 20 
+ class cm_dscp_att_class3
+  bandwidth remaining percent 25 
+ class cm_dscp_att_class_scavenger
+  bandwidth remaining percent 5 
+ class class-default
+  bandwidth remaining percent 25 
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description 4s6/vWD5a/lo0/global
+ ip address 9.97.176.85 255.255.255.255
+ load-interval 60
+!
+interface Loopback10
+ description 4s6/vWD5a/lo10/blue
+ vrf forwarding blue
+ ip address 9.189.141.37 255.255.255.255
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22::5:1B:A/128
+!
+interface Port-channel11
+ description 4s6/vWD5a-WLC1/trunk/4s6-wc-c1a
+ switchport trunk native vlan 4094
+ switchport trunk allowed vlan 2101-2132,2141-2160,4022,4030
+ switchport mode trunk
+ switchport nonegotiate
+ load-interval 60
+ ipv6 nd raguard attach-policy pp6_raguard_client
+ ipv6 dhcp guard attach-policy pp6_dhcp_client
+!
+interface Port-channel101
+ description 4s6/vWD5a-vWD5b/trunk/xlink
+ switchport trunk native vlan 4094
+ switchport trunk allowed vlan 2101-2132,2141-2160,4022,4027,4030,4090
+ switchport mode trunk
+ switchport nonegotiate
+ load-interval 60
+!
+interface GigabitEthernet0/0
+ description ** RESERVED **
+ vrf forwarding Mgmt-vrf
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface TwentyFiveGigE1/0/1
+ description 4s6/vWD5a-WLC1.1/trunk/4s6-wc-c1
+ switchport trunk native vlan 4094
+ switchport trunk allowed vlan 2101-2132,2141-2160,4022,4030
+ switchport mode trunk
+ switchport nonegotiate
+ logging event bundle-status
+ load-interval 60
+ channel-group 11 mode on
+ service-policy output pm_att_queuing
+!
+interface TwentyFiveGigE1/0/2
+ description 4s6/vWD5a-WLC1.2/trunk/4s6-wc-c1
+ switchport trunk native vlan 4094
+ switchport trunk allowed vlan 2101-2132,2141-2160,4022,4030
+ switchport mode trunk
+ switchport nonegotiate
+ logging event bundle-status
+ load-interval 60
+ channel-group 11 mode on
+ service-policy output pm_att_queuing
+!
+interface TwentyFiveGigE1/0/3
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/4
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/5
+ description 4s6/vWD5a-WLC1/HA/4s6-wc-c1
+ switchport access vlan 4027
+ switchport mode access
+ load-interval 60
+ service-policy output pm_att_queuing
+!
+interface TwentyFiveGigE1/0/6
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/7
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/8
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/9
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/10
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/11
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/12
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/13
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/14
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/15
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/16
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/17
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/18
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/19
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/20
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/21
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/22
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/23
+ description ** Not In Use **
+ shutdown
+ no snmp trap link-status
+!
+interface TwentyFiveGigE1/0/24
+ description ** RESERVED-SPAN **
+ switchport mode access
+ shutdown
+ no snmp trap link-status
+!
+interface HundredGigE1/0/25
+ description 4s6/vWD5a-vWD5b/trunk/xlink
+ switchport trunk native vlan 4094
+ switchport trunk allowed vlan 2101-2132,2141-2160,4022,4027,4030,4090
+ switchport mode trunk
+ switchport nonegotiate
+ logging event bundle-status
+ load-interval 60
+ channel-group 101 mode active
+ service-policy output pm_att_queuing
+!
+interface HundredGigE1/0/26
+ description 4s6/vWD5a-vWD5b/trunk/xlink
+ switchport trunk native vlan 4094
+ switchport trunk allowed vlan 2101-2132,2141-2160,4022,4027,4030,4090
+ switchport mode trunk
+ switchport nonegotiate
+ logging event bundle-status
+ load-interval 60
+ channel-group 101 mode active
+ service-policy output pm_att_queuing
+!
+interface HundredGigE1/0/27
+ description 4s6/vWD5a-vSCa/global
+ no switchport
+ mtu 4486
+ ip address 9.97.176.89 255.255.255.254
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 4470
+ ip ospf authentication-key 7 08765678021E12433C
+ ip ospf network point-to-point
+ load-interval 60
+ mpls ip
+ arp timeout 420
+ service-policy output pm_att_queuing
+!
+interface HundredGigE1/0/28
+ description 4s6/vWD5a-vSCb/global
+ no switchport
+ mtu 4486
+ ip address 9.97.176.93 255.255.255.254
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 4470
+ ip ospf authentication-key 7 1440083D07033D7F0A
+ ip ospf network point-to-point
+ load-interval 60
+ mpls ip
+ arp timeout 420
+ service-policy output pm_att_queuing
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan2101
+ description 4s6/vWD5-WLC/blue-1/blue/9.68.18.0/23/2620:1F7:3A22:1440::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.18.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1440::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1440::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1440
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.18.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1440::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2102
+ description 4s6/vWD5-WLC/blue-2/blue/9.68.22.0/23/2620:1F7:3A22:1441::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.22.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1441::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1441::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1441
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.22.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1441::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2103
+ description 4s6/vWD5-WLC/blue-3/blue/9.68.24.0/23/2620:1F7:3A22:1442::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.24.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1442::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1442::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1442
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.24.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1442::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2104
+ description 4s6/vWD5-WLC/blue-4/blue/9.68.26.0/23/2620:1F7:3A22:1443::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.26.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1443::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1443::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1443
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.26.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1443::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2105
+ description 4s6/vWD5-WLC/blue-5/blue/9.68.28.0/23/2620:1F7:3A22:1444::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.28.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1444::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1444::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1444
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.28.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1444::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2106
+ description 4s6/vWD5-WLC/blue-6/blue/9.68.30.0/23/2620:1F7:3A22:1445::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.30.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1445::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1445::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1445
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.30.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1445::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2107
+ description 4s6/vWD5-WLC/blue-7/blue/9.68.32.0/23/2620:1F7:3A22:1446::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.32.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1446::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1446::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1446
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.32.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1446::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2108
+ description 4s6/vWD5-WLC/blue-8/blue/9.68.36.0/23/2620:1F7:3A22:1447::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.36.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1447::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1447::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1447
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.36.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1447::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2109
+ description 4s6/vWD5-WLC/blue-9/blue/9.68.38.0/23/2620:1F7:3A22:1448::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.38.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1448::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1448::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1448
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.38.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1448::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2110
+ description 4s6/vWD5-WLC/blue-10/blue/9.68.40.0/23/2620:1F7:3A22:1449::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.40.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1449::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1449::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1449
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.40.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1449::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2111
+ description 4s6/vWD5-WLC/blue-11/blue/9.68.42.0/23/2620:1F7:3A22:144A::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.42.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:144A::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:144A::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:144A
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.42.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:144A::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2112
+ description 4s6/vWD5-WLC/blue-12/blue/9.68.192.0/23/2620:1F7:3A22:144B::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.192.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:144B::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:144B::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:144B
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.192.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:144B::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2113
+ description 4s6/vWD5-WLC/blue-13/blue/9.68.194.0/23/2620:1F7:3A22:144C::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.194.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:144C::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:144C::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:144C
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.194.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:144C::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2114
+ description 4s6/vWD5-WLC/blue-14/blue/9.68.196.0/23/2620:1F7:3A22:144D::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.196.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:144D::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:144D::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:144D
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.196.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:144D::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2115
+ description 4s6/vWD5-WLC/blue-15/blue/9.68.198.0/23/2620:1F7:3A22:144E::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.198.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:144E::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:144E::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:144E
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.198.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:144E::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2116
+ description 4s6/vWD5-WLC/blue-16/blue/9.68.204.0/23/2620:1F7:3A22:144F::/64/wls1
+ vrf forwarding blue
+ ip address 9.68.204.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:144F::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:144F::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:144F
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.68.204.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:144F::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2117
+ description 4s6/vWD5-WLC/blue-17/blue/9.116.80.0/23/2620:1F7:3A22:1450::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.80.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1450::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1450::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1450
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.80.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1450::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2118
+ description 4s6/vWD5-WLC/blue-18/blue/9.116.86.0/23/2620:1F7:3A22:1451::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.86.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1451::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1451::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1451
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.86.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1451::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2119
+ description 4s6/vWD5-WLC/blue-19/blue/9.116.88.0/23/2620:1F7:3A22:1452::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.88.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1452::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1452::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1452
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.88.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1452::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2120
+ description 4s6/vWD5-WLC/blue-20/blue/9.116.90.0/23/2620:1F7:3A22:1453::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.90.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1453::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1453::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1453
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.90.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1453::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2121
+ description 4s6/vWD5-WLC/blue-21/blue/9.116.92.0/23/2620:1F7:3A22:1454::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.92.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1454::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1454::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1454
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.92.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1454::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2122
+ description 4s6/vWD5-WLC/blue-22/blue/9.116.94.0/23/2620:1F7:3A22:1455::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.94.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1455::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1455::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1455
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.94.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1455::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2123
+ description 4s6/vWD5-WLC/blue-23/blue/9.116.156.0/23/2620:1F7:3A22:1456::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.156.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1456::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1456::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1456
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.156.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1456::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2124
+ description 4s6/vWD5-WLC/blue-24/blue/9.116.158.0/23/2620:1F7:3A22:1457::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.158.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1457::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1457::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1457
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.158.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1457::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2125
+ description 4s6/vWD5-WLC/blue-25/blue/9.116.160.0/23/2620:1F7:3A22:1458::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.160.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1458::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1458::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1458
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.160.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1458::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2126
+ description 4s6/vWD5-WLC/blue-26/blue/9.116.162.0/23/2620:1F7:3A22:1459::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.162.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:1459::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:1459::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:1459
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.162.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:1459::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2127
+ description 4s6/vWD5-WLC/blue-27/blue/9.116.164.0/23/2620:1F7:3A22:145A::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.164.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:145A::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:145A::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:145A
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.164.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:145A::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2128
+ description 4s6/vWD5-WLC/blue-28/blue/9.116.166.0/23/2620:1F7:3A22:145B::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.166.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:145B::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:145B::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:145B
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.166.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:145B::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2129
+ description 4s6/vWD5-WLC/blue-29/blue/9.116.168.0/23/2620:1F7:3A22:145C::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.168.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:145C::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:145C::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:145C
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.168.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:145C::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2130
+ description 4s6/vWD5-WLC/blue-30/blue/9.116.170.0/23/2620:1F7:3A22:145D::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.170.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:145D::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:145D::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:145D
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.170.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:145D::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2131
+ description 4s6/vWD5-WLC/blue-31/blue/9.116.172.0/23/2620:1F7:3A22:145E::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.172.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:145E::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:145E::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:145E
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.172.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:145E::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2132
+ description 4s6/vWD5-WLC/blue-32/blue/9.116.174.0/23/2620:1F7:3A22:145F::/64/wls1
+ vrf forwarding blue
+ ip address 9.116.174.3 255.255.254.0
+ ip helper-address 9.189.139.112
+ ip helper-address 9.201.185.116
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2023
+ load-interval 60
+ ipv6 address FE80::A link-local
+ ipv6 address 2620:1F7:3A22:145F::A/64
+ ipv6 mtu 1500
+ ipv6 nd prefix 2620:1F7:3A22:145F::/64 300 300 no-autoconfig
+ ipv6 nd managed-config-flag
+ ipv6 nd other-config-flag
+ ipv6 nd router-preference High
+ no ipv6 redirects
+ ipv6 dhcp relay destination 2620:1F7:702:8D00::FEED:B01A
+ ipv6 dhcp relay destination 2620:1F7:701:8D00::FEED:B01B
+ ipv6 verify unicast source reachable-via rx al6_rpf_2620:1F7:3A22:145F
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.116.174.1 primary
+  exit-vrrp
+ vrrp 62 address-family ipv6
+  timers advertise 500
+  priority 150
+  address FE80::2 primary
+  address 2620:1F7:3A22:145F::2/64
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2141
+ description 4s6/vWD5-WLC/yellow-1/acc.y1/9.239.112.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.239.112.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.239.112.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2142
+ description 4s6/vWD5-WLC/yellow-2/acc.y1/9.239.114.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.239.114.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.239.114.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2143
+ description 4s6/vWD5-WLC/yellow-3/acc.y1/9.239.116.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.239.116.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.239.116.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2144
+ description 4s6/vWD5-WLC/yellow-4/acc.y1/9.239.118.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.239.118.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.239.118.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2145
+ description 4s6/vWD5-WLC/yellow-5/acc.y1/9.239.120.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.239.120.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.239.120.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2146
+ description 4s6/vWD5-WLC/yellow-6/acc.y1/9.239.122.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.239.122.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.239.122.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2147
+ description 4s6/vWD5-WLC/yellow-7/acc.y1/9.239.124.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.239.124.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.239.124.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2148
+ description 4s6/vWD5-WLC/yellow-8/acc.y1/9.239.126.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.239.126.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.239.126.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2149
+ description 4s6/vWD5-WLC/yellow-9/acc.y1/9.236.176.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.236.176.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.236.176.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2150
+ description 4s6/vWD5-WLC/yellow-10/acc.y1/9.236.178.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.236.178.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.236.178.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2151
+ description 4s6/vWD5-WLC/yellow-11/acc.y1/9.236.180.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.236.180.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.236.180.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2152
+ description 4s6/vWD5-WLC/yellow-12/acc.y1/9.236.182.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.236.182.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.236.182.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2153
+ description 4s6/vWD5-WLC/yellow-13/acc.y1/9.245.144.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.245.144.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.245.144.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2154
+ description 4s6/vWD5-WLC/yellow-14/acc.y1/9.245.146.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.245.146.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.245.146.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2155
+ description 4s6/vWD5-WLC/yellow-15/acc.y1/9.245.148.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.245.148.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.245.148.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2156
+ description 4s6/vWD5-WLC/yellow-16/acc.y1/9.245.150.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.245.150.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.245.150.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2157
+ description 4s6/vWD5-WLC/yellow-17/acc.y1/9.245.208.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.245.208.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.245.208.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2158
+ description 4s6/vWD5-WLC/yellow-18/acc.y1/9.245.210.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.245.210.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.245.210.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2159
+ description 4s6/vWD5-WLC/yellow-19/acc.y1/9.245.212.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.245.212.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.245.212.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan2160
+ description 4s6/vWD5-WLC/yellow-20/acc.y1/9.245.214.0/23/wls1
+ vrf forwarding acc.y1
+ ip address 9.245.214.3 255.255.254.0
+ ip helper-address 9.0.220.112
+ ip helper-address 9.0.218.112
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 150
+  address 9.245.214.1 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan4022
+ description 4s6/vWD5-WLC/blue-wlc/blue/9.189.140.160/27/transport
+ vrf forwarding blue
+ ip address 9.189.140.163 255.255.255.224
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ ip verify unicast source reachable-via rx 2027
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 200
+  preempt delay minimum 60
+  track 10 decrement 40
+  track 20 decrement 40
+  address 9.189.140.161 primary
+  exit-vrrp
+ arp timeout 420
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan4027
+ description 4s6/WLC-WLC/L2/169.254.0.0/16/HA
+ no ip address
+ service-policy input pm_trust_valid_dscp
+!
+interface Vlan4030
+ description 4s6/vWD5-vWD5/global-1/global/9.97.177.0/27/dev_mgmt
+ ip address 9.97.177.3 255.255.255.224
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 1500
+ load-interval 60
+ vrrp 1 address-family ipv4
+  timers advertise 500
+  priority 200
+  preempt delay minimum 60
+  track 10 decrement 40
+  track 20 decrement 40
+  address 9.97.177.1 primary
+  exit-vrrp
+ arp timeout 420
+!
+interface Vlan4090
+ description 4s6/vWD5a-vWD5b/global/9.97.176.80/30/xlink
+ mtu 4486
+ ip address 9.97.176.81 255.255.255.252
+ no ip redirects
+ no ip proxy-arp
+ ip mtu 4470
+ ip ospf authentication-key 7 040C113004265B1A27
+ ip ospf network point-to-point
+ ip ospf cost 10
+ load-interval 60
+ mpls ip
+ arp timeout 420
+!
+router ospf 1
+ router-id 9.97.176.85
+ auto-cost reference-bandwidth 100000
+ area 0 authentication
+ area 5 authentication
+ timers throttle spf 1000 10000 10000
+ passive-interface default
+ no passive-interface Vlan4090
+ no passive-interface HundredGigE1/0/27
+ no passive-interface HundredGigE1/0/28
+ network 9.97.176.80 0.0.0.7 area 5
+ network 9.97.176.88 0.0.0.7 area 0
+ network 9.97.177.0 0.0.0.31 area 5
+ maximum-paths 2
+!
+router bgp 65449
+ bgp router-id 9.97.176.85
+ bgp asnotation dot
+ bgp log-neighbor-changes
+ bgp deterministic-med
+ no bgp default ipv4-unicast
+ timers bgp 5 15
+ neighbor rr peer-group
+ neighbor rr remote-as 65449
+ neighbor rr description ** 4s6 route reflectors **
+ neighbor rr password 7 032C6122242201585A0B481012010015
+ neighbor rr update-source Loopback0
+ neighbor 9.97.176.13 peer-group rr
+ neighbor 9.97.176.13 description ** 4s6-rr-a **
+ neighbor 9.97.176.14 peer-group rr
+ neighbor 9.97.176.14 description ** 4s6-rr-b **
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family vpnv4
+  neighbor rr send-community both
+  neighbor rr route-map rm_from_rr in
+  neighbor rr route-map rm_to_rr out
+  neighbor 9.97.176.13 activate
+  neighbor 9.97.176.14 activate
+ exit-address-family
+ !
+ address-family vpnv6
+  neighbor rr send-community both
+  neighbor rr route-map rm_from_rr in
+  neighbor rr route-map rm_to_rr out
+  neighbor 9.97.176.13 activate
+  neighbor 9.97.176.14 activate
+ exit-address-family
+ !
+ address-family ipv4 vrf acc.y1
+  import path selection bestpath
+  import path limit 2
+  redistribute connected route-map rm_conn_to_bgp_acc.y1
+  redistribute static route-map rm_static_to_bgp_vrf
+  maximum-paths 2
+  maximum-paths ibgp 2
+ exit-address-family
+ !
+ address-family ipv4 vrf blue
+  import path selection bestpath
+  import path limit 2
+  bgp router-id 9.189.141.37
+  redistribute connected route-map rm_conn_to_bgp_blue
+  redistribute static route-map rm_static_to_bgp_vrf
+  maximum-paths 2
+  maximum-paths ibgp 2
+ exit-address-family
+ !
+ address-family ipv6 vrf blue
+  redistribute connected route-map rm6_conn_to_bgp_blue
+  redistribute static route-map rm_static_to_bgp_vrf
+  maximum-paths 2
+  maximum-paths ibgp 2
+  import path selection bestpath
+  import path limit 2
+  bgp router-id 9.189.141.37
+ exit-address-family
+!
+no ip forward-protocol nd
+no ip forward-protocol udp tftp
+no ip forward-protocol udp nameserver
+no ip forward-protocol udp domain
+no ip forward-protocol udp time
+no ip forward-protocol udp netbios-ns
+no ip forward-protocol udp netbios-dgm
+no ip forward-protocol udp tacacs
+ip tcp synwait-time 10
+ip tcp path-mtu-discovery
+no ip http server
+no ip http secure-server
+ip ftp source-interface Loopback0
+ip tftp source-interface Loopback0
+ip tftp blocksize 1468
+ip route vrf acc.y1 0.0.0.0 0.0.0.0 9.239.102.105 name "/* Default route to vSCa beacon */" track 10
+ip route vrf blue 0.0.0.0 0.0.0.0 9.189.141.253 name "/* Default route to vSCa beacon */" track 10
+ip route vrf acc.y1 0.0.0.0 0.0.0.0 9.239.102.106 name "/* Default route to vSCb beacon */" track 20
+ip route vrf blue 0.0.0.0 0.0.0.0 9.189.141.254 name "/* Default route to vSCb beacon */" track 20
+ip route vrf acc.y1 9.236.176.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2149 */"
+ip route vrf acc.y1 9.236.178.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2150 */"
+ip route vrf acc.y1 9.236.180.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2151 */"
+ip route vrf acc.y1 9.236.182.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2152 */"
+ip route vrf acc.y1 9.239.112.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2141 */"
+ip route vrf acc.y1 9.239.114.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2142 */"
+ip route vrf acc.y1 9.239.116.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2143 */"
+ip route vrf acc.y1 9.239.118.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2144 */"
+ip route vrf acc.y1 9.239.120.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2145 */"
+ip route vrf acc.y1 9.239.122.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2146 */"
+ip route vrf acc.y1 9.239.124.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2147 */"
+ip route vrf acc.y1 9.239.126.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2148 */"
+ip route vrf acc.y1 9.245.144.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2153 */"
+ip route vrf acc.y1 9.245.146.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2154 */"
+ip route vrf acc.y1 9.245.148.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2155 */"
+ip route vrf acc.y1 9.245.150.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2156 */"
+ip route vrf acc.y1 9.245.208.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2157 */"
+ip route vrf acc.y1 9.245.210.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2158 */"
+ip route vrf acc.y1 9.245.212.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2159 */"
+ip route vrf acc.y1 9.245.214.0 255.255.254.0 Null0 240 tag 210612000 name "/* Wireless subnet anchor - Vl2160 */"
+ip route vrf blue 9.68.18.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2101 */"
+ip route vrf blue 9.68.22.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2102 */"
+ip route vrf blue 9.68.24.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2103 */"
+ip route vrf blue 9.68.26.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2104 */"
+ip route vrf blue 9.68.28.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2105 */"
+ip route vrf blue 9.68.30.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2106 */"
+ip route vrf blue 9.68.32.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2107 */"
+ip route vrf blue 9.68.36.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2108 */"
+ip route vrf blue 9.68.38.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2109 */"
+ip route vrf blue 9.68.40.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2110 */"
+ip route vrf blue 9.68.42.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2111 */"
+ip route vrf blue 9.68.192.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2112 */"
+ip route vrf blue 9.68.194.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2113 */"
+ip route vrf blue 9.68.196.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2114 */"
+ip route vrf blue 9.68.198.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2115 */"
+ip route vrf blue 9.68.204.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2116 */"
+ip route vrf blue 9.116.80.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2117 */"
+ip route vrf blue 9.116.86.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2118 */"
+ip route vrf blue 9.116.88.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2119 */"
+ip route vrf blue 9.116.90.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2120 */"
+ip route vrf blue 9.116.92.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2121 */"
+ip route vrf blue 9.116.94.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2122 */"
+ip route vrf blue 9.116.156.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2123 */"
+ip route vrf blue 9.116.158.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2124 */"
+ip route vrf blue 9.116.160.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2125 */"
+ip route vrf blue 9.116.162.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2126 */"
+ip route vrf blue 9.116.164.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2127 */"
+ip route vrf blue 9.116.166.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2128 */"
+ip route vrf blue 9.116.168.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2129 */"
+ip route vrf blue 9.116.170.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2130 */"
+ip route vrf blue 9.116.172.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2131 */"
+ip route vrf blue 9.116.174.0 255.255.254.0 Null0 240 tag 100812000 name "/* Wireless subnet anchor - Vl2132 */"
+ip route vrf blue 9.189.140.160 255.255.255.224 Null0 240 tag 100811000 name "/* WLC transport subnet anchor */"
+ip ssh version 2
+ip ssh dscp 26
+ip ssh server algorithm mac hmac-sha2-256 hmac-sha2-512
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh server algorithm kex ecdh-sha2-nistp256 ecdh-sha2-nistp384 ecdh-sha2-nistp521
+ip ssh client algorithm mac hmac-sha2-256 hmac-sha2-512
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm kex ecdh-sha2-nistp256 ecdh-sha2-nistp384 ecdh-sha2-nistp521
+!
+ip policy-list rp_block_scope permit
+ match community 50
+!
+ip policy-list rp_other_block permit
+ match community 110
+!
+ip policy-list rp_same_block_same_asn permit
+ match as-path 1
+ match community 10
+!
+ip policy-list rp_sink permit
+ match community 39
+!
+ip policy-list rp_everything permit
+ match as-path 100
+!
+ip bgp-community new-format
+ip community-list 10 permit 2002:1005
+ip community-list 39 permit 2002:39
+ip community-list 50 permit 2002:50
+ip community-list 110 deny _2002:1005_
+ip community-list 110 permit _2002:1..._
+ip as-path access-list 1 permit ^$
+ip as-path access-list 100 permit .*
+!
+ip access-list standard al_vty_access_aspr
+ 10 remark /**********************************************
+ 20 remark Restrict VTY access
+ 30 remark ***********************************************
+ 40 remark Site network infrastructure ranges
+ 50 remark **********************************************/
+ 60 permit 9.88.0.0 0.7.255.255
+ 70 permit 9.96.0.0 0.1.255.255
+ 200 remark /*********************************************-
+ 210 remark AT&T management segments
+ 220 remark *********************************************-/
+ 230 permit 9.0.63.128 0.0.0.127
+ 240 permit 9.17.223.224 0.0.0.31
+ 250 permit 135.89.45.0 0.0.0.255
+ 260 permit 135.89.84.128 0.0.0.127
+ 270 permit 135.89.162.0 0.0.0.127
+ 280 permit 135.89.176.0 0.0.0.255
+ 290 permit 135.89.213.0 0.0.0.255
+ 300 remark /********************************************--
+ 310 remark Global AT&T enclave address pool
+ 320 remark ********************************************--/
+ 330 permit 9.78.8.0 0.0.7.255
+ 340 permit 9.78.16.0 0.0.15.255
+ 350 permit 9.78.32.0 0.0.15.255
+ 400 remark /********************************************---
+ 410 remark Global IBM-CIO jump host address pool
+ 420 remark ********************************************---/
+ 430 permit 9.46.161.10 0.0.0.1
+ 440 permit 9.46.165.10 0.0.0.1
+ 450 permit 9.172.51.10 0.0.0.1
+ 460 permit 9.172.59.10 0.0.0.1
+ 470 permit 9.189.152.10 0.0.0.1
+ 480 permit 9.201.104.10 0.0.0.1
+ 490 permit 9.203.184.10 0.0.0.1
+ 500 permit 9.203.200.10 0.0.0.1
+ 9990 deny   any log
+!
+!
+logging history notifications
+logging trap notifications
+logging source-interface Loopback0
+logging host 135.89.176.123
+logging host 135.89.45.123
+ip access-list standard 79
+ 10 remark /**********************************************
+ 20 remark NTP authorized servers
+ 30 remark **********************************************/
+ 40 permit 135.89.176.123
+ 50 permit 135.89.45.123
+ 9990 deny   any
+ip access-list standard 80
+ 10 remark /**********************************************
+ 20 remark IBM-CIO SNMP RO authorized servers
+ 30 remark **********************************************/
+ 50 permit 9.46.161.252 0.0.0.1
+ 60 permit 9.46.165.252 0.0.0.1
+ 70 permit 9.172.51.252 0.0.0.1
+ 80 permit 9.172.59.252 0.0.0.1
+ 90 permit 9.189.152.252 0.0.0.1
+ 100 permit 9.201.104.252 0.0.0.1
+ 110 permit 9.203.184.252 0.0.0.1
+ 120 permit 9.203.200.252 0.0.0.1
+ 130 permit 9.208.15.32 0.0.0.1
+ 140 permit 9.217.0.0 0.0.0.1
+ 9990 deny   any
+ip access-list standard 93
+ 10 remark /**********************************************
+ 20 remark AT&T SNMP RW authorized servers
+ 30 remark **********************************************/
+ 50 permit 135.89.45.0 0.0.0.255
+ 60 permit 135.89.176.0 0.0.0.255
+ 70 permit 135.89.127.0 0.0.0.255
+ 80 permit 9.17.223.224 0.0.0.31
+ 90 permit 9.0.63.128 0.0.0.127
+ 9990 deny   any
+ip access-list standard 95
+ 10 remark /**********************************************
+ 20 remark AT&T SNMP RO authorized servers
+ 30 remark **********************************************/
+ 50 permit 135.89.45.0 0.0.0.255
+ 60 permit 135.89.176.0 0.0.0.255
+ 70 permit 135.89.127.0 0.0.0.255
+ 80 permit 9.17.223.224 0.0.0.31
+ 90 permit 9.0.63.128 0.0.0.127
+ 9990 deny   any
+ip access-list extended 2023
+ 10 remark /*********************************************************************
+ 20 remark uRPF access list allowing connectivity to the routers for /23 subnets
+ 30 remark *********************************************************************/
+ 40 permit ip any 0.0.0.0 255.255.254.3
+ 50 permit ip any 0.0.0.4 255.255.254.0
+ 9990 deny   ip any any log-input
+ip access-list extended 2024
+ 10 remark /*********************************************************************
+ 20 remark uRPF access list allowing connectivity to the routers for /24 subnets
+ 30 remark *********************************************************************/
+ 40 permit ip any 0.0.0.0 255.255.255.3
+ 50 permit ip any 0.0.0.4 255.255.255.0
+ 9990 deny   ip any any log-input
+ip access-list extended 2025
+ 10 remark /*********************************************************************
+ 20 remark uRPF access list allowing connectivity to the routers for /25 subnets
+ 30 remark *********************************************************************/
+ 40 permit ip any 0.0.0.0 255.255.255.131
+ 50 permit ip any 0.0.0.4 255.255.255.128
+ 9990 deny   ip any any log-input
+ip access-list extended 2026
+ 10 remark /*********************************************************************
+ 20 remark uRPF access list allowing connectivity to the routers for /26 subnets
+ 30 remark *********************************************************************/
+ 40 permit ip any 0.0.0.0 255.255.255.195
+ 50 permit ip any 0.0.0.4 255.255.255.192
+ 9990 deny   ip any any log-input
+ip access-list extended 2027
+ 10 remark /*********************************************************************
+ 20 remark uRPF access list allowing connectivity to the routers for /27 subnets
+ 30 remark *********************************************************************/
+ 40 permit ip any 0.0.0.0 255.255.255.227
+ 50 permit ip any 0.0.0.4 255.255.255.224
+ 9990 deny   ip any any log-input
+ip access-list extended 2028
+ 10 remark /*********************************************************************
+ 20 remark uRPF access list allowing connectivity to the routers for /28 subnets
+ 30 remark *********************************************************************/
+ 40 permit ip any 0.0.0.0 255.255.255.243
+ 50 permit ip any 0.0.0.4 255.255.255.240
+ 9990 deny   ip any any log-input
+ipv6 route vrf blue 2620:1F7:3A22:1440::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1441::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1442::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1443::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1444::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1445::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1446::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1447::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1448::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1449::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:144A::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:144B::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:144C::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:144D::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:144E::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:144F::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1450::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1451::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1452::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1453::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1454::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1455::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1456::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1457::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1458::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:1459::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:145A::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:145B::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:145C::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:145D::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:145E::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue 2620:1F7:3A22:145F::/64 Null0 240 tag 100812000 name "/* Wireless subnet anchor */"
+ipv6 route vrf blue ::/0 2620:1F7:3A22::1B:B track 20 name "/* Default route to vSCb beacon */"
+ipv6 route vrf blue ::/0 2620:1F7:3A22::1B:A track 10 name "/* Default route to vSCa beacon */"
+!
+route-map rm_to_rr permit 500 
+ description ** Allow all prefixes **
+ match policy-list rp_everything
+!
+route-map rm_from_rr deny 100 
+ description ** Deny prefixes from same block tagged as sink **
+ match policy-list rp_sink
+ match policy-list rp_same_block_same_asn
+!
+route-map rm_from_rr deny 110 
+ description ** Deny block-scope prefixes from other blocks **
+ match policy-list rp_block_scope
+ match policy-list rp_other_block
+!
+route-map rm_from_rr permit 500 
+ description ** Allow all other prefixes **
+ match policy-list rp_everything
+!
+route-map rm_static_to_bgp_vrf permit 1001 
+ description ** Harden infrastructure access subnets in VRF blue **
+ match tag 100811000
+ set metric 999
+ set local-preference 50
+ set weight 0
+ set origin igp
+ set community 163:55196 2002:8 2002:11 2002:39 2002:100 2002:1005
+!
+route-map rm_static_to_bgp_vrf permit 1002 
+ description ** Harden user access subnets in VRF blue **
+ match tag 100812000
+ set metric 999
+ set local-preference 50
+ set weight 0
+ set origin igp
+ set community 163:55196 2002:8 2002:12 2002:39 2002:100 2002:1005
+!
+route-map rm_static_to_bgp_vrf permit 2102 
+ description ** Harden user access subnets in VRF acc.y1 **
+ match tag 210612000
+ set metric 999
+ set local-preference 50
+ set weight 0
+ set origin igp
+ set community 163:55196 2002:6 2002:12 2002:39 2002:210 2002:1005
+!
+route-map rm6_conn_to_bgp_blue permit 100 
+ description ** Set attributes for blue IPv6 loopback interface **
+ match interface Loopback10
+ set origin igp
+ set community 163:55196 2002:8 2002:11 2002:61 2002:100 2002:1005
+!
+route-map rm6_conn_to_bgp_blue permit 500 
+ description ** Set attributes for blue IPv6 user access interfaces **
+ set origin igp
+ set community 163:55196 2002:8 2002:12 2002:100 2002:1005
+!
+route-map rm_conn_to_bgp_blue permit 100 
+ description ** Set attributes for blue IPv4 loopback interface **
+ match interface Loopback10
+ set origin igp
+ set community 163:55196 2002:8 2002:11 2002:61 2002:100 2002:1005
+!
+route-map rm_conn_to_bgp_blue permit 110 
+ description ** Set attributes for blue IPv4 WLC transport interface **
+ match interface Vlan4022
+ set origin igp
+ set community 163:55196 2002:8 2002:11 2002:100 2002:1005
+!
+route-map rm_conn_to_bgp_blue permit 500 
+ description ** Set attributes for blue IPv4 user access interfaces **
+ set origin igp
+ set community 163:55196 2002:8 2002:12 2002:100 2002:1005
+!
+route-map rm_conn_to_bgp_acc.y1 permit 500 
+ description ** Set attributes for acc.y1 user access interfaces **
+ set origin igp
+ set community 163:55196 2002:6 2002:12 2002:210 2002:1005
+!
+mpls ldp router-id Loopback0 force
+!
+snmp-server community 1BML0vesB1GData RO 80
+snmp-server community pbzvKE6Ak4ygnfcmSt RW 93
+snmp-server community WQgbxtam3ZmG9yceq RO 95
+snmp-server trap timeout 180
+snmp-server trap-source Loopback0
+snmp-server queue-length 100
+snmp-server location ASPAC/Japan/Tokyo/4s6/vWD/+9:00/Hakozaki-4F/MR/[rack]
+snmp-server ip dscp 18
+snmp-server contact [GPS asset common key]//vSC
+snmp-server system-shutdown
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps fru-ctrl
+snmp-server enable traps entity
+snmp-server enable traps envmon fan shutdown supply temperature status
+snmp-server enable traps config
+snmp-server enable traps bgp
+snmp-server host 135.89.176.123 version 2c WQgbxtam3ZmG9yceq 
+snmp-server host 135.89.176.246 version 2c WQgbxtam3ZmG9yceq  config
+snmp-server host 135.89.45.123 version 2c WQgbxtam3ZmG9yceq 
+snmp ifmib ifindex persist
+tacacs-server attribute allow unknown
+!
+!
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1440
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1440::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1441
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1441::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1442
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1442::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1443
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1443::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1444
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1444::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1445
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1445::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1446
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1446::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1447
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1447::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1448
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1448::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1449
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1449::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:144A
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:144A::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:144B
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:144B::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:144C
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:144C::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:144D
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:144D::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:144E
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:144E::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:144F
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:144F::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1450
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1450::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1451
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1451::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1452
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1452::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1453
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1453::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1454
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1454::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1455
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1455::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1456
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1456::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1457
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1457::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1458
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1458::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:1459
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:1459::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:145A
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:145A::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:145B
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:145B::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:145C
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:145C::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:145D
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:145D::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:145E
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:145E::/124
+!
+ipv6 access-list al6_rpf_2620:1F7:3A22:145F
+ sequence 10 remark /************************************************************
+ sequence 20 remark IPv6 uRPF access list allowing asymmetric path to the routers
+ sequence 30 remark *************************************************************/
+ sequence 40 permit ipv6 any 2620:1F7:3A22:145F::/124
+!
+ipv6 access-list al6_vty_access_aspr
+ sequence 10 remark /**********************************************
+ sequence 20 remark Restrict IPv6 VTY access
+ sequence 30 remark **********************************************/
+ sequence 40 deny ipv6 any any log
+!
+control-plane
+ service-policy input system-cpp-policy
+!
+privilege exec level 7 show running-config view full
+privilege exec level 7 show running-config view
+privilege exec level 7 show running-config
+privilege exec all level 1 show
+banner exec ^C *** Cisco 9500-24Y4C / 22.2.0 / vWDa-vsc-9500y.txt ***
+^C
+banner login ^C
+***********************************************************************
+*  Warning Notice:                                                    *
+*   This system is restricted solely to AT&T authorized users for     *
+*   legitimate business purposes only. You must have explicit,        *
+*   authorized permission by AT&T to access or configure this device. *
+*   All activities performed on this device are logged and monitored. *
+*   The actual or attempted unauthorized access, use, or modification *
+*   of this system is strictly prohibited by AT&T. Unauthorized users *
+*   are subject to Company disciplinary proceedings and/or criminal   *
+*   and civil penalties under state, federal, or other applicable     *
+*   domestic and foreign laws. The use of this system may be          *
+*   monitored and recorded for administrative and security reasons.   *
+*   Anyone accessing this system expressly consents to such           *
+*   monitoring and is advised that if monitoring reveals possible     *
+*   evidence of criminal activity, AT&T may provide the evidence of   *
+*   such activity to law enforcement officials. All users must comply *
+*   with AT&T company policies regarding the protection of AT&T       *
+*   information assets.                                               *
+***********************************************************************
+^C
+!
+line con 0
+ session-timeout 15 
+ exec-timeout 15 0
+ logging synchronous
+ stopbits 1
+line aux 0
+ session-timeout 15 
+ exec-timeout 15 0
+ logging synchronous
+line vty 0 4
+ session-timeout 15 
+ access-class al_vty_access_aspr in
+ exec-timeout 15 0
+ ipv6 access-class al6_vty_access_aspr in
+ logging synchronous
+ transport input ssh
+line vty 5 15
+ session-timeout 15 
+ access-class al_vty_access_aspr in
+ exec-timeout 15 0
+ ipv6 access-class al6_vty_access_aspr in
+ logging synchronous
+ transport input ssh
+!
+call-home
+ profile "CiscoTAC-1"
+  destination transport-method http
+ntp source Loopback0
+ntp access-group peer 79
+ntp server 135.89.176.123
+ntp server 135.89.45.123
+!
+!
+!
+!
+!
+!
+end

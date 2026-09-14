@@ -2,7 +2,7 @@
 
 # ------------------------------------------------------------------------------
 from nettoolkit.cmn.fstr import blank_line, interface_type, get_juniper_int_type
-from nettoolkit.cmn.flist import create_and_add_to_list
+from nettoolkit.cmn.flist import create_and_add_to_list, add_to_list_if_missing
 from nettoolkit.cmn.networking import get_vlans_juniper
 from nettoolkit.addressing import get_subnet, get_v6_subnet, IPv6
 from nettoolkit.crypt.jpw import doller9_dec
@@ -39,7 +39,7 @@ def parse_juniper_interfaces_single_pass(cmd_op):
             raw_if_name = spl[2]
             
             # Determine the logical unit overlay structure context cleanly
-            unit_id = "0"
+            unit_id = None
             if "unit" in spl:
                 try:
                     unit_id = spl[spl.index("unit") + 1]
@@ -55,22 +55,26 @@ def parse_juniper_interfaces_single_pass(cmd_op):
             if raw_if_name not in ports_dict[filter_type]:
                 ports_dict[filter_type][raw_if_name] = {}
                 
-            # Structuralize down into logical unit blocks to stop sub-interface data loss!
-            if 'units' not in ports_dict[filter_type][raw_if_name]:
-                ports_dict[filter_type][raw_if_name]['units'] = {}
-            if unit_id not in ports_dict[filter_type][raw_if_name]['units']:
-                ports_dict[filter_type][raw_if_name]['units'][unit_id] = {
-                    'description': None,
-                    'link_status': 'up',
-                    'vrf': None,
-                    'ipv4': {},
-                    'ipv6': {},
-                    'switchport': {},
-                    'etherchannel': {},
-                    'ospf': {}
-                }
-                
-            unit_dict = ports_dict[filter_type][raw_if_name]['units'][unit_id]
+            if unit_id is None:
+                unit_dict = ports_dict[filter_type][raw_if_name]
+            else:
+                # Structuralize down into logical unit blocks to stop sub-interface data loss!
+                if 'units' not in ports_dict[filter_type][raw_if_name]:
+                    ports_dict[filter_type][raw_if_name]['units'] = {}
+
+                if unit_id not in ports_dict[filter_type][raw_if_name]['units']:
+                    ports_dict[filter_type][raw_if_name]['units'][unit_id] = {
+                        'description': None,
+                        # 'link_status': 'up',
+                        'vrf': None,
+                        'ipv4': {},
+                        'ipv6': {},
+                        'switchport': {},
+                        'etherchannel': {},
+                        'ospf': {}
+                    }
+                    
+                unit_dict = ports_dict[filter_type][raw_if_name]['units'][unit_id]
             
             # Delegate line data collection contextually
             _parse_junos_metadata(unit_dict, line, spl)
@@ -97,6 +101,7 @@ def parse_juniper_interfaces_single_pass(cmd_op):
                 if f_type in ports_dict and p_name in ports_dict[f_type]:
                     if u_id in ports_dict[f_type][p_name]['units']:
                         ports_dict[f_type][p_name]['units'][u_id]['vrf'] = vrf_name
+
             except Exception:
                 pass
 
@@ -138,7 +143,11 @@ def _parse_junos_ipv4(unit_dict, line, spl):
         try:
             addr_idx = spl.index("address") + 1
             if addr_idx < len(spl):
-                unit_dict['ipv4']['subnet'] = spl[addr_idx]
+                if not unit_dict['ipv4'].get('subnet'):
+                    unit_dict['ipv4']['subnet'] = spl[addr_idx]
+                else:
+                    unit_dict['ipv4']['subnet'] = add_to_list_if_missing(unit_dict['ipv4']['subnet'], spl[addr_idx])
+                    
         except ValueError:
             pass
 
@@ -152,7 +161,10 @@ def _parse_junos_ipv6(unit_dict, line, spl):
                 v6_addr = spl[addr_idx]
                 # Exclude link-local fe80:: blocks safely from standard variable captures
                 if not v6_addr.lower().startswith("fe80:"):
-                    unit_dict['ipv6']['subnet'] = v6_addr
+                    if not unit_dict['ipv6'].get('subnet'):
+                        unit_dict['ipv6']['subnet'] = v6_addr
+                    else:
+                        unit_dict['ipv6']['subnet'] = add_to_list_if_missing(unit_dict['ipv6']['subnet'], v6_addr)
                     # if "/" in v6_addr:
                     #     unit_dict['ipv6']['h4_block'] = v6_addr.split(":")
         except ValueError:
@@ -221,10 +233,10 @@ def _parse_junos_ospf_auth(ports_dict, spl):
                             unit_ospf['network_type'] = spl[spl.index("interface-type") + 1]
                         if "authentication" in spl:
                             raw_key = " ".join(spl[spl.index("authentication") + 1:]).strip('"')
-                            try:
-                                unit_ospf['authentication_key'] = doller9_dec(raw_key)
-                            except Exception:
-                                unit_ospf['authentication_key'] = raw_key
+                            # try:
+                            #     unit_ospf['authentication_key'] = doller9_dec(raw_key)
+                            # except Exception:
+                            unit_ospf['authentication_key'] = raw_key
     except Exception:
         pass
 
@@ -282,7 +294,5 @@ def _cleanup_juniper_interface_placeholders(ports_dict):
 # Pipeline Entry Point Hook
 # ==============================================================================
 def get_interfaces(cmd_op, *args):
-    interfaces_dict = parse_juniper_interfaces_single_pass(cmd_op)
-    if not interfaces_dict:
-        interfaces_dict['dummy_int'] = ""
+    interfaces_dict = parse_juniper_interfaces_single_pass(cmd_op) or {}
     return {'op_dict': interfaces_dict}

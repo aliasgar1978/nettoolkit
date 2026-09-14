@@ -92,9 +92,5 @@ def parse_prefix_lists_single_pass(cmd_op):
 
 def get_prefix_lists(cmd_op, *args):
     # Bridges with your main centralized orchestration execution registers loop pipeline smoothly
-    prefix_results = parse_prefix_lists_single_pass(cmd_op)
-    
-    if not prefix_results:
-        prefix_results['dummy_pl'] = ""
-        
+    prefix_results = parse_prefix_lists_single_pass(cmd_op) or {}
     return {'op_dict': prefix_results}

@@ -3,7 +3,6 @@
 # ------------------------------------------------------------------------------
 from nettoolkit.cmn.fstr import blank_line
 from nettoolkit.cmn.flist import add_to_list_if_missing
-from nettoolkit.cmn.networking import get_juniper_pw_string
 # ------------------------------------------------------------------------------
 
 def parse_juniper_ospf_single_pass(cmd_op):
@@ -93,9 +92,10 @@ def parse_juniper_ospf_single_pass(cmd_op):
                         # Handle Authentication Credentials
                         elif "authentication" in spl:
                             try:
-                                pw_idx = spl.index("authentication") + 1
-                                # Intercepts your native library decryption modules cleanly
-                                intf_block['authentication_key'] = get_juniper_pw_string(spl, pw_idx + 1)
+                                auth_idx = spl.index("authentication")
+                                if 'key' in spl:
+                                    auth_idx = spl.index("key")
+                                intf_block['authentication_key'] = spl[auth_idx + 1]
                             except Exception:
                                 pass
                 except ValueError:
@@ -103,11 +103,6 @@ def parse_juniper_ospf_single_pass(cmd_op):
 
     # Post-parsing cleanup: Remove empty array/dictionary placeholders to ensure clean formatting
     return _cleanup_juniper_ospf_placeholders(ospf_database)
-
-
-def _cleanup_juniper_interface_placeholders(ports_dict):
-    """Placeholder method to maintain compatibility with legacy architecture checks if called."""
-    return ports_dict
 
 
 def _cleanup_juniper_ospf_placeholders(db):

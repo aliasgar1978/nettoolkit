@@ -16,25 +16,12 @@ from ._prefix_lists import get_prefix_lists
 
 JUNIPER_CMD_REGISTER = {
 	'show configuration':(
-		get_system,
-		get_interfaces,
-		get_instances,
-		get_bgps, 
-		get_ospfs,
-		get_routes,
-		get_prefix_lists,
+		('system',      get_system,       ),
+		('interfaces',  get_interfaces,   ),
+		('instances',   get_instances,    ),
+		('routing',     get_bgps,         ),
+		('routing',     get_ospfs,        ),
+		('routes',      get_routes,       ),
+		('prefixes',    get_prefix_lists, ),
 	),
 }
-
-JUNIPER_CMD_SECTION = {
-	'show configuration':(
-		'system',
-		'interfaces',
-		'instances',
-		'routing', 
-		'routing', 
-		'routes', 
-		'prefixes',
-	),
-}
-

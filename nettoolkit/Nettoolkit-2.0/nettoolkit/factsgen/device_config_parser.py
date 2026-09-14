@@ -2,10 +2,11 @@
 # =======================================================================================
 #  IMPORTS
 # =======================================================================================
+from pathlib import Path
 
 from parser.file_parser import parse_network_output_file
-from parser.device.cisco import CISCO_CMD_REGISTER, CISCO_CMD_SECTION
-from parser.device.juniper import JUNIPER_CMD_REGISTER, JUNIPER_CMD_SECTION
+from parser.device.cisco import CISCO_CMD_REGISTER
+from parser.device.juniper import JUNIPER_CMD_REGISTER
 
 from nettoolkit.juniper import JSet
 from nettoolkit.cmn.fdict import merge_dict
@@ -13,62 +14,92 @@ from nettoolkit.cmn.fio import write_as_yaml
 # from pprint import pprint
 import yaml
 
+CMD_REGISTERS = {
+    'cisco': CISCO_CMD_REGISTER,
+    'juniper': JUNIPER_CMD_REGISTER,
+}
+
 # =======================================================================================
 # Main facts extractor function 
 # =======================================================================================
 
-def extract_device_facts(capture_file):
+def extract_device_facts(capture_file, output_directory=None):
+    capture_path = Path(capture_file)
+    capture_file_result_dic = parse_network_output_file(capture_path, 
+                                                        cmd_registers=CMD_REGISTERS)
+    hostname = capture_file_result_dic.get('hostname')
+    make     = capture_file_result_dic.get('make')
+    cmd_dict = capture_file_result_dic.get('cmd_op', {})
+    if not hostname or not make:
+        raise ValueError(f"Could not identify hostname/vendor from {capture_file}")
 
-    registers_map = {
-        'cisco': CISCO_CMD_REGISTER,
-        'juniper': JUNIPER_CMD_REGISTER,
-    }
-    cmd_sections_map = {
-        'cisco': CISCO_CMD_SECTION,
-        'juniper': JUNIPER_CMD_SECTION,
-    }
+    device_register = CMD_REGISTERS.get(make)
+    if device_register is None:
+        raise ValueError(
+            f"Unsupported device make {make!r} "
+            f"for {capture_path}"
+        )
 
-    capture_file_result_dic = parse_network_output_file(capture_file, cmd_registers={'cisco': CISCO_CMD_REGISTER, 'juniper': JUNIPER_CMD_REGISTER})
-    hostname = capture_file_result_dic['hostname']
-    make     = capture_file_result_dic['make']
-    cmd_dict = capture_file_result_dic['cmd_op']
+    device_data = {}
 
-    parser_functions = registers_map.get(make)
-    cmd_sections     = cmd_sections_map.get(make)
-    if not parser_functions:
-        raise Exception(f"No Valid command parsers available for identified device type {make}")
-
-    d = {}
     if make == 'juniper':
         js = JSet(input_list=cmd_dict.get("show configuration", []))
         cmd_dict["show configuration"] = js()
         with open(hostname+"_jset.txt", 'w') as f:
             f.write("\n".join(cmd_dict['show configuration']))
 
-    for cmd, section_tuple in cmd_sections.items():
-        if cmd not in cmd_dict:
+    for command, parser_registrations in device_register.items():
+        command_output = cmd_dict.get(command)
+        if command not in cmd_dict or command_output is None:
+            print(f"[-] Missing capture: [{hostname}] - [{command}]")
             continue
-        #
-        cmd_op = cmd_dict[cmd]
-        parser_function_tuple = parser_functions.get(cmd)
-        if not parser_function_tuple: continue
-        for i, parser_function in enumerate(parser_function_tuple):
-            parser_dict = parser_function(cmd_op)
-            try:
-                op_dict = {section_tuple[i]: parser_dict['op_dict']}
-                merge_dict(d, op_dict)
-            except:
-                print(f"[-] Failed to parse output for section: {section_tuple[i]} for {parser_function}")
 
-    write_as_yaml(d, file=f'{hostname}_devices-data.yaml')
+        parser_registrations = device_register.get(command)
+        if not parser_registrations: continue
+
+        for section, parser_function in parser_registrations:
+            parser_result = parser_function(command_output)
+
+            if not isinstance(parser_result, dict):
+                raise TypeError(
+                    f"{parser_function.__name__} returned "
+                    f"{type(parser_result).__name__}, expected dict"
+                )
+            if 'op_dict' not in parser_result:
+                raise KeyError(
+                    f"{parser_function.__name__} did not return 'op_dict'"
+                )
+
+            parsed_data = parser_result.get('op_dict', {})
+            if parsed_data:
+                    merge_dict(device_data, {section: parsed_data})
+
+    output_dir = (
+        Path(output_directory)
+        if output_directory
+        else capture_path.parent
+    )
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_file = output_dir / f'{hostname}_devices-data.yaml'
+    write_as_yaml(device_data, file=str(output_file ))
 
 # =======================================================================================
 # Main bypass
 # =======================================================================================
 if __name__ == "__main__": 
-    # extract_device_facts("5aa-ecd-b.log")
-    # extract_device_facts("00h-ecd-a.log")
     pass
+
+    from pathlib import Path
+    inventory_directory = Path("./device_vault")
+    for capture_file in inventory_directory.iterdir():
+        if not capture_file.is_file(): continue
+        if capture_file.suffix.lower() not in {".log", ".txt", ".cfg"}: continue
+        # extract_device_facts(f"./{inventory_directory}/{capture_file}")
+        try:
+            extract_device_facts(capture_file)
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            print(f"[-] {capture_file.name}: {exc}")
+
 # =======================================================================================
 
 __all__ = ['extract_device_facts', ]

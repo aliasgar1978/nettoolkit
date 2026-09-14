@@ -17,9 +17,8 @@ def parse_interfaces_single_pass(cmd_op):
     ports_dict = {}
     port_dict = None
     
-    for line in cmd_op:
-        raw_line = line
-        line = line.strip()
+    for raw_line in cmd_op:
+        line = raw_line.strip()
         if not line or line == "!":
             continue
             
@@ -143,10 +142,10 @@ def _parse_routing_policies(port_dict, line):
     """Parses link-level OSPF configurations."""
     if line.startswith("ip ospf authentication-key "):
         raw_key = line.split()[-1]
-        try:
-            port_dict['ospf']['authentication_key'] = type7_dec(raw_key)
-        except Exception:
-            port_dict['ospf']['authentication_key'] = raw_key
+        # try:
+        #     port_dict['ospf']['authentication_key'] = type7_dec(raw_key)
+        # except Exception:
+        port_dict['ospf']['authentication_key'] = raw_key
             
     elif line.startswith("ip ospf network "):
         port_dict['ospf']['network_type'] = line.split()[-1]
@@ -171,7 +170,5 @@ def _cleanup_empty_placeholders(ports_dict):
 # Pipeline Entry Point Hook
 # ==============================================================================
 def get_interfaces(cmd_op, *args):
-    interfaces_dict = parse_interfaces_single_pass(cmd_op)
-    if not interfaces_dict:
-        interfaces_dict['dummy_int'] = ""
+    interfaces_dict = parse_interfaces_single_pass(cmd_op) or {}
     return {'op_dict': interfaces_dict}

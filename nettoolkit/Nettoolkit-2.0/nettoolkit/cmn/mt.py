@@ -5,6 +5,8 @@
 from abc import abstractmethod
 import threading
 from time import sleep
+import logging
+
 
 from .bldblk import Default
 from .fstr import list_of_devices, split_to_group
@@ -25,6 +27,7 @@ class Multi_Execution(Default):
 
 	def __init__(self, items=None):
 		self.items = items
+		self.workers = min(self.max_connections, len(self.items))
 
 	def execute_steps(self, multi_thread=True):
 		"""steps defining executions
@@ -44,24 +47,22 @@ class Multi_Execution(Default):
 			None: None
 		"""		
 		if not self.items: return None 
+		logging.info(f"{self} - Starting MT Execution")
 		if multi_thread:
 			self.execute_mt()
 		else: 
 			self.execute_sequencial()
+		logging.info(f"{self} - Completed MT Execution")
 
 	def end(self):
 		"""Closure process"""		
 		pass
 
-	def get_devices(self):
-		"""get devices names from list of files"""
-		self.devices = list_of_devices(self.files)
-
 	def execute_mt(self):
 		"""threaded execution in groups 
 		(self.max_connections defines max threaded processes) 
 		"""
-		for group, items in enumerate(split_to_group(self.items, self.max_connections)):
+		for items in split_to_group(self.items, self.max_connections):
 			self.execute_threads_max(items)
 
 	def execute_threads_max(self, item_list):
@@ -75,7 +76,7 @@ class Multi_Execution(Default):
 			t = threading.Thread(target=self.execute, args=(hn,) )
 			t.start()
 			ts.append(t)
-			if self.sleep_by and isinstance(self.sleep_by, int):
+			if self.sleep_by and isinstance(self.sleep_by, (int, float)):
 				sleep(self.sleep_by)
 
 		for t in ts: t.join()

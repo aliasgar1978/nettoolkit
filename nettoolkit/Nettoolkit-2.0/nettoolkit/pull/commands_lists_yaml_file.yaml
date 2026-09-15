@@ -1,0 +1,25 @@
+cisco_xe:
+  - show clock
+  - show sdwan run 
+  - show run
+  - show ver
+  - show cdp neighbor
+  - show lldp neighbor
+  - show sdwan system
+  - show sdwan software
+  - show interface description
+  - show ip int brief
+  - show sdwan control connections
+  - show sdwan control local-properties
+  - show sdwan bfd sessions 
+  - show sdwan omp peers
+  - show sdwan omp routes
+  - show ip nat translations
+  - show sdwan omp sum
+  - show ip bgp all sum
+  - sh inventory
+  - sh license udi
+  - show sdwan certificate serial
+  - show pnp version
+  - show license summary
+  - show license authorization

@@ -37,11 +37,11 @@ def extract_ip_from_text(text):
             
     return None
 
-def get_device_ip_using_nlist(ssh_shell, target):
+def get_device_ip_using_nlist(ssh_shell, target, self):
     if is_valid_ip(target):
         return target
 
-    logging.info(f"[*] Resolving hostname '{target}' via jump server...")
+    logging.info(f"[{self}] Resolving hostname '{target}' via jump server...")
     
     # 1. Try 'nlist'
     ssh_shell.send(f"nlist {target}\n")
@@ -50,10 +50,11 @@ def get_device_ip_using_nlist(ssh_shell, target):
     resolved_ip = extract_ip_from_text(output)
     
     if resolved_ip:
-        logging.info(f"[+] Resolved {target} to: {resolved_ip}")
+        logging.info(f"[{self}] Resolved {target} to: {resolved_ip}")
         return resolved_ip
     else:
-        raise ValueError(f"[-] Could not extract a valid IPv4/IPv6 address for hostname: {target}")
+        logging.critical(f"[{self}] Could not extract a valid IPv4/IPv6 address for hostname: {target}")
+        raise ValueError(f"[{self}] Could not extract a valid IPv4/IPv6 address for hostname: {target}")
 
 # ------------------------------------------------------------------------------
 

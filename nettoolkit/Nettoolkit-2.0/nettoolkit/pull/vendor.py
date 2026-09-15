@@ -14,7 +14,7 @@ def get_signature_terminal_len(output_lowered, vendors_dict):
                 return vendor, ven_dict.get('terminal_length')
     return None, None
     
-def determine_vendor_profile(device_shell, charasteristics_dict):
+def determine_vendor_profile(device_shell, charasteristics_dict, device):
     vendors_dict = charasteristics_dict.get('vendors', {})
     timers_dict =  charasteristics_dict.get('timers', {})
 
@@ -26,7 +26,7 @@ def determine_vendor_profile(device_shell, charasteristics_dict):
         initial_prompt += device_shell.recv(4096).decode('utf-8', errors='ignore')
     
     initial_prompt_lower = initial_prompt.lower()
-    logging.info(f"[*] Initial system environment: {initial_prompt.strip()}")
+    logging.info(f"[{device}] Initial system environment: {initial_prompt.strip()}")
 
     # 2. Linux Root Shell Interception (e.g., root@hostname:~#)
     if all([
@@ -35,11 +35,11 @@ def determine_vendor_profile(device_shell, charasteristics_dict):
         ":~" in initial_prompt_lower,]
         ):
         # if "~#" in initial_prompt_lower or "bash" in initial_prompt_lower or ":~" in initial_prompt_lower:
-        logging.info("[!] Linux/Bash root shell environment. Elevating to CLI...")
+        logging.info(f"\t[{device}] Linux/Bash root shell environment. Elevating to CLI...")
         cli_response = wait_for_output(device_shell, "cli", timers_dict)
-        logging.info(f"[*] CLI Transition Output: {cli_response.strip()}")
+        logging.info(f"\t[{device}] CLI Transition Output: {cli_response.strip()}")
 
-    logging.info("[*] Probing device vendor...")
+    logging.info(f"[{device}] Probing device vendor...")
     probe_output = wait_for_output(device_shell, "show version", timers_dict)
     probe_lower = probe_output.lower()
 
@@ -52,7 +52,7 @@ def determine_vendor_profile(device_shell, charasteristics_dict):
         return vendor, terminal_cmd
 
     # 2. STRATEGY FALLBACK: If show version is a bare number, probe for Viptela SD-WAN specific commands
-    logging.warning("[*] signature inconclusive. Running next level verification...")
+    logging.warning(f"[{device}] signature inconclusive. Running next level verification...")
     probe_output = wait_for_output(device_shell, "show system status", timers_dict)
     probe_lower = probe_output.lower()
     send_break(device_shell)
@@ -61,7 +61,7 @@ def determine_vendor_profile(device_shell, charasteristics_dict):
     if vendor and terminal_cmd:
         return vendor, terminal_cmd
         
-    logging.error("[-] Signature indeterminate..")
+    logging.error(f"[{device}] Signature indeterminate..")
     return None, None
 
 # --------------------------------------------------------------------------------

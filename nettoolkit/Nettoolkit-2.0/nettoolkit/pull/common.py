@@ -1,4 +1,5 @@
 
+# --------------------------------------------------------------------------------
 
 import ipaddress
 import time
@@ -71,5 +72,63 @@ def strip_ansi_and_clean(text):
     # Normalize Windows/Network line endings (\r\n) to simple lines (\n)
     return cleaned.replace('\r\n', '\n').replace('\r', '\n')
 
+# --------------------------------------------------------------------------------
 
+def wait_for_prompt(channel, timers_dict):
+    timeout = timers_dict.get('prompt_timeout', 60)
+
+    output = ""
+    start = time.time()
+
+    while time.time() - start < timeout:
+
+        if channel.recv_ready():
+            output += channel.recv(65535).decode(
+                "utf-8",
+                errors="ignore"
+            )
+
+            if output.rstrip().endswith( ("#", ">", "$", ":") ):
+                return output
+
+        time.sleep(0.5)
+
+    return output
+
+def wait_for_output(channel, command, timers_dict):
+    timeout = timers_dict.get('command_timeout', 15)
+
+    output = ""
+    idle = 0
+
+    channel.send(f"{command}\n")
+
+    while idle < 3 and timeout > 0:
+        if channel.recv_ready():
+            output += channel.recv(65535).decode(
+                "utf-8",
+                errors="ignore"
+            )
+            idle = 0
+        else:
+            idle += 1
+            timeout -= 1
+            time.sleep(1)
+
+    return output
+
+# --------------------------------------------------------------------------------
+
+def drain_buffer(channel):
+    output = b''
+    while channel.recv_ready():
+        output += channel.recv(65535)
+    return output.decode('utf-8', errors='ignore')
+
+def send_break(channel):
+    channel.send("\x03")
+    time.sleep(0.5)
+    return drain_buffer(channel)
+
+# --------------------------------------------------------------------------------
 

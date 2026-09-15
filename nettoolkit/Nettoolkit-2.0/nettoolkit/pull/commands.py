@@ -1,9 +1,8 @@
 
+# --------------------------------------------------------------------------------
 from nettoolkit.cmn.fio import read_yaml
 
-
-
-
+# --------------------------------------------------------------------------------
 
 
 def get_commands_for_type(commands_lists_yaml_file, device_type):
@@ -22,3 +21,4 @@ def get_commands_for_type(commands_lists_yaml_file, device_type):
     # }
     
 
+# --------------------------------------------------------------------------------

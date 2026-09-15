@@ -4,9 +4,9 @@
 # =======================================================================================
 from pathlib import Path
 
-from parser.file_parser import parse_network_output_file
-from parser.device.cisco import CISCO_CMD_REGISTER
-from parser.device.juniper import JUNIPER_CMD_REGISTER
+from .parser.file_parser import parse_network_output_file
+from .parser.device.cisco import CISCO_CMD_REGISTER
+from .parser.device.juniper import JUNIPER_CMD_REGISTER
 
 from nettoolkit.juniper import JSet
 from nettoolkit.cmn.fdict import merge_dict

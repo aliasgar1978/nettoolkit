@@ -39,7 +39,7 @@ def get_version(cmd_op, *args):
 				# Isolate the token right before the word 'processor' dynamically
 				p_idx = spl.index("processor")
 				if p_idx > 1:
-					model = spl[p_idx - 1]
+					model = " ".join(spl[1:p_idx])
 			except ValueError:
 				pass
 

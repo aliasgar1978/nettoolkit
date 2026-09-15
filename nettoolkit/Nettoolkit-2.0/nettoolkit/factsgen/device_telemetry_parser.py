@@ -5,14 +5,15 @@
 from collections import OrderedDict
 from pathlib import Path
 
-from parser.file_parser import parse_network_output_file
-from parser.telemetry.cisco import CISCO_CMD_REGISTER
-from parser.telemetry.juniper import JUNIPER_CMD_REGISTER, merge_juniper_transceivers_to_interfaces
+from .parser.file_parser import parse_network_output_file
+from .parser.telemetry.cisco import CISCO_CMD_REGISTER
+from .parser.telemetry.juniper import JUNIPER_CMD_REGISTER, merge_juniper_transceivers_to_interfaces
 
-from parser.telemetry.cisco.sdwan import CISCO_SDWAN_CMD_REGISTER, merge_control_conn_local_prop
+from .parser.telemetry.cisco.sdwan import CISCO_SDWAN_CMD_REGISTER, merge_control_conn_local_prop
 
 from nettoolkit.cmn.fdict import merge_dict
 from nettoolkit.cmn.fio import write_as_yaml
+
 
 import yaml
 

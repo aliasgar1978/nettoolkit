@@ -1,5 +1,5 @@
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 import time
 import paramiko
@@ -185,38 +185,93 @@ def start_logging(charasteristics):
         handlers=handlers,
     )
 
+@dataclass
+class CaptureManager():
+    user: str
+    password: str=''
+    pkey: str=''
+    passphrase: str=''
+    targets: list = field(default_factory=list)
+    jumpserver_host: str=''
+    jumpserver_auth_type: str='auto'
+    output_path: str="."
+    commands_list_file: str = ''
+    charasteristics_file: str = ''
 
+    def __post_init__(self):
+        self.exec_result = {}
+        self.charasteristics = get_charasteristics(self.charasteristics_file)
+        start_logging(self.charasteristics.get('logging', {}))
+
+    def capture_targets(self):
+        try:
+            if self.jumpserver_host:
+                self.connect_jump_server()
+            self.execute_targets()
+        finally:
+            if self.jumpserver_host:
+                self.disconnect_jump_server()
+
+    def connect_jump_server(self):
+        self.jumpserver = JumpServer(server=self.jumpserver_host, 
+                                     user=self.user, 
+                                     pkey=self.pkey, 
+                                     passphrase=self.passphrase,
+                                     auth_type=self.jumpserver_auth_type)
+        self.jumpserver.connect()
+
+    def disconnect_jump_server(self):
+        self.jumpserver.disconnect()
+
+    def execute_targets(self):
+        for target in self.targets:
+            try:
+                if self.jumpserver_host:
+                    device_ip = self.jumpserver.nlist(host=target)
+                else:
+                    device_ip = target
+                self.capture_target(device_ip)
+                self.exec_result[target] = 'success'
+            except Exception as e:
+                logging.exception(f"Capture failed for {target}")
+                self.exec_result[target] = f'failed: {e}'
+
+    def capture_target(self, device_ip):
+        device = Device()
+        device.charasteristics = self.charasteristics
+        try:
+            device.connect(ip=device_ip, user=self.user, pw=self.password, jumpserver=self.jumpserver)
+            device_type = device.identify_device_type()
+            hostname = device.identify_hostname()
+            commands_list = get_commands_for_type(self.commands_list_file, device_type=device_type)
+            device.capture(commands_list, to_file=f'{self.output_path}/{hostname}.log', mode='w')
+        finally:
+            try:
+                device.disconnect()
+            except:
+                pass
+
+    def print_summary(self):
+        print(f"DEVICE\t\tRESULT")
+        for target, result in self.exec_result.items():
+            print(f"{target}\t{result}")
 # ===================================================================================
 
 if __name__ == "__main__":
     pass
 
-    charasteristics_file = 'characteristics.yaml'
-    commands_list_file   = 'commands_lists_yaml_file.yaml'
+    # ## EXAMPLE USAGE ##
+    # cm = CaptureManager(
+    #     user='al2025',
+    #     pkey='c:/abcd/abcd/abcd/privatekey',
+    #     passphrase='mostsecure',
+    #     jumpserver_host='rlpv123456',
+    #     targets=["dev1", "dev2", "dev3"],
+    #     output_path=".",
+    #     commands_list_file='commands_lists_yaml_file.yaml',
+    #     charasteristics_file='characteristics.yaml',
+    # )
+    # cm.capture_targets()
+    # cm.print_summary()
 
-    charasteristics = get_charasteristics(charasteristics_file)
-    start_logging(charasteristics.get('logging', {}))
-
-    jumpserver = JumpServer(server='rlpv123456', user='al2025', pkey='c:/abcd/abcd/abcd/privatekey', passphrase='mostsecurepw')
-    jumpserver.connect()
-    device_ip = jumpserver.nlist(host='ABCDEFG')
-    # -----------------
-    device = Device()
-    device.charasteristics = charasteristics
-    device.connect(ip=device_ip, user='al2026', pw='securepw', jumpserver=jumpserver)
-    device_type = device.identify_device_type()
-    hostname = device.identify_hostname()
-    commands_list = get_commands_for_type(commands_list_file, device_type=device_type)
-    device.capture(commands_list, to_file=f'{hostname}.log', mode='w')
-    device.disconnect()
-    # ----------------- 
-    jumpserver.disconnect()
-
-    # JUMP_SERVER_IP = "rlpv13447.gcsc.att.com"
-    # JUMP_SERVER_IP = "rlpv12149.gcsc.att.com"
-    # JUMP_SERVER_IP = "rlpv10188.gcsc.att.com"
-    # JUMP_SERVER_USER = "al202t"
-    # PRIVATE_KEY_PATH = "C:/Users/al202t/OneDrive - AT&T Services, Inc/Documents/Identity2048"
-    # DEVICE_USER = "al202t"
-    # # DEVICE_USER = "root"
-    # DEVICE_USER = "admin"
+# ===================================================================================

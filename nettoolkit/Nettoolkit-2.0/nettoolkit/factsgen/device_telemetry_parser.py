@@ -91,7 +91,7 @@ def extract_device_telemetry_data(capture_file, output_directory=None):
                 merge_dict(telemetry_data, section_data)
 
 
-    add_exclusions(telemetry_data, additional_outputs)
+    merge_sdwan_control_conn_with_local_prop(telemetry_data, additional_outputs)
 
     output_dir = (
         Path(output_directory)
@@ -102,8 +102,9 @@ def extract_device_telemetry_data(capture_file, output_directory=None):
     output_file = output_dir / f'{hostname}_devices-telemetry-data.yaml'
     write_as_yaml(telemetry_data, file=str(output_file ))
 
+# =============================================================================================
 
-def add_exclusions(telemetry_data, additional_outputs):
+def merge_sdwan_control_conn_with_local_prop(telemetry_data, additional_outputs):
     # 1. Merge SDWAN CONTROL CONNECTIONS / LOCAL PROP DATA AND ADD IT TO TELEMETRY
     ctrl_conn_dict = 'show sdwan control connections'
     ctrl_local_prop_dict = 'show sdwan control local-properties'
@@ -117,8 +118,14 @@ def add_exclusions(telemetry_data, additional_outputs):
     if additional_outputs.get(ctrl_local_prop_dict):
         merge_dict(telemetry_data, {'sdwan': {'system':additional_outputs[ctrl_local_prop_dict]['sdwan']['system']}} )
 
-    # 2. -- Add as comes
+# =============================================================================================
 
+
+
+
+
+
+# =============================================================================================
 
 
 # =======================================================================================

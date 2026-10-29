@@ -1,0 +1,368 @@
+system:
+  software:
+    version: 17.06.04
+    boot_file: bootflash:packages.conf
+  hardware:
+    model: C9500-24Y4C
+    serial_number: CAT2415L0ZG
+interfaces:
+  l3vlan:
+    Vlan1:
+      description: ''
+      link_status: administratively down
+    Vlan1901:
+      description: 4s6/vID6-vIA1/global/9.9.97.178.0/29/xA_mgmt
+      link_status: up
+    Vlan2021:
+      description: 4s6/vID6-vIA1/blue-1/blue/9.189.122.128/28/2620:1F7:3A22::6:8101:0/112/krx1
+      link_status: up
+    Vlan2041:
+      description: 4s6/vID6-vIA1/blue-2/blue/9.189.122.144/28/SBC
+      link_status: up
+    Vlan4090:
+      description: 4s6/vID6b-vID6a/global/9.97.176.96/30/xlink
+      link_status: up
+  physical:
+    GigabitEthernet0/0:
+      description: '** RESERVED **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/1:
+      description: 4s6/vID6b-vIA1/trunk/4s6-via-hb1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-via-hb1
+        interface: GigabitEthernet1/0/25
+        platform: WS-C2960X
+      neighbors:
+      - hostname: 4s6-via-hb1
+        interface: GigabitEthernet1/0/25
+    TwentyFiveGigE1/0/2:
+      description: 4s6/vID6b-vPR2/global/4s6-vpr-1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vpr-1
+        interface: HundredGigE1/0/52
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vpr-1
+        interface: HundredGigE1/0/52
+    TwentyFiveGigE1/0/3:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/4:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/5:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/6:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/7:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/8:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/9:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/10:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/11:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/12:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/13:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/14:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/15:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/16:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/17:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/18:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/19:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/20:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/21:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/22:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/23:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/24:
+      description: '** RESERVED-SPAN **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 10/100/1000BaseTX SFP
+        duplex: auto
+        speed: auto
+    HundredGigE1/0/25:
+      description: 4s6/vID6b-vID6a.1/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vid-6a
+        interface: HundredGigE1/0/25
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vid-6a
+        interface: HundredGigE1/0/25
+    HundredGigE1/0/26:
+      description: 4s6/vID6b-vID6a.2/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vid-6a
+        interface: HundredGigE1/0/26
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vid-6a
+        interface: HundredGigE1/0/26
+    HundredGigE1/0/27:
+      description: 4s6/vID6b-vSCa/global
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vsc-a
+        interface: TwentyFiveGigE1/0/14
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vsc-a
+        interface: TwentyFiveGigE1/0/14
+    HundredGigE1/0/28:
+      description: 4s6/vID6b-vSCb/global
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vsc-b
+        interface: TwentyFiveGigE1/0/14
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vsc-b
+        interface: TwentyFiveGigE1/0/14
+  aggregated:
+    Port-channel101:
+      description: 4s6/vID6b-vID6a/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: N/A
+        duplex: a-full
+        speed: a-10G
+  loopback:
+    Loopback0:
+      description: 4s6/vID6b/lo0/global
+      link_status: up
+    Loopback10:
+      description: 4s6/vID6b/lo10/blue
+      link_status: up

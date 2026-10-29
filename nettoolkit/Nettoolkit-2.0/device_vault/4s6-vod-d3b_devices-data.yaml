@@ -1,0 +1,2923 @@
+interfaces:
+  loopback:
+    Loopback0:
+      description: 4s6/vOD3b/lo0/global
+      link_status: up
+      ipv4:
+        subnet: 9.97.176.54/32
+    Loopback10:
+      description: 4s6/vOD3b/lo10/blue
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.141.22/32
+      ipv6:
+        subnet: 2620:1F7:3A22::3:1B:B/128
+      h4_block: '0'
+  aggregated:
+    Port-channel101:
+      description: 4s6/vOD3b-vOD3a/trunk/xlink
+      link_status: up
+      switchport:
+        vlan_members: 4001,4090
+        mode: trunk
+  physical:
+    GigabitEthernet0/0:
+      description: '** RESERVED **'
+      link_status: administratively down
+      vrf: Mgmt-vrf
+    TwentyFiveGigE1/0/1:
+      description: 4s6/vOD3b-vUA1/trunk/4s6-vua-24frn1
+      link_status: up
+      switchport:
+        vlan_members: 1901,2001,2041,2441
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/2:
+      description: 4s6/vOD3b-vUA2/trunk/4s6-vua-24frn2
+      link_status: up
+      switchport:
+        vlan_members: 1902,2002,2042
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/3:
+      description: 4s6/vOD3b-vUA3/trunk/4s6-vua-24frs1
+      link_status: up
+      switchport:
+        vlan_members: 1903,2003,2043
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/4:
+      description: 4s6/vOD3b-vUA4/trunk/4s6-vua-24frs2
+      link_status: up
+      switchport:
+        vlan_members: 1904,2004,2044,2444
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/5:
+      description: 4s6/vOD3b-vUA5/trunk/4s6-vua-23frn1
+      link_status: up
+      switchport:
+        vlan_members: 1905,2005,2045,2445
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/6:
+      description: 4s6/vOD3b-vUA6/trunk/4s6-vua-23frn2
+      link_status: up
+      switchport:
+        vlan_members: 1906,2006,2046
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/7:
+      description: 4s6/vOD3b-vUA7/trunk/4s6-vua-23frs1
+      link_status: up
+      switchport:
+        vlan_members: 1907,2007,2047,2427
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/8:
+      description: 4s6/vOD3b-vUA8/trunk/4s6-vua-23frs2
+      link_status: up
+      switchport:
+        vlan_members: 1908,2008,2048,2448
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/9:
+      description: 4s6/vOD3b-vUA9/trunk/4s6-vua-22frn1
+      link_status: up
+      switchport:
+        vlan_members: 1909,2009,2049,2449
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/10:
+      description: 4s6/vOD3b-vUA10/trunk/4s6-vua-22frn2
+      link_status: up
+      switchport:
+        vlan_members: 1910,2010,2050
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/11:
+      description: 4s6/vOD3b-vUA11/trunk/4s6-vua-22frs1
+      link_status: up
+      switchport:
+        vlan_members: 1911,2011,2051,2431
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/12:
+      description: 4s6/vOD3b-vUA12/trunk/4s6-vua-22frs2
+      link_status: up
+      switchport:
+        vlan_members: 1912,2012,2052,2452
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/13:
+      description: 4s6/vOD3b-vUA13/trunk/4s6-vua-21frn1
+      link_status: up
+      switchport:
+        vlan_members: 1913,2013,2053,2453
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/14:
+      description: 4s6/vOD3b-vUA14/trunk/4s6-vua-21frn2
+      link_status: up
+      switchport:
+        vlan_members: 1914,2014,2054
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/15:
+      description: 4s6/vOD3b-vUA15/trunk/4s6-vua-21frs1
+      link_status: up
+      switchport:
+        vlan_members: 1915,2015,2055,2435
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/16:
+      description: 4s6/vOD3b-vUA16/trunk/4s6-vua-21frs2
+      link_status: up
+      switchport:
+        vlan_members: 1916,2016,2056,2456
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/17:
+      description: 4s6/vOD3b-vUA17/trunk/4s6-vua-20frn1
+      link_status: up
+      switchport:
+        vlan_members: 1917,2017,2057,2457
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/18:
+      description: 4s6/vOD3b-vUA18/trunk/4s6-vua-20frn2
+      link_status: up
+      switchport:
+        vlan_members: 1918,2018,2058
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/19:
+      description: 4s6/vOD3b-vUA19/trunk/4s6-vua-20frs1
+      link_status: up
+      switchport:
+        vlan_members: 1919,2019,2059,2439
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/20:
+      description: 4s6/vOD3b-vUA20/trunk/4s6-vua-20frs2
+      link_status: up
+      switchport:
+        vlan_members: 1920,2020,2060,2460
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/21:
+      description: 4s6/vOD3b-vUA21/trunk/4s6-vua-19frn1
+      link_status: up
+      switchport:
+        vlan_members: 1921,3001,3041,3441
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/22:
+      description: 4s6/vOD3b-vUA22/trunk/4s6-vua-19frn2
+      link_status: up
+      switchport:
+        vlan_members: 1922,3002,3042
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/23:
+      description: 4s6/vOD3b-vUA23/trunk/4s6-vua-19frs1
+      link_status: up
+      switchport:
+        vlan_members: 1923,3003,3043,3423
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/24:
+      description: 4s6/vOD3b-vUA24/trunk/4s6-vua-19frs2
+      link_status: up
+      switchport:
+        vlan_members: 1924,3004,3044,3444
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/25:
+      description: 4s6/vOD3b-vUA25/trunk/4s6-vua-18frn1
+      link_status: up
+      switchport:
+        vlan_members: 1925,3005,3045,3445
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/26:
+      description: 4s6/vOD3b-vUA26/trunk/4s6-vua-18frn2
+      link_status: up
+      switchport:
+        vlan_members: 1926,3006,3046
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/27:
+      description: 4s6/vOD3b-vUA27/trunk/4s6-vua-18frs1
+      link_status: up
+      switchport:
+        vlan_members: 1927,3007,3047,3427
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/28:
+      description: 4s6/vOD3b-vUA28/trunk/4s6-vua-18frs2
+      link_status: up
+      switchport:
+        vlan_members: 1928,3008,3048,3448
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/29:
+      description: 4s6/vOD3b-vUA29/trunk/4s6-vua-17frn1
+      link_status: up
+      switchport:
+        vlan_members: 1929,3009,3049,3449
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/30:
+      description: 4s6/vOD3b-vUA30/trunk/4s6-vua-17frn2
+      link_status: up
+      switchport:
+        vlan_members: 1930,3010,3050
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/31:
+      description: 4s6/vOD3b-vUA31/trunk/4s6-vua-17frs1
+      link_status: up
+      switchport:
+        vlan_members: 1931,3011,3051,3431
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/32:
+      description: 4s6/vOD3b-vUA32/trunk/4s6-vua-17frs2
+      link_status: up
+      switchport:
+        vlan_members: 1932,3012,3052,3452
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/33:
+      description: 4s6/vOD3b-vUA33/trunk/4s6-vua-16frn1
+      link_status: up
+      switchport:
+        vlan_members: 1933,3013,3053,3453
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/34:
+      description: 4s6/vOD3b-vUA34/trunk/4s6-vua-16frn2
+      link_status: up
+      switchport:
+        vlan_members: 1934,3014,3054
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/35:
+      description: 4s6/vOD3b-vUA35/trunk/4s6-vua-16frs1
+      link_status: up
+      switchport:
+        vlan_members: 1935,3015,3055,3375,3435
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/36:
+      description: 4s6/vOD3b-vUA36/trunk/4s6-vua-16frs2
+      link_status: up
+      switchport:
+        vlan_members: 1936,3016,3056,3456
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/37:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/38:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/39:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/40:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/41:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/42:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/43:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/44:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/45:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/46:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/47:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/48:
+      description: '** RESERVED-SPAN **'
+      link_status: administratively down
+      switchport:
+        mode: access
+    HundredGigE1/0/49:
+      description: 4s6/vOD3b-vOD3a.1/trunk/xlink
+      link_status: up
+      switchport:
+        vlan_members: 4001,4090
+        mode: trunk
+      etherchannel:
+        id: 101
+        interface: Port-channel101
+        mode: active
+    HundredGigE1/0/50:
+      description: 4s6/vOD3b-vOD3a.2/trunk/xlink
+      link_status: up
+      switchport:
+        vlan_members: 4001,4090
+        mode: trunk
+      etherchannel:
+        id: 101
+        interface: Port-channel101
+        mode: active
+    HundredGigE1/0/51:
+      description: 4s6/vOD3b-vSCa/global
+      link_status: up
+      ipv4:
+        subnet: 9.97.176.58/31
+      ospf:
+        authentication_key: 091B543F1202004625
+        network_type: point-to-point
+    HundredGigE1/0/52:
+      description: 4s6/vOD3b-vSCb/global
+      link_status: up
+      ipv4:
+        subnet: 9.97.176.62/31
+      ospf:
+        authentication_key: 07583B7A450E0E5139
+        network_type: point-to-point
+  l3vlan:
+    Vlan1:
+      link_status: administratively down
+    Vlan1901:
+      description: 4s6/vOD3-vUA1/global//9.97.172.0/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.0/29
+    Vlan1902:
+      description: 4s6/vOD3-vUA2/global//9.97.172.8/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.8/29
+    Vlan1903:
+      description: 4s6/vOD3-vUA3/global//9.97.172.16/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.16/29
+    Vlan1904:
+      description: 4s6/vOD3-vUA4/global//9.97.172.24/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.24/29
+    Vlan1905:
+      description: 4s6/vOD3-vUA5/global//9.97.172.32/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.32/29
+    Vlan1906:
+      description: 4s6/vOD3-vUA6/global//9.97.172.40/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.40/29
+    Vlan1907:
+      description: 4s6/vOD3-vUA7/global//9.97.172.48/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.48/29
+    Vlan1908:
+      description: 4s6/vOD3-vUA8/global//9.97.172.56/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.56/29
+    Vlan1909:
+      description: 4s6/vOD3-vUA9/global//9.97.172.64/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.64/29
+    Vlan1910:
+      description: 4s6/vOD3-vUA10/global//9.97.172.72/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.72/29
+    Vlan1911:
+      description: 4s6/vOD3-vUA11/global//9.97.172.80/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.80/29
+    Vlan1912:
+      description: 4s6/vOD3-vUA12/global//9.97.172.88/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.88/29
+    Vlan1913:
+      description: 4s6/vOD3-vUA13/global//9.97.172.96/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.96/29
+    Vlan1914:
+      description: 4s6/vOD3-vUA14/global//9.97.172.104/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.104/29
+    Vlan1915:
+      description: 4s6/vOD3-vUA15/global//9.97.172.112/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.112/29
+    Vlan1916:
+      description: 4s6/vOD3-vUA16/global//9.97.172.120/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.120/29
+    Vlan1917:
+      description: 4s6/vOD3-vUA17/global//9.97.172.128/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.128/29
+    Vlan1918:
+      description: 4s6/vOD3-vUA18/global//9.97.172.136/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.136/29
+    Vlan1919:
+      description: 4s6/vOD3-vUA19/global//9.97.172.144/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.144/29
+    Vlan1920:
+      description: 4s6/vOD3-vUA20/global//9.97.172.152/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.152/29
+    Vlan1921:
+      description: 4s6/vOD3-vUA21/global//9.97.172.160/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.160/29
+    Vlan1922:
+      description: 4s6/vOD3-vUA22/global//9.97.172.168/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.168/29
+    Vlan1923:
+      description: 4s6/vOD3-vUA23/global//9.97.172.176/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.176/29
+    Vlan1924:
+      description: 4s6/vOD3-vUA24/global//9.97.172.184/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.184/29
+    Vlan1925:
+      description: 4s6/vOD3-vUA25/global//9.97.172.192/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.192/29
+    Vlan1926:
+      description: 4s6/vOD3-vUA26/global//9.97.172.200/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.200/29
+    Vlan1927:
+      description: 4s6/vOD3-vUA27/global//9.97.172.208/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.208/29
+    Vlan1928:
+      description: 4s6/vOD3-vUA28/global//9.97.172.216/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.216/29
+    Vlan1929:
+      description: 4s6/vOD3-vUA29/global//9.97.172.224/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.224/29
+    Vlan1930:
+      description: 4s6/vOD3-vUA30/global//9.97.172.232/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.232/29
+    Vlan1931:
+      description: 4s6/vOD3-vUA31/global//9.97.172.240/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.240/29
+    Vlan1932:
+      description: 4s6/vOD3-vUA32/global//9.97.172.248/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.172.248/29
+    Vlan1933:
+      description: 4s6/vOD3-vUA33/global//9.97.173.0/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.173.0/29
+    Vlan1934:
+      description: 4s6/vOD3-vUA34/global//9.97.173.8/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.173.8/29
+    Vlan1935:
+      description: 4s6/vOD3-vUA35/global//9.97.173.16/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.173.16/29
+    Vlan1936:
+      description: 4s6/vOD3-vUA36/global//9.97.173.24/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.173.24/29
+    Vlan2001:
+      description: 4s6/vOD3-vUA1/blue-1/blue/9.189.176.0/24/2620:1F7:3A22:C10::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.176.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:C10:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: C10
+    Vlan2002:
+      description: 4s6/vOD3-vUA2/blue-1/blue/9.189.177.0/24/2620:1F7:3A22:C20::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.177.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:C20:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: C20
+    Vlan2003:
+      description: 4s6/vOD3-vUA3/blue-1/blue/9.189.178.0/24/2620:1F7:3A22:C30::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.178.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:C30:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: C30
+    Vlan2004:
+      description: 4s6/vOD3-vUA4/blue-1/blue/9.189.179.0/24/2620:1F7:3A22:C40::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.179.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:C40:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: C40
+    Vlan2005:
+      description: 4s6/vOD3-vUA5/blue-1/blue/9.68.108.0/24/2620:1F7:3A22:C50::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.108.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:C50:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: C50
+    Vlan2006:
+      description: 4s6/vOD3-vUA6/blue-1/blue/9.68.111.0/24/2620:1F7:3A22:C60::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.111.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:C60:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: C60
+    Vlan2007:
+      description: 4s6/vOD3-vUA7/blue-1/blue/9.68.122.0/24/2620:1F7:3A22:C70::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.122.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:C70:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: C70
+    Vlan2008:
+      description: 4s6/vOD3-vUA8/blue-1/blue/9.68.123.0/24/2620:1F7:3A22:C80::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.123.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:C80:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: C80
+    Vlan2009:
+      description: 4s6/vOD3-vUA9/blue-1/blue/9.189.168.0/24/2620:1F7:3A22:C90::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.168.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:C90:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: C90
+    Vlan2010:
+      description: 4s6/vOD3-vUA10/blue-1/blue/9.189.169.0/24/2620:1F7:3A22:CA0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.169.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:CA0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: CA0
+    Vlan2011:
+      description: 4s6/vOD3-vUA11/blue-1/blue/9.189.174.0/24/2620:1F7:3A22:CB0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.174.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:CB0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: CB0
+    Vlan2012:
+      description: 4s6/vOD3-vUA12/blue-1/blue/9.189.175.0/24/2620:1F7:3A22:CC0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.175.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:CC0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: CC0
+    Vlan2013:
+      description: 4s6/vOD3-vUA13/blue-1/blue/9.68.100.0/24/2620:1F7:3A22:CD0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.100.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:CD0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: CD0
+    Vlan2014:
+      description: 4s6/vOD3-vUA14/blue-1/blue/9.68.101.0/24/2620:1F7:3A22:CE0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.101.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:CE0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: CE0
+    Vlan2015:
+      description: 4s6/vOD3-vUA15/blue-1/blue/9.68.138.0/24/2620:1F7:3A22:CF0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.138.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:CF0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: CF0
+    Vlan2016:
+      description: 4s6/vOD3-vUA16/blue-1/blue/9.68.139.0/24/2620:1F7:3A22:D00::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.139.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:D00:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: D00
+    Vlan2017:
+      description: 4s6/vOD3-vUA17/blue-1/blue/9.68.128.0/24/2620:1F7:3A22:D10::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.128.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:D10:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: D10
+    Vlan2018:
+      description: 4s6/vOD3-vUA18/blue-1/blue/9.68.142.0/24/2620:1F7:3A22:D20::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.142.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:D20:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: D20
+    Vlan2019:
+      description: 4s6/vOD3-vUA19/blue-1/blue/9.68.144.0/24/2620:1F7:3A22:D30::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.144.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:D30:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: D30
+    Vlan2020:
+      description: 4s6/vOD3-vUA20/blue-1/blue/9.68.145.0/24/2620:1F7:3A22:D40::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.145.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:D40:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: D40
+    Vlan2041:
+      description: 4s6/vOD3-vUA1/blue-3/blue/9.116.252.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.252.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2042:
+      description: 4s6/vOD3-vUA2/blue-3/blue/9.116.252.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.252.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2043:
+      description: 4s6/vOD3-vUA3/blue-3/blue/9.116.253.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.253.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2044:
+      description: 4s6/vOD3-vUA4/blue-3/blue/9.116.253.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.253.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2045:
+      description: 4s6/vOD3-vUA5/blue-3/blue/9.116.248.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.248.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2046:
+      description: 4s6/vOD3-vUA6/blue-3/blue/9.116.248.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.248.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2047:
+      description: 4s6/vOD3-vUA7/blue-3/blue/9.116.249.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.249.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2048:
+      description: 4s6/vOD3-vUA8/blue-3/blue/9.116.249.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.249.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2049:
+      description: 4s6/vOD3-vUA9/blue-3/blue/9.116.244.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.244.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2050:
+      description: 4s6/vOD3-vUA10/blue-3/blue/9.116.244.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.244.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2051:
+      description: 4s6/vOD3-vUA11/blue-3/blue/9.116.245.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.245.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2052:
+      description: 4s6/vOD3-vUA12/blue-3/blue/9.116.245.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.245.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2053:
+      description: 4s6/vOD3-vUA13/blue-3/blue/9.116.240.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.240.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2054:
+      description: 4s6/vOD3-vUA14/blue-3/blue/9.116.240.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.240.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2055:
+      description: 4s6/vOD3-vUA15/blue-3/blue/9.116.241.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.241.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2056:
+      description: 4s6/vOD3-vUA16/blue-3/blue/9.116.241.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.241.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2057:
+      description: 4s6/vOD3-vUA17/blue-3/blue/9.116.236.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.236.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2058:
+      description: 4s6/vOD3-vUA18/blue-3/blue/9.116.236.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.236.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2059:
+      description: 4s6/vOD3-vUA19/blue-3/blue/9.116.237.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.237.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2060:
+      description: 4s6/vOD3-vUA20/blue-3/blue/9.116.237.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.237.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan2427:
+      description: 4s6/vOD3-vUA7/green-7/acn.g1/9.219.75.208/28/acn.g1
+      link_status: up
+      vrf: acn.g1
+      ipv4:
+        subnet: 9.219.75.208/28
+    Vlan2431:
+      description: 4s6/vOD3-vUA11/green-7/acn.g1/9.219.75.192/28/acn.g1
+      link_status: up
+      vrf: acn.g1
+      ipv4:
+        subnet: 9.219.75.192/28
+    Vlan2435:
+      description: 4s6/vOD3-vUA15/green-7/acn.g1/9.219.75.176/28/acn.g1
+      link_status: up
+      vrf: acn.g1
+      ipv4:
+        subnet: 9.219.75.176/28
+    Vlan2439:
+      description: 4s6/vOD3-vUA19/green-7/acn.g1/9.219.75.0/28/acn.g1
+      link_status: up
+      vrf: acn.g1
+      ipv4:
+        subnet: 9.219.75.0/28
+    Vlan2441:
+      description: 4s6/vOD3-vUA1/green-8/ctv.g1/9.215.216.0/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.216.0/27
+    Vlan2444:
+      description: 4s6/vOD3-vUA4/green-8/ctv.g1/9.215.216.32/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.216.32/27
+    Vlan2445:
+      description: 4s6/vOD3-vUA5/green-8/ctv.g1/9.215.215.128/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.215.128/27
+    Vlan2448:
+      description: 4s6/vOD3-vUA8/green-8/ctv.g1/9.215.215.160/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.215.160/27
+    Vlan2449:
+      description: 4s6/vOD3-vUA9/green-8/ctv.g1/9.215.215.0/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.215.0/27
+    Vlan2452:
+      description: 4s6/vOD3-vUA12/green-8/ctv.g1/9.215.215.32/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.215.32/27
+    Vlan2453:
+      description: 4s6/vOD3-vUA13/green-8/ctv.g1/9.215.214.128/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.214.128/27
+    Vlan2456:
+      description: 4s6/vOD3-vUA16/green-8/ctv.g1/9.215.214.160/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.214.160/27
+    Vlan2457:
+      description: 4s6/vOD3-vUA17/green-8/ctv.g1/9.215.214.0/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.214.0/27
+    Vlan2460:
+      description: 4s6/vOD3-vUA20/green-8/ctv.g1/9.215.214.32/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.214.32/27
+    Vlan3001:
+      description: 4s6/vOD3-vUA21/blue-1/blue/9.68.124.0/24/2620:1F7:3A22:D50::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.124.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:D50:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: D50
+    Vlan3002:
+      description: 4s6/vOD3-vUA22/blue-1/blue/9.68.125.0/24/2620:1F7:3A22:D60::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.125.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:D60:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: D60
+    Vlan3003:
+      description: 4s6/vOD3-vUA23/blue-1/blue/9.68.183.0/25/2620:1F7:3A22:D70::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.183.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:D70:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: D70
+    Vlan3004:
+      description: 4s6/vOD3-vUA24/blue-1/blue/9.68.183.128/25/2620:1F7:3A22:D80::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.183.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:D80:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: D80
+    Vlan3005:
+      description: 4s6/vOD3-vUA25/blue-1/blue/9.189.164.0/24/2620:1F7:3A22:D90::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.164.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:D90:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: D90
+    Vlan3006:
+      description: 4s6/vOD3-vUA26/blue-1/blue/9.189.165.0/24/2620:1F7:3A22:DA0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.165.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:DA0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: DA0
+    Vlan3007:
+      description: 4s6/vOD3-vUA27/blue-1/blue/9.189.166.0/24/2620:1F7:3A22:DB0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.166.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:DB0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: DB0
+    Vlan3008:
+      description: 4s6/vOD3-vUA28/blue-1/blue/9.189.167.0/24/2620:1F7:3A22:DC0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.167.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:DC0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: DC0
+    Vlan3009:
+      description: 4s6/vOD3-vUA29/blue-1/blue/9.68.164.0/25/2620:1F7:3A22:DD0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.164.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:DD0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: DD0
+    Vlan3010:
+      description: 4s6/vOD3-vUA30/blue-1/blue/9.68.165.0/24/2620:1F7:3A22:DE0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.165.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:DE0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: DE0
+    Vlan3011:
+      description: 4s6/vOD3-vUA31/blue-1/blue/9.68.164.128/25/2620:1F7:3A22:DF0::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.164.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:DF0:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: DF0
+    Vlan3012:
+      description: 4s6/vOD3-vUA32/blue-1/blue/9.68.166.0/24/2620:1F7:3A22:E00::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.166.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:E00:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: E00
+    Vlan3013:
+      description: 4s6/vOD3-vUA33/blue-1/blue/9.68.146.0/25/2620:1F7:3A22:E10::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.146.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:E10:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: E10
+    Vlan3014:
+      description: 4s6/vOD3-vUA34/blue-1/blue/9.68.147.0/24/2620:1F7:3A22:E20::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.147.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:E20:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: E20
+    Vlan3015:
+      description: 4s6/vOD3-vUA35/blue-1/blue/9.68.146.128/25/2620:1F7:3A22:E30::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.146.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:E30:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: E30
+    Vlan3016:
+      description: 4s6/vOD3-vUA36/blue-1/blue/9.68.151.0/24/2620:1F7:3A22:E40::/64/user1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.68.151.0/24
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+      ipv6:
+        subnet: 2620:1F7:3A22:E40:0:0:0:0/64
+        helpers:
+        - 2620:1F7:702:8D00::FEED:B01A
+        - 2620:1F7:701:8D00::FEED:B01B
+      h4_block: E40
+    Vlan3041:
+      description: 4s6/vOD3-vUA21/blue-3/blue/9.116.233.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.233.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3042:
+      description: 4s6/vOD3-vUA22/blue-3/blue/9.116.233.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.233.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3043:
+      description: 4s6/vOD3-vUA23/blue-3/blue/9.116.232.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.232.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3044:
+      description: 4s6/vOD3-vUA24/blue-3/blue/9.116.232.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.232.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3045:
+      description: 4s6/vOD3-vUA25/blue-3/blue/9.116.228.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.228.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3046:
+      description: 4s6/vOD3-vUA26/blue-3/blue/9.116.228.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.228.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3047:
+      description: 4s6/vOD3-vUA27/blue-3/blue/9.116.229.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.229.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3048:
+      description: 4s6/vOD3-vUA28/blue-3/blue/9.116.229.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.229.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3049:
+      description: 4s6/vOD3-vUA29/blue-3/blue/9.116.224.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.224.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3050:
+      description: 4s6/vOD3-vUA30/blue-3/blue/9.116.224.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.224.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3051:
+      description: 4s6/vOD3-vUA31/blue-3/blue/9.116.225.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.225.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3052:
+      description: 4s6/vOD3-vUA32/blue-3/blue/9.116.225.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.225.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3053:
+      description: 4s6/vOD3-vUA33/blue-3/blue/9.116.220.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.220.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3054:
+      description: 4s6/vOD3-vUA34/blue-3/blue/9.116.220.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.220.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3055:
+      description: 4s6/vOD3-vUA35/blue-3/blue/9.116.221.0/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.221.0/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3056:
+      description: 4s6/vOD3-vUA36/blue-3/blue/9.116.221.128/25/VOIP1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.116.221.128/25
+        helpers:
+        - 9.189.139.112
+        - 9.201.185.116
+    Vlan3375:
+      description: 4s6/vOD3-vUA35/green-4/bms.g1/9.103.65.32/27/bms
+      link_status: up
+      vrf: bms.g1
+      ipv4:
+        subnet: 9.103.65.32/27
+    Vlan3423:
+      description: 4s6/vOD3-vUA23/green-7/acn.g1/9.219.75.160/28/acn.g1
+      link_status: up
+      vrf: acn.g1
+      ipv4:
+        subnet: 9.219.75.160/28
+    Vlan3427:
+      description: 4s6/vOD3-vUA27/green-7/acn.g1/9.219.75.144/28/acn.g1
+      link_status: up
+      vrf: acn.g1
+      ipv4:
+        subnet: 9.219.75.144/28
+    Vlan3431:
+      description: 4s6/vOD3-vUA31/green-7/acn.g1/9.219.75.112/28/acn.g1
+      link_status: up
+      vrf: acn.g1
+      ipv4:
+        subnet: 9.219.75.112/28
+    Vlan3435:
+      description: 4s6/vOD3-vUA35/green-7/acn.g1/9.219.74.224/28/acn.g1
+      link_status: up
+      vrf: acn.g1
+      ipv4:
+        subnet: 9.219.74.224/28
+    Vlan3441:
+      description: 4s6/vOD3-vUA21/green-8/ctv.g1/9.215.213.128/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.213.128/27
+    Vlan3444:
+      description: 4s6/vOD3-vUA24/green-8/ctv.g1/9.215.213.160/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.213.160/27
+    Vlan3445:
+      description: 4s6/vOD3-vUA25/green-8/ctv.g1/9.215.213.0/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.213.0/27
+    Vlan3448:
+      description: 4s6/vOD3-vUA28/green-8/ctv.g1/9.215.213.32/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.213.32/27
+    Vlan3449:
+      description: 4s6/vOD3-vUA29/green-8/ctv.g1/9.215.212.128/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.212.128/27
+    Vlan3452:
+      description: 4s6/vOD3-vUA32/green-8/ctv.g1/9.215.212.160/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.212.160/27
+    Vlan3453:
+      description: 4s6/vOD3-vUA33/green-8/ctv.g1/9.215.212.0/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.212.0/27
+    Vlan3456:
+      description: 4s6/vOD3-vUA36/green-8/ctv.g1/9.215.212.32/27/ctv.g1
+      link_status: up
+      vrf: ctv.g1
+      ipv4:
+        subnet: 9.215.212.32/27
+    Vlan4001:
+      description: 4s6/vOD3b-vOD3a/blue/9.189.141.16/30/xlink
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.141.16/30
+      ospf:
+        authentication_key: 1545113A0F2D3C7006
+        network_type: point-to-point
+    Vlan4090:
+      description: '** Set attributes for bms.g1 interfaces **'
+      link_status: up
+      ipv4:
+        subnet: 9.97.176.48/30
+      ospf:
+        authentication_key: 091B543F1202004625
+        network_type: point-to-point
+routing:
+  bgp:
+    global_bgp:
+      router_id: 9.97.176.54
+    vrfs:
+      default:
+        address_families:
+          ipv4_unicast:
+            neighbors:
+              rr:
+                peer_ip: rr
+                send-community: both
+                policies:
+                  inbound_route_map: rm_from_rr
+                  outbound_route_map: rm_to_rr
+              9.97.176.13:
+                peer_ip: 9.97.176.13
+              9.97.176.14:
+                peer_ip: 9.97.176.14
+      acn.g1:
+        address_families:
+          ipv4_unicast:
+            redistribute:
+            - protocol: connected
+              route_map: rm_conn_to_bgp_acn.g1
+            - protocol: static
+              route_map: rm_static_to_bgp_vrf
+      blue:
+        router_id: 9.189.141.22
+        address_families:
+          ipv4_unicast:
+            redistribute:
+            - protocol: connected
+              route_map: rm_conn_to_bgp_blue
+            - protocol: static
+              route_map: rm_static_to_bgp_vrf
+          ipv6_unicast:
+            redistribute:
+            - protocol: connected
+              route_map: rm6_conn_to_bgp_blue
+            - protocol: static
+              route_map: rm_static_to_bgp_vrf
+      bms.g1:
+        address_families:
+          ipv4_unicast:
+            redistribute:
+            - protocol: connected
+              route_map: rm_conn_to_bgp_bms.g1
+            - protocol: static
+              route_map: rm_static_to_bgp_vrf
+      ctv.g1:
+        address_families:
+          ipv4_unicast:
+            redistribute:
+            - protocol: connected
+              route_map: rm_conn_to_bgp_ctv.g1
+            - protocol: static
+              route_map: rm_static_to_bgp_vrf
+  ospf:
+    '1':
+      ospf_vrf: ''
+      router_id: 9.97.176.54
+      passive_interface_default: true
+      active_interfaces:
+      - Vlan4090
+      - HundredGigE1/0/51
+      - HundredGigE1/0/52
+      areas:
+        '0':
+          authentication: cleartext
+          networks:
+          - 9.97.176.56/29
+        '3':
+          authentication: cleartext
+          networks:
+          - 9.97.172.0/23
+          - 9.97.176.48/29
+          range_summaries:
+          - 9.97.172.0/23
+instances:
+  Mgmt-vrf:
+    address_families:
+    - ipv4
+    - ipv6
+  acn.g1:
+    description: IBM-CIO green Security Access Control Zone - Per-site VPN
+    route_distinguisher: 9.97.176.54:771
+    route_targets:
+      import:
+      - 8:771
+      export:
+      - 8:771
+    address_families:
+    - ipv4
+  blue:
+    description: IBM-CIO Internal Network Blue - Global VPN
+    route_distinguisher: 9.97.176.54:100
+    route_targets:
+      import:
+      - 8:100
+      export:
+      - 8:100
+    address_families:
+    - ipv4
+    - ipv6
+  bms.g1:
+    description: IBM-CIO green Real Estate BMS Zone - Per-site VPN
+    route_distinguisher: 9.97.176.54:761
+    route_targets:
+      import:
+      - 8:761
+      export:
+      - 8:761
+    address_families:
+    - ipv4
+  ctv.g1:
+    description: IBM-CIO green Security CCTV Zone - Per-site VPN
+    route_distinguisher: 9.97.176.54:772
+    route_targets:
+      import:
+      - 8:772
+      export:
+      - 8:772
+    address_families:
+    - ipv4
+system:
+  identity:
+    hostname: 4s6-vod-d3b
+    banner: banner exec ^C *** Cisco 9500-48Y4C / 22.2.0 / vODb-vsc-9500y.txt ***
+  routing_metadata:
+    bgp_as: 65449
+  security:
+    ca_certificate: "  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101\
+      \ 0B050030\n  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317\
+      \ 43697363\n  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533\
+      \ 30313934\n  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355\
+      \ 040A1305\n  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73\
+      \ 696E6720\n  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382\
+      \ 010F0030\n  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1\
+      \ F1EFF64D\n  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388\
+      \ 8A38E520\n  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7\
+      \ D8F256EE\n  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F\
+      \ EA2956AC\n  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF\
+      \ 58BD7188\n  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B\
+      \ 42C68BB7\n  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8\
+      \ 8F27D191\n  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368\
+      \ 95135E44\n  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04\
+      \ 04030201\n  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604\
+      \ 1449DC85\n  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01\
+      \ 010B0500\n  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78\
+      \ 240DA905\n  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1\
+      \ 6C9E3D8B\n  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146\
+      \ 8DFC66A8\n  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2\
+      \ 55A9232C\n  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49\
+      \ 1765308B\n  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69\
+      \ 39F08678\n  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD\
+      \ 230E3AFB\n  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F\
+      \ 719BB2F0\n  D697DF7F 28"
+  aaa:
+    tacacs_servers:
+    - 135.89.45.254
+    - 135.89.176.190
+    tacacs_key: t5mZgCaixP8u3bKhW6dr
+    tacacs_tcp_port: 49170
+  services:
+    dns_servers:
+    - 9.0.0.1
+    - 9.0.0.2
+    syslog_servers:
+    - 135.89.45.123
+    - 135.89.176.123
+    ntp_servers:
+    - 135.89.45.123
+    - 135.89.176.123
+routes:
+  vrf_routes:
+    ipv4:
+    - instance: blue
+      prefix: 0.0.0.0/0
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: 9.189.141.253
+      name: '"/*'
+      track: '10'
+    - instance: ctv.g1
+      prefix: 0.0.0.0/0
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: 9.215.197.21
+      name: '"/*'
+      track: '10'
+    - instance: acn.g1
+      prefix: 0.0.0.0/0
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: 9.219.74.21
+      name: '"/*'
+      track: '10'
+    - instance: bms.g1
+      prefix: 0.0.0.0/0
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: 9.103.65.21
+      name: '"/*'
+      track: '10'
+    - instance: blue
+      prefix: 0.0.0.0/0
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: 9.189.141.254
+      name: '"/*'
+      track: '20'
+    - instance: ctv.g1
+      prefix: 0.0.0.0/0
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: 9.215.197.22
+      name: '"/*'
+      track: '20'
+    - instance: acn.g1
+      prefix: 0.0.0.0/0
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: 9.219.74.22
+      name: '"/*'
+      track: '20'
+    - instance: bms.g1
+      prefix: 0.0.0.0/0
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: 9.103.65.22
+      name: '"/*'
+      track: '20'
+    - instance: acn.g1
+      prefix: 9.219.74.224/28
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '771317000'
+      name: '"/*'
+      distance: 240
+    - instance: acn.g1
+      prefix: 9.219.75.0/28
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '771317000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.100.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.101.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.108.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.111.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.122.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.123.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.124.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.125.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.128.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.138.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.139.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.142.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.144.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.145.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.146.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.146.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.147.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.151.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.164.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.164.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.165.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.166.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.183.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.68.183.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.220.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.220.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.221.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.221.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.224.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.224.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.225.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.225.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.228.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.228.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.229.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.229.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.232.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.232.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.233.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.233.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.236.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.236.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.237.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.237.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.240.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.240.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.241.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.241.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.244.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.244.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.245.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.245.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.248.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.248.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.249.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.249.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.252.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.252.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.253.0/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.116.253.128/25
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.164.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.165.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.166.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.167.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.168.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.169.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.174.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.175.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.176.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.177.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.178.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.179.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.212.0/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.212.32/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.212.128/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.212.160/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.213.0/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.213.32/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.213.128/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.213.160/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.214.0/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.214.32/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.214.128/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.214.160/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.215.0/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.215.32/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.215.128/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.215.160/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.216.0/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: ctv.g1
+      prefix: 9.215.216.32/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '772317000'
+      name: '"/*'
+      distance: 240
+    - instance: bms.g1
+      prefix: 9.103.65.32/27
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '761317000'
+      name: '"/*'
+      distance: 240
+    ipv6:
+    - instance: blue
+      prefix: 2620:1F7:3A22:C10::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:C20::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:C30::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:C40::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:C50::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:C60::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:C70::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:C80::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:C90::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:CA0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:CB0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:CC0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:CD0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:CE0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:CF0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:D00::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:D10::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:D20::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:D30::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:D40::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:D50::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:D60::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:D70::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:D80::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:D90::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:DA0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:DB0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:DC0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:DD0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:DE0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:DF0::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:E00::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:E10::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:E20::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:E30::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:E40::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:E50::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:E60::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:E70::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 2620:1F7:3A22:E80::/64
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100812000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: ::/0
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: 2620:1F7:3A22::1B:A
+      name: '"/*'
+      track: '10'
+    - instance: blue
+      prefix: ::/0
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: 2620:1F7:3A22::1B:B
+      name: '"/*'
+      track: '20'
+prefixes:
+  ipv4:
+    pl_blue_servers:
+      1000:
+        action: deny
+        prefix: 0.0.0.0/0
+        le: 32
+    pl_default_route:
+      100:
+        action: permit
+        prefix: 0.0.0.0/0
+      1000:
+        action: deny
+        prefix: 0.0.0.0/0
+        le: 32
+    pl_everything:
+      1000:
+        action: permit
+        prefix: 0.0.0.0/0
+        le: 32
+    pl_vxb_infra_blue:
+      1000:
+        action: deny
+        prefix: 0.0.0.0/0
+        le: 32
+  ipv6:
+    pl6_blue_servers:
+      1000:
+        action: deny
+        prefix: ::/0
+        le: 128

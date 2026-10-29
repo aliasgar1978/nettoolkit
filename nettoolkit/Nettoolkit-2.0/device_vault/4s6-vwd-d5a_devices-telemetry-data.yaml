@@ -1,0 +1,536 @@
+system:
+  software:
+    version: 17.06.04
+    boot_file: bootflash:packages.conf
+  hardware:
+    model: C9500-24Y4C
+    serial_number: CAT2342L0BY
+interfaces:
+  l3vlan:
+    Vlan1:
+      description: ''
+      link_status: administratively down
+    Vlan2101:
+      description: 4s6/vWD5-WLC/blue-1/blue/9.68.18.0/23/2620:1F7:3A22:1440::/64/wls1
+      link_status: up
+    Vlan2102:
+      description: 4s6/vWD5-WLC/blue-2/blue/9.68.22.0/23/2620:1F7:3A22:1441::/64/wls1
+      link_status: up
+    Vlan2103:
+      description: 4s6/vWD5-WLC/blue-3/blue/9.68.24.0/23/2620:1F7:3A22:1442::/64/wls1
+      link_status: up
+    Vlan2104:
+      description: 4s6/vWD5-WLC/blue-4/blue/9.68.26.0/23/2620:1F7:3A22:1443::/64/wls1
+      link_status: up
+    Vlan2105:
+      description: 4s6/vWD5-WLC/blue-5/blue/9.68.28.0/23/2620:1F7:3A22:1444::/64/wls1
+      link_status: up
+    Vlan2106:
+      description: 4s6/vWD5-WLC/blue-6/blue/9.68.30.0/23/2620:1F7:3A22:1445::/64/wls1
+      link_status: up
+    Vlan2107:
+      description: 4s6/vWD5-WLC/blue-7/blue/9.68.32.0/23/2620:1F7:3A22:1446::/64/wls1
+      link_status: up
+    Vlan2108:
+      description: 4s6/vWD5-WLC/blue-8/blue/9.68.36.0/23/2620:1F7:3A22:1447::/64/wls1
+      link_status: up
+    Vlan2109:
+      description: 4s6/vWD5-WLC/blue-9/blue/9.68.38.0/23/2620:1F7:3A22:1448::/64/wls1
+      link_status: up
+    Vlan2110:
+      description: 4s6/vWD5-WLC/blue-10/blue/9.68.40.0/23/2620:1F7:3A22:1449::/64/wls1
+      link_status: up
+    Vlan2111:
+      description: 4s6/vWD5-WLC/blue-11/blue/9.68.42.0/23/2620:1F7:3A22:144A::/64/wls1
+      link_status: up
+    Vlan2112:
+      description: 4s6/vWD5-WLC/blue-12/blue/9.68.192.0/23/2620:1F7:3A22:144B::/64/wls1
+      link_status: up
+    Vlan2113:
+      description: 4s6/vWD5-WLC/blue-13/blue/9.68.194.0/23/2620:1F7:3A22:144C::/64/wls1
+      link_status: up
+    Vlan2114:
+      description: 4s6/vWD5-WLC/blue-14/blue/9.68.196.0/23/2620:1F7:3A22:144D::/64/wls1
+      link_status: up
+    Vlan2115:
+      description: 4s6/vWD5-WLC/blue-15/blue/9.68.198.0/23/2620:1F7:3A22:144E::/64/wls1
+      link_status: up
+    Vlan2116:
+      description: 4s6/vWD5-WLC/blue-16/blue/9.68.204.0/23/2620:1F7:3A22:144F::/64/wls1
+      link_status: up
+    Vlan2117:
+      description: 4s6/vWD5-WLC/blue-17/blue/9.116.80.0/23/2620:1F7:3A22:1450::/64/wls1
+      link_status: up
+    Vlan2118:
+      description: 4s6/vWD5-WLC/blue-18/blue/9.116.86.0/23/2620:1F7:3A22:1451::/64/wls1
+      link_status: up
+    Vlan2119:
+      description: 4s6/vWD5-WLC/blue-19/blue/9.116.88.0/23/2620:1F7:3A22:1452::/64/wls1
+      link_status: up
+    Vlan2120:
+      description: 4s6/vWD5-WLC/blue-20/blue/9.116.90.0/23/2620:1F7:3A22:1453::/64/wls1
+      link_status: up
+    Vlan2121:
+      description: 4s6/vWD5-WLC/blue-21/blue/9.116.92.0/23/2620:1F7:3A22:1454::/64/wls1
+      link_status: up
+    Vlan2122:
+      description: 4s6/vWD5-WLC/blue-22/blue/9.116.94.0/23/2620:1F7:3A22:1455::/64/wls1
+      link_status: up
+    Vlan2123:
+      description: 4s6/vWD5-WLC/blue-23/blue/9.116.156.0/23/2620:1F7:3A22:1456::/64/wls1
+      link_status: up
+    Vlan2124:
+      description: 4s6/vWD5-WLC/blue-24/blue/9.116.158.0/23/2620:1F7:3A22:1457::/64/wls1
+      link_status: up
+    Vlan2125:
+      description: 4s6/vWD5-WLC/blue-25/blue/9.116.160.0/23/2620:1F7:3A22:1458::/64/wls1
+      link_status: up
+    Vlan2126:
+      description: 4s6/vWD5-WLC/blue-26/blue/9.116.162.0/23/2620:1F7:3A22:1459::/64/wls1
+      link_status: up
+    Vlan2127:
+      description: 4s6/vWD5-WLC/blue-27/blue/9.116.164.0/23/2620:1F7:3A22:145A::/64/wls1
+      link_status: up
+    Vlan2128:
+      description: 4s6/vWD5-WLC/blue-28/blue/9.116.166.0/23/2620:1F7:3A22:145B::/64/wls1
+      link_status: up
+    Vlan2129:
+      description: 4s6/vWD5-WLC/blue-29/blue/9.116.168.0/23/2620:1F7:3A22:145C::/64/wls1
+      link_status: up
+    Vlan2130:
+      description: 4s6/vWD5-WLC/blue-30/blue/9.116.170.0/23/2620:1F7:3A22:145D::/64/wls1
+      link_status: up
+    Vlan2131:
+      description: 4s6/vWD5-WLC/blue-31/blue/9.116.172.0/23/2620:1F7:3A22:145E::/64/wls1
+      link_status: up
+    Vlan2132:
+      description: 4s6/vWD5-WLC/blue-32/blue/9.116.174.0/23/2620:1F7:3A22:145F::/64/wls1
+      link_status: up
+    Vlan2141:
+      description: 4s6/vWD5-WLC/yellow-1/acc.y1/9.239.112.0/23/wls1
+      link_status: up
+    Vlan2142:
+      description: 4s6/vWD5-WLC/yellow-2/acc.y1/9.239.114.0/23/wls1
+      link_status: up
+    Vlan2143:
+      description: 4s6/vWD5-WLC/yellow-3/acc.y1/9.239.116.0/23/wls1
+      link_status: up
+    Vlan2144:
+      description: 4s6/vWD5-WLC/yellow-4/acc.y1/9.239.118.0/23/wls1
+      link_status: up
+    Vlan2145:
+      description: 4s6/vWD5-WLC/yellow-5/acc.y1/9.239.120.0/23/wls1
+      link_status: up
+    Vlan2146:
+      description: 4s6/vWD5-WLC/yellow-6/acc.y1/9.239.122.0/23/wls1
+      link_status: up
+    Vlan2147:
+      description: 4s6/vWD5-WLC/yellow-7/acc.y1/9.239.124.0/23/wls1
+      link_status: up
+    Vlan2148:
+      description: 4s6/vWD5-WLC/yellow-8/acc.y1/9.239.126.0/23/wls1
+      link_status: up
+    Vlan2149:
+      description: 4s6/vWD5-WLC/yellow-9/acc.y1/9.236.176.0/23/wls1
+      link_status: up
+    Vlan2150:
+      description: 4s6/vWD5-WLC/yellow-10/acc.y1/9.236.178.0/23/wls1
+      link_status: up
+    Vlan2151:
+      description: 4s6/vWD5-WLC/yellow-11/acc.y1/9.236.180.0/23/wls1
+      link_status: up
+    Vlan2152:
+      description: 4s6/vWD5-WLC/yellow-12/acc.y1/9.236.182.0/23/wls1
+      link_status: up
+    Vlan2153:
+      description: 4s6/vWD5-WLC/yellow-13/acc.y1/9.245.144.0/23/wls1
+      link_status: up
+    Vlan2154:
+      description: 4s6/vWD5-WLC/yellow-14/acc.y1/9.245.146.0/23/wls1
+      link_status: up
+    Vlan2155:
+      description: 4s6/vWD5-WLC/yellow-15/acc.y1/9.245.148.0/23/wls1
+      link_status: up
+    Vlan2156:
+      description: 4s6/vWD5-WLC/yellow-16/acc.y1/9.245.150.0/23/wls1
+      link_status: up
+    Vlan2157:
+      description: 4s6/vWD5-WLC/yellow-17/acc.y1/9.245.208.0/23/wls1
+      link_status: up
+    Vlan2158:
+      description: 4s6/vWD5-WLC/yellow-18/acc.y1/9.245.210.0/23/wls1
+      link_status: up
+    Vlan2159:
+      description: 4s6/vWD5-WLC/yellow-19/acc.y1/9.245.212.0/23/wls1
+      link_status: up
+    Vlan2160:
+      description: 4s6/vWD5-WLC/yellow-20/acc.y1/9.245.214.0/23/wls1
+      link_status: up
+    Vlan4022:
+      description: 4s6/vWD5-WLC/blue-wlc/blue/9.189.140.160/27/transport
+      link_status: up
+    Vlan4027:
+      description: 4s6/WLC-WLC/L2/169.254.0.0/16/HA
+      link_status: up
+    Vlan4030:
+      description: 4s6/vWD5-vWD5/global-1/global/9.97.177.0/27/dev_mgmt
+      link_status: up
+    Vlan4090:
+      description: 4s6/vWD5a-vWD5b/global/9.97.176.80/30/xlink
+      link_status: up
+  physical:
+    GigabitEthernet0/0:
+      description: '** RESERVED **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/1:
+      description: 4s6/vWD5a-WLC1.1/trunk/4s6-wc-c1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-wc-c1a
+        interface: TenGigabitEthernet0/0/1
+        platform: AIR-CT552
+      neighbors:
+      - hostname: '4s6-wc-c1a       '
+        interface: TenGigabitEthernet0/0/1
+        platform: 'AIR-CT552 '
+    TwentyFiveGigE1/0/2:
+      description: 4s6/vWD5a-WLC1.2/trunk/4s6-wc-c1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-wc-c1a
+        interface: TenGigabitEthernet0/0/2
+        platform: AIR-CT552
+      neighbors:
+      - hostname: '4s6-wc-c1a       '
+        interface: TenGigabitEthernet0/0/2
+        platform: 'AIR-CT552 '
+    TwentyFiveGigE1/0/3:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/4:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/5:
+      description: 4s6/vWD5a-WLC1/HA/4s6-wc-c1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 10/100/1000BaseTX SFP
+        duplex: a-full
+        speed: a-1000
+    TwentyFiveGigE1/0/6:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/7:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/8:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/9:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/10:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/11:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/12:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/13:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/14:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/15:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/16:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/17:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/18:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/19:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/20:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/21:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/22:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/23:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/24:
+      description: '** RESERVED-SPAN **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    HundredGigE1/0/25:
+      description: 4s6/vWD5a-vWD5b/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vwd-d5b
+        interface: HundredGigE1/0/25
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vwd-d5b
+        interface: HundredGigE1/0/25
+    HundredGigE1/0/26:
+      description: 4s6/vWD5a-vWD5b/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vwd-d5b
+        interface: HundredGigE1/0/26
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vwd-d5b
+        interface: HundredGigE1/0/26
+    HundredGigE1/0/27:
+      description: 4s6/vWD5a-vSCa/global
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vsc-a
+        interface: TwentyFiveGigE1/0/9
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vsc-a
+        interface: TwentyFiveGigE1/0/9
+    HundredGigE1/0/28:
+      description: 4s6/vWD5a-vSCb/global
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vsc-b
+        interface: TwentyFiveGigE1/0/9
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vsc-b
+        interface: TwentyFiveGigE1/0/9
+  aggregated:
+    Port-channel11:
+      description: 4s6/vWD5a-WLC1/trunk/4s6-wc-c1a
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: N/A
+        duplex: a-full
+        speed: a-10G
+    Port-channel101:
+      description: 4s6/vWD5a-vWD5b/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: N/A
+        duplex: a-full
+        speed: a-10G
+  loopback:
+    Loopback0:
+      description: 4s6/vWD5a/lo0/global
+      link_status: up
+    Loopback10:
+      description: 4s6/vWD5a/lo10/blue
+      link_status: up

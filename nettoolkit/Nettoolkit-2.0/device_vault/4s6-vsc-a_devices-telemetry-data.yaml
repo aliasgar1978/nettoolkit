@@ -1,0 +1,469 @@
+system:
+  software:
+    version: 17.06.04
+    boot_file: bootflash:packages.conf
+  hardware:
+    model: C9500-24Y4C
+    serial_number: CAT2342L066
+interfaces:
+  l3vlan:
+    Vlan1:
+      description: ''
+      link_status: administratively down
+    Vlan1111:
+      description: 4s6/vSC-WANa/blue/9.189.140.0/28/2620:1F7:3A22::AA1:0/112
+      link_status: up
+    Vlan1114:
+      description: 4s6/vSC-WANb/blue/9.189.140.32/28/2620:1F7:3A22::BA1:0/112
+      link_status: up
+    Vlan1131:
+      description: 4s6/vSC-WANa/acc.y1/9.239.102.32/28
+      link_status: up
+    Vlan1134:
+      description: 4s6/vSC-WANb/acc.y1/9.239.102.64/28
+      link_status: up
+    Vlan1981:
+      description: 4s6/vSC-vBAa/global/9.97.176.240/29/xA_mgmt
+      link_status: up
+    Vlan1982:
+      description: 4s6/vSC-vBAb/global/9.97.176.248/29/xA_mgmt
+      link_status: up
+  physical:
+    GigabitEthernet0/0:
+      description: '** RESERVED **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/1:
+      description: 4s6/vSCa-vOD1a/global/4s6-vod-d1a
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d1a
+        interface: HundredGigE1/0/51
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d1a
+        interface: HundredGigE1/0/51
+    TwentyFiveGigE1/0/2:
+      description: 4s6/vSCa-vOD1b/global/4s6-vod-d1b
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d1b
+        interface: HundredGigE1/0/51
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d1b
+        interface: HundredGigE1/0/51
+    TwentyFiveGigE1/0/3:
+      description: 4s6/vSCa-vOD2a/global/4s6-vod-d2a
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d2a
+        interface: HundredGigE1/0/51
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d2a
+        interface: HundredGigE1/0/51
+    TwentyFiveGigE1/0/4:
+      description: 4s6/vSCa-vOD2b/global/4s6-vod-d2b
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d2b
+        interface: HundredGigE1/0/51
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d2b
+        interface: HundredGigE1/0/51
+    TwentyFiveGigE1/0/5:
+      description: 4s6/vSCa-vOD3a/global/4s6-vod-d3a
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d3a
+        interface: HundredGigE1/0/51
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d3a
+        interface: HundredGigE1/0/51
+    TwentyFiveGigE1/0/6:
+      description: 4s6/vSCa-vOD3b/global/4s6-vod-d3b
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d3b
+        interface: HundredGigE1/0/51
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d3b
+        interface: HundredGigE1/0/51
+    TwentyFiveGigE1/0/7:
+      description: 4s6/vSCa-vOD4a/global/4s6-vod-d4a
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d4a
+        interface: HundredGigE1/0/51
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d4a
+        interface: HundredGigE1/0/51
+    TwentyFiveGigE1/0/8:
+      description: 4s6/vSCa-vOD4b/global/4s6-vod-d4b
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d4b
+        interface: HundredGigE1/0/51
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d4b
+        interface: HundredGigE1/0/51
+    TwentyFiveGigE1/0/9:
+      description: 4s6/vSCa-vWD5a/global/4s6-vwd-d5a
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vwd-d5a
+        interface: HundredGigE1/0/27
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vwd-d5a
+        interface: HundredGigE1/0/27
+    TwentyFiveGigE1/0/10:
+      description: 4s6/vSCa-vWD5b/global/4s6-vwd-d5b
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vwd-d5b
+        interface: HundredGigE1/0/27
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vwd-d5b
+        interface: HundredGigE1/0/27
+    TwentyFiveGigE1/0/11:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/12:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/13:
+      description: 4s6/vSCa-vID6a/global/4s6-vid-6a
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vid-6a
+        interface: HundredGigE1/0/27
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vid-6a
+        interface: HundredGigE1/0/27
+    TwentyFiveGigE1/0/14:
+      description: 4s6/vSCa-vID6b/global/4s6-vid-6b
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: SFP-10GBase-LR
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vid-6b
+        interface: HundredGigE1/0/27
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vid-6b
+        interface: HundredGigE1/0/27
+    TwentyFiveGigE1/0/15:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/16:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/17:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/18:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/19:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/20:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/21:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/22:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/23:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/24:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    HundredGigE1/0/25:
+      description: 4s6/vSCa-vSCb.1/global/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vsc-b
+        interface: HundredGigE1/0/25
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vsc-b
+        interface: HundredGigE1/0/25
+    HundredGigE1/0/26:
+      description: 4s6/vSCa-vSCb.2/global/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vsc-b
+        interface: HundredGigE1/0/26
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vsc-b
+        interface: HundredGigE1/0/26
+    HundredGigE1/0/27:
+      description: 4s6/vSCa-vBAa/trunk
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vba-a
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-24T
+      neighbors:
+      - hostname: 4s6-vba-a
+        interface: TenGigabitEthernet1/1/3
+    HundredGigE1/0/28:
+      description: 4s6/vSCa-vBAb/trunk
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vba-b
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-24T
+      neighbors:
+      - hostname: 4s6-vba-b
+        interface: TenGigabitEthernet1/1/3
+  aggregated:
+    Port-channel101:
+      description: 4s6/vSCa-vSCb/global/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: N/A
+        duplex: a-full
+        speed: a-10G
+  loopback:
+    Loopback0:
+      description: 4s6/vSCa/lo0/global
+      link_status: up
+    Loopback1:
+      description: 4s6/vSCa/lo1/global/RR
+      link_status: up
+    Loopback2:
+      description: 4s6/vSCa/lo2/global
+      link_status: up
+    Loopback10:
+      description: 4s6/vSCa/lo10/blue
+      link_status: up
+    Loopback21:
+      description: 4s6/vSCa/lo21/acc.y1
+      link_status: up
+    Loopback761:
+      description: 4s6/vSCa/lo761/bms.g1
+      link_status: up
+    Loopback771:
+      description: 4s6/vSCa/lo771/acn.g1
+      link_status: up
+    Loopback772:
+      description: 4s6/vSCa/lo772/ctv.g1
+      link_status: up
+  tunnel:
+    Tunnel0:
+      description: 4s6/vSCa/global-blue/tunnel
+      link_status: up
+    Tunnel1:
+      description: 4s6/vSCa/blue-global/tunnel
+      link_status: up

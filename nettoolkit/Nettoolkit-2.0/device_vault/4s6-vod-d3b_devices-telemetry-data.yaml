@@ -1,0 +1,1245 @@
+system:
+  software:
+    version: 17.06.04
+    boot_file: bootflash:packages.conf
+  hardware:
+    model: C9500-48Y4C
+    serial_number: CAT2341L0H6
+interfaces:
+  l3vlan:
+    Vlan1:
+      description: ''
+      link_status: administratively down
+    Vlan1901:
+      description: 4s6/vOD3-vUA1/global//9.97.172.0/29/xA_mgmt
+      link_status: up
+    Vlan1902:
+      description: 4s6/vOD3-vUA2/global//9.97.172.8/29/xA_mgmt
+      link_status: up
+    Vlan1903:
+      description: 4s6/vOD3-vUA3/global//9.97.172.16/29/xA_mgmt
+      link_status: up
+    Vlan1904:
+      description: 4s6/vOD3-vUA4/global//9.97.172.24/29/xA_mgmt
+      link_status: up
+    Vlan1905:
+      description: 4s6/vOD3-vUA5/global//9.97.172.32/29/xA_mgmt
+      link_status: up
+    Vlan1906:
+      description: 4s6/vOD3-vUA6/global//9.97.172.40/29/xA_mgmt
+      link_status: up
+    Vlan1907:
+      description: 4s6/vOD3-vUA7/global//9.97.172.48/29/xA_mgmt
+      link_status: up
+    Vlan1908:
+      description: 4s6/vOD3-vUA8/global//9.97.172.56/29/xA_mgmt
+      link_status: up
+    Vlan1909:
+      description: 4s6/vOD3-vUA9/global//9.97.172.64/29/xA_mgmt
+      link_status: up
+    Vlan1910:
+      description: 4s6/vOD3-vUA10/global//9.97.172.72/29/xA_mgmt
+      link_status: up
+    Vlan1911:
+      description: 4s6/vOD3-vUA11/global//9.97.172.80/29/xA_mgmt
+      link_status: up
+    Vlan1912:
+      description: 4s6/vOD3-vUA12/global//9.97.172.88/29/xA_mgmt
+      link_status: up
+    Vlan1913:
+      description: 4s6/vOD3-vUA13/global//9.97.172.96/29/xA_mgmt
+      link_status: up
+    Vlan1914:
+      description: 4s6/vOD3-vUA14/global//9.97.172.104/29/xA_mgmt
+      link_status: up
+    Vlan1915:
+      description: 4s6/vOD3-vUA15/global//9.97.172.112/29/xA_mgmt
+      link_status: up
+    Vlan1916:
+      description: 4s6/vOD3-vUA16/global//9.97.172.120/29/xA_mgmt
+      link_status: up
+    Vlan1917:
+      description: 4s6/vOD3-vUA17/global//9.97.172.128/29/xA_mgmt
+      link_status: up
+    Vlan1918:
+      description: 4s6/vOD3-vUA18/global//9.97.172.136/29/xA_mgmt
+      link_status: up
+    Vlan1919:
+      description: 4s6/vOD3-vUA19/global//9.97.172.144/29/xA_mgmt
+      link_status: up
+    Vlan1920:
+      description: 4s6/vOD3-vUA20/global//9.97.172.152/29/xA_mgmt
+      link_status: up
+    Vlan1921:
+      description: 4s6/vOD3-vUA21/global//9.97.172.160/29/xA_mgmt
+      link_status: up
+    Vlan1922:
+      description: 4s6/vOD3-vUA22/global//9.97.172.168/29/xA_mgmt
+      link_status: up
+    Vlan1923:
+      description: 4s6/vOD3-vUA23/global//9.97.172.176/29/xA_mgmt
+      link_status: up
+    Vlan1924:
+      description: 4s6/vOD3-vUA24/global//9.97.172.184/29/xA_mgmt
+      link_status: up
+    Vlan1925:
+      description: 4s6/vOD3-vUA25/global//9.97.172.192/29/xA_mgmt
+      link_status: up
+    Vlan1926:
+      description: 4s6/vOD3-vUA26/global//9.97.172.200/29/xA_mgmt
+      link_status: up
+    Vlan1927:
+      description: 4s6/vOD3-vUA27/global//9.97.172.208/29/xA_mgmt
+      link_status: up
+    Vlan1928:
+      description: 4s6/vOD3-vUA28/global//9.97.172.216/29/xA_mgmt
+      link_status: up
+    Vlan1929:
+      description: 4s6/vOD3-vUA29/global//9.97.172.224/29/xA_mgmt
+      link_status: up
+    Vlan1930:
+      description: 4s6/vOD3-vUA30/global//9.97.172.232/29/xA_mgmt
+      link_status: up
+    Vlan1931:
+      description: 4s6/vOD3-vUA31/global//9.97.172.240/29/xA_mgmt
+      link_status: up
+    Vlan1932:
+      description: 4s6/vOD3-vUA32/global//9.97.172.248/29/xA_mgmt
+      link_status: up
+    Vlan1933:
+      description: 4s6/vOD3-vUA33/global//9.97.173.0/29/xA_mgmt
+      link_status: up
+    Vlan1934:
+      description: 4s6/vOD3-vUA34/global//9.97.173.8/29/xA_mgmt
+      link_status: up
+    Vlan1935:
+      description: 4s6/vOD3-vUA35/global//9.97.173.16/29/xA_mgmt
+      link_status: up
+    Vlan1936:
+      description: 4s6/vOD3-vUA36/global//9.97.173.24/29/xA_mgmt
+      link_status: up
+    Vlan2001:
+      description: 4s6/vOD3-vUA1/blue-1/blue/9.189.176.0/24/2620:1F7:3A22:C10::/64/user1
+      link_status: up
+    Vlan2002:
+      description: 4s6/vOD3-vUA2/blue-1/blue/9.189.177.0/24/2620:1F7:3A22:C20::/64/user1
+      link_status: up
+    Vlan2003:
+      description: 4s6/vOD3-vUA3/blue-1/blue/9.189.178.0/24/2620:1F7:3A22:C30::/64/user1
+      link_status: up
+    Vlan2004:
+      description: 4s6/vOD3-vUA4/blue-1/blue/9.189.179.0/24/2620:1F7:3A22:C40::/64/user1
+      link_status: up
+    Vlan2005:
+      description: 4s6/vOD3-vUA5/blue-1/blue/9.68.108.0/24/2620:1F7:3A22:C50::/64/user1
+      link_status: up
+    Vlan2006:
+      description: 4s6/vOD3-vUA6/blue-1/blue/9.68.111.0/24/2620:1F7:3A22:C60::/64/user1
+      link_status: up
+    Vlan2007:
+      description: 4s6/vOD3-vUA7/blue-1/blue/9.68.122.0/24/2620:1F7:3A22:C70::/64/user1
+      link_status: up
+    Vlan2008:
+      description: 4s6/vOD3-vUA8/blue-1/blue/9.68.123.0/24/2620:1F7:3A22:C80::/64/user1
+      link_status: up
+    Vlan2009:
+      description: 4s6/vOD3-vUA9/blue-1/blue/9.189.168.0/24/2620:1F7:3A22:C90::/64/user1
+      link_status: up
+    Vlan2010:
+      description: 4s6/vOD3-vUA10/blue-1/blue/9.189.169.0/24/2620:1F7:3A22:CA0::/64/user1
+      link_status: up
+    Vlan2011:
+      description: 4s6/vOD3-vUA11/blue-1/blue/9.189.174.0/24/2620:1F7:3A22:CB0::/64/user1
+      link_status: up
+    Vlan2012:
+      description: 4s6/vOD3-vUA12/blue-1/blue/9.189.175.0/24/2620:1F7:3A22:CC0::/64/user1
+      link_status: up
+    Vlan2013:
+      description: 4s6/vOD3-vUA13/blue-1/blue/9.68.100.0/24/2620:1F7:3A22:CD0::/64/user1
+      link_status: up
+    Vlan2014:
+      description: 4s6/vOD3-vUA14/blue-1/blue/9.68.101.0/24/2620:1F7:3A22:CE0::/64/user1
+      link_status: up
+    Vlan2015:
+      description: 4s6/vOD3-vUA15/blue-1/blue/9.68.138.0/24/2620:1F7:3A22:CF0::/64/user1
+      link_status: up
+    Vlan2016:
+      description: 4s6/vOD3-vUA16/blue-1/blue/9.68.139.0/24/2620:1F7:3A22:D00::/64/user1
+      link_status: up
+    Vlan2017:
+      description: 4s6/vOD3-vUA17/blue-1/blue/9.68.128.0/24/2620:1F7:3A22:D10::/64/user1
+      link_status: up
+    Vlan2018:
+      description: 4s6/vOD3-vUA18/blue-1/blue/9.68.142.0/24/2620:1F7:3A22:D20::/64/user1
+      link_status: up
+    Vlan2019:
+      description: 4s6/vOD3-vUA19/blue-1/blue/9.68.144.0/24/2620:1F7:3A22:D30::/64/user1
+      link_status: up
+    Vlan2020:
+      description: 4s6/vOD3-vUA20/blue-1/blue/9.68.145.0/24/2620:1F7:3A22:D40::/64/user1
+      link_status: up
+    Vlan2041:
+      description: 4s6/vOD3-vUA1/blue-3/blue/9.116.252.0/25/VOIP1
+      link_status: up
+    Vlan2042:
+      description: 4s6/vOD3-vUA2/blue-3/blue/9.116.252.128/25/VOIP1
+      link_status: up
+    Vlan2043:
+      description: 4s6/vOD3-vUA3/blue-3/blue/9.116.253.0/25/VOIP1
+      link_status: up
+    Vlan2044:
+      description: 4s6/vOD3-vUA4/blue-3/blue/9.116.253.128/25/VOIP1
+      link_status: up
+    Vlan2045:
+      description: 4s6/vOD3-vUA5/blue-3/blue/9.116.248.0/25/VOIP1
+      link_status: up
+    Vlan2046:
+      description: 4s6/vOD3-vUA6/blue-3/blue/9.116.248.128/25/VOIP1
+      link_status: up
+    Vlan2047:
+      description: 4s6/vOD3-vUA7/blue-3/blue/9.116.249.0/25/VOIP1
+      link_status: up
+    Vlan2048:
+      description: 4s6/vOD3-vUA8/blue-3/blue/9.116.249.128/25/VOIP1
+      link_status: up
+    Vlan2049:
+      description: 4s6/vOD3-vUA9/blue-3/blue/9.116.244.0/25/VOIP1
+      link_status: up
+    Vlan2050:
+      description: 4s6/vOD3-vUA10/blue-3/blue/9.116.244.128/25/VOIP1
+      link_status: up
+    Vlan2051:
+      description: 4s6/vOD3-vUA11/blue-3/blue/9.116.245.0/25/VOIP1
+      link_status: up
+    Vlan2052:
+      description: 4s6/vOD3-vUA12/blue-3/blue/9.116.245.128/25/VOIP1
+      link_status: up
+    Vlan2053:
+      description: 4s6/vOD3-vUA13/blue-3/blue/9.116.240.0/25/VOIP1
+      link_status: up
+    Vlan2054:
+      description: 4s6/vOD3-vUA14/blue-3/blue/9.116.240.128/25/VOIP1
+      link_status: up
+    Vlan2055:
+      description: 4s6/vOD3-vUA15/blue-3/blue/9.116.241.0/25/VOIP1
+      link_status: up
+    Vlan2056:
+      description: 4s6/vOD3-vUA16/blue-3/blue/9.116.241.128/25/VOIP1
+      link_status: up
+    Vlan2057:
+      description: 4s6/vOD3-vUA17/blue-3/blue/9.116.236.0/25/VOIP1
+      link_status: up
+    Vlan2058:
+      description: 4s6/vOD3-vUA18/blue-3/blue/9.116.236.128/25/VOIP1
+      link_status: up
+    Vlan2059:
+      description: 4s6/vOD3-vUA19/blue-3/blue/9.116.237.0/25/VOIP1
+      link_status: up
+    Vlan2060:
+      description: 4s6/vOD3-vUA20/blue-3/blue/9.116.237.128/25/VOIP1
+      link_status: up
+    Vlan2427:
+      description: 4s6/vOD3-vUA7/green-7/acn.g1/9.219.75.208/28/acn.g1
+      link_status: up
+    Vlan2431:
+      description: 4s6/vOD3-vUA11/green-7/acn.g1/9.219.75.192/28/acn.g1
+      link_status: up
+    Vlan2435:
+      description: 4s6/vOD3-vUA15/green-7/acn.g1/9.219.75.176/28/acn.g1
+      link_status: up
+    Vlan2439:
+      description: 4s6/vOD3-vUA19/green-7/acn.g1/9.219.75.0/28/acn.g1
+      link_status: up
+    Vlan2441:
+      description: 4s6/vOD3-vUA1/green-8/ctv.g1/9.215.216.0/27/ctv.g1
+      link_status: up
+    Vlan2444:
+      description: 4s6/vOD3-vUA4/green-8/ctv.g1/9.215.216.32/27/ctv.g1
+      link_status: up
+    Vlan2445:
+      description: 4s6/vOD3-vUA5/green-8/ctv.g1/9.215.215.128/27/ctv.g1
+      link_status: up
+    Vlan2448:
+      description: 4s6/vOD3-vUA8/green-8/ctv.g1/9.215.215.160/27/ctv.g1
+      link_status: up
+    Vlan2449:
+      description: 4s6/vOD3-vUA9/green-8/ctv.g1/9.215.215.0/27/ctv.g1
+      link_status: up
+    Vlan2452:
+      description: 4s6/vOD3-vUA12/green-8/ctv.g1/9.215.215.32/27/ctv.g1
+      link_status: up
+    Vlan2453:
+      description: 4s6/vOD3-vUA13/green-8/ctv.g1/9.215.214.128/27/ctv.g1
+      link_status: up
+    Vlan2456:
+      description: 4s6/vOD3-vUA16/green-8/ctv.g1/9.215.214.160/27/ctv.g1
+      link_status: up
+    Vlan2457:
+      description: 4s6/vOD3-vUA17/green-8/ctv.g1/9.215.214.0/27/ctv.g1
+      link_status: up
+    Vlan2460:
+      description: 4s6/vOD3-vUA20/green-8/ctv.g1/9.215.214.32/27/ctv.g1
+      link_status: up
+    Vlan3001:
+      description: 4s6/vOD3-vUA21/blue-1/blue/9.68.124.0/24/2620:1F7:3A22:D50::/64/user1
+      link_status: up
+    Vlan3002:
+      description: 4s6/vOD3-vUA22/blue-1/blue/9.68.125.0/24/2620:1F7:3A22:D60::/64/user1
+      link_status: up
+    Vlan3003:
+      description: 4s6/vOD3-vUA23/blue-1/blue/9.68.183.0/25/2620:1F7:3A22:D70::/64/user1
+      link_status: up
+    Vlan3004:
+      description: 4s6/vOD3-vUA24/blue-1/blue/9.68.183.128/25/2620:1F7:3A22:D80::/64/user1
+      link_status: up
+    Vlan3005:
+      description: 4s6/vOD3-vUA25/blue-1/blue/9.189.164.0/24/2620:1F7:3A22:D90::/64/user1
+      link_status: up
+    Vlan3006:
+      description: 4s6/vOD3-vUA26/blue-1/blue/9.189.165.0/24/2620:1F7:3A22:DA0::/64/user1
+      link_status: up
+    Vlan3007:
+      description: 4s6/vOD3-vUA27/blue-1/blue/9.189.166.0/24/2620:1F7:3A22:DB0::/64/user1
+      link_status: up
+    Vlan3008:
+      description: 4s6/vOD3-vUA28/blue-1/blue/9.189.167.0/24/2620:1F7:3A22:DC0::/64/user1
+      link_status: up
+    Vlan3009:
+      description: 4s6/vOD3-vUA29/blue-1/blue/9.68.164.0/25/2620:1F7:3A22:DD0::/64/user1
+      link_status: up
+    Vlan3010:
+      description: 4s6/vOD3-vUA30/blue-1/blue/9.68.165.0/24/2620:1F7:3A22:DE0::/64/user1
+      link_status: up
+    Vlan3011:
+      description: 4s6/vOD3-vUA31/blue-1/blue/9.68.164.128/25/2620:1F7:3A22:DF0::/64/user1
+      link_status: up
+    Vlan3012:
+      description: 4s6/vOD3-vUA32/blue-1/blue/9.68.166.0/24/2620:1F7:3A22:E00::/64/user1
+      link_status: up
+    Vlan3013:
+      description: 4s6/vOD3-vUA33/blue-1/blue/9.68.146.0/25/2620:1F7:3A22:E10::/64/user1
+      link_status: up
+    Vlan3014:
+      description: 4s6/vOD3-vUA34/blue-1/blue/9.68.147.0/24/2620:1F7:3A22:E20::/64/user1
+      link_status: up
+    Vlan3015:
+      description: 4s6/vOD3-vUA35/blue-1/blue/9.68.146.128/25/2620:1F7:3A22:E30::/64/user1
+      link_status: up
+    Vlan3016:
+      description: 4s6/vOD3-vUA36/blue-1/blue/9.68.151.0/24/2620:1F7:3A22:E40::/64/user1
+      link_status: up
+    Vlan3041:
+      description: 4s6/vOD3-vUA21/blue-3/blue/9.116.233.0/25/VOIP1
+      link_status: up
+    Vlan3042:
+      description: 4s6/vOD3-vUA22/blue-3/blue/9.116.233.128/25/VOIP1
+      link_status: up
+    Vlan3043:
+      description: 4s6/vOD3-vUA23/blue-3/blue/9.116.232.0/25/VOIP1
+      link_status: up
+    Vlan3044:
+      description: 4s6/vOD3-vUA24/blue-3/blue/9.116.232.128/25/VOIP1
+      link_status: up
+    Vlan3045:
+      description: 4s6/vOD3-vUA25/blue-3/blue/9.116.228.0/25/VOIP1
+      link_status: up
+    Vlan3046:
+      description: 4s6/vOD3-vUA26/blue-3/blue/9.116.228.128/25/VOIP1
+      link_status: up
+    Vlan3047:
+      description: 4s6/vOD3-vUA27/blue-3/blue/9.116.229.0/25/VOIP1
+      link_status: up
+    Vlan3048:
+      description: 4s6/vOD3-vUA28/blue-3/blue/9.116.229.128/25/VOIP1
+      link_status: up
+    Vlan3049:
+      description: 4s6/vOD3-vUA29/blue-3/blue/9.116.224.0/25/VOIP1
+      link_status: up
+    Vlan3050:
+      description: 4s6/vOD3-vUA30/blue-3/blue/9.116.224.128/25/VOIP1
+      link_status: up
+    Vlan3051:
+      description: 4s6/vOD3-vUA31/blue-3/blue/9.116.225.0/25/VOIP1
+      link_status: up
+    Vlan3052:
+      description: 4s6/vOD3-vUA32/blue-3/blue/9.116.225.128/25/VOIP1
+      link_status: up
+    Vlan3053:
+      description: 4s6/vOD3-vUA33/blue-3/blue/9.116.220.0/25/VOIP1
+      link_status: up
+    Vlan3054:
+      description: 4s6/vOD3-vUA34/blue-3/blue/9.116.220.128/25/VOIP1
+      link_status: up
+    Vlan3055:
+      description: 4s6/vOD3-vUA35/blue-3/blue/9.116.221.0/25/VOIP1
+      link_status: up
+    Vlan3056:
+      description: 4s6/vOD3-vUA36/blue-3/blue/9.116.221.128/25/VOIP1
+      link_status: up
+    Vlan3375:
+      description: 4s6/vOD3-vUA35/green-4/bms.g1/9.103.65.32/27/bms
+      link_status: up
+    Vlan3423:
+      description: 4s6/vOD3-vUA23/green-7/acn.g1/9.219.75.160/28/acn.g1
+      link_status: up
+    Vlan3427:
+      description: 4s6/vOD3-vUA27/green-7/acn.g1/9.219.75.144/28/acn.g1
+      link_status: up
+    Vlan3431:
+      description: 4s6/vOD3-vUA31/green-7/acn.g1/9.219.75.112/28/acn.g1
+      link_status: up
+    Vlan3435:
+      description: 4s6/vOD3-vUA35/green-7/acn.g1/9.219.74.224/28/acn.g1
+      link_status: up
+    Vlan3441:
+      description: 4s6/vOD3-vUA21/green-8/ctv.g1/9.215.213.128/27/ctv.g1
+      link_status: up
+    Vlan3444:
+      description: 4s6/vOD3-vUA24/green-8/ctv.g1/9.215.213.160/27/ctv.g1
+      link_status: up
+    Vlan3445:
+      description: 4s6/vOD3-vUA25/green-8/ctv.g1/9.215.213.0/27/ctv.g1
+      link_status: up
+    Vlan3448:
+      description: 4s6/vOD3-vUA28/green-8/ctv.g1/9.215.213.32/27/ctv.g1
+      link_status: up
+    Vlan3449:
+      description: 4s6/vOD3-vUA29/green-8/ctv.g1/9.215.212.128/27/ctv.g1
+      link_status: up
+    Vlan3452:
+      description: 4s6/vOD3-vUA32/green-8/ctv.g1/9.215.212.160/27/ctv.g1
+      link_status: up
+    Vlan3453:
+      description: 4s6/vOD3-vUA33/green-8/ctv.g1/9.215.212.0/27/ctv.g1
+      link_status: up
+    Vlan3456:
+      description: 4s6/vOD3-vUA36/green-8/ctv.g1/9.215.212.32/27/ctv.g1
+      link_status: up
+    Vlan4001:
+      description: 4s6/vOD3b-vOD3a/blue/9.189.141.16/30/xlink
+      link_status: up
+    Vlan4090:
+      description: 4s6/vOD3b-vOD3a/global/9.97.176.48/30/xlink
+      link_status: up
+  physical:
+    GigabitEthernet0/0:
+      description: '** RESERVED **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/1:
+      description: 4s6/vOD3b-vUA1/trunk/4s6-vua-24frn1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-24frn1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-24frn1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/2:
+      description: 4s6/vOD3b-vUA2/trunk/4s6-vua-24frn2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-24frn2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-24frn2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/3:
+      description: 4s6/vOD3b-vUA3/trunk/4s6-vua-24frs1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-24frs1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-24frs1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/4:
+      description: 4s6/vOD3b-vUA4/trunk/4s6-vua-24frs2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-24frs2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-24frs2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/5:
+      description: 4s6/vOD3b-vUA5/trunk/4s6-vua-23frn1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-23frn1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-23frn1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/6:
+      description: 4s6/vOD3b-vUA6/trunk/4s6-vua-23frn2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-23frn2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-23frn2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/7:
+      description: 4s6/vOD3b-vUA7/trunk/4s6-vua-23frs1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-23frs1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-23frs1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/8:
+      description: 4s6/vOD3b-vUA8/trunk/4s6-vua-23frs2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-23frs2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-23frs2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/9:
+      description: 4s6/vOD3b-vUA9/trunk/4s6-vua-22frn1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-22frn1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-22frn1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/10:
+      description: 4s6/vOD3b-vUA10/trunk/4s6-vua-22frn2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-22frn2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-22frn2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/11:
+      description: 4s6/vOD3b-vUA11/trunk/4s6-vua-22frs1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-22frs1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-22frs1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/12:
+      description: 4s6/vOD3b-vUA12/trunk/4s6-vua-22frs2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-22frs2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-22frs2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/13:
+      description: 4s6/vOD3b-vUA13/trunk/4s6-vua-21frn1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-21frn1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-21frn1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/14:
+      description: 4s6/vOD3b-vUA14/trunk/4s6-vua-21frn2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-21frn2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-21frn2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/15:
+      description: 4s6/vOD3b-vUA15/trunk/4s6-vua-21frs1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-21frs1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-21frs1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/16:
+      description: 4s6/vOD3b-vUA16/trunk/4s6-vua-21frs2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-21frs2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-21frs2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/17:
+      description: 4s6/vOD3b-vUA17/trunk/4s6-vua-20frn1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-20frn1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-20frn1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/18:
+      description: 4s6/vOD3b-vUA18/trunk/4s6-vua-20frn2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-20frn2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-20frn2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/19:
+      description: 4s6/vOD3b-vUA19/trunk/4s6-vua-20frs1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-20frs1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-20frs1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/20:
+      description: 4s6/vOD3b-vUA20/trunk/4s6-vua-20frs2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-20frs2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-20frs2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/21:
+      description: 4s6/vOD3b-vUA21/trunk/4s6-vua-19frn1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-19frn1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-19frn1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/22:
+      description: 4s6/vOD3b-vUA22/trunk/4s6-vua-19frn2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-19frn2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-19frn2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/23:
+      description: 4s6/vOD3b-vUA23/trunk/4s6-vua-19frs1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-19frs1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-19frs1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/24:
+      description: 4s6/vOD3b-vUA24/trunk/4s6-vua-19frs2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-19frs2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-19frs2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/25:
+      description: 4s6/vOD3b-vUA25/trunk/4s6-vua-18frn1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-18frn1
+        interface: TenGigabitEthernet2/1/1
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-18frn1
+        interface: TenGigabitEthernet2/1/1
+    TwentyFiveGigE1/0/26:
+      description: 4s6/vOD3b-vUA26/trunk/4s6-vua-18frn2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-18frn2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-18frn2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/27:
+      description: 4s6/vOD3b-vUA27/trunk/4s6-vua-18frs1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-18frs1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-18frs1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/28:
+      description: 4s6/vOD3b-vUA28/trunk/4s6-vua-18frs2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-18frs2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-18frs2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/29:
+      description: 4s6/vOD3b-vUA29/trunk/4s6-vua-17frn1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-17frn1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-17frn1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/30:
+      description: 4s6/vOD3b-vUA30/trunk/4s6-vua-17frn2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-17frn2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-17frn2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/31:
+      description: 4s6/vOD3b-vUA31/trunk/4s6-vua-17frs1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-17frs1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-17frs1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/32:
+      description: 4s6/vOD3b-vUA32/trunk/4s6-vua-17frs2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-17frs2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-17frs2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/33:
+      description: 4s6/vOD3b-vUA33/trunk/4s6-vua-16frn1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-16frn1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-16frn1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/34:
+      description: 4s6/vOD3b-vUA34/trunk/4s6-vua-16frn2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-16frn2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-16frn2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/35:
+      description: 4s6/vOD3b-vUA35/trunk/4s6-vua-16frs1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-16frs1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-16frs1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/36:
+      description: 4s6/vOD3b-vUA36/trunk/4s6-vua-16frs2
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-16frs2
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-16frs2
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/37:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/38:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/39:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/40:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/41:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/42:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/43:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/44:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/45:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/46:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/47:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/48:
+      description: '** RESERVED-SPAN **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    HundredGigE1/0/49:
+      description: 4s6/vOD3b-vOD3a.1/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d3a
+        interface: HundredGigE1/0/49
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d3a
+        interface: HundredGigE1/0/49
+    HundredGigE1/0/50:
+      description: 4s6/vOD3b-vOD3a.2/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d3a
+        interface: HundredGigE1/0/50
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d3a
+        interface: HundredGigE1/0/50
+    HundredGigE1/0/51:
+      description: 4s6/vOD3b-vSCa/global
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vsc-a
+        interface: TwentyFiveGigE1/0/6
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vsc-a
+        interface: TwentyFiveGigE1/0/6
+    HundredGigE1/0/52:
+      description: 4s6/vOD3b-vSCb/global
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vsc-b
+        interface: TwentyFiveGigE1/0/6
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vsc-b
+        interface: TwentyFiveGigE1/0/6
+  aggregated:
+    Port-channel101:
+      description: 4s6/vOD3b-vOD3a/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: N/A
+        duplex: a-full
+        speed: a-10G
+  loopback:
+    Loopback0:
+      description: 4s6/vOD3b/lo0/global
+      link_status: up
+    Loopback10:
+      description: 4s6/vOD3b/lo10/blue
+      link_status: up

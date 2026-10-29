@@ -1,0 +1,882 @@
+system:
+  software:
+    version: 17.06.04
+    boot_file: bootflash:packages.conf
+  hardware:
+    model: C9500-48Y4C
+    serial_number: CAT2341L0DT
+interfaces:
+  l3vlan:
+    Vlan1:
+      description: ''
+      link_status: administratively down
+    Vlan1913:
+      description: 4s6/vOD2-vUA13/global//9.97.170.96/29/xA_mgmt
+      link_status: administratively down
+    Vlan1914:
+      description: 4s6/vOD2-vUA14/global//9.97.170.104/29/xA_mgmt
+      link_status: administratively down
+    Vlan1915:
+      description: 4s6/vOD2-vUA15/global//9.97.170.112/29/xA_mgmt
+      link_status: administratively down
+    Vlan1916:
+      description: 4s6/vOD2-vUA16/global//9.97.170.120/29/xA_mgmt
+      link_status: administratively down
+    Vlan1917:
+      description: 4s6/vOD2-vUA17/global//9.97.170.128/29/xA_mgmt
+      link_status: administratively down
+    Vlan1918:
+      description: 4s6/vOD2-vUA18/global//9.97.170.136/29/xA_mgmt
+      link_status: administratively down
+    Vlan1919:
+      description: 4s6/vOD2-vUA19/global//9.97.170.144/29/xA_mgmt
+      link_status: administratively down
+    Vlan1920:
+      description: 4s6/vOD2-vUA20/global//9.97.170.152/29/xA_mgmt
+      link_status: administratively down
+    Vlan1921:
+      description: 4s6/vOD2-vUA21/global//9.97.170.160/29/xA_mgmt
+      link_status: up
+    Vlan1922:
+      description: 4s6/vOD2-vUA22/global//9.97.170.168/29/xA_mgmt
+      link_status: up
+    Vlan1923:
+      description: 4s6/vOD2-vUA23/global//9.97.170.176/29/xA_mgmt
+      link_status: administratively down
+    Vlan1924:
+      description: 4s6/vOD2-vUA24/global//9.97.170.184/29/xA_mgmt
+      link_status: administratively down
+    Vlan1925:
+      description: 4s6/vOD2-vUA25/global//9.97.170.192/29/xA_mgmt
+      link_status: administratively down
+    Vlan1926:
+      description: 4s6/vOD2-vUA26/global//9.97.170.200/29/xA_mgmt
+      link_status: administratively down
+    Vlan1927:
+      description: 4s6/vOD2-vUA27/global//9.97.170.208/29/xA_mgmt
+      link_status: administratively down
+    Vlan1928:
+      description: 4s6/vOD2-vUA28/global//9.97.170.216/29/xA_mgmt
+      link_status: administratively down
+    Vlan1929:
+      description: 4s6/vOD2-vUA29/global//9.97.170.224/29/xA_mgmt
+      link_status: administratively down
+    Vlan1930:
+      description: 4s6/vOD2-vUA30/global//9.97.170.232/29/xA_mgmt
+      link_status: administratively down
+    Vlan1931:
+      description: 4s6/vOD2-vUA31/global//9.97.170.240/29/xA_mgmt
+      link_status: administratively down
+    Vlan1932:
+      description: 4s6/vOD2-vUA32/global//9.97.170.248/29/xA_mgmt
+      link_status: administratively down
+    Vlan1933:
+      description: 4s6/vOD2-vUA33/global//9.97.171.0/29/xA_mgmt
+      link_status: administratively down
+    Vlan1934:
+      description: 4s6/vOD2-vUA34/global//9.97.171.8/29/xA_mgmt
+      link_status: administratively down
+    Vlan1935:
+      description: 4s6/vOD2-vUA35/global//9.97.171.16/29/xA_mgmt
+      link_status: administratively down
+    Vlan1936:
+      description: 4s6/vOD2-vUA36/global//9.97.171.24/29/xA_mgmt
+      link_status: administratively down
+    Vlan1937:
+      description: 4s6/vOD2-vUA37/global//9.97.171.32/29/xA_mgmt
+      link_status: administratively down
+    Vlan1938:
+      description: 4s6/vOD2-vUA38/global//9.97.171.40/29/xA_mgmt
+      link_status: administratively down
+    Vlan1940:
+      description: 4s6/vOD2-vUA40/global//9.97.171.56/29/xA_mgmt
+      link_status: administratively down
+    Vlan1941:
+      description: 4s6/vOD2-vUA41/global//9.97.171.64/29/xA_mgmt
+      link_status: up
+    Vlan2013:
+      description: 4s6/vOD2-vUA13/blue-1/blue/9.68.173.0/24/2620:1F7:3A22:8D0::/64/user1
+      link_status: administratively down
+    Vlan2014:
+      description: 4s6/vOD2-vUA14/blue-1/blue/9.68.180.0/24/2620:1F7:3A22:8E0::/64/user1
+      link_status: administratively down
+    Vlan2015:
+      description: 4s6/vOD2-vUA15/blue-1/blue/9.68.181.0/24/2620:1F7:3A22:8F0::/64/user1
+      link_status: administratively down
+    Vlan2016:
+      description: 4s6/vOD2-vUA16/blue-1/blue/9.68.182.0/24/2620:1F7:3A22:900::/64/user1
+      link_status: administratively down
+    Vlan2017:
+      description: 4s6/vOD2-vUA17/blue-1/blue/9.68.159.0/24/2620:1F7:3A22:910::/64/user1
+      link_status: administratively down
+    Vlan2018:
+      description: 4s6/vOD2-vUA18/blue-1/blue/9.68.168.0/24/2620:1F7:3A22:920::/64/user1
+      link_status: administratively down
+    Vlan2019:
+      description: 4s6/vOD2-vUA19/blue-1/blue/9.68.169.0/24/2620:1F7:3A22:930::/64/user1
+      link_status: administratively down
+    Vlan2020:
+      description: 4s6/vOD2-vUA20/blue-1/blue/9.68.170.0/24/2620:1F7:3A22:940::/64/user1
+      link_status: administratively down
+    Vlan2053:
+      description: 4s6/vOD2-vUA13/blue-3/blue/9.116.199.0/25/VOIP1
+      link_status: administratively down
+    Vlan2054:
+      description: 4s6/vOD2-vUA14/blue-3/blue/9.116.199.128/25/VOIP1
+      link_status: administratively down
+    Vlan2055:
+      description: 4s6/vOD2-vUA15/blue-3/blue/9.116.200.0/25/VOIP1
+      link_status: administratively down
+    Vlan2056:
+      description: 4s6/vOD2-vUA16/blue-3/blue/9.116.200.128/25/VOIP1
+      link_status: administratively down
+    Vlan2057:
+      description: 4s6/vOD2-vUA17/blue-3/blue/9.116.195.0/25/VOIP1
+      link_status: administratively down
+    Vlan2058:
+      description: 4s6/vOD2-vUA18/blue-3/blue/9.116.195.128/25/VOIP1
+      link_status: administratively down
+    Vlan2059:
+      description: 4s6/vOD2-vUA19/blue-3/blue/9.116.196.0/25/VOIP1
+      link_status: administratively down
+    Vlan2060:
+      description: 4s6/vOD2-vUA20/blue-3/blue/9.116.196.128/25/VOIP1
+      link_status: administratively down
+    Vlan2435:
+      description: 4s6/vOD2-vUA15/green-7/acn.g1/9.219.74.240/28/acn.g1
+      link_status: administratively down
+    Vlan2439:
+      description: 4s6/vOD2-vUA19/green-7/acn.g1/9.219.74.208/28/acn.g1
+      link_status: administratively down
+    Vlan2501:
+      description: 4s6/vOD2-vUA41/blue-1/blue/9.68.219.128/26/2620:1F7:3A22:A90::/64/user1
+      link_status: up
+    Vlan2521:
+      description: 4s6/vOD2-vUA41/blue-2/blue/9.68.219.192/26/2620:1F7:3A22:A91::/64/user2
+      link_status: up
+    Vlan3001:
+      description: 4s6/vOD2-vUA21/blue-1/blue/9.189.180.0/24/2620:1F7:3A22:950::/64/user1
+      link_status: up
+    Vlan3002:
+      description: 4s6/vOD2-vUA22/blue-1/blue/9.189.181.0/24/2620:1F7:3A22:960::/64/user1
+      link_status: up
+    Vlan3003:
+      description: 4s6/vOD2-vUA23/blue-1/blue/9.68.216.0/24/2620:1F7:3A22:970::/64/user1
+      link_status: administratively down
+    Vlan3004:
+      description: 4s6/vOD2-vUA24/blue-1/blue/9.68.217.0/24/2620:1F7:3A22:980::/64/user1
+      link_status: administratively down
+    Vlan3005:
+      description: 4s6/vOD2-vUA25/blue-1/blue/9.68.167.0/25/2620:1F7:3A22:990::/64/user1
+      link_status: administratively down
+    Vlan3006:
+      description: 4s6/vOD2-vUA26/blue-1/blue/9.68.184.0/24/2620:1F7:3A22:9A0::/64/user1
+      link_status: administratively down
+    Vlan3007:
+      description: 4s6/vOD2-vUA27/blue-1/blue/9.189.98.0/24/2620:1F7:3A22:9B0::/64/user1
+      link_status: administratively down
+    Vlan3008:
+      description: 4s6/vOD2-vUA28/blue-1/blue/9.189.97.0/24/2620:1F7:3A22:9C0::/64/user1
+      link_status: administratively down
+    Vlan3009:
+      description: 4s6/vOD2-vUA29/blue-1/blue/9.189.101.0/25/2620:1F7:3A22:9D0::/64/user1
+      link_status: administratively down
+    Vlan3010:
+      description: 4s6/vOD2-vUA30/blue-1/blue/9.189.101.128/25/2620:1F7:3A22:9E0::/64/user1
+      link_status: administratively down
+    Vlan3011:
+      description: 4s6/vOD2-vUA31/blue-1/blue/9.189.102.0/24/2620:1F7:3A22:9F0::/64/user1
+      link_status: administratively down
+    Vlan3012:
+      description: 4s6/vOD2-vUA32/blue-1/blue/9.68.218.0/24/2620:1F7:3A22:A00::/64/user1
+      link_status: administratively down
+    Vlan3013:
+      description: 4s6/vOD2-vUA33/blue-1/blue/9.189.105.0/24/2620:1F7:3A22:A10::/64/user1
+      link_status: administratively down
+    Vlan3014:
+      description: 4s6/vOD2-vUA34/blue-1/blue/9.189.106.0/24/2620:1F7:3A22:A20::/64/user1
+      link_status: administratively down
+    Vlan3015:
+      description: 4s6/vOD2-vUA35/blue-1/blue/9.189.109.0/24/2620:1F7:3A22:A30::/64/user1
+      link_status: administratively down
+    Vlan3016:
+      description: 4s6/vOD2-vUA36/blue-1/blue/9.189.189.0/24/2620:1F7:3A22:A40::/64/user1
+      link_status: administratively down
+    Vlan3017:
+      description: 4s6/vOD2-vUA37/blue-1/blue/9.189.112.0/24/2620:1F7:3A22:A50::/64/user1
+      link_status: administratively down
+    Vlan3018:
+      description: 4s6/vOD2-vUA38/blue-1/blue/9.68.219.0/25/2620:1F7:3A22:A60::/64/user1
+      link_status: administratively down
+    Vlan3020:
+      description: 4s6/vOD2-vUA40/blue-1/blue/9.68.201.0/25/2620:1F7:3A22:A80::/64/user1
+      link_status: administratively down
+    Vlan3041:
+      description: 4s6/vOD2-vUA21/blue-3/blue/9.116.254.0/25/VOIP1
+      link_status: up
+    Vlan3042:
+      description: 4s6/vOD2-vUA22/blue-3/blue/9.116.254.128/25/VOIP1
+      link_status: up
+    Vlan3043:
+      description: 4s6/vOD2-vUA23/blue-3/blue/9.116.191.0/25/VOIP1
+      link_status: administratively down
+    Vlan3044:
+      description: 4s6/vOD2-vUA24/blue-3/blue/9.116.191.128/25/VOIP1
+      link_status: administratively down
+    Vlan3045:
+      description: 4s6/vOD2-vUA25/blue-3/blue/9.116.192.0/25/VOIP1
+      link_status: administratively down
+    Vlan3046:
+      description: 4s6/vOD2-vUA26/blue-3/blue/9.116.192.128/25/VOIP1
+      link_status: administratively down
+    Vlan3047:
+      description: 4s6/vOD2-vUA27/blue-3/blue/9.116.188.128/25/VOIP1
+      link_status: administratively down
+    Vlan3048:
+      description: 4s6/vOD2-vUA28/blue-3/blue/9.116.189.0/25/VOIP1
+      link_status: administratively down
+    Vlan3049:
+      description: 4s6/vOD2-vUA29/blue-3/blue/9.116.186.128/25/VOIP1
+      link_status: administratively down
+    Vlan3050:
+      description: 4s6/vOD2-vUA30/blue-3/blue/9.116.187.0/25/VOIP1
+      link_status: administratively down
+    Vlan3051:
+      description: 4s6/vOD2-vUA31/blue-3/blue/9.116.186.0/25/VOIP1
+      link_status: administratively down
+    Vlan3052:
+      description: 4s6/vOD2-vUA32/blue-3/blue/9.116.183.128/25/VOIP1
+      link_status: administratively down
+    Vlan3053:
+      description: 4s6/vOD2-vUA33/blue-3/blue/9.116.184.0/25/VOIP1
+      link_status: administratively down
+    Vlan3054:
+      description: 4s6/vOD2-vUA34/blue-3/blue/9.116.184.128/25/VOIP1
+      link_status: administratively down
+    Vlan3055:
+      description: 4s6/vOD2-vUA35/blue-3/blue/9.116.182.0/25/VOIP1
+      link_status: administratively down
+    Vlan3056:
+      description: 4s6/vOD2-vUA36/blue-3/blue/9.116.180.128/25/VOIP1
+      link_status: administratively down
+    Vlan3057:
+      description: 4s6/vOD2-vUA37/blue-3/blue/9.116.180.0/25/VOIP1
+      link_status: administratively down
+    Vlan3058:
+      description: 4s6/vOD2-vUA38/blue-3/blue/9.116.177.128/25/VOIP1
+      link_status: administratively down
+    Vlan3426:
+      description: 4s6/vOD2-vUA26/green-7/acn.g1/9.219.74.176/28/acn.g1
+      link_status: administratively down
+    Vlan3429:
+      description: 4s6/vOD2-vUA29/green-7/acn.g1/9.219.74.144/28/acn.g1
+      link_status: administratively down
+    Vlan3433:
+      description: 4s6/vOD2-vUA33/green-7/acn.g1/9.219.74.112/28/acn.g1
+      link_status: administratively down
+    Vlan3437:
+      description: 4s6/vOD2-vUA37/green-7/acn.g1/9.219.74.64/28/acn.g1
+      link_status: administratively down
+    Vlan3441:
+      description: 4s6/vOD2-vUA21/green-8/ctv.g1/9.215.216.224/27/ctv.g1
+      link_status: up
+    Vlan3442:
+      description: 4s6/vOD2-vUA22/green-8/ctv.g1/9.215.216.192/27/ctv.g1
+      link_status: up
+    Vlan4001:
+      description: 4s6/vOD2b-vOD2a/blue/9.189.141.8/30/xlink
+      link_status: up
+    Vlan4090:
+      description: 4s6/vOD2b-vOD2a/global/9.97.176.32/30/xlink
+      link_status: up
+  physical:
+    GigabitEthernet0/0:
+      description: '** RESERVED **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/1:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/2:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/3:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/4:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/5:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/6:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/7:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/8:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/9:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/10:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/11:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/12:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/13:
+      description: 4s6/vOD2b-vUA13/trunk/4s6-vua-11fts1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/14:
+      description: 4s6/vOD2b-vUA14/trunk/4s6-vua-11fts2
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/15:
+      description: 4s6/vOD2b-vUA15/trunk/4s6-vua-11ftn1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/16:
+      description: 4s6/vOD2b-vUA16/trunk/4s6-vua-11ftn2
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/17:
+      description: 4s6/vOD2b-vUA17/trunk/4s6-vua-10fts1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/18:
+      description: 4s6/vOD2b-vUA18/trunk/4s6-vua-10fts2
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/19:
+      description: 4s6/vOD2b-vUA19/trunk/4s6-vua-10ftn1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/20:
+      description: 4s6/vOD2b-vUA20/trunk/4s6-vua-10ftn2
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/21:
+      description: 4s6/vOD2b-vUA21/trunk/4s6-vua-25fts1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-25fts1
+        interface: TwentyFiveGigE2/1/1
+        platform: C9300X-48
+      neighbors:
+      - hostname: 4s6-vua-25fts1
+        interface: TwentyFiveGigE2/1/1
+    TwentyFiveGigE1/0/22:
+      description: 4s6/vOD2b-vUA22/trunk/4s6-vua-25ftn1
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-25ftn1
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-25ftn1
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/23:
+      description: 4s6/vOD2b-vUA23/trunk/4s6-vua-9fts1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/24:
+      description: 4s6/vOD2b-vUA24/trunk/4s6-vua-9fts2
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/25:
+      description: 4s6/vOD2b-vUA25/trunk/4s6-vua-9ftn1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/26:
+      description: 4s6/vOD2b-vUA26/trunk/4s6-vua-9ftn2
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/27:
+      description: 4s6/vOD2b-vUA27/trunk/4s6-vua-8fts1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/28:
+      description: 4s6/vOD2b-vUA28/trunk/4s6-vua-8ftn1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/29:
+      description: 4s6/vOD2b-vUA29/trunk/4s6-vua-7ftn1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/30:
+      description: 4s6/vOD2b-vUA30/trunk/4s6-vua-7ftn2
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/31:
+      description: 4s6/vOD2b-vUA31/trunk/4s6-vua-7fts1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/32:
+      description: 4s6/vOD2b-vUA32/trunk/4s6-vua-4ftn1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/33:
+      description: 4s6/vOD2b-vUA33/trunk/4s6-vua-6ftn2
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/34:
+      description: 4s6/vOD2b-vUA34/trunk/4s6-vua-6fts1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/35:
+      description: 4s6/vOD2b-vUA35/trunk/4s6-vua-4fts1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/36:
+      description: 4s6/vOD2b-vUA36/trunk/4s6-vua-3fts1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/37:
+      description: 4s6/vOD2b-vUA37/trunk/4s6-vua-3ftn1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/38:
+      description: 4s6/vOD2b-vUA38/trunk/4s6-vua-2ftn1
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/39:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/40:
+      description: 4s6/vOD2b-vUA40/trunk/4s6-vua-7fts2
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/41:
+      description: 4s6/vOD2b-vUA41/trunk/4s6-vua-cwptest
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+      neighbor:
+        hostname: 4s6-vua-cwptest
+        interface: TenGigabitEthernet1/1/3
+        platform: C9300-48U
+      neighbors:
+      - hostname: 4s6-vua-cwptest
+        interface: TenGigabitEthernet1/1/3
+    TwentyFiveGigE1/0/42:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/43:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/44:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/45:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: 1000BaseLX SFP
+        duplex: full
+        speed: '1000'
+    TwentyFiveGigE1/0/46:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/47:
+      description: '** Not In Use **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    TwentyFiveGigE1/0/48:
+      description: '** RESERVED-SPAN **'
+      link_status: administratively down
+      state:
+        admin: down
+        protocol: down
+      hardware:
+        media_type: unknown
+        duplex: auto
+        speed: auto
+    HundredGigE1/0/49:
+      description: 4s6/vOD2b-vOD2a/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d2a
+        interface: HundredGigE1/0/49
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d2a
+        interface: HundredGigE1/0/49
+    HundredGigE1/0/50:
+      description: 4s6/vOD2b-vOD2a/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vod-d2a
+        interface: HundredGigE1/0/50
+        platform: C9500-48Y
+      neighbors:
+      - hostname: 4s6-vod-d2a
+        interface: HundredGigE1/0/50
+    HundredGigE1/0/51:
+      description: 4s6/vOD2b-vSCa/global
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vsc-a
+        interface: TwentyFiveGigE1/0/4
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vsc-a
+        interface: TwentyFiveGigE1/0/4
+    HundredGigE1/0/52:
+      description: 4s6/vOD2b-vSCb/global
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: CVR QSFP SFP10G(SFP-10GBase-LR)
+        duplex: full
+        speed: 10G
+      neighbor:
+        hostname: 4s6-vsc-b
+        interface: TwentyFiveGigE1/0/4
+        platform: C9500-24Y
+      neighbors:
+      - hostname: 4s6-vsc-b
+        interface: TwentyFiveGigE1/0/4
+  aggregated:
+    Port-channel101:
+      description: 4s6/vOD2b-vOD2a/trunk/xlink
+      link_status: up
+      state:
+        admin: up
+        protocol: up
+      hardware:
+        media_type: N/A
+        duplex: a-full
+        speed: a-10G
+  loopback:
+    Loopback0:
+      description: 4s6/vOD2b/lo0/global
+      link_status: up
+    Loopback10:
+      description: 4s6/vOD2b/lo10/blue
+      link_status: up

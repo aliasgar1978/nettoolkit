@@ -1,0 +1,849 @@
+interfaces:
+  loopback:
+    Loopback0:
+      description: 4s6/vID6a/lo0/global
+      link_status: up
+      ipv4:
+        subnet: 9.97.176.101/32
+    Loopback10:
+      description: 4s6/vID6a/lo10/blue
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.141.45/32
+      ipv6:
+        subnet: 2620:1F7:3A22::6:1B:A/128
+      h4_block: '0'
+  aggregated:
+    Port-channel101:
+      description: 4s6/vID6a-vID6b/trunk/xlink
+      link_status: up
+      switchport:
+        vlan_members: '4090'
+        mode: trunk
+  physical:
+    GigabitEthernet0/0:
+      description: '** RESERVED **'
+      link_status: administratively down
+      vrf: Mgmt-vrf
+    TwentyFiveGigE1/0/1:
+      description: 4s6/vID6a-vIA1/trunk/4s6-via-ha1
+      link_status: up
+      switchport:
+        vlan_members: 1901,2021,2041
+        mode: trunk
+      udld: aggressive
+    TwentyFiveGigE1/0/2:
+      description: 4s6/vID6a-vPR2/global/4s6-vpr-1
+      link_status: up
+      ipv4:
+        subnet: 9.97.178.8/31
+      ospf:
+        authentication_key: 1440083D07033D7F0A
+        network_type: point-to-point
+    TwentyFiveGigE1/0/3:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/4:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/5:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/6:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/7:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/8:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/9:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/10:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/11:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/12:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/13:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/14:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/15:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/16:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/17:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/18:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/19:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/20:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/21:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/22:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/23:
+      description: '** Not In Use **'
+      link_status: administratively down
+    TwentyFiveGigE1/0/24:
+      description: '** RESERVED-SPAN **'
+      link_status: administratively down
+      switchport:
+        mode: access
+    HundredGigE1/0/25:
+      description: 4s6/vID6a-vID6b.1/trunk/xlink
+      link_status: up
+      switchport:
+        vlan_members: '4090'
+        mode: trunk
+      etherchannel:
+        id: 101
+        interface: Port-channel101
+        mode: active
+    HundredGigE1/0/26:
+      description: 4s6/vID6a-vID6b.2/trunk/xlink
+      link_status: up
+      switchport:
+        vlan_members: '4090'
+        mode: trunk
+      etherchannel:
+        id: 101
+        interface: Port-channel101
+        mode: active
+    HundredGigE1/0/27:
+      description: 4s6/vID6a-vSCa/global
+      link_status: up
+      ipv4:
+        subnet: 9.97.176.104/31
+      ospf:
+        authentication_key: 1019132F0E10055F22
+        network_type: point-to-point
+    HundredGigE1/0/28:
+      description: 4s6/vID6a-vSCb/global
+      link_status: up
+      ipv4:
+        subnet: 9.97.176.108/31
+      ospf:
+        authentication_key: 091B543F1202004625
+        network_type: point-to-point
+  l3vlan:
+    Vlan1:
+      link_status: administratively down
+    Vlan1901:
+      description: 4s6/vID6-vIA1/global/9.97.178.0/29/xA_mgmt
+      link_status: up
+      ipv4:
+        subnet: 9.97.178.0/29
+    Vlan2021:
+      description: 4s6/vID6-vIA1/blue-1/blue/9.189.122.128/28/2620:1F7:3A22::6:8101:0/112/krx1
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.122.128/28
+      ipv6:
+        subnet: 2620:1F7:3A22:0:0:6:8101:0/112
+      h4_block: '0'
+    Vlan2041:
+      description: 4s6/vID6-vIA1/blue-2/blue/9.189.122.144/28/SBC
+      link_status: up
+      vrf: blue
+      ipv4:
+        subnet: 9.189.122.144/28
+    Vlan4090:
+      description: '** Reset block ID on all prefixes **'
+      link_status: up
+      ipv4:
+        subnet: 9.97.176.96/30
+      ospf:
+        authentication_key: 124E1F21190C1B5004
+        network_type: point-to-point
+routing:
+  bgp:
+    global_bgp:
+      router_id: 9.97.176.101
+    vrfs:
+      default:
+        address_families:
+          ipv4_unicast:
+            neighbors:
+              rr:
+                peer_ip: rr
+                send-community: both
+                policies:
+                  inbound_route_map: rm_from_rr
+                  outbound_route_map: rm_to_rr
+                  unsuppress_map: rm_unsup_to_rr
+              9.97.176.13:
+                peer_ip: 9.97.176.13
+              9.97.176.14:
+                peer_ip: 9.97.176.14
+      blue:
+        router_id: 9.189.141.45
+        address_families:
+          ipv4_unicast:
+            redistribute:
+            - protocol: connected
+              route_map: rm_conn_to_bgp_blue
+            - protocol: static
+              route_map: rm_static_to_bgp_vrf
+            peer_groups:
+              kr1a:
+                peer_description: '** 4s6-KR1a-blue **'
+                peer_password: '7'
+                send-community: standard
+                policies:
+                  outbound_prefix_list: pl_non_kr1_blue
+                  inbound_route_map: rm_from_kr1_blue
+                  outbound_route_map: rm_default_or_block_ab
+              kr1b:
+                peer_description: '** 4s6-KR1b-blue **'
+                peer_password: '7'
+                send-community: standard
+                policies:
+                  outbound_prefix_list: pl_non_kr1_blue
+                  inbound_route_map: rm_from_kr1_blue_alt
+                  outbound_route_map: rm_default_or_block_ab_alt
+            neighbors:
+              9.189.122.139:
+                peer_ip: 9.189.122.139
+                peergrp: kr1a
+                peer_description: '** 4s6-kr1a-blue **'
+              9.189.122.140:
+                peer_ip: 9.189.122.140
+                peergrp: kr1b
+                peer_description: '** 4s6-kr1b-blue **'
+          ipv6_unicast:
+            redistribute:
+            - protocol: connected
+              route_map: rm6_conn_to_bgp_blue
+            - protocol: static
+              route_map: rm_static_to_bgp_vrf
+            peer_groups:
+              kr1a-v6:
+                peer_description: '** 4s6-KR1a-blue-v6 **'
+                peer_password: '7'
+                send-community: standard
+                policies:
+                  outbound_prefix_list: pl6_non_kr1_blue
+                  inbound_route_map: rm_from_kr1_blue
+                  outbound_route_map: rm_default_or_block_ab
+              kr1b-v6:
+                peer_description: '** 4s6-KR1b-blue-v6 **'
+                peer_password: '7'
+                send-community: standard
+                policies:
+                  outbound_prefix_list: pl6_non_kr1_blue
+                  inbound_route_map: rm_from_kr1_blue_alt
+                  outbound_route_map: rm_default_or_block_ab_alt
+            neighbors:
+              2620:1F7:3A22::6:8101:E00A:
+                peer_ip: 2620:1F7:3A22::6:8101:E00A
+                peergrp: kr1a-v6
+                peer_description: '** 4s6-kr1a-blue-v6 **'
+              2620:1F7:3A22::6:8101:E00B:
+                peer_ip: 2620:1F7:3A22::6:8101:E00B
+                peergrp: kr1b-v6
+                peer_description: '** 4s6-kr1b-blue-v6 **'
+  ospf:
+    '1':
+      ospf_vrf: ''
+      router_id: 9.97.176.101
+      passive_interface_default: true
+      active_interfaces:
+      - Vlan4090
+      - TwentyFiveGigE1/0/2
+      - HundredGigE1/0/27
+      - HundredGigE1/0/28
+      areas:
+        '0':
+          authentication: cleartext
+          networks:
+          - 9.97.176.104/29
+        '6':
+          authentication: cleartext
+          networks:
+          - 9.97.176.96/29
+          - 9.97.178.0/24
+          - 9.97.179.32/27
+          range_summaries:
+          - 9.97.178.0/24
+          - 9.97.179.32/27
+instances:
+  Mgmt-vrf:
+    address_families:
+    - ipv4
+    - ipv6
+  blue:
+    description: IBM-CIO Internal Network Blue - Global VPN
+    route_distinguisher: 9.97.176.101:100
+    route_targets:
+      import:
+      - 8:100
+      export:
+      - 8:100
+    address_families:
+    - ipv4
+    - ipv6
+system:
+  identity:
+    hostname: 4s6-vid-6a
+    banner: banner exec ^C *** Cisco 9500-24Y4C / 23.0.0 / vIDa-vsc-9500y.txt ***
+  routing_metadata:
+    bgp_as: 65449
+  security:
+    ca_certificate: "  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101\
+      \ 0B050030\n  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317\
+      \ 43697363\n  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533\
+      \ 30313934\n  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355\
+      \ 040A1305\n  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73\
+      \ 696E6720\n  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382\
+      \ 010F0030\n  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1\
+      \ F1EFF64D\n  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388\
+      \ 8A38E520\n  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7\
+      \ D8F256EE\n  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F\
+      \ EA2956AC\n  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF\
+      \ 58BD7188\n  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B\
+      \ 42C68BB7\n  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8\
+      \ 8F27D191\n  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368\
+      \ 95135E44\n  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04\
+      \ 04030201\n  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604\
+      \ 1449DC85\n  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01\
+      \ 010B0500\n  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78\
+      \ 240DA905\n  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1\
+      \ 6C9E3D8B\n  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146\
+      \ 8DFC66A8\n  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2\
+      \ 55A9232C\n  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49\
+      \ 1765308B\n  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69\
+      \ 39F08678\n  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD\
+      \ 230E3AFB\n  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F\
+      \ 719BB2F0\n  D697DF7F 28"
+  aaa:
+    tacacs_servers:
+    - 135.89.176.190
+    - 135.89.45.254
+    tacacs_key: t5mZgCaixP8u3bKhW6dr
+    tacacs_tcp_port: 49170
+  services:
+    dns_servers:
+    - 9.0.0.1
+    - 9.0.0.2
+    syslog_servers:
+    - 135.89.176.123
+    - 135.89.45.123
+    ntp_servers:
+    - 135.89.176.123
+    - 135.89.45.123
+routes:
+  vrf_routes:
+    ipv4:
+    - instance: blue
+      prefix: 0.0.0.0/0
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.0.0.0/8
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: 9.0.64.1
+      tag: '100899'
+      name: '"/*'
+    - instance: blue
+      prefix: 9.64.0.0/16
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: 9.0.64.1
+      tag: '100898'
+      name: '"/*'
+    - instance: blue
+      prefix: 9.189.122.128/28
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100811000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 9.189.122.144/28
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100811000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 10.0.0.0/8
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 127.0.0.0/8
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 169.254.0.0/16
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 172.16.0.0/12
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 192.0.2.0/24
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 192.168.0.0/16
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: 198.18.0.0/15
+      version: ipv4
+      nexthop_interface: ''
+      nexthop: Null0
+      name: '"/*'
+      distance: 240
+    ipv6:
+    - instance: blue
+      prefix: 2620:1F7:3A22::6:8101:0/112
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      tag: '100811000'
+      name: '"/*'
+      distance: 240
+    - instance: blue
+      prefix: ::/0
+      version: ipv6
+      nexthop_interface: ''
+      nexthop: Null0
+      name: '"/*'
+      distance: 240
+prefixes:
+  ipv4:
+    pl_default_route:
+      100:
+        action: permit
+        prefix: 0.0.0.0/0
+      1000:
+        action: deny
+        prefix: 0.0.0.0/0
+        le: 32
+    pl_more_specific_blue:
+      100:
+        action: permit
+        prefix: 9.68.18.0/23
+        ge: 24
+      110:
+        action: permit
+        prefix: 9.68.22.0/23
+        ge: 24
+      120:
+        action: permit
+        prefix: 9.68.24.0/21
+        ge: 22
+      130:
+        action: permit
+        prefix: 9.68.32.0/23
+        ge: 24
+      140:
+        action: permit
+        prefix: 9.68.36.0/22
+        ge: 23
+      150:
+        action: permit
+        prefix: 9.68.40.0/22
+        ge: 23
+      160:
+        action: permit
+        prefix: 9.68.64.0/22
+        ge: 23
+      170:
+        action: permit
+        prefix: 9.68.69.0/24
+        ge: 25
+      180:
+        action: permit
+        prefix: 9.68.70.0/23
+        ge: 24
+      190:
+        action: permit
+        prefix: 9.68.72.0/24
+        ge: 25
+      200:
+        action: permit
+        prefix: 9.68.76.0/22
+        ge: 23
+      210:
+        action: permit
+        prefix: 9.68.80.0/21
+        ge: 22
+      220:
+        action: permit
+        prefix: 9.68.97.0/24
+        ge: 25
+      230:
+        action: permit
+        prefix: 9.68.98.0/23
+        ge: 24
+      240:
+        action: permit
+        prefix: 9.68.100.0/22
+        ge: 23
+      250:
+        action: permit
+        prefix: 9.68.105.0/24
+        ge: 25
+      260:
+        action: permit
+        prefix: 9.68.106.0/23
+        ge: 24
+      270:
+        action: permit
+        prefix: 9.68.111.0/24
+        ge: 25
+      280:
+        action: permit
+        prefix: 9.68.118.0/25
+        ge: 26
+      290:
+        action: permit
+        prefix: 9.68.120.0/21
+        ge: 22
+      300:
+        action: permit
+        prefix: 9.68.128.0/19
+        ge: 20
+      310:
+        action: permit
+        prefix: 9.68.160.0/20
+        ge: 21
+      320:
+        action: permit
+        prefix: 9.68.176.0/21
+        ge: 22
+      330:
+        action: permit
+        prefix: 9.68.184.0/24
+        ge: 25
+      340:
+        action: permit
+        prefix: 9.68.192.0/21
+        ge: 22
+      350:
+        action: permit
+        prefix: 9.68.200.0/23
+        ge: 24
+      360:
+        action: permit
+        prefix: 9.68.204.0/22
+        ge: 23
+      370:
+        action: permit
+        prefix: 9.68.208.0/22
+        ge: 23
+      380:
+        action: permit
+        prefix: 9.68.216.0/21
+        ge: 22
+      390:
+        action: permit
+        prefix: 9.68.228.0/23
+        ge: 24
+      400:
+        action: permit
+        prefix: 9.68.238.0/24
+        ge: 25
+      410:
+        action: permit
+        prefix: 9.68.240.0/22
+        ge: 23
+      420:
+        action: permit
+        prefix: 9.68.244.0/24
+        ge: 25
+      430:
+        action: permit
+        prefix: 9.116.1.0/24
+        ge: 25
+      440:
+        action: permit
+        prefix: 9.116.2.0/23
+        ge: 24
+      450:
+        action: permit
+        prefix: 9.116.20.0/22
+        ge: 23
+      460:
+        action: permit
+        prefix: 9.116.24.0/23
+        ge: 24
+      470:
+        action: permit
+        prefix: 9.116.30.0/24
+        ge: 25
+      480:
+        action: permit
+        prefix: 9.116.32.0/22
+        ge: 23
+      490:
+        action: permit
+        prefix: 9.116.48.0/24
+        ge: 25
+      500:
+        action: permit
+        prefix: 9.116.56.0/22
+        ge: 23
+      510:
+        action: permit
+        prefix: 9.116.60.0/23
+        ge: 24
+      520:
+        action: permit
+        prefix: 9.116.80.0/23
+        ge: 24
+      530:
+        action: permit
+        prefix: 9.116.82.0/24
+        ge: 25
+      540:
+        action: permit
+        prefix: 9.116.85.0/24
+        ge: 25
+      550:
+        action: permit
+        prefix: 9.116.86.0/23
+        ge: 24
+      560:
+        action: permit
+        prefix: 9.116.88.0/21
+        ge: 22
+      570:
+        action: permit
+        prefix: 9.116.156.0/22
+        ge: 23
+      580:
+        action: permit
+        prefix: 9.116.192.0/18
+        ge: 19
+      590:
+        action: permit
+        prefix: 9.188.43.128/25
+        ge: 26
+      600:
+        action: permit
+        prefix: 9.188.77.0/24
+        ge: 25
+      610:
+        action: permit
+        prefix: 9.189.47.0/24
+        ge: 25
+      620:
+        action: permit
+        prefix: 9.189.112.0/23
+        ge: 24
+      630:
+        action: permit
+        prefix: 9.189.114.0/24
+        ge: 25
+      640:
+        action: permit
+        prefix: 9.189.116.0/22
+        ge: 23
+      650:
+        action: permit
+        prefix: 9.189.120.0/24
+        ge: 25
+      660:
+        action: permit
+        prefix: 9.189.121.128/25
+        ge: 26
+      670:
+        action: permit
+        prefix: 9.189.122.0/25
+        ge: 26
+      680:
+        action: permit
+        prefix: 9.189.140.0/23
+        ge: 24
+      690:
+        action: permit
+        prefix: 9.68.114.0/24
+        ge: 25
+      700:
+        action: permit
+        prefix: 9.68.115.0/24
+        ge: 25
+      710:
+        action: permit
+        prefix: 9.68.116.0/24
+        ge: 25
+      720:
+        action: permit
+        prefix: 9.68.117.0/24
+        ge: 25
+      730:
+        action: permit
+        prefix: 9.116.160.0/19
+        ge: 20
+      740:
+        action: permit
+        prefix: 9.189.160.0/20
+        ge: 21
+      750:
+        action: permit
+        prefix: 9.189.176.0/21
+        ge: 22
+      760:
+        action: permit
+        prefix: 9.189.184.0/22
+        ge: 23
+      770:
+        action: permit
+        prefix: 9.189.188.0/23
+        ge: 24
+      780:
+        action: permit
+        prefix: 9.189.190.0/23
+        ge: 24
+      790:
+        action: permit
+        prefix: 9.189.96.0/20
+        ge: 21
+      800:
+        action: permit
+        prefix: 9.68.108.0/24
+        ge: 25
+      810:
+        action: permit
+        prefix: 9.68.109.0/24
+        ge: 25
+      820:
+        action: permit
+        prefix: 9.189.122.128/27
+        ge: 28
+      830:
+        action: permit
+        prefix: 9.116.4.0/24
+        ge: 25
+      1000:
+        action: deny
+        prefix: 0.0.0.0/0
+        le: 32
+    pl_non_kr1_blue:
+      100:
+        action: deny
+        prefix: 9.189.122.128/28
+        le: 32
+      110:
+        action: deny
+        prefix: 9.116.1.0/24
+        le: 32
+      120:
+        action: deny
+        prefix: 9.116.2.0/23
+        le: 32
+      130:
+        action: deny
+        prefix: 9.116.20.0/22
+        le: 32
+      140:
+        action: deny
+        prefix: 9.116.24.0/23
+        le: 32
+      150:
+        action: deny
+        prefix: 9.116.30.0/24
+        le: 32
+      160:
+        action: deny
+        prefix: 9.116.32.0/22
+        le: 32
+      170:
+        action: deny
+        prefix: 9.116.48.0/24
+        le: 32
+      180:
+        action: deny
+        prefix: 9.116.56.0/22
+        le: 32
+      190:
+        action: deny
+        prefix: 9.116.60.0/23
+        le: 32
+      200:
+        action: deny
+        prefix: 9.116.4.0/24
+        le: 32
+      1000:
+        action: permit
+        prefix: 0.0.0.0/0
+        le: 32
+    pl_wan_beacon:
+      100:
+        action: permit
+        prefix: 9.0.64.1/32
+      1000:
+        action: deny
+        prefix: 0.0.0.0/0
+        le: 32
+  ipv6:
+    pl6_default_route:
+      100:
+        action: permit
+        prefix: ::/0
+      1000:
+        action: deny
+        prefix: ::/0
+        le: 128
+    pl6_non_kr1_blue:
+      100:
+        action: deny
+        prefix: 2620:1F7:3A22:A000::/56
+        le: 128
+      110:
+        action: deny
+        prefix: 2620:1F7:3A22::6:8101:0/112
+        le: 128
+      1000:
+        action: permit
+        prefix: ::/0
+        le: 128

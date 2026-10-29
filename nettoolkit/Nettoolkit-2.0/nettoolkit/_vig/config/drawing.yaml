@@ -1,0 +1,23 @@
+drawing:
+  title: ""
+  page_size: A3
+  orientation: landscape
+  link_mode: logical
+  include_down_links: false
+  include_external_neighbors: true
+  show_port_labels: true
+  show_ip_subnets: true
+  show_media_type: false
+  show_serial_number: true
+
+layout:
+  engine: hierarchical
+  horizontal_spacing: 2.5
+  vertical_spacing: 1.8
+
+status_colors:
+  up: "#00B050"
+  down: "#C00000"
+  administratively_down: "#C00000"
+  unknown: "#7F7F7F"
+
